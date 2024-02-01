@@ -3,6 +3,31 @@ body {
     font-family: 'Inter';
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 96px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px 20px 348px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+header span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
 .side-bar {
     display: flex;
     flex-direction: column;
@@ -33,9 +58,15 @@ body {
 .button-side-bar {
     display: flex;
     align-items: center;
-    padding: 8px 56px 8px 56px;
+    padding: 8px 64px 8px 64px;
     gap: 8px;
     color: #CDCDCD;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.button-side-bar:hover {
+    background-color: #2A3D59;
 }
 
 .policy-container {
@@ -51,5 +82,11 @@ body {
     padding: 8px;
     gap: 8px;
     color: #A8A8A8;
+    cursor: pointer;
+}
+
+.policy-container span:hover{
+    color: #29ABE2;
+    font-weight: 700;
 }
 
