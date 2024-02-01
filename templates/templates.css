@@ -21,8 +21,7 @@ body {
 
 .join-logo-right-corner {
     width: 100px;
-    height: 122px;
-    
+    height: 122px; 
 }
 
 .button-container-side-bar {
@@ -34,7 +33,7 @@ body {
 .button-side-bar {
     display: flex;
     align-items: center;
-    padding: 8px, 56px, 8px, 56px;
+    padding: 8px 56px 8px 56px;
     gap: 8px;
     color: #CDCDCD;
 }
