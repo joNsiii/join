@@ -1,0 +1,31 @@
+.summary-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 625px;
+    height: 73px;
+    position: fixed;
+    top: 206px;
+    left: 328px;
+    box-sizing: border-box;
+}
+
+.summary-headline-left {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.summary-headline-mid {
+    border: 1.5px solid #29ABE2;
+    border-radius: 3px;
+    height: 59px;
+    padding: 0;
+    
+}
+
+.summary-headline-right {
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+    height: 32px;
+}
