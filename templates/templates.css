@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: 'Inter';
+}
+
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #2A3647;
+    height: 100vh;
+    width: 232px;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 64px 0 64px 0;
+    box-sizing: border-box;
+}
+
+.join-logo-right-corner {
+    width: 100px;
+    height: 122px; 
+}
+
+.button-container-side-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.button-side-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+    color: #CDCDCD;
+}
+
+.policy-container {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    height: 317px;
+    padding: 243px 0 0 0px;
+    gap: 4px;
+}
+
+.policy-container span {
+    padding: 8px;
+    gap: 8px;
+    color: #A8A8A8;
+}
+
