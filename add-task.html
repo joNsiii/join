@@ -23,25 +23,36 @@
                     <div class="left-side-inputs">
                         <div class="single-input-container">
                             <label>Title<label class="red-star">*</label></label>
-                            <input class="input-single-line" placeholder="Enter a title" type="text">
+                            <input class="input-single-line" required placeholder="Enter a title" type="text">
                         </div>
                         <div class="desc-input-container">
                             <label>Description</label>
-                            <textarea class="desc-textarea" placeholder="Enter a Description" id="" cols="30" rows="3"></textarea>
+                            <textarea class="desc-textarea" placeholder="Enter a Description" id="" cols="30"
+                                rows="3"></textarea>
                         </div>
                         <div class="single-input-container">
                             <label>Assigned to</label>
                             <select class="select-input" id="">
-                                <option value="Select contacts to assign"></option>
-                                <option value="Rudolf Sachslehner"></option>
-                                <option value="Oumout Resit Ismail"></option>
-                                <option value="Jens Gartsch"></option>
-                                <option value="Janik Stratmann"></option>
+                                <option value="" disabled selected>Select contacts to assign</option>
+                                <option value="">Rudolf Sachslehner</option>
+                                <option value="">Oumout Resit Ismail</option>
+                                <option value="">Jens Gartsch</option>
+                                <option value="">Janik Stratmann</option>
                             </select>
-                        </div>  
+                        </div>
                     </div>
-                    <div></div>
-                    <div></div>
+                    <div class="border-between"></div>
+                    <div class="right-side-inputs">
+                        <div class="single-input-container">
+                            <label for="date">Due Date<label class="red-star">*</label></label>
+                            <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" name="date" id="date">
+                        </div>
+                        <div class="prio-container">
+                            <label>Prio</label>
+                            <div class="urgent-selection">Urgent <img src="./img/urgent.png" alt=""></div>
+                            
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

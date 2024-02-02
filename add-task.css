@@ -47,8 +47,9 @@
     line-height: 24px !important;
 } 
 
-.input-single-line {
+.input-single-line:focus {
     border: 1px solid #29ABE2;
+    outline: none;
 }
 
 .desc-input-container {
@@ -71,14 +72,57 @@
     color: #D1D1D1;
     font-family: inter;
     font-size: 20px;
+}
 
+.desc-textarea:focus {
+    border: 1px solid #29ABE2 ;
+    outline: none;
 }
 
 .select-input {
     display: flex;
     height: 48px;
+    appearance: none;
+    background: center right 10px;
+    background-image: url('./img/arrow_drop_downaa.png');
+    background-repeat: no-repeat;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 12px 16px 12px 16px;
     gap: 10px;
+}
+
+.select-input:focus {
+    background-image: url('./img/arrow_drop_down-up.png');
+    outline: none;
+    border: 1px solid #29ABE2 ;
+}
+
+.border-between {
+    height: 424px;
+    position: fixed;
+    top: 327px;
+    left: 816.25px;
+    border: 1px solid #D1D1D1;
+}
+
+.right-side-inputs {
+    width: 440px;
+    height: 416px;
+    position: fixed;
+    top: 327px;
+    left: 864.25px;
+}
+
+.prio-container{
+    display: flex;
+    flex-direction: column;
+    height: 88px;
+    gap: 8px;
+}
+
+.urgent-selection {
+    width: 136px;
+    height: 56px;
+    
 }
