@@ -108,6 +108,8 @@
 }
 
 .right-side-inputs {
+    display: flex;
+    flex-direction: column;
     width: 440px;
     height: 416px;
     position: fixed;
