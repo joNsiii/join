@@ -14,6 +14,8 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 99;
+    display: flex;
+    flex-direction: column;
 }
 
 .joinLogo {
@@ -233,6 +235,9 @@ body {
 
 .button-login:hover {
     cursor: pointer;
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 150ms ease;
 }
 
 .button-guest {
@@ -245,6 +250,52 @@ body {
     line-height: 25px;
 }
 
+#sign-up:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 150ms ease;
+}
+
 .button-guest:hover {
+    cursor: pointer;
+    color: #29ABE2;
+    border: 2px solid #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 150ms ease;
+}
+
+#password-lock:hover {
+    cursor: pointer;
+}
+
+.footer-container {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-self: end !important;
+    margin-bottom: 35px;
+    position: absolute;
+    bottom: 0;
+    transform: translate(0%, 0%);
+}
+
+.footer-parent {
+    width: 246px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #A8A8A8;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.footer-parent p {
+    margin: 0;
+}
+
+.footer-parent p:hover {
     cursor: pointer;
 }
