@@ -45,12 +45,26 @@
                     <div class="right-side-inputs">
                         <div class="single-input-container">
                             <label for="date">Due Date<label class="red-star">*</label></label>
-                            <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" name="date" id="date">
+                            <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                onblur="(this.type='text')" name="date" id="date">
                         </div>
                         <div class="prio-container">
                             <label>Prio</label>
-                            <div class="urgent-selection">Urgent <img src="./img/urgent.png" alt=""></div>
-                            
+                            <div class="prio-select-con">
+                                <div class="prio-selection">Urgent <img src="./img/urgent-red.png" alt="urgent-red"></div>
+                                <div class="medium-selection">Medium <img src="./img/medium.png" alt="medium"></div>
+                                <div class="prio-selection">Low<img src="./img/low.png" alt="low"></div>
+                            </div>
+                            <div class="single-input-container">
+                                <label>Category<label class="red-star">*</label></label>
+                                <select class="select-input-category" id="">
+                                    <option value="" disabled selected>Select contacts to assign</option>
+                                    <option value="">Rudolf Sachslehner</option>
+                                    <option value="">Oumout Resit Ismail</option>
+                                    <option value="">Jens Gartsch</option>
+                                    <option value="">Janik Stratmann</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>
