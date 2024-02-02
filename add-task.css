@@ -1,0 +1,84 @@
+.add-task-headline {
+    width: 278px;
+    height: 73px;
+    position: fixed;
+    top: 206px;
+    left: 328px;
+    gap: 1px;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.left-side-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 440px;
+    height: 376px;
+    position: fixed;
+    top: 327px;
+    left: 328px;
+}
+
+.single-input-container {
+    display: flex;
+    flex-direction: column;
+    height: 96px;
+    gap: 8px;
+}
+
+.red-star {
+    color: red;
+}
+
+.input-single-line {
+    display: flex;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.input-single-line::placeholder {
+    color: #D1D1D1;
+    font-family: inter;
+    font-size: 20px;
+    line-height: 24px !important;
+} 
+
+.input-single-line: {
+    border: 1px solid #29ABE2;
+}
+
+.desc-input-container {
+    display: flex;
+    flex-direction: column;
+    height: 168px;
+    gap: 8px;
+}
+
+.desc-textarea {
+    display: flex;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 18px 16px 18px 16px;
+    gap: 10px;
+    font-size: 20px
+}
+
+.desc-textarea::placeholder {
+    color: #D1D1D1;
+    font-family: inter;
+    font-size: 20px;
+
+}
+
+.select-input {
+    display: flex;
+    height: 48px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 12px 16px 12px 16px;
+    gap: 10px;
+}
