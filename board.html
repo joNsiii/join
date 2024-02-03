@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,125 @@
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./board.css">
 </head>
+
 <body onload="init()">
     <div w3-include-html="templates/side-head.html"></div>
-    <!-- hier board content -->
+
+    <main class="board-content">
+        <section class="board-top-group">
+            <h1 class="board-headline">Board</h1>
+            <div class="board-top-right">
+                <div class="p-relative">
+                    <input id="board-search" class="board-search" type="search" placeholder="Find Task">
+                    <img class="board-search-img" src="./img/search-input.png" alt="search-input">
+                </div>
+                <button class="board-task-button">
+                    <div class="btb-text">Add task</div>
+                    <img class="btb-img" src="./img/add-task.png" alt="add-task">
+                </button>
+            </div>
+        </section>
+
+        <section class="board-header-group">
+            <div class="board-header">
+                <div class="board-header-title">To do</div>
+                <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
+            </div>
+            <div class="board-header">
+                <div class="board-header-title">In progress</div>
+                <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
+            </div>
+            <div class="board-header">
+                <div class="board-header-title">Await feedback</div>
+                <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
+            </div>
+            <div class="board-header">
+                <div class="board-header-title">Done</div>
+            </div>
+        </section>
+
+        <section class="board-body-group">
+            <div class="board-body">
+                <div class="board-no-task">No tasks to do</div>
+            </div>
+            <div class="board-body">
+                <div class="board-task-card">
+                    <h3 class="btc-type btc-type-blue">User Story</h3>
+                    <div class="btc-group">
+                        <div class="btc-title">Kochwelt Page & Recipe Recommender</div>
+                        <div class="btc-description">Build start page with recipe recommendation...</div>
+                    </div>
+                    <div class="board-task-progress-group">
+                        <div class="board-task-max-bar">
+                            <div class="board-task-value-bar"></div>
+                        </div>
+                        <div class="board-task-progress-text">1/2 Subtasks</div>
+                    </div>
+                    <div class="user-priority-group">
+                        <div class="board-user-group">
+                            <div class="board-card-user bcu-orange">AM</div>
+                            <div class="board-card-user bcu-green">EM</div>
+                            <div class="board-card-user bcu-dark-blue">MB</div>
+                        </div>
+                        <img src="./img/medium-board.png" alt="medium-board">
+                    </div>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="board-task-card">
+                    <h3 class="btc-type btc-type-green">Technical Task</h3>
+                    <div class="btc-group">
+                        <div class="btc-title">HTML Base Template Creation</div>
+                        <div class="btc-description">Create reusable HTML base templates...</div>
+                    </div>
+                    <div class="user-priority-group">
+                        <div class="board-user-group">
+                            <div class="board-card-user bcu-magenta">DE</div>
+                            <div class="board-card-user bcu-blue">BZ</div>
+                            <div class="board-card-user bcu-purple">AS</div>
+                        </div>
+                        <img src="./img/low-board.png" alt="low-board">
+                    </div>
+                </div>
+                <div class="board-task-card">
+                    <h3 class="btc-type btc-type-blue">User Story</h3>
+                    <div class="btc-group">
+                        <div class="btc-title">Daily Kochwelt Recipe</div>
+                        <div class="btc-description">Implement daily recipe and portion calculator...</div>
+                    </div>
+                    <div class="user-priority-group">
+                        <div class="board-user-group">
+                            <div class="board-card-user bcu-yellow">EF</div>
+                            <div class="board-card-user bcu-purple">AS</div>
+                            <div class="board-card-user bcu-red">TW</div>
+                        </div>
+                        <img src="./img/medium-board.png" alt="medium-board">
+                    </div>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="board-task-card">
+                    <h3 class="btc-type btc-type-green">Technical Task</h3>
+                    <div class="btc-group">
+                        <div class="btc-title">CSS Architecture Planning</div>
+                        <div class="btc-description">Define CSS naming conventions and structure...</div>
+                    </div>
+                    <div class="board-task-progress-group">
+                        <div class="board-task-max-bar">
+                            <div class="board-task-value-bar-complete"></div>
+                        </div>
+                        <div class="board-task-progress-text">2/2 Subtasks</div>
+                    </div>
+                    <div class="user-priority-group">
+                        <div class="board-user-group">
+                            <div class="board-card-user bcu-blue-green">SM</div>
+                            <div class="board-card-user bcu-blue">BZ</div>
+                        </div>
+                        <img src="./img/urgent-board.png" alt="urgent-board">
+                    </div>
+                </div>
+        </section>
+    </main>
 </body>
+
 </html>
