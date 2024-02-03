@@ -1,5 +1,6 @@
 async function init() {
     await includeHTML();
+    hightlightButton()
 }
 
 async function includeHTML() {
@@ -12,6 +13,21 @@ async function includeHTML() {
             element.innerHTML = await resp.text();
         } else {
             element.innerHTML = 'Page not found';
+        }
+    }
+}
+
+function hightlightButton() {
+    let links = document.querySelectorAll('a');
+
+    let currentUrl = window.location.href;
+    for (let i = 0; i < links.length; i++) {
+        let link = links[i];
+        let currentLink = link.href;
+        if (currentLink == currentUrl) {
+            currentLink.parentElement.classList.add('bg-color-button-sidebar');
+        }else {
+        console.log('no URL found')
         }
     }
 }
