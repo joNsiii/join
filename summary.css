@@ -1,4 +1,5 @@
 .summary-content {
+    position: relative;
     display: flex;
 }
 
@@ -13,7 +14,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 625px;
+    max-width: 625px;
+    min-width: 625px;
     height: 73px;
     box-sizing: border-box;
 }
@@ -39,17 +41,11 @@
 
 .summary-main-content {
     display: flex;
+    flex-direction: column;
     margin-top: 56px;
     width: 560px;
     height: 562px;
     justify-content: space-between;
-}
-
-.summary-main-content {
-    display: flex;
-    flex-direction: column;
-    width: 560px;
-    height: 562px;
 }
 
 .summary-main-overview {
@@ -70,6 +66,12 @@
     background-color: white;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.summary-main-overview-container:hover {
+    background-color: #2A3647;
+    color: white;
 }
 
 .summary-main-counter-container {
@@ -77,31 +79,9 @@
     flex-direction: column;
 }
 
-.summary-main-img-container {
-    width: 69px;
-    height: 69px;
-    background-color: #2A3647;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    gap: 10px;
-}
-
 .summary-main-counter {
     font-size: 64px;
     font-weight: 600;
-}
-
-.summary-main-overview-right-success-img {
-    width: 69px;
-    height: 69px;
-    background-color: #2A3647;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    gap: 10px;
 }
 
 .summary-urgent {
@@ -115,6 +95,11 @@
     box-sizing: border-box;
 }
 
+.summary-urgent:hover {
+    background-color: #2A3647;
+    color: white;
+}
+
 .summary-urgent-left {
     display: flex;
     box-sizing: border-box;
@@ -123,17 +108,6 @@
     gap: 18px;
     justify-content: center;
     align-items: center;
-}
-
-.summary-main-img-container-urgent {
-    width: 60px;
-    height: 60px;
-    background-color: #FF3D00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    gap: 10px;
 }
 
 .summary-urgent-border {
@@ -170,7 +144,11 @@
     background-color: white;
     border-radius: 30px;
     gap: 13px;
+}
 
+.summary-main-counter-container-task:hover {
+    background-color: #2A3647;
+    color: white;
 }
 
 .summary-main-name {
@@ -183,17 +161,18 @@
 
 .summary-greeting-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     margin-top: 451.5px;
     margin-left: 80px;
-    width: 385px;
     height: 136px;
     gap: 3px;
 }
 
 .summary-daytime-container {
-    
+    display: flex;
+    flex-wrap: wrap;
     height: 56px;
     font-size: 47px;
     line-height: 56.4px;
@@ -201,9 +180,11 @@
 }
 
 .summary-name-container {
-    width: 385px;
+    display: flex;
+    flex-wrap: wrap;
     height: 77px;
     font-size: 64px;
     font-weight: 700;
     color: #29ABE2;
 }
+

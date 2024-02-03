@@ -1,14 +1,16 @@
 body {
+    display: flex;
     margin: 0;
     font-family: 'Inter';
     background-color: #F6F7F8;
+    z-index: -1;
 }
 
 header {
-    z-index: 100;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+    background-color: #FFFFFF;
     height: 96px;
     position: fixed;
     top: 0;
