@@ -1,5 +1,6 @@
 /* general css */
 .board-content {
+    z-index: 1;
     width: calc(100% - 232px);
     position: absolute;
     top: 96px;

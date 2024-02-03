@@ -1,12 +1,20 @@
+.summary-content {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 206px;
+    margin-left: 328px;
+}
+
 .summary-headline {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 625px;
     height: 73px;
-    position: fixed;
-    top: 206px;
-    left: 328px;
     box-sizing: border-box;
 }
 
@@ -31,11 +39,9 @@
 
 .summary-main-content {
     display: flex;
+    margin-top: 56px;
     width: 560px;
     height: 562px;
-    position: fixed;
-    top: 325px;
-    left: 328px;
     justify-content: space-between;
 }
 
@@ -179,11 +185,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 451.5px;
+    margin-left: 80px;
     width: 385px;
     height: 136px;
-    position: fixed;
-    top: 547.5px;
-    left: 986px;
     gap: 3px;
 }
 

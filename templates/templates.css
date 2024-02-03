@@ -5,6 +5,7 @@ body {
 }
 
 header {
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -30,6 +31,7 @@ header span {
     gap: 8px;
 }
 .side-bar {
+    z-index: 200;
     display: flex;
     flex-direction: column;
     position: fixed;
