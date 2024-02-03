@@ -1,6 +1,6 @@
 async function init() {
     await includeHTML();
-    hightlightButton()
+    hightlightCurrentButton();
 }
 
 async function includeHTML() {
@@ -17,15 +17,15 @@ async function includeHTML() {
     }
 }
 
-function hightlightButton() {
-    let links = document.querySelectorAll('a');
+function hightlightCurrentButton() {
+    let links = document.querySelectorAll('div > span > a');
 
     let currentUrl = window.location.href;
     for (let i = 0; i < links.length; i++) {
         let link = links[i];
         let currentLink = link.href;
         if (currentLink == currentUrl) {
-            currentLink.parentElement.classList.add('bg-color-button-sidebar');
+            link.parentElement.parentElement.classList.add('bg-color-button-sidebar')
         }else {
         console.log('no URL found')
         }
