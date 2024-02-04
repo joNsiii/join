@@ -1,11 +1,12 @@
 @media (max-width: 600px) {
     .signup-main {
-        width: 90%;
-        padding: 10px;
+        width: 85%;
+        padding: 15px;
     }
 
     .arrow-back-to-login {
         left: -30px;
+        top: 0;
     }
 
     .input-child {
@@ -23,6 +24,10 @@
 
 @media (max-width: 400px) {
     .arrow-back-to-login {
-        left: 0px;
+        left: 30px;
+    }
+
+    .signup-text-child p {
+        font-size: 47px;
     }
 }

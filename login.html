@@ -1,24 +1,28 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <link rel="stylesheet" href="styles/style-login.css">
+    <link rel="stylesheet" href="styles/login-mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
 </head>
-<body class="login-body" onload="renderLogin()">
-    
-    <div class="front-page-container">   
-       <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
-       <div class="startup"></div>
 
-       <div class="sign-up-container">
-        <p class="no-user">Not a Join user?</p>
-        <a href="signup.html"><button id="sign-up" class="button">Sign up</button></a>
-       </div>
+<body class="login-body" onload="renderLogin()">
+
+    <div class="front-page-container">
+        <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
+        <div class="startup"></div>
+
+        <div class="sign-up-container">
+            <p class="no-user">Not a Join user?</p>
+            <a href="signup.html"><button id="sign-up" class="button">Sign up</button></a>
+        </div>
 
         <div class="login-main">
             <div class="login-container">
@@ -28,32 +32,36 @@
                 </div>
             </div>
 
-                <div class="input-container">
-                    <div class="input-child"><input type="text" placeholder="Email">
-                        <img src="./img/mail.png" alt="email-icon">
-                    </div>
-
-                    <div class="input-child"><input type="password" placeholder="Password">
-                        <img src="./img/lock.png" alt="password-icon" id="password-lock">
-                    </div>
-
-                    <div class="checkbox-container">
-                        <div class="checkbox-child">
-                            <div class="checkbox"></div>
-                            <p>Remember me</p>
-                        </div>
-
-                        <div class="checkbox-child">
-                            <div class="checkbox"></div>
-                            <p>I forgot my password</p>
-                        </div>
-                    </div>
+            <div class="input-container">
+                <div class="input-child"><input type="text" placeholder="Email">
+                    <img src="./img/mail.png" alt="email-icon">
                 </div>
 
-                    <div class="button-login-container">
-                        <button class="button button-login">Log in</button>
-                        <button class="button button-guest">Guest Log in</button>
+                <div class="input-child"><input type="password" placeholder="Password">
+                    <img src="./img/lock.png" alt="password-icon" id="password-lock">
+                </div>
+
+                <div class="checkbox-container">
+                    <div class="checkbox-child">
+                        <div class="checkbox"></div>
+                        <p>Remember me</p>
                     </div>
+
+                    <div class="checkbox-child">
+                        <div class="checkbox"></div>
+                        <p>I forgot my password</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-login-container">
+                <button class="button button-login">Log in</button>
+                <button class="button button-guest">Guest Log in</button>
+            </div>
+        </div>
+        <div id="sign-up-mobile" class="sign-up-mobile d-none">
+            <p class="no-user">Not a Join user?</p>
+            <a href="signup.html"><button id="sign-up" class="button">Sign up</button></a>
         </div>
 
         <div class="footer-container">
@@ -69,4 +77,5 @@
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
 </body>
+
 </html>
