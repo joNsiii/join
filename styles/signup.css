@@ -6,6 +6,12 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.signup-content {
+    display: flex;
+    position: relative;
+
+}
+
 .front-page-container {
     position: relative;
     height: 100vh;
@@ -55,10 +61,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: relative;
+
 }
 
 .signup-text-child {
+    position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
