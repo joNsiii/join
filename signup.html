@@ -6,62 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <link rel="stylesheet" href="styles/signup.css">
-    <script src="javascript/storage.js"></script>
+    <link rel="stylesheet" href="styles/signup-media.css">
     <script src="javascript/includes.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
 </head>
 
-<body class="login-body" onload="renderLogin()">
+<body class="signup-body">
+    <div class="signup-content">
+        <div class="front-page-container">
+            <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
+            <div class="signup-main">
+                <div class="signup-container">
+                    <div class="signup-text-child">
+                        <a class="arrow-back-to-login" href="login.html"><img src="img/arrow-left-line.png" alt=""></a>
+                        <p>Sign up</p>
+                        <div class="border"></div>
+                    </div>
+                </div>
 
-    <div class="front-page-container">
-        <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
+                <form class="input-container">
+                    <div class="input-child"><input type="name" required placeholder="Name">
+                        <img src="./img/person.png" alt="Name-icon" id="name-signup">
+                    </div>
+                    <div class="input-child"><input type="email" required placeholder="Email">
+                        <img src="./img/mail.png" alt="email-icon" id="email-signup">
+                    </div>
+                    <div class="input-child"><input type="password" required placeholder="Password">
+                        <img src="./img/lock.png" alt="password-icon" id="set-password">
+                    </div>
+                    <div class="input-child"><input type="password" required placeholder="Confirm Password">
+                        <img src="./img/lock.png" alt="password-icon" id="confirm-password">
+                    </div>
 
-        <div class="signup-main">
-            <div class="signup-container">
-                <div class="signup-text-child">
-                    <a class="arrow-back-to-login" href="login.html"><img src="img/arrow-left-line.png" alt=""></a>
-                    <p>Sign up</p>
-                    <div class="border"></div>
+                    <div class="checkbox-button-container">
+                        <div class="policy">
+                            <input type="checkbox" class="policy-checkbox" name="policy" required id="policy-checkbox">
+                            <p>I accept the </p><a href="">Privacy Policy</a>
+                        </div>
+
+                        <div class="button-signup-container">
+                            <button class="button button-signup">Sign up </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer-container">
+                <div class="footer-parent">
+                    <p>Privacy Policy</p>
+                    <p>Legal Notice</p>
                 </div>
             </div>
 
-            <form class="input-container">
-                <div class="input-child"><input type="name" required placeholder="Name">
-                    <img src="./img/person.png" alt="Name-icon" id="name-signup">
-                </div>
-                <div class="input-child"><input type="email" required placeholder="Email">
-                    <img src="./img/mail.png" alt="email-icon" id="email-signup">
-                </div>
-                <div class="input-child"><input type="password" required placeholder="Password">
-                    <img src="./img/lock.png" alt="password-icon" id="set-password">
-                </div>
-                <div class="input-child"><input type="password" required placeholder="Confirm Password">
-                    <img src="./img/lock.png" alt="password-icon" id="confirm-password">
-                </div>
-
-                <div class="checkbox-button-container">
-                    <div class="policy">
-                        <input type="checkbox" class="policy-checkbox" name="policy" required id="policy-checkbox">
-                        <p>I accept the </p><a href="">Privacy Policy</a>
-                    </div>
-
-                    <div class="button-signup-container">
-                        <button class="button button-signup">Sign up </button>
-                    </div>
-                </div>
-            </form>
         </div>
-
-        <div class="footer-container">
-            <div class="footer-parent">
-                <p>Privacy Policy</p>
-                <p>Legal Notice</p>
-            </div>
-        </div>
-
     </div>
-
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
 </body>
