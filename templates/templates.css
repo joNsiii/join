@@ -33,6 +33,12 @@ header span {
     align-items: center;
     gap: 8px;
 }
+
+.help-img:hover {
+    width: 24px;
+    height: 24px;
+}
+
 .side-bar {
     z-index: 200;
     display: flex;
@@ -93,15 +99,19 @@ header span {
     gap: 4px;
 }
 
-.policy-container span {
-    padding: 8px;
-    gap: 8px;
+.policy-container a {
+    text-decoration: none;
     color: #A8A8A8;
-    cursor: pointer;
 }
-
-.policy-container span:hover{
+.policy-container a:hover {
     color: #29ABE2;
     font-weight: 700;
 }
+
+.policy-container span {
+    padding: 8px;
+    gap: 8px;
+}
+
+
 
