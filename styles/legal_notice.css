@@ -7,6 +7,7 @@ body {
     top: 206px;
     left: 328px;
     max-width: 1014px;
+    padding-bottom: 32px;
 }
 
 h1 {
@@ -47,6 +48,6 @@ h1 {
 
 @media (max-width: 1370px) {
     .main-content {
-        padding-right: 24px;
+        margin-right: 96px;
     }
 }
