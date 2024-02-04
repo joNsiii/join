@@ -113,5 +113,61 @@ header span {
     gap: 8px;
 }
 
+.d-none {
+    display: none;
+}
 
 
+/* mobile */
+
+.mobile-navbar {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    background-color: #2A3647;
+    z-index: 40;
+    justify-content: space-evenly;
+    display: none;
+}
+
+
+
+@media (max-width: 730px) {
+    .mobile-navbar {
+        display: flex;
+    }
+    header {
+        padding: 20px 16px 20px 16px;
+    }
+    .side-bar {
+        display: none;
+    }
+    .button-side-bar {
+        padding: 2px 16px 2px 16px;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        justify-content: center;
+    }
+    .help-main-content {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 128px 16px 
+    }
+}
+
+@media (max-width: 430px) {
+    .button-side-bar {
+        font-size: 14px;
+        text-align: center;
+    }
+    .button-side-bar img {
+        width: 24px;
+        height: 24px;
+    }
+}

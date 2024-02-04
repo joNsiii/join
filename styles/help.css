@@ -27,3 +27,9 @@ body {
 .step p {
     margin: 0;
 }
+
+@media (max-width: 1370px) {
+    .help-main-content {
+        margin-right: 96px;
+    }
+}
