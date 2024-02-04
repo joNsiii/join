@@ -15,62 +15,62 @@
 
 <body onload="init()">
     <div w3-include-html="templates/side-head.html"></div>
-    <div>
-        <div>
-            <div class="add-task-headline">Add Task</div>
-            <div>
-                <form>
-                    <div class="left-side-inputs">
-                        <div class="single-input-container">
-                            <label>Title<label class="red-star">*</label></label>
-                            <input class="input-single-line" required placeholder="Enter a title" type="text">
-                        </div>
-                        <div class="desc-input-container">
-                            <label>Description</label>
-                            <textarea class="desc-textarea" placeholder="Enter a Description" id="" cols="30"
-                                rows="3"></textarea>
-                        </div>
-                        <div class="single-input-container">
-                            <label>Assigned to</label>
-                            <select class="select-input" id="">
-                                <option value="" disabled selected>Select contacts to assign</option>
-                                <option value="">Rudolf Sachslehner</option>
-                                <option value="">Oumout Resit Ismail</option>
-                                <option value="">Jens Gartsch</option>
-                                <option value="">Janik Stratmann</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="border-between"></div>
-                    <div class="right-side-inputs">
-                        <div class="single-input-container">
-                            <label for="date">Due Date<label class="red-star">*</label></label>
-                            <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                                onblur="(this.type='text')" name="date" id="date">
-                        </div>
-                        <div class="prio-container">
-                            <label>Prio</label>
-                            <div class="prio-select-con">
-                                <div class="prio-selection">Urgent <img src="./img/urgent-red-arrows.png" alt="urgent-red"></div>
-                                <div class="medium-selection">Medium <img src="./img/medium.png" alt="medium"></div>
-                                <div class="prio-selection">Low<img src="./img/low.png" alt="low"></div>
-                            </div>
-                            <div class="single-input-container">
-                                <label>Category<label class="red-star">*</label></label>
-                                <select class="select-input-category" id="">
-                                    <option value="" disabled selected>Select contacts to assign</option>
-                                    <option value="">Rudolf Sachslehner</option>
-                                    <option value="">Oumout Resit Ismail</option>
-                                    <option value="">Jens Gartsch</option>
-                                    <option value="">Janik Stratmann</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+
+    <div class="add-task-headline">Add Task</div>
+
+    <form>
+        <div class="left-side-inputs">
+            <div class="single-input-container">
+                <label>Title<label class="red-star">*</label></label>
+                <input class="input-single-line" required placeholder="Enter a title" type="text">
+            </div>
+            <div class="desc-input-container">
+                <label>Description</label>
+                <textarea class="desc-textarea" placeholder="Enter a Description" id="" cols="30" rows="3"></textarea>
+            </div>
+            <div class="single-input-container">
+                <label>Assigned to</label>
+                <select class="select-input" id="">
+                    <option value="" disabled selected>Select contacts to assign</option>
+                    <option value="">Rudolf Sachslehner</option>
+                    <option value="">Oumout Resit Ismail</option>
+                    <option value="">Jens Gartsch</option>
+                    <option value="">Janik Stratmann</option>
+                </select>
             </div>
         </div>
-    </div>
+        <div class="border-between"></div>
+        <div class="right-side-inputs">
+            <div class="single-input-container">
+                <label for="date">Due Date<label class="red-star">*</label></label>
+                <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                    onblur="(this.type='text')" name="date" id="date">
+            </div>
+            <div class="prio-container">
+                <label>Prio</label>
+                <div class="prio-select-con">
+                    <div class="prio-selection"><p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red">
+                    </div>
+                    <div class="medium-selection"><p>Medium</p> <img src="./img/medium.png" alt="medium"></div>
+                    <div class="prio-selection"><p>Low</p><img src="./img/low.png" alt="low"></div>
+                </div>
+            </div>
+            <div class="single-input-container">
+                <label>Category<label class="red-star">*</label></label>
+                <select class="select-input-category" id="">
+                    <option value="" disabled selected>Select contacts to assign</option>
+                    <option value="">Rudolf Sachslehner</option>
+                    <option value="">Oumout Resit Ismail</option>
+                    <option value="">Jens Gartsch</option>
+                    <option value="">Janik Stratmann</option>
+                </select>
+            </div>
+            <div class="single-input-container">
+                <label>Title<label class="red-star">*</label></label>
+                <input class="input-single-line" required placeholder="Enter a title" type="text">
+            </div>
+        </div>
+    </form>
 </body>
 
 </html>

@@ -1,23 +1,31 @@
+/* .add-task-content {
+    display: flex;
+    
+} */
+
 .add-task-headline {
-    width: 278px;
+    display: flex;
     height: 73px;
-    position: fixed;
-    top: 206px;
-    left: 328px;
+    margin-top: 206px;
+    margin-left: 328px;
     gap: 1px;
     font-size: 61px;
     font-weight: 700;
+}
+
+form {
+    display: flex;
+    margin-left: 328px;
 }
 
 .left-side-inputs {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 440px;
+    margin-top: 48px;
+    max-width: 440px;
+    min-width: 200px;
     height: 376px;
-    position: fixed;
-    top: 327px;
-    left: 328px;
 }
 
 .single-input-container {
@@ -44,8 +52,7 @@
     color: #D1D1D1;
     font-family: inter;
     font-size: 20px;
-    line-height: 24px !important;
-} 
+}
 
 .input-single-line:focus {
     border: 1px solid #29ABE2;
@@ -75,7 +82,7 @@
 }
 
 .desc-textarea:focus {
-    border: 1px solid #29ABE2 ;
+    border: 1px solid #29ABE2;
     outline: none;
 }
 
@@ -96,36 +103,41 @@
 .select-input:focus {
     background-image: url('./img/arrow_drop_down-up.png');
     outline: none;
-    border: 1px solid #29ABE2 ;
+    border: 1px solid #29ABE2;
 }
 
 .border-between {
     height: 424px;
-    position: fixed;
-    top: 327px;
-    left: 816.25px;
+    margin-top: 48px;
+    margin-left: 48px;
     border: 1px solid #D1D1D1;
 }
 
 .right-side-inputs {
     display: flex;
     flex-direction: column;
+    margin-top: 48px;
     width: 440px;
-    height: 416px;
-    position: fixed;
+    min-width: 200px;
+    margin-left: 48px;
+    margin-right: 48px;
     gap: 16px;
-    top: 327px;
-    left: 864.25px;
+    box-sizing: border-box;
 }
 
-.prio-container{
+.prio-container {
     display: flex;
     flex-direction: column;
     height: 88px;
     gap: 8px;
 }
 
-.prio-select-con{
+.prio-container p {
+    margin: 0;
+    min-width: 20px;
+}
+
+.prio-select-con {
     display: flex;
     gap: 16px;
 }

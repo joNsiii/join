@@ -1,23 +1,21 @@
 .summary-content {
-    position: relative;
-    display: flex;
+
 }
 
 .flex-column {
     display: flex;
-    flex-direction: column;
-    margin-top: 206px;
+    min-width: 200px;
     margin-left: 328px;
 }
 
 .summary-headline {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    max-width: 625px;
-    min-width: 625px;
+    margin-top: 206px;
+    margin-left: 328px;
+    min-width: 200px;
     height: 73px;
-    box-sizing: border-box;
+    gap: 30px;
 }
 
 .summary-headline-left {
@@ -42,8 +40,9 @@
 .summary-main-content {
     display: flex;
     flex-direction: column;
-    margin-top: 56px;
     width: 560px;
+    min-width: 200px;
+    margin-top: 48px;
     height: 562px;
     justify-content: space-between;
 }
@@ -51,8 +50,8 @@
 .summary-main-overview {
     display: flex;
     justify-content: space-between;
-    width: 560px;
-    height: 168px;
+    min-width: 200px;
+    gap: 10px;
 }
 
 .summary-main-overview-container {
@@ -87,8 +86,9 @@
 .summary-urgent {
     display: flex;
     justify-content: space-between;
-    width: 560px;
+    max-width: 560px;
     height: 168px;
+   gap: 20px;
     background-color: white;
     border-radius: 30px;
     padding: 28px 48px 28px 48px;
@@ -132,6 +132,7 @@
 .summary-main-tasks {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .summary-main-counter-container-task {
@@ -164,7 +165,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    margin-top: 451.5px;
+    min-width: 200px;
+    margin-top: 268px;
     margin-left: 80px;
     height: 136px;
     gap: 3px;

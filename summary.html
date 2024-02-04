@@ -18,24 +18,27 @@
 <body onload="init()">
     <div w3-include-html="templates/side-head.html"></div>
     <div class="summary-content">
+
+        <div class="summary-headline">
+            <div class="summary-headline-left">Join 360</div>
+            <div class="summary-headline-mid"></div>
+            <div class="summary-headline-right">Key Metrics at a Glance</div>
+        </div>
         <div class="flex-column">
-            <div class="summary-headline">
-                <div class="summary-headline-left">Join 360</div>
-                <div class="summary-headline-mid"></div>
-                <div class="summary-headline-right">Key Metrics at a Glance</div>
-            </div>
             <div class="summary-main-content">
                 <div class="summary-main-overview">
-                    <div id="edit" onmousemove="changeImage()" onmouseleave="changeImageBack()" class="summary-main-overview-container">
+                    <div id="edit" onmousemove="changeImage()" onmouseleave="changeImageBack()"
+                        class="summary-main-overview-container">
                         <div class="summary-main-img-container">
-                            <img  id="edit-img" src="./img/edit-bg-blue.png" alt="edit">
+                            <img id="edit-img" src="./img/edit-bg-blue.png" alt="edit">
                         </div>
                         <div class="summary-main-counter-container">
                             <span class="summary-main-counter">1</span>
                             <span>To-do</span>
                         </div>
                     </div>
-                    <div id="success" onmouseover="changeImage1()" onmouseleave="changeImageBack1()" class="summary-main-overview-container">
+                    <div id="success" onmouseover="changeImage1()" onmouseleave="changeImageBack1()"
+                        class="summary-main-overview-container">
                         <div class="summary-main-overview-right-success-img">
                             <img id="success-img" src="./img/success-bg-blue.png" alt="done">
                         </div>
@@ -76,10 +79,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="summary-greeting-container">
-            <span class="summary-daytime-container">Good morning,</span>
-            <span class="summary-name-container">Sofia Müller</span>
+
+            <div class="summary-greeting-container">
+                <span class="summary-daytime-container">Good morning,</span>
+                <span class="summary-name-container">Sofia Müller</span>
+            </div>
         </div>
     </div>
 </body>
