@@ -1,5 +1,10 @@
 .summary-content {
+<<<<<<< Updated upstream:styles/summary.css
 
+=======
+    display: flex;
+    
+>>>>>>> Stashed changes:summary.css
 }
 
 .flex-column {
@@ -39,19 +44,38 @@
 
 .summary-main-content {
     display: flex;
+<<<<<<< Updated upstream:styles/summary.css
     flex-direction: column;
     width: 560px;
     min-width: 200px;
     margin-top: 48px;
     height: 562px;
     justify-content: space-between;
+=======
+    margin-top: 56px;
+    max-width: 560px;
+    max-height: 562px;
+    justify-content: space-between;
+}
+
+.summary-main-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    max-height: 562px;
+>>>>>>> Stashed changes:summary.css
 }
 
 .summary-main-overview {
     display: flex;
     justify-content: space-between;
+<<<<<<< Updated upstream:styles/summary.css
     min-width: 200px;
     gap: 10px;
+=======
+    max-width: 560px;
+    max-height: 168px;
+>>>>>>> Stashed changes:summary.css
 }
 
 .summary-main-overview-container {
