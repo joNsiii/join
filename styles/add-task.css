@@ -91,7 +91,7 @@ form {
     height: 48px;
     appearance: none;
     background: center right 10px;
-    background-image: url('./img/arrow_drop_downaa.png');
+    background-image: url('../img/arrow_drop_downaa.png');
     background-repeat: no-repeat;
     border: 1px solid #D1D1D1;
     background-color: white;
@@ -101,7 +101,7 @@ form {
 }
 
 .select-input:focus {
-    background-image: url('./img/arrow_drop_down-up.png');
+    background-image: url('../img/arrow_drop_down-up.png');
     outline: none;
     border: 1px solid #29ABE2;
 }
@@ -140,6 +140,7 @@ form {
 .prio-select-con {
     display: flex;
     gap: 16px;
+    cursor: pointer;
 }
 
 .prio-selection {

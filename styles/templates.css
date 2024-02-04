@@ -108,7 +108,7 @@ header span {
     font-weight: 700;
 }
 
-.policy-container span {
+.policy-container div {
     padding: 8px;
     gap: 8px;
 }
