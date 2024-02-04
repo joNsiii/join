@@ -8,11 +8,15 @@
         <link rel="stylesheet" href="./fonts/fonts.css" />
         <link rel="stylesheet" href="styles/templates.css" />
         <script src="javascript/includes.js"></script>
+        <script src="./javascript/global.js"></script>
     </head>
     <body onload="init()">
         <div w3-include-html="templates/templates.html"></div>
         <div class="main-content">
-            <h1>Legal Notice</h1>
+            <div class="head">
+                <h1 class="main-header">Legal Notice</h1>
+                <a class="arrow-back" href="#" onclick="redirectToPreviousPage()"><img src="./img/arrow-left-line.png" alt="Arrow Back" /></a>
+            </div>
             <h2>Imprint</h2>
             <ul>
                 <li>Oumout Resit Ismail</li>
@@ -20,11 +24,11 @@
                 <li>Rudolf Sachslehner</li>
                 <li>Janik Stratmann</li>
             </ul>
-            <p>
-                Oumout Resit Ismail <br />
-                Musterstr. 8<br />
-                95343 Muster<br />
-            </p>
+            <ul class="no-bullets">
+                <li>Oumout Resit Ismail</li>
+                <li>Musterstr. 8</li>
+                <li>95343 Muster</li>
+            </ul>
             <h3>Exploring the Board</h3>
             <p>Email: muster@muster.de</p>
             <h3>Acceptance of terms</h3>
@@ -48,10 +52,26 @@
             </p>
             <h3>Use of the product</h3>
             <p>
-                <span class="blue-text">Join</span> is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of <span class="blue-text">Join</span> for illegal activities, or to harass,
-                harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of <span class="blue-text">Join</span>.
+                <span class="blue-text">Join</span> is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of
+                <span class="blue-text">Join</span> for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely
+                responsible for your interactions with other users of <span class="blue-text">Join</span>.
             </p>
             <h3>Disclaimer of warranties and limitation of liability</h3>
+            <p>
+                <span class="blue-text">Join</span> is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied
+                warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the
+                <span class="blue-text">Developer Akademie</span>, be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not
+                limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising
+                out of or in connection with the use or performance of <span class="blue-text">Join</span>.
+            </p>
+            <h3>Indemnity</h3>
+            <p class="pd-bottom-48">
+                You agree to indemnify, defend and hold harmless us, the listed students, the <span class="blue-text">Developer Akademie</span>, and our affiliates, partners,
+                officers, directors, agents, and employees, from and against any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or
+                relating to your use of <span class="blue-text">Join</span> and/or your breach of this Legal Notice.<br /><br />
+                For any questions or notices, please contact us at <span class="blue-text">Join-Gruppe-776@mail.de</span>.<br /><br />
+                Date: February 04, 2024
+            </p>
         </div>
     </body>
 </html>
