@@ -33,12 +33,12 @@ function hightlightCurrentButton() {
 }
 
 function toggleDropdown() {
-    var dropdownContent = document.getElementById("dropDownMenu");
+    let dropdownContent = document.getElementById("dropDownMenu");
     dropdownContent.classList.toggle("show");
 }
 
 window.onclick = function(event) {
-    var dropdownContent = document.getElementById("dropDownMenu");
+    let dropdownContent = document.getElementById("dropDownMenu");
 
     if (!event.target.matches('.dropdown-menu, .dropdown-menu *')) {
         if (dropdownContent.classList.contains("show")) {
