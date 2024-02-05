@@ -62,6 +62,7 @@ header span {
 }
 
 .button-container-side-bar {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -70,11 +71,19 @@ header span {
 .button-side-bar {
     display: flex;
     align-items: center;
-    padding: 8px 64px 8px 64px;
+    text-decoration: none;
+    padding: 8px 56px;
     gap: 8px;
     color: #CDCDCD;
     box-sizing: border-box;
     cursor: pointer;
+}
+
+.button-side-bar-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .button-side-bar:hover {
