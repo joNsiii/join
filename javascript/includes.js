@@ -18,7 +18,7 @@ async function includeHTML() {
 }
 
 function hightlightCurrentButton() {
-    let links = document.querySelectorAll('div > span > a');
+    let links = document.querySelectorAll('div > a');
 
     let currentUrl = window.location.href;
     for (let i = 0; i < links.length; i++) {
