@@ -1,10 +1,11 @@
 /* general css */
 .board-content {
-    z-index: 1;
     width: calc(100% - 232px);
+    height: calc(100vh - 96px);
     position: absolute;
     top: 96px;
     left: 232px;
+    overflow: auto;
 }
 
 .p-relative {
@@ -121,8 +122,8 @@
 }
 
 .board-body-group {
-    min-height: 688px;
-    padding: 15.5px 64px 0 64px;
+    height: 527px;
+    padding: 15.5px 64px 48px 64px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -131,7 +132,6 @@
 
 .board-body {
     width: 244px;
-    min-height: 688px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
