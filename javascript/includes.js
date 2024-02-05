@@ -31,3 +31,8 @@ function hightlightCurrentButton() {
         }
     }
 }
+
+function toggleDropdown() {
+    var dropdownContent = document.getElementById("dropDownMenu");
+    dropdownContent.classList.toggle("show");
+}
