@@ -1,24 +1,45 @@
-/* general css */
-.board-content {
-    z-index: 1;
+dialog[open] {
+    display: flex;
+}
+
+.dialog {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: unset;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.content {
     width: calc(100% - 232px);
+    height: calc(100vh - 96px);
     position: absolute;
     top: 96px;
     left: 232px;
+    overflow-y: auto;
 }
 
 .p-relative {
     position: relative;
 }
 
-
-/* board css */
 .board-top-group {
     box-sizing: border-box;
     padding: 79.5px 64px 48px 64px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 16px 364px;
 }
 
 .board-headline {
@@ -32,9 +53,10 @@
 
 .board-top-right {
     display: flex;
-    justify-content: flex-end;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
-    gap: 32px;
+    gap: 16px 32px;
 }
 
 .board-search {
@@ -99,7 +121,6 @@
 }
 
 .board-header {
-    width: 244px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -120,18 +141,24 @@
     object-position: center;
 }
 
-.board-body-group {
-    min-height: 688px;
-    padding: 15.5px 64px 0 64px;
+.board-content-group {
+    padding: 0 64px 48px 64px;
+    min-height: 566px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 26px;
+    gap: 24px;
+}
+
+.board-content {
+    width: 252px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .board-body {
-    width: 244px;
-    min-height: 688px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
