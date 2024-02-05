@@ -21,3 +21,18 @@ body {
         margin-right: 96px;
     }
 }
+
+@media (max-width: 800px){
+    .main-content {
+        margin-right: 64px;
+    }
+}
+
+@media (max-width: 730px) {
+    .main-content {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        margin: 150px 16px 64px 16px;
+    }
+}
