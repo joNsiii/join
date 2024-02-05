@@ -100,7 +100,7 @@
 }
 
 .board-header {
-    width: 244px;
+    width: 252px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -122,8 +122,8 @@
 }
 
 .board-body-group {
-    height: 527px;
     padding: 15.5px 64px 48px 64px;
+    height: 527px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -131,7 +131,7 @@
 }
 
 .board-body {
-    width: 244px;
+    width: 252px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
