@@ -1,11 +1,11 @@
 /* general css */
-.board-content {
+.content {
     width: calc(100% - 232px);
     height: calc(100vh - 96px);
     position: absolute;
     top: 96px;
     left: 232px;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .p-relative {
@@ -121,13 +121,20 @@
     object-position: center;
 }
 
-.board-body-group {
-    padding: 15.5px 64px 48px 64px;
-    height: 527px;
+.board-content-group {
+    padding: 0 64px 48px 64px;
+    min-height: 566px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 26px;
+}
+
+.board-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .board-body {
