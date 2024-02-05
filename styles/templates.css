@@ -19,6 +19,7 @@ header {
     right: 0;
     padding: 20px 40px 20px 348px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 header span {
@@ -139,7 +140,10 @@ header span {
     justify-content: space-evenly;
     display: none;
 }
-
+.header-mobile-img {
+    width: 32px;
+    height: 39px;
+}
 
 
 @media (max-width: 730px) {
@@ -167,6 +171,16 @@ header span {
         justify-content: center;
         align-items: center;
         margin: 128px 16px 
+    }
+    .header-mobile-img {
+        display: flex;
+    }
+    .header-text {
+        display: none;
+    }
+    .profile-img {
+        width: 40px;
+        height: 40px;
     }
 }
 
