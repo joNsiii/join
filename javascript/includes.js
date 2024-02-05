@@ -18,14 +18,14 @@ async function includeHTML() {
 }
 
 function hightlightCurrentButton() {
-    let links = document.querySelectorAll('div > a');
+    let links = document.querySelectorAll('a.button-side-bar');
 
     let currentUrl = window.location.href;
     for (let i = 0; i < links.length; i++) {
         let link = links[i];
         let currentLink = link.href;
         if (currentLink == currentUrl) {
-            link.parentElement.parentElement.classList.add('bg-color-button-sidebar')
+            link.classList.add('bg-color-button-sidebar')
         }else {
         console.log('no URL found')
         }
