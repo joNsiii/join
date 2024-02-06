@@ -104,7 +104,6 @@
 .summary-urgent-left {
     display: flex;
     box-sizing: border-box;
-    width: 130px;
     height: 96px;
     gap: 18px;
     justify-content: center;
@@ -124,7 +123,6 @@
 }
 
 .summary-urgent-right-date {
-    width: 178px;
     height: 25px;
     font-size: 21px;
     font-weight: 700;
