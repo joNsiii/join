@@ -27,6 +27,13 @@
     padding: 0;
 }
 
+.summary-headline-bottom-border-mobile {
+    border: 3px solid #29ABE2;
+    width: 90px;
+    border-radius: 10px;
+    display: none;
+}
+
 .summary-headline-right {
     font-size: 27px;
     display: flex;

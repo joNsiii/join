@@ -1,0 +1,45 @@
+@media (max-width: 1350px) {
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .summary-greeting-container {
+        margin-top: 48px;
+        margin-left: 0;
+    }
+
+    .summary-main-content {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 966px){
+    .summary-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 48px;
+    }
+
+    .summary-headline-mid {
+        display: none !important;
+    }
+
+    .summary-headline-bottom-border-mobile {
+        display: flex !important;
+    }
+
+    .summary-content {
+        margin-left: -48px;
+    }
+
+    .summary-headline-left {
+        font-size: 47px;
+    }
+
+    .summary-headline-right {
+        font-size: 20px;
+    }
+
+    /* gesamten Text verkleinern */
+}
