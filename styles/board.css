@@ -113,6 +113,15 @@ dialog[open] {
     object-position: center;
 }
 
+.board-search-mobile {
+    box-sizing: border-box;
+    padding: 40px 16px 0 16px;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
 .board-header-group {
     padding: 0 64px;
     display: flex;

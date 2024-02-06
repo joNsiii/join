@@ -5,6 +5,10 @@
         left: 0;
     }
 
+    .board-search-group {
+        display: none;
+    }
+
     .p-relative {
         width: 100%;
         max-width: 396px;
@@ -31,12 +35,7 @@
     }
 
     .board-search-mobile {
-        box-sizing: border-box;
-        padding: 40px 16px 0 16px;
-        width: 100%;
         display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .board-search {
@@ -78,9 +77,5 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-    }
-
-    .d-none {
-        display: none;
     }
 }
