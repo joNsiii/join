@@ -1,7 +1,6 @@
 
 .flex-column {
     display: flex;
-    min-width: 200px;
     margin-left: 328px;
 }
 
@@ -54,7 +53,6 @@
 .summary-main-overview {
     display: flex;
     justify-content: space-between;
-    min-width: 200px;
     gap: 10px;
 }
 
@@ -90,9 +88,8 @@
 .summary-urgent {
     display: flex;
     justify-content: space-between;
-    max-width: 560px;
     height: 168px;
-   gap: 20px;
+    gap: 20px;
     background-color: white;
     border-radius: 30px;
     padding: 28px 48px 28px 48px;

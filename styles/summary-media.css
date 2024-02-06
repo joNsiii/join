@@ -13,7 +13,7 @@
     }
 }
 
-@media (max-width: 966px){
+@media (max-width: 966px) {
     .summary-headline {
         flex-direction: column;
         align-items: flex-start;
@@ -26,11 +26,15 @@
     }
 
     .summary-headline-bottom-border-mobile {
-        display: flex !important;
+          display: flex !important;
+    }
+    .flex-column {
+        margin-left: 280px;
     }
 
-    .summary-content {
-        margin-left: -48px;
+    .summary-headline {
+        margin-left: 280px;
+        margin-top: 206px;
     }
 
     .summary-headline-left {
@@ -41,5 +45,89 @@
         font-size: 20px;
     }
 
-    /* gesamten Text verkleinern */
+    .summary-main-content {
+        width: 396px;
+        height: 384px;
+    }
+
+    .summary-main-overview-container {
+        width: 186px;
+        height: 110px;
+    }
+
+    .summary-main-img-container img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .summary-main-text{
+        font-size: 14px;
+    }
+
+    .summary-main-counter {
+        font-size: 47px;
+    }
+
+    .summary-urgent {
+        height: 110px;
+        align-items: center;
+    }
+
+    .summary-urgent-left {
+        height: 73px;
+    }
+
+    .summary-urgent-right-date {
+        font-size: 16px;
+    }
+
+    .summary-urgent-right-text{
+        font-size: 14px;
+    }
+
+    .summary-main-img-container-urgent img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .summary-urgent-border{
+        height: 68px;
+    }
+
+    .summary-main-counter-container-task {
+        width: 116px;
+        height: 116px;
+    }
+
+    .summary-main-name{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 730px) {
+    .summary-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 10% 0 15%;
+    }
+
+    .flex-column {
+        margin: 0;
+    }
+
+    .summary-headline {
+        margin-left: 0;
+        margin-top: 128px;
+    }
+
+    .summary-greeting-container {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .summary-content {
+        margin: 0 16px 0 16px;
+    }
 }
