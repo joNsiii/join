@@ -41,6 +41,13 @@
     gap: 8px;
 }
 
+.task-label-input-group-mobile {
+    width: 440px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .task-label-text {
     font-family: 'Inter', sans-serif;
     font-size: 20px;
