@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./styles/add-task-form.css">
+    <link rel="stylesheet" href="./media/board-media.css">
+    <link rel="stylesheet" href="./media/add-task-form-media.css">
 </head>
 
 <body onload="init()">
@@ -25,7 +27,7 @@
         <section class="board-top-group">
             <h1 class="board-headline">Board</h1>
             <div class="board-top-right">
-                <div class="p-relative">
+                <div class="board-search-group p-relative">
                     <input id="board-search" class="board-search" type="search" placeholder="Find Task">
                     <img class="board-search-img" src="./img/search-input.png" alt="search-input">
                 </div>
@@ -33,6 +35,13 @@
                     <div class="btb-text">Add task</div>
                     <img class="btb-img" src="./img/add.png" alt="add-task">
                 </button>
+            </div>
+        </section>
+
+        <section class="board-search-mobile">
+            <div class="p-relative">
+                <input id="board-search" class="board-search" type="search" placeholder="Find Task">
+                <img class="board-search-img" src="./img/search-input.png" alt="search-input">
             </div>
         </section>
 

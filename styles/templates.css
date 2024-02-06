@@ -179,9 +179,6 @@ header span {
     background-color: #2A3D59;
 }
 
-/* .dropdown-menu:hover .dropdown-content {
-    display: flex;
-} */
 
 .show {
     display: flex;
@@ -202,13 +199,13 @@ header span {
     }
     .button-side-bar {
         padding: 2px 16px 2px 16px;
-        width: 80px;
         height: 76px;
         display: flex;
         flex-direction: column;
         gap: 0;
         justify-content: center;
         border-radius: 16px;
+        text-align: center;
     }
     .help-main-content {
         position: static;
@@ -234,6 +231,7 @@ header span {
     .button-side-bar {
         font-size: 14px;
         text-align: center;
+        padding: 2px 8px 2px 8px;
     }
     .button-side-bar img {
         width: 24px;

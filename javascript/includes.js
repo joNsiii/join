@@ -4,7 +4,7 @@ async function init() {
 }
 
 async function includeHTML() {
-    let includeElements = document.querySelectorAll('[w3-include-html]');
+    let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
         const element = includeElements[i];
         file = element.getAttribute("w3-include-html"); // "includes/header.html"
@@ -12,27 +12,39 @@ async function includeHTML() {
         if (resp.ok) {
             element.innerHTML = await resp.text();
         } else {
-            element.innerHTML = 'Page not found';
+            element.innerHTML = "Page not found";
         }
     }
 }
 
 function hightlightCurrentButton() {
-    let links = document.querySelectorAll('a.button-side-bar');
+    let links = document.querySelectorAll("a.button-side-bar");
 
     let currentUrl = window.location.href;
     for (let i = 0; i < links.length; i++) {
         let link = links[i];
         let currentLink = link.href;
         if (currentLink == currentUrl) {
-            link.classList.add('bg-color-button-sidebar')
-        }else {
-        console.log('no URL found')
+            link.classList.add("bg-color-button-sidebar");
+        } else {
+            console.log("no URL found");
         }
     }
 }
 
 function toggleDropdown() {
-    var dropdownContent = document.getElementById("dropDownMenu");
+    let dropdownContent = document.getElementById("dropDownMenu");
     dropdownContent.classList.toggle("show");
 }
+
+window.onclick = function(event) {
+    let dropdownContent = document.getElementById("dropDownMenu");
+
+    if (!event.target.matches('.dropdown-menu, .dropdown-menu *')) {
+        if (dropdownContent.classList.contains("show")) {
+            dropdownContent.classList.remove("show");
+        }
+    }
+};
+
+

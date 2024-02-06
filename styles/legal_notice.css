@@ -20,7 +20,8 @@ h1 {
 .main-header {
     font-size: 61px;
 }
-.main-content h3, h2 {
+.main-content h3,
+h2 {
     font-size: 27px;
 }
 .main-content h3 {
@@ -43,11 +44,26 @@ h1 {
 }
 .arrow-back {
     cursor: pointer;
- }
-
+}
 
 @media (max-width: 1370px) {
     .main-content {
         margin-right: 96px;
+    }
+}
+
+@media (max-width: 890px){
+    .main-content {
+        margin-right: 56px;
+    }
+}
+
+@media (max-width: 730px) {
+    .main-content {
+        position: static;
+        margin: 128px 16px 64px 16px;
+    }
+    .head {
+        align-items: flex-start;
     }
 }
