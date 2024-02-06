@@ -160,7 +160,8 @@ body {
 
 .input-child {
     height: auto;
-    width: 375px;
+    width: 422px;
+    height: 48px;
     padding: 12px 21px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -220,7 +221,16 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    margin: 0 16px 0 16px;
+    margin: 0 32px 0 16px;
+}
+
+.forgot-pw {
+    color: #29ABE2;
+}
+
+.forgot-pw:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .button-login-container {
@@ -314,7 +324,7 @@ body {
 }
 
 .input-password {
-    height: 92px;
+    height: 90px;
 }
 
 .wrong-password {
