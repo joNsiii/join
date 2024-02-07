@@ -134,7 +134,7 @@
 
 .prio-select-con {
     display: flex;
-    gap: 16px;
+    gap: 15px;
     cursor: pointer;
     flex-wrap: wrap;
 }
