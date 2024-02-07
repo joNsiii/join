@@ -87,7 +87,7 @@
 
 .summary-urgent {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 168px;
     gap: 20px;
     background-color: white;
@@ -157,6 +157,7 @@
     font-size: 21px;
     width: 86px;
     height: 50px;
+    text-align: center;
 }
 
 .summary-greeting-container {
