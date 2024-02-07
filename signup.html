@@ -7,7 +7,6 @@
     <title>Join</title>
     <link rel="stylesheet" href="styles/signup.css">
     <link rel="stylesheet" href="styles/signup-media.css">
-    <script src="javascript/includes.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
 </head>
@@ -32,11 +31,11 @@
                     <div class="input-child"><input type="email" required placeholder="Email">
                         <img src="./img/mail.png" alt="email-icon" id="email-signup">
                     </div>
-                    <div class="input-child"><input type="password" required placeholder="Password">
-                        <img src="./img/lock.png" alt="password-icon" id="set-password">
+                    <div class="input-child" id="password-parent"><input type="password" required placeholder="Password" id="password-type">
+                        <img src="./img/lock.png" alt="password-icon" id="set-password" onclick="togglePasswordIcon()">
                     </div>
-                    <div class="input-child"><input type="password" required placeholder="Confirm Password">
-                        <img src="./img/lock.png" alt="password-icon" id="confirm-password">
+                    <div class="input-child"><input type="password" required placeholder="Confirm Password" id="password-type2">
+                        <img src="./img/lock.png" alt="password-icon" id="confirm-password" onclick="togglePasswordIcon()">
                     </div>
 
                     <div class="checkbox-button-container">

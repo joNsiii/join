@@ -221,3 +221,11 @@ body {
     color: #29ABE2;
     font-weight: 700;
 }
+
+.bad-outline {
+    border: 1px solid #FF001F;
+}
+
+.d-none {
+    display: none;
+}
