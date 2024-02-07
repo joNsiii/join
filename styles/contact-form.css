@@ -177,6 +177,10 @@
 
 
 /* dialog-add-contact */
+#dialog-add-contact[open] {
+    display: flex;
+}
+
 .dialog-contacts-left-clear {
     box-sizing: border-box;
     padding: 66px 48px;

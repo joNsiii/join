@@ -1,5 +1,5 @@
 @media (max-width: 1400px) {
-    .dialog[open] {
+    #dialog-contact-viewer[open] {
         display: flex;
     }
 
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 730px) {
-    .dialog[open] {
+    #dialog-contact-viewer[open] {
         display: none;
     }
 
