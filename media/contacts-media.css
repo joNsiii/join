@@ -1,10 +1,18 @@
 @media (max-width: 1400px) {
+    .dialog[open] {
+        display: flex;
+    }
+
     .contact-viewer {
         display: none;
     }
 }
 
 @media (max-width: 730px) {
+    .dialog[open] {
+        display: none;
+    }
+
     .content {
         width: 100%;
         height: calc(100vh - 172px);
@@ -47,10 +55,3 @@
         display: none;
     }
 }
-
-
-/* responsiveness of add contact form and edit contact form */
-/* dialog add contact and edit contact einarbeiten */
-/* responsiveness of contact-viewer einbauen */
-
-/* responsiveness of board verbessern */

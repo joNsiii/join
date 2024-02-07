@@ -1,5 +1,5 @@
 dialog[open] {
-    display: flex;
+    display: none;
 }
 
 .dialog {
@@ -24,14 +24,34 @@ dialog[open] {
     padding: 48px 16px;
     width: 100%;
     max-width: 428px;
-    ;
     background-color: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 48px;
-    /* position: relative; */
+    position: relative;
+}
+
+.contact-more-button {
+    box-sizing: border-box;
+    padding: 12px;
+    width: 56px;
+    height: 56px;
+    background-color: #2A3647;
+    border: unset;
+    border-radius: 56px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    right: 16px;
+    bottom: 32px;
+}
+
+.contact-more-button-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .contact-viewer-header-mobile {
@@ -104,7 +124,7 @@ dialog[open] {
     gap: 8px;
 } */
 
-.contact-user-name {
+.contact-user-name-mobile {
     font-family: 'Inter', sans-serif;
     font-size: 36px;
     font-weight: 700;
@@ -138,9 +158,8 @@ dialog[open] {
     object-position: center;
 } */
 
-.contact-user-info {
+.contact-user-info-mobile {
     width: fit-content;
-    height: 74px;
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 400;
@@ -149,41 +168,3 @@ dialog[open] {
     justify-content: center;
     align-items: center;
 }
-
-.contact-user-detail-group {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-.contact-user-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.cud-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 19.2px;
-}
-
-.cud-mail {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 19.2px;
-    color: #007CEE;
-}
-
-.cud-phone {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 19.2px;
-}
-
-/* button-group-button einarbeiten */
-/* Bitte dialog in Desktop-Version ausblenden */
-/* Bitte andere Notizen beachten */
