@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/contact-viewer-mobile.css">
     <link rel="stylesheet" href="./media/contacts-media.css">
 </head>
 
 <body onload="init()">
+
+    <dialog open id="dialog" class="dialog" w3-include-html="./templates/contact-viewer-mobile.html">
+        
+    </dialog>
+
     <div w3-include-html="templates/templates.html"></div>
 
     <main class="content">
