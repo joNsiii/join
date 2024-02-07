@@ -1,5 +1,7 @@
 @media (max-width: 1400px) {
     .dialog-contacts {
+        width: 100%;
+        max-width: 396px;
         flex-direction: column;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     }
@@ -39,10 +41,7 @@
     /* Bitte bearbeiten!!! */
     .dialog-contacts-right {
         box-sizing: border-box;
-
-        /* padding-3 anpassen!!! */
         padding: 92px 16px 80px 16px;
-        width: 396px;
         height: 408px;
         border-radius: 0 0 30px 30px;
         flex-direction: column;
@@ -74,7 +73,7 @@
 
     .dcr-form {
         margin-top: 0;
-        width: 364px;
+        width: 100%;
         gap: 32px;
     }
 
@@ -85,6 +84,10 @@
     .dcr-input-group {
         width: 100%;
         height: 41px;
+    }
+
+    .dcr-input {
+        width: 100%;
     }
 
     .dcr-button-bar {
@@ -128,7 +131,6 @@
 
     .dialog-contacts-left-clear {
         padding: 66px 24px;
-        width: 396px;
         height: 352px;
         border-radius: 30px 30px 0 0;
         justify-content: center;
@@ -174,6 +176,16 @@
 }
 
 
-/* close-button einfuegen!!! */
+@media (max-width: 350px) {
+    .dialog-contacts-headline {
+        height: unset;
+        font-size: 37.5px;
+        line-height: 45px;
+    }
 
-/* edit-contact-form pruefen!!! */
+    .dialog-contacts-subheadline {
+        line-height: 19px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+}
