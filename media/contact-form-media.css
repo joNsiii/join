@@ -1,4 +1,8 @@
 @media (max-width: 1400px) {
+    #dialog-edit-contact[open] {
+        display: flex;
+    }
+
     .dialog-contacts {
         width: 100%;
         max-width: 396px;
@@ -41,7 +45,7 @@
     /* Bitte bearbeiten!!! */
     .dialog-contacts-right {
         box-sizing: border-box;
-        padding: 92px 16px 80px 16px;
+        padding: 92px 16px 62px 16px;
         height: 408px;
         border-radius: 0 0 30px 30px;
         flex-direction: column;
@@ -78,7 +82,7 @@
     }
 
     .dcr-fieldset {
-        gap: 15px;
+        gap: 24px;
     }
 
     .dcr-input-group {
@@ -93,36 +97,22 @@
     .dcr-button-bar {
         width: unset;
         justify-content: center;
+        gap: 20px;
     }
 
-    /* .dcr-button {
-        padding: 14px 23px;
-        font-family: 'Inter', sans-serif;
-        font-size: 21px;
-        font-weight: 400;
-        line-height: 25.2px;
-        color: #2A3647;
-        background-color: transparent;
-        border: 1px solid #2A3647;
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
-
-    /* .dcr-button-img {
-        width: 24px;
-        height: 24px;
-        object-fit: cover;
-        object-position: center;
-    } */
-
+    .dcr-button {
+        box-sizing: border-box;
+        padding: 17px 9px;
+        height: 51px;
+        font-size: 20px;
+        line-height: 24px;
+        border-radius: 10px;
+    }
 
     .dcr-button-dark {
         padding: 18px 10px;
         height: 51px;
     }
-
 
     /* dialog-add-contact */
     #dialog-add-contact[open] {
@@ -150,6 +140,11 @@
     .dcr-profile-clear {
         margin-top: -152px;
         background-color: #D1D1D1;
+    }
+
+    .dcr-profile {
+        margin-top: -152px;
+        background-color: #FFBB2B;
     }
 
     .dcr-button-clear {
@@ -185,6 +180,12 @@
 
     .dialog-contacts-subheadline {
         line-height: 19px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .dcr-input {
+        height: 19px;
         font-size: 16px;
         line-height: 19.2px;
     }

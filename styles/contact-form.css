@@ -1,4 +1,8 @@
 /* dialog-edit-contact */
+#dialog-edit-contact[open] {
+    display: flex;
+}
+
 .dialog-contacts {
     border-radius: 30px;
     display: flex;
