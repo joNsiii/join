@@ -37,32 +37,8 @@
         max-width: 352px;
     }
 
-
-    /* Bitte neuen Button hinzufuegen!!! */
-    .contacts {
-        position: relative;
-    }
-
     .add-contact-button-mobile {
-        /* margin: 0 16px 32px 0; */
-        padding: 12px;
-        border: unset;
-        border-radius: 46px;
-        background-color: #2A3647;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        /* position: absolute;
-        right: 16px;
-        bottom: 32px; */
-    }
-
-    .acb-mobile-img {
-        width: 32px;
-        height: 32px;
-        object-fit: cover;
-        object-position: center;
     }
 }
 
@@ -76,6 +52,5 @@
 /* responsiveness of add contact form and edit contact form */
 /* dialog add contact and edit contact einarbeiten */
 /* responsiveness of contact-viewer einbauen */
-/* responsiveness inklusive add-contact-button!!! */
 
 /* responsiveness of board verbessern */
