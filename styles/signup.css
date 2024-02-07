@@ -156,6 +156,10 @@ body {
     outline: 2px auto black;
 }
 
+.policy-checkbox:hover {
+    cursor: pointer;
+}
+
 .button-signup-container {
     display: flex;
     justify-content: center;
@@ -228,4 +232,21 @@ body {
 
 .d-none {
     display: none;
+}
+
+.password-inp {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-inp:hover {
+    cursor: pointer;
+}
+
+img[src*="./img/lock.png"] {
+    width: auto;
+    height: auto;
 }

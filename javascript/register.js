@@ -1,14 +1,20 @@
 let users = [];
 
 
+document.querySelectorAll('input[type="password"]').forEach(passwordField => {
+    passwordField.addEventListener('input', togglePassword);
+});
 
-document.getElementById('password-type').addEventListener('input', togglePassword);
+document.querySelectorAll('input[type="password"]').forEach(passwordField => {
+    let toggleImg = passwordField.nextElementSibling.querySelector('img');
+    toggleImg.addEventListener('click', function() {
+        togglePasswordIcon(passwordField, toggleImg);
+    });
+});
 
 function togglePassword() {
-    let passwordField = document.getElementById('password-type');
-    let toggleImg = document.getElementById('set-password');
-    let badOutline = document.getElementById('password-parent');
-    let wrongPw = document.getElementById('wrong-pw');
+    let passwordField = this;
+    let toggleImg = passwordField.nextElementSibling.querySelector('img');
 
     if (passwordField.value !== "") {
         toggleImg.src = "./img/visibility_off.png";
@@ -17,25 +23,19 @@ function togglePassword() {
         toggleImg.src = "./img/lock.png";
         passwordField.type = "password";
     }
-
-    if (badOutline.classList.contains("bad-outline")) {
-        badOutline.classList.remove("bad-outline");
-        wrongPw.classList.add("d-none");
-    }
 }
 
-  function togglePasswordIcon() {
-    let passwordField = document.getElementById('password-type');
-    let toggleImg = document.getElementById('set-password');
-    let currentType = passwordField.type; 
+function togglePasswordIcon(passwordField, toggleImg) {
+    if (passwordField) {
+        let currentType = passwordField.type; 
         if (passwordField.value !== "") {
             passwordField.type = (currentType === "password") ? "text" : "password";
-
             toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
         } else {
             toggleImg.src = "./img/lock.png";
             passwordField.type = "password";
         }
+    }
 }
 
 function toggleCheckbox() {
