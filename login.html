@@ -6,10 +6,7 @@
     <title>Join</title>
     <link rel="stylesheet" href="styles/style-login.css">
     <link rel="stylesheet" href="styles/login-mobile.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="./fonts/fonts.css">
 
 </head>
 
@@ -33,29 +30,33 @@
             </div>
 
             <div class="input-container">
-                <div class="input-child"><input type="text" placeholder="Email">
+                <div class="input-child margin-bottom"><input type="email" placeholder="Email">
                     <img src="./img/mail.png" alt="email-icon">
                 </div>
 
-                <div class="input-child"><input type="password" placeholder="Password">
-                    <img src="./img/lock.png" alt="password-icon" id="password-lock">
+                <div class="input-password">
+                    <div class="input-child" id="password-parent"><input type="password" placeholder="Password" id="password-type" onchange="togglePassword()">
+                        <img src="./img/lock.png" alt="password-icon" id="password-lock" onclick="togglePasswordIcon()">
+                    </div>
+                    <div class="wrong-password d-none" id="wrong-pw">
+                        <p>Wrong password Ups! Try again.</p>
+                    </div>
                 </div>
 
                 <div class="checkbox-container">
                     <div class="checkbox-child">
-                        <div class="checkbox"></div>
+                        <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox" id="checkbox-remember-me" onclick="toggleCheckbox()"></div>
                         <p>Remember me</p>
                     </div>
 
                     <div class="checkbox-child">
-                        <div class="checkbox"></div>
-                        <p>I forgot my password</p>
+                        <p class="forgot-pw">I forgot my password</p>
                     </div>
                 </div>
             </div>
 
             <div class="button-login-container">
-                <button class="button button-login">Log in</button>
+                <button class="button button-login" onclick="login()">Log in</button>
                 <button class="button button-guest">Guest Log in</button>
             </div>
         </div>
@@ -74,6 +75,7 @@
     </div>
 
     <script src="javascript/logo-animation.js"></script>
+    <script src="javascript/login.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
 </body>

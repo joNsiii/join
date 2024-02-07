@@ -15,7 +15,9 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+.head h1 {
+    margin: 0;
+}
 @media (max-width: 1370px) {
     .main-content {
         margin-right: 96px;
@@ -34,5 +36,8 @@ body {
         display: flex;
         flex-direction: column;
         margin: 150px 16px 64px 16px;
+    }
+    .head {
+        align-items: flex-start;
     }
 }

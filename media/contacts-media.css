@@ -1,0 +1,57 @@
+@media (max-width: 1400px) {
+    #dialog-contact-viewer[open] {
+        display: flex;
+    }
+
+    .contact-viewer {
+        display: none;
+    }
+}
+
+@media (max-width: 730px) {
+    #dialog-contact-viewer[open] {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+        height: calc(100vh - 172px);
+        left: 0px;
+    }
+
+    .content-row {
+        justify-content: center;
+    }
+
+    .contacts {
+        padding-left: 14px;
+        width: 100%;
+        max-width: 428px;
+        height: calc(100vh - 172px);
+    }
+
+    .contacts-header {
+        display: none;
+    }
+
+    .contacts-collector {
+        padding: 24px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .contacts-contact {
+        width: 100%;
+        max-width: 352px;
+    }
+
+    .add-contact-button-mobile {
+        display: flex;
+    }
+}
+
+@media (max-width: 400px) {
+    .contact-profile {
+        display: none;
+    }
+}
