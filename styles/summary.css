@@ -1,7 +1,6 @@
 
 .flex-column {
     display: flex;
-    min-width: 200px;
     margin-left: 328px;
 }
 
@@ -27,6 +26,13 @@
     padding: 0;
 }
 
+.summary-headline-bottom-border-mobile {
+    border: 3px solid #29ABE2;
+    width: 90px;
+    border-radius: 10px;
+    display: none;
+}
+
 .summary-headline-right {
     font-size: 27px;
     display: flex;
@@ -47,7 +53,6 @@
 .summary-main-overview {
     display: flex;
     justify-content: space-between;
-    min-width: 200px;
     gap: 10px;
 }
 
@@ -83,9 +88,8 @@
 .summary-urgent {
     display: flex;
     justify-content: space-between;
-    max-width: 560px;
     height: 168px;
-   gap: 20px;
+    gap: 20px;
     background-color: white;
     border-radius: 30px;
     padding: 28px 48px 28px 48px;
@@ -100,7 +104,6 @@
 .summary-urgent-left {
     display: flex;
     box-sizing: border-box;
-    width: 130px;
     height: 96px;
     gap: 18px;
     justify-content: center;
@@ -120,7 +123,6 @@
 }
 
 .summary-urgent-right-date {
-    width: 178px;
     height: 25px;
     font-size: 21px;
     font-weight: 700;

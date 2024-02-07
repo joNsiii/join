@@ -1,0 +1,41 @@
+@media (max-width: 950px) {
+    form {
+        flex-direction: column;
+    }
+
+    .border-between {
+        display: none;
+    }
+
+    .right-side-inputs {
+        margin-left: 0;
+        margin-right: 96px;
+    }
+
+    .left-side-inputs {
+        margin-right: 96px;
+    }
+}
+
+@media (max-width: 730px) {
+    .add-task-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right-side-inputs {
+        margin-left: 96px;
+        margin-right: 96px;
+    }
+
+    .left-side-inputs {
+        margin-left: 96px;
+        margin-right: 96px;
+    }
+
+    .form {
+       margin: 0;
+    } 
+}

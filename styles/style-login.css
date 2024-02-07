@@ -156,12 +156,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 32px;
 }
 
 .input-child {
     height: auto;
-    width: 375px;
+    width: 422px;
+    height: 48px;
     padding: 12px 21px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -170,6 +170,10 @@ body {
     justify-content: space-between;
     flex-direction: row;
     box-sizing: border-box;
+}
+
+.margin-bottom {
+    margin-bottom: 32px;
 }
 
 .input-child input {
@@ -200,10 +204,11 @@ body {
 }
 
 .checkbox {
-    width: 16px;
-    height: 16px;
-    border: 2px solid black;
-    border-radius: 4px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 8px;
 }
 
@@ -216,7 +221,16 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    margin: 0 16px 0 16px;
+    margin: 0 32px 0 16px;
+}
+
+.forgot-pw {
+    color: #29ABE2;
+}
+
+.forgot-pw:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .button-login-container {
@@ -307,4 +321,18 @@ body {
     cursor: pointer;
     color: #29ABE2;
     font-weight: 700;
+}
+
+.input-password {
+    height: 90px;
+}
+
+.wrong-password {
+    font-size: 13px;
+    color: #FF8190;
+    margin-top: -6px;
+}
+
+.bad-outline {
+    border: 1px solid #FF001F;
 }

@@ -19,7 +19,24 @@
                     <div class="task-hint">This field is required</div>
                 </div>
             </div>
-            <div class="task-label-input-group">
+            <div class="task-label-input-group-mobile">
+                <label class="task-label-text" for="task-priority">Prio</label>
+                <div class="priority-button-group">
+                    <button id="priority-urgent-button" class="priority-button pb-white">
+                        <div class="priority-button-text">Urgent</div>
+                        <img class="priority-img" src="./img/urgent-red-arrows.png" alt="urgent-red-arrows">
+                    </button>
+                    <button id="priority-medium-button" class="priority-button pb-orange">
+                        <div class="priority-medium-button-text">Medium</div>
+                        <img class="priority-img" src="./img/medium.png" alt="medium">
+                    </button>
+                    <button id="priority-low-button" class="priority-button pb-white">
+                        <div class="priority-button-text">Low</div>
+                        <img class="priority-img" src="./img/low.png" alt="low">
+                    </button>
+                </div>
+            </div>
+            <div class="task-label-input-group d-none-mobile">
                 <label class="task-label-text" for="task-assignment">Assigned to</label>
                 <div class="p-relative">
                     <select name="task-assignment" id="task-assignment" class="task-select">
@@ -27,12 +44,11 @@
                         <option value="1">You</option>
                         <option value="i">User i</option>
                     </select>
-                    <img class="task-drop-down-arrow" src="./assets/img/drop-down-arrow.svg" alt="drop-down-arrow">
+                    <img class="task-drop-down-arrow" src="./img/arrow_drop_downaa.png" alt="arrow-drop-down">
                 </div>
             </div>
         </fieldset>
-        <img class="vertical-line-task-form" src="./assets/img/vertical-line-task-form.svg"
-            alt="vertical-line-task-form">
+        <img class="vertical-line-task-form d-none-mobile" src="./img/vector-board-form.png" alt="vector-board-form">
         <fieldset class="add-task-fieldset gap-24">
             <div class="task-label-input-group">
                 <label class="task-label-text" for="task-due-date">Due date<span class="tlt-required">*</span></label>
@@ -41,20 +57,20 @@
                     <div class="task-hint">This field is required</div>
                 </div>
             </div>
-            <div class="task-label-input-group">
+            <div class="task-label-input-group d-none-mobile">
                 <label class="task-label-text" for="task-priority">Prio</label>
                 <div class="priority-button-group">
                     <button id="priority-urgent-button" class="priority-button pb-white">
                         <div class="priority-button-text">Urgent</div>
-                        <img class="priority-img" src="./assets/img/prio-urgent.svg" alt="prio-urgent">
+                        <img class="priority-img" src="./img/urgent-red-arrows.png" alt="urgent-red-arrows">
                     </button>
                     <button id="priority-medium-button" class="priority-button pb-orange">
                         <div class="priority-medium-button-text">Medium</div>
-                        <img class="priority-img" src="./assets/img/prio-medium.svg" alt="prio-medium">
+                        <img class="priority-img" src="./img/medium.png" alt="medium">
                     </button>
                     <button id="priority-low-button" class="priority-button pb-white">
                         <div class="priority-button-text">Low</div>
-                        <img class="priority-img" src="./assets/img/prio-low.svg" alt="prio-low">
+                        <img class="priority-img" src="./img/low.png" alt="low">
                     </button>
                 </div>
             </div>
@@ -66,14 +82,25 @@
                         <option value="1">To do</option>
                         <option value="i">Testing</option>
                     </select>
-                    <img class="task-drop-down-arrow" src="./assets/img/drop-down-arrow.svg" alt="drop-down-arrow">
+                    <img class="task-drop-down-arrow" src="./img/arrow_drop_downaa.png" alt="arrow-drop-down">
+                </div>
+            </div>
+            <div class="task-label-input-group-mobile">
+                <label class="task-label-text" for="task-assignment">Assigned to</label>
+                <div class="p-relative">
+                    <select name="task-assignment" id="task-assignment" class="task-select">
+                        <option value="0">Select contacts to assign</option>
+                        <option value="1">You</option>
+                        <option value="i">User i</option>
+                    </select>
+                    <img class="task-drop-down-arrow" src="./img/arrow_drop_downaa.png" alt="arrow-drop-down">
                 </div>
             </div>
             <div class="task-label-input-group">
                 <label class="task-label-text" for="task-subtask">Subtasks</label>
                 <div class="p-relative">
                     <input id="task-subtask" class="task-input" type="text" placeholder="Add new subtask" required>
-                    <img class="task-plus" src="./assets/img/plus.svg" alt="plus">
+                    <img class="task-plus" src="./img/subtask.png" alt="subtask">
                 </div>
             </div>
         </fieldset>
@@ -84,11 +111,11 @@
         <div class="clear-create-button-bar">
             <button class="clear-button">
                 <div class="cb-text">Clear</div>
-                <img class="cb-img" src="./assets/img/cancel.svg" alt="cancel">
+                <img class="cb-img" src="./img/cancel.png" alt="cancel">
             </button>
             <button class="create-task-button">
                 <div class="ctb-text">Create Task</div>
-                <img class="cb-img" src="./assets/img/check-task.svg" alt="check-task">
+                <img class="cb-img" src="./img/check.png" alt="check">
             </button>
         </div>
     </div>

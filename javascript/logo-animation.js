@@ -3,18 +3,14 @@ function renderLogin() {
     const startup = document.querySelector('.startup');
 
     setTimeout(function(){
-        logo.classList.add('selected');;
+        logo.classList.add('selected');
     }, 1000);
 
     setTimeout(function(){
-        startup.classList.add('blend-out');;
+        startup.classList.add('blend-out');
     }, 1250);
 
     setTimeout(function(){
-        startup.classList.add('d-none');;
+        startup.classList.add('d-none');
     }, 1350);
 }
-
-
-// const logo = document.querySelector('.joinLogo');
-// logo.addEventListener('click', () => logo.classList.toggle('selected'));
