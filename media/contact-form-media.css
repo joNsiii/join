@@ -10,13 +10,13 @@
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     }
 
-    /* edit contact anpassen!!! */
     .dialog-contacts-left {
         padding: 66px 24px;
-        width: 396px;
         height: 352px;
         border-radius: 30px 30px 0 0;
-        gap: 32px;
+        justify-content: center;
+        gap: 12px;
+        position: relative;
     }
 
     .dialog-contacts-img {
@@ -150,7 +150,6 @@
     .dcr-button-clear {
         display: none;
     }
-
 
     /* backlog contact */
     .backlog-contact {
