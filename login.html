@@ -36,7 +36,9 @@
 
                 <div class="input-password">
                     <div class="input-child" id="password-parent"><input type="password" placeholder="Password" id="password-type" onchange="togglePassword()">
-                        <img src="./img/lock.png" alt="password-icon" id="password-lock" onclick="togglePasswordIcon()">
+                        <div class="password-inp">
+                            <img src="./img/lock.png" alt="password-icon" id="password-lock" onclick="togglePasswordIcon()">
+                        </div>
                     </div>
                     <div class="wrong-password d-none" id="wrong-pw">
                         <p>Wrong password Ups! Try again.</p>
