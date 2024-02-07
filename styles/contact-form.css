@@ -192,6 +192,13 @@
     gap: 16px;
 }
 
+.dcr-close-button-mobile {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+}
+
 .dcg-subgroup {
     display: flex;
     flex-direction: column;
@@ -217,6 +224,7 @@
     line-height: 56.4px;
     text-align: center;
     color: #FFFFFF;
+    background-color: #D1D1D1;
     border: 3px solid #FFFFFF;
     border-radius: 70px;
     display: flex;
