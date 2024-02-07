@@ -32,10 +32,6 @@ function hightlightCurrentButton() {
     }
 }
 
-function toggleDropdown() {
-    let dropdownContent = document.getElementById("dropDownMenu");
-    dropdownContent.classList.toggle("show");
-}
 
 window.onclick = function(event) {
     let dropdownContent = document.getElementById("dropDownMenu");
@@ -47,4 +43,43 @@ window.onclick = function(event) {
     }
 };
 
+
+function openMenu(dropdownContent) {
+    dropdownContent.classList.add("show");
+    requestAnimationFrame(() => {
+        dropdownContent.style.transform = "translateX(0)";
+    });
+}
+
+function closeMenu(dropdownContent) {
+    dropdownContent.style.transform = "translateX(100%)";
+    dropdownContent.addEventListener('transitionend', function handler() {
+        dropdownContent.classList.remove("show");
+        dropdownContent.removeEventListener('transitionend', handler);
+    });
+}
+
+function toggleDropdown() {
+    let dropdownContent = document.getElementById("dropDownMenu");
+
+    if (window.innerWidth <= 730) {
+        if (dropdownContent.classList.contains("show")) {
+            closeMenu(dropdownContent);
+        } else {
+            openMenu(dropdownContent);
+        }
+    } else {
+        dropdownContent.classList.toggle("show");
+    }
+}
+
+function adjustDropdownOnResize() {
+    let dropdownContent = document.getElementById("dropDownMenu");
+
+    if (window.innerWidth > 730) {
+        dropdownContent.style.removeProperty('transform');
+    }
+}
+
+window.addEventListener('resize', adjustDropdownOnResize);
 
