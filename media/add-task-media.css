@@ -1,5 +1,5 @@
 @media (max-width: 950px) {
-    form {
+    .display-flex {
         flex-direction: column;
     }
 
@@ -10,9 +10,16 @@
     .right-side-inputs {
         margin-left: 0;
         margin-right: 96px;
+        max-width: 100%;
     }
 
     .left-side-inputs {
+        margin-right: 96px;
+        width: auto;
+    }
+
+    .bottom-button-container {
+        max-width: 440px;
         margin-right: 96px;
     }
 }
@@ -22,20 +29,41 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+    }
+
+    .add-task-headline {
+        font-size: 47px;
+    }
+
+    .add-task-headline {
+        margin-left: 0;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 112px;
     }
 
     .right-side-inputs {
-        margin-left: 96px;
-        margin-right: 96px;
+        margin-right: 16px;
+        margin-left: 16px;
+
     }
 
     .left-side-inputs {
-        margin-left: 96px;
-        margin-right: 96px;
+        margin-right: 16px;
+        margin-left: 16px;
     }
 
-    .form {
-       margin: 0;
-    } 
+    .display-flex {
+        margin-left: 0;
+    }
+
+    .prio-selection {
+        height: 41px;
+        width: 121px;
+    }
+
+    .medium-selection {
+        height: 41px;
+        width: 121px;
+    }
 }
