@@ -11,8 +11,7 @@ async function addUser() {
         return alert('Email already exist!!')    
     }
     users.push({name: name.value, email: email.value, password: password.value})
-    alert('Your account was successfully created!!!')
-    // window.location.reload();
+    window.location.href = 'login.html?msg=You Signed Up successfully'
 }
 
 function checkPassword() {

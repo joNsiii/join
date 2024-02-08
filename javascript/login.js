@@ -53,3 +53,13 @@ function login() {
         input.classList.add("bad-outline");
     }
 }
+
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get('msg');
+if(msg) {
+    msgPopup.innerHTML = msg;
+    setTimeout(() => {
+        msgPopup.classList.add('d-none');
+      }, "6000");
+      
+}
