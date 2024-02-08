@@ -378,7 +378,6 @@ a {
     animation-delay: 2s;
   }
   
-
   @keyframes flyIn {
     0% {
       bottom: -100px; /* Start position */
