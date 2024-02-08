@@ -195,6 +195,7 @@ body {
     justify-content: center;
     flex-direction: row;
     height: 24px;
+    width: 100%;
 }
 
 .checkbox-container p {
@@ -325,6 +326,7 @@ body {
 
 .input-password {
     height: 90px;
+    width: 100%;
 }
 
 .wrong-password {
@@ -348,4 +350,37 @@ body {
 img[src*="./img/lock.png"] {
     width: auto;
     height: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (max-width: 553px) {
+    .checkbox-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin: 0 0px 0 0px;
+        text-align: center;
+    }
+
+    .checkbox-container {
+        justify-content: space-between;
+    }
+
+    .checkbox {
+        margin: 0 8px 0 0;
+    }
+}
+
+@media (max-width: 451px) {
+    .checkbox-container p {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
