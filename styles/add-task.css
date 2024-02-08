@@ -44,6 +44,16 @@
     font-size: 20px;
 }
 
+.input-single-line-subtask {
+    display: flex;
+    border: 1px solid #D1D1D1;
+    background-image: url('../img/add-button.png');
+    border-radius: 10px;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
+    font-size: 20px;
+}
+
 .input-single-line::placeholder {
     color: #D1D1D1;
     font-family: inter;
@@ -60,6 +70,7 @@
     flex-direction: column;
     height: 168px;
     gap: 8px;
+    resize: none;
 }
 
 .desc-textarea {
@@ -183,11 +194,52 @@
     gap: 10px;
 }
 
-.bottom-button-container {
+.bottom-container {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     margin-left: 328px;
     max-width: 1026px;
     margin-right: 48px;
+    margin-top: 146px;
+}
+
+.bottom-button-container {
+    display: flex;
+    gap: 16px;
+}
+
+.createBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 700;
+    width: 183px;
+    padding: 16px;
+    background-color: #2A3647;
+    color: white;
+    border: unset;
+    border-radius: 10px;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.createBtn img {
+    width: 24px;
+    height: 24px;
+}
+
+.clearBtn {
+    display: flex;
+    padding: 16px;
+    gap: 4px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    width: 110px;
+    height: 56px;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
 
 }
