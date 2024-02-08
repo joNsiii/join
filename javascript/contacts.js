@@ -1,52 +1,64 @@
+// let contactSample = [
+//     {
+//         'name': 'Anton Mayer',
+//         'mail': 'anton@gmail.com'
+//     },
+//     {
+//         'name': 'Anja Schulz',
+//         'mail': 'schulz@hotmail.com'
+//     },
+//     {
+//         'name': 'Benedikt Ziegler',
+//         'mail': 'benedikt@gmail.com'
+//     },
+//     {
+//         'name': 'David Eisenberg',
+//         'mail': 'davidberg@gmail.com'
+//     },
+//     {
+//         'name': 'Eva Fischer',
+//         'mail': 'eva@gmail.com'
+//     },
+//     {
+//         'name': 'Emmanuel Mauer',
+//         'mail': 'emmanuelma@gmail.com'
+//     },
+//     {
+//         'name': 'Marcel Bauer',
+//         'mail': 'bauer@gmail.com'
+//     },
+//     {
+//         'name': 'Tatjana Wolf',
+//         'mail': 'wolf@gmail.com'
+//     }
+// ];
+
 let contactSample = [
     {
-        'name': 'Anton Mayer',
-        'mail': 'anton@gmail.com',
-        'bgc': 'orange'
+        'name': 'Rudolf Reiner',
+        'mail': 'rudolf@gmail.com'
     },
     {
-        'name': 'Anja Schulz',
-        'mail': 'schulz@hotmail.com',
-        'bgc': 'purple'
+        'name': 'Susi Landstreich',
+        'mail': 'streich@hotmail.com'
     },
     {
-        'name': 'Benedikt Ziegler',
-        'mail': 'benedikt@gmail.com',
-        'bgc': 'blue'
+        'name': 'Karl Kaiser',
+        'mail': 'karl@gmail.com'
     },
     {
-        'name': 'David Eisenberg',
-        'mail': 'davidberg@gmail.com',
-        'bgc': 'magenta'
-    },
-    {
-        'name': 'Eva Fischer',
-        'mail': 'eva@gmail.com',
-        'bgc': 'yellow'
-    },
-    {
-        'name': 'Emmanuel Mauer',
-        'mail': 'emmanuelma@gmail.com',
-        'bgc': 'green'
-    },
-    {
-        'name': 'Marcel Bauer',
-        'mail': 'bauer@gmail.com',
-        'bgc': 'dark-blue'
-    },
-    {
-        'name': 'Tatjana Wolf',
-        'mail': 'wolf@gmail.com',
-        'bgc': 'red'
+        'name': 'Walter Walhalter',
+        'mail': 'walhalter@gmail.com'
     }
 ];
 
-let initials = [];
+let initials;
 let backgroundColor = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red'];
 let bgcCounter = 0;
 
 
 function collectInitials() {
+    initials = [];
     for (let i = 0; i < contactSample.length; i++) {
         let name = contactSample[i]['name'];
         let initial = name[0];
@@ -99,3 +111,12 @@ function fillContactList(contactList) {
         }
     }
 }
+
+
+function sortContactsByName(contacts) {
+    return contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// contactSample = sortContactsByName(contactSample);
+
+// lowerCase beruecksichtigen!!!
