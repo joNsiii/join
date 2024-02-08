@@ -111,6 +111,8 @@
     box-sizing: border-box;
     width: 42px;
     height: 42px;
+    min-width: 42px;
+    min-height: 42px;
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 400;
@@ -159,6 +161,9 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    flex: 1;
+    text-wrap: nowrap;
+    overflow: hidden;
 }
 
 .contact-name {
@@ -166,7 +171,6 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
-    word-wrap: normal;
 }
 
 .contact-email {

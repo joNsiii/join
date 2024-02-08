@@ -51,7 +51,19 @@
 }
 
 @media (max-width: 400px) {
-    .contact-profile {
-        display: none;
+    .contacts-contact {
+        gap: 25px;
+    }
+
+    .contact-name {
+        height: 19px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .contact-email {
+        height: 14px;
+        font-size: 12px;
+        line-height: 14.4px;
     }
 }
