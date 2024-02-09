@@ -32,15 +32,3 @@ function getJsonObjectValue(variable, key) {
 function getJsonObjectDeepValue(variable, key, subkey) {
     return variable[key][subkey];
 }
-
-
-/**
- * Provides a Boolean value by making a comparison between an including array and a requested value. 
- * 
- * @param {*} array - The including array.
- * @param {*} value - The requested value.
- * @returns - True or false.
- */
-function getIncludingMatch(array, value) {
-    return array.includes(value);
-}

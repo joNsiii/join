@@ -61,6 +61,9 @@ let backgroundColor = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green',
 let bgcCounter = 0;
 
 
+/**
+ * Initializes the user's contacts.
+ */
 function initContacts() {
     sortContactsByName(contactSample);
     collectInitials(contactSample);
@@ -82,17 +85,42 @@ function sortContactsByName(contacts) {
 /**
  * Collects the required register letters.
  * 
- * @param {*} contacts - The contact list which is to render subsequently.
+ * @param {*} contacts - The contacts which are to render subsequently.
  */
 function collectInitials(contacts) {
     initials = [];
     for (let i = 0; i < contacts.length; i++) {
-        let name = getJsonObjectDeepValue(contactSample, i, 'name');
-        let initial = getJsonObjectValue(name, 0);
+        let initial = getInitialLetter(contactSample, i);
         contacts[i]['register'] = initial;
         let match = getIncludingMatch(initials, initial);
         (!match) ? initials.push(initial) : false;
     }
+}
+
+
+/**
+ * Provides the initial letter of a name.
+ * 
+ * @param {*} variable - The providing json.
+ * @param {*} i - The current object's index.
+ * @returns - The initial letter.
+ */
+function getInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    let initial = getJsonObjectValue(name, 0);
+    return initial.toLowerCase();
+}
+
+
+/**
+ * Provides a Boolean value by making a comparison between an including array and a requested value. 
+ * 
+ * @param {*} array - The including array.
+ * @param {*} value - The requested value.
+ * @returns - True or false.
+ */
+function getIncludingMatch(array, value) {
+    return array.includes(value);
 }
 
 
@@ -108,12 +136,12 @@ function renderContacts() {
 
 function fillContactList(contactList) {
     for (let i = 0; i < initials.length; i++) {
-        let initial = initials[i];
-        contactList.innerHTML += `<div class="contacts-letter">${initial}</div>`
+        renderRegisterLetter(contactList, i);
 
         for (let j = 0; j < contactSample.length; j++) {
             let name = contactSample[j]['name'];
-            let first = name[0];
+            let first = name[0].toLowerCase();
+            let initial = initials[i];
             let match = first == initial;
             if (match) {
                 let space = name.indexOf(' ');
@@ -136,6 +164,19 @@ function fillContactList(contactList) {
         }
     }
 }
+
+
+/**
+ * Renders a register letter.
+ * 
+ * @param {*} contactList - The contacts which are to render subsequently.
+ * @param {*} i - The current contacts' index.
+ */
+function renderRegisterLetter(contactList, i) {
+    let initial = initials[i].toUpperCase();
+    contactList.innerHTML += `<div class="contacts-letter">${initial}</div>`;
+}
+
 
 
 
