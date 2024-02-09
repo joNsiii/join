@@ -329,18 +329,23 @@
 }
 
 .cud-mail {
+    width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 19.2px;
+    text-decoration: none;
     color: #007CEE;
 }
 
 .cud-phone {
+    width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 19.2px;
+    text-decoration: none;
+    color: #000000;
 }
 
 .add-contact-button-mobile {

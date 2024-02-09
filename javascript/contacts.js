@@ -336,6 +336,7 @@ function renderUserMail(j) {
     let userMail = getElement('contact-user-mail');
     let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
     userMail.innerHTML = mail;
+    setElementAttribute('contact-user-mail', 'href', `mailto: ${mail}`);
 }
 
 
@@ -343,7 +344,9 @@ function renderUserPhone(j) {
     let userPhone = getElement('contact-user-phone');
     let phone = getJsonObjectDeepValue(contactSample, j, 'phone');
     userPhone.innerHTML = phone;
+    setElementAttribute('contact-user-phone', 'href', `tel: ${phone}`);
 }
+
 
 /*
     E3 / US01 - Kontaktliste
