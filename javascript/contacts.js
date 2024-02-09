@@ -57,7 +57,7 @@ let contactSample = [
 ];
 
 let initials;
-let backgroundColor = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red'];
+let bgcUser = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red'];
 let bgcCounter = 0;
 
 
@@ -137,31 +137,7 @@ function renderContacts() {
 function fillContactList(contactList) {
     for (let i = 0; i < initials.length; i++) {
         renderRegisterLetter(contactList, i);
-
-        for (let j = 0; j < contactSample.length; j++) {
-            let name = contactSample[j]['name'];
-            let first = name[0].toLowerCase();
-            let initial = initials[i];
-            let match = first == initial;
-            if (match) {
-                let space = name.indexOf(' ');
-                let second = name[space + 1];
-                let mail = contactSample[j]['mail'];
-                bgcCounter = (bgcCounter < backgroundColor.length) ? bgcCounter : 0;
-                let bgc = backgroundColor[bgcCounter];
-                bgcCounter++;
-
-                contactList.innerHTML += `
-                    <div class="contacts-contact">
-                        <div class="contact-profile bgc-${bgc}">${first}${second}</div>
-                        <div class="name-email-group">
-                            <div class="contact-name">${name}</div>
-                            <div class="contact-email">${mail}</div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
+        fillRegisterSection(contactList, i);
     }
 }
 
@@ -178,6 +154,61 @@ function renderRegisterLetter(contactList, i) {
 }
 
 
+function fillRegisterSection(contactList, i) {
+    for (let j = 0; j < contactSample.length; j++) {
+        let match = getMatch(i, j);
+        if (match) {
+            let first = getInitialLetter(contactSample, j).toUpperCase();
+            let second = getSecondInitialLetter(contactSample, j).toUpperCase();
+            let name = getJsonObjectDeepValue(contactSample, j, 'name');
+            let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
+            let bgc = getUserBgc();
+
+            contactList.innerHTML += `
+                <div class="contacts-contact">
+                    <div class="contact-profile bgc-${bgc}">${first}${second}</div>
+                    <div class="name-email-group">
+                        <div class="contact-name">${name}</div>
+                        <div class="contact-email">${mail}</div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+}
+
+
+function getMatch(i, j) {
+    let first = getInitialLetter(contactSample, j);
+    let initial = getJsonObjectValue(initials, i);
+    return compareValues(first, initial);
+}
+
+
+function compareValues(valueA, valueB) {
+    return valueA == valueB;
+}
+
+
+function getSecondInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    let space = name.indexOf(' ');
+    let second = name[space + 1];
+    return second.toLowerCase();
+}
+
+
+/**
+ * Provides a user's background color.
+ * 
+ * @returns - A class fraction.
+ */
+function getUserBgc() {
+    bgcCounter = (bgcCounter < bgcUser.length) ? bgcCounter : 0;
+    let bgc = bgcUser[bgcCounter];
+    bgcCounter++;
+    return bgc;
+}
 
 
 /*
