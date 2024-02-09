@@ -16,15 +16,19 @@
     <link rel="stylesheet" href="./media/contact-form-media.css">
     <script src="./javascript/common.js"></script>
     <script src="./javascript/contacts.js"></script>
+    <script src="./javascript/contacts-dialog.js"></script>
 
     <style id="user-bgc-flexible"></style>
 </head>
 
 <body onload="init(); initContacts()">
 
-    <dialog id="dialog-contact-viewer" class="dialog" w3-include-html="./templates/contact-viewer-mobile.html"></dialog>
-    <dialog id="dialog-add-contact" class="dialog" w3-include-html="./templates/add-contact-form.html"></dialog>
-    <dialog id="dialog-edit-contact" class="dialog" w3-include-html="./templates/edit-contact-form.html"></dialog>
+    <dialog id="dialog-contact-viewer" class="dialog" w3-include-html="./templates/contact-viewer-mobile.html"
+        onclick="closeDialog(id)"></dialog>
+    <dialog id="dialog-add-contact" class="dialog" w3-include-html="./templates/add-contact-form.html"
+        onclick="closeDialog(id)"></dialog>
+    <dialog id="dialog-edit-contact" class="dialog" w3-include-html="./templates/edit-contact-form.html"
+        onclick="closeDialog(id)"></dialog>
 
     <div w3-include-html="templates/templates.html"></div>
 

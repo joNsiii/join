@@ -216,7 +216,7 @@ function compareValues(valueA, valueB) {
  */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
-        <div class="contacts-contact" onclick="renderContactViewer(${j})">
+        <div class="contacts-contact" onclick="renderContactViewer(${j}); openDialog('dialog-contact-viewer')">
             ${renderContactProfile(j)}
             ${renderNameMailGroup(j)}
         </div>
@@ -290,11 +290,9 @@ function renderNameMailGroup(j) {
 
 
 function renderContactViewer(j) {
-    renderUserProfile(j);
     renderUserBgc(j);
-    renderUserName(j);
-    renderUserMail(j);
-    renderUserPhone(j);
+    renderContactViewerVersion(j);
+    renderContactViewerVersion(j, 'mobile');
 }
 
 
@@ -311,8 +309,18 @@ function renderUserBgc(j) {
 }
 
 
-function renderUserProfile(j) {
-    let userProfile = getElement('contact-user-profile');
+function renderContactViewerVersion(j, extension) {
+    (!extension) ? renderUserProfile(j) : renderUserProfile(j, extension);
+    (!extension) ? renderUserInfo(j, 'name') : renderUserInfo(j, 'name', extension);
+    (!extension) ? renderUserInfo(j, 'mail') : renderUserInfo(j, 'mail', extension);
+    (!extension) ? renderUserInfo(j, 'phone') : renderUserInfo(j, 'phone', extension);
+}
+
+
+function renderUserProfile(j, extension) {
+    let id = 'contact-user-profile';
+    id = (!extension) ? id : id + `-${extension}`;
+    let userProfile = getElement(id);
     let profile = getInitialLetterGroup(contactSample, j);
     userProfile.innerHTML = profile;
 }
@@ -325,26 +333,12 @@ function getInitialLetterGroup(variable, i) {
 }
 
 
-function renderUserName(j) {
-    let userName = getElement('contact-user-name');
-    let name = getJsonObjectDeepValue(contactSample, j, 'name');
-    userName.innerHTML = name;
-}
-
-
-function renderUserMail(j) {
-    let userMail = getElement('contact-user-mail');
-    let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
-    userMail.innerHTML = mail;
-    setElementAttribute('contact-user-mail', 'href', `mailto: ${mail}`);
-}
-
-
-function renderUserPhone(j) {
-    let userPhone = getElement('contact-user-phone');
-    let phone = getJsonObjectDeepValue(contactSample, j, 'phone');
-    userPhone.innerHTML = phone;
-    setElementAttribute('contact-user-phone', 'href', `tel: ${phone}`);
+function renderUserInfo(j, info, extension) {
+    let id = `contact-user-${info}`;
+    id = (!extension) ? id : id + `-${extension}`;
+    let userInfo = getElement(id);
+    let name = getJsonObjectDeepValue(contactSample, j, info);
+    userInfo.innerHTML = name;
 }
 
 
