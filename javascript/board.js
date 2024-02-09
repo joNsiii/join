@@ -43,6 +43,17 @@ let todos = [
         priority: 'Low',
         date: '',
     },
+    {
+        id: 4,
+        title: "Funny Storys",
+        description: "THIS IS FUNNY!!",
+        category: "toDo",
+        heading: "User Story",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Urgent',
+        date: '',
+    },
 ];
 
 function boardInit() {
@@ -91,7 +102,7 @@ function createHTML(todo, containerId) {
                     <div class="board-task-max-bar">
                         <div class="board-task-value-bar"></div>
                     </div>
-                    <div class="board-task-progress-text"></div>
+                    <div class="board-task-progress-text">1/2 Subtasks</div>
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
