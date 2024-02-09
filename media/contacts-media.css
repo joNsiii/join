@@ -9,10 +9,6 @@
 }
 
 @media (max-width: 730px) {
-    #dialog-contact-viewer[open] {
-        display: none;
-    }
-
     .content {
         width: 100%;
         height: calc(100vh - 172px);
@@ -47,6 +43,22 @@
 
     .add-contact-button-mobile {
         display: flex;
+    }
+
+    .dialog {
+        background-color: transparent;
+    }
+
+    .contact-viewer-mobile {
+        margin-top: 16px;
+        height: calc(100vh - 172px);
+        background-color: #F6F7F8;
+        border: none;
+    }
+
+    .contact-user-profile-mobile {
+        min-width: 80px;
+        min-height: 80px;
     }
 }
 
