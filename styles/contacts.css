@@ -222,9 +222,13 @@
 }
 
 .contact-user {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 21px;
+}
+
+.cu-enabled {
+    display: flex;
 }
 
 .contact-user-header {

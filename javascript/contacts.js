@@ -306,7 +306,8 @@ function renderUserBgc(j) {
         .bgc-flexible {
             background-color: ${bgc};
         }
-    `
+    `;
+    addClass('contact-user', 'cu-enabled');
 }
 
 
