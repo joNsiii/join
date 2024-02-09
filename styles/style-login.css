@@ -371,19 +371,19 @@ a {
 
 #msgPopup {
     position: absolute;
-    bottom: -100px; /* Start position */
-    left: 50%; /* Center horizontally */
+    bottom: -100px;
+    left: 50%;
     transform: translateX(-50%);
-    animation: flyIn 2s forwards;
+    animation: flyIn 2s forwards; 
     animation-delay: 2s;
   }
   
   @keyframes flyIn {
     0% {
-      bottom: -100px; /* Start position */
+      bottom: -100px;
     }
     100% {
-      bottom: 25%; /* End position, middle of the screen */
+      bottom: 25%; 
     }
   }
   
