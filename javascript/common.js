@@ -1,7 +1,6 @@
 /**
  * Provides an element by id.
- * 
- * @param {*} id - The requested element's id.
+ * @param {String} id - The requested element's id.
  * @returns - The requested element.
  */
 function getElement(id) {
@@ -11,7 +10,6 @@ function getElement(id) {
 
 /**
 //  * Provides a json's object value.
- * 
  * @param {json} variable - The providing json.
  * @param {value} key - The requested object's key.
  * @returns - The requested object's value.
@@ -23,7 +21,6 @@ function getJsonObjectValue(variable, key) {
 
 /**
  * Provides a a json's deeper object value.
- * 
  * @param {json} variable - The providing json.
  * @param {value} key - The requested object's key.
  * @param {value} subkey - The requested object's subkey.

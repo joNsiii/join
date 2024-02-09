@@ -1,3 +1,4 @@
+// Variables
 // let contactSample = [
 //     {
 //         'name': 'Anton Mayer',
@@ -61,6 +62,7 @@ let bgcUser = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-b
 let bgcCounter = 0;
 
 
+// Functions
 /**
  * Initializes the user's contacts.
  */
@@ -73,8 +75,7 @@ function initContacts() {
 
 /**
  * Sorts a list of contacts alphabetically.
- * 
- * @param {*} contacts - The list of contacts.
+ * @param {json} contacts - The list of contacts.
  * @returns - The sorted list of contacts.
  */
 function sortContactsByName(contacts) {
@@ -84,8 +85,7 @@ function sortContactsByName(contacts) {
 
 /**
  * Collects the required register letters.
- * 
- * @param {*} contacts - The contacts which are to render subsequently.
+ * @param {json} contacts - The contacts which are to render subsequently.
  */
 function collectInitials(contacts) {
     initials = [];
@@ -100,10 +100,9 @@ function collectInitials(contacts) {
 
 /**
  * Provides the initial letter of a name.
- * 
- * @param {*} variable - The providing json.
- * @param {*} i - The current object's index.
- * @returns - The initial letter.
+ * @param {json} variable - The providing json.
+ * @param {index} i - The current object's index.
+ * @returns - The initial letter in lower case.
  */
 function getInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
@@ -114,9 +113,8 @@ function getInitialLetter(variable, i) {
 
 /**
  * Provides a Boolean value by making a comparison between an including array and a requested value. 
- * 
- * @param {*} array - The including array.
- * @param {*} value - The requested value.
+ * @param {array} array - The including array.
+ * @param {value} value - The requested value.
  * @returns - True or false.
  */
 function getIncludingMatch(array, value) {
@@ -134,6 +132,10 @@ function renderContacts() {
 }
 
 
+/**
+ * Fills the element 'contacts-collector'..
+ * @param {element} contactList - The element which collects the user contacts.
+ */
 function fillContactList(contactList) {
     for (let i = 0; i < initials.length; i++) {
         renderRegisterLetter(contactList, i);
@@ -143,10 +145,9 @@ function fillContactList(contactList) {
 
 
 /**
- * Renders a register letter.
- * 
- * @param {*} contactList - The contacts which are to render subsequently.
- * @param {*} i - The current contacts' index.
+ * Renders the register letter i.
+ * @param {element} contactList - The element which collects the register lettters.
+ * @param {index} i - The current register letter's index.
  */
 function renderRegisterLetter(contactList, i) {
     let initial = initials[i].toUpperCase();
@@ -154,42 +155,91 @@ function renderRegisterLetter(contactList, i) {
 }
 
 
+/**
+ * Fills the current register section with user contacts.
+ * @param {element} contactList - The element which collects the user contacts.
+ * @param {index} i - The current contact's index.
+ */
 function fillRegisterSection(contactList, i) {
     for (let j = 0; j < contactSample.length; j++) {
-        let match = getMatch(i, j);
+        let match = getInitialsMatch(i, j);
         if (match) {
-            let first = getInitialLetter(contactSample, j).toUpperCase();
-            let second = getSecondInitialLetter(contactSample, j).toUpperCase();
-            let name = getJsonObjectDeepValue(contactSample, j, 'name');
-            let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
-            let bgc = getUserBgc();
-
-            contactList.innerHTML += `
-                <div class="contacts-contact">
-                    <div class="contact-profile bgc-${bgc}">${first}${second}</div>
-                    <div class="name-email-group">
-                        <div class="contact-name">${name}</div>
-                        <div class="contact-email">${mail}</div>
-                    </div>
-                </div>
-            `;
+            renderContact(contactList, j);
         }
     }
 }
 
 
-function getMatch(i, j) {
+/**
+ * Provides the result of an initial match.
+ * @param {index} i - The contacts' current index.
+ * @param {index} j - The initials' current index.
+ * @returns - compareValues(first, initials)
+ */
+function getInitialsMatch(i, j) {
     let first = getInitialLetter(contactSample, j);
     let initial = getJsonObjectValue(initials, i);
     return compareValues(first, initial);
 }
 
 
+/**
+ * Provides a Boolean value.
+ * @param {value} valueA - The comparing value A
+ * @param {value} valueB - The comparing value B
+ * @returns - True or false.
+ */
 function compareValues(valueA, valueB) {
     return valueA == valueB;
 }
 
 
+/**
+ * Renders the contact j.
+ * @param {element} contactList - The element which collects the user contacts.
+ * @param {index} j - The currents contact's index. 
+ */
+function renderContact(contactList, j) {
+    contactList.innerHTML += `
+        <div class="contacts-contact">
+            ${renderContactProfile(j)}
+            ${renderNameMailGroup(j)}
+        </div>
+    `;
+}
+
+
+/**
+ * Renders the contact profile j.
+ * @param {index} j - The current contact profile's index 
+ * @returns - The html code of contact profile j.
+ */
+function renderContactProfile(j) {
+    let bgc = getUserBgc();
+    let first = getInitialLetter(contactSample, j).toUpperCase();
+    let second = getSecondInitialLetter(contactSample, j).toUpperCase();
+    return `<div class="contact-profile bgc-${bgc}">${first}${second}</div>`;
+}
+
+
+/**
+ * Provides a user's background color.
+ * @returns - A class fraction.
+ */
+function getUserBgc() {
+    bgcCounter = (bgcCounter < bgcUser.length) ? bgcCounter : 0;
+    let bgc = bgcUser[bgcCounter];
+    bgcCounter++;
+    return bgc;
+}
+
+
+/**
+ * Provides the second initial of contact i.
+ * @param {json} variable - The providing json.
+ * @param {index} i - The requested object's index.
+ * @returns - The second initial letter in lower case.
+ */
 function getSecondInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
     let space = name.indexOf(' ');
@@ -199,15 +249,19 @@ function getSecondInitialLetter(variable, i) {
 
 
 /**
- * Provides a user's background color.
- * 
- * @returns - A class fraction.
+ * Renders the name-mail-group j.
+ * @param {index} j  - The current contact's index.
+ * @returns - The html code of name-mail-group j.
  */
-function getUserBgc() {
-    bgcCounter = (bgcCounter < bgcUser.length) ? bgcCounter : 0;
-    let bgc = bgcUser[bgcCounter];
-    bgcCounter++;
-    return bgc;
+function renderNameMailGroup(j) {
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
+    return `
+        <div class="name-email-group">
+            <div class="contact-name">${name}</div>
+            <div class="contact-email">${mail}</div>
+        </div>
+    `;
 }
 
 
