@@ -9,6 +9,15 @@ function addClass(id, className) {
 
 
 /**
+ * Closes a dialog by id.
+ * @param {String} id - The dialog's id.
+ */
+function closeDialog(id) {
+    document.getElementById(id).close();
+}
+
+
+/**
  * Provides an element by id.
  * @param {String} id - The requested element's id.
  * @returns - The requested element.
@@ -42,6 +51,15 @@ function getJsonObjectValue(variable, key) {
 
 
 /**
+ * Opens a dialog by id.
+ * @param {String} id - The dialog's id.
+ */
+function openDialog(id) {
+    document.getElementById(id).show();
+}
+
+
+/**
  * Sets an element's attribute.
  * @param {value} id - The element's id.
  * @param {String} attribute - The setting attribute.
@@ -49,4 +67,13 @@ function getJsonObjectValue(variable, key) {
  */
 function setElementAttribute(id, attribute, value) {
     document.getElementById(id).setAttribute(attribute, value);
+}
+
+
+/**
+ * Prevents closing of the dialog by clicking on the dialog window.
+ * @param {event} event
+ */
+function stop(event) {
+    event.stopPropagation();
 }
