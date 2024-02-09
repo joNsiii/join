@@ -7,6 +7,7 @@
     <title>Join</title>
     <script src="javascript/storage.js"></script>
     <script src="javascript/includes.js"></script>
+    <script src="javascript/board.js"></script>
     <link rel="stylesheet" href="./styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/board.css">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="./media/add-task-form-media.css">
 </head>
 
-<body onload="init()">
+<body onload="init(), boardInit()">
 
     <dialog id="dialog" class="dialog" w3-include-html="./templates/add-task-form.html">
 
@@ -46,21 +47,21 @@
         </section>
 
         <section class="board-content-group">
-            <div class="board-content">
+            <div class="board-content" >
                 <div class="board-header">
                     <div class="board-header-title">To do</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div class="board-body">
+                <div class="board-body" id="toDo">
                     <div class="board-no-task">No tasks to do</div>
                 </div>
             </div>
-            <div class="board-content">
+            <div class="board-content" > 
                 <div class="board-header">
                     <div class="board-header-title">In progress</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div class="board-body">
+                <div class="board-body" id="inProgress">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-blue">User Story</h3>
                         <div class="btc-group">
@@ -84,12 +85,12 @@
                     </div>
                 </div>
             </div>
-            <div class="board-content">
+            <div class="board-content" >
                 <div class="board-header">
                     <div class="board-header-title">Await feedback</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div class="board-body">
+                <div class="board-body" id="AwaitFeedback">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-green">Technical Task</h3>
                         <div class="btc-group">
@@ -122,11 +123,11 @@
                     </div>
                 </div>
             </div>
-            <div class="board-content">
+            <div class="board-content" >
                 <div class="board-header">
                     <div class="board-header-title">Done</div>
                 </div>
-                <div class="board-body">
+                <div class="board-body" id="Done">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-green">Technical Task</h3>
                         <div class="btc-group">
