@@ -16,6 +16,10 @@ let todos = [
         description: "dont know what to do..",
         category: "inProgress",
         heading: "Technical Task",
+        subtasks: ["i do have to test this", "second subtask for testing"],
+        sub_users: [],
+        priority: 'Medium',
+        date: '',
     },
     {
         id: 2,
@@ -23,6 +27,10 @@ let todos = [
         description: "adsöfljasödfasdf",
         category: "AwaitFeedback",
         heading: "User Story",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Urgent',
+        date: '',
     },
     {
         id: 3,
@@ -30,6 +38,10 @@ let todos = [
         description: " testin bla bla",
         category: "Done",
         heading: "Technical Task",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Low',
+        date: '',
     },
 ];
 
@@ -79,7 +91,7 @@ function createHTML(todo, containerId) {
                     <div class="board-task-max-bar">
                         <div class="board-task-value-bar"></div>
                     </div>
-                    <div class="board-task-progress-text">1/2 Subtasks</div>
+                    <div class="board-task-progress-text"></div>
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
@@ -87,7 +99,7 @@ function createHTML(todo, containerId) {
                         <div class="board-card-user bcu-green">EM</div>
                         <div class="board-card-user bcu-dark-blue">MB</div>
                     </div>
-                    <img src="./img/medium-board.png" alt="medium-board">
+                    ${showPriority(todo)}
                 </div>
             </div>
         </div>
@@ -96,6 +108,17 @@ function createHTML(todo, containerId) {
 
     if (containerId) {
         document.getElementById(containerId).innerHTML += toDoHtml;
+    }
+}
+
+
+function showPriority(todo){
+    if (todo.priority === "Urgent") {
+        return '<img src="./img/urgent-board.png"></img>'
+    } else if (todo.priority === "Medium") {
+        return '<img src="./img/medium-board.png"></img>'
+    } else if (todo.priority === "Low") {
+        return '<img src="./img/low-board.png"></img>'
     }
 }
 
