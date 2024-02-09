@@ -47,6 +47,10 @@ let contactSample = [
         'mail': 'karl@gmail.com'
     },
     {
+        'name': 'Richard Raiser',
+        'mail': 'raiser@gmail.com'
+    },
+    {
         'name': 'Walter Walhalter',
         'mail': 'walhalter@gmail.com'
     }
@@ -57,13 +61,20 @@ let backgroundColor = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green',
 let bgcCounter = 0;
 
 
+function initContacts() {
+    sortContactsByName(contactSample);
+    collectInitials();
+    renderContacts();
+}
+
+
 function collectInitials() {
     initials = [];
     for (let i = 0; i < contactSample.length; i++) {
-        let name = contactSample[i]['name'];
-        let initial = name[0];
+        let name = getJSONObjectValueDeep(contactSample, i, 'name');
+        let initial = getJSONObjectValue(name, 0);
         contactSample[i]['register'] = initial;
-        let match = initials.includes(initial);
+        let match = getIncludingMatch(initials, initial);
         (!match) ? initials.push(initial) : false;
     }
 }
@@ -119,4 +130,17 @@ function sortContactsByName(contacts) {
 
 // contactSample = sortContactsByName(contactSample);
 
-// lowerCase beruecksichtigen!!!
+
+
+/*
+    E3 / US01 - Kontaktliste
+        1. Es gibt eine Seite oder einen Bereich fuer Kontakte. - Check
+        2. Kontakte werden alphabetisch nach ihrem Namen sortiert und ihre E-Mail-Adresse unterhalb ihres Namens angezeigt. - Check
+        3. Die Liste ist in Abschnitte nach Buchstaben unterteilt, sodass
+           Kontakte, die mit einem bestimmten Buchstaben beginnen,
+           zusammen gruppiert sind. - Check
+        4. Ein Klick auf einen Kontakt oeffnet eine Detailansicht mit dem
+           Namen, der E-Mail-Adresse und der Telefonnummer des Kontakts.
+
+    3 von 4 Subtask erledigt.
+*/
