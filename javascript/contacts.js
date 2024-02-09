@@ -63,32 +63,46 @@ let bgcCounter = 0;
 
 function initContacts() {
     sortContactsByName(contactSample);
-    collectInitials();
+    collectInitials(contactSample);
     renderContacts();
 }
 
 
-function collectInitials() {
+/**
+ * Sorts a list of contacts alphabetically.
+ * 
+ * @param {*} contacts - The list of contacts.
+ * @returns - The sorted list of contacts.
+ */
+function sortContactsByName(contacts) {
+    return contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+/**
+ * Collects the required register letters.
+ * 
+ * @param {*} contacts - The contact list which is to render subsequently.
+ */
+function collectInitials(contacts) {
     initials = [];
-    for (let i = 0; i < contactSample.length; i++) {
-        let name = getJSONObjectValueDeep(contactSample, i, 'name');
-        let initial = getJSONObjectValue(name, 0);
-        contactSample[i]['register'] = initial;
+    for (let i = 0; i < contacts.length; i++) {
+        let name = getJsonObjectDeepValue(contactSample, i, 'name');
+        let initial = getJsonObjectValue(name, 0);
+        contacts[i]['register'] = initial;
         let match = getIncludingMatch(initials, initial);
         (!match) ? initials.push(initial) : false;
     }
 }
 
 
+/**
+ * Renders the user's contacts.
+ */
 function renderContacts() {
     let contactList = getElement('contacts-collector');
     contactList.innerHTML = '';
     fillContactList(contactList);
-}
-
-
-function getElement(id) {
-    return document.getElementById(id);
 }
 
 
@@ -122,13 +136,6 @@ function fillContactList(contactList) {
         }
     }
 }
-
-
-function sortContactsByName(contacts) {
-    return contacts.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-// contactSample = sortContactsByName(contactSample);
 
 
 
