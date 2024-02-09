@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./styles/add-task-form.css">
+    <link rel="stylesheet" href="./styles/board-overlay.css">
     <link rel="stylesheet" href="./media/board-media.css">
     <link rel="stylesheet" href="./media/add-task-form-media.css">
 </head>
 
 <body onload="init(), boardInit()">
 
-    <dialog id="dialog" class="dialog" w3-include-html="./templates/add-task-form.html">
+    <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html">
 
     </dialog>
 
@@ -47,7 +48,7 @@
         </section>
 
         <section class="board-content-group">
-            <div class="board-content" >
+            <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">To do</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
@@ -56,7 +57,7 @@
                     <div class="board-no-task">No tasks to do</div>
                 </div>
             </div>
-            <div class="board-content" > 
+            <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">In progress</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
@@ -85,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="board-content" >
+            <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">Await feedback</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
@@ -123,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="board-content" >
+            <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">Done</div>
                 </div>
