@@ -1,65 +1,80 @@
-// Variables
+//Variables
 // let contactSample = [
 //     {
 //         'name': 'Anton Mayer',
-//         'mail': 'anton@gmail.com'
+//         'mail': 'anton@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Anja Schulz',
-//         'mail': 'schulz@hotmail.com'
+//         'mail': 'schulz@hotmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Benedikt Ziegler',
-//         'mail': 'benedikt@gmail.com'
+//         'mail': 'benedikt@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'David Eisenberg',
-//         'mail': 'davidberg@gmail.com'
+//         'mail': 'davidberg@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Eva Fischer',
-//         'mail': 'eva@gmail.com'
+//         'mail': 'eva@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Emmanuel Mauer',
-//         'mail': 'emmanuelma@gmail.com'
+//         'mail': 'emmanuelma@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Marcel Bauer',
-//         'mail': 'bauer@gmail.com'
+//         'mail': 'bauer@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     },
 //     {
 //         'name': 'Tatjana Wolf',
-//         'mail': 'wolf@gmail.com'
+//         'mail': 'wolf@gmail.com',
+//         'phone': '+49 1111 111 11 1'
 //     }
 // ];
 
 let contactSample = [
     {
         'name': 'Rudolf Reiner',
-        'mail': 'rudolf@gmail.com'
+        'mail': 'rudolf@gmail.com',
+        'phone': '+49 3333 333 33 3'
     },
     {
         'name': 'Susi Landstreich',
-        'mail': 'streich@hotmail.com'
+        'mail': 'streich@hotmail.com',
+        'phone': '+49 4444 444 44 4'
     },
     {
         'name': 'Karl Kaiser',
-        'mail': 'karl@gmail.com'
+        'mail': 'karl@gmail.com',
+        'phone': '+49 1111 111 11 1'
     },
     {
         'name': 'Richard Raiser',
-        'mail': 'raiser@gmail.com'
+        'mail': 'raiser@gmail.com',
+        'phone': '+49 2222 222 22 2'
     },
     {
         'name': 'Walter Walhalter',
-        'mail': 'walhalter@gmail.com'
+        'mail': 'walhalter@gmail.com',
+        'phone': '+49 5555 555 55 5'
     }
 ];
 
 let initials;
 let bgcUser = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red'];
+let bgcHex = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646'];
 let bgcCounter = 0;
+let bgcHexCounter = 0;
 
 
 // Functions
@@ -201,7 +216,7 @@ function compareValues(valueA, valueB) {
  */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
-        <div class="contacts-contact">
+        <div class="contacts-contact" onclick="renderContactViewer(${j})">
             ${renderContactProfile(j)}
             ${renderNameMailGroup(j)}
         </div>
@@ -216,9 +231,10 @@ function renderContact(contactList, j) {
  */
 function renderContactProfile(j) {
     let bgc = getUserBgc();
+    let bgcHex = getUserBgcHex();
     let first = getInitialLetter(contactSample, j).toUpperCase();
     let second = getSecondInitialLetter(contactSample, j).toUpperCase();
-    return `<div class="contact-profile bgc-${bgc}">${first}${second}</div>`;
+    return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}" bgc="${bgcHex}">${first}${second}</div>`;
 }
 
 
@@ -230,6 +246,14 @@ function getUserBgc() {
     bgcCounter = (bgcCounter < bgcUser.length) ? bgcCounter : 0;
     let bgc = bgcUser[bgcCounter];
     bgcCounter++;
+    return bgc;
+}
+
+
+function getUserBgcHex() {
+    bgcHexCounter = (bgcHexCounter < bgcHex.length) ? bgcHexCounter : 0;
+    let bgc = bgcHex[bgcHexCounter];
+    bgcHexCounter++;
     return bgc;
 }
 
@@ -264,6 +288,61 @@ function renderNameMailGroup(j) {
     `;
 }
 
+
+function renderContactViewer(j) {
+    renderUserProfile(j);
+    renderUserBgc(j);
+    renderUserName(j);
+    renderUserMail(j);
+    renderUserPhone(j);
+}
+
+
+function renderUserBgc(j) {
+    let userProfile = getElement(`contact-profile-${j}`);
+    let bgc = userProfile.getAttribute('bgc');
+    let bgcCss = getElement('user-bgc-flexible');
+    bgcCss.innerHTML = `
+        .bgc-flexible {
+            background-color: ${bgc};
+        }
+    `
+}
+
+
+function renderUserProfile(j) {
+    let userProfile = getElement('contact-user-profile');
+    let profile = getInitialLetterGroup(contactSample, j);
+    userProfile.innerHTML = profile;
+}
+
+
+function getInitialLetterGroup(variable, i) {
+    let first = getInitialLetter(variable, i).toUpperCase();
+    let second = getSecondInitialLetter(variable, i).toUpperCase();
+    return first + second;
+}
+
+
+function renderUserName(j) {
+    let userName = getElement('contact-user-name');
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    userName.innerHTML = name;
+}
+
+
+function renderUserMail(j) {
+    let userMail = getElement('contact-user-mail');
+    let mail = getJsonObjectDeepValue(contactSample, j, 'mail');
+    userMail.innerHTML = mail;
+}
+
+
+function renderUserPhone(j) {
+    let userPhone = getElement('contact-user-phone');
+    let phone = getJsonObjectDeepValue(contactSample, j, 'phone');
+    userPhone.innerHTML = phone;
+}
 
 /*
     E3 / US01 - Kontaktliste
