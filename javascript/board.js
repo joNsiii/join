@@ -90,7 +90,7 @@ function clearHTML() {
 
 function createHTML(todo, containerId) {
     let toDoHtml = /*html*/ `
-    <div class="board-content"> 
+    <div class="board-content" onclick="openDetails(${todo.id})"> 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(todo.heading)}">${todo.heading}</h3>
@@ -120,6 +120,11 @@ function createHTML(todo, containerId) {
     if (containerId) {
         document.getElementById(containerId).innerHTML += toDoHtml;
     }
+}
+
+
+function openDetails(id) {
+    document.getElementById('dialog') = true;
 }
 
 
