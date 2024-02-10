@@ -2,7 +2,8 @@
     <img class="cvm-img" src="./img/arrow-left-line.png" alt="arrow-left-line"
         onclick="closeDialog('dialog-contact-viewer')">
     <button class="contact-more-button">
-        <img class="contact-more-button-img" src="./img/more-vert.png" alt="more-vert">
+        <img class="contact-more-button-img" src="./img/more-vert.png" alt="more-vert"
+            onclick="openDialog('contact-settings-dialog')">
     </button>
     <div class="contact-viewer-header-mobile">
         <h1 class="contact-viewer-headline-mobile">Contacts</h1>
@@ -30,7 +31,8 @@
         </div>
     </div>
 
-    <div class="contact-more-dialog">
+    <dialog id="contact-settings-dialog" class="contact-settings-dialog"
+        onmouseleave="closeDialog('contact-settings-dialog')">
         <button class="contact-more-dialog-button" onclick="updateEditForm(3)">
             <img src="./img/edit-contacts.png" alt="edit-contacts">
             Edit
@@ -39,5 +41,5 @@
             <img src="./img/delete.png" alt="delete">
             Delete
         </button>
-    </div>
+    </dialog>
 </section>
