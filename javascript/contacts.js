@@ -229,7 +229,7 @@ function compareValues(valueA, valueB) {
  */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
-        <div class="contacts-contact" onclick="updateContactViewer(${j}); openDialog('dialog-contact-viewer')">
+        <div class="contacts-contact" onclick="updateContactViewer(${j})">
             ${renderContactProfile(j)}
             ${renderNameMailGroup(j)}
         </div>
@@ -303,9 +303,13 @@ function renderNameMailGroup(j) {
 
 
 function updateContactViewer(j) {
+    openDialog('dialog-contact-viewer');
     renderContactViewer(j);
     setUserInfo(j);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
+    setElementAttribute('delete-contact-button', 'onclick', `deleteContact(${j})`);
+    setElementAttribute('contact-settings-edit-button', 'onclick', `updateEditForm(${j})`);
+    setElementAttribute('contact-settings-delete-button', 'onclick', `deleteContact(${j})`);
 }
 
 

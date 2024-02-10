@@ -7,6 +7,9 @@ function updateEditForm(j) {
     renderEditForm(j);
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
+
+    setElementAttribute('contact-settings-dialog', 'onclick', `openContactSettingsDialog(${j})`);
 }
 
 
@@ -59,12 +62,20 @@ function getInputValue(id) {
 }
 
 
-// function deleteContact(j) {
-//     delete contactSample[j];
-//     saveEditContact('contactSample', contactSample);
-//     initContacts();
-//     updateContactViewer(j);
-// }
+function deleteContact(j) {
+    contactSample.splice(j, 1);
+    save('contactSample', contactSample);
+    closeDialog('dialog-contact-viewer');
+    initContacts();
+    updateContactViewer(j);
+}
+
+
+function openContactSettingsMobile(j) {
+    openDialog('contact-settings-dialog');
+    setElementAttribute('contact-settings-edit-button', 'onclick', `updateEditForm(${j})`);
+    setElementAttribute('contact-settings-delete-button', 'onclick', `deleteContact(${j})`);
+}
 
 
 // Bitte loeschen!!!
