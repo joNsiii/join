@@ -65,22 +65,25 @@ if (msg) {
 
 }
 
-async function loadUsersData() {
+async function loadUsersLogInData() {
     try {
         users = JSON.parse(await getItem('users'));
+        checkLogin();
     } catch (e) {
         console.error('Loading Users Data:', e);
     }
-    checkLogin();
 }
 
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
-
-    if(users.find(u => email == u.email && password == u.password)) {
-        console.log('true')
-        localStorage.setItem('session_token', 'token');
-        window.location.href = 'summary.html'
+    
+    let loggedInUser = users.find(u => email === u.email && password === u.password);
+    if (loggedInUser) {
+        console.log('Login successful');
+        localStorage.setItem('session_token', loggedInUser.id);
+        window.location.href = 'summary.html';
+    } else {
+        console.log('Login failed. Incorrect email or password.');
     }
 }

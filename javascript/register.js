@@ -17,6 +17,8 @@ async function addUser() {
         'name': name.value,
         'email': email.value,
         'password': password.value,
+        'contacts': [],
+        'phone': '',
         'id': userId
     }
     users.push(newUser);
