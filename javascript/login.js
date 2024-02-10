@@ -20,18 +20,18 @@ function togglePassword() {
     }
 }
 
-  function togglePasswordIcon() {
+function togglePasswordIcon() {
     let passwordField = document.getElementById('password-type');
     let toggleImg = document.getElementById('password-lock');
-    let currentType = passwordField.type; 
-        if (passwordField.value !== "") {
-            passwordField.type = (currentType === "password") ? "text" : "password";
+    let currentType = passwordField.type;
+    if (passwordField.value !== "") {
+        passwordField.type = (currentType === "password") ? "text" : "password";
 
-            toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
-        } else {
-            toggleImg.src = "./img/lock.png";
-            passwordField.type = "password";
-        }
+        toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
+    } else {
+        toggleImg.src = "./img/lock.png";
+        passwordField.type = "password";
+    }
 }
 
 function toggleCheckbox() {
@@ -54,12 +54,33 @@ function login() {
     }
 }
 
+/**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
-if(msg) {
+if (msg) {
     msgPopup.innerHTML = msg;
     setTimeout(() => {
         msgPopup.classList.add('d-none');
-      }, "6000");
-      
+    }, "6000");
+
+}
+
+async function loadUsersData() {
+    try {
+        users = JSON.parse(await getItem('users'));
+    } catch (e) {
+        console.error('Loading Users Data:', e);
+    }
+    checkLogin();
+}
+
+function checkLogin() {
+    let email = document.getElementById('email-field').value.toLowerCase();
+    let password = document.getElementById('password-type').value;
+
+    if(users.find(u => email == u.email && password == u.password)) {
+        console.log('true')
+        localStorage.setItem('session_token', 'token');
+        window.location.href = 'summary.html'
+    }
 }

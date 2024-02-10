@@ -1,7 +1,5 @@
 let users = [];
 
-
-
 async function addUser() {
     let date = new Date();
     let userId = date.getTime();
@@ -22,8 +20,7 @@ async function addUser() {
         'id': userId
     }
     users.push(newUser);
-    // window.location.href = 'login.html?msg=You Signed Up successfully'
-
+    window.location.href = 'login.html?msg=You Signed Up successfully'
     setItem('users', users);
 }
 
