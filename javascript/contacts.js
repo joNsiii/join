@@ -67,6 +67,16 @@ let contactSample = [
         'name': 'Walter Walhalter',
         'mail': 'walhalter@gmail.com',
         'phone': '+49 5555 555 55 5'
+    },
+    {
+        'name': 'Cyrus Cyberwelt',
+        'mail': 'cyberwelt@gmail.com',
+        'phone': '+49 7777 777 77 7'
+    },
+    {
+        'name': 'Lisa Liger',
+        'mail': 'lisa@gmail.com',
+        'phone': '+49 6666 666 66 6'
     }
 ];
 
@@ -216,7 +226,7 @@ function compareValues(valueA, valueB) {
  */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
-        <div class="contacts-contact" onclick="renderContactViewer(${j}); openDialog('dialog-contact-viewer')">
+        <div class="contacts-contact" onclick="updateContactViewer(${j}); openDialog('dialog-contact-viewer')">
             ${renderContactProfile(j)}
             ${renderNameMailGroup(j)}
         </div>
@@ -289,6 +299,12 @@ function renderNameMailGroup(j) {
 }
 
 
+function updateContactViewer(j) {
+    renderContactViewer(j);
+    setUserInfo(j);
+}
+
+
 function renderContactViewer(j) {
     renderUserBgc(j);
     renderContactViewerVersion(j);
@@ -339,6 +355,26 @@ function renderUserInfo(j, info, extension) {
     let userInfo = getElement(id);
     let name = getJsonObjectDeepValue(contactSample, j, info);
     userInfo.innerHTML = name;
+}
+
+
+function setUserInfo(j) {
+    setUserInfoLinkVersion(j);
+    setUserInfoLinkVersion(j, 'mobile');
+}
+
+
+function setUserInfoLinkVersion(j, extension) {
+    (!extension) ? setUserInfoLink(j, 'mail') : setUserInfoLink(j, 'mail', 'mobile');
+    (!extension) ? setUserInfoLink(j, 'phone') : setUserInfoLink(j, 'phone', 'mobile');
+}
+
+
+function setUserInfoLink(j, info, extension) {
+    let id = `contact-user-${info}`;
+    id = (!extension) ? id : id + `-${extension}`;
+    let userInfo = getJsonObjectDeepValue(contactSample, j, info);
+    (info == 'mail') ? setElementAttribute(id, 'href', `mailto: ${userInfo}`) : setElementAttribute(id, 'href', `tel: ${userInfo}`);
 }
 
 
