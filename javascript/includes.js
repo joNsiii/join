@@ -32,54 +32,33 @@ function hightlightCurrentButton() {
     }
 }
 
-
-window.onclick = function(event) {
+window.onclick = function (event) {
     let dropdownContent = document.getElementById("dropDownMenu");
 
+    if (window.innerWidth <= 730) {
+        dropdownContent.classList.remove('flyOUT');
+        dropdownContent.classList.add('flyIN');
+    } else {
+        dropdownContent.classList.add('show');
+    }
+
     if (!event.target.matches('.dropdown-menu, .dropdown-menu *')) {
-        if (dropdownContent.classList.contains("show")) {
-            dropdownContent.classList.remove("show");
+        if (dropdownContent.classList.contains('flyIN')) {
+            dropdownContent.classList.add('flyOUT');
+
+        } if (dropdownContent.classList.contains('show')) {
+            dropdownContent.classList.remove('show');
         }
     }
 };
 
-
-function openMenu(dropdownContent) {
-    dropdownContent.classList.add("show");
-    requestAnimationFrame(() => {
-        dropdownContent.style.transform = "translateX(0)";
-    });
-}
-
-function closeMenu(dropdownContent) {
-    dropdownContent.style.transform = "translateX(100%)";
-    dropdownContent.addEventListener('transitionend', function handler() {
-        dropdownContent.classList.remove("show");
-        dropdownContent.removeEventListener('transitionend', handler);
-    });
-}
-
-function toggleDropdown() {
+function closeDropdown() {
     let dropdownContent = document.getElementById("dropDownMenu");
-
-    if (window.innerWidth <= 730) {
-        if (dropdownContent.classList.contains("show")) {
-            closeMenu(dropdownContent);
-        } else {
-            openMenu(dropdownContent);
-        }
-    } else {
-        dropdownContent.classList.toggle("show");
+    if (dropdownContent.classList.contains('flyIn')) {
+        dropdownContent.classList.add('flyOUT');
+        dropdownContent.classList.remove('show');
     }
 }
 
-function adjustDropdownOnResize() {
-    let dropdownContent = document.getElementById("dropDownMenu");
 
-    if (window.innerWidth > 730) {
-        dropdownContent.style.removeProperty('transform');
-    }
-}
-
-window.addEventListener('resize', adjustDropdownOnResize);
 

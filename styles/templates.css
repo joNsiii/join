@@ -111,6 +111,7 @@ header span {
     text-decoration: none;
     color: #a8a8a8;
 }
+
 .policy-container a:hover {
     color: #29abe2;
     font-weight: 700;
@@ -137,6 +138,7 @@ header span {
     justify-content: space-evenly;
     display: none;
 }
+
 .header-mobile-img {
     width: 32px;
     height: 39px;
@@ -158,6 +160,7 @@ header span {
     border-radius: 20px 0 20px 20px;
     background-color: #2a3647;
     height: 158px;
+    width: 150px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -182,22 +185,54 @@ header span {
 }
 
 @media (max-width: 730px) {
-    .dropdown-content {
-        position: absolute;
-        transform: translateX(100%); 
-        transition: transform 0.5s ease; 
-        left: -160px;
-        top: auto;
+
+
+    .flyIN {
+        display: flex !important;
+        transform: translateX(100%);
+        animation: flyIn 1s forwards;
+        left: -50px ;
+        top: 40px;
     }
+
+    @keyframes flyIn {
+        0% {
+            left: -50px;
+        }
+
+        100% {
+            left: -260px;
+        }
+    }
+
+    .flyOUT {
+        animation: flyOUT 1s forwards;
+        top: 40px;
+        left: -260px;
+    }
+
+    @keyframes flyOUT {
+        0% {
+            left: -260px;
+        }
+
+        100% {
+            left: -50px;
+        }   
+    }
+
     .mobile-navbar {
         display: flex;
     }
+
     header {
         padding: 20px 16px 20px 16px;
     }
+
     .side-bar {
         display: none;
     }
+
     .button-side-bar {
         padding: 2px 16px 2px 16px;
         height: 76px;
@@ -208,6 +243,7 @@ header span {
         border-radius: 16px;
         text-align: center;
     }
+
     .help-main-content {
         position: static;
         display: flex;
@@ -216,12 +252,15 @@ header span {
         align-items: center;
         margin: 128px 16px;
     }
+
     .header-mobile-img {
         display: flex;
     }
+
     .header-text {
         display: none;
     }
+
     .profile-img {
         width: 40px;
         height: 40px;
@@ -234,6 +273,7 @@ header span {
         text-align: center;
         padding: 2px 8px 2px 8px;
     }
+
     .button-side-bar img {
         width: 24px;
         height: 24px;
