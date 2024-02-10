@@ -95,6 +95,9 @@ function initContacts() {
     sortContactsByName(contactSample);
     collectInitials(contactSample);
     renderContacts();
+
+    // Bitte loeschen!!!
+    save('contactSample', contactSample);
 }
 
 
@@ -302,6 +305,7 @@ function renderNameMailGroup(j) {
 function updateContactViewer(j) {
     renderContactViewer(j);
     setUserInfo(j);
+    setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
 }
 
 
