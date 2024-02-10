@@ -6,6 +6,11 @@
     .contact-viewer {
         display: none;
     }
+
+    .contact-viewer-mobile {
+        margin-top: 16px;
+        height: calc(100vh - 172px);
+    }
 }
 
 @media (max-width: 730px) {
@@ -53,7 +58,7 @@
         margin-top: 16px;
         height: calc(100vh - 172px);
         background-color: #F6F7F8;
-        border: none;
+        border-radius: 0;
     }
 
     .contact-user-profile-mobile {
@@ -77,5 +82,17 @@
         height: 14px;
         font-size: 12px;
         line-height: 14.4px;
+    }
+
+    .contact-user-profile-mobile {
+        width: 64px;
+        min-width: 64px;
+        height: 64px;
+        min-height: 64px;
+    }
+
+    .contact-user-name-mobile {
+        font-size: 28px;
+        line-height: 34px;
     }
 }

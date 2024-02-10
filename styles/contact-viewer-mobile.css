@@ -33,6 +33,16 @@
     position: relative;
 }
 
+.cvm-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 48px;
+    right: 16px;
+}
+
 .contact-more-button {
     box-sizing: border-box;
     padding: 12px;
