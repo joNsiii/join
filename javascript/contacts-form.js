@@ -59,6 +59,14 @@ function getInputValue(id) {
 }
 
 
+// function deleteContact(j) {
+//     delete contactSample[j];
+//     saveEditContact('contactSample', contactSample);
+//     initContacts();
+//     updateContactViewer(j);
+// }
+
+
 // Bitte loeschen!!!
 function save(key, variable) {
     let variableAsText = JSON.stringify(variable);
