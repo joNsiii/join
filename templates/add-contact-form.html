@@ -17,18 +17,18 @@
         <div class="dcr-profile-clear">
             <img src="./img/person-clear.png" alt="person-clear">
         </div>
-        <form class="dcr-form">
+        <form class="dcr-form" onsubmit="updateContactList(); return false">
             <fieldset class="dcr-fieldset">
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="text" placeholder="Name" required>
+                    <input id="add-contact-name" class="dcr-input" type="text" placeholder="Name">
                     <img class="dcr-img" src="./img/person.png" alt="person">
                 </div>
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="email" placeholder="Email">
+                    <input id="add-contact-mail" class="dcr-input" type="email" placeholder="Email">
                     <img class="dcr-img" src="./img/mail.png" alt="mail">
                 </div>
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="tel" placeholder="Number">
+                    <input id="add-contact-phone" class="dcr-input" type="tel" placeholder="Phone">
                     <img class="dcr-img" src="./img/call.png" alt="call">
                 </div>
             </fieldset>

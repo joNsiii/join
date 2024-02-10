@@ -87,6 +87,41 @@ function closeContactViewerMobile() {
 }
 
 
+async function updateContactList() {
+    addContact();
+    resetAddContactInput();
+    return initContacts();
+}
+
+
+function addContact() {
+    let name = getInputValue('add-contact-name');
+    let mail = getInputValue('add-contact-mail');
+    let phone = getInputValue('add-contact-phone');
+    let user = addUserContact(name, mail, phone);
+    contactSample.push(user);
+}
+
+
+function addUserContact(name, mail, phone) {
+    return {
+        'name': name,
+        'mail': mail,
+        'phone': phone
+    };
+}
+
+
+function resetAddContactInput() {
+    let ids = ['name', 'mail', 'phone'];
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let info = getElement(`add-contact-${id}`);
+        info.value = '';
+    }
+}
+
+
 // Bitte loeschen!!!
 function save(key, variable) {
     let variableAsText = JSON.stringify(variable);
