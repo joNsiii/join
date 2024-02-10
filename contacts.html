@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="./media/contact-form-media.css">
     <script src="./javascript/common.js"></script>
     <script src="./javascript/contacts.js"></script>
-    <script src="./javascript/contacts-dialog.js"></script>
+    <script src="./javascript/contacts-form.js"></script>
 
     <style id="user-bgc-flexible"></style>
 </head>
@@ -65,7 +65,7 @@
                         <div class="contact-user-group">
                             <div id="contact-user-name" class="contact-user-name">Anton Mayer</div>
                             <div class="contact-user-button-group">
-                                <button class="contact-user-button">
+                                <button class="contact-user-button" onclick="openDialog('dialog-edit-contact')">
                                     <img src="./img/edit-contacts.png" alt="edit-contacts">
                                     Edit
                                 </button>
