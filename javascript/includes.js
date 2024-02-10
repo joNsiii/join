@@ -1,3 +1,5 @@
+let isDropdownOpen = false; 
+
 async function init() {
     await includeHTML();
     hightlightCurrentButton();
@@ -32,33 +34,45 @@ function hightlightCurrentButton() {
     }
 }
 
-window.onclick = function (event) {
-    let dropdownContent = document.getElementById("dropDownMenu");
 
-    if (window.innerWidth <= 730) {
-        dropdownContent.classList.remove('flyOUT');
-        dropdownContent.classList.add('flyIN');
-    } else {
-        dropdownContent.classList.add('show');
-    }
 
-    if (!event.target.matches('.dropdown-menu, .dropdown-menu *')) {
-        if (dropdownContent.classList.contains('flyIN')) {
-            dropdownContent.classList.add('flyOUT');
-
-        } if (dropdownContent.classList.contains('show')) {
-            dropdownContent.classList.remove('show');
-        }
-    }
-};
 
 function closeDropdown() {
     let dropdownContent = document.getElementById("dropDownMenu");
-    if (dropdownContent.classList.contains('flyIn')) {
-        dropdownContent.classList.add('flyOUT');
-        dropdownContent.classList.remove('show');
+    if (window.innerWidth <= 730) {
+        if (!isDropdownOpen) {
+            dropdownContent.classList.remove("flyOUT");
+            dropdownContent.classList.add("flyIN");
+            isDropdownOpen = true;
+        } else {
+            dropdownContent.classList.add("flyOUT");
+            setTimeout(() => {
+                dropdownContent.classList.remove("flyIN");
+              }, 1000);
+            
+            isDropdownOpen = false;
+        }
+    } else {
+        if (!isDropdownOpen) {
+            dropdownContent.classList.add("show");
+            isDropdownOpen = true;
+        } else {
+            dropdownContent.classList.remove("show");
+            isDropdownOpen = false;
+        }
     }
 }
 
+
+window.onclick = function(event) {
+    let dropdownContent = document.getElementById("dropDownMenu");
+    if (!event.target.matches(".dropdown-menu, .dropdown-menu *") && isDropdownOpen) {
+        if (dropdownContent.classList.contains("flyIN") || dropdownContent.classList.contains("show")) {
+            dropdownContent.classList.remove("flyIN", "show");
+            dropdownContent.classList.add("flyOUT");
+            isDropdownOpen = false;
+        }
+    }
+};
 
 

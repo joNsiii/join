@@ -1,14 +1,4 @@
 /**
- * Adds a class to the element 'id'.
- * @param {value} id - The element's id.
- * @param {String} className - The adding class name.
- */
-function addClass(id, className) {
-    document.getElementById(id).classList.add(className);
-}
-
-
-/**
  * Closes a dialog by id.
  * @param {String} id - The dialog's id.
  */
@@ -76,4 +66,31 @@ function setElementAttribute(id, attribute, value) {
  */
 function stop(event) {
     event.stopPropagation();
+}
+
+
+function setClassOnCommand(id, command, className) {    // adds or removes an element's class on command
+    let toggling = command == 'toggle';    // true or false
+    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);    // true: toggle | false: add or remove
+}
+
+
+function toggleClass(id, className) {    // toggles an element's class
+    document.getElementById(id).classList.toggle(className);
+}
+
+
+function addOrRemoveClass(id, command, className) {    // adds or removes an element's class
+    let adding = command == 'add';    // true or false
+    (adding) ? addClass(id, className) : removeClass(id, className);    // true: add | false: remove
+}
+
+
+function addClass(id, className) {    // adds an element's class
+    document.getElementById(id).classList.add(className);
+}
+
+
+function removeClass(id, className) {    // removes an element's class
+    document.getElementById(id).classList.remove(className);
 }

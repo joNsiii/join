@@ -1,6 +1,7 @@
-<section class="dialog-contacts">
+<section class="dialog-contacts" onclick="stop(event)">
     <div class="dialog-contacts-left">
-        <img class="dcr-close-button-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white">
+        <img class="dcr-close-button-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white"
+            onclick="closeDialog('dialog-edit-contact')">
         <img class="dialog-contacts-img" src="./img/logo-contact-form.png" alt="logo-contact-form">
         <div class="dialog-contacts-group">
             <div class="dialog-contacts-headline">Edit contact</div>
@@ -8,26 +9,30 @@
         </div>
     </div>
     <div class="dialog-contacts-right">
-        <img class="dcr-close-button" src="./img/close-dialog.png" alt="close-dialog">
-        <div class="dcr-profile">TW</div>
-        <form class="dcr-form">
+        <img class="dcr-close-button" src="./img/close-dialog.png" alt="close-dialog"
+            onclick="closeDialog('dialog-edit-contact')">
+        <div id="edit-contact-profile" class="dcr-profile bgc-flexible">TW</div>
+        <form id="edit-contact-form" class="dcr-form">
             <fieldset class="dcr-fieldset">
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="text" placeholder="Name" required value="Tatjana Wolf">
+                    <input id="edit-contact-name" class="dcr-input" type="text" placeholder="Name" required
+                        value="Tatjana Wolf">
                     <img class="dcr-img" src="./img/person.png" alt="person">
                 </div>
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="email" placeholder="Email" value="wolf@gmail.com">
+                    <input id="edit-contact-mail" class="dcr-input" type="email" placeholder="Email"
+                        value="wolf@gmail.com">
                     <img class="dcr-img" src="./img/mail.png" alt="mail">
                 </div>
                 <div class="dcr-input-group">
-                    <input class="dcr-input" type="tel" placeholder="Number" value="+49 2222 222 22 2">
+                    <input id="edit-contact-phone" class="dcr-input" type="tel" placeholder="Number"
+                        value="+49 2222 222 22 2">
                     <img class="dcr-img" src="./img/call.png" alt="call">
                 </div>
             </fieldset>
             <div class="dcr-button-bar">
-                <button class="dcr-button">Delete</button>
-                <button class="dcr-button-dark">
+                <button id="delete-contact-button-mobile" class="dcr-button">Delete</button>
+                <button id="save-edited-contact-button" class="dcr-button-dark">
                     Save
                     <img class="dcr-button-img" src="./img/check.png" alt="check">
                 </button>

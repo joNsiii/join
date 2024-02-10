@@ -90,7 +90,7 @@ function clearHTML() {
 
 function createHTML(todo, containerId) {
     let toDoHtml = /*html*/ `
-    <div class="board-content"> 
+    <div class="board-content" onclick="openDetails(${todo.id})"> 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(todo.heading)}">${todo.heading}</h3>
@@ -120,6 +120,39 @@ function createHTML(todo, containerId) {
     if (containerId) {
         document.getElementById(containerId).innerHTML += toDoHtml;
     }
+}
+
+function closeBoardOverlay(){
+    const dialog = document.querySelector('dialog');
+    if (dialog) {
+        dialog.close()
+    }
+}
+
+async function openDetails(id) {
+    const todo = todos.find(todo => todo.id === id);
+    
+    if (!todo) {
+        console.error('Todo item not found');
+        return;
+    }
+    const dialog = document.getElementById('dialog');
+    dialog.setAttribute('w3-include-html', './templates/board-overlay-blue.html');
+    
+    await includeHTML(); 
+    insertTodoDataIntoDialog(todo, dialog);
+    dialog.showModal(); 
+}
+
+function insertTodoDataIntoDialog(todo, dialog) {
+    const title = dialog.querySelector('.dbt-title'); 
+    const description = dialog.querySelector('.dbt-description');
+    const priority = dialog.querySelector('.dbt-priority');
+  
+    
+    if(title) title.innerText = todo.title;
+    if(description) description.innerText = todo.description;
+    if(priority) priority.innerHTML = todo.priority + showPriority(todo) ;
 }
 
 
