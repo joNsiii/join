@@ -1,9 +1,12 @@
 let isDropdownOpen = false;
+let contacts = [];
+let currentUserData = [];
 
 async function init() {
     loadUsers();
     await includeHTML();
     hightlightCurrentButton();
+    loadUserData();
 }
 
 async function loadUsers() {
@@ -14,32 +17,26 @@ async function loadUsers() {
     }
 }
 
-function redirectToPreviousPage() {
-    location.href = document.referrer;
-    return false;
-}
 
 function isLoggedIn() {
     const sessionToken = localStorage.getItem('session_token');
     return sessionToken !== null;
 }
 
-// function loadUserData() {
-//     let userId = localStorage.getItem('session_token');
-//     console.log(userId);
-//     let userData = users.find(u => u.id == userId);
+function loadUserData() {
+    let userId = localStorage.getItem('session_token');
+    console.log(userId);
+    let userData = users.find(u => u.id == userId);
 
-//     if (userData) {
-//         currentUserData.push(userData);
-//         console.log('Current user data:', currentUserData);
-//     }
-// }
+    if (userData) {
+        currentUserData.push(userData);
+        console.log('Current user data:', currentUserData);
+    }
+}
 
 window.addEventListener('DOMContentLoaded', function () {
     if (isLoggedIn()) {
-        // loadUserData();
         console.log('User is logged in');
-
     } else {
         console.log('User is not logged in');
     }
@@ -57,6 +54,11 @@ async function includeHTML() {
             element.innerHTML = "Page not found";
         }
     }
+}
+
+function redirectToPreviousPage() {
+    location.href = document.referrer;
+    return false;
 }
 
 // template animation and navigation
