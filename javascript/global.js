@@ -25,14 +25,6 @@ function isLoggedIn() {
     return sessionToken !== null;
 }
 
-async function loadAllData() {
-    try {
-        users = JSON.parse(await getItem('users'));
-    } catch (e) {
-        console.error('Loading Users Data:', e);
-    }
-    loadUserData();
-}
 
 function loadUserData() {
     let userId = localStorage.getItem('session_token');
@@ -47,7 +39,7 @@ function loadUserData() {
 
 window.addEventListener('DOMContentLoaded', function () {
     if (isLoggedIn()) {
-        loadAllData();
+        loadUserData();
         console.log('User is logged in');
 
     } else {
