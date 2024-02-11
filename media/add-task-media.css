@@ -20,7 +20,14 @@
 
     .bottom-button-container {
         max-width: 440px;
-        margin-right: 96px;
+        margin-right: 54px;
+        margin-bottom: 32px;
+    }
+
+    .bottom-container {
+        margin: 0;
+        margin-left: 328px;
+        align-items: normal;
     }
 }
 
@@ -84,5 +91,22 @@
 
     .clearBtn {
         display: none;
+    }
+}
+
+@media (max-width: 983px) {
+    .bottom-flex-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+    
+    .bottom-flex-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 55%;
     }
 }

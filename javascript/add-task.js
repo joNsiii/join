@@ -1,15 +1,20 @@
+
+
+// !!! WORK IN PROGRESS BITTE NICHT ANFASSEN !!!
+
 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-document.addEventListener("DOMContentLoaded", function(event) {
+// document.addEventListener("DOMContentLoaded", function(event) {
 
-    renderTasks();
-});
+//     renderTasks()
+
+// });
 
 function scopeTasks() {
 
 let title = document.getElementById('title-task').value;
 let description = document.getElementById('description-task').value;
-let dueDate = document.getElementById('date"').value;
+// let dueDate = document.getElementById('date"').value;
 
 var e = document.getElementById("assign-task");
 let assignedTo = e.options[e.selectedIndex].text;
@@ -17,17 +22,43 @@ let assignedTo = e.options[e.selectedIndex].text;
 var h = document.getElementById("category");
 let category = h.options[h.selectedIndex].text;
 
-const task = {
-    title: title,
-    description: description,
-    assignedTo: assignedTo,
-    dueDate: dueDate,
-    category: category
-};
+// const task = {
+//     title: title,
+//     description: description,
+//     assignedTo: assignedTo,
+//     dueDate: dueDate,
+//     category: category
+// };
 
-    tasks.push(task);
+//     tasks.push(task);
+
+const userID = {
+    id: [
+      {
+        title: title,
+        description: description,
+        category: category,
+        assignedTo: assignedTo,
+        subTask: ["Blablablabla", "Blabloblolbolbo"],
+        priority: "Medium",
+        dueDate: dueDate,
+      },
+      {
+        title: "Test Title 2",
+        description: "Test Description 2",
+        category: "Programming 2",
+        assignedTo: "112224423",
+        subTask: ["Blablablabla", "Blabloblolbolbo"],
+        priority: "Low",
+        dueDate: "XX:XX:XX",
+      },
+    ],
+  };
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    const userJSON = JSON.stringify(userID);
+    userInfo = JSON.parse(userJSON);
+    console.log(userInfo)
 
 };
 
@@ -55,3 +86,32 @@ function renderTasks() {
         `;
     });
 }
+
+// function start() {
+//     const userID = {
+//         id: [
+//           {
+//             title: "Test Title",
+//             description: "Test Description",
+//             category: "Programming",
+//             assignedTo: "112224433",
+//             subTask: ["Blablablabla", "Blabloblolbolbo"],
+//             priority: "Medium",
+//             dueDate: "XX:XX:XX",
+//           },
+//           {
+//             title: "Test Title 2",
+//             description: "Test Description 2",
+//             category: "Programming 2",
+//             assignedTo: "112224423",
+//             subTask: ["Blablablabla", "Blabloblolbolbo"],
+//             priority: "Low",
+//             dueDate: "XX:XX:XX",
+//           },
+//         ],
+//       };
+      
+//       const userJSON = JSON.stringify(userID);
+//       userInfo = JSON.parse(userJSON);
+//       console.log(userInfo)
+// }
