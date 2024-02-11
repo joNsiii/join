@@ -239,7 +239,22 @@
     width: 110px;
     height: 56px;
     font-size: 21px;
-    font-weight: 700;
+    font-weight: 400;
     cursor: pointer;
 
+}
+
+.createBtn:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 150ms ease;
+}
+
+.clearBtn:hover {
+    cursor: pointer;
+    color: #29ABE2;
+    border: 2px solid #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 150ms ease;
 }
