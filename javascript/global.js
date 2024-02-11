@@ -1,9 +1,11 @@
 let isDropdownOpen = false;
 let contacts = [];
-let currentUserData = [];
+let currentUserData;
+let userId = sessionStorage.getItem('session_token');
+
 
 async function init() {
-    loadUsers();
+    await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
     loadUserData();
@@ -17,19 +19,18 @@ async function loadUsers() {
     }
 }
 
-
 function isLoggedIn() {
-    const sessionToken = localStorage.getItem('session_token');
+    const sessionToken = sessionStorage.getItem('session_token');
     return sessionToken !== null;
 }
 
 function loadUserData() {
-    let userId = localStorage.getItem('session_token');
+    let userId = sessionStorage.getItem('session_token');
     console.log(userId);
     let userData = users.find(u => u.id == userId);
 
     if (userData) {
-        currentUserData.push(userData);
+        currentUserData = userData;
         console.log('Current user data:', currentUserData);
     }
 }
@@ -54,6 +55,14 @@ async function includeHTML() {
             element.innerHTML = "Page not found";
         }
     }
+}
+
+function clearSessionStorage() {
+    sessionStorage.clear();
+}
+
+function logout() {
+    clearSessionStorage();
 }
 
 function redirectToPreviousPage() {
