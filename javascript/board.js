@@ -36,14 +36,14 @@ function updateBoard() {
 
 
 function renderTaskCategory(category) {
-    let taskType = boardTasks.filter(t => t['category'] == `${category}`);
-    document.getElementById(`${category}`).innerHTML = '';
+    let taskType = boardTasks.filter(t => t['category'] == category);
+    document.getElementById(category).innerHTML = '';
     if (taskType.length < 1) {
-        document.getElementById(`${category}`).innerHTML += generateTaskPlaceholder(category);
+        document.getElementById(category).innerHTML += generateTaskPlaceholder(category);
     } else {
         for (let i = 0; i < taskType.length; i++) {
             const element = taskType[i];
-            document.getElementById(`${category}`).innerHTML += generateTodosHTML(element, i);
+            document.getElementById(category).innerHTML += generateTodosHTML(element);
         }
     }
 }
@@ -54,10 +54,10 @@ function generateTaskPlaceholder(category) {
 }
 
 
-function generateTodosHTML(element, i) {
-    let card = boardTasks[i];
+function generateTodosHTML(element) {
+    let card = element;
     return `
-        <div class="board-task-card" draggable="true" ondragstart="startDragging(${element['id']})">
+        <div class="board-task-card" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openDialog('dialog')">
             ${renderCardType(card)}
             ${renderCardTitleDescriptionGroup(card)}
             ${renderCardSubtasks(card)}
