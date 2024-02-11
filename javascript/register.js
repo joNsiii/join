@@ -19,11 +19,12 @@ async function addUser() {
         'password': password.value,
         'contacts': [],
         'phone': '',
+        'todos': [],
         'id': userId
     }
     users.push(newUser);
     await setItem('users', users);
-    // window.location.href = 'login.html?msg=You Signed Up successfully'
+    window.location.href = 'login.html?msg=You Signed Up successfully'
 }
 
 function checkPassword() {
