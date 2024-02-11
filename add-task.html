@@ -18,20 +18,20 @@
     <div class="add-task-content">
         <div class="add-task-headline">Add Task</div>
         <form>
-            <div class="display-flex">
+            <div class="display-flex" id="taskForm">
                 <div class="left-side-inputs">
                     <div class="single-input-container">
                         <label>Title<label class="red-star">*</label></label>
-                        <input class="input-single-line" required placeholder="Enter a title" type="text">
+                        <input class="input-single-line"  placeholder="Enter a title" type="text" id="title-task">
                     </div>
                     <div class="desc-input-container">
                         <label>Description</label>
-                        <textarea class="desc-textarea" placeholder="Enter a Description" id="" cols="30"
+                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task" cols="30"
                             rows="3"></textarea>
                     </div>
                     <div class="single-input-container">
                         <label>Assigned to</label>
-                        <select class="select-input" id="">
+                        <select class="select-input" id="assign-task">
                             <option value="" disabled selected>Select contacts to assign</option>
                             <option value="">Rudolf Sachslehner</option>
                             <option value="">Oumout Resit Ismail</option>
@@ -45,7 +45,7 @@
                     <div class="single-input-container">
                         <label for="date">Due Date<label class="red-star">*</label></label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                            onblur="(this.type='text')" name="date" id="date">
+                            onblur="(this.type='text')" name="date" id="date date-task">
                     </div>
                     <div class="prio-container">
                         <label>Prio</label>
@@ -63,28 +63,31 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category<label class="red-star">*</label></label>
-                        <select class="select-input" id="">
+                        <select class="select-input" id="category">
                             <option value="" disabled selected>Select contacts to assign</option>
                             <option value="">Technical Task</option>
                             <option value="">User Story</option>
                         </select>
                     </div>
                     <div class="single-input-container">
-                        <label>Title<label class="red-star">*</label></label>
-                        <input class="input-single-line" required placeholder="Enter a title" type="text">
+                        <label>Subtasks</label>
+                        <input class="input-single-line"  placeholder="Add a new subtask" type="text">
                     </div>
                 </div>
 
             </div>
             <div class="bottom-button-container">
-                <span><label class="red-star">*</label>This field is required</span>
-                <div>
-                    <button>Clear</button>
-                    <button>Create Task </button>
+                <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
+                <div class="bottom-flex-right">
+                    <button class="button button-clear">Clear</button>
+                    <button class="button button-task" onclick="scopeTasks()">Create Task </button>
                 </div>
+                <div id="taskList"></div>
             </div>
         </form>
     </div>
+
+    <script src="./javascript/add-task.js"></script>
 </body>
 
 </html>
