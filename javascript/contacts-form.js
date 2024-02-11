@@ -89,6 +89,7 @@ function closeContactViewerMobile() {
 
 async function updateContactList() {
     addContact();
+    closeDialog('dialog-add-contact');
     resetAddContactInput();
     return initContacts();
 }
