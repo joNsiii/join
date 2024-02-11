@@ -65,6 +65,7 @@ if (msg) {
 
 }
 
+
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;

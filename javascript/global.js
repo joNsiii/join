@@ -1,4 +1,3 @@
-let currentUserData = [];
 let isDropdownOpen = false;
 
 async function init() {
@@ -25,21 +24,20 @@ function isLoggedIn() {
     return sessionToken !== null;
 }
 
+// function loadUserData() {
+//     let userId = localStorage.getItem('session_token');
+//     console.log(userId);
+//     let userData = users.find(u => u.id == userId);
 
-function loadUserData() {
-    let userId = localStorage.getItem('session_token');
-    console.log(userId);
-    let userData = users.find(u => u.id == userId);
-
-    if (userData) {
-        currentUserData.push(userData);
-        console.log('Current user data:', currentUserData);
-    }
-}
+//     if (userData) {
+//         currentUserData.push(userData);
+//         console.log('Current user data:', currentUserData);
+//     }
+// }
 
 window.addEventListener('DOMContentLoaded', function () {
     if (isLoggedIn()) {
-        loadUserData();
+        // loadUserData();
         console.log('User is logged in');
 
     } else {
@@ -62,7 +60,6 @@ async function includeHTML() {
 }
 
 // template animation and navigation
-
 function hightlightCurrentButton() {
     let links = document.querySelectorAll("a.button-side-bar");
 
@@ -88,7 +85,6 @@ function closeDropdown() {
             setTimeout(() => {
                 dropdownContent.classList.remove("flyIN");
             }, 1000);
-
             isDropdownOpen = false;
         }
     } else {

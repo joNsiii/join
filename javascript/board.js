@@ -116,7 +116,6 @@ function createHTML(todo, containerId) {
         </div>
     </div>
     `;
-
     if (containerId) {
         document.getElementById(containerId).innerHTML += toDoHtml;
     }
@@ -155,7 +154,6 @@ function insertTodoDataIntoDialog(todo, dialog) {
     priority.innerHTML = todo.priority + showPriority(todo) ;
 }
 
-
 function showPriority(todo){
     if (todo.priority === "Urgent") {
         return '<img src="./img/urgent-board.png"></img>'
@@ -165,7 +163,6 @@ function showPriority(todo){
         return '<img src="./img/low-board.png"></img>'
     }
 }
-
 
 function setCategoryStyle(heading) {
     if (heading == "User Story") {
