@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./media/add-task-form-media.css">
 </head>
 
-<body onload="init(); updateBoard()">
+<body onload="init(), boardInit()">
 
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html">
 
@@ -54,8 +54,7 @@
                     <div class="board-header-title">To do</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div id="to-do" class="board-body" ondrop="moveTo(id); removeHighlight(id)"
-                    ondragover="allowDrop(event); addhighlight(id)" ondragleave="removeHighlight(id)">
+                <div class="board-body" id="toDo">
                     <div class="board-no-task">No tasks to do</div>
                 </div>
             </div>
@@ -64,8 +63,7 @@
                     <div class="board-header-title">In progress</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div id="in-progress" class="board-body" ondrop="moveTo(id); removeHighlight(id)"
-                    ondragover="allowDrop(event); addhighlight(id)" ondragleave="removeHighlight(id)">
+                <div class="board-body" id="inProgress">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-blue">User Story</h3>
                         <div class="btc-group">
@@ -94,8 +92,7 @@
                     <div class="board-header-title">Await feedback</div>
                     <img class="board-header-img" src="./img/plus-button.png" alt="plus-button">
                 </div>
-                <div id="await-feedback" class="board-body" ondrop="moveTo(id); removeHighlight(id)"
-                    ondragover="allowDrop(event); addhighlight(id)" ondragleave="removeHighlight(id)">
+                <div class="board-body" id="AwaitFeedback">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-green">Technical Task</h3>
                         <div class="btc-group">
@@ -132,8 +129,7 @@
                 <div class="board-header">
                     <div class="board-header-title">Done</div>
                 </div>
-                <div id="done" class="board-body" ondrop="moveTo(id); removeHighlight(id)"
-                    ondragover="allowDrop(event); addhighlight(id)" ondragleave="removeHighlight(id)">
+                <div class="board-body" id="Done">
                     <div class="board-task-card">
                         <h3 class="btc-type btc-type-green">Technical Task</h3>
                         <div class="btc-group">

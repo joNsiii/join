@@ -170,6 +170,7 @@ dialog[open] {
 }
 
 .board-body {
+    min-height: 252px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -351,4 +352,8 @@ dialog[open] {
 
 .bcu-blue-green {
     background-color: #00BEE8;
+}
+
+.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
 }
