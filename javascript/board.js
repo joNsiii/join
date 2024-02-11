@@ -150,9 +150,9 @@ function insertTodoDataIntoDialog(todo, dialog) {
     const priority = dialog.querySelector('.dbt-priority');
   
     
-    if(title) title.innerText = todo.title;
-    if(description) description.innerText = todo.description;
-    if(priority) priority.innerHTML = todo.priority + showPriority(todo) ;
+    title.innerText = todo.title;
+    description.innerText = todo.description;
+    priority.innerHTML = todo.priority + showPriority(todo) ;
 }
 
 
