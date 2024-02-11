@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./fonts/fonts.css">
 </head>
 
-<body class="signup-body">
+<body onload="loadUsers()" class="signup-body">
     <div class="signup-content">
         <div class="front-page-container">
             <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
@@ -24,14 +24,14 @@
                     </div>
                 </div>
 
-                <form class="input-container">
-                    <div class="input-child"><input type="name" required placeholder="Name">
+                <form onsubmit="checkPassword(); return false" class="input-container">
+                    <div class="input-child"><input id="username" type="name" required placeholder="Name">
                         <img src="./img/person.png" alt="Name-icon" id="name-signup">
                     </div>
-                    <div class="input-child"><input type="email" required placeholder="Email">
+                    <div class="input-child"><input id="useremail" type="email" required placeholder="Email">
                         <img src="./img/mail.png" alt="email-icon" id="email-signup">
                     </div>
-                    <div class="input-child" id="password-parent"><input type="password" required placeholder="Password" id="password-type">
+                    <div class="input-child" id="password-parent"><input  type="password" required placeholder="Password" id="password-type">
                         <div class="password-inp">
                             <img src="./img/lock.png" alt="password-icon" id="set-password" onclick="togglePasswordIcon()">
                         </div>
@@ -61,12 +61,11 @@
                     <p>Legal Notice</p>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
-    <script src="javascript/sign-up.js"></script>
+    <script src="./javascript/global.js"></script>
 </body>
 
 </html>

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <script src="javascript/storage.js"></script>
-    <script src="javascript/includes.js"></script>
+    <script src="javascript/register.js"></script>
+    <script src="./javascript/global.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/add-task.css">
@@ -71,16 +72,17 @@
                     </div>
                     <div class="single-input-container">
                         <label>Subtasks</label>
-                        <input class="input-single-line"  placeholder="Add a new subtask" type="text">
+                        <input class="input-single-line-subtask" required placeholder="Add new subtask" type="text">
+                    
                     </div>
                 </div>
 
             </div>
-            <div class="bottom-button-container">
-                <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
-                <div class="bottom-flex-right">
-                    <button class="button button-clear">Clear</button>
-                    <button class="button button-task" onclick="scopeTasks()">Create Task </button>
+            <div class="bottom-container">
+                <span><label class="red-star">*</label>This field is required</span>
+                <div class="bottom-button-container">
+                    <button class="clearBtn">Clear <img src="./img/cancel.png" alt="clear"></button>
+                    <button class="createBtn">Create Task <img src="./img/check.png" alt="check"> </button>
                 </div>
                 <div id="taskList"></div>
             </div>

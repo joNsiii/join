@@ -1,6 +1,9 @@
-<section class="contact-viewer-mobile">
+<section class="contact-viewer-mobile" onclick="stop(event)">
+    <img class="cvm-img" src="./img/arrow-left-line.png" alt="arrow-left-line"
+        onclick="closeContactViewerMobile()">
     <button class="contact-more-button">
-        <img class="contact-more-button-img" src="./img/more-vert.png" alt="more-vert">
+        <img class="contact-more-button-img" src="./img/more-vert.png" alt="more-vert"
+            onclick="openDialog('contact-settings-dialog')">
     </button>
     <div class="contact-viewer-header-mobile">
         <h1 class="contact-viewer-headline-mobile">Contacts</h1>
@@ -10,8 +13,8 @@
 
     <div class="contact-user-mobile">
         <div class="contact-user-header-mobile">
-            <div class="contact-user-profile-mobile bgc-orange">AM</div>
-            <div class="contact-user-name-mobile">Anton Mayer</div>
+            <div id="contact-user-profile-mobile" class="contact-user-profile-mobile bgc-flexible">AM</div>
+            <div id="contact-user-name-mobile" class="contact-user-name-mobile">Anton Mayer</div>
         </div>
         <div class="contact-user-info-mobile">
             Contact Information
@@ -19,12 +22,24 @@
         <div class="contact-user-detail-group">
             <div class="contact-user-detail">
                 <div class="cud-title">Email</div>
-                <div class="cud-mail">anton@gmail.com</div>
+                <a id="contact-user-mail-mobile" class="cud-mail">anton@gmail.com</a>
             </div>
             <div class="contact-user-detail">
                 <div class="cud-title">Phone</div>
-                <div class="cud-phone">+ 49 1111 111 11 1</div>
+                <a id="contact-user-phone-mobile" class="cud-phone">+ 49 1111 111 11 1</a>
             </div>
         </div>
     </div>
+
+    <dialog id="contact-settings-dialog" class="contact-settings-dialog"
+        onmouseleave="closeDialog('contact-settings-dialog')">
+        <button id="contact-settings-edit-button" class="contact-more-dialog-button">
+            <img src="./img/edit-contacts.png" alt="edit-contacts">
+            Edit
+        </button>
+        <button id="contact-settings-delete-button" class="contact-more-dialog-button">
+            <img src="./img/delete.png" alt="delete">
+            Delete
+        </button>
+    </dialog>
 </section>

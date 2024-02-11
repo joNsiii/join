@@ -13,6 +13,7 @@
 .content-row {
     display: flex;
     flex-direction: row;
+    gap: 28px;
 }
 
 .contact-list {
@@ -134,7 +135,7 @@
 }
 
 .bgc-blue {
-    background-color: blue;
+    background-color: #6E52FF;
 }
 
 .bgc-magenta {
@@ -222,9 +223,13 @@
 }
 
 .contact-user {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 21px;
+}
+
+.cu-enabled {
+    display: flex;
 }
 
 .contact-user-header {
@@ -325,18 +330,23 @@
 }
 
 .cud-mail {
+    width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 19.2px;
+    text-decoration: none;
     color: #007CEE;
 }
 
 .cud-phone {
+    width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 19.2px;
+    text-decoration: none;
+    color: #000000;
 }
 
 .add-contact-button-mobile {

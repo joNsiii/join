@@ -20,18 +20,18 @@ function togglePassword() {
     }
 }
 
-  function togglePasswordIcon() {
+function togglePasswordIcon() {
     let passwordField = document.getElementById('password-type');
     let toggleImg = document.getElementById('password-lock');
-    let currentType = passwordField.type; 
-        if (passwordField.value !== "") {
-            passwordField.type = (currentType === "password") ? "text" : "password";
+    let currentType = passwordField.type;
+    if (passwordField.value !== "") {
+        passwordField.type = (currentType === "password") ? "text" : "password";
 
-            toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
-        } else {
-            toggleImg.src = "./img/lock.png";
-            passwordField.type = "password";
-        }
+        toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
+    } else {
+        toggleImg.src = "./img/lock.png";
+        passwordField.type = "password";
+    }
 }
 
 function toggleCheckbox() {
@@ -51,5 +51,31 @@ function login() {
     if (warning.classList !== "d-none") {
         warning.classList.remove("d-none");
         input.classList.add("bad-outline");
+    }
+}
+
+/**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get('msg');
+if (msg) {
+    msgPopup.innerHTML = msg;
+    setTimeout(() => {
+        msgPopup.classList.add('d-none');
+    }, "6000");
+
+}
+
+
+function checkLogin() {
+    let email = document.getElementById('email-field').value.toLowerCase();
+    let password = document.getElementById('password-type').value;
+    
+    let loggedInUser = users.find(u => email === u.email && password === u.password);
+    if (loggedInUser) {
+        console.log('Login successfully');
+        localStorage.setItem('session_token', loggedInUser.id);
+        window.location.href = 'summary.html';
+    } else {
+        console.log('Login failed. Incorrect email or password.');
     }
 }

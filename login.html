@@ -11,7 +11,7 @@
 
 </head>
 
-<body class="login-body" onload="renderLogin()">
+<body class="login-body" onload="renderLogin(), loadUsers()">
 
     <div class="front-page-container">
         <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="input-container">
-                <div class="input-child margin-bottom"><input type="email" placeholder="Email">
+                <div class="input-child margin-bottom"><input id="email-field" type="email" placeholder="Email">
                     <img src="./img/mail.png" alt="email-icon">
                 </div>
 
@@ -61,7 +61,7 @@
             </div>
 
             <div class="button-login-container">
-                <button class="button button-login" onclick="login()">Log in</button>
+                <button class="button button-login" onclick="checkLogin()">Log in</button>
                 <button class="button button-guest">Guest Log in</button>
             </div>
         </div>
@@ -76,13 +76,14 @@
                 <a target="_blank" href="./legal_notice.html">Legal Notice</a>
             </div>
         </div>
-
+        <div id="msgPopup" class="d-none"></div>
     </div>
 
-    <script src="javascript/logo-animation.js"></script>
-    <script src="javascript/login.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
+    <script src="javascript/logo-animation.js"></script>
+    <script src="./javascript/global.js"></script>
+    <script src="javascript/login.js"></script>
 </body>
 
 </html>
