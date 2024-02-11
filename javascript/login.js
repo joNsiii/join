@@ -73,7 +73,7 @@ function checkLogin() {
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
         console.log('Login successfully');
-        localStorage.setItem('session_token', loggedInUser.id);
+        sessionStorage.setItem('session_token', loggedInUser.id);
         window.location.href = 'summary.html';
     } else {
         console.log('Login failed. Incorrect email or password.');
