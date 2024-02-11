@@ -65,15 +65,6 @@ if (msg) {
 
 }
 
-async function loadUsersLogInData() {
-    try {
-        users = JSON.parse(await getItem('users'));
-        checkLogin();
-    } catch (e) {
-        console.error('Loading Users Data:', e);
-    }
-}
-
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;

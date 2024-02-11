@@ -1,9 +1,9 @@
 let users = [];
+let newArray = []; /* delete our backend-users-array */
 
 async function addUser() {
     let date = new Date();
     let userId = date.getTime();
-    let newArray = []; /* delete our backend-users-array */
     let name = document.getElementById('username');
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
@@ -22,8 +22,8 @@ async function addUser() {
         'id': userId
     }
     users.push(newUser);
-    window.location.href = 'login.html?msg=You Signed Up successfully'
-    setItem('users', users);
+    await setItem('users', users);
+    // window.location.href = 'login.html?msg=You Signed Up successfully'
 }
 
 function checkPassword() {
