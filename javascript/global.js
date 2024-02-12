@@ -1,10 +1,14 @@
-let currentUserData = [];
 let isDropdownOpen = false;
+let contacts = [];
+let currentUserData;
+let userId = sessionStorage.getItem('session_token');
+
 
 async function init() {
-    loadUsers();
+    await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
+    loadUserData();
 }
 
 async function loadUsers() {
@@ -15,33 +19,25 @@ async function loadUsers() {
     }
 }
 
-function redirectToPreviousPage() {
-    location.href = document.referrer;
-    return false;
-}
-
 function isLoggedIn() {
-    const sessionToken = localStorage.getItem('session_token');
+    const sessionToken = sessionStorage.getItem('session_token');
     return sessionToken !== null;
 }
 
-
 function loadUserData() {
-    let userId = localStorage.getItem('session_token');
+    let userId = sessionStorage.getItem('session_token');
     console.log(userId);
     let userData = users.find(u => u.id == userId);
 
     if (userData) {
-        currentUserData.push(userData);
+        currentUserData = userData;
         console.log('Current user data:', currentUserData);
     }
 }
 
 window.addEventListener('DOMContentLoaded', function () {
     if (isLoggedIn()) {
-        loadUserData();
         console.log('User is logged in');
-
     } else {
         console.log('User is not logged in');
     }
@@ -61,8 +57,20 @@ async function includeHTML() {
     }
 }
 
-// template animation and navigation
+function clearSessionStorage() {
+    sessionStorage.clear();
+}
 
+function logout() {
+    clearSessionStorage();
+}
+
+function redirectToPreviousPage() {
+    location.href = document.referrer;
+    return false;
+}
+
+// template animation and navigation
 function hightlightCurrentButton() {
     let links = document.querySelectorAll("a.button-side-bar");
 
@@ -88,7 +96,6 @@ function closeDropdown() {
             setTimeout(() => {
                 dropdownContent.classList.remove("flyIN");
             }, 1000);
-
             isDropdownOpen = false;
         }
     } else {

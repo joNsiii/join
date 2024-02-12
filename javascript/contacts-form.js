@@ -89,6 +89,7 @@ function closeContactViewerMobile() {
 
 async function updateContactList() {
     addContact();
+    closeDialog('dialog-add-contact');
     resetAddContactInput();
     return initContacts();
 }
@@ -112,14 +113,14 @@ function addUserContact(name, mail, phone) {
     };
 }
 
+
 async function addToCurrentUser(user) {
-    let userId = localStorage.getItem('session_token');
     let userData = users.find(u => u.id == userId);
 
     if (userData) {
         userData['contacts'].push(user);
     }
-    await setItem('users', userData);
+    await setItem('users', users);
 }
 
 function resetAddContactInput() {

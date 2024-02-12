@@ -65,14 +65,15 @@ if (msg) {
 
 }
 
+
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
     
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
-        console.log('Login successful');
-        localStorage.setItem('session_token', loggedInUser.id);
+        console.log('Login successfully');
+        sessionStorage.setItem('session_token', loggedInUser.id);
         window.location.href = 'summary.html';
     } else {
         console.log('Login failed. Incorrect email or password.');
