@@ -10,18 +10,18 @@ let boardTasks = [
                 subtaskId: 0,
                 subtasksText: "subtasks Text for checked unchecked",
                 isChecked: false,
-            }
+            },
         ],
         sub_users: [
             {
                 userId: 0,
                 userFirstname: "Anton",
                 userSurname: "Müller",
-                userBackgroundColor: "green"
-            }
+                userBackgroundColor: "green",
+            },
         ],
-        priority: 'Medium',
-        date: '02/15/2024',
+        priority: "Medium",
+        date: "15/02/2024",
     },
     {
         taskId: 1,
@@ -35,17 +35,17 @@ let boardTasks = [
                 userId: 0,
                 userFirstname: "Anton",
                 userSurname: "Müller",
-                userBackgroundColor: "green"
+                userBackgroundColor: "green",
             },
             {
                 userId: 1,
                 userFirstname: "Oumout",
                 userSurname: "Resit",
-                userBackgroundColor: "blue"
-            }
+                userBackgroundColor: "blue",
+            },
         ],
-        priority: 'Medium',
-        date: '',
+        priority: "Medium",
+        date: "09/08/2023",
     },
     {
         taskId: 2,
@@ -55,8 +55,8 @@ let boardTasks = [
         heading: "User Story",
         subtasks: [],
         sub_users: [],
-        priority: 'Urgent',
-        date: '',
+        priority: "Urgent",
+        date: "25/02/2023",
     },
     {
         taskId: 3,
@@ -66,8 +66,8 @@ let boardTasks = [
         heading: "Technical Task",
         subtasks: [],
         sub_users: [],
-        priority: 'Low',
-        date: '',
+        priority: "Low",
+        date: "15/05/2023",
     },
     {
         taskId: 4,
@@ -77,8 +77,8 @@ let boardTasks = [
         heading: "User Story",
         subtasks: [],
         sub_users: [],
-        priority: 'Urgent',
-        date: '',
+        priority: "Urgent",
+        date: "26/11/2023",
     },
 ];
 
@@ -147,18 +147,15 @@ function createHTML(task, containerId) {
     }
 }
 
-
-// overlay html 
+// overlay html
 function insertTodoDataIntoDialog(task, dialog) {
-    const title = dialog.querySelector('.dbt-title'); 
-    const description = dialog.querySelector('.dbt-description');
-    const priority = dialog.querySelector('.dbt-priority');
-    const date = dialog.querySelector('.dbt-date');
-    const subtask = dialog.querySelector('.dbt-collector');
-
+    const title = dialog.querySelector(".dbt-title");
+    const description = dialog.querySelector(".dbt-description");
+    const priority = dialog.querySelector(".dbt-priority");
+    const date = dialog.querySelector(".dbt-date");
+    const subtask = dialog.querySelector(".dbt-collector");
     const subUsersNames = generateSubUsersHtml(task.sub_users);
-  
-    
+
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
@@ -166,15 +163,14 @@ function insertTodoDataIntoDialog(task, dialog) {
     subtask.innerHTML = subUsersNames;
 }
 
-
 function generateSubUsersHtml(subUsers) {
-    let subUserNamesHtml = '';
+    let subUserNamesHtml = "";
 
-    if(subUsers && subUsers.length > 0) {
-        subUsers.forEach(user => {
+    if (subUsers && subUsers.length > 0) {
+        subUsers.forEach((user) => {
             const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
             const fullName = `${user.userFirstname} ${user.userSurname}`;
-            subUserNamesHtml += /*html*/`
+            subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
                         <div class="dbt-contact-profile dbt-${user.userBackgroundColor}">${initials}</div>
                         <div class="dbt-contact-name">${fullName}</div>
@@ -184,61 +180,78 @@ function generateSubUsersHtml(subUsers) {
     } else {
         subUserNamesHtml = '<div class="dbt-contact-name">No users assigned</div>';
     }
-
     return subUserNamesHtml;
 }
 
-
 // User Interface related
-function closeBoardOverlay(){
-    const dialog = document.querySelector('dialog');
+function closeBoardOverlay() {
+    const dialog = document.querySelector("dialog");
     if (dialog) {
-        dialog.close()
+        dialog.close();
     }
 }
 
 async function openDetails(taskId) {
-    const task = boardTasks.find(task => task.taskId === taskId);
-    
+    const task = boardTasks.find((task) => task.taskId === taskId);
+
     if (!task) {
-        console.error('Todo item not found');
+        console.error("Todo item not found");
         return;
     }
-    const dialog = document.getElementById('dialog');
-    dialog.setAttribute('w3-include-html', './templates/board-overlay-blue.html');
-    
-    await includeHTML(); 
+    const dialog = document.getElementById("dialog");
+    dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
+
+    await includeHTML();
     insertTodoDataIntoDialog(task, dialog);
-    dialog.showModal(); 
+    dialog.showModal();
+
+    setupCloseDialogMechanism();
 }
 
 // Help functions
-function showPriority(task){
+function showPriority(task) {
     if (task.priority === "Urgent") {
-        return '<img src="./img/urgent-board.png"></img>'
+        return '<img src="./img/urgent-board.png"></img>';
     } else if (task.priority === "Medium") {
-        return '<img src="./img/medium-board.png"></img>'
+        return '<img src="./img/medium-board.png"></img>';
     } else if (task.priority === "Low") {
-        return '<img src="./img/low-board.png"></img>'
+        return '<img src="./img/low-board.png"></img>';
     }
 }
 
 function setCategoryStyle(heading) {
     if (heading == "User Story") {
-        return "btc-type-blue"
+        return "btc-type-blue";
     } else if (heading == "Technical Task") {
-        return "btc-type-green"
+        return "btc-type-green";
     }
 }
 
-
 function generateUserInitialsHtml(subUsers) {
-    let userInitialsHtml = '';
+    let userInitialsHtml = "";
     for (let user of subUsers) {
-        // Direkte Integration der Logik zur Extraktion der Initialen
         const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
         userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
     }
     return userInitialsHtml;
 }
 
+
+function setupCloseDialogMechanism() {
+    const closeOverlayIMG = document.querySelector(".closeOverlayIMG");
+    const dialogBoardTask = document.querySelector(".dialog-board-task");
+    const dialog = document.getElementById("dialog");
+
+    if (dialog && closeOverlayIMG && dialogBoardTask) {
+        dialog.addEventListener("click", function (event) {
+            if (!dialogBoardTask.contains(event.target)) {
+                closeDialog("dialog");
+            }
+        });
+
+        // prevent closing dialog if element itself is clicked
+        dialogBoardTask.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+}
