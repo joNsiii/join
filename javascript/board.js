@@ -142,7 +142,7 @@ function createHTML(task, containerId) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
 
     let toDoHtml = /*html*/ `
-    <div class="board-content" onclick="openDetails(${task.taskId})"> 
+    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}</h3>
@@ -266,7 +266,6 @@ function setupCloseDialogMechanism() {
     });
 }
 
-
 // drag n drop
 function allowDrop(ev) {
     ev.preventDefault();
@@ -275,4 +274,9 @@ function allowDrop(ev) {
 function moveTo(category) {
     boardTasks[currentDraggedElement]["category"] = category;
     renderEachTask();
+}
+
+function startDragging(id) {
+    console.log('start dragging')
+    currentDraggedElement = id;
 }
