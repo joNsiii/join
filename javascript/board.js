@@ -277,6 +277,6 @@ function moveTo(category) {
 }
 
 function startDragging(id) {
-    console.log('start dragging')
+    console.log(`start dragging ${id}`)
     currentDraggedElement = id;
 }
