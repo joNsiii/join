@@ -4,7 +4,7 @@ let boardTasks = [
         taskId: 0,
         title: "Start with JS",
         description: "create reusable HTML base templates...",
-        category: "toDos",
+        category: "toDo",
         heading: "Technical Task",
         subtasks: [
             {
@@ -85,7 +85,7 @@ let boardTasks = [
         taskId: 4,
         title: "Funny Storys",
         description: "THIS IS FUNNY!!",
-        category: "toDos",
+        category: "toDo",
         heading: "User Story",
         subtasks: [],
         sub_users: [],
@@ -116,7 +116,7 @@ function renderEachTask() {
         const task = boardTasks[i];
         let containerId = "";
 
-        if (task.category === "toDos") {
+        if (task.category === "toDo") {
             containerId = "toDo";
         } else if (task.category === "inProgress") {
             containerId = "inProgress";
@@ -277,6 +277,6 @@ function moveTo(category) {
 }
 
 function startDragging(id) {
-    console.log('start dragging')
+    console.log(`start dragging ${id}`)
     currentDraggedElement = id;
 }

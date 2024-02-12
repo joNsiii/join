@@ -175,7 +175,6 @@ dialog[open] {
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
-    min-height: 200px;
 }
 
 .board-no-task {
