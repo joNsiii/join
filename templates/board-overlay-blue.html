@@ -1,24 +1,24 @@
-<section id="dialog-board-task" class="dialog-board-task" onclick="stop(event)">
+<section class="dialog-board-task">
     <div class="dbt-top-group">
-        <h3 id="board-task-type" class="dbt-type dbt-type-blue">User Story</h3>
-        <img src="./img/close.png" alt="close" onclick="closeDialog('dialog')">
+        <h3 class="dbt-type dbt-type-blue">User Story</h3>
+        <img src="./img/close.png" alt="close" onclick="closeBoardOverlay()">
     </div>
-    <h2 id="board-task-title" class="dbt-title">Kochwelt Page & Recipe Recommender</h2>
-    <p id="board-task-description" class="dbt-description">Build start page with recipe recommendation.</p>
+    <h2 class="dbt-title">Kochwelt Page & Recipe Recommender</h2>
+    <p class="dbt-description">Build start page with recipe recommendation.</p>
     <div class="dbt-detail-group">
         <div class="dbt-detail">Due date: </div>
-        <div id="board-task-due-date">10/05/2023</div>
+        <div>10/05/2023</div>
     </div>
     <div class="dbt-detail-group">
         <div class="dbt-detail">Priority: </div>
-        <div id="board-task-priority" class="dbt-priority">
+        <div class="dbt-priority">
             Medium
             <img src="./img/medium-board.png" alt="prio-medium-board">
         </div>
     </div>
     <div class="dbt-subcontent-group">
         <div class="dbt-subcontent">Assigned To:</div>
-        <div id="board-task-member-collector" class="dbt-collector">
+        <div class="dbt-collector">
             <div class="dbt-contact-group">
                 <div class="dbt-contact-profile dbt-green">EM</div>
                 <div class="dbt-contact-name">Emmanuel Mauer</div>
@@ -35,7 +35,7 @@
     </div>
     <div class="dbt-subcontent-group">
         <div class="dbt-subcontent">Subtasks</div>
-        <div id="board-task-subtask-group" class="dbt-collector">
+        <div class="dbt-collector">
             <div class="dbt-subtask-group">
                 <img class="dbt-subtask-img" src="./img/checkmark.png" alt="check-button-complete">
                 <div class="dbt-subtask-text">Implement Recipe Recommendation</div>

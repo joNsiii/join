@@ -1,272 +1,173 @@
-let boardTasks = [
+let todos = [
     {
-        'id': 0,
-        'category': 'in-progress',
-        'type': 'User Story',
-        'title': 'Kochwelt Page & Recipe Recommender',
-        'description': 'Build start page with recipe recommendation...',
-        'subtasks': [1, 2],
-        'members': ['AM', 'EM', 'MB'],
-        'bgc': ['orange', 'green', 'dark-blue'],
-        'priority': './img/medium-board.png'
+        id: 0,
+        title: "Start with JS",
+        description: "create reusable HTML base templates...",
+        category: "toDo",
+        heading: "Technical Task",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Medium',
+        date: '',
     },
     {
-        'id': 1,
-        'category': 'in-progress',
-        'type': 'User Story',
-        'title': 'Contact Form & Imprint',
-        'description': 'Create a contact form and imprint page...',
-        'subtasks': [1, 2],
-        'members': ['AS', 'DE', 'EF'],
-        'bgc': ['orange', 'green', 'dark-blue'],
-        'priority': './img/urgent-board.png'
-    }
-];
-
-let currentDraggedElement;
-
-
-function updateBoard() {
-    renderTaskCategory('to-do');
-    renderTaskCategory('in-progress');
-    renderTaskCategory('await-feedback');
-    renderTaskCategory('done');
-
-}
-
-
-function renderTaskCategory(category) {
-    let taskType = boardTasks.filter(t => t['category'] == category);
-    document.getElementById(category).innerHTML = '';
-    if (taskType.length < 1) {
-        document.getElementById(category).innerHTML += generateTaskPlaceholder(category);
-    } else {
-        for (let i = 0; i < taskType.length; i++) {
-            const element = taskType[i];
-            document.getElementById(category).innerHTML += generateTodosHTML(element);
-        }
-    }
-}
-
-
-function generateTaskPlaceholder(category) {
-    return `<div class="board-no-task">No tasks ${category.replace('-', ' ')}</div>`
-}
-
-
-function generateTodosHTML(element) {
-    let card = element;
-    return `
-        <div class="board-task-card" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openDialog('dialog')">
-            ${renderCardType(card)}
-            ${renderCardTitleDescriptionGroup(card)}
-            ${renderCardSubtasks(card)}
-            ${renderCardMemberPriorityGroup(card)}
-        </div>
-    `;
-}
-
-
-// Card Type Color anpassen!!!
-function renderCardType(card) {
-    return `<h3 class="btc-type btc-type-blue">${card.type}</h3>`;
-}
-
-
-function renderCardTitleDescriptionGroup(card) {
-    return `
-        <div class="btc-group">
-            <div class="btc-title">${card.title}</div>
-            <div class="btc-description">${card.description}</div>
-        </div>
-    `;
-}
-
-
-// Progess Bar bearbeiten!!!
-function renderCardSubtasks(card) {
-    let subtasks = card.subtasks;
-    return `
-        <div class="board-task-progress-group">
-                <div class="board-task-max-bar">
-                    <div class="board-task-value-bar"></div>
-                </div>
-                <div class="board-task-progress-text">${subtasks[0]}/${subtasks[1]} Subtasks</div>
-        </div>
-    `;
-}
-
-
-function renderCardMemberPriorityGroup(card) {
-    return `
-        <div class="user-priority-group">
-            ${renderCardMemberGroup(card)}
-            ${renderCardPriority(card)}
-        </div>
-    `;
-}
-
-
-function renderCardMemberGroup(card) {
-    let members = card.members;
-    let bgc = card.bgc;
-    return `
-        <div class="board-user-group">
-            ${renderCardMember(members, bgc)}
-        </div>
-    `;
-}
-
-
-function renderCardMember(members, bgc) {
-    let membersHTML = '';
-    for (let i = 0; i < members.length; i++) {
-        membersHTML += `<div class="board-card-user bcu-${bgc[i]}">${members[i]}</div>`;
-    }
-    return membersHTML;
-}
-
-
-function renderCardPriority(card) {
-    return `<img src="${card.priority}" alt="medium-board">`;
-}
-
-
-function startDragging(id) {
-    currentDraggedElement = id;
-}
-
-
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-
-function moveTo(category) {
-    boardTasks[currentDraggedElement]['category'] = category;
-    updateBoard();
-}
-
-
-function addhighlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-
-
-// Bitte verschieben!!!
-let boardTasksDialog = [
+        id: 1,
+        title: "What ? ",
+        description: "dont know what to do..",
+        category: "inProgress",
+        heading: "Technical Task",
+        subtasks: ["i do have to test this", "second subtask for testing"],
+        sub_users: [],
+        priority: 'Medium',
+        date: '',
+    },
     {
-        'type': 'User Story',
-        'title': 'Kochwelt Page & Recipe Recommender',
-        'description': 'Build start page with recipe recommendation.',
-        'due-date': '10/05/2023',
-        'priority-text': 'Medium',
-        'priority-img': './img/medium-board.png',
-        'members': ['Emmanuel Mauer', 'Marcel Bauer', 'Anton Mayer'],
-        'members-bgc': ['green', 'dark-blue', 'blue'],
-        'subtasks-state': ['./img/checkmark.png', './img/checkmark-unchecked.png'],
-        'subtasks-text': ['Implement Recipe Recommendation', 'Start Page Layout']
-    }
+        id: 2,
+        title: "S234524",
+        description: "adsöfljasödfasdf",
+        category: "AwaitFeedback",
+        heading: "User Story",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Urgent',
+        date: '',
+    },
+    {
+        id: 3,
+        title: "Start blabla",
+        description: " testin bla bla",
+        category: "Done",
+        heading: "Technical Task",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Low',
+        date: '',
+    },
+    {
+        id: 4,
+        title: "Funny Storys",
+        description: "THIS IS FUNNY!!",
+        category: "toDo",
+        heading: "User Story",
+        subtasks: [],
+        sub_users: [],
+        priority: 'Urgent',
+        date: '',
+    },
 ];
 
-
-function renderTaskViewer(i) {
-    let task = boardTasksDialog[i];
-    renderBoardTaskValue(task, 'type');
-    renderBoardTaskValue(task, 'title');
-    renderBoardTaskValue(task, 'description');
-    renderBoardTaskValue(task, 'due-date');
-    renderBoardTaskPriority(task);
-    renderBoardTaskMemberCollector(task);
-    renderBoardTaskSubtaskGroup(task);
+function boardInit() {
+    renderTodos();
 }
 
+function renderTodos() {
+    clearHTML();
 
-function renderBoardTaskValue(task, key) {
-    let output = getElement(`board-task-${key}`);
-    output.innerHTML = task[key];
-}
+    for (let i = 0; i < todos.length; i++) {
+        const todo = todos[i];
+        let containerId = "";
 
+        if (todo.category === "toDo") {
+            containerId = "toDo";
+        } else if (todo.category === "inProgress") {
+            containerId = "inProgress";
+        } else if (todo.category === "AwaitFeedback") {
+            containerId = "AwaitFeedback";
+        } else if (todo.category === "Done") {
+            containerId = "Done";
+        }
 
-function renderBoardTaskPriority(task) {
-    let priority = getElement('board-task-priority');
-    let priorityText = task['priority-text'];
-    let priorityImg = task['priority-img'];
-    priority.innerHTML = `
-        <div id="board-task-priority" class="dbt-priority">
-            ${priorityText}
-            <img src="${priorityImg}" alt="prio-icon">
-        </div>
-    `;
-}
-
-
-function renderBoardTaskMemberCollector(task) {
-    let memberCollector = getElement('board-task-member-collector');
-    memberCollector.innerHTML = '';
-    fillMemberCollector(task, memberCollector);
-}
-
-
-function fillMemberCollector(task, memberCollector) {
-    let members = task['members'];
-    let bgColors = task['members-bgc'];
-    memberCollector.innerHTML += `
-    <div id="board-task-members" class="dbt-collector">
-            ${renderMember(members, bgColors)}
-        </div>
-    `;
-}
-
-
-function renderMember(members, bgColors) {
-    let membersHTML = '';
-    for (let i = 0; i < members.length; i++) {
-        let member = members[i];
-        let bgColor = bgColors[i];
-        membersHTML += `
-            <div class="dbt-contact-group">
-                <div class="dbt-contact-profile dbt-${bgColor}">EM</div>
-                <div class="dbt-contact-name">${member}</div>
-            </div>
-        `;
+        createHTML(todo, containerId);
     }
-    return membersHTML;
 }
 
-
-function renderBoardTaskSubtaskGroup(task) {
-    let subtaskGroup = getElement('board-task-subtask-group');
-    fillSubtaskGroup(task, subtaskGroup);
+function clearHTML() {
+    document.getElementById("toDo").innerHTML = "";
+    document.getElementById("inProgress").innerHTML = "";
+    document.getElementById("AwaitFeedback").innerHTML = "";
+    document.getElementById("Done").innerHTML = "";
 }
 
-
-function fillSubtaskGroup(task, subtaskGroup) {
-    let subtaskStates = task['subtasks-state'];
-    let subtaskTexts = task['subtasks-text'];
-    subtaskGroup.innerHTML = `
-        ${renderSubtask(subtaskStates, subtaskTexts)}
-    `;
-}
-
-
-function renderSubtask(subtaskStates, subtaskTexts) {
-    let subtaskHTML = '';
-    for (let i = 0; i < subtaskStates.length; i++) {
-        let subtaskState = subtaskStates[i];
-        let subtaskText = subtaskTexts[i];
-        subtaskHTML += `
-            <div class="dbt-subtask-group">
-                <img class="dbt-subtask-img" src="${subtaskState}" alt="check-box">
-                <div class="dbt-subtask-text">${subtaskText}</div>
+function createHTML(todo, containerId) {
+    let toDoHtml = /*html*/ `
+    <div class="board-content" onclick="openDetails(${todo.id})"> 
+        <div class="board-body">
+            <div class="board-task-card">
+                <h3 class="btc-type ${setCategoryStyle(todo.heading)}">${todo.heading}</h3>
+                <div class="btc-group">
+                    <div class="btc-title">${todo.title}</div>
+                    <div class="btc-description">${todo.description}</div>
+                </div>
+                <div class="board-task-progress-group">
+                    <div class="board-task-max-bar">
+                        <div class="board-task-value-bar"></div>
+                    </div>
+                    <div class="board-task-progress-text">1/2 Subtasks</div>
+                </div>
+                <div class="user-priority-group">
+                    <div class="board-user-group">
+                        <div class="board-card-user bcu-orange">AM</div>
+                        <div class="board-card-user bcu-green">EM</div>
+                        <div class="board-card-user bcu-dark-blue">MB</div>
+                    </div>
+                    ${showPriority(todo)}
+                </div>
             </div>
-        `;
+        </div>
+    </div>
+    `;
+    if (containerId) {
+        document.getElementById(containerId).innerHTML += toDoHtml;
     }
-    return subtaskHTML;
+}
+
+function closeBoardOverlay(){
+    const dialog = document.querySelector('dialog');
+    if (dialog) {
+        dialog.close()
+    }
+}
+
+async function openDetails(id) {
+    const todo = todos.find(todo => todo.id === id);
+    
+    if (!todo) {
+        console.error('Todo item not found');
+        return;
+    }
+    const dialog = document.getElementById('dialog');
+    dialog.setAttribute('w3-include-html', './templates/board-overlay-blue.html');
+    
+    await includeHTML(); 
+    insertTodoDataIntoDialog(todo, dialog);
+    dialog.showModal(); 
+}
+
+function insertTodoDataIntoDialog(todo, dialog) {
+    const title = dialog.querySelector('.dbt-title'); 
+    const description = dialog.querySelector('.dbt-description');
+    const priority = dialog.querySelector('.dbt-priority');
+  
+    
+    title.innerText = todo.title;
+    description.innerText = todo.description;
+    priority.innerHTML = todo.priority + showPriority(todo) ;
+}
+
+function showPriority(todo){
+    if (todo.priority === "Urgent") {
+        return '<img src="./img/urgent-board.png"></img>'
+    } else if (todo.priority === "Medium") {
+        return '<img src="./img/medium-board.png"></img>'
+    } else if (todo.priority === "Low") {
+        return '<img src="./img/low-board.png"></img>'
+    }
+}
+
+function setCategoryStyle(heading) {
+    if (heading == "User Story") {
+        return "btc-type-blue"
+    } else if (heading == "Technical Task") {
+        return "btc-type-green"
+    }
 }
