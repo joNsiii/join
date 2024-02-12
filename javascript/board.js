@@ -183,14 +183,6 @@ function generateSubUsersHtml(subUsers) {
     return subUserNamesHtml;
 }
 
-// User Interface related
-function closeBoardOverlay() {
-    const dialog = document.querySelector("dialog");
-    if (dialog) {
-        dialog.close();
-    }
-}
-
 async function openDetails(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
 
@@ -236,22 +228,16 @@ function generateUserInitialsHtml(subUsers) {
     return userInitialsHtml;
 }
 
-
 function setupCloseDialogMechanism() {
-    const closeOverlayIMG = document.querySelector(".closeOverlayIMG");
     const dialogBoardTask = document.querySelector(".dialog-board-task");
     const dialog = document.getElementById("dialog");
 
-    if (dialog && closeOverlayIMG && dialogBoardTask) {
-        dialog.addEventListener("click", function (event) {
-            if (!dialogBoardTask.contains(event.target)) {
-                closeDialog("dialog");
-            }
-        });
+    dialog.addEventListener("click", function (event) {
+        closeDialog("dialog");
+    });
 
-        // prevent closing dialog if element itself is clicked
-        dialogBoardTask.addEventListener("click", function (event) {
-            event.stopPropagation();
-        });
-    }
+    // prevent closing dialog if element itself is clicked
+    dialogBoardTask.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
 }
