@@ -11,6 +11,11 @@ let boardTasks = [
                 subtasksText: "subtasks Text for checked unchecked",
                 isChecked: false,
             },
+            {
+                subtaskId: 1,
+                subtasksText: "adsfasdöflasdjfökasdf",
+                isChecked: false,
+            },
         ],
         sub_users: [
             {
@@ -29,7 +34,13 @@ let boardTasks = [
         description: "dont know what to do..",
         category: "inProgress",
         heading: "Technical Task",
-        subtasks: ["i do have to test this", "second subtask for testing"],
+        subtasks: [
+            {
+                subtaskId: 2,
+                subtasksText: "hallo das ist ein text ?",
+                isChecked: false,
+            },
+        ],
         sub_users: [
             {
                 userId: 0,
@@ -86,6 +97,17 @@ function boardInit() {
     renderTodos();
 }
 
+// subtaks render
+
+function renderSubTaks(subTaskData) {
+    let subtask = subTaskData.subtasks;
+
+    for (let i = 0; i < subtask.length; i++) {
+        const task = subtask[i];
+        console.log(task.subtasksText);
+    }
+}
+
 function renderTodos() {
     clearHTML();
 
@@ -104,6 +126,7 @@ function renderTodos() {
         }
 
         createHTML(task, containerId);
+        renderSubTaks(task);
     }
 }
 
