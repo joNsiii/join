@@ -156,3 +156,117 @@ function addhighlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
+
+
+
+// Bitte verschieben!!!
+let boardTasksDialog = [
+    {
+        'type': 'User Story',
+        'title': 'Kochwelt Page & Recipe Recommender',
+        'description': 'Build start page with recipe recommendation.',
+        'due-date': '10/05/2023',
+        'priority-text': 'Medium',
+        'priority-img': './img/medium-board.png',
+        'members': ['Emmanuel Mauer', 'Marcel Bauer', 'Anton Mayer'],
+        'members-bgc': ['green', 'dark-blue', 'blue'],
+        'subtasks-state': ['./img/checkmark.png', './img/checkmark-unchecked.png'],
+        'subtasks-text': ['Implement Recipe Recommendation', 'Start Page Layout']
+    }
+];
+
+
+function renderTaskViewer(i) {
+    let task = boardTasksDialog[i];
+    renderBoardTaskValue(task, 'type');
+    renderBoardTaskValue(task, 'title');
+    renderBoardTaskValue(task, 'description');
+    renderBoardTaskValue(task, 'due-date');
+    renderBoardTaskPriority(task);
+    renderBoardTaskMemberCollector(task);
+    renderBoardTaskSubtaskGroup(task);
+}
+
+
+function renderBoardTaskValue(task, key) {
+    let output = getElement(`board-task-${key}`);
+    output.innerHTML = task[key];
+}
+
+
+function renderBoardTaskPriority(task) {
+    let priority = getElement('board-task-priority');
+    let priorityText = task['priority-text'];
+    let priorityImg = task['priority-img'];
+    priority.innerHTML = `
+        <div id="board-task-priority" class="dbt-priority">
+            ${priorityText}
+            <img src="${priorityImg}" alt="prio-icon">
+        </div>
+    `;
+}
+
+
+function renderBoardTaskMemberCollector(task) {
+    let memberCollector = getElement('board-task-member-collector');
+    memberCollector.innerHTML = '';
+    fillMemberCollector(task, memberCollector);
+}
+
+
+function fillMemberCollector(task, memberCollector) {
+    let members = task['members'];
+    let bgColors = task['members-bgc'];
+    memberCollector.innerHTML += `
+    <div id="board-task-members" class="dbt-collector">
+            ${renderMember(members, bgColors)}
+        </div>
+    `;
+}
+
+
+function renderMember(members, bgColors) {
+    let membersHTML = '';
+    for (let i = 0; i < members.length; i++) {
+        let member = members[i];
+        let bgColor = bgColors[i];
+        membersHTML += `
+            <div class="dbt-contact-group">
+                <div class="dbt-contact-profile dbt-${bgColor}">EM</div>
+                <div class="dbt-contact-name">${member}</div>
+            </div>
+        `;
+    }
+    return membersHTML;
+}
+
+
+function renderBoardTaskSubtaskGroup(task) {
+    let subtaskGroup = getElement('board-task-subtask-group');
+    fillSubtaskGroup(task, subtaskGroup);
+}
+
+
+function fillSubtaskGroup(task, subtaskGroup) {
+    let subtaskStates = task['subtasks-state'];
+    let subtaskTexts = task['subtasks-text'];
+    subtaskGroup.innerHTML = `
+        ${renderSubtask(subtaskStates, subtaskTexts)}
+    `;
+}
+
+
+function renderSubtask(subtaskStates, subtaskTexts) {
+    let subtaskHTML = '';
+    for (let i = 0; i < subtaskStates.length; i++) {
+        let subtaskState = subtaskStates[i];
+        let subtaskText = subtaskTexts[i];
+        subtaskHTML += `
+            <div class="dbt-subtask-group">
+                <img class="dbt-subtask-img" src="${subtaskState}" alt="check-box">
+                <div class="dbt-subtask-text">${subtaskText}</div>
+            </div>
+        `;
+    }
+    return subtaskHTML;
+}
