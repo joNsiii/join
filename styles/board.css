@@ -175,6 +175,7 @@ dialog[open] {
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
+    min-height: 200px;
 }
 
 .board-no-task {
@@ -352,3 +353,18 @@ dialog[open] {
 .bcu-blue-green {
     background-color: #00BEE8;
 }
+
+@media (max-width: 870px) {
+    .board-content {
+        flex-direction: column;
+    }
+    .board-body {
+        flex-direction: row;
+    }
+}
+/* @media (max-width: 550px) {
+
+    .board-body {
+        flex-direction: row;
+    }
+} */
