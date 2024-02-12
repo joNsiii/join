@@ -7,6 +7,7 @@
 // });
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let subtaskInput = [];
 
 function scopeTasks() {
   let title = document.getElementById("title-task").value;
@@ -19,13 +20,12 @@ function scopeTasks() {
   var h = document.getElementById("category");
   let category = h.options[h.selectedIndex].text;
 
-  let subtaskInputs = document.getElementById("subtask").value;
-  let subtasks = [];
+  // let subTask = document.getElementById('sub-content').innerHTML;
 
-  for (let i = 0; i < subtaskInputs.length; i++) {
-    const input = subtaskInputs[i];
-    subtasks.push(input);
-  }
+  // for (let i = 0; i < subtaskInputs.length; i++) {
+  //   const input = subtaskInputs[i];
+  //   subtasks.push(input);
+  // }
 
   const userID = {
     id: [
@@ -34,8 +34,8 @@ function scopeTasks() {
         description: description,
         category: category,
         assignedTo: assignedTo,
-        subTask: subtasks,
-        priority: "Medium",
+        subTask: subtaskInput,
+        priority: priority,
         dueDate: dueDate,
       },
     ],
@@ -101,9 +101,10 @@ function cancelSubtask() {
 
 function addSubtask() {
   let subtaskAdd = document.getElementById("subtask-display");
+  subtaskInput = document.getElementById('subtask').value;
   subtaskAdd.innerHTML += `
   <div class="subtask-container">
-    <div id="taskList" class="subtask-selector">Contact Form</div>
+    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInput}</p></div>
   </div>
   `;
 
@@ -116,26 +117,28 @@ function prioSelection(clickedPrio) {
   let mediumImg= document.getElementById('medium-img');
   let urgentImg= document.getElementById('urgent-img');
 
-  document.getElementById('prio1').classList.remove('prioUrgent');
-  document.getElementById('prio2').classList.remove('prioMedium');
-  document.getElementById('prio3').classList.remove('prioLow');
+  document.getElementById('Urgent').classList.remove('prioUrgent');
+  document.getElementById('Medium').classList.remove('prioMedium');
+  document.getElementById('Low').classList.remove('prioLow');
 
   lowImg.src = './img/low.png';
   mediumImg.src = './img/medium-prio.png';
   urgentImg.src = './img/urgent-red-arrows.png';
 
-    if (prio.id === 'prio1') {
+    if (prio.id === 'Urgent') {
       prio.classList.add('prioUrgent')
       urgentImg.src = './img/urgent-white-arrows.png'
     }
 
-    else if (prio.id === 'prio2') {
+    else if (prio.id === 'Medium') {
       prio.classList.add('prioMedium')
       mediumImg.src = './img/medium.png'
     }
 
-    else if (prio.id === 'prio3') {
+    else if (prio.id === 'Low') {
       prio.classList.add('prioLow')
       lowImg.src = './img/low-white-arrows.png'
     }
+
+    priority = prio.id;
 }
