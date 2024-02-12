@@ -8,7 +8,7 @@ async function init() {
     await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
-    loadUserData();
+    loadUserData()
 }
 
 async function loadUsers() {

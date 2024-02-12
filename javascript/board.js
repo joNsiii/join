@@ -1,9 +1,10 @@
+let currentDraggedElement;
 let boardTasks = [
     {
         taskId: 0,
         title: "Start with JS",
         description: "create reusable HTML base templates...",
-        category: "toDo",
+        category: "toDos",
         heading: "Technical Task",
         subtasks: [
             {
@@ -62,7 +63,7 @@ let boardTasks = [
         taskId: 2,
         title: "S234524",
         description: "adsöfljasödfasdf",
-        category: "AwaitFeedback",
+        category: "awaitFeedback",
         heading: "User Story",
         subtasks: [],
         sub_users: [],
@@ -73,7 +74,7 @@ let boardTasks = [
         taskId: 3,
         title: "Start blabla",
         description: " testin bla bla",
-        category: "Done",
+        category: "done",
         heading: "Technical Task",
         subtasks: [],
         sub_users: [],
@@ -84,7 +85,7 @@ let boardTasks = [
         taskId: 4,
         title: "Funny Storys",
         description: "THIS IS FUNNY!!",
-        category: "toDo",
+        category: "toDos",
         heading: "User Story",
         subtasks: [],
         sub_users: [],
@@ -94,12 +95,12 @@ let boardTasks = [
 ];
 
 function boardInit() {
-    renderTodos();
+    renderEachTask();
 }
 
 // subtaks render
 
-function renderSubTaks(subTaskData) {
+function renderSubTask(subTaskData) {
     let subtask = subTaskData.subtasks;
 
     for (let i = 0; i < subtask.length; i++) {
@@ -108,33 +109,33 @@ function renderSubTaks(subTaskData) {
     }
 }
 
-function renderTodos() {
+function renderEachTask() {
     clearHTML();
 
     for (let i = 0; i < boardTasks.length; i++) {
         const task = boardTasks[i];
         let containerId = "";
 
-        if (task.category === "toDo") {
+        if (task.category === "toDos") {
             containerId = "toDo";
         } else if (task.category === "inProgress") {
             containerId = "inProgress";
-        } else if (task.category === "AwaitFeedback") {
-            containerId = "AwaitFeedback";
-        } else if (task.category === "Done") {
-            containerId = "Done";
+        } else if (task.category === "awaitFeedback") {
+            containerId = "awaitFeedback";
+        } else if (task.category === "done") {
+            containerId = "done";
         }
 
         createHTML(task, containerId);
-        renderSubTaks(task);
+        renderSubTask(task);
     }
 }
 
 function clearHTML() {
     document.getElementById("toDo").innerHTML = "";
     document.getElementById("inProgress").innerHTML = "";
-    document.getElementById("AwaitFeedback").innerHTML = "";
-    document.getElementById("Done").innerHTML = "";
+    document.getElementById("awaitFeedback").innerHTML = "";
+    document.getElementById("done").innerHTML = "";
 }
 
 function createHTML(task, containerId) {
@@ -263,4 +264,15 @@ function setupCloseDialogMechanism() {
     dialogBoardTask.addEventListener("click", function (event) {
         event.stopPropagation();
     });
+}
+
+
+// drag n drop
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    boardTasks[currentDraggedElement]["category"] = category;
+    renderEachTask();
 }
