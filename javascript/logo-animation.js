@@ -1,4 +1,4 @@
-function renderLogin() {
+function loadLogoAnimation() {
     const logo = document.querySelector('.joinLogo');
     const startup = document.querySelector('.startup');
 
