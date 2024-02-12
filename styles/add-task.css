@@ -337,3 +337,21 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+.prioUrgent {
+    background-color: #FF3D00;
+    font-weight: 700;
+    color: white;
+}
+
+.prioMedium {
+    background-color: #FFA800;
+    font-weight: 700;
+    color: white;
+}
+
+.prioLow {
+    background-color: #7AE229;
+    font-weight: 700;
+    color: white;
+}

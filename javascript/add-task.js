@@ -11,7 +11,7 @@ const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
-  // let dueDate = document.getElementById('date"').value;
+  let dueDate = document.getElementById('date date-task').value;
 
   var e = document.getElementById("assign-task");
   let assignedTo = e.options[e.selectedIndex].text;
@@ -36,7 +36,7 @@ function scopeTasks() {
         assignedTo: assignedTo,
         subTask: subtasks,
         priority: "Medium",
-        dueDate: "XX:XX:XX",
+        dueDate: dueDate,
       },
     ],
   };
@@ -103,9 +103,39 @@ function addSubtask() {
   let subtaskAdd = document.getElementById("subtask-display");
   subtaskAdd.innerHTML += `
   <div class="subtask-container">
-    <div id="taskList">Contact Form</div>
+    <div id="taskList" class="subtask-selector">Contact Form</div>
   </div>
   `;
 
   cancelSubtask()
 };
+
+function prioSelection(clickedPrio) {
+  let prio = clickedPrio;
+  let lowImg= document.getElementById('low-img');
+  let mediumImg= document.getElementById('medium-img');
+  let urgentImg= document.getElementById('urgent-img');
+
+  document.getElementById('prio1').classList.remove('prioUrgent');
+  document.getElementById('prio2').classList.remove('prioMedium');
+  document.getElementById('prio3').classList.remove('prioLow');
+
+  lowImg.src = './img/low.png';
+  mediumImg.src = './img/medium-prio.png';
+  urgentImg.src = './img/urgent-red-arrows.png';
+
+    if (prio.id === 'prio1') {
+      prio.classList.add('prioUrgent')
+      urgentImg.src = './img/urgent-white-arrows.png'
+    }
+
+    else if (prio.id === 'prio2') {
+      prio.classList.add('prioMedium')
+      mediumImg.src = './img/medium.png'
+    }
+
+    else if (prio.id === 'prio3') {
+      prio.classList.add('prioLow')
+      lowImg.src = './img/low-white-arrows.png'
+    }
+}
