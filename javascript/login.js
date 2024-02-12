@@ -1,3 +1,28 @@
+/**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get('msg');
+if (msg) {
+    msgPopup.innerHTML = msg;
+    setTimeout(() => {
+        msgPopup.classList.add('d-none');
+    }, "6000");
+
+}
+
+function checkLogin() {
+    let email = document.getElementById('email-field').value.toLowerCase();
+    let password = document.getElementById('password-type').value;
+    
+    let loggedInUser = users.find(u => email === u.email && password === u.password);
+    if (loggedInUser) {
+        console.log('Login successfully');
+        sessionStorage.setItem('session_token', loggedInUser.id);
+        window.location.href = 'summary.html';
+    } else {
+        console.log('Login failed. Incorrect email or password.');
+    }
+}
+
 document.getElementById('password-type').addEventListener('input', togglePassword);
 
 function togglePassword() {
@@ -54,28 +79,3 @@ function login() {
     }
 }
 
-/**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
-const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get('msg');
-if (msg) {
-    msgPopup.innerHTML = msg;
-    setTimeout(() => {
-        msgPopup.classList.add('d-none');
-    }, "6000");
-
-}
-
-
-function checkLogin() {
-    let email = document.getElementById('email-field').value.toLowerCase();
-    let password = document.getElementById('password-type').value;
-    
-    let loggedInUser = users.find(u => email === u.email && password === u.password);
-    if (loggedInUser) {
-        console.log('Login successfully');
-        sessionStorage.setItem('session_token', loggedInUser.id);
-        window.location.href = 'summary.html';
-    } else {
-        console.log('Login failed. Incorrect email or password.');
-    }
-}
