@@ -1,102 +1,154 @@
-let todos = [
+let currentDraggedElement;
+let boardTasks = [
     {
-        id: 0,
+        taskId: 0,
         title: "Start with JS",
         description: "create reusable HTML base templates...",
-        category: "toDo",
+        category: "toDos",
         heading: "Technical Task",
-        subtasks: [],
-        sub_users: [],
-        priority: 'Medium',
-        date: '',
+        subtasks: [
+            {
+                subtaskId: 0,
+                subtasksText: "subtasks Text for checked unchecked",
+                isChecked: false,
+            },
+            {
+                subtaskId: 1,
+                subtasksText: "adsfasdöflasdjfökasdf",
+                isChecked: false,
+            },
+        ],
+        sub_users: [
+            {
+                userId: 0,
+                userFirstname: "Anton",
+                userSurname: "Müller",
+                userBackgroundColor: "green",
+            },
+        ],
+        priority: "Medium",
+        date: "15/02/2024",
     },
     {
-        id: 1,
+        taskId: 1,
         title: "What ? ",
         description: "dont know what to do..",
         category: "inProgress",
         heading: "Technical Task",
-        subtasks: ["i do have to test this", "second subtask for testing"],
-        sub_users: [],
-        priority: 'Medium',
-        date: '',
+        subtasks: [
+            {
+                subtaskId: 2,
+                subtasksText: "hallo das ist ein text ?",
+                isChecked: false,
+            },
+        ],
+        sub_users: [
+            {
+                userId: 0,
+                userFirstname: "Anton",
+                userSurname: "Müller",
+                userBackgroundColor: "green",
+            },
+            {
+                userId: 1,
+                userFirstname: "Oumout",
+                userSurname: "Resit",
+                userBackgroundColor: "blue",
+            },
+        ],
+        priority: "Medium",
+        date: "09/08/2023",
     },
     {
-        id: 2,
+        taskId: 2,
         title: "S234524",
         description: "adsöfljasödfasdf",
-        category: "AwaitFeedback",
+        category: "awaitFeedback",
         heading: "User Story",
         subtasks: [],
         sub_users: [],
-        priority: 'Urgent',
-        date: '',
+        priority: "Urgent",
+        date: "25/02/2023",
     },
     {
-        id: 3,
+        taskId: 3,
         title: "Start blabla",
         description: " testin bla bla",
-        category: "Done",
+        category: "done",
         heading: "Technical Task",
         subtasks: [],
         sub_users: [],
-        priority: 'Low',
-        date: '',
+        priority: "Low",
+        date: "15/05/2023",
     },
     {
-        id: 4,
+        taskId: 4,
         title: "Funny Storys",
         description: "THIS IS FUNNY!!",
-        category: "toDo",
+        category: "toDos",
         heading: "User Story",
         subtasks: [],
         sub_users: [],
-        priority: 'Urgent',
-        date: '',
+        priority: "Urgent",
+        date: "26/11/2023",
     },
 ];
 
 function boardInit() {
-    renderTodos();
+    renderEachTask();
 }
 
-function renderTodos() {
+// subtaks render
+
+function renderSubTask(subTaskData) {
+    let subtask = subTaskData.subtasks;
+
+    for (let i = 0; i < subtask.length; i++) {
+        const task = subtask[i];
+        console.log(task.subtasksText);
+    }
+}
+
+function renderEachTask() {
     clearHTML();
 
-    for (let i = 0; i < todos.length; i++) {
-        const todo = todos[i];
+    for (let i = 0; i < boardTasks.length; i++) {
+        const task = boardTasks[i];
         let containerId = "";
 
-        if (todo.category === "toDo") {
+        if (task.category === "toDos") {
             containerId = "toDo";
-        } else if (todo.category === "inProgress") {
+        } else if (task.category === "inProgress") {
             containerId = "inProgress";
-        } else if (todo.category === "AwaitFeedback") {
-            containerId = "AwaitFeedback";
-        } else if (todo.category === "Done") {
-            containerId = "Done";
+        } else if (task.category === "awaitFeedback") {
+            containerId = "awaitFeedback";
+        } else if (task.category === "done") {
+            containerId = "done";
         }
 
-        createHTML(todo, containerId);
+        createHTML(task, containerId);
+        renderSubTask(task);
     }
 }
 
 function clearHTML() {
     document.getElementById("toDo").innerHTML = "";
     document.getElementById("inProgress").innerHTML = "";
-    document.getElementById("AwaitFeedback").innerHTML = "";
-    document.getElementById("Done").innerHTML = "";
+    document.getElementById("awaitFeedback").innerHTML = "";
+    document.getElementById("done").innerHTML = "";
 }
 
-function createHTML(todo, containerId) {
+function createHTML(task, containerId) {
+    let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
+
     let toDoHtml = /*html*/ `
-    <div class="board-content" onclick="openDetails(${todo.id})"> 
+    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
         <div class="board-body">
             <div class="board-task-card">
-                <h3 class="btc-type ${setCategoryStyle(todo.heading)}">${todo.heading}</h3>
+                <h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}</h3>
                 <div class="btc-group">
-                    <div class="btc-title">${todo.title}</div>
-                    <div class="btc-description">${todo.description}</div>
+                    <div class="btc-title">${task.title}</div>
+                    <div class="btc-description">${task.description}</div>
                 </div>
                 <div class="board-task-progress-group">
                     <div class="board-task-max-bar">
@@ -106,11 +158,9 @@ function createHTML(todo, containerId) {
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
-                        <div class="board-card-user bcu-orange">AM</div>
-                        <div class="board-card-user bcu-green">EM</div>
-                        <div class="board-card-user bcu-dark-blue">MB</div>
+                        ${userInitialsHtml}
                     </div>
-                    ${showPriority(todo)}
+                    ${showPriority(task)}
                 </div>
             </div>
         </div>
@@ -121,53 +171,112 @@ function createHTML(todo, containerId) {
     }
 }
 
-function closeBoardOverlay(){
-    const dialog = document.querySelector('dialog');
-    if (dialog) {
-        dialog.close()
-    }
+// overlay html
+function insertTodoDataIntoDialog(task, dialog) {
+    const title = dialog.querySelector(".dbt-title");
+    const description = dialog.querySelector(".dbt-description");
+    const priority = dialog.querySelector(".dbt-priority");
+    const date = dialog.querySelector(".dbt-date");
+    const subtask = dialog.querySelector(".dbt-collector");
+    const subUsersNames = generateSubUsersHtml(task.sub_users);
+
+    title.innerText = task.title;
+    description.innerText = task.description;
+    priority.innerHTML = task.priority + showPriority(task);
+    date.innerHTML = task.date;
+    subtask.innerHTML = subUsersNames;
 }
 
-async function openDetails(id) {
-    const todo = todos.find(todo => todo.id === id);
-    
-    if (!todo) {
-        console.error('Todo item not found');
+function generateSubUsersHtml(subUsers) {
+    let subUserNamesHtml = "";
+
+    if (subUsers && subUsers.length > 0) {
+        subUsers.forEach((user) => {
+            const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
+            const fullName = `${user.userFirstname} ${user.userSurname}`;
+            subUserNamesHtml += /*html*/ `
+                <div class="dbt-contact-group">
+                        <div class="dbt-contact-profile dbt-${user.userBackgroundColor}">${initials}</div>
+                        <div class="dbt-contact-name">${fullName}</div>
+                </div>
+            `;
+        });
+    } else {
+        subUserNamesHtml = '<div class="dbt-contact-name">No users assigned</div>';
+    }
+    return subUserNamesHtml;
+}
+
+async function openDetails(taskId) {
+    const task = boardTasks.find((task) => task.taskId === taskId);
+
+    if (!task) {
+        console.error("Todo item not found");
         return;
     }
-    const dialog = document.getElementById('dialog');
-    dialog.setAttribute('w3-include-html', './templates/board-overlay-blue.html');
-    
-    await includeHTML(); 
-    insertTodoDataIntoDialog(todo, dialog);
-    dialog.showModal(); 
+    const dialog = document.getElementById("dialog");
+    dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
+
+    await includeHTML();
+    insertTodoDataIntoDialog(task, dialog);
+    dialog.showModal();
+
+    setupCloseDialogMechanism();
 }
 
-function insertTodoDataIntoDialog(todo, dialog) {
-    const title = dialog.querySelector('.dbt-title'); 
-    const description = dialog.querySelector('.dbt-description');
-    const priority = dialog.querySelector('.dbt-priority');
-  
-    
-    title.innerText = todo.title;
-    description.innerText = todo.description;
-    priority.innerHTML = todo.priority + showPriority(todo) ;
-}
-
-function showPriority(todo){
-    if (todo.priority === "Urgent") {
-        return '<img src="./img/urgent-board.png"></img>'
-    } else if (todo.priority === "Medium") {
-        return '<img src="./img/medium-board.png"></img>'
-    } else if (todo.priority === "Low") {
-        return '<img src="./img/low-board.png"></img>'
+// Help functions
+function showPriority(task) {
+    if (task.priority === "Urgent") {
+        return '<img src="./img/urgent-board.png"></img>';
+    } else if (task.priority === "Medium") {
+        return '<img src="./img/medium-board.png"></img>';
+    } else if (task.priority === "Low") {
+        return '<img src="./img/low-board.png"></img>';
     }
 }
 
 function setCategoryStyle(heading) {
     if (heading == "User Story") {
-        return "btc-type-blue"
+        return "btc-type-blue";
     } else if (heading == "Technical Task") {
-        return "btc-type-green"
+        return "btc-type-green";
     }
+}
+
+function generateUserInitialsHtml(subUsers) {
+    let userInitialsHtml = "";
+    for (let user of subUsers) {
+        const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
+        userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
+    }
+    return userInitialsHtml;
+}
+
+function setupCloseDialogMechanism() {
+    const dialogBoardTask = document.querySelector(".dialog-board-task");
+    const dialog = document.getElementById("dialog");
+
+    dialog.addEventListener("click", function (event) {
+        closeDialog("dialog");
+    });
+
+    // prevent closing dialog if element itself is clicked
+    dialogBoardTask.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+}
+
+// drag n drop
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    boardTasks[currentDraggedElement]["category"] = category;
+    renderEachTask();
+}
+
+function startDragging(id) {
+    console.log('start dragging')
+    currentDraggedElement = id;
 }
