@@ -31,7 +31,7 @@
     <dialog id="dialog-edit-contact" class="dialog" w3-include-html="./templates/edit-contact-form.html"
         onclick="closeDialog(id)"></dialog>
 
-    <div w3-include-html="templates/templates.html"></div>
+    <div w3-include-html="./templates/templates.html"></div>
 
     <main class="content">
         <div class="content-row">
@@ -40,8 +40,8 @@
                     <div class="contacts-header">
                         <button id="add-contact-button" class="add-contact-button"
                             onclick="openDialog('dialog-add-contact')">
-                            <div class="acb-text">Add new contact</div>
-                            <img class="acb-img" src="./img/add-contact.png" alt="add-contact">
+                            <div class="add-contact-text">Add new contact</div>
+                            <img class="add-contact-img" src="./img/add-contact.png" alt="add-contact">
                         </button>
                     </div>
                     <div id="contacts-collector" class="contacts-collector">
@@ -51,7 +51,7 @@
 
                 <button id="add-contact-button-mobile" class="add-contact-button-mobile"
                     onclick="openDialog('dialog-add-contact')">
-                    <img class="acb-mobile-img" src="./img/add-contact.png" alt="add-contact">
+                    <img class="add-contact-img-mobile" src="./img/add-contact.png" alt="add-contact">
                 </button>
             </section>
 
@@ -69,27 +69,25 @@
                             <div id="contact-user-name" class="contact-user-name">Anton Mayer</div>
                             <div class="contact-user-button-group">
                                 <button id="edit-contact-button" class="contact-user-button">
-                                    <img src="./img/edit-contacts.png" alt="edit-contacts">
-                                    Edit
+                                    <img class="contact-button-img" src="./img/edit-contacts.png" alt="edit-contacts">
+                                    <div class="contact-button-text">Edit</div>
                                 </button>
                                 <button id="delete-contact-button" class="contact-user-button">
-                                    <img class="cub-img" src="./img/delete.png" alt="delete">
-                                    Delete
+                                    <img class="contact-button-img" src="./img/delete.png" alt="delete">
+                                    <div class="contact-button-text">Delete</div>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="contact-user-info">
-                        Contact Information
-                    </div>
+                    <div class="contact-user-info">Contact Information</div>
                     <div class="contact-user-detail-group">
                         <div class="contact-user-detail">
-                            <div class="cud-title">Email</div>
-                            <a id="contact-user-mail" class="cud-mail">anton@gmail.com</a>
+                            <div class="user-detail-title">Email</div>
+                            <a id="contact-user-mail" class="user-detail-mail">anton@gmail.com</a>
                         </div>
                         <div class="contact-user-detail">
-                            <div class="cud-title">Phone</div>
-                            <a id="contact-user-phone" class="cud-phone">+ 49 1111 111 11 1</a>
+                            <div class="user-detail-title">Phone</div>
+                            <a id="contact-user-phone" class="user-detail-phone">+ 49 1111 111 11 1</a>
                         </div>
                     </div>
                 </div>
