@@ -134,6 +134,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -20px;
 }
 
 .policy {
@@ -227,6 +228,12 @@ body {
 
 .bad-outline {
     border: 1px solid #FF001F;
+    transition: all 0.25s ease-in-out;
+}
+
+.good-outline {
+    border: 1px solid green;
+    transition: all 0.25s ease-in-out;
 }
 
 .d-none {
@@ -248,4 +255,14 @@ body {
 img[src*="./img/lock.png"] {
     width: auto;
     height: auto;
+}
+
+.no-match {
+    margin: 0;
+    height: 20px;
+    width: fit-content;
+}
+
+#password-input2 {
+    margin-bottom: 16px;
 }
