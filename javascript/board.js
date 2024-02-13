@@ -138,11 +138,11 @@ function clearHTML() {
     document.getElementById("done").innerHTML = "";
 }
 
-function createHTML(task, containerId) {
+function createHTML(task, containerId, returnHtml = false) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
 
-    let toDoHtml = /*html*/ `
-    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
+    let taskHtml = /*html*/ `
+    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}</h3>
@@ -164,10 +164,14 @@ function createHTML(task, containerId) {
                 </div>
             </div>
         </div>
-    </div>
-    `;
-    if (containerId) {
-        document.getElementById(containerId).innerHTML += toDoHtml;
+    </div>`;
+
+    if (returnHtml) {
+        return taskHtml;
+    } else {
+        if (containerId) {
+            document.getElementById(containerId).innerHTML += taskHtml;
+        }
     }
 }
 
@@ -265,106 +269,58 @@ function setupCloseDialogMechanism() {
     });
 }
 
-
 function startDragging(id) {
-    console.log(`start dragging ${id}`)
+    console.log(`start dragging ${id}`);
     currentDraggedElement = id;
 }
-
 
 function allowDrop(event) {
     event.preventDefault();
 }
 
 function moveTo(category) {
-    const categories = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
-    categories.forEach(cat => {
+    const categories = ["toDo", "inProgress", "awaitFeedback", "done"];
+    categories.forEach((cat) => {
         const element = document.getElementById(cat);
-        if (element.classList.contains('highlight')) {
-            element.classList.remove('highlight');
+        if (element.classList.contains("highlight")) {
+            element.classList.remove("highlight");
         }
     });
     boardTasks[currentDraggedElement]["category"] = category;
     renderEachTask();
 }
 
-// function highlight(event, category) {
-//     event.preventDefault();
-//     const categoryElement = document.getElementById(category);
-//     if (!categoryElement.querySelector('.highlight-placeholder')) {
-//         const element = document.createElement('div');
-//         element.className = 'highlight-placeholder';
-//         categoryElement.appendChild(element);
-//     }
-// }
+function highlight(event, category) {
+    event.preventDefault();
+    const categoryElement = document.getElementById(category);
+    let highlightElement = categoryElement.querySelector(".highlight-placeholder");
+
+    if (!highlightElement) {
+        highlightElement = document.createElement("div");
+        highlightElement.className = "highlight-placeholder";
+        categoryElement.appendChild(highlightElement);
+    }
+    const draggedElementHtml = getDraggedElementData();
+    highlightElement.innerHTML = draggedElementHtml;
+}
 
 function removeHighlight(event, category) {
     setTimeout(() => {
         const categoryElement = document.getElementById(category);
         if (!categoryElement.contains(event.relatedTarget)) {
-            const existingHighlight = categoryElement.querySelector('.highlight-placeholder');
-                existingHighlight.remove();
+            const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+            existingHighlight.remove();
         }
     }, 100);
 }
 
-
-
-
-
-function highlight(event, category) {
-    event.preventDefault();
-    const categoryElement = document.getElementById(category);
-    let highlightElement = categoryElement.querySelector('.highlight-placeholder');
-
-    // Erstelle das Highlight-Element, falls es nicht existiert
-    if (!highlightElement) {
-        highlightElement = document.createElement('div');
-        highlightElement.className = 'highlight-placeholder';
-        categoryElement.appendChild(highlightElement);
-    }
-    
-    // Hier fügen wir die Daten des gezogenen Elements hinzu
-    // Angenommen, `getDraggedElementData` ist eine Funktion, die die Daten des gezogenen Elements zurückgibt
-    const draggedElementData = getDraggedElementData(); // Diese Funktion musst du entsprechend deiner Logik implementieren
-    
-    // Setze oder aktualisiere den Inhalt des Highlight-Elements mit den Daten des gezogenen Elements
-    // Du kannst hier HTML-Inhalt einfügen oder Text basierend auf `draggedElementData`
-    highlightElement.innerHTML = draggedElementData; // Beispiel, wie du Daten setzen könntest
-}
-
-
 function getDraggedElementData() {
-    const task = boardTasks.find(t => t.taskId === currentDraggedElement);
+    const task = boardTasks.find((t) => t.taskId === currentDraggedElement);
     if (!task) {
-        console.error('Dragged element not found');
-        return '';
+        console.error("Dragged element not found");
+        return "";
     }
-
-    // Verwende board-body und board-task-card Klassen für die Highlight-Anzeige
-    const dataHtml = `
-        <div class="board-body highlight-placeholder"> <!-- highlight-placeholder für spezifische Anpassungen -->
-            <div class="board-task-card">
-                <h3 class="btc-type ${setCategoryStyle(task.heading)}"">${task.heading}</h3>
-                <div class="btc-group">
-                    <div class="btc-title">${task.title}</div>
-                    <div class="btc-description">${task.description}</div>
-                </div>
-                <div class="board-task-progress-group">
-                    <div class="board-task-max-bar">
-                        <div class="board-task-value-bar"></div>
-                    </div>
-                    <div class="board-task-progress-text">1/2 Subtasks</div>
-                </div>
-                <div class="user-priority-group">
-                    <div class="board-user-group">
-                        ${generateUserInitialsHtml(task.sub_users)}
-                    </div>
-                    <div>${showPriority(task)}</div>
-                </div>
-            </div>
-        </div>
-    `;
-    return dataHtml;
+    // use createHTML with boolean true to get the html for rendering of the dragged element
+    const taskHtml = createHTML(task, null, true);
+    return taskHtml;
 }
-
