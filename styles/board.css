@@ -368,3 +368,7 @@ dialog[open] {
         flex-direction: row;
     }
 } */
+.highlight {
+    border: 2px dashed #ffa500;
+    background-color: rgb(188, 189, 188);
+}

@@ -142,7 +142,7 @@ function createHTML(task, containerId) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
 
     let toDoHtml = /*html*/ `
-    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
+    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" id="task-${task.taskId}" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}</h3>
@@ -274,9 +274,24 @@ function allowDrop(ev) {
 function moveTo(category) {
     boardTasks[currentDraggedElement]["category"] = category;
     renderEachTask();
+    removeHighlights();
 }
 
 function startDragging(id) {
     console.log(`start dragging ${id}`)
     currentDraggedElement = id;
+    console.log(`versuch highlight task-${id}`)
+    highlight(`task-${id}`)
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('highlight');
+}
+
+function noHighlight(id) {
+    document.getElementById(id).classList.remove('highlight');
+}
+
+function removeHighlights() {
+    ['toDo', 'inProgress', 'awaitFeedback', 'done'].forEach(noHighlight);
 }
