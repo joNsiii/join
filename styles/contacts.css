@@ -54,7 +54,7 @@
     gap: 16px;
 }
 
-.acb-text {
+.add-contact-text {
     width: 175px;
     height: 25px;
     font-family: 'Inter', sans-serif;
@@ -64,7 +64,7 @@
     color: #FFFFFF;
 }
 
-.acb-img {
+.add-contact-img {
     width: 32px;
     height: 32px;
     object-fit: cover;
@@ -103,6 +103,10 @@
 }
 
 .contacts-contact:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.contacts-contact-active {
     color: #FFFFFF;
     background-color: #2A3647;
     border-radius: 10px;
@@ -228,7 +232,7 @@
     gap: 21px;
 }
 
-.cu-enabled {
+.contact-user-enabled {
     display: flex;
 }
 
@@ -278,11 +282,6 @@
 
 .contact-user-button {
     padding: 0;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    color: #2A3647;
     border: unset;
     background-color: transparent;
     display: flex;
@@ -291,7 +290,16 @@
     gap: 8px;
 }
 
-.cub-img {
+.contact-button-text {
+    height: 19px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
+}
+
+.contact-button-img {
     width: 24px;
     height: 24px;
     object-fit: cover;
@@ -322,14 +330,14 @@
     gap: 15px;
 }
 
-.cud-title {
+.user-detail-title {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
 }
 
-.cud-mail {
+.user-detail-mail {
     width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -339,7 +347,7 @@
     color: #007CEE;
 }
 
-.cud-phone {
+.user-detail-phone {
     width: fit-content;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -363,9 +371,21 @@
     bottom: 32px;
 }
 
-.acb-mobile-img {
+.add-contact-img-mobile {
     width: 32px;
     height: 32px;
     object-fit: cover;
     object-position: center;
 }
+
+
+/* Check contacts.js */
+/* ids anpassen */
+/* hover + acitve classes + animation hinzufuegen */
+/* contact classes pruefen */
+
+/* bgcUser + bgcHex zusammenfassen */
+/* resetCounter */
+/* addInlineInitials() */
+
+/* Check forms */
