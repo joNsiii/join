@@ -64,7 +64,8 @@ function getInputValue(id) {
 
 function deleteContact(j) {
     contactSample.splice(j, 1);
-    setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
+    showUserInfo(false);
+    // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
     sortContactsByName(contactSample);
     collectInitials(contactSample);
@@ -83,7 +84,8 @@ function openContactSettingsMobile(j) {
 
 function closeContactViewerMobile() {
     setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
-    setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
+    showUserInfo(false);
+    // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
 }
 
