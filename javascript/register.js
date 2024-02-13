@@ -42,7 +42,7 @@ function checkPassword() {
     }
 }
 
-var passwordValidation = function() {
+    function passwordValidation() {
 
     let passwordOutline1 = document.getElementById('password-parent');
     let passwordOutline2 = document.getElementById('password-input2');
