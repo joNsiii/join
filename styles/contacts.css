@@ -109,7 +109,7 @@
 }
 
 .contacts-contact:hover {
-    background: linear-gradient(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.08));
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
 .contacts-contact-active {
@@ -284,11 +284,6 @@
     cursor: pointer;
 }
 
-
-.contact-user-button:hover {
-    color: #29ABE2;
-}
-
 .contact-button-text {
     height: 19px;
     font-family: 'Inter', sans-serif;
@@ -296,6 +291,11 @@
     font-weight: 400;
     line-height: 19.2px;
     color: #2A3647;
+}
+
+.contact-user-button:hover .contact-button-text {
+    font-weight: 700;
+    color: #29ABE2;
 }
 
 .contact-button-img {
@@ -376,6 +376,11 @@
     position: absolute;
     right: 16px;
     bottom: 32px;
+    outline: none;
+}
+
+.add-contact-button-mobile:hover {
+    background-color: #29ABE2;
 }
 
 .add-contact-img-mobile {

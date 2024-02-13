@@ -32,14 +32,18 @@
     </div>
 
     <dialog id="dialog-contact-settings" class="dialog-contact-settings"
-        onmouseleave="closeDialog('contact-settings-dialog')">
-        <button id="edit-contact-button-mobile" class="contact-settings-button">
-            <img src="./img/edit-contacts.png" alt="edit-contacts">
-            Edit
+        onmouseleave="closeDialog('dialog-contact-settings')">
+        <button id="edit-contact-button-mobile" class="contact-settings-button"
+            onmouseover="showImg('edit-contact-img-mobile', 'edit-contacts-blue')"
+            onmouseleave="showImg('edit-contact-img-mobile', 'edit-contacts')">
+            <img id="edit-contact-img-mobile" src="./img/edit-contacts.png" alt="edit-contacts">
+            <div class="contact-settings-button-text">Edit</div>
         </button>
-        <button id="delete-contact-button-mobile" class="contact-settings-button">
-            <img src="./img/delete.png" alt="delete">
-            Delete
+        <button id="delete-contact-button-mobile" class="contact-settings-button"
+            onmouseover="showImg('delete-contact-img-mobile', 'delete-blue')"
+            onmouseleave="showImg('delete-contact-img-mobile', 'delete')">
+            <img id="delete-contact-img-mobile" src="./img/delete.png" alt="delete">
+            <div class="contact-settings-button-text">Delete</div>
         </button>
     </dialog>
 </section>

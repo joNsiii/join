@@ -374,7 +374,7 @@ function showUserInfo(logical) {
 
 
 function showImg(id, image) {
-    document.getElementById(id).src = image;
+    document.getElementById(id).src = `./img/${image}.png`;
 }
 
 
