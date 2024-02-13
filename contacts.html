@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/contact-viewer-mobile.css">
     <link rel="stylesheet" href="./styles/contact-form.css">
     <link rel="stylesheet" href="./media/contacts-media.css">
@@ -68,13 +69,19 @@
                         <div class="contact-user-group">
                             <div id="contact-user-name" class="contact-user-name">Anton Mayer</div>
                             <div class="contact-user-button-group">
-                                <button id="edit-contact-button" class="contact-user-button">
-                                    <img class="contact-button-img" src="./img/edit-contacts.png" alt="edit-contacts">
-                                    <div class="contact-button-text">Edit</div>
+                                <button id="edit-contact-button" class="contact-user-button"
+                                    onmouseover="showImg('edit-contact-img', './img/edit-contacts-blue.png')"
+                                    onmouseleave="showImg('edit-contact-img', './img/edit-contacts.png')">
+                                    <img id="edit-contact-img" class="contact-button-img" src="./img/edit-contacts.png"
+                                        alt="edit-contacts">
+                                    Edit
                                 </button>
-                                <button id="delete-contact-button" class="contact-user-button">
-                                    <img class="contact-button-img" src="./img/delete.png" alt="delete">
-                                    <div class="contact-button-text">Delete</div>
+                                <button id="delete-contact-button" class="contact-user-button"
+                                    onmouseover="showImg('delete-contact-img', './img/delete-blue.png')"
+                                    onmouseleave="showImg('delete-contact-img', './img/delete.png')">
+                                    <img id="delete-contact-img" class="contact-button-img" src="./img/delete.png"
+                                        alt="delete">
+                                    Delete
                                 </button>
                             </div>
                         </div>

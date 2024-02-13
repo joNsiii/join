@@ -359,6 +359,11 @@ function setUserInfoLink(j, info, extension) {
 }
 
 
+function showImg(id, image) {
+    document.getElementById(id).src = image;
+}
+
+
 /*
     E3 / US01 - Kontaktliste
         1. Es gibt eine Seite oder einen Bereich fuer Kontakte. - Check
