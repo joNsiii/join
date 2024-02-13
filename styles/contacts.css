@@ -103,10 +103,16 @@
 }
 
 .contacts-contact:hover {
-    background-color: rgba(0, 0, 0, 0.08);
+    background: linear-gradient(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.08));
 }
 
 .contacts-contact-active {
+    color: #FFFFFF;
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.contacts-contact-active:hover {
     color: #FFFFFF;
     background-color: #2A3647;
     border-radius: 10px;
@@ -388,4 +394,5 @@
 /* resetCounter */
 /* addInlineInitials() */
 
-/* Check forms */
+/* close contact - remove highlight */
+/* json contactSample */

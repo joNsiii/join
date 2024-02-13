@@ -85,6 +85,7 @@ let bgcUser = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-b
 let bgcHex = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646'];
 let bgcCounter = 0;
 let bgcHexCounter = 0;
+let currentContact;
 
 
 // Functions
@@ -229,7 +230,7 @@ function compareValues(valueA, valueB) {
  */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
-        <div class="contacts-contact" onclick="updateContactViewer(${j})">
+        <div id="contacts-contact-${j}" class="contacts-contact" onclick="showContact(${j})">
             ${renderContactProfile(j)}
             ${renderNameMailGroup(j)}
         </div>
@@ -299,6 +300,21 @@ function renderNameMailGroup(j) {
             <div class="contact-email">${mail}</div>
         </div>
     `;
+}
+
+
+function showContact(j) {
+    highlightCurrentContact(j);
+    updateContactViewer(j);
+}
+
+
+function highlightCurrentContact(j) {
+    if (currentContact !== undefined) {
+        setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
+    }
+    currentContact = `contacts-contact-${j}`;
+    setClassOnCommand(currentContact, 'add', 'contacts-contact-active');
 }
 
 

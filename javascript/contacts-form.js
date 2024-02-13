@@ -82,6 +82,7 @@ function openContactSettingsMobile(j) {
 
 
 function closeContactViewerMobile() {
+    setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
     setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
 }
