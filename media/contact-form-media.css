@@ -23,24 +23,11 @@
         display: none;
     }
 
-    /* .dialog-contacts-group {
-        display: flex;
-        flex-direction: column;
-        gap: 13px;
-    } */
-
     .dialog-contacts-headline {
         height: 56px;
         font-size: 47px;
         line-height: 56.4px;
     }
-
-    /* .dialog-contacts-underline {
-        width: 90px;
-        height: 3px;
-        object-fit: cover;
-        object-position: center;
-    } */
 
     /* Bitte bearbeiten!!! */
     .dialog-contacts-right {
@@ -53,54 +40,36 @@
         gap: 32px;
     }
 
-    .dcr-close-button {
+    .close-contact-form {
         display: none;
     }
 
-    /* .dcr-profile {
-        box-sizing: border-box;
-        margin-top: 138px;
-        width: 120px;
-        height: 120px;
-        font-family: 'Inter', sans-serif;
-        font-size: 47px;
-        font-weight: 500;
-        line-height: 56.4px;
-        text-align: center;
-        color: #FFFFFF;
-        border: 3px solid #FFFFFF;
-        border-radius: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
-
-    .dcr-form {
+    .add-contact-form {
         margin-top: 0;
         width: 100%;
         gap: 32px;
     }
 
-    .dcr-fieldset {
+    .add-contact-fieldset {
         gap: 24px;
     }
 
-    .dcr-input-group {
+    .add-contact-input-group {
         width: 100%;
         height: 41px;
     }
 
-    .dcr-input {
+    .add-contact-input {
         width: 100%;
     }
 
-    .dcr-button-bar {
+    .contact-form-button-bar {
         width: unset;
         justify-content: center;
         gap: 20px;
     }
 
-    .dcr-button {
+    .contact-form-button {
         box-sizing: border-box;
         padding: 17px 9px;
         height: 51px;
@@ -109,7 +78,7 @@
         border-radius: 10px;
     }
 
-    .dcr-button-dark {
+    .contact-form-button-dark {
         padding: 18px 10px;
         height: 51px;
     }
@@ -128,7 +97,7 @@
         position: relative;
     }
 
-    .dcr-close-button-mobile {
+    .close-contact-form-mobile {
         display: unset;
     }
 
@@ -137,17 +106,17 @@
         line-height: 24px;
     }
 
-    .dcr-profile-clear {
+    .contact-form-profile-clear {
         margin-top: -152px;
         background-color: #D1D1D1;
     }
 
-    .dcr-profile {
+    .contact-form-profile {
         margin-top: -152px;
         background-color: #FFBB2B;
     }
 
-    .dcr-button-clear {
+    .contact-form-button-clear {
         display: none;
     }
 
@@ -183,7 +152,7 @@
         line-height: 19.2px;
     }
 
-    .dcr-input {
+    .add-contact-input {
         height: 19px;
         font-size: 16px;
         line-height: 19.2px;
