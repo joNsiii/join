@@ -288,15 +288,15 @@ function moveTo(category) {
     renderEachTask();
 }
 
-function highlight(event, category) {
-    event.preventDefault();
-    const categoryElement = document.getElementById(category);
-    if (!categoryElement.querySelector('.highlight-placeholder')) {
-        const element = document.createElement('div');
-        element.className = 'highlight-placeholder';
-        categoryElement.appendChild(element);
-    }
-}
+// function highlight(event, category) {
+//     event.preventDefault();
+//     const categoryElement = document.getElementById(category);
+//     if (!categoryElement.querySelector('.highlight-placeholder')) {
+//         const element = document.createElement('div');
+//         element.className = 'highlight-placeholder';
+//         categoryElement.appendChild(element);
+//     }
+// }
 
 function removeHighlight(event, category) {
     setTimeout(() => {
@@ -307,3 +307,64 @@ function removeHighlight(event, category) {
         }
     }, 100);
 }
+
+
+
+
+
+function highlight(event, category) {
+    event.preventDefault();
+    const categoryElement = document.getElementById(category);
+    let highlightElement = categoryElement.querySelector('.highlight-placeholder');
+
+    // Erstelle das Highlight-Element, falls es nicht existiert
+    if (!highlightElement) {
+        highlightElement = document.createElement('div');
+        highlightElement.className = 'highlight-placeholder';
+        categoryElement.appendChild(highlightElement);
+    }
+    
+    // Hier fügen wir die Daten des gezogenen Elements hinzu
+    // Angenommen, `getDraggedElementData` ist eine Funktion, die die Daten des gezogenen Elements zurückgibt
+    const draggedElementData = getDraggedElementData(); // Diese Funktion musst du entsprechend deiner Logik implementieren
+    
+    // Setze oder aktualisiere den Inhalt des Highlight-Elements mit den Daten des gezogenen Elements
+    // Du kannst hier HTML-Inhalt einfügen oder Text basierend auf `draggedElementData`
+    highlightElement.innerHTML = draggedElementData; // Beispiel, wie du Daten setzen könntest
+}
+
+
+function getDraggedElementData() {
+    const task = boardTasks.find(t => t.taskId === currentDraggedElement);
+    if (!task) {
+        console.error('Dragged element not found');
+        return '';
+    }
+
+    // Verwende board-body und board-task-card Klassen für die Highlight-Anzeige
+    const dataHtml = `
+        <div class="board-body highlight-placeholder"> <!-- highlight-placeholder für spezifische Anpassungen -->
+            <div class="board-task-card">
+                <h3 class="btc-type ${setCategoryStyle(task.heading)}"">${task.heading}</h3>
+                <div class="btc-group">
+                    <div class="btc-title">${task.title}</div>
+                    <div class="btc-description">${task.description}</div>
+                </div>
+                <div class="board-task-progress-group">
+                    <div class="board-task-max-bar">
+                        <div class="board-task-value-bar"></div>
+                    </div>
+                    <div class="board-task-progress-text">1/2 Subtasks</div>
+                </div>
+                <div class="user-priority-group">
+                    <div class="board-user-group">
+                        ${generateUserInitialsHtml(task.sub_users)}
+                    </div>
+                    <div>${showPriority(task)}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    return dataHtml;
+}
+

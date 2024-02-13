@@ -354,6 +354,12 @@ dialog[open] {
     background-color: #00BEE8;
 }
 
+.highlight-placeholder {
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+
 @media (max-width: 870px) {
     .board-content {
         flex-direction: column;
@@ -362,22 +368,5 @@ dialog[open] {
         flex-direction: row;
     }
 }
-/* @media (max-width: 550px) {
 
-    .board-body {
-        flex-direction: row;
-    }
-} */
-.highlight {
-    border: 2px dashed #ffa500;
-    background-color: rgb(188, 189, 188);
-}
 
-.highlight-placeholder {
-    width: 100%;
-    height: 200px;
-    border: 2px dashed #ffa500;
-    background-color: rgba(188, 189, 188, 0.5);
-    margin: 10px 0; /* Etwas Abstand oben und unten */
-    /* Weitere Stile nach Bedarf */
-}
