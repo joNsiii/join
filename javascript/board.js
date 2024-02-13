@@ -259,24 +259,51 @@ function setupCloseDialogMechanism() {
     dialog.addEventListener("click", function (event) {
         closeDialog("dialog");
     });
-
     // prevent closing dialog if element itself is clicked
     dialogBoardTask.addEventListener("click", function (event) {
         event.stopPropagation();
     });
 }
 
-// drag n drop
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function moveTo(category) {
-    boardTasks[currentDraggedElement]["category"] = category;
-    renderEachTask();
-}
 
 function startDragging(id) {
     console.log(`start dragging ${id}`)
     currentDraggedElement = id;
+}
+
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function moveTo(category) {
+    const categories = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
+    categories.forEach(cat => {
+        const element = document.getElementById(cat);
+        if (element.classList.contains('highlight')) {
+            element.classList.remove('highlight');
+        }
+    });
+    boardTasks[currentDraggedElement]["category"] = category;
+    renderEachTask();
+}
+
+function highlight(event, category) {
+    event.preventDefault();
+    const categoryElement = document.getElementById(category);
+    if (!categoryElement.querySelector('.highlight-placeholder')) {
+        const element = document.createElement('div');
+        element.className = 'highlight-placeholder';
+        categoryElement.appendChild(element);
+    }
+}
+
+function removeHighlight(event, category) {
+    setTimeout(() => {
+        const categoryElement = document.getElementById(category);
+        if (!categoryElement.contains(event.relatedTarget)) {
+            const existingHighlight = categoryElement.querySelector('.highlight-placeholder');
+                existingHighlight.remove();
+        }
+    }, 100);
 }
