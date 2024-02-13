@@ -52,6 +52,11 @@
     justify-content: center;
     align-items: center;
     gap: 16px;
+    cursor: pointer;
+}
+
+.add-contact-button:hover {
+    background-color: #29ABE2;
 }
 
 .add-contact-text {
@@ -100,6 +105,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 35px;
+    cursor: pointer;
 }
 
 .contacts-contact:hover {
@@ -134,38 +140,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.bgc-orange {
-    background-color: #FF7A00;
-}
-
-.bgc-purple {
-    background-color: #9327FF;
-}
-
-.bgc-blue {
-    background-color: #6E52FF;
-}
-
-.bgc-magenta {
-    background-color: #FC71FF;
-}
-
-.bgc-yellow {
-    background-color: #FFBB2B;
-}
-
-.bgc-green {
-    background-color: #1FD7C1;
-}
-
-.bgc-dark-blue {
-    background-color: #462F8A;
-}
-
-.bgc-red {
-    background-color: #FF4646;
 }
 
 .name-email-group {
@@ -294,6 +268,12 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+}
+
+
+.contact-user-button:hover {
+    color: #29ABE2;
 }
 
 .contact-button-text {
@@ -353,6 +333,10 @@
     color: #007CEE;
 }
 
+.user-detail-mail:hover {
+    text-decoration: underline;
+}
+
 .user-detail-phone {
     width: fit-content;
     font-family: 'Inter', sans-serif;
@@ -361,6 +345,10 @@
     line-height: 19.2px;
     text-decoration: none;
     color: #000000;
+}
+
+.user-detail-phone:hover {
+    color: #29ABE2;
 }
 
 .add-contact-button-mobile {
@@ -385,8 +373,6 @@
 }
 
 
-/* Check contacts.js */
-/* ids anpassen */
 /* hover + acitve classes + animation hinzufuegen */
 /* contact classes pruefen */
 
@@ -396,3 +382,5 @@
 
 /* close contact - remove highlight */
 /* json contactSample */
+
+/* clean coding */
