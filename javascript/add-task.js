@@ -1,8 +1,4 @@
-
-
 // !!! WORK IN PROGRESS BITTE NICHT ANFASSEN !!!
-
-const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 // document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -10,64 +6,60 @@ const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 // });
 
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let subtaskInput = [];
+
 function scopeTasks() {
+  let title = document.getElementById("title-task").value;
+  let description = document.getElementById("description-task").value;
+  let dueDate = document.getElementById('date date-task').value;
 
-let title = document.getElementById('title-task').value;
-let description = document.getElementById('description-task').value;
-// let dueDate = document.getElementById('date"').value;
+  var e = document.getElementById("assign-task");
+  let assignedTo = e.options[e.selectedIndex].text;
 
-var e = document.getElementById("assign-task");
-let assignedTo = e.options[e.selectedIndex].text;
+  var h = document.getElementById("category");
+  let category = h.options[h.selectedIndex].text;
 
-var h = document.getElementById("category");
-let category = h.options[h.selectedIndex].text;
+  // let subTask = document.getElementById('sub-content').innerHTML;
 
-// const task = {
-//     title: title,
-//     description: description,
-//     assignedTo: assignedTo,
-//     dueDate: dueDate,
-//     category: category
-// };
+  // for (let i = 0; i < subtaskInputs.length; i++) {
+  //   const input = subtaskInputs[i];
+  //   subtasks.push(input);
+  // }
 
-//     tasks.push(task);
-
-const userID = {
+  const userID = {
     id: [
       {
         title: title,
         description: description,
         category: category,
         assignedTo: assignedTo,
-        subTask: ["Blablablabla", "Blabloblolbolbo"],
-        priority: "Medium",
+        subTask: subtaskInput,
+        priority: priority,
         dueDate: dueDate,
-      },
-      {
-        title: "Test Title 2",
-        description: "Test Description 2",
-        category: "Programming 2",
-        assignedTo: "112224423",
-        subTask: ["Blablablabla", "Blabloblolbolbo"],
-        priority: "Low",
-        dueDate: "XX:XX:XX",
       },
     ],
   };
 
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    const userJSON = JSON.stringify(userID);
-    userInfo = JSON.parse(userJSON);
-    console.log(userInfo)
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  const userJSON = JSON.stringify(userID);
+  userInfo = JSON.parse(userJSON);
+  console.log(userInfo);
+}
 
-};
+// async function setItem(key, value) {
+//   const url = 'https://remote-storage.developerakademie.org/item';
+//   const payload = { key, value };
+
+//   return fetch(url, { method: 'POST', body: JSON.stringify(payload) });
+// }
 
 function renderTasks() {
-    const board = document.querySelector('.board-body');
-    board.innerHTML = ''; 
+  const board = document.querySelector(".board-body");
+  board.innerHTML = "";
 
-    tasks.forEach((task, index) => {
-        board.innerHTML += `
+  tasks.forEach((task, index) => {
+    board.innerHTML += `
         <div class="board-task-card" style="width: 252px;">
         <h3 class="btc-type btc-type-blue">${task.category}</h3>
         <div class="btc-group">
@@ -84,34 +76,69 @@ function renderTasks() {
         </div>
         </div>
         `;
-    });
+  });
 }
 
-// function start() {
-//     const userID = {
-//         id: [
-//           {
-//             title: "Test Title",
-//             description: "Test Description",
-//             category: "Programming",
-//             assignedTo: "112224433",
-//             subTask: ["Blablablabla", "Blabloblolbolbo"],
-//             priority: "Medium",
-//             dueDate: "XX:XX:XX",
-//           },
-//           {
-//             title: "Test Title 2",
-//             description: "Test Description 2",
-//             category: "Programming 2",
-//             assignedTo: "112224423",
-//             subTask: ["Blablablabla", "Blabloblolbolbo"],
-//             priority: "Low",
-//             dueDate: "XX:XX:XX",
-//           },
-//         ],
-//       };
-      
-//       const userJSON = JSON.stringify(userID);
-//       userInfo = JSON.parse(userJSON);
-//       console.log(userInfo)
-// }
+function subtaskTemplate() {
+  let subtaskForm = document.getElementById("subtask-form");
+  subtaskForm.innerHTML = `
+          <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" value="Contact Form">
+          <div class="subtask-add-icons">
+            <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+            <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+            <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
+          </div>
+    `;
+};
+
+function cancelSubtask() {
+  let subtaskForm = document.getElementById("subtask-form");
+  subtaskForm.innerHTML = `
+        <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask">
+        <img src="./img/subtask.png" alt="add-icon" class="hover" onclick="subtaskTemplate()">
+  `;
+};
+
+function addSubtask() {
+  let subtaskAdd = document.getElementById("subtask-display");
+  subtaskInput = document.getElementById('subtask').value;
+  subtaskAdd.innerHTML += `
+  <div class="subtask-container">
+    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInput}</p></div>
+  </div>
+  `;
+
+  cancelSubtask()
+};
+
+function prioSelection(clickedPrio) {
+  let prio = clickedPrio;
+  let lowImg= document.getElementById('low-img');
+  let mediumImg= document.getElementById('medium-img');
+  let urgentImg= document.getElementById('urgent-img');
+
+  document.getElementById('Urgent').classList.remove('prioUrgent');
+  document.getElementById('Medium').classList.remove('prioMedium');
+  document.getElementById('Low').classList.remove('prioLow');
+
+  lowImg.src = './img/low.png';
+  mediumImg.src = './img/medium-prio.png';
+  urgentImg.src = './img/urgent-red-arrows.png';
+
+    if (prio.id === 'Urgent') {
+      prio.classList.add('prioUrgent')
+      urgentImg.src = './img/urgent-white-arrows.png'
+    }
+
+    else if (prio.id === 'Medium') {
+      prio.classList.add('prioMedium')
+      mediumImg.src = './img/medium.png'
+    }
+
+    else if (prio.id === 'Low') {
+      prio.classList.add('prioLow')
+      lowImg.src = './img/low-white-arrows.png'
+    }
+
+    priority = prio.id;
+}

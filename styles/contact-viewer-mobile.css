@@ -33,7 +33,7 @@
     position: relative;
 }
 
-.cvm-img {
+.close-contact-viewer {
     width: 32px;
     height: 32px;
     object-fit: cover;
@@ -43,7 +43,7 @@
     right: 16px;
 }
 
-.contact-more-button {
+.contact-settings-button-mobile {
     box-sizing: border-box;
     padding: 12px;
     width: 56px;
@@ -57,7 +57,7 @@
     bottom: 32px;
 }
 
-.contact-more-button-img {
+.contact-settings-img {
     width: 32px;
     height: 32px;
     object-fit: cover;
@@ -128,45 +128,12 @@
     align-items: center;
 }
 
-/* .contact-user-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-} */
-
 .contact-user-name-mobile {
     font-family: 'Inter', sans-serif;
     font-size: 36px;
     font-weight: 700;
     line-height: 43.2px;
 }
-
-/* .contact-user-button-group {
-    display: flex;
-    gap: 16px;
-}
-
-.contact-user-button {
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    color: #2A3647;
-    border: unset;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-.cub-img {
-    width: 24px;
-    height: 24px;
-    object-fit: cover;
-    object-position: center;
-} */
 
 .contact-user-info-mobile {
     width: fit-content;
@@ -180,7 +147,7 @@
 }
 
 
-.contact-settings-dialog {
+.dialog-contact-settings {
     margin: 0;
     padding: 10px;
     background-color: #FFFFFF;
@@ -194,11 +161,11 @@
     left: unset;
 }
 
-.contact-settings-dialog[open] {
+.dialog-contact-settings[open] {
     display: block;
 }
 
-.contact-more-dialog-button {
+.contact-settings-button {
     box-sizing: border-box;
     padding: 8px;
     width: 96px;

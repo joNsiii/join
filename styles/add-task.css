@@ -46,18 +46,83 @@
 
 .input-single-line-subtask {
     display: flex;
+    justify-content: space-between;
     border: 1px solid #D1D1D1;
-    background-image: url('../img/add-button.png');
     border-radius: 10px;
+    background-color: #FFFFFF;
     padding: 12px 21px 12px 21px;
-    gap: 10px;
+    width: auto;
+}
+
+.subtask-container {
+    width: auto;
+    height: fit-content;
+    padding: 6px 16px 6px 16px;
+}
+
+.subtask-subchild {
+    display: inline-block;
+}
+
+#taskList {
+    display: list-item;
+    width: fit-content;
+    margin-left: 32px;
+}
+
+.subtask-add-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 56px;
+}
+
+.divider-subtask-icon {
+    width: 1px !important;
+}
+
+.subtask-add-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.input-single-line-subtask:focus-within {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.divider-subtask {
+    width: 1px;
+    height: auto;
+    border: 1px solid black;
+}
+
+.sub-task-child {
+    outline: 0;
+    border: 0;
     font-size: 20px;
+    width: 75%;
+    overflow: hidden;
 }
 
 .input-single-line::placeholder {
     color: #D1D1D1;
     font-family: inter;
     font-size: 20px;
+}
+
+.sub-task-child::placeholder {
+    color: #D1D1D1;
+    font-family: inter;
+    font-size: 20px;
+}
+
+.input-single-line-subtask:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
 }
 
 .input-single-line:focus {
@@ -271,4 +336,22 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+
+.prioUrgent {
+    background-color: #FF3D00;
+    font-weight: 700;
+    color: white;
+}
+
+.prioMedium {
+    background-color: #FFA800;
+    font-weight: 700;
+    color: white;
+}
+
+.prioLow {
+    background-color: #7AE229;
+    font-weight: 700;
+    color: white;
 }
