@@ -27,20 +27,20 @@ async function addUser() {
     window.location.href = 'login.html?msg=You Signed Up successfully'
 }
 
-// function checkPassword() {
-//     let password = document.getElementById('password-type').value;
-//     let confirmPassword = document.getElementById('password-type2').value;
-//     if (password === confirmPassword) {
-//         addUser();
-//     } else {
-//         let pInput1 = document.getElementById('password-input1');
-//         let pInput2 = document.getElementById('password-input2');
+function checkPassword() {
+    let password = document.getElementById('password-type').value;
+    let confirmPassword = document.getElementById('password-type2').value;
+    if (password === confirmPassword) {
+        addUser();
+    } else {
+    //     let pInput1 = document.getElementById('password-input1');
+    //     let pInput2 = document.getElementById('password-input2');
 
-//         pInput1.classList.add('bad-outline');
-//         pInput2.classList.add('bad-outline');
-//         // alert('PASSWORDS ARE DIFFERENT!!!')
-//     }
-// }
+    //     pInput1.classList.add('bad-outline');
+    //     pInput2.classList.add('bad-outline');
+        alert('PASSWORDS ARE DIFFERENT!!!')
+    }
+}
 
 var passwordValidation = function() {
 
