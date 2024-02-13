@@ -167,11 +167,16 @@
     color: #007CEE;
 }
 
+/* in Bearbeitung */
 .contact-viewer {
     padding: 110px 55px;
     display: flex;
     flex-direction: column;
     gap: 32px;
+
+    flex: 1;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .contact-viewer-header {
@@ -206,10 +211,20 @@
     color: #2A3647;
 }
 
+/* in Bearbeitung */
 .contact-user {
     display: none;
     flex-direction: column;
     gap: 21px;
+
+    position: absolute;
+    top: 205px;
+    left: 55px;
+    transition: 125ms left ease-in-out;
+}
+
+.contact-user-out {
+    left: 853px;
 }
 
 .contact-user-enabled {
