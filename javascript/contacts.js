@@ -302,7 +302,8 @@ function renderUserBgc(j) {
             background-color: ${bgc};
         }
     `;
-    addClass('contact-user', 'contact-user-enabled');
+    showUserInfo(true);
+    // addClass('contact-user', 'contact-user-enabled');
 }
 
 
@@ -356,6 +357,19 @@ function setUserInfoLink(j, info, extension) {
     id = (!extension) ? id : id + `-${extension}`;
     let userInfo = getJsonObjectDeepValue(contactSample, j, info);
     (info == 'mail') ? setElementAttribute(id, 'href', `mailto: ${userInfo}`) : setElementAttribute(id, 'href', `tel: ${userInfo}`);
+}
+
+
+function showUserInfo(logical) {
+    let value = getElement('contact-viewer').offsetWidth;
+    value = (logical) ? 55 : value;
+    value = (value < 55) ? 3840 : value;
+    let style = getElement('contact-user-animation');
+    style.innerHTML = `
+        .contact-user-animation {
+            left: ${value}px;
+        }
+    `;
 }
 
 

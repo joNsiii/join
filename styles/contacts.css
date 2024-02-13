@@ -213,7 +213,9 @@
 
 /* in Bearbeitung */
 .contact-user {
-    display: none;
+    min-width: 603px;
+    display: flex;
+    /* display: none; */
     flex-direction: column;
     gap: 21px;
 
@@ -221,10 +223,6 @@
     top: 205px;
     left: 55px;
     transition: 125ms left ease-in-out;
-}
-
-.contact-user-out {
-    left: 853px;
 }
 
 .contact-user-enabled {
