@@ -9,7 +9,7 @@ function updateEditForm(j) {
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
 
-    setElementAttribute('contact-settings-dialog', 'onclick', `openContactSettingsDialog(${j})`);
+    setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
 
 
@@ -64,7 +64,7 @@ function getInputValue(id) {
 
 function deleteContact(j) {
     contactSample.splice(j, 1);
-    setClassOnCommand('contact-user', 'remove', 'cu-enabled');
+    setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
     sortContactsByName(contactSample);
     collectInitials(contactSample);
@@ -75,14 +75,14 @@ function deleteContact(j) {
 
 
 function openContactSettingsMobile(j) {
-    openDialog('contact-settings-dialog');
-    setElementAttribute('contact-settings-edit-button', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('contact-settings-delete-button', 'onclick', `deleteContact(${j})`);
+    openDialog('dialog-contact-settings');
+    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
 }
 
 
 function closeContactViewerMobile() {
-    setClassOnCommand('contact-user', 'remove', 'cu-enabled');
+    setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
 }
 

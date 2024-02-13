@@ -307,9 +307,9 @@ function updateContactViewer(j) {
     renderContactViewer(j);
     setUserInfo(j);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
+    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
     setElementAttribute('delete-contact-button', 'onclick', `deleteContact(${j})`);
-    setElementAttribute('contact-settings-edit-button', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('contact-settings-delete-button', 'onclick', `deleteContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
 }
 
 
@@ -329,7 +329,7 @@ function renderUserBgc(j) {
             background-color: ${bgc};
         }
     `;
-    addClass('contact-user', 'cu-enabled');
+    addClass('contact-user', 'contact-user-enabled');
 }
 
 
