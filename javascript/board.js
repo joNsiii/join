@@ -138,11 +138,11 @@ function clearHTML() {
     document.getElementById("done").innerHTML = "";
 }
 
-function createHTML(task, containerId) {
+function createHTML(task, containerId, returnHtml = false) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
 
-    let toDoHtml = /*html*/ `
-    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" ondragover="allowDrop(event)" ondrop="moveTo('${containerId}')" draggable="true" > 
+    let taskHtml = /*html*/ `
+    <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
         <div class="board-body">
             <div class="board-task-card">
                 <h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}</h3>
@@ -164,10 +164,14 @@ function createHTML(task, containerId) {
                 </div>
             </div>
         </div>
-    </div>
-    `;
-    if (containerId) {
-        document.getElementById(containerId).innerHTML += toDoHtml;
+    </div>`;
+
+    if (returnHtml) {
+        return taskHtml;
+    } else {
+        if (containerId) {
+            document.getElementById(containerId).innerHTML += taskHtml;
+        }
     }
 }
 
@@ -265,23 +269,21 @@ function setupCloseDialogMechanism() {
     });
 }
 
-
 function startDragging(id) {
-    console.log(`start dragging ${id}`)
+    console.log(`start dragging ${id}`);
     currentDraggedElement = id;
 }
-
 
 function allowDrop(event) {
     event.preventDefault();
 }
 
 function moveTo(category) {
-    const categories = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
-    categories.forEach(cat => {
+    const categories = ["toDo", "inProgress", "awaitFeedback", "done"];
+    categories.forEach((cat) => {
         const element = document.getElementById(cat);
-        if (element.classList.contains('highlight')) {
-            element.classList.remove('highlight');
+        if (element.classList.contains("highlight")) {
+            element.classList.remove("highlight");
         }
     });
     boardTasks[currentDraggedElement]["category"] = category;
@@ -291,19 +293,34 @@ function moveTo(category) {
 function highlight(event, category) {
     event.preventDefault();
     const categoryElement = document.getElementById(category);
-    if (!categoryElement.querySelector('.highlight-placeholder')) {
-        const element = document.createElement('div');
-        element.className = 'highlight-placeholder';
-        categoryElement.appendChild(element);
+    let highlightElement = categoryElement.querySelector(".highlight-placeholder");
+
+    if (!highlightElement) {
+        highlightElement = document.createElement("div");
+        highlightElement.className = "highlight-placeholder";
+        categoryElement.appendChild(highlightElement);
     }
+    const draggedElementHtml = getDraggedElementData();
+    highlightElement.innerHTML = draggedElementHtml;
 }
 
 function removeHighlight(event, category) {
     setTimeout(() => {
         const categoryElement = document.getElementById(category);
         if (!categoryElement.contains(event.relatedTarget)) {
-            const existingHighlight = categoryElement.querySelector('.highlight-placeholder');
-                existingHighlight.remove();
+            const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+            existingHighlight.remove();
         }
     }, 100);
+}
+
+function getDraggedElementData() {
+    const task = boardTasks.find((t) => t.taskId === currentDraggedElement);
+    if (!task) {
+        console.error("Dragged element not found");
+        return "";
+    }
+    // use createHTML with boolean true to get the html for rendering of the dragged element
+    const taskHtml = createHTML(task, null, true);
+    return taskHtml;
 }

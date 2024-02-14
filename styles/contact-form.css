@@ -63,6 +63,11 @@
     right: 48px;
 }
 
+.close-contact-form:hover {
+    background-color: #EEEEEE;
+    border-radius: 16px;
+}
+
 .contact-form-profile {
     box-sizing: border-box;
     margin-top: 138px;
@@ -109,6 +114,10 @@
     gap: 10px;
 }
 
+.add-contact-input-group:focus-within {
+    border: 1px solid #29ABE2;
+}
+
 .add-contact-input {
     padding: 0;
     border: unset;
@@ -140,7 +149,10 @@
 }
 
 .contact-form-button {
+    box-sizing: border-box;
     padding: 14px 23px;
+    width: 110px;
+    height: 56px;
     background-color: transparent;
     border: 1px solid #2A3647;
     border-radius: 8px;
@@ -149,12 +161,31 @@
     align-items: center;
 }
 
+.contact-form-button:hover {
+    border: 2px solid #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.contact-form-button:active {
+    border: 1px solid #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
 .contact-form-button-text {
     font-family: 'Inter', sans-serif;
     font-size: 21px;
     font-weight: 400;
     line-height: 25.2px;
     color: #2A3647;
+}
+
+.contact-form-button:hover .contact-form-button-text {
+    color: #29ABE2;
+}
+
+.contact-form-button:active .contact-form-button-text {
+    color: #091931;
 }
 
 .contact-form-button-img {
@@ -174,6 +205,16 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
+}
+
+.contact-form-button-dark:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.contact-form-button-dark:active {
+    background-color: #091931;
+    ;
 }
 
 .contact-form-button-dark-text {
@@ -206,6 +247,11 @@
     position: absolute;
     top: 24px;
     right: 16px;
+}
+
+.close-contact-form-mobile:hover {
+    background-color: #29ABE2;
+    border-radius: 16px;
 }
 
 .dialog-contacts-subgroup {
@@ -242,7 +288,10 @@
 }
 
 .contact-form-button-clear {
+    box-sizing: border-box;
     padding: 15px;
+    width: 126px;
+    height: 56px;
     background-color: transparent;
     border: 1px solid #2A3647;
     border-radius: 10px;
@@ -252,12 +301,48 @@
     gap: 4px;
 }
 
+.contact-form-button-clear:hover {
+    border: 2px solid #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.contact-form-button-clear:active {
+    color: #091931;
+    border: 1px solid #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
 .contact-form-button-text {
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     color: #2A3647;
+}
+
+.contact-form-button-clear:hover .contact-form-button-text {
+    color: #29ABE2;
+}
+
+.contact-form-button-clear:active .contact-form-button-text {
+    color: #091931;
+}
+
+.contact-form-cancel-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/cancel.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-form-button-clear:hover .contact-form-cancel-img {
+    background-image: url('../img/cancel-blue.png');
+}
+
+.contact-form-button-clear:active .contact-form-cancel-img {
+    background-image: url('../img/cancel.png');
 }
 
 
