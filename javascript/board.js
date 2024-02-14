@@ -296,7 +296,6 @@ function highlight(event, category) {
     event.preventDefault();
     const categoryElement = document.getElementById(category);
     let highlightElement = categoryElement.querySelector(".highlight-placeholder");
-
     if (!highlightElement) {
         highlightElement = document.createElement("div");
         highlightElement.className = "highlight-placeholder";
