@@ -43,7 +43,6 @@ function checkPassword() {
 }
 
 function passwordValidation() {
-debugger
 let passwordOutline1 = document.getElementById('password-parent');
 let passwordOutline2 = document.getElementById('password-input2');
 
@@ -73,7 +72,7 @@ if (document.getElementById('password-type').value == '' &&
     document.getElementById('message').innerHTML = '';
     }
 
-    console.log('Working')
+
 }
 
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
