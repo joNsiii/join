@@ -7,9 +7,9 @@ function updateEditForm(j) {
     renderEditForm(j);
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
+    setElementAttribute('contact-form-delete-button', 'onclick', `deleteContact(${j})`);
 
-    setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
+    // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
 
 
