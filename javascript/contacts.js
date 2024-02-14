@@ -38,10 +38,9 @@ let contactSample = [
 ];
 
 let initials;
-let bgcUser = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red'];
-let bgcHex = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646'];
+let bgcNames = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red', 'cyan'];
+let bgcCodes = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
 let bgcCounter = 0;
-let bgcHexCounter = 0;
 let currentContact;
 
 
@@ -123,6 +122,7 @@ function renderContacts() {
  * @param {element} contactList - The element which collects the user contacts.
  */
 function fillContactList(contactList) {
+    bgcCounter = 0;
     for (let i = 0; i < initials.length; i++) {
         renderRegisterLetter(contactList, i);
         fillRegisterSection(contactList, i);
@@ -201,11 +201,13 @@ function renderContact(contactList, j) {
  * @returns - The html code of contact profile j.
  */
 function renderContactProfile(j) {
-    let bgc = getUserBgc();
-    let bgcHex = getUserBgcHex();
+    let bgc = getUserBgc(bgcNames, false);
+    let bgcHex = getUserBgc(bgcCodes, true);
     let first = getInitialLetter(contactSample, j).toUpperCase();
     let second = getSecondInitialLetter(contactSample, j).toUpperCase();
-    return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}" bgc="${bgcHex}">${first}${second}</div>`;
+    return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}" bgc="${bgcHex}">
+                <div class="contact-profile-text">${first}${second}</div>
+            </div>`;
 }
 
 
@@ -213,18 +215,10 @@ function renderContactProfile(j) {
  * Provides a user's background color.
  * @returns - A class fraction.
  */
-function getUserBgc() {
-    bgcCounter = (bgcCounter < bgcUser.length) ? bgcCounter : 0;
-    let bgc = bgcUser[bgcCounter];
-    bgcCounter++;
-    return bgc;
-}
-
-
-function getUserBgcHex() {
-    bgcHexCounter = (bgcHexCounter < bgcHex.length) ? bgcHexCounter : 0;
-    let bgc = bgcHex[bgcHexCounter];
-    bgcHexCounter++;
+function getUserBgc(array, logical) {
+    bgcCounter = (bgcCounter < array.length) ? bgcCounter : 0;
+    let bgc = array[bgcCounter];
+    (logical) ? bgcCounter++ : false;
     return bgc;
 }
 
