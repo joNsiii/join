@@ -8,6 +8,8 @@
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let subtaskInput = [];
+let priorityDefault = ('Medium');
+priority = priorityDefault;
 
 function scopeTasks() {
   let title = document.getElementById("title-task").value;
@@ -15,7 +17,7 @@ function scopeTasks() {
   let dueDate = document.getElementById('date date-task').value;
 
   let assignTask = document.getElementById("assign-task");
-  let assignedTo = assignTask.options[assignTask.selectedIndex].text;
+  let sub_users = assignTask.options[assignTask.selectedIndex].text;
 
   let categoryOption = document.getElementById("category");
   let category = categoryOption.options[categoryOption.selectedIndex].text;
@@ -33,7 +35,7 @@ function scopeTasks() {
         title: title,
         description: description,
         category: category,
-        assignedTo: assignedTo,
+        sub_users: sub_users,
         subTask: subtaskInput,
         priority: priority,
         dueDate: dueDate,
@@ -101,13 +103,14 @@ function cancelSubtask() {
 
 function addSubtask() {
   let subtaskAdd = document.getElementById("subtask-display");
-  subtaskInput = document.getElementById('subtask').value;
+  let subtaskInputValue = document.getElementById('subtask').value;
   subtaskAdd.innerHTML += `
   <div class="subtask-container">
-    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInput}</p></div>
+    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInputValue}</p></div>
   </div>
   `;
 
+  subtaskInput.push(subtaskInputValue)
   cancelSubtask()
 };
 
