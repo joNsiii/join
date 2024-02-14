@@ -105,7 +105,6 @@ function renderSubTask(subTaskData) {
 
     for (let i = 0; i < subtask.length; i++) {
         const task = subtask[i];
-        console.log(task.subtasksText);
     }
 }
 
@@ -270,7 +269,6 @@ function setupCloseDialogMechanism() {
 }
 
 function startDragging(id) {
-    console.log(`start dragging ${id}`);
     currentDraggedElement = id;
 }
 

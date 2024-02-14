@@ -229,12 +229,12 @@ function getUserBgc(array, logical) {
  * @param {index} i - The requested object's index.
  * @returns - The second initial letter in lower case.
  */
-function getSecondInitialLetter(variable, i) {
-    let name = getJsonObjectDeepValue(variable, i, 'name');
-    let space = name.indexOf(' ');
-    let second = name[space + 1];
-    return second.toLowerCase();
-}
+// function getSecondInitialLetter(variable, i) {
+//     let name = getJsonObjectDeepValue(variable, i, 'name');
+//     let space = name.indexOf(' ');
+//     let second = name[space + 1];
+//     return second.toLowerCase();
+// }
 
 
 /**
