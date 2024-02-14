@@ -42,37 +42,37 @@ function checkPassword() {
     }
 }
 
-function passwordValidation() {
+    function passwordValidation() {
 
     let passwordOutline1 = document.getElementById('password-parent');
     let passwordOutline2 = document.getElementById('password-input2');
 
-    if (document.getElementById('password-type').value ==
-        document.getElementById('password-type2').value) {
-        //Wollen wir eine grüne Outline? Wenn nein, dann bitte removen.
-        passwordOutline1.classList.add('good-outline');
-        passwordOutline2.classList.add('good-outline');
-        document.getElementById('message').innerHTML = 'Matching!';
-    } else {
-        document.getElementById('message').innerHTML = 'Not matching';
-        passwordOutline1.classList.add('bad-outline');
-        passwordOutline2.classList.add('bad-outline');
+if (document.getElementById('password-type').value ==
+    document.getElementById('password-type2').value) {
+    //Wollen wir eine grüne Outline? Wenn nein, dann bitte removen.
+    passwordOutline1.classList.add('good-outline');
+    passwordOutline2.classList.add('good-outline');
+    document.getElementById('message').innerHTML = 'Matching!';
+} else {
+    document.getElementById('message').innerHTML = 'Not matching';
+    passwordOutline1.classList.add('bad-outline');
+    passwordOutline2.classList.add('bad-outline');
 
-        //Green-Outline 2.
-        passwordOutline1.classList.remove('good-outline');
-        passwordOutline2.classList.remove('good-outline');
-    }
-
-    if (document.getElementById('password-type').value == '' &&
-        document.getElementById('password-type2').value == '') {
-        passwordOutline1.classList.remove('good-outline');
-        passwordOutline2.classList.remove('good-outline');
-        //Green-Outline 3.
-        passwordOutline1.classList.remove('bad-outline');
-        passwordOutline2.classList.remove('bad-outline');
-        document.getElementById('message').innerHTML = '';
-    }
+    //Green-Outline 2.
+    passwordOutline1.classList.remove('good-outline');
+    passwordOutline2.classList.remove('good-outline');
 }
+
+if (document.getElementById('password-type').value == '' &&
+    document.getElementById('password-type2').value == '') {
+    passwordOutline1.classList.remove('good-outline');
+    passwordOutline2.classList.remove('good-outline');
+    //Green-Outline 3.
+    passwordOutline1.classList.remove('bad-outline');
+    passwordOutline2.classList.remove('bad-outline');
+    document.getElementById('message').innerHTML = '';
+    }
+  }
 
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
     passwordField.addEventListener('input', togglePassword);
