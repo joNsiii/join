@@ -136,6 +136,19 @@ function resetAddContactInput() {
 }
 
 
+function getLastInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    let space = name.indexOf(' ');
+    let last = '';
+    while (space > -1) {
+        last = name[space];
+        space = name.indexOf(' ');
+        name = (space < 0) ? name : name.replace(' ', '');
+    }
+    return last.toLowerCase();
+}
+
+
 // Bitte loeschen!!!
 function save(key, variable) {
     let variableAsText = JSON.stringify(variable);

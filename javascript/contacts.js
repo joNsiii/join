@@ -204,7 +204,7 @@ function renderContactProfile(j) {
     let bgc = getUserBgc(bgcNames, false);
     let bgcHex = getUserBgc(bgcCodes, true);
     let first = getInitialLetter(contactSample, j).toUpperCase();
-    let second = getSecondInitialLetter(contactSample, j).toUpperCase();
+    let second = getLastInitialLetter(contactSample, j).toUpperCase();
     return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}" bgc="${bgcHex}">
                 <div class="contact-profile-text">${first}${second}</div>
             </div>`;
@@ -320,8 +320,8 @@ function renderUserProfile(j, extension) {
 
 function getInitialLetterGroup(variable, i) {
     let first = getInitialLetter(variable, i).toUpperCase();
-    let second = getSecondInitialLetter(variable, i).toUpperCase();
-    return first + second;
+    let last = getLastInitialLetter(variable, i).toUpperCase();
+    return first + last;
 }
 
 
