@@ -303,13 +303,13 @@ function highlight(event, category) {
 }
 
 function removeHighlight(event, category) {
-    setTimeout(() => {
+
         const categoryElement = document.getElementById(category);
         if (!categoryElement.contains(event.relatedTarget)) {
             const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
             existingHighlight.remove();
         }
-    }, 100);
+
 }
 
 function getDraggedElementData() {

@@ -19,7 +19,7 @@ function checkLogin() {
         sessionStorage.setItem('session_token', loggedInUser.userId);
         window.location.href = 'summary.html';
     } else {
-        console.log('Login failed. Incorrect email or password.');
+        wrongPassword();
     }
 }
 
@@ -69,7 +69,7 @@ function toggleCheckbox() {
     }
 }
 
-function login() {
+function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
     let input = document.getElementById('password-parent');
 

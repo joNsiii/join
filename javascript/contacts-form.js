@@ -103,7 +103,7 @@ function addContact() {
     let mail = getInputValue('add-contact-mail');
     let phone = getInputValue('add-contact-phone');
     let user = addUserContact(name, mail, phone);
-    addToCurrentUser(user);
+    addToCurrentUser(user, mail);
     contactSample.push(user);
 }
 
@@ -117,14 +117,18 @@ function addUserContact(name, mail, phone) {
 }
 
 
-async function addToCurrentUser(user) {
-    let userData = users.find(u => u.id == userId);
-
-    if (userData) {
+async function addToCurrentUser(user , mail) {
+    let userData = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
+    if (checkedUser) {
+        return console.log('already in')   /* PopUp statt console.log()  */
+    } else {
         userData['contacts'].push(user);
     }
     await setItem('users', users);
 }
+
+
 
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];
