@@ -24,14 +24,15 @@
                     </div>
                 </div>
 
-                <form onsubmit="checkPassword(); return false" class="input-container">
+                <form class="input-container">
                     <div class="input-child"><input id="username" type="name" required placeholder="Name">
                         <img src="./img/person.png" alt="Name-icon" id="name-signup">
                     </div>
                     <div class="input-child"><input id="useremail" type="email" required placeholder="Email">
                         <img src="./img/mail.png" alt="email-icon" id="email-signup">
                     </div>
-                    <div class="input-child" id="password-parent"><input  type="password" required placeholder="Password" id="password-type" onkeyup="passwordValidation()">
+                    <div class="input-child" id="password-parent">
+                        <input  type="password" required placeholder="Password" id="password-type" onkeyup="passwordValidation()">
                         <div class="password-inp">
                             <img src="./img/lock.png" alt="password-icon" id="set-password" onclick="togglePasswordIcon()">
                         </div>
@@ -53,7 +54,7 @@
                         </div>
 
                         <div class="button-signup-container">
-                            <button class="button button-signup">Sign up </button>
+                            <button class="button button-signup" onclick="checkPassword()">Sign up </button>
                         </div>
                     </div>
                 </form>

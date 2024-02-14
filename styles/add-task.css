@@ -55,19 +55,17 @@
 }
 
 .subtask-container {
-    width: auto;
-    height: fit-content;
-    padding: 6px 16px 6px 16px;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding: 6px 16px 6px 16px; */
 }
 
 .subtask-subchild {
     display: inline-block;
-}
-
-#taskList {
-    display: list-item;
-    width: fit-content;
-    margin-left: 32px;
 }
 
 .subtask-add-icons {
@@ -77,12 +75,13 @@
 }
 
 .divider-subtask-icon {
-    width: 1px !important;
+    width: 2px !important;
+    height: 24px;
 }
 
 .subtask-add-icons img {
     width: 24px;
-    height: 24px;
+    height: 22px;
 }
 
 .hover {
@@ -354,4 +353,58 @@
     background-color: #7AE229;
     font-weight: 700;
     color: white;
+}
+
+.subtask-preview {
+    display: flex;
+    align-items: center;
+    max-width: 440px;
+    width: 100%;
+    height: 32px;
+    margin-left: 32px;
+}
+
+.subtask-preview:focus {
+    background-color: #FFFFFF;
+    display: block;
+    outline: none;
+    border-bottom: 1px solid #005DFF;
+    margin: 0;
+}
+
+.subtask-container:hover  {
+    background-color: #cdcdcd6e;
+    border-radius: 10px;
+    margin: 0;
+    cursor: pointer;
+}
+
+#subtask-display {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtask-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 56px;
+    gap: 4px;
+    margin-right: 32px;
+}
+
+.span-container {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.list-item {
+    display: list-item;
 }

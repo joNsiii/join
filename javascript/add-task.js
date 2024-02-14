@@ -56,30 +56,30 @@ function scopeTasks() {
 //   return fetch(url, { method: 'POST', body: JSON.stringify(payload) });
 // }
 
-function renderTasks() {
-  const board = document.querySelector(".board-body");
-  board.innerHTML = "";
+// function renderTasks() {
+//   const board = document.querySelector(".board-body");
+//   board.innerHTML = "";
 
-  tasks.forEach((task, index) => {
-    board.innerHTML += `
-        <div class="board-task-card" style="width: 252px;">
-        <h3 class="btc-type btc-type-blue">${task.category}</h3>
-        <div class="btc-group">
-            <div class="btc-title">${task.title}</div>
-            <div class="btc-description">${task.description}</div>
-        </div>
-        <div class="user-priority-group">
-            <div class="board-user-group">
-                <div class="board-card-user bcu-yellow">EF</div>
-                <div class="board-card-user bcu-purple">AS</div>
-                <div class="board-card-user bcu-red">TW</div>
-            </div>
-            <img src="./img/medium-board.png" alt="medium-board">
-        </div>
-        </div>
-        `;
-  });
-}
+//   tasks.forEach((task, index) => {
+//     board.innerHTML += `
+//         <div class="board-task-card" style="width: 252px;">
+//         <h3 class="btc-type btc-type-blue">${task.category}</h3>
+//         <div class="btc-group">
+//             <div class="btc-title">${task.title}</div>
+//             <div class="btc-description">${task.description}</div>
+//         </div>
+//         <div class="user-priority-group">
+//             <div class="board-user-group">
+//                 <div class="board-card-user bcu-yellow">EF</div>
+//                 <div class="board-card-user bcu-purple">AS</div>
+//                 <div class="board-card-user bcu-red">TW</div>
+//             </div>
+//             <img src="./img/medium-board.png" alt="medium-board">
+//         </div>
+//         </div>
+//         `;
+//   });
+// }
 
 function subtaskTemplate() {
   let subtaskForm = document.getElementById("subtask-form");
@@ -106,7 +106,7 @@ function addSubtask() {
   let subtaskInputValue = document.getElementById('subtask').value;
   subtaskAdd.innerHTML += `
   <div class="subtask-container">
-    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInputValue}</p></div>
+    <div id="taskList" class="subtask-selector"><p id="sub-content"><span contenteditable="true">${subtaskInputValue}</span></p></div>
   </div>
   `;
 
