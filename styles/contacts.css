@@ -53,10 +53,16 @@
     align-items: center;
     gap: 16px;
     cursor: pointer;
+    outline: none;
 }
 
 .add-contact-button:hover {
     background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-contact-button:active {
+    background-color: #091931;
 }
 
 .add-contact-text {
@@ -108,7 +114,7 @@
     cursor: pointer;
 }
 
-.contacts-contact:hover {
+.contacts-contact:hover:not(.contacts-contact-active) {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
@@ -369,7 +375,6 @@
     border: unset;
     border-radius: 46px;
     background-color: #2A3647;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     display: none;
     justify-content: center;
     align-items: center;
@@ -381,6 +386,11 @@
 
 .add-contact-button-mobile:hover {
     background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-contact-button-mobile:active {
+    background-color: #091931;
 }
 
 .add-contact-img-mobile {

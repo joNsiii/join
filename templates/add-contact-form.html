@@ -20,11 +20,11 @@
         <form class="add-contact-form" onsubmit="updateContactList(); return false">
             <fieldset class="add-contact-fieldset">
                 <div class="add-contact-input-group">
-                    <input id="add-contact-name" class="add-contact-input" type="text" placeholder="Name">
+                    <input id="add-contact-name" class="add-contact-input" type="text" placeholder="Name" required>
                     <img class="contact-input-img" src="./img/person.png" alt="person">
                 </div>
                 <div class="add-contact-input-group">
-                    <input id="add-contact-mail" class="add-contact-input" type="email" placeholder="Email">
+                    <input id="add-contact-mail" class="add-contact-input" type="email" placeholder="Email" required>
                     <img class="contact-input-img" src="./img/mail.png" alt="mail">
                 </div>
                 <div class="add-contact-input-group">
@@ -35,7 +35,7 @@
             <div class="contact-form-button-bar">
                 <button class="contact-form-button-clear" onclick="closeDialog('dialog-add-contact')">
                     <div class="contact-form-button-text">Cancel</div>
-                    <img class="contact-form-button-img" src="./img/cancel.png" alt="cancel">
+                    <div class="contact-form-cancel-img"></div>
                 </button>
                 <button class="contact-form-button-dark">
                     <div class="contact-form-button-dark-text">Create contact</div>

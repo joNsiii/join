@@ -45,7 +45,7 @@
 
 .close-contact-viewer:hover {
     background-color: #EEEEEE;
-    border-radius: 32px;
+    border-radius: 16px;
 }
 
 .contact-settings-button-mobile {
@@ -56,7 +56,6 @@
     background-color: #2A3647;
     border: none;
     border-radius: 56px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +67,11 @@
 
 .contact-settings-button-mobile:hover {
     background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.contact-settings-button-mobile:active {
+    background-color: #091931;
 }
 
 .contact-settings-img {
