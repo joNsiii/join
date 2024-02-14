@@ -8,17 +8,19 @@
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let subtaskInput = [];
+let priorityDefault = ('Medium');
+priority = priorityDefault;
 
 function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById('date date-task').value;
 
-  var e = document.getElementById("assign-task");
-  let assignedTo = e.options[e.selectedIndex].text;
+  let assignTask = document.getElementById("assign-task");
+  let sub_users = assignTask.options[assignTask.selectedIndex].text;
 
-  var h = document.getElementById("category");
-  let category = h.options[h.selectedIndex].text;
+  let categoryOption = document.getElementById("category");
+  let category = categoryOption.options[categoryOption.selectedIndex].text;
 
   // let subTask = document.getElementById('sub-content').innerHTML;
 
@@ -33,7 +35,7 @@ function scopeTasks() {
         title: title,
         description: description,
         category: category,
-        assignedTo: assignedTo,
+        sub_users: sub_users,
         subTask: subtaskInput,
         priority: priority,
         dueDate: dueDate,
@@ -54,30 +56,30 @@ function scopeTasks() {
 //   return fetch(url, { method: 'POST', body: JSON.stringify(payload) });
 // }
 
-function renderTasks() {
-  const board = document.querySelector(".board-body");
-  board.innerHTML = "";
+// function renderTasks() {
+//   const board = document.querySelector(".board-body");
+//   board.innerHTML = "";
 
-  tasks.forEach((task, index) => {
-    board.innerHTML += `
-        <div class="board-task-card" style="width: 252px;">
-        <h3 class="btc-type btc-type-blue">${task.category}</h3>
-        <div class="btc-group">
-            <div class="btc-title">${task.title}</div>
-            <div class="btc-description">${task.description}</div>
-        </div>
-        <div class="user-priority-group">
-            <div class="board-user-group">
-                <div class="board-card-user bcu-yellow">EF</div>
-                <div class="board-card-user bcu-purple">AS</div>
-                <div class="board-card-user bcu-red">TW</div>
-            </div>
-            <img src="./img/medium-board.png" alt="medium-board">
-        </div>
-        </div>
-        `;
-  });
-}
+//   tasks.forEach((task, index) => {
+//     board.innerHTML += `
+//         <div class="board-task-card" style="width: 252px;">
+//         <h3 class="btc-type btc-type-blue">${task.category}</h3>
+//         <div class="btc-group">
+//             <div class="btc-title">${task.title}</div>
+//             <div class="btc-description">${task.description}</div>
+//         </div>
+//         <div class="user-priority-group">
+//             <div class="board-user-group">
+//                 <div class="board-card-user bcu-yellow">EF</div>
+//                 <div class="board-card-user bcu-purple">AS</div>
+//                 <div class="board-card-user bcu-red">TW</div>
+//             </div>
+//             <img src="./img/medium-board.png" alt="medium-board">
+//         </div>
+//         </div>
+//         `;
+//   });
+// }
 
 function subtaskTemplate() {
   let subtaskForm = document.getElementById("subtask-form");
@@ -101,13 +103,14 @@ function cancelSubtask() {
 
 function addSubtask() {
   let subtaskAdd = document.getElementById("subtask-display");
-  subtaskInput = document.getElementById('subtask').value;
+  let subtaskInputValue = document.getElementById('subtask').value;
   subtaskAdd.innerHTML += `
   <div class="subtask-container">
-    <div id="taskList" class="subtask-selector"><p id="sub-content">${subtaskInput}</p></div>
+    <div id="taskList" class="subtask-selector"><p id="sub-content"><span contenteditable="true">${subtaskInputValue}</span></p></div>
   </div>
   `;
 
+  subtaskInput.push(subtaskInputValue)
   cancelSubtask()
 };
 
