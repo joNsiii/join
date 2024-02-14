@@ -45,19 +45,6 @@ function togglePasswordLogin() {
     }
 }
 
-// function togglePasswordIconLogin() {
-//     let passwordField = document.getElementById('password-type');
-//     let toggleImg = document.getElementById('password-lock');
-//     let currentType = passwordField.type;
-//     if (passwordField.value !== "") {
-//         passwordField.type = (currentType === "password") ? "text" : "password";
-
-//         toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
-//     } else {
-//         toggleImg.src = "./img/lock.png";
-//         passwordField.type = "password";
-//     }
-// }
 
 function toggleCheckboxLogin() {
     let checkBox = document.getElementById('checkbox-remember-me');
