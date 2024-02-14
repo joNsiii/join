@@ -73,6 +73,7 @@ function deleteContact(j) {
     contactSample.splice(j, 1);
     showUserInfo(false);
     // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
+    closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-viewer');
     sortContactsByName(contactSample);
     collectInitials(contactSample);
@@ -126,7 +127,7 @@ function addUserContact(name, mail, phone) {
 }
 
 
-async function addToCurrentUser(user , mail) {
+async function addToCurrentUser(user, mail) {
     let userData = users.find(u => u.userId == userId);
     let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
@@ -137,6 +138,11 @@ async function addToCurrentUser(user , mail) {
     await setItem('users', users);
 }
 
+
+function closeAddContact() {
+    closeDialog('dialog-add-contact');
+    resetAddContactInput();
+}
 
 
 function resetAddContactInput() {

@@ -1,7 +1,7 @@
 <section class="dialog-contacts" onclick="stop(event)">
     <div class="dialog-contacts-left-clear">
         <img class="close-contact-form-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white"
-            onclick="closeDialog('dialog-add-contact')">
+            onclick="closeAddContact()">
         <img class="dialog-contacts-img" src="./img/logo-contact-form.png" alt="logo-contact-form">
         <div class="dialog-contacts-group">
             <div class="dialog-contacts-subgroup">
@@ -12,8 +12,7 @@
         </div>
     </div>
     <div class="dialog-contacts-right">
-        <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog"
-            onclick="closeDialog('dialog-add-contact')">
+        <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog" onclick="closeAddContact()">
         <div class="contact-form-profile-clear">
             <img src="./img/person-clear.png" alt="person-clear">
         </div>
@@ -36,7 +35,7 @@
                 </fieldset>
             </form>
             <div class="contact-form-button-bar">
-                <button class="contact-form-button-clear" onclick="closeDialog('dialog-add-contact')">
+                <button class="contact-form-button-clear" onclick="closeAddContact()">
                     <div class="contact-form-button-text">Cancel</div>
                     <div class="contact-form-cancel-img"></div>
                 </button>
