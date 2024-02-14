@@ -74,9 +74,17 @@
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
                             <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask">
-                            <img src="./img/subtask.png" alt="add-icon" class="hover" onclick="subtaskTemplate()">
+                            <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
                         </div>
                         <div id="subtask-display">
+                            <span contenteditable="true" class="span-container">
+                                <div class="subtask-preview"><div class="list-item"></div><p id="sub-content">Content Preview</p></div>
+                                <div class="subtask-icon-container">
+                                    <img src="./img/edit-contacts.png" alt="edit-icon" class="hover">
+                                    <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+                                    <img src="./img/delete.png" alt="delete-icon">
+                                </div>
+                            </span>
                         </div>
                     </div>
 

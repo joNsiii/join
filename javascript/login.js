@@ -19,13 +19,13 @@ function checkLogin() {
         sessionStorage.setItem('session_token', loggedInUser.userId);
         window.location.href = 'summary.html';
     } else {
-        console.log('Login failed. Incorrect email or password.');
+        wrongPassword();
     }
 }
 
-document.getElementById('password-type').addEventListener('input', togglePassword);
+document.getElementById('password-type').addEventListener('input', togglePasswordLogin);
 
-function togglePassword() {
+function togglePasswordLogin() {
     let passwordField = document.getElementById('password-type');
     let toggleImg = document.getElementById('password-lock');
     let badOutline = document.getElementById('password-parent');
@@ -45,21 +45,8 @@ function togglePassword() {
     }
 }
 
-function togglePasswordIcon() {
-    let passwordField = document.getElementById('password-type');
-    let toggleImg = document.getElementById('password-lock');
-    let currentType = passwordField.type;
-    if (passwordField.value !== "") {
-        passwordField.type = (currentType === "password") ? "text" : "password";
 
-        toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
-    } else {
-        toggleImg.src = "./img/lock.png";
-        passwordField.type = "password";
-    }
-}
-
-function toggleCheckbox() {
+function toggleCheckboxLogin() {
     let checkBox = document.getElementById('checkbox-remember-me');
 
     if (checkBox.src.includes("checkmark-unchecked.png")) {
@@ -69,7 +56,7 @@ function toggleCheckbox() {
     }
 }
 
-function login() {
+function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
     let input = document.getElementById('password-parent');
 
@@ -78,4 +65,3 @@ function login() {
         input.classList.add("bad-outline");
     }
 }
-

@@ -33,19 +33,19 @@ function checkPassword() {
     if (password === confirmPassword) {
         addUser();
     } else {
-    //     let pInput1 = document.getElementById('password-input1');
-    //     let pInput2 = document.getElementById('password-input2');
+        //     let pInput1 = document.getElementById('password-input1');
+        //     let pInput2 = document.getElementById('password-input2');
 
-    //     pInput1.classList.add('bad-outline');
-    //     pInput2.classList.add('bad-outline');
+        //     pInput1.classList.add('bad-outline');
+        //     pInput2.classList.add('bad-outline');
         alert('PASSWORDS ARE DIFFERENT!!!')
     }
 }
 
-function passwordValidation() {
-debugger
-let passwordOutline1 = document.getElementById('password-parent');
-let passwordOutline2 = document.getElementById('password-input2');
+    function passwordValidation() {
+
+    let passwordOutline1 = document.getElementById('password-parent');
+    let passwordOutline2 = document.getElementById('password-input2');
 
 if (document.getElementById('password-type').value ==
     document.getElementById('password-type2').value) {
@@ -72,9 +72,7 @@ if (document.getElementById('password-type').value == '' &&
     passwordOutline2.classList.remove('bad-outline');
     document.getElementById('message').innerHTML = '';
     }
-
-    console.log('Working')
-}
+  }
 
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
     passwordField.addEventListener('input', togglePassword);
