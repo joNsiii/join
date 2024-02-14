@@ -249,6 +249,9 @@ dialog[open] {
     font-weight: 400;
     line-height: 19.2px;
     color: #A8A8A8;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 3lh;
 }
 
 .board-task-progress-group {

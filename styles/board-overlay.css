@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    overflow-wrap: break-word;
 }
 
 .dbt-top-group {

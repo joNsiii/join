@@ -3,7 +3,7 @@ let boardTasks = [
     {
         taskId: 0,
         title: "Start with JS",
-        description: "create reusable HTML base templates...",
+        description: "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
         category: "toDo",
         heading: "Technical Task",
         subtasks: [
