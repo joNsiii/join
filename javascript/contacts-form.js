@@ -36,10 +36,17 @@ function renderEditFormInfo(j, info) {
 
 
 function updateEditedContact(j) {
-    saveEditContact(j);
-    closeDialog('dialog-edit-contact');
-    initContacts();
-    updateContactViewer(j);
+    let name = getInputValue('edit-contact-name');
+    let mail = getInputValue('edit-contact-mail');
+    if (name == '' || mail == '') {
+        console.log('no function');
+    } else {
+        saveEditContact(j);
+        closeDialog('dialog-edit-contact');
+        initContacts();
+        updateContactViewer(j);
+        console.log('saved');
+    }
 }
 
 
@@ -72,6 +79,8 @@ function deleteContact(j) {
     renderContacts();
     save('contactSample', contactSample);
     // updateContactViewer(j);
+
+    console.log('deleted');
 }
 
 

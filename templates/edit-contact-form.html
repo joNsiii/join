@@ -12,33 +12,36 @@
         <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog"
             onclick="closeDialog('dialog-edit-contact')">
         <div id="edit-contact-profile" class="contact-form-profile bgc-flexible">TW</div>
-        <form id="edit-contact-form" class="add-contact-form" onsubmit="return false">
-            <fieldset class="add-contact-fieldset">
-                <div class="add-contact-input-group">
-                    <input id="edit-contact-name" class="add-contact-input" type="text" placeholder="Name" required
-                        value="Tatjana Wolf">
-                    <img class="contact-input-img" src="./img/person.png" alt="person">
-                </div>
-                <div class="add-contact-input-group">
-                    <input id="edit-contact-mail" class="add-contact-input" type="email" placeholder="Email" required
-                        value="wolf@gmail.com">
-                    <img class="contact-input-img" src="./img/mail.png" alt="mail">
-                </div>
-                <div class="add-contact-input-group">
-                    <input id="edit-contact-phone" class="add-contact-input" type="tel" placeholder="Number"
-                        value="+49 2222 222 22 2">
-                    <img class="contact-input-img" src="./img/call.png" alt="call">
-                </div>
-            </fieldset>
+        <div class="add-contact-form-group">
+            <form id="edit-contact-form" class="add-contact-form" onsubmit="return false">
+                <fieldset class="add-contact-fieldset">
+                    <div class="add-contact-input-group">
+                        <input id="edit-contact-name" class="add-contact-input" type="text" placeholder="Name" required
+                            value="Tatjana Wolf">
+                        <img class="contact-input-img" src="./img/person.png" alt="person">
+                    </div>
+                    <div class="add-contact-input-group">
+                        <input id="edit-contact-mail" class="add-contact-input" type="email" placeholder="Email"
+                            required value="wolf@gmail.com">
+                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                    </div>
+                    <div class="add-contact-input-group">
+                        <input id="edit-contact-phone" class="add-contact-input" type="tel" placeholder="Number"
+                            value="+49 2222 222 22 2">
+                        <img class="contact-input-img" src="./img/call.png" alt="call">
+                    </div>
+                </fieldset>
+            </form>
             <div class="contact-form-button-bar">
                 <button id="contact-form-delete-button" class="contact-form-button">
                     <div class="contact-form-button-text">Delete</div>
                 </button>
-                <button id="save-edited-contact-button" class="contact-form-button-dark">
+                <button id="save-edited-contact-button" class="contact-form-button-dark" form="edit-contact-form"
+                    type="submit">
                     <div class="contact-form-button-dark-text">Save</div>
                     <img class="contact-form-button-img" src="./img/check.png" alt="check">
                 </button>
             </div>
-        </form>
+        </div>
     </div>
 </section>
