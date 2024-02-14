@@ -14,11 +14,11 @@ function scopeTasks() {
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById('date date-task').value;
 
-  var e = document.getElementById("assign-task");
-  let assignedTo = e.options[e.selectedIndex].text;
+  let assignTask = document.getElementById("assign-task");
+  let assignedTo = assignTask.options[assignTask.selectedIndex].text;
 
-  var h = document.getElementById("category");
-  let category = h.options[h.selectedIndex].text;
+  let categoryOption = document.getElementById("category");
+  let category = categoryOption.options[categoryOption.selectedIndex].text;
 
   // let subTask = document.getElementById('sub-content').innerHTML;
 
