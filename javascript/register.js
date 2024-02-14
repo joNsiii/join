@@ -19,8 +19,8 @@ async function addUser() {
         'password': password.value,
         'contacts': [],
         'phone': '',
-        'todos': [],
-        'id': userId
+        'boardTasks': [],
+        'userId': userId
     }
     users.push(newUser);
     await setItem('users', JSON.stringify(users));

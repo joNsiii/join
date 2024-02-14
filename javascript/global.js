@@ -27,7 +27,7 @@ function isLoggedIn() {
 function loadUserData() {
     let userId = sessionStorage.getItem('session_token');
     console.log(userId);
-    let userData = users.find(u => u.id == userId);
+    let userData = users.find(u => u.userId == userId);
 
     if (userData) {
         currentUserData = userData;
