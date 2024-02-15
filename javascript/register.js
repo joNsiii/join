@@ -2,12 +2,13 @@ let users = [];
 let newArray = []; /* delete our backend-users-array */
 
 async function addUser() {
+    registerBtn.disabled = true;
     let date = new Date();
     let userId = date.getTime();
     let name = document.getElementById('username');
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
-    if (users.find(u => name.value === u.name)) {
+    if (users.find(u => name.value === u.name )) {
         return alert('Username already exist!!');
     } if (users.find(u => email.value === u.email)) {
         return alert('Email already exist!!');
@@ -23,7 +24,12 @@ async function addUser() {
     }
     users.push(newUser);
     await setItem('users', JSON.stringify(users));
-    window.location.href = 'login.html?msg=You Signed Up successfully'
+    resetButton();
+    window.location.href = 'login.html?msg=You Signed Up successfully';
+}
+
+function resetButton() {
+    registerBtn.disabled = false;
 }
 
 // function checkPassword() {

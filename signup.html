@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <form class="input-container" onsubmit="return false">
+                <form class="input-container" onsubmit=" addUser(); return false">
                     <div class="input-child"><input id="username" type="name" required placeholder="Name">
                         <img src="./img/person.png" alt="Name-icon" id="name-signup">
                     </div>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="button-signup-container">
-                            <button class="button button-signup" onclick="addUser()">Sign up </button>
+                            <button class="button button-signup" id="registerBtn">Sign up </button>
                         </div>
                     </div>
                 </form>

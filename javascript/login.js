@@ -4,6 +4,7 @@ let checkStatus;
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 if (msg) {
+    document.getElementById('msgPopup').classList.remove('d-none');
     msgPopup.innerHTML = msg;
     setTimeout(() => {
         msgPopup.classList.add('d-none');
@@ -14,13 +15,11 @@ function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
     let loggedInUser = users.find(u => email === u.email && password === u.password);
-
     if (loggedInUser) {
         rememberMe();
         console.log('Login successfully');
         sessionStorage.setItem('session_token', loggedInUser.userId);
-        window.location.href = 'summary.html';
-        
+        window.location.href = 'summary.html'; 
     } else {
         wrongPassword();
     }
@@ -74,7 +73,6 @@ function loadCheckBoxStatus() {
 
 function toggleCheckboxLogin() {
     let checkBox = document.getElementById('checkbox-remember-me');
-
     if (checkBox.src.includes("checkmark-unchecked.png")) {
         checkBox.src = "./img/checkmark_2_18x18.png";
     } else {
@@ -89,7 +87,6 @@ function togglePasswordLogin() {
     let toggleImg = document.getElementById('password-lock');
     let badOutline = document.getElementById('password-parent');
     let wrongPw = document.getElementById('wrong-pw');
-
     if (passwordField.value !== "") {
         toggleImg.src = "./img/visibility_off.png";
         passwordField.type = "password";
@@ -97,20 +94,15 @@ function togglePasswordLogin() {
         toggleImg.src = "./img/lock.png";
         passwordField.type = "password";
     }
-
     if (badOutline.classList.contains("bad-outline")) {
         badOutline.classList.remove("bad-outline");
         wrongPw.classList.add("d-none");
     }
 }
 
-
-
-
 function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
     let input = document.getElementById('password-parent');
-
     if (warning.classList !== "d-none") {
         warning.classList.remove("d-none");
         input.classList.add("bad-outline");
