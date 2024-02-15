@@ -40,33 +40,23 @@ function loadUserData() {
 }
 
 function loadUserImage() {
-    let userLogo = document.getElementById('loggedin-user-logo');
+    let userLogo = document.getElementById('user-initials');
     if (userIsLoggedIn()) {
-        // userLogo(userLogo);
+        userInitials(userLogo);
     } else if (guestIsLoggedIn()) {
         guestLogo(userLogo);
 }}
 
-function userLogo(userLogo) {
-    // userLogo.classList.add('profile-img-bg');
-    userLogo.src = './img/guest-login-logo.png';
+function userInitials(userLogo) {
+    let initials = currentUserData.name.match(/(\b\S)?/g).join("").toUpperCase()
+    userLogo.innerHTML = initials;
 }
 
 function guestLogo(userLogo) {
-    userLogo.src = './img/guest-login-logo.png';
-    userLogo.addEventListener('mouseover', function () {
-        userLogo.src = './img/guest-login-logo-hover.png';
-});
-    userLogo.addEventListener('mouseleave', function () {
-        userLogo.src = './img/guest-login-logo.png';
-});
+    userLogo.innerHTML = 'G'
 }
 
 
-
-
-// window.addEventListener('DOMContentLoaded', function () {  
-// });
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
