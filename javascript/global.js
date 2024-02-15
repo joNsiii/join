@@ -4,11 +4,13 @@ let currentUserData;
 let userId = sessionStorage.getItem('session_token');
 
 
+
 async function init() {
     await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
     loadUserData();
+    loadUserImage();
 }
 
 async function loadUsers() {
@@ -37,15 +39,34 @@ function loadUserData() {
     }
 }
 
+function loadUserImage() {
+    let userLogo = document.getElementById('loggedin-user-logo');
+    if (userIsLoggedIn()) {
+        // userLogo(userLogo);
+    } else if (guestIsLoggedIn()) {
+        guestLogo(userLogo);
+}}
 
+function userLogo(userLogo) {
+    // userLogo.classList.add('profile-img-bg');
+    userLogo.src = './img/guest-login-logo.png';
+}
 
-window.addEventListener('DOMContentLoaded', function () {
-    if (isLoggedIn()) {
-        console.log('User is logged in');
-    } else {
-        console.log('User is not logged in');
-    }
+function guestLogo(userLogo) {
+    userLogo.src = './img/guest-login-logo.png';
+    userLogo.addEventListener('mouseover', function () {
+        userLogo.src = './img/guest-login-logo-hover.png';
 });
+    userLogo.addEventListener('mouseleave', function () {
+        userLogo.src = './img/guest-login-logo.png';
+});
+}
+
+
+
+
+// window.addEventListener('DOMContentLoaded', function () {  
+// });
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");

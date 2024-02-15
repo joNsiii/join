@@ -145,6 +145,16 @@ header span {
 }
 
 /* dropdown menu */
+
+
+.profile-img-bg {
+    cursor: pointer;
+    background-image: url('../img/Ellipse\ 3.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .dropdown-menu {
     position: relative;
     display: inline-block;

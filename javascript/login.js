@@ -82,7 +82,7 @@ function toggleCheckboxLogin() {
 }
 
 function guestLogin() {
-    sessionStorage.setItem('session_token', 'guest');
+    sessionStorage.setItem('guest_token', 'guest');
     window.location.href = 'summary.html';
 }
 
