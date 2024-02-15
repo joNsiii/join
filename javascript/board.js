@@ -125,10 +125,11 @@ function renderEachTask() {
         } else if (task.category === "done") {
             containerId = "done";
         }
-
         createHTML(task, containerId);
+        updateProgressBar(task);
         renderSubTask(task);
     }
+
 }
 
 function clearHTML() {
@@ -136,6 +137,36 @@ function clearHTML() {
     document.getElementById("inProgress").innerHTML = "";
     document.getElementById("awaitFeedback").innerHTML = "";
     document.getElementById("done").innerHTML = "";
+}
+
+function updateProgressBar(task) {
+    let currentSubtask = 0;
+    // debugger;
+    let percent = (currentSubtask + 1) / task["subtasks"].length;
+    if (percent !== Infinity){
+        percent = Math.round(percent * 100);
+        document.getElementById("progress-bar").style.width = `${percent}%`;
+        let test = percentageToFraction(percent);
+        console.log(test);
+        // progress bar steps
+        document.getElementById('subtask-progress-text').innerHTML += `${test}`
+    } else{
+        return
+    }
+}
+
+function percentageToFraction(percentage) {
+    var decimal = percentage / 100;
+    var gcd = function(a, b) {
+        if (b < 0.0000001) return a; 
+        return gcd(b, Math.floor(a % b));
+    };
+    var numerator = decimal * 10000;
+    var denominator = 10000;
+    var divisor = gcd(numerator, denominator);
+    numerator /= divisor;
+    denominator /= divisor;
+    return numerator + "/" + denominator;
 }
 
 function createHTML(task, containerId, returnHtml = false) {
@@ -152,9 +183,9 @@ function createHTML(task, containerId, returnHtml = false) {
                 </div>
                 <div class="board-task-progress-group">
                     <div class="board-task-max-bar">
-                        <div class="board-task-value-bar"></div>
+                        <div id="progress-bar" class="board-task-value-bar"></div>
                     </div>
-                    <div class="board-task-progress-text">1/2 Subtasks</div>
+                    <div id="subtask-progress-text" class="board-task-progress-text"></div>
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
