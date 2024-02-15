@@ -1,7 +1,7 @@
-<section class="dialog-contacts" onclick="stop(event)">
+<section id="section-edit-contact" class="dialog-contacts" onclick="stop(event)">
     <div class="dialog-contacts-left">
         <img class="close-contact-form-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white"
-            onclick="closeDialog('dialog-edit-contact')">
+            onclick="closeEditContact()">
         <img class="dialog-contacts-img" src="./img/logo-contact-form.png" alt="logo-contact-form">
         <div class="dialog-contacts-group">
             <div class="dialog-contacts-headline">Edit contact</div>
@@ -10,7 +10,7 @@
     </div>
     <div class="dialog-contacts-right">
         <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog"
-            onclick="closeDialog('dialog-edit-contact')">
+            onclick="closeEditContact()">
         <div id="edit-contact-profile" class="contact-form-profile bgc-flexible">TW</div>
         <div class="add-contact-form-group">
             <form id="edit-contact-form" class="add-contact-form" onsubmit="return false">

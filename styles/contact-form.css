@@ -6,6 +6,16 @@
 .dialog-contacts {
     border-radius: 30px;
     display: flex;
+    position: absolute;
+    top: calc(50vh - 296px);
+    left: 100%;
+    /* left: calc(50% - 606px); */
+    transition: 125ms left ease-in-out;
+}
+
+.dialog-contacts-position {
+    left: calc(50% - 606px);
+    /* left: 100%; */
 }
 
 .dialog-contacts-left {

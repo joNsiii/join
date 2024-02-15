@@ -5,6 +5,7 @@ load('contactSample');
 function updateEditForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
+    setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
     setElementAttribute('contact-form-delete-button', 'onclick', `deleteContact(${j})`);
@@ -139,9 +140,26 @@ async function addToCurrentUser(user, mail) {
 }
 
 
+function closeEditContact() {
+    setClassOnCommand('section-edit-contact', 'remove', 'dialog-contacts-position');
+    setTimeout(() => {
+        closeDialog('dialog-edit-contact')
+    }, 125);
+}
+
+
+function openAddContact() {
+    openDialog('dialog-add-contact');
+    setClassOnCommand('section-add-contact', 'add', 'dialog-contacts-position');
+}
+
+
 function closeAddContact() {
-    closeDialog('dialog-add-contact');
-    resetAddContactInput();
+    setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
+    setTimeout(() => {
+        closeDialog('dialog-add-contact');
+        resetAddContactInput();
+    }, 125);
 }
 
 
