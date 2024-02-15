@@ -1,4 +1,4 @@
-let checked = false;
+let checkStatus;
 
 /**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
 const urlParams = new URLSearchParams(window.location.search);
@@ -13,20 +13,73 @@ if (msg) {
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
-    
     let loggedInUser = users.find(u => email === u.email && password === u.password);
+
     if (loggedInUser) {
+        rememberMe();
         console.log('Login successfully');
         sessionStorage.setItem('session_token', loggedInUser.userId);
         window.location.href = 'summary.html';
+        
     } else {
         wrongPassword();
     }
 }
 
-function rememberMe() {
-    let checked = document.getElementById('checkbox-remember-me');
+function rememberMeStatus() {
+    if(checkStatus == true){
+        checkStatus = false;
+        console.log('unchecked')
+    }else {
+        checkStatus = true;
+        console.log('checked')
+    }
+}
 
+function rememberMe() {
+    let email = document.getElementById('email-field').value;
+    let password = document.getElementById('password-type').value;   
+    if(checkStatus == true){
+        localStorage.setItem('remember-me-email', email);
+        localStorage.setItem('remember-me-password', password);
+    }
+}
+
+function loadRememberMe() {
+    loadCheckBoxStatus();
+    let savedEmail =  localStorage.getItem('remember-me-email');
+    let savedPassword = localStorage.getItem('remember-me-password');
+    if(savedEmail) {
+        document.getElementById('email-field').value = savedEmail;
+    }
+    if(savedPassword) {
+        document.getElementById('password-type').value = savedPassword;
+    }
+}
+
+function isKeyInLocalStorage() {
+    return localStorage.getItem('remember-me-email') !== null;
+}
+
+function loadCheckBoxStatus() {
+    let checkBox = document.getElementById('checkbox-remember-me');
+    if(isKeyInLocalStorage()) {
+        checkBox.src = "./img/checkmark_2_18x18.png";
+        checkStatus = true;
+    }else {
+        checkBox.src = "./img/checkmark-unchecked.png";
+        checkStatus = false;
+    }
+}
+
+function toggleCheckboxLogin() {
+    let checkBox = document.getElementById('checkbox-remember-me');
+
+    if (checkBox.src.includes("checkmark-unchecked.png")) {
+        checkBox.src = "./img/checkmark_2_18x18.png";
+    } else {
+        checkBox.src = "./img/checkmark-unchecked.png";
+    }
 }
 
 document.getElementById('password-type').addEventListener('input', togglePasswordLogin);
@@ -52,15 +105,7 @@ function togglePasswordLogin() {
 }
 
 
-function toggleCheckboxLogin() {
-    let checkBox = document.getElementById('checkbox-remember-me');
 
-    if (checkBox.src.includes("checkmark-unchecked.png")) {
-        checkBox.src = "./img/checkmark_2_18x18.png";
-    } else {
-        checkBox.src = "./img/checkmark-unchecked.png";
-    }
-}
 
 function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
