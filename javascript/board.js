@@ -3,7 +3,8 @@ let boardTasks = [
     {
         taskId: 0,
         title: "Start with JS",
-        description: "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
+        description:
+            "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
         category: "toDo",
         heading: "Technical Task",
         subtasks: [
@@ -176,6 +177,7 @@ function createHTML(task, containerId, returnHtml = false) {
 
 // overlay html
 function insertTodoDataIntoDialog(task, dialog) {
+    const type = dialog.querySelector(".dbt-type");
     const title = dialog.querySelector(".dbt-title");
     const description = dialog.querySelector(".dbt-description");
     const priority = dialog.querySelector(".dbt-priority");
@@ -183,6 +185,8 @@ function insertTodoDataIntoDialog(task, dialog) {
     const subtask = dialog.querySelector(".dbt-collector");
     const subUsersNames = generateSubUsersHtml(task.sub_users);
 
+    type.classList.add(`${setCategoryStyle(task.heading)}`);
+    type.innerText = task.heading;
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
@@ -292,7 +296,6 @@ function highlight(event, category) {
     event.preventDefault();
     const categoryElement = document.getElementById(category);
     let highlightElement = categoryElement.querySelector(".highlight-placeholder");
-
     if (!highlightElement) {
         highlightElement = document.createElement("div");
         highlightElement.className = "highlight-placeholder";
@@ -303,13 +306,13 @@ function highlight(event, category) {
 }
 
 function removeHighlight(event, category) {
-
-        const categoryElement = document.getElementById(category);
-        if (!categoryElement.contains(event.relatedTarget)) {
-            const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+    const categoryElement = document.getElementById(category);
+    if (!categoryElement.contains(event.relatedTarget)) {
+        const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+        if (existingHighlight) {
             existingHighlight.remove();
         }
-
+    }
 }
 
 function getDraggedElementData() {
