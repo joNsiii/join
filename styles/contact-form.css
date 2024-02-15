@@ -1,6 +1,7 @@
 /* dialog-edit-contact */
 #dialog-edit-contact[open] {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .dialog-contacts {
@@ -209,7 +210,6 @@
     object-position: center;
 }
 
-
 .contact-form-button-dark {
     padding: 16px;
     background-color: #2A3647;
@@ -243,6 +243,7 @@
 /* dialog-add-contact */
 #dialog-add-contact[open] {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .dialog-contacts-left-clear {

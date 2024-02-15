@@ -163,6 +163,20 @@ function closeAddContact() {
 }
 
 
+function openContactSettings() {
+    openDialog('dialog-contact-settings');
+    setClassOnCommand('section-contact-settings', 'add', 'section-contact-settings-position');
+}
+
+
+function closeContactSettings() {
+    setClassOnCommand('section-contact-settings', 'remove', 'section-contact-settings-position');
+    setTimeout(() => {
+        closeDialog('dialog-contact-settings');
+    }, 125);
+}
+
+
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];
     for (let i = 0; i < ids.length; i++) {

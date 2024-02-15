@@ -31,6 +31,7 @@
     flex-direction: column;
     gap: 48px;
     position: relative;
+    overflow-x: hidden;
 }
 
 .close-contact-viewer {
@@ -166,20 +167,38 @@
 
 .dialog-contact-settings {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 428px;
+    height: calc(100vh - 172px);
+    background-color: transparent;
+    border: unset;
+    position: fixed;
+    top: 96px;
+    left: calc(50% - 214px);
+    overflow-x: hidden;
+}
+
+.dialog-contact-settings[open] {
+    display: block;
+}
+
+.section-contact-settings {
+    margin: 0;
     padding: 10px;
     background-color: #FFFFFF;
     border: unset;
     border-radius: 20px 20px 0 20px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    display: none;
+    /* display: none; */
     position: absolute;
-    right: 8px;
     bottom: 16px;
-    left: unset;
+    left: calc(100% + 4px);
+    transition: 125ms right ease-in-out, 125ms left ease-in-out;
 }
 
-.dialog-contact-settings[open] {
-    display: block;
+.section-contact-settings-position {
+    left: calc(100% - 124px);
 }
 
 .contact-settings-button {
