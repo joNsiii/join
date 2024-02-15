@@ -8,7 +8,7 @@ async function init() {
     await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
-    loadUserData()
+    loadUserData();
 }
 
 async function loadUsers() {
@@ -19,21 +19,25 @@ async function loadUsers() {
     }
 }
 
-function isLoggedIn() {
+function userIsLoggedIn() {
     const sessionToken = sessionStorage.getItem('session_token');
+    return sessionToken !== null;
+}
+
+function guestIsLoggedIn() {
+    const sessionToken = sessionStorage.getItem('guest_token');
     return sessionToken !== null;
 }
 
 function loadUserData() {
     let userId = sessionStorage.getItem('session_token');
-    console.log(userId);
     let userData = users.find(u => u.userId == userId);
-
     if (userData) {
         currentUserData = userData;
-        console.log('Current user data:', currentUserData);
     }
 }
+
+
 
 window.addEventListener('DOMContentLoaded', function () {
     if (isLoggedIn()) {

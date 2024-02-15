@@ -11,6 +11,7 @@ if (msg) {
     }, "6000");
 }
 
+
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
@@ -19,17 +20,17 @@ function checkLogin() {
         rememberMe();
         console.log('Login successfully');
         sessionStorage.setItem('session_token', loggedInUser.userId);
-        window.location.href = 'summary.html'; 
+        window.location.href = 'summary.html';
     } else {
         wrongPassword();
     }
 }
 
 function rememberMeStatus() {
-    if(checkStatus == true){
+    if (checkStatus == true) {
         checkStatus = false;
         console.log('unchecked')
-    }else {
+    } else {
         checkStatus = true;
         console.log('checked')
     }
@@ -37,8 +38,8 @@ function rememberMeStatus() {
 
 function rememberMe() {
     let email = document.getElementById('email-field').value;
-    let password = document.getElementById('password-type').value;   
-    if(checkStatus == true){
+    let password = document.getElementById('password-type').value;
+    if (checkStatus == true) {
         localStorage.setItem('remember-me-email', email);
         localStorage.setItem('remember-me-password', password);
     }
@@ -46,12 +47,12 @@ function rememberMe() {
 
 function loadRememberMe() {
     loadCheckBoxStatus();
-    let savedEmail =  localStorage.getItem('remember-me-email');
+    let savedEmail = localStorage.getItem('remember-me-email');
     let savedPassword = localStorage.getItem('remember-me-password');
-    if(savedEmail) {
+    if (savedEmail) {
         document.getElementById('email-field').value = savedEmail;
     }
-    if(savedPassword) {
+    if (savedPassword) {
         document.getElementById('password-type').value = savedPassword;
     }
 }
@@ -62,10 +63,10 @@ function isKeyInLocalStorage() {
 
 function loadCheckBoxStatus() {
     let checkBox = document.getElementById('checkbox-remember-me');
-    if(isKeyInLocalStorage()) {
+    if (isKeyInLocalStorage()) {
         checkBox.src = "./img/checkmark_2_18x18.png";
         checkStatus = true;
-    }else {
+    } else {
         checkBox.src = "./img/checkmark-unchecked.png";
         checkStatus = false;
     }
@@ -78,6 +79,11 @@ function toggleCheckboxLogin() {
     } else {
         checkBox.src = "./img/checkmark-unchecked.png";
     }
+}
+
+function guestLogin() {
+    sessionStorage.setItem('session_token', 'guest');
+    window.location.href = 'summary.html';
 }
 
 document.getElementById('password-type').addEventListener('input', togglePasswordLogin);
