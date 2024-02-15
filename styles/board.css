@@ -267,7 +267,7 @@ dialog[open] {
 }
 
 .board-task-value-bar {
-    width: 50%;
+    width: 0%;
     height: 8px;
     background-color: #4589FF;
     border-radius: 16px;
