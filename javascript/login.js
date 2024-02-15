@@ -1,3 +1,5 @@
+let checked = false;
+
 /**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
@@ -6,7 +8,6 @@ if (msg) {
     setTimeout(() => {
         msgPopup.classList.add('d-none');
     }, "6000");
-
 }
 
 function checkLogin() {
@@ -21,6 +22,11 @@ function checkLogin() {
     } else {
         wrongPassword();
     }
+}
+
+function rememberMe() {
+    let checked = document.getElementById('checkbox-remember-me');
+
 }
 
 document.getElementById('password-type').addEventListener('input', togglePasswordLogin);
