@@ -16,3 +16,21 @@ function changeImageBack1() {
     successImage.src = 'img/success-bg-blue.png'
 }
 
+function dayTimeGretting() {
+    let greet = [
+        'What are you doing that early?',
+        'Good Morning',
+        'Good Afternoon',
+        'Good Evening'
+      ][ parseInt(new Date().getHours() / 24 * 4) ];
+      document.getElementById('daytime-greet').innerHTML = greet + ',';
+}
+
+function greetUser() {
+    let nameBox = document.getElementById('greeting-name'); 
+    if(currentUserData !== undefined) {
+        nameBox.innerHTML = currentUserData.name;
+    }else {
+        nameBox.innerHTML = 'Guest';
+    }
+}
