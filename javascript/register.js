@@ -71,8 +71,6 @@ if (document.getElementById('password-type').value == '' &&
     passwordOutline2.classList.remove('bad-outline');
     document.getElementById('message').innerHTML = '';
     }
-
-
 }
 
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
@@ -122,7 +120,7 @@ function toggleCheckbox() {
     }
 }
 
-function login() {
+function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
     let input = document.getElementById('password-parent');
 
