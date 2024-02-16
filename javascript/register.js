@@ -2,17 +2,17 @@ let users = [];
 let newArray = []; /* delete our backend-users-array */
 
 async function addUser() {
+    registerBtn.disabled = true;
     let date = new Date();
     let userId = date.getTime();
     let name = document.getElementById('username');
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
-    if (users.find(u => name.value === u.name)) {
+    if (users.find(u => name.value === u.name )) {
         return alert('Username already exist!!');
     } if (users.find(u => email.value === u.email)) {
         return alert('Email already exist!!');
     }
-
     let newUser = {
         'name': name.value,
         'email': email.value,
@@ -24,27 +24,28 @@ async function addUser() {
     }
     users.push(newUser);
     await setItem('users', JSON.stringify(users));
-    window.location.href = 'login.html?msg=You Signed Up successfully'
+    resetButton();
+    window.location.href = 'login.html?msg=You Signed Up successfully';
 }
 
-function checkPassword() {
-    let password = document.getElementById('password-type').value;
-    let confirmPassword = document.getElementById('password-type2').value;
-    if (password === confirmPassword) {
-        addUser();
-    } else {
-    //     let pInput1 = document.getElementById('password-input1');
-    //     let pInput2 = document.getElementById('password-input2');
-
-    //     pInput1.classList.add('bad-outline');
-    //     pInput2.classList.add('bad-outline');
-        alert('PASSWORDS ARE DIFFERENT!!!')
-    }
+function resetButton() {
+    registerBtn.disabled = false;
 }
 
-function passwordValidation() {
-let passwordOutline1 = document.getElementById('password-parent');
-let passwordOutline2 = document.getElementById('password-input2');
+// function checkPassword() {
+//     let password = document.getElementById('password-type').value;
+//     let confirmPassword = document.getElementById('password-type2').value;
+//     if (password === confirmPassword) {
+//         addUser();
+//     } else {
+
+//     }
+// }
+
+    function passwordValidation() {
+
+    let passwordOutline1 = document.getElementById('password-parent');
+    let passwordOutline2 = document.getElementById('password-input2');
 
 if (document.getElementById('password-type').value ==
     document.getElementById('password-type2').value) {
@@ -71,7 +72,7 @@ if (document.getElementById('password-type').value == '' &&
     passwordOutline2.classList.remove('bad-outline');
     document.getElementById('message').innerHTML = '';
     }
-}
+  }
 
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
     passwordField.addEventListener('input', togglePassword);
@@ -129,3 +130,5 @@ function wrongPassword() {
         input.classList.add("bad-outline");
     }
 }
+
+

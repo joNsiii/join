@@ -1,11 +1,22 @@
 /* dialog-edit-contact */
 #dialog-edit-contact[open] {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .dialog-contacts {
     border-radius: 30px;
     display: flex;
+    position: absolute;
+    top: calc(50vh - 296px);
+    left: 100%;
+    /* left: calc(50% - 606px); */
+    transition: 125ms left ease-in-out;
+}
+
+.dialog-contacts-position {
+    left: calc(50% - 606px);
+    /* left: 100%; */
 }
 
 .dialog-contacts-left {
@@ -72,7 +83,9 @@
     box-sizing: border-box;
     margin-top: 138px;
     width: 120px;
+    min-width: 120px;
     height: 120px;
+    min-height: 120px;
     font-family: 'Inter', sans-serif;
     font-size: 47px;
     font-weight: 500;
@@ -86,11 +99,14 @@
     align-items: center;
 }
 
-.add-contact-form {
-    margin-top: 71px;
+.add-contact-form-group {
     display: flex;
     flex-direction: column;
     gap: 48px;
+}
+
+.add-contact-form {
+    margin-top: 71px;
 }
 
 .add-contact-fieldset {
@@ -164,7 +180,6 @@
 .contact-form-button:hover {
     border: 2px solid #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 .contact-form-button:active {
@@ -194,7 +209,6 @@
     object-fit: cover;
     object-position: center;
 }
-
 
 .contact-form-button-dark {
     padding: 16px;
@@ -229,6 +243,7 @@
 /* dialog-add-contact */
 #dialog-add-contact[open] {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .dialog-contacts-left-clear {
@@ -272,7 +287,9 @@
     box-sizing: border-box;
     margin-top: 138px;
     width: 120px;
+    min-width: 120px;
     height: 120px;
+    min-height: 120px;
     font-family: 'Inter', sans-serif;
     font-size: 47px;
     font-weight: 500;

@@ -3,12 +3,17 @@ let contacts = [];
 let currentUserData;
 let userId = sessionStorage.getItem('session_token');
 
-
 async function init() {
     await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
-    loadUserData()
+    loadUserData();
+    loadUserImage();
+    let greetingName = document.getElementById('greeting-name');
+    if (greetingName) {
+        dayTimeGretting();
+        greetUser();
+    }
 }
 
 async function loadUsers() {
@@ -19,29 +24,60 @@ async function loadUsers() {
     }
 }
 
-function isLoggedIn() {
+function userIsLoggedIn() {
     const sessionToken = sessionStorage.getItem('session_token');
+    return sessionToken !== null;
+}
+
+function guestIsLoggedIn() {
+    const sessionToken = sessionStorage.getItem('guest_token');
     return sessionToken !== null;
 }
 
 function loadUserData() {
     let userId = sessionStorage.getItem('session_token');
-    console.log(userId);
     let userData = users.find(u => u.userId == userId);
-
     if (userData) {
         currentUserData = userData;
-        console.log('Current user data:', currentUserData);
     }
 }
 
-window.addEventListener('DOMContentLoaded', function () {
-    if (isLoggedIn()) {
-        console.log('User is logged in');
-    } else {
-        console.log('User is not logged in');
+function loadUserImage() {
+    let userLogo = document.getElementById('user-initials');
+    if (userIsLoggedIn()) {
+        userInitials(userLogo);
+    } else if (guestIsLoggedIn()) {
+        guestLogo(userLogo);
     }
-});
+}
+
+function userInitials(userLogo) {
+    let initials = currentUserData.name.match(/(\b\S)?/g).join("").toUpperCase()
+    userLogo.innerHTML = initials;
+}
+
+function guestLogo(userLogo) {
+    userLogo.innerHTML = 'G'
+}
+
+function dayTimeGretting() {
+    let greet = [
+        'What are you doing that early?',
+        'Good Morning',
+        'Good Afternoon',
+        'Good Evening'
+    ][parseInt(new Date().getHours() / 24 * 4)];
+    document.getElementById('daytime-greet').innerHTML = greet + ',';
+}
+
+function greetUser() {
+    let nameBox = document.getElementById('greeting-name');
+    if (currentUserData !== undefined) {
+        nameBox.innerHTML = currentUserData.name;
+    } else {
+        nameBox.innerHTML = 'Guest';
+    }
+}
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");

@@ -5,6 +5,7 @@ load('contactSample');
 function updateEditForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
+    setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
     setElementAttribute('contact-form-delete-button', 'onclick', `deleteContact(${j})`);
@@ -36,10 +37,17 @@ function renderEditFormInfo(j, info) {
 
 
 function updateEditedContact(j) {
-    saveEditContact(j);
-    closeDialog('dialog-edit-contact');
-    initContacts();
-    updateContactViewer(j);
+    let name = getInputValue('edit-contact-name');
+    let mail = getInputValue('edit-contact-mail');
+    if (name == '' || mail == '') {
+        console.log('no function');
+    } else {
+        saveEditContact(j);
+        closeDialog('dialog-edit-contact');
+        initContacts();
+        updateContactViewer(j);
+        console.log('saved');
+    }
 }
 
 
@@ -66,12 +74,15 @@ function deleteContact(j) {
     contactSample.splice(j, 1);
     showUserInfo(false);
     // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
+    closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-viewer');
     sortContactsByName(contactSample);
     collectInitials(contactSample);
     renderContacts();
     save('contactSample', contactSample);
     // updateContactViewer(j);
+
+    console.log('deleted');
 }
 
 
@@ -91,19 +102,19 @@ function closeContactViewerMobile() {
 
 
 async function updateContactList() {
-    addContact();
+    await addContact();
     closeDialog('dialog-add-contact');
     resetAddContactInput();
     return initContacts();
 }
 
 
-function addContact() {
+async function addContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
     let phone = getInputValue('add-contact-phone');
     let user = addUserContact(name, mail, phone);
-    addToCurrentUser(user);
+    await addToCurrentUser(user, mail);
     contactSample.push(user);
 }
 
@@ -117,14 +128,54 @@ function addUserContact(name, mail, phone) {
 }
 
 
-async function addToCurrentUser(user) {
-    let userData = users.find(u => u.id == userId);
-
-    if (userData) {
+async function addToCurrentUser(user, mail) {
+    let userData = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
+    if (checkedUser) {
+        return console.log('already in')   /* PopUp statt console.log()  */
+    } else {
         userData['contacts'].push(user);
     }
     await setItem('users', users);
 }
+
+
+function closeEditContact() {
+    setClassOnCommand('section-edit-contact', 'remove', 'dialog-contacts-position');
+    setTimeout(() => {
+        closeDialog('dialog-edit-contact')
+    }, 125);
+}
+
+
+function openAddContact() {
+    openDialog('dialog-add-contact');
+    setClassOnCommand('section-add-contact', 'add', 'dialog-contacts-position');
+}
+
+
+function closeAddContact() {
+    setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
+    setTimeout(() => {
+        closeDialog('dialog-add-contact');
+        resetAddContactInput();
+    }, 125);
+}
+
+
+function openContactSettings() {
+    openDialog('dialog-contact-settings');
+    setClassOnCommand('section-contact-settings', 'add', 'section-contact-settings-position');
+}
+
+
+function closeContactSettings() {
+    setClassOnCommand('section-contact-settings', 'remove', 'section-contact-settings-position');
+    setTimeout(() => {
+        closeDialog('dialog-contact-settings');
+    }, 125);
+}
+
 
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];

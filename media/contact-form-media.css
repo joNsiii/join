@@ -8,6 +8,14 @@
         max-width: 396px;
         flex-direction: column;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+        top: 100vh;
+        left: calc(50% - 198px);
+        transition: 125ms top ease-in-out;
+    }
+
+    .dialog-contacts-position {
+        top: calc(50vh - 380px);
+        left: calc(50% - 198px);
     }
 
     .dialog-contacts-left {

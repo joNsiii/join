@@ -145,6 +145,29 @@ header span {
 }
 
 /* dropdown menu */
+
+
+.profile-img {
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    border: 3px solid #2A3647;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img:hover {
+    background-color: hsla(216, 78%, 22%, 0.122);
+}
+
+.user-initials {
+    font-size: 24px;
+    font-weight: 700;
+    color: #29abe2;
+}
+
 .dropdown-menu {
     position: relative;
     display: inline-block;
@@ -191,7 +214,7 @@ header span {
         display: flex !important;
         transform: translateX(100%);
         animation: flyIn 1s forwards;
-        left: -50px ;
+        left: -50px;
         top: 40px;
     }
 
@@ -218,7 +241,7 @@ header span {
 
         100% {
             left: -50px;
-        }   
+        }
     }
 
     .mobile-navbar {

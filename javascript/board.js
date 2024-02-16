@@ -3,7 +3,8 @@ let boardTasks = [
     {
         taskId: 0,
         title: "Start with JS",
-        description: "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
+        description:
+            "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
         category: "toDo",
         heading: "Technical Task",
         subtasks: [
@@ -15,7 +16,7 @@ let boardTasks = [
             {
                 subtaskId: 1,
                 subtasksText: "adsfasdöflasdjfökasdf",
-                isChecked: false,
+                isChecked: true,
             },
         ],
         sub_users: [
@@ -124,8 +125,8 @@ function renderEachTask() {
         } else if (task.category === "done") {
             containerId = "done";
         }
-
         createHTML(task, containerId);
+        updateProgressBar(task);
         renderSubTask(task);
     }
 }
@@ -135,6 +136,36 @@ function clearHTML() {
     document.getElementById("inProgress").innerHTML = "";
     document.getElementById("awaitFeedback").innerHTML = "";
     document.getElementById("done").innerHTML = "";
+}
+
+function updateProgressBar(task) {
+    let currentSubtask = 0;
+    // debugger;
+    let percent = (currentSubtask + 1) / task["subtasks"].length;
+    if (percent !== Infinity) {
+        percent = Math.round(percent * 100);
+        document.getElementById("progress-bar").style.width = `${percent}%`;
+        let test = percentageToFraction(percent);
+        console.log(test);
+        // progress bar steps
+        document.getElementById("subtask-progress-text").innerHTML += `${test}`;
+    } else {
+        return;
+    }
+}
+
+function percentageToFraction(percentage) {
+    var decimal = percentage / 100;
+    var gcd = function (a, b) {
+        if (b < 0.0000001) return a;
+        return gcd(b, Math.floor(a % b));
+    };
+    var numerator = decimal * 10000;
+    var denominator = 10000;
+    var divisor = gcd(numerator, denominator);
+    numerator /= divisor;
+    denominator /= divisor;
+    return numerator + "/" + denominator;
 }
 
 function createHTML(task, containerId, returnHtml = false) {
@@ -151,9 +182,9 @@ function createHTML(task, containerId, returnHtml = false) {
                 </div>
                 <div class="board-task-progress-group">
                     <div class="board-task-max-bar">
-                        <div class="board-task-value-bar"></div>
+                        <div id="progress-bar" class="board-task-value-bar"></div>
                     </div>
-                    <div class="board-task-progress-text">1/2 Subtasks</div>
+                    <div id="subtask-progress-text" class="board-task-progress-text"></div>
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
@@ -176,18 +207,44 @@ function createHTML(task, containerId, returnHtml = false) {
 
 // overlay html
 function insertTodoDataIntoDialog(task, dialog) {
+    const type = dialog.querySelector(".dbt-type");
     const title = dialog.querySelector(".dbt-title");
     const description = dialog.querySelector(".dbt-description");
     const priority = dialog.querySelector(".dbt-priority");
     const date = dialog.querySelector(".dbt-date");
     const subtask = dialog.querySelector(".dbt-collector");
     const subUsersNames = generateSubUsersHtml(task.sub_users);
+    let subtaskText = document.getElementById("subtask-content");
 
+    type.classList.add(`${setCategoryStyle(task.heading)}`);
+    type.innerText = task.heading;
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
     date.innerHTML = task.date;
     subtask.innerHTML = subUsersNames;
+    subtaskText.innerHTML = subTasksRender(task);
+}
+
+function subTasksRender(task) {
+    // debugger
+    let subtasksHtml = "";
+    for (let i = 0; i < task["subtasks"].length; i++) {
+        const subtask = task["subtasks"][i];
+        let imagePath;
+        if (subtask.isChecked) {
+            imagePath = "./img/checkmark.png";
+        } else {
+            imagePath = "./img/checkmark-unchecked.png";
+        }
+        subtasksHtml += /*html */ `
+            <div class="dbt-subtask-group">
+                <img class="dbt-subtask-img" src="${imagePath}" alt="check-button-complete">
+                <div class="dbt-subtask-text">${subtask.subtasksText}</div>
+            </div>
+        `
+    }
+    return subtasksHtml;
 }
 
 function generateSubUsersHtml(subUsers) {
@@ -292,7 +349,6 @@ function highlight(event, category) {
     event.preventDefault();
     const categoryElement = document.getElementById(category);
     let highlightElement = categoryElement.querySelector(".highlight-placeholder");
-
     if (!highlightElement) {
         highlightElement = document.createElement("div");
         highlightElement.className = "highlight-placeholder";
@@ -303,13 +359,13 @@ function highlight(event, category) {
 }
 
 function removeHighlight(event, category) {
-    setTimeout(() => {
-        const categoryElement = document.getElementById(category);
-        if (!categoryElement.contains(event.relatedTarget)) {
-            const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+    const categoryElement = document.getElementById(category);
+    if (!categoryElement.contains(event.relatedTarget)) {
+        const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+        if (existingHighlight) {
             existingHighlight.remove();
         }
-    }, 100);
+    }
 }
 
 function getDraggedElementData() {
