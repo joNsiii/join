@@ -249,7 +249,7 @@ function subTasksRender(task) {
 function subtaskStatus(taskId, subtaskId) {
     let task = boardTasks.find((t) => t.taskId === taskId);
     let dialog = document.getElementById("dialog");
-    subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
+    let subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
 
     subtask.isChecked = !subtask.isChecked;
     insertTodoDataIntoDialog(task, dialog);
