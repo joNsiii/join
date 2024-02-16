@@ -39,6 +39,11 @@ header span {
     height: 24px;
 }
 
+.help-img {
+    width: 20px;
+    height: 20px;
+}
+
 .side-bar {
     z-index: 200;
     display: flex;
