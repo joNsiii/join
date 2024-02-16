@@ -332,7 +332,7 @@ function updateContactViewer(j) {
     setUserInfo(j);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button', 'onclick', `deleteContact(${j})`);
+    setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${j})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
 }
 
