@@ -227,7 +227,6 @@ function insertTodoDataIntoDialog(task, dialog) {
 }
 
 function subTasksRender(task) {
-    // debugger
     let subtasksHtml = "";
     for (let i = 0; i < task["subtasks"].length; i++) {
         const subtask = task["subtasks"][i];
@@ -238,13 +237,22 @@ function subTasksRender(task) {
             imagePath = "./img/checkmark-unchecked.png";
         }
         subtasksHtml += /*html */ `
-            <div class="dbt-subtask-group">
+            <div onclick="subtaskStatus(${task.taskId}, ${subtask.subtaskId})" class="dbt-subtask-group">
                 <img class="dbt-subtask-img" src="${imagePath}" alt="check-button-complete">
                 <div class="dbt-subtask-text">${subtask.subtasksText}</div>
             </div>
-        `
+        `;
     }
     return subtasksHtml;
+}
+
+function subtaskStatus(taskId, subtaskId) {
+    let task = boardTasks.find((t) => t.taskId === taskId);
+    let dialog = document.getElementById("dialog");
+    subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
+
+    subtask.isChecked = !subtask.isChecked;
+    insertTodoDataIntoDialog(task, dialog);
 }
 
 function generateSubUsersHtml(subUsers) {
@@ -268,6 +276,7 @@ function generateSubUsersHtml(subUsers) {
 }
 
 async function openDetails(taskId) {
+    currentDisplayedTaskId = taskId;
     const task = boardTasks.find((task) => task.taskId === taskId);
 
     if (!task) {
