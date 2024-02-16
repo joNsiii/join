@@ -206,6 +206,12 @@ dialog[open] {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    cursor: pointer;
+    transition: all 0.124s ease-in-out;
+}
+
+.board-task-card:hover {
+    transform: scale(1.03);
 }
 
 .btc-type {
