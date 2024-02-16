@@ -205,6 +205,7 @@ function resetAddContactInput() {
 
 function getLastInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
+    name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
     let space = name.indexOf(' ');
     let last = '';
     while (space > -1) {
