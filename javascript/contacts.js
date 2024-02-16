@@ -418,7 +418,24 @@ function showUserInfo(logical) {
     value = (logical) ? 55 : value;
     value = (value < 55) ? 3840 : value;
     let style = getElement('contact-user-animation');
-    style.innerHTML = `
+    let cssCodeIn = animateContactUserIn(value);
+    let cssCodeOut = animateContactUserOut(value);
+    style.innerHTML = (logical) ? cssCodeIn : cssCodeOut;
+}
+
+
+function animateContactUserIn(value) {
+    return `
+        .contact-user-animation {
+            left: ${value}px;
+            transition: 125ms left ease-in-out;
+        }
+    `;
+}
+
+
+function animateContactUserOut(value) {
+    return `
         .contact-user-animation {
             left: ${value}px;
         }

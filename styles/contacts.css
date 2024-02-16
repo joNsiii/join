@@ -233,7 +233,7 @@
     position: absolute;
     top: 205px;
     left: 55px;
-    transition: 125ms left ease-in-out;
+    /* transition: 125ms left ease-in-out; */
 }
 
 .contact-user-enabled {
