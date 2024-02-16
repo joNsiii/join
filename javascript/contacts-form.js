@@ -119,10 +119,18 @@ function closeContactViewerMobile() {
 
 
 async function updateContactList() {
+    let name = getInputValue('add-contact-name');
+
     await addContact();
     closeDialog('dialog-add-contact');
     resetAddContactInput();
-    return initContacts();
+    // return initContacts();
+
+    await initContacts();
+    let createdIndex = contactSample.find(c => c.name == name);
+    let renderIndex = contactSample.indexOf(createdIndex);
+    showContact(renderIndex);
+    location.href = `#contacts-contact-${renderIndex}`;
 }
 
 
@@ -167,6 +175,7 @@ async function updateEditedContactList(j) {
 
 
 async function editContact(j) {
+    let currentMail = contactSample[j]['mail'];
     let contactId = contactSample[j]['contact-id'];
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
@@ -174,7 +183,7 @@ async function editContact(j) {
 
     // Bedingung hier einfuegen!!!
     let alreadyExisting = contactSample.find(c => c['mail'] == mail);
-    if (alreadyExisting && mail === alreadyExisting['mail']) {
+    if (alreadyExisting && mail === alreadyExisting['mail'] && mail != currentMail) {
         console.log('already existing');
         console.log(alreadyExisting['name']);
     } else {
