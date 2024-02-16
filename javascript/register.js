@@ -52,9 +52,9 @@ if (document.getElementById('password-type').value ==
     //Wollen wir eine grüne Outline? Wenn nein, dann bitte removen.
     passwordOutline1.classList.add('good-outline');
     passwordOutline2.classList.add('good-outline');
-    document.getElementById('message').innerHTML = 'Matching!';
+    document.getElementById('message').innerHTML = '';
 } else {
-    document.getElementById('message').innerHTML = 'Not matching';
+    document.getElementById('message').innerHTML = 'Ups! Your password\'s don\'t match';
     passwordOutline1.classList.add('bad-outline');
     passwordOutline2.classList.add('bad-outline');
 
@@ -96,7 +96,7 @@ function togglePassword() {
         toggleImg.src = "./img/lock.png";
         passwordField.type = "password";
     }
-}
+};
 
 function togglePasswordIcon(passwordField, toggleImg) {
     if (passwordField) {
@@ -109,9 +109,9 @@ function togglePasswordIcon(passwordField, toggleImg) {
             passwordField.type = "password";
         }
     }
-}
+};
 
-function toggleCheckbox() {
+function toggleCheckboxLogin() {
     let checkBox = document.getElementById('checkbox-remember-me');
 
     if (checkBox.src.includes("checkmark-unchecked.png")) {
@@ -119,7 +119,7 @@ function toggleCheckbox() {
     } else {
         checkBox.src = "./img/checkmark-unchecked.png";
     }
-}
+};
 
 function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
@@ -129,6 +129,4 @@ function wrongPassword() {
         warning.classList.remove("d-none");
         input.classList.add("bad-outline");
     }
-}
-
-
+};
