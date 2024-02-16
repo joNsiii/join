@@ -67,6 +67,12 @@
     }
 }
 
+@media (max-width: 428px) {
+    .dialog-contact-settings {
+        left: 0;
+    }
+}
+
 @media (max-width: 400px) {
     .contacts-contact {
         gap: 25px;

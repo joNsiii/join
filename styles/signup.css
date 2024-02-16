@@ -142,6 +142,7 @@ body {
     align-items: center;
     gap: 4px;
     color: #A8A8A8;
+    margin-top: -8px;
 }
 
 .policy a {
@@ -232,7 +233,7 @@ body {
 }
 
 .good-outline {
-    border: 1px solid green;
+    border: 1px solid #29ABE2;
     transition: all 0.25s ease-in-out;
 }
 
@@ -259,10 +260,26 @@ img[src*="./img/lock.png"] {
 
 .no-match {
     margin: 0;
+    margin-bottom: -4px;
     height: 20px;
     width: fit-content;
+    color: #FF8190;
+    font-size: 12px;
 }
 
 #password-input2 {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+}
+
+.checkbox:hover {
+    cursor: pointer;
 }

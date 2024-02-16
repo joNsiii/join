@@ -9,8 +9,11 @@ async function init() {
     hightlightCurrentButton();
     loadUserData();
     loadUserImage();
-    dayTimeGretting();
-    greetUser();
+    let greetingName = document.getElementById('greeting-name');
+    if (greetingName) {
+        dayTimeGretting();
+        greetUser();
+    }
 }
 
 async function loadUsers() {
@@ -45,7 +48,8 @@ function loadUserImage() {
         userInitials(userLogo);
     } else if (guestIsLoggedIn()) {
         guestLogo(userLogo);
-}}
+    }
+}
 
 function userInitials(userLogo) {
     let initials = currentUserData.name.match(/(\b\S)?/g).join("").toUpperCase()
@@ -54,6 +58,25 @@ function userInitials(userLogo) {
 
 function guestLogo(userLogo) {
     userLogo.innerHTML = 'G'
+}
+
+function dayTimeGretting() {
+    let greet = [
+        'What are you doing that early?',
+        'Good Morning',
+        'Good Afternoon',
+        'Good Evening'
+    ][parseInt(new Date().getHours() / 24 * 4)];
+    document.getElementById('daytime-greet').innerHTML = greet + ',';
+}
+
+function greetUser() {
+    let nameBox = document.getElementById('greeting-name');
+    if (currentUserData !== undefined) {
+        nameBox.innerHTML = currentUserData.name;
+    } else {
+        nameBox.innerHTML = 'Guest';
+    }
 }
 
 async function includeHTML() {

@@ -46,7 +46,7 @@ dialog[open] {
 .board-headline {
     margin: 0;
     height: 73px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
@@ -64,11 +64,11 @@ dialog[open] {
     box-sizing: border-box;
     padding: 11px 16px;
     width: 312px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
-    border: 1px solid #A8A8A8;
+    border: 1px solid #a8a8a8;
     border-radius: 10px;
     outline: none;
 }
@@ -79,31 +79,37 @@ dialog[open] {
     height: 32px;
     object-fit: cover;
     object-position: center;
-    border-left: 1px solid #D1D1D1;
+    border-left: 1px solid #d1d1d1;
     position: absolute;
     top: 8px;
     right: 17px;
+    cursor: pointer;
 }
 
 .board-task-button {
     padding: 8px 16px;
-    background-color: #2A3647;
+    background-color: #2a3647;
     border: unset;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
+}
+
+.board-task-button:hover {
+    background-color: #2FBAF5;
 }
 
 .btb-text {
     width: 92px;
     height: 24px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 21px;
     font-weight: 700;
     line-height: 25.2px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .btb-img {
@@ -137,11 +143,11 @@ dialog[open] {
 }
 
 .board-header-title {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
-    color: #42526E;
+    color: #42526e;
 }
 
 .board-header-img {
@@ -182,13 +188,13 @@ dialog[open] {
     box-sizing: border-box;
     width: 100%;
     height: 48px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
-    color: #A8A8A8;
-    background-color: #E7E7E7;
-    border: 1px dotted #A8A8A8;
+    color: #a8a8a8;
+    background-color: #e7e7e7;
+    border: 1px dotted #a8a8a8;
     border-radius: 10px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     display: flex;
@@ -200,12 +206,18 @@ dialog[open] {
     box-sizing: border-box;
     padding: 16px;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     gap: 24px;
+    cursor: pointer;
+    transition: all 0.124s ease-in-out;
+}
+
+.board-task-card:hover {
+    transform: scale(1.03);
 }
 
 .btc-type {
@@ -213,20 +225,20 @@ dialog[open] {
     margin: 0;
     padding: 4px 16px;
     width: fit-content;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 8px;
 }
 
 .btc-type-blue {
-    background-color: #0038FF;
+    background-color: #0038ff;
 }
 
 .btc-type-green {
-    background-color: #1FD7C1;
+    background-color: #1fd7c1;
 }
 
 .btc-group {
@@ -236,19 +248,19 @@ dialog[open] {
 }
 
 .btc-title {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
-    color: #2A3647;
+    color: #2a3647;
 }
 
 .btc-description {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
-    color: #A8A8A8;
+    color: #a8a8a8;
     text-overflow: ellipsis;
     overflow: hidden;
     max-height: 3lh;
@@ -262,20 +274,20 @@ dialog[open] {
 
 .board-task-max-bar {
     width: 128px;
-    background-color: #F4F4F4;
+    background-color: #f4f4f4;
     border-radius: 8px;
 }
 
 .board-task-value-bar {
     width: 0%;
     height: 8px;
-    background-color: #4589FF;
+    background-color: #4589ff;
     border-radius: 16px;
 }
 
 .board-task-progress-text {
     height: 14px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 12px;
     font-weight: 400;
     line-height: 14.4px;
@@ -297,12 +309,12 @@ dialog[open] {
     box-sizing: border-box;
     width: 32px;
     height: 32px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 12px;
     font-weight: 400;
     line-height: 14.4px;
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF;
+    color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 45px;
     display: flex;
     justify-content: center;
@@ -310,51 +322,51 @@ dialog[open] {
 }
 
 .bcu-orange {
-    background-color: #FF7A00;
+    background-color: #ff7a00;
 }
 
 .bcu-green {
     margin-left: -8px;
-    background-color: #1FD7C1;
+    background-color: #1fd7c1;
 }
 
 .bcu-dark-blue {
     margin-left: -8px;
-    background-color: #462F8A;
+    background-color: #462f8a;
 }
 
 .bcu-magenta {
-    background-color: #FC71FF;
+    background-color: #fc71ff;
 }
 
 .bcu-blue {
     margin-left: -8px;
-    background-color: #6E52FF;
+    background-color: #6e52ff;
 }
 
 .bcu-purple {
     margin-left: -8px;
-    background-color: #9327FF;
+    background-color: #9327ff;
 }
 
 .bcu-yellow {
-    background-color: #FFBB2B;
+    background-color: #ffbb2b;
 }
 
 .bcu-red {
     margin-left: -8px;
-    background-color: #FF4646;
+    background-color: #ff4646;
 }
 
 .board-task-value-bar-complete {
     width: 100%;
     height: 8px;
-    background-color: #4589FF;
+    background-color: #4589ff;
     border-radius: 16px;
 }
 
 .bcu-blue-green {
-    background-color: #00BEE8;
+    background-color: #00bee8;
 }
 
 .highlight-placeholder {
@@ -372,5 +384,3 @@ dialog[open] {
         flex-direction: row;
     }
 }
-
-

@@ -30,12 +30,18 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    width: 104px;
+    gap: 16px;
 }
 
 .help-img:hover {
     width: 24px;
     height: 24px;
+}
+
+.help-img {
+    width: 20px;
+    height: 20px;
 }
 
 .side-bar {
@@ -148,8 +154,8 @@ header span {
 
 
 .profile-img {
-    width: 56px;
-    height: 56px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     border: 3px solid #2A3647;
     border-radius: 50%;
@@ -205,6 +211,22 @@ header span {
 
 .show {
     display: flex;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.center a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
 }
 
 @media (max-width: 730px) {
