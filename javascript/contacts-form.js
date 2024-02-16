@@ -102,19 +102,19 @@ function closeContactViewerMobile() {
 
 
 async function updateContactList() {
-    addContact();
+    await addContact();
     closeDialog('dialog-add-contact');
     resetAddContactInput();
     return initContacts();
 }
 
 
-function addContact() {
+async function addContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
     let phone = getInputValue('add-contact-phone');
     let user = addUserContact(name, mail, phone);
-    addToCurrentUser(user, mail);
+    await addToCurrentUser(user, mail);
     contactSample.push(user);
 }
 

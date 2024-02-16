@@ -67,7 +67,7 @@ async function initContacts() {
     //         'phone': currentUserData.contacts[1].phone
     //     }
     // ];
-    contactSample = getUserContactList();
+    contactSample = await getUserContactList();
     sortContactsByName(contactSample);
     collectInitials(contactSample);
     renderContacts();
@@ -77,11 +77,13 @@ async function initContacts() {
 }
 
 
-function getUserContactList() {
+async function getUserContactList() {
     let userContactList = [];
-    let userContact = getUserContact(userContactList);
+    getUserContact(userContactList);
+    // let userContact = getUserContact(userContactList);
     // userContactList.push(userContact);
-    let userSubcontacts = getUserSubcontacts(userContactList);
+    getUserSubcontacts(userContactList);
+    // let userSubcontacts = getUserSubcontacts(userContactList);
     // userContactList.push(userSubcontacts);
     return userContactList;
 }
