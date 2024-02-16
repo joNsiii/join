@@ -6,8 +6,8 @@ function updateEditForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
-    setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
-    setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
+    setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
+    setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContactList(${j})`);
     setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
 
     // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
@@ -42,7 +42,8 @@ function updateEditedContact(j) {
     if (name == '' || mail == '') {
         console.log('no function');
     } else {
-        saveEditContact(j);
+        updateEditedContactList(j);
+        // saveEditContact(j);
         closeDialog('dialog-edit-contact');
         initContacts();
         updateContactViewer(j);
@@ -137,6 +138,7 @@ async function addContact() {
 
 function addUserContact(name, mail, phone) {
     return {
+        'contact-id': contactSample.length - 1,
         'name': name,
         'mail': mail,
         'phone': phone
@@ -153,6 +155,39 @@ async function addToCurrentUser(user, mail) {
         userData['contacts'].push(user);
     }
     await setItem('users', users);
+}
+
+
+// For editUserContact()
+async function updateEditedContactList(j) {
+    await editContact(j);
+    closeDialog('dialog-edit-contact');
+    return initContacts();
+}
+
+
+async function editContact(j) {
+    let contactId = contactSample[j]['contact-id'];
+    let name = getInputValue('edit-contact-name');
+    let mail = getInputValue('edit-contact-mail');
+    let phone = getInputValue('edit-contact-phone');
+
+    // Bedingung hier einfuegen!!!
+    let alreadyExisting = contactSample.find(c => c['mail'] == mail);
+    if (alreadyExisting && mail === alreadyExisting['mail']) {
+        console.log('already existing');
+        console.log(alreadyExisting['name']);
+    } else {
+        let userData = users.find(u => u.userId == userId);
+        let userContact = userData.contacts.find(c => c['contact-id'] == contactId);
+        if (userContact) {
+            userContact['name'] = name;
+            userContact['mail'] = mail;
+            userContact['phone'] = phone;
+        }
+
+        setItem('users', users);
+    }
 }
 
 

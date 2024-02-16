@@ -91,6 +91,7 @@ async function getUserContactList() {
 
 function getUserContact(userContactList) {
     let userContact = {
+        'id': -1,
         'name': currentUserData.name + ' (You)',
         'mail': currentUserData.email,
         'phone': currentUserData.phone
@@ -104,6 +105,7 @@ function getUserSubcontacts(userContactList) {
     // let userSubcontacts = [];
     for (let i = 0; i < currentUserData.contacts.length; i++) {
         let userSubcontact = {
+            'contact-id': i,
             'name': currentUserData.contacts[i].name,
             'mail': currentUserData.contacts[i].mail,
             'phone': currentUserData.contacts[i].phone
