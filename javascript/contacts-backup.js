@@ -48,68 +48,13 @@ let currentContact;
 /**
  * Initializes the user's contacts.
  */
-async function initContacts() {
-    await init();
-    // contactSample = [
-    //     {
-    //         'name': currentUserData.name,
-    //         'mail': currentUserData.email,
-    //         'phone': currentUserData.phone
-    //     },
-    //     {
-    //         'name': currentUserData.contacts[0].name,
-    //         'mail': currentUserData.contacts[0].mail,
-    //         'phone': currentUserData.contacts[0].phone
-    //     },
-    //     {
-    //         'name': currentUserData.contacts[1].name,
-    //         'mail': currentUserData.contacts[1].mail,
-    //         'phone': currentUserData.contacts[1].phone
-    //     }
-    // ];
-    contactSample = getUserContactList();
+function initContacts() {
     sortContactsByName(contactSample);
     collectInitials(contactSample);
     renderContacts();
 
     // Bitte loeschen!!!
     save('contactSample', contactSample);
-}
-
-
-function getUserContactList() {
-    let userContactList = [];
-    let userContact = getUserContact(userContactList);
-    // userContactList.push(userContact);
-    let userSubcontacts = getUserSubcontacts(userContactList);
-    // userContactList.push(userSubcontacts);
-    return userContactList;
-}
-
-
-function getUserContact(userContactList) {
-    let userContact = {
-        'name': currentUserData.name + ' (You)',
-        'mail': currentUserData.email,
-        'phone': currentUserData.phone
-    };
-    userContactList.push(userContact);
-    // return userContact;
-}
-
-
-function getUserSubcontacts(userContactList) {
-    // let userSubcontacts = [];
-    for (let i = 0; i < currentUserData.contacts.length; i++) {
-        let userSubcontact = {
-            'name': currentUserData.contacts[i].name,
-            'mail': currentUserData.contacts[i].mail,
-            'phone': currentUserData.contacts[i].phone
-        }
-        userContactList.push(userSubcontact);
-        // userSubcontacts.push(userSubcontact);
-    }
-    // return userSubcontacts;
 }
 
 
