@@ -60,25 +60,6 @@ function guestLogo(userLogo) {
     userLogo.innerHTML = 'G'
 }
 
-function dayTimeGretting() {
-    let greet = [
-        'What are you doing that early?',
-        'Good Morning',
-        'Good Afternoon',
-        'Good Evening'
-    ][parseInt(new Date().getHours() / 24 * 4)];
-    document.getElementById('daytime-greet').innerHTML = greet + ',';
-}
-
-function greetUser() {
-    let nameBox = document.getElementById('greeting-name');
-    if (currentUserData !== undefined) {
-        nameBox.innerHTML = currentUserData.name;
-    } else {
-        nameBox.innerHTML = 'Guest';
-    }
-}
-
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
