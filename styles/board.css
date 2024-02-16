@@ -83,6 +83,7 @@ dialog[open] {
     position: absolute;
     top: 8px;
     right: 17px;
+    cursor: pointer;
 }
 
 .board-task-button {
@@ -94,6 +95,11 @@ dialog[open] {
     justify-content: center;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
+}
+
+.board-task-button:hover {
+    background-color: #2FBAF5;
 }
 
 .btb-text {
