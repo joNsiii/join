@@ -128,6 +128,7 @@ function renderEachTask() {
         createHTML(task, containerId);
         updateProgressBar(task);
         renderSubTask(task);
+        noTodoMessage();
     }
 }
 
@@ -137,6 +138,24 @@ function clearHTML() {
     document.getElementById("awaitFeedback").innerHTML = "";
     document.getElementById("done").innerHTML = "";
 }
+
+function noTodoMessage() {
+    const toDoContainer = document.getElementById("toDo");
+    const hasTasks = toDoContainer.children.length > 0;
+    const noTaskMessage = toDoContainer.querySelector(".board-no-task");
+
+    if (!hasTasks && !noTaskMessage) {
+        toDoContainer.innerHTML += /*html*/ `
+            <div class="board-content">
+                <div class="board-no-task">No tasks to do</div>
+            </div>
+        `;
+    } else if (hasTasks && noTaskMessage) {
+        noTaskMessage.parentNode.remove();
+    }
+}
+
+// progress bar
 
 function updateProgressBar(task) {
     let currentSubtask = 0;
@@ -167,6 +186,8 @@ function percentageToFraction(percentage) {
     denominator /= divisor;
     return numerator + "/" + denominator;
 }
+
+// HTML Task Card
 
 function createHTML(task, containerId, returnHtml = false) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
@@ -205,7 +226,25 @@ function createHTML(task, containerId, returnHtml = false) {
     }
 }
 
-// overlay html
+async function openDetails(taskId) {
+    currentDisplayedTaskId = taskId;
+    const task = boardTasks.find((task) => task.taskId === taskId);
+
+    if (!task) {
+        console.error("Todo item not found");
+        return;
+    }
+    const dialog = document.getElementById("dialog");
+    dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
+
+    await includeHTML();
+    insertTodoDataIntoDialog(task, dialog);
+    dialog.showModal();
+
+    setupCloseDialogMechanism();
+}
+
+// overlay
 function insertTodoDataIntoDialog(task, dialog) {
     const type = dialog.querySelector(".dbt-type");
     const title = dialog.querySelector(".dbt-title");
@@ -273,24 +312,6 @@ function generateSubUsersHtml(subUsers) {
         subUserNamesHtml = '<div class="dbt-contact-name">No users assigned</div>';
     }
     return subUserNamesHtml;
-}
-
-async function openDetails(taskId) {
-    currentDisplayedTaskId = taskId;
-    const task = boardTasks.find((task) => task.taskId === taskId);
-
-    if (!task) {
-        console.error("Todo item not found");
-        return;
-    }
-    const dialog = document.getElementById("dialog");
-    dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
-
-    await includeHTML();
-    insertTodoDataIntoDialog(task, dialog);
-    dialog.showModal();
-
-    setupCloseDialogMechanism();
 }
 
 // Help functions
