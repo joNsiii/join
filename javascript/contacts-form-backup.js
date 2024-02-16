@@ -8,7 +8,7 @@ function updateEditForm(j) {
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContact(${j}); return false`);
     setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContact(${j})`);
-    setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('contact-form-delete-button', 'onclick', `deleteContact(${j})`);
 
     // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
@@ -86,26 +86,10 @@ function deleteContact(j) {
 }
 
 
-async function deleteUserContact(j) {
-    let currentUser = users.find(u => u.userId == userId);
-    let originalIndex = j - 1;
-    currentUser.contacts.splice(originalIndex, 1);
-    await setItem('users', users);
-    contactSample.splice(j, 1);
-    showUserInfo(false);
-    closeDialog('dialog-edit-contact');
-    closeDialog('dialog-contact-viewer');
-    sortContactsByName(contactSample);
-    collectInitials(contactSample);
-    renderContacts();
-    save('contactSample', contactSample);
-}
-
-
 function openContactSettingsMobile(j) {
     openDialog('dialog-contact-settings');
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
 }
 
 
