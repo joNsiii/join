@@ -244,6 +244,35 @@ async function openDetails(taskId) {
     setupCloseDialogMechanism();
 }
 
+function renderEditAndDeleteSection(task) {
+    let ContentHTML = "";
+    ContentHTML +=/*html*/  `
+        <button class="dbt-button" onclick="deleteTask(${task.taskId})">
+            <img src="./img/delete.png" alt="delete">
+            <div class="dbt-button-text">Delete</div>
+        </button>
+        <img class="dbt-button-separator" src="./img/vector-board-form.png" alt="vertical-line-dbt">
+        <button class="dbt-button" onclick="editTask(${task.taskId})">
+            <img src="./img/edit2.png" alt="edit">
+            <div class="dbt-button-text">Edit</div>
+        </button>
+    
+    `;
+
+    return ContentHTML;
+}
+
+function editTask(taskId) {
+    console.log(taskId)
+}
+
+function deleteTask(taskId) {
+    const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
+    boardTasks.splice(taskIndex, 1);
+    closeDialog("dialog")
+    renderEachTask();
+}
+
 // overlay
 function insertTodoDataIntoDialog(task, dialog) {
     const type = dialog.querySelector(".dbt-type");
@@ -254,6 +283,7 @@ function insertTodoDataIntoDialog(task, dialog) {
     const subtask = dialog.querySelector(".dbt-collector");
     const subUsersNames = generateSubUsersHtml(task.sub_users);
     let subtaskText = document.getElementById("subtask-content");
+    contentHTML = document.getElementById("deleteAndEditTask");
 
     type.classList.add(`${setCategoryStyle(task.heading)}`);
     type.innerText = task.heading;
@@ -263,6 +293,7 @@ function insertTodoDataIntoDialog(task, dialog) {
     date.innerHTML = task.date;
     subtask.innerHTML = subUsersNames;
     subtaskText.innerHTML = subTasksRender(task);
+    contentHTML.innerHTML = renderEditAndDeleteSection(task);
 }
 
 function subTasksRender(task) {
