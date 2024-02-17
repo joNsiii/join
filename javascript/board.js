@@ -100,7 +100,6 @@ function boardInit() {
 // subtasks render
 function renderSubTask(subTaskData) {
     let subtask = subTaskData.subtasks;
-
     for (let i = 0; i < subtask.length; i++) {
         const task = subtask[i];
     }
@@ -112,21 +111,37 @@ function renderEachTask() {
     for (let i = 0; i < boardTasks.length; i++) {
         const task = boardTasks[i];
         let containerId = "";
-
-        if (task.category === "toDo") {
-            containerId = "toDo";
-        } else if (task.category === "inProgress") {
-            containerId = "inProgress";
-        } else if (task.category === "awaitFeedback") {
-            containerId = "awaitFeedback";
-        } else if (task.category === "done") {
-            containerId = "done";
-        }
-        createHTML(task, containerId);
+        checkCategory(task, containerId)
         updateProgressBar(task);
         renderSubTask(task);
         noTodoMessage();
     }
+}
+
+function renderMatchingTask() {
+    clearHTML();
+
+    for (let i = 0; i < matchingBoardTask.length; i++) {
+        const task = matchingBoardTask[i];
+        let containerId = "";
+        checkCategory(task, containerId);
+        updateProgressBar(task);
+        renderSubTask(task);
+        noTodoMessage();
+    }
+}
+
+function checkCategory(task,  containerId) {
+    if (task.category === "toDo") {
+        containerId = "toDo";
+    } else if (task.category === "inProgress") {
+        containerId = "inProgress";
+    } else if (task.category === "awaitFeedback") {
+        containerId = "awaitFeedback";
+    } else if (task.category === "done") {
+        containerId = "done";
+    }
+    createHTML(task, containerId);
 }
 
 function clearHTML() {
@@ -140,7 +155,6 @@ function noTodoMessage() {
     const toDoContainer = document.getElementById("toDo");
     const hasTasks = toDoContainer.children.length > 0;
     const noTaskMessage = toDoContainer.querySelector(".board-no-task");
-
     if (!hasTasks && !noTaskMessage) {
         toDoContainer.innerHTML += /*html*/ `
             <div class="board-content">
@@ -153,10 +167,8 @@ function noTodoMessage() {
 }
 
 // progress bar
-
 function updateProgressBar(task) {
     let currentSubtask = 0;
-    // debugger;
     let percent = (currentSubtask + 1) / task["subtasks"].length;
     if (percent !== Infinity) {
         percent = Math.round(percent * 100);
@@ -171,14 +183,14 @@ function updateProgressBar(task) {
 }
 
 function percentageToFraction(percentage) {
-    var decimal = percentage / 100;
-    var gcd = function (a, b) {
+    let decimal = percentage / 100;
+    let gcd = function (a, b) {
         if (b < 0.0000001) return a;
         return gcd(b, Math.floor(a % b));
     };
-    var numerator = decimal * 10000;
-    var denominator = 10000;
-    var divisor = gcd(numerator, denominator);
+    let numerator = decimal * 10000;
+    let denominator = 10000;
+    let divisor = gcd(numerator, denominator);
     numerator /= divisor;
     denominator /= divisor;
     return numerator + "/" + denominator;
@@ -188,7 +200,6 @@ function percentageToFraction(percentage) {
 
 function createHTML(task, containerId, returnHtml = false) {
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
-
     let taskHtml = /*html*/ `
     <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
         <div class="board-body">
@@ -213,7 +224,6 @@ function createHTML(task, containerId, returnHtml = false) {
             </div>
         </div>
     </div>`;
-
     if (returnHtml) {
         return taskHtml;
     } else {
@@ -226,18 +236,15 @@ function createHTML(task, containerId, returnHtml = false) {
 async function openDetails(taskId) {
     currentDisplayedTaskId = taskId;
     const task = boardTasks.find((task) => task.taskId === taskId);
-
     if (!task) {
         console.error("Todo item not found");
         return;
     }
     const dialog = document.getElementById("dialog");
     dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
-
     await includeHTML();
     insertTodoDataIntoDialog(task, dialog);
     dialog.showModal();
-
     setupCloseDialogMechanism();
 }
 
@@ -474,25 +481,5 @@ function searchForTask() {
     }, 300);
 }
 
-function renderMatchingTask() {
-    clearHTML();
 
-    for (let i = 0; i < matchingBoardTask.length; i++) {
-        const task = matchingBoardTask[i];
-        let containerId = "";
 
-        if (task.category === "toDo") {
-            containerId = "toDo";
-        } else if (task.category === "inProgress") {
-            containerId = "inProgress";
-        } else if (task.category === "awaitFeedback") {
-            containerId = "awaitFeedback";
-        } else if (task.category === "done") {
-            containerId = "done";
-        }
-        createHTML(task, containerId);
-        updateProgressBar(task);
-        renderSubTask(task);
-        noTodoMessage();
-    }
-}
