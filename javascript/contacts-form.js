@@ -124,6 +124,7 @@ async function updateContactList() {
     let renderIndex = contactSample.indexOf(createdIndex);
     showContact(renderIndex);
     location.href = `#contacts-contact-${renderIndex}`;
+    setTimeout(showBacklogContact, 125);
 }
 
 
@@ -302,4 +303,25 @@ function load(key) {
     if (variableAsText && key == 'contactSample') {
         contactSample = JSON.parse(variableAsText);
     }
+}
+
+
+function showBacklogContact() {
+    let style = getElement('backlog-contact-animation');
+    let cssCode = animateBacklogContact('55px');
+    style.innerHTML = cssCode;
+
+    setTimeout(() => {
+        cssCode = animateBacklogContact('100%');
+        style.innerHTML = cssCode;
+    }, 800);
+}
+
+
+function animateBacklogContact(value) {
+    return `
+        .backlog-contact-animation {
+            left: ${value};
+        }
+    `;
 }

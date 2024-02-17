@@ -378,4 +378,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 110px;
+    left: 100%;
+    transition: 125ms left ease-out;
 }
