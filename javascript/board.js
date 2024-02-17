@@ -262,9 +262,18 @@ function renderEditAndDeleteSection(task) {
     return ContentHTML;
 }
 
-function editTask(taskId) {
-    console.log(taskId)
-}
+// async function editTask(taskId) {
+//     console.log(taskId)
+//     const task = boardTasks.find((task) => task.taskId === taskId);
+
+//     const dialog = document.getElementById("dialog");
+//     dialog.setAttribute("w3-include-html", "./templates/edit-task.html");
+
+//     await includeHTML();
+//     dialog.showModal();
+
+//     setupCloseDialogMechanism();
+// }
 
 function deleteTask(taskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
