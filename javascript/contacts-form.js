@@ -166,7 +166,17 @@ async function addToCurrentUser(user, mail) {
 async function updateEditedContactList(j) {
     await editContact(j);
     closeSavedContact('edit');
-    return initContacts();
+    initContacts();    // update contactlist directly!!!
+    updateContactUserInfo('name');
+    updateContactUserInfo('mail');
+    updateContactUserInfo('phone');
+}
+
+
+function updateContactUserInfo(info) {
+    let value = getInputValue(`edit-contact-${info}`);
+    let userInfo = getElement(`contact-user-${info}`);
+    userInfo.innerHTML = value;
 }
 
 
