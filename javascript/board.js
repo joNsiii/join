@@ -23,8 +23,7 @@ let boardTasks = [
         sub_users: [
             {
                 userId: 0,
-                userFirstname: "Anton",
-                userSurname: "Müller",
+                name: 'Jens Gartsch',
                 userBackgroundColor: "green",
             },
         ],
@@ -47,14 +46,12 @@ let boardTasks = [
         sub_users: [
             {
                 userId: 0,
-                userFirstname: "Anton",
-                userSurname: "Müller",
+                name: 'Anton Mueller',
                 userBackgroundColor: "green",
             },
             {
                 userId: 1,
-                userFirstname: "Oumout",
-                userSurname: "Resit",
+                name: 'Oumout Resit',
                 userBackgroundColor: "blue",
             },
         ],
@@ -100,8 +97,7 @@ function boardInit() {
     renderEachTask();
 }
 
-// subtaks render
-
+// subtasks render
 function renderSubTask(subTaskData) {
     let subtask = subTaskData.subtasks;
 
@@ -245,6 +241,49 @@ async function openDetails(taskId) {
     setupCloseDialogMechanism();
 }
 
+function renderEditAndDeleteSection(task) {
+    let ContentHTML = "";
+    ContentHTML +=/*html*/  `
+        <button class="dbt-button" onclick="deleteTask(${task.taskId})">
+            <img src="./img/delete.png" alt="delete">
+            <div class="dbt-button-text">Delete</div>
+        </button>
+        <img class="dbt-button-separator" src="./img/vector-board-form.png" alt="vertical-line-dbt">
+        <button class="dbt-button" onclick="editTask(${task.taskId})">
+            <img src="./img/edit2.png" alt="edit">
+            <div class="dbt-button-text">Edit</div>
+        </button>
+    
+    `;
+
+    return ContentHTML;
+}
+
+function addTaskFromBoard() {
+    console.log('add task button board working')
+}
+
+// NOT FINISHED YET
+// async function editTask(taskId) {
+//     console.log(taskId)
+//     const task = boardTasks.find((task) => task.taskId === taskId);
+
+//     const dialog = document.getElementById("dialog");
+//     dialog.setAttribute("w3-include-html", "./templates/edit-task.html");
+
+//     await includeHTML();
+//     dialog.showModal();
+
+//     setupCloseDialogMechanism();
+// }
+
+function deleteTask(taskId) {
+    const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
+    boardTasks.splice(taskIndex, 1);
+    closeDialog("dialog")
+    renderEachTask();
+}
+
 // overlay
 function insertTodoDataIntoDialog(task, dialog) {
     const type = dialog.querySelector(".dbt-type");
@@ -255,6 +294,7 @@ function insertTodoDataIntoDialog(task, dialog) {
     const subtask = dialog.querySelector(".dbt-collector");
     const subUsersNames = generateSubUsersHtml(task.sub_users);
     let subtaskText = document.getElementById("subtask-content");
+    contentHTML = document.getElementById("deleteAndEditTask");
 
     type.classList.add(`${setCategoryStyle(task.heading)}`);
     type.innerText = task.heading;
@@ -264,6 +304,7 @@ function insertTodoDataIntoDialog(task, dialog) {
     date.innerHTML = task.date;
     subtask.innerHTML = subUsersNames;
     subtaskText.innerHTML = subTasksRender(task);
+    contentHTML.innerHTML = renderEditAndDeleteSection(task);
 }
 
 function subTasksRender(task) {
@@ -300,8 +341,8 @@ function generateSubUsersHtml(subUsers) {
 
     if (subUsers && subUsers.length > 0) {
         subUsers.forEach((user) => {
-            const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
-            const fullName = `${user.userFirstname} ${user.userSurname}`;
+            const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
+            const fullName = user.name;
             subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
                         <div class="dbt-contact-profile dbt-${user.userBackgroundColor}">${initials}</div>
@@ -337,7 +378,7 @@ function setCategoryStyle(heading) {
 function generateUserInitialsHtml(subUsers) {
     let userInitialsHtml = "";
     for (let user of subUsers) {
-        const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
+        const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
         userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
     }
     return userInitialsHtml;

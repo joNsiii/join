@@ -319,11 +319,15 @@ function renderNameMailGroup(j) {
 
 
 function showContact(j) {
-    highlightCurrentContact(j);
-    updateContactViewer(j);
-    // let element = document.getElementsByClassName('contacts-contact-active');
-    // let id = element[0].getAttribute('id');
-    // console.log(id);
+    let element = getElement(`contacts-contact-${j}`);
+    let classes = element.getAttribute('class');
+    let match = getIncludingMatch(classes, 'contacts-contact-active');
+    if (match) {
+        closeContactViewerMobile();
+    } else {
+        highlightCurrentContact(j);
+        updateContactViewer(j);
+    }
 }
 
 
