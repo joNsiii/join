@@ -120,12 +120,8 @@ function closeContactViewerMobile() {
 
 async function updateContactList() {
     let name = getInputValue('add-contact-name');
-
     await addContact();
-    closeDialog('dialog-add-contact');
-    resetAddContactInput();
-    // return initContacts();
-
+    closeCreatedContact();
     await initContacts();
     let createdIndex = contactSample.find(c => c.name == name);
     let renderIndex = contactSample.indexOf(createdIndex);
@@ -220,6 +216,29 @@ function closeAddContact() {
         closeDialog('dialog-add-contact');
         resetAddContactInput();
     }, 125);
+}
+
+
+function closeCreatedContact() {
+    let style = getElement('create-contact-animation');
+    let cssCode = animateCreatedContact();
+    style.innerHTML = cssCode;
+    setTimeout(() => {
+        closeDialog('dialog-add-contact');
+        resetAddContactInput();
+        setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
+        style.innerHTML = '';
+    }, 125);
+}
+
+
+function animateCreatedContact() {
+    return `
+        .dialog-contacts-position {
+            opacity: 0;
+            transition: 125ms opacity ease-in-out;
+        }
+    `;
 }
 
 
