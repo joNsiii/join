@@ -91,30 +91,34 @@ async function getUserContactList() {
 
 
 function getUserContact(userContactList) {
-    let userContact = {
-        'id': -1,
-        'name': currentUserData.name + ' (You)',
-        'mail': currentUserData.email,
-        'phone': currentUserData.phone
-    };
-    userContactList.push(userContact);
-    // return userContact;
+    if (checkSessionStorage()) {
+        let userContact = {
+            'id': -1,
+            'name': currentUserData.name + ' (You)',
+            'mail': currentUserData.email,
+            'phone': currentUserData.phone
+        };
+        userContactList.push(userContact);
+        // return userContact;
+    }
 }
 
 
 function getUserSubcontacts(userContactList) {
-    // let userSubcontacts = [];
-    for (let i = 0; i < currentUserData.contacts.length; i++) {
-        let userSubcontact = {
-            'contact-id': i,
-            'name': currentUserData.contacts[i].name,
-            'mail': currentUserData.contacts[i].mail,
-            'phone': currentUserData.contacts[i].phone
+    if (checkSessionStorage()) {
+        // let userSubcontacts = [];
+        for (let i = 0; i < currentUserData.contacts.length; i++) {
+            let userSubcontact = {
+                'contact-id': i,
+                'name': currentUserData.contacts[i].name,
+                'mail': currentUserData.contacts[i].mail,
+                'phone': currentUserData.contacts[i].phone
+            }
+            userContactList.push(userSubcontact);
+            // userSubcontacts.push(userSubcontact);
         }
-        userContactList.push(userSubcontact);
-        // userSubcontacts.push(userSubcontact);
+        // return userSubcontacts;
     }
-    // return userSubcontacts;
 }
 
 

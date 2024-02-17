@@ -74,6 +74,10 @@ async function includeHTML() {
     }
 }
 
+function checkSessionStorage() {
+    return sessionStorage.getItem('session_token') !== null;
+}
+
 function clearSessionStorage() {
     sessionStorage.clear();
 }
