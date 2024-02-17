@@ -164,19 +164,21 @@ async function addToCurrentUser(user, mail) {
 
 // For editUserContact()
 async function updateEditedContactList(j) {
+    let mail = getInputValue('edit-contact-mail');
     await editContact(j);
     closeSavedContact('edit');
-    initContacts();    // update contactlist directly!!!
-    updateContactUserInfo('name');
-    updateContactUserInfo('mail');
-    updateContactUserInfo('phone');
-}
+    await initContacts();
 
+    let currentUser = contactSample.find(c => c['mail'] == mail);
+    let userIndex = contactSample.indexOf(currentUser);
+    highlightCurrentContact(userIndex);
 
-function updateContactUserInfo(info) {
-    let value = getInputValue(`edit-contact-${info}`);
-    let userInfo = getElement(`contact-user-${info}`);
-    userInfo.innerHTML = value;
+    renderContactViewer(userIndex);    // Mobile Version fixen!!!
+    setUserInfo(userIndex);
+    setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
+    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
+    setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
 }
 
 

@@ -74,6 +74,7 @@ async function initContacts() {
 
     // Bitte loeschen!!!
     save('contactSample', contactSample);
+    document.getElementById('dialog-contact-viewer').removeAttribute('w3-include-html');
 }
 
 
