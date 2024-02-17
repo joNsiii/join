@@ -1,4 +1,5 @@
 let currentDraggedElement;
+let matchingBoardTask = [];
 let boardTasks = [
     {
         taskId: 0,
@@ -407,4 +408,50 @@ function getDraggedElementData() {
     // use createHTML with boolean true to get the html for rendering of the dragged element
     const taskHtml = createHTML(task, null, true);
     return taskHtml;
+}
+
+let searchTimeout;
+function searchForTask() {
+    clearTimeout(searchTimeout);
+    let searchInput = document.getElementById('board-search-desktop').value.toLowerCase() || document.getElementById('board-search').value.toLowerCase();
+    if (searchInput === '') {
+        matchingBoardTask = [];
+        renderEachTask();
+        return;
+    }
+    searchTimeout = setTimeout(function () {
+        matchingBoardTask = [];
+        for (let i = 0; i < boardTasks.length; i++) {
+            let task = boardTasks[i];
+            let lowerCaseTask = task.title.toLowerCase();
+            isTaskInMatching = matchingBoardTask.some(matchingBoardTask => matchingBoardTask.title === lowerCaseTask);
+            if(lowerCaseTask.includes(searchInput) && !isTaskInMatching) {
+                matchingBoardTask.push(task);
+            }
+            renderMatchingTask();
+        }
+    }, 300);
+}
+
+function renderMatchingTask() {
+    clearHTML();
+
+    for (let i = 0; i < matchingBoardTask.length; i++) {
+        const task = matchingBoardTask[i];
+        let containerId = "";
+
+        if (task.category === "toDo") {
+            containerId = "toDo";
+        } else if (task.category === "inProgress") {
+            containerId = "inProgress";
+        } else if (task.category === "awaitFeedback") {
+            containerId = "awaitFeedback";
+        } else if (task.category === "done") {
+            containerId = "done";
+        }
+        createHTML(task, containerId);
+        updateProgressBar(task);
+        renderSubTask(task);
+        noTodoMessage();
+    }
 }

@@ -28,7 +28,7 @@
                 <h1 class="board-headline">Board</h1>
                 <div class="board-top-right">
                     <div class="board-search-group p-relative">
-                        <input id="board-search" class="board-search" type="search" placeholder="Find Task" />
+                        <input id="board-search-desktop" class="board-search" type="search" onkeyup="searchForTask()" placeholder="Find Task" />
                         <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                     </div>
                     <button class="board-task-button">
@@ -40,7 +40,7 @@
 
             <section class="board-search-mobile">
                 <div class="p-relative">
-                    <input id="board-search" class="board-search" type="search" placeholder="Find Task" />
+                    <input id="board-search" class="board-search" type="search" onkeyup="searchForTask()" placeholder="Find Task" />
                     <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                 </div>
             </section>
@@ -108,6 +108,9 @@
                 </div>
             </section>
         </main>
+
+        <!-- dialog für Popup von einzelenen Tasks -->
+
         <script src="./javascript/add-task.js"></script>
     </body>
 </html>
