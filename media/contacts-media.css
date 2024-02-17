@@ -10,6 +10,13 @@
     .contact-viewer-mobile {
         margin-top: 16px;
         height: calc(100vh - 172px);
+        overflow-y: hidden;
+    }
+
+    .backlog-contact {
+        bottom: -74px;
+        left: calc(50% - 163px);
+        transition: 125ms bottom ease-in-out;
     }
 }
 

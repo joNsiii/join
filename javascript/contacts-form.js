@@ -96,6 +96,7 @@ async function deleteUserContact(j) {
     showUserInfo(false);
     closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-viewer');
+    closeDialog('dialog-contact-settings');
     initContacts();
 }
 
@@ -307,21 +308,33 @@ function load(key) {
 
 
 function showBacklogContact() {
-    let style = getElement('backlog-contact-animation');
-    let cssCode = animateBacklogContact('55px');
-    style.innerHTML = cssCode;
-
-    setTimeout(() => {
-        cssCode = animateBacklogContact('100%');
+    let bodyWidth = document.body.offsetWidth;
+    if (bodyWidth > 1400) {
+        let style = getElement('backlog-contact-animation');
+        let cssCode = animateBacklogContact('left', '55px');
         style.innerHTML = cssCode;
-    }, 800);
+
+        setTimeout(() => {
+            cssCode = animateBacklogContact('left', '100%');
+            style.innerHTML = cssCode;
+        }, 800);
+    } else {
+        let style = getElement('backlog-contact-animation');
+        let cssCode = animateBacklogContact('bottom', '110px');
+        style.innerHTML = cssCode;
+
+        setTimeout(() => {
+            cssCode = animateBacklogContact('bottom', '-74px');
+            style.innerHTML = cssCode;
+        }, 800);
+    }
 }
 
 
-function animateBacklogContact(value) {
+function animateBacklogContact(position, value) {
     return `
         .backlog-contact-animation {
-            left: ${value};
+            ${position}: ${value};
         }
     `;
 }
