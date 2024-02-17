@@ -317,6 +317,9 @@ function renderNameMailGroup(j) {
 function showContact(j) {
     highlightCurrentContact(j);
     updateContactViewer(j);
+    // let element = document.getElementsByClassName('contacts-contact-active');
+    // let id = element[0].getAttribute('id');
+    // console.log(id);
 }
 
 
