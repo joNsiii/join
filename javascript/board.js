@@ -22,8 +22,7 @@ let boardTasks = [
         sub_users: [
             {
                 userId: 0,
-                userFirstname: "Anton",
-                userSurname: "Müller",
+                name: 'Jens Gartsch',
                 userBackgroundColor: "green",
             },
         ],
@@ -46,14 +45,12 @@ let boardTasks = [
         sub_users: [
             {
                 userId: 0,
-                userFirstname: "Anton",
-                userSurname: "Müller",
+                name: 'Anton Mueller',
                 userBackgroundColor: "green",
             },
             {
                 userId: 1,
-                userFirstname: "Oumout",
-                userSurname: "Resit",
+                name: 'Oumout Resit',
                 userBackgroundColor: "blue",
             },
         ],
@@ -99,8 +96,7 @@ function boardInit() {
     renderEachTask();
 }
 
-// subtaks render
-
+// subtasks render
 function renderSubTask(subTaskData) {
     let subtask = subTaskData.subtasks;
 
@@ -262,6 +258,11 @@ function renderEditAndDeleteSection(task) {
     return ContentHTML;
 }
 
+function addTaskFromBoard() {
+    console.log('add task button board working')
+}
+
+// NOT FINISHED YET
 // async function editTask(taskId) {
 //     console.log(taskId)
 //     const task = boardTasks.find((task) => task.taskId === taskId);
@@ -339,8 +340,8 @@ function generateSubUsersHtml(subUsers) {
 
     if (subUsers && subUsers.length > 0) {
         subUsers.forEach((user) => {
-            const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
-            const fullName = `${user.userFirstname} ${user.userSurname}`;
+            const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
+            const fullName = user.name;
             subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
                         <div class="dbt-contact-profile dbt-${user.userBackgroundColor}">${initials}</div>
@@ -376,7 +377,7 @@ function setCategoryStyle(heading) {
 function generateUserInitialsHtml(subUsers) {
     let userInitialsHtml = "";
     for (let user of subUsers) {
-        const initials = `${user.userFirstname.charAt(0).toUpperCase()}${user.userSurname.charAt(0).toUpperCase()}`;
+        const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
         userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
     }
     return userInitialsHtml;
