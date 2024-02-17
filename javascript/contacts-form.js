@@ -121,7 +121,7 @@ function closeContactViewerMobile() {
 async function updateContactList() {
     let name = getInputValue('add-contact-name');
     await addContact();
-    closeCreatedContact();
+    closeSavedContact('add');
     await initContacts();
     let createdIndex = contactSample.find(c => c.name == name);
     let renderIndex = contactSample.indexOf(createdIndex);
@@ -165,7 +165,7 @@ async function addToCurrentUser(user, mail) {
 // For editUserContact()
 async function updateEditedContactList(j) {
     await editContact(j);
-    closeDialog('dialog-edit-contact');
+    closeSavedContact('edit');
     return initContacts();
 }
 
@@ -219,20 +219,20 @@ function closeAddContact() {
 }
 
 
-function closeCreatedContact() {
-    let style = getElement('create-contact-animation');
-    let cssCode = animateCreatedContact();
+function closeSavedContact(id) {
+    let style = getElement('save-contact-animation');
+    let cssCode = animateSavedContact();
     style.innerHTML = cssCode;
     setTimeout(() => {
-        closeDialog('dialog-add-contact');
+        closeDialog(`dialog-${id}-contact`);
         resetAddContactInput();
-        setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
+        setClassOnCommand(`dialog-${id}-contact`, 'remove', 'dialog-contacts-position');
         style.innerHTML = '';
     }, 125);
 }
 
 
-function animateCreatedContact() {
+function animateSavedContact() {
     return `
         .dialog-contacts-position {
             opacity: 0;
