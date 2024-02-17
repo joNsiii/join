@@ -89,17 +89,14 @@ function deleteContact(j) {
 
 async function deleteUserContact(j) {
     let currentUser = users.find(u => u.userId == userId);
-    let originalIndex = j - 1;
-    currentUser.contacts.splice(originalIndex, 1);
+    let contactId = contactSample[j]['contact-id'];
+    currentUser.contacts.splice(contactId, 1);
+    currentContact = undefined;
     await setItem('users', users);
-    contactSample.splice(j, 1);
     showUserInfo(false);
     closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-viewer');
-    sortContactsByName(contactSample);
-    collectInitials(contactSample);
-    renderContacts();
-    save('contactSample', contactSample);
+    initContacts();
 }
 
 
