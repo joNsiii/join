@@ -229,7 +229,6 @@ function insertTodoDataIntoDialog(task, dialog) {
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
-    debugger
     date.innerHTML = task.date;
     subtask.innerHTML = subUsersNames;
     subtaskText.innerHTML = subTasksRender(task);
