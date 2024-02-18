@@ -97,7 +97,10 @@ async function deleteUserContact(j) {
     closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-viewer');
     closeDialog('dialog-contact-settings');
-    initContacts();
+    await initContacts();
+    setTimeout(() => {
+        showBacklogContact('Contact successfully deleted');
+    }, 125);
 }
 
 
@@ -125,7 +128,9 @@ async function updateContactList() {
     let renderIndex = contactSample.indexOf(createdIndex);
     showContact(renderIndex);
     location.href = `#contacts-contact-${renderIndex}`;
-    setTimeout(showBacklogContact, 125);
+    setTimeout(() => {
+        showBacklogContact('Contact successfully created');
+    }, 125);
 }
 
 
@@ -178,6 +183,9 @@ async function updateEditedContactList(j) {
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
+    setTimeout(() => {
+        showBacklogContact('Contact successfully saved');
+    }, 125);
 }
 
 
@@ -307,27 +315,32 @@ function load(key) {
 }
 
 
-function showBacklogContact() {
+function showBacklogContact(message) {
     let bodyWidth = document.body.offsetWidth;
     if (bodyWidth > 1400) {
-        let style = getElement('backlog-contact-animation');
-        let cssCode = animateBacklogContact('left', '55px');
-        style.innerHTML = cssCode;
-
-        setTimeout(() => {
-            cssCode = animateBacklogContact('left', '100%');
-            style.innerHTML = cssCode;
-        }, 800);
+        setBacklogContactMessage('backlog-contact', message);
+        setBacklogContactPosition('left', '55px', '100%');
     } else {
-        let style = getElement('backlog-contact-animation');
-        let cssCode = animateBacklogContact('bottom', '110px');
-        style.innerHTML = cssCode;
-
-        setTimeout(() => {
-            cssCode = animateBacklogContact('bottom', '-74px');
-            style.innerHTML = cssCode;
-        }, 800);
+        setBacklogContactMessage('backlog-contact-mobile', message);
+        setBacklogContactPosition('bottom', '110px', '-74px');
     }
+}
+
+
+function setBacklogContactMessage(id, message) {
+    let backlog = getElement(id);
+    backlog.innerHTML = message;
+}
+
+
+function setBacklogContactPosition(position, valueIn, valueOut) {
+    let style = getElement('backlog-contact-animation');
+    let cssCode = animateBacklogContact(position, valueIn);
+    style.innerHTML = cssCode;
+    setTimeout(() => {
+        cssCode = animateBacklogContact(position, valueOut);
+        style.innerHTML = cssCode;
+    }, 800);
 }
 
 
