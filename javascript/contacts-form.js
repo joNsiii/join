@@ -126,21 +126,6 @@ async function updateContactList() {
 }
 
 
-// async function updateContactList() {
-//     let name = getInputValue('add-contact-name');
-//     await addContact();
-//     closeSavedContact('add');
-//     await initContacts();
-//     let createdIndex = contactSample.find(c => c.name == name);
-//     let renderIndex = contactSample.indexOf(createdIndex);
-//     showContact(renderIndex);
-//     location.href = `#contacts-contact-${renderIndex}`;
-//     setTimeout(() => {
-//         showBacklogContact('Contact successfully created');
-//     }, 125);
-// }
-
-
 async function addContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -388,4 +373,11 @@ function showBacklogAddContact(message) {
             setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-out');
         }, 125);
     }, 800);
+}
+
+
+async function deleteEmptyContacts(i) {
+    let currentUser = users.find(u => u.userId == userId);
+    currentUser.contacts.splice(i, 1);
+    await setItem('users', users);
 }
