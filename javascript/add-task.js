@@ -1,85 +1,68 @@
-// !!! WORK IN PROGRESS BITTE NICHT ANFASSEN !!!
-
-// document.addEventListener("DOMContentLoaded", function(event) {
-
-//     renderTasks()
-
-// });
-
-const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let subtaskInput = [];
 let priorityDefault = ('Medium');
 priority = priorityDefault;
 
-function scopeTasks() {
-  let title = document.getElementById("title-task").value;
-  let description = document.getElementById("description-task").value;
-  let dueDate = document.getElementById('date date-task').value;
+document.addEventListener('DOMContentLoaded', function() {
+  loadTasks();
+});
 
-  let assignTask = document.getElementById("assign-task");
-  let sub_users = assignTask.options[assignTask.selectedIndex].text;
-
-  let categoryOption = document.getElementById("category");
-  let category = categoryOption.options[categoryOption.selectedIndex].text;
-
-  // let subTask = document.getElementById('sub-content').innerHTML;
-
-  // for (let i = 0; i < subtaskInputs.length; i++) {
-  //   const input = subtaskInputs[i];
-  //   subtasks.push(input);
-  // }
-
-  const userID = {
-    id: [
-      {
-        title: title,
-        description: description,
-        category: category,
-        sub_users: sub_users,
-        subTask: subtaskInput,
-        priority: priority,
-        dueDate: dueDate,
-      },
-    ],
-  };
-
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  const userJSON = JSON.stringify(userID);
-  userInfo = JSON.parse(userJSON);
-  console.log(userInfo);
+async function loadTasks() {
+      const getTasks = await getItem("boardTasks");
+      const tasks = JSON.parse(getTasks);
+      console.log(tasks)
 }
 
-// async function setItem(key, value) {
-//   const url = 'https://remote-storage.developerakademie.org/item';
-//   const payload = { key, value };
+async function scopeTasks() {
+      let getTasks = await getItem("boardTasks");
+      let existingTasks = JSON.parse(getTasks);
 
-//   return fetch(url, { method: 'POST', body: JSON.stringify(payload) });
-// }
+      let title = document.getElementById("title-task").value;
+      let description = document.getElementById("description-task").value;
+      let dueDate = document.getElementById('date date-task').value;
 
-// function renderTasks() {
-//   const board = document.querySelector(".board-body");
-//   board.innerHTML = "";
+      let assignTask = document.getElementById("assign-task");
+      let sub_users_child = assignTask.options[assignTask.selectedIndex].text;
 
-//   tasks.forEach((task, index) => {
-//     board.innerHTML += `
-//         <div class="board-task-card" style="width: 252px;">
-//         <h3 class="btc-type btc-type-blue">${task.category}</h3>
-//         <div class="btc-group">
-//             <div class="btc-title">${task.title}</div>
-//             <div class="btc-description">${task.description}</div>
-//         </div>
-//         <div class="user-priority-group">
-//             <div class="board-user-group">
-//                 <div class="board-card-user bcu-yellow">EF</div>
-//                 <div class="board-card-user bcu-purple">AS</div>
-//                 <div class="board-card-user bcu-red">TW</div>
-//             </div>
-//             <img src="./img/medium-board.png" alt="medium-board">
-//         </div>
-//         </div>
-//         `;
-//   });
-// }
+      let headingOption = document.getElementById("category");
+      let heading = headingOption.options[headingOption.selectedIndex].text;
+
+      const taskId = Date.now();
+
+      let task = {
+          taskId: taskId,
+          title: title,
+          description: description,
+          category: "toDo",
+          heading: heading,
+          subtasks: [
+              {
+                  subtaskId: 1,
+                  subtasksText: subtaskInput,
+                  isChecked: false,
+              },
+              {
+                  subtaskId: 2,
+                  subtasksText: subtaskInput,
+                  isChecked: false,
+              },
+          ],
+          sub_users: [
+              {
+                  userId: 0,
+                  name: sub_users_child,
+                  userBackgroundColor: "green", // Muss noch definiert werden
+              },
+          ],
+          priority: priority,
+          date: dueDate,
+      };
+
+      existingTasks.push(task);
+
+      await setItem("boardTasks", JSON.stringify(existingTasks));
+
+      console.log('Task added successfully:', task);
+  };
 
 function subtaskTemplate() {
   let subtaskForm = document.getElementById("subtask-form");
