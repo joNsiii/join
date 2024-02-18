@@ -12,6 +12,7 @@
     left: 100%;
     /* left: calc(50% - 606px); */
     transition: 125ms left ease-in-out;
+    overflow: hidden;
 }
 
 .dialog-contacts-position {
@@ -381,7 +382,7 @@
     position: absolute;
     bottom: 110px;
     left: 100%;
-    transition: 125ms left ease-out;
+    transition: 125ms left ease-in-out;
 }
 
 .backlog-add-contact {
@@ -401,5 +402,13 @@
     position: absolute;
     bottom: 33px;
     left: 100%;
-    transition: 125ms left ease-out;
+}
+
+.backlog-add-contact-in {
+    left: calc(50% - 163px);
+    transition: 125ms left ease-in-out;
+}
+
+.backlog-add-contact-out {
+    transition: 125ms left ease-in-out;
 }

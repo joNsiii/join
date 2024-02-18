@@ -379,32 +379,13 @@ function animateBacklogContact(position, value) {
 
 
 function showBacklogAddContact(message) {
-    let bodyWidth = document.body.offsetWidth;
-    if (bodyWidth > 1400) {
-        setBacklogContactMessage('backlog-add-contact', message);
-        setBacklogAddContactPosition('left', 'calc(50% - 163px)', '100%');
-    } else {
-        setBacklogContactMessage('backlog-add-contact', message);
-        setBacklogAddContactPosition('bottom', '33px', '-74px');
-    }
-}
-
-
-function setBacklogAddContactPosition(position, valueIn, valueOut) {
-    let style = getElement('backlog-add-contact-animation');
-    let cssCode = animateBacklogAddContact(position, valueIn);
-    style.innerHTML = cssCode;
+    setBacklogContactMessage('backlog-add-contact', message);
+    setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-in');
     setTimeout(() => {
-        cssCode = animateBacklogAddContact(position, valueOut);
-        style.innerHTML = cssCode;
+        setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-in');
+        setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-out');
+        setTimeout(() => {
+            setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-out');
+        }, 125);
     }, 800);
-}
-
-
-function animateBacklogAddContact(position, value) {
-    return `
-        .backlog-add-contact-animation {
-            ${position}: ${value};
-        }
-    `;
 }
