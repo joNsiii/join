@@ -4,6 +4,7 @@ let currentUserData;
 let userId = sessionStorage.getItem('session_token');
 
 async function init() {
+    checkForValidUser();
     await loadUsers();
     await includeHTML();
     hightlightCurrentButton();
@@ -27,6 +28,12 @@ async function includeHTML() {
         } else {
             element.innerHTML = "Page not found";
         }
+    }
+}
+
+function checkForValidUser() {
+    if(userIsLoggedIn() == false && guestIsLoggedIn() == false) {
+        window.location.href = 'login.html';
     }
 }
 
