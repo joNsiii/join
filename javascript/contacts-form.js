@@ -384,8 +384,8 @@ function showBacklogAddContact(message) {
         setBacklogContactMessage('backlog-add-contact', message);
         setBacklogAddContactPosition('left', 'calc(50% - 163px)', '100%');
     } else {
-        setBacklogContactMessage('backlog-contact-mobile', message);
-        setBacklogAddContactPosition('bottom', '110px', '-74px');
+        setBacklogContactMessage('backlog-add-contact', message);
+        setBacklogAddContactPosition('bottom', '33px', '-74px');
     }
 }
 

@@ -18,6 +18,12 @@
         left: calc(50% - 163px);
         transition: 125ms bottom ease-in-out;
     }
+
+    .backlog-add-contact {
+        left: calc(50% - 163px);
+        bottom: -74px;
+        transition: 125ms bottom ease-in-out;
+    }
 }
 
 @media (max-width: 730px) {
