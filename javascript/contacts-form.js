@@ -120,18 +120,25 @@ function closeContactViewerMobile() {
 
 
 async function updateContactList() {
-    let name = getInputValue('add-contact-name');
+    // let name = getInputValue('add-contact-name');
     await addContact();
-    closeSavedContact('add');
-    await initContacts();
-    let createdIndex = contactSample.find(c => c.name == name);
-    let renderIndex = contactSample.indexOf(createdIndex);
-    showContact(renderIndex);
-    location.href = `#contacts-contact-${renderIndex}`;
-    setTimeout(() => {
-        showBacklogContact('Contact successfully created');
-    }, 125);
+    // showUpdatedContactList();
 }
+
+
+// async function updateContactList() {
+//     let name = getInputValue('add-contact-name');
+//     await addContact();
+//     closeSavedContact('add');
+//     await initContacts();
+//     let createdIndex = contactSample.find(c => c.name == name);
+//     let renderIndex = contactSample.indexOf(createdIndex);
+//     showContact(renderIndex);
+//     location.href = `#contacts-contact-${renderIndex}`;
+//     setTimeout(() => {
+//         showBacklogContact('Contact successfully created');
+//     }, 125);
+// }
 
 
 async function addContact() {
@@ -140,7 +147,7 @@ async function addContact() {
     let phone = getInputValue('add-contact-phone');
     let user = addUserContact(name, mail, phone);
     await addToCurrentUser(user, mail);
-    contactSample.push(user);
+    // contactSample.push(user);
 }
 
 
@@ -158,11 +165,29 @@ async function addToCurrentUser(user, mail) {
     let userData = users.find(u => u.userId == userId);
     let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
-        return console.log('already in')   /* PopUp statt console.log()  */
+        /* PopUp statt console.log()  */
+        // return console.log('already in');
+        showBacklogAddContact('Email already existing');
     } else {
         userData['contacts'].push(user);
+        await setItem('users', users);
+        showUpdatedContactList();
     }
-    await setItem('users', users);
+    // await setItem('users', users);
+}
+
+
+async function showUpdatedContactList() {
+    let name = getInputValue('add-contact-name');
+    closeSavedContact('add');
+    await initContacts();
+    let createdIndex = contactSample.find(c => c.name == name);
+    let renderIndex = contactSample.indexOf(createdIndex);
+    showContact(renderIndex);
+    location.href = `#contacts-contact-${renderIndex}`;
+    setTimeout(() => {
+        showBacklogContact('Contact successfully created');
+    }, 125);
 }
 
 
@@ -347,6 +372,38 @@ function setBacklogContactPosition(position, valueIn, valueOut) {
 function animateBacklogContact(position, value) {
     return `
         .backlog-contact-animation {
+            ${position}: ${value};
+        }
+    `;
+}
+
+
+function showBacklogAddContact(message) {
+    let bodyWidth = document.body.offsetWidth;
+    if (bodyWidth > 1400) {
+        setBacklogContactMessage('backlog-add-contact', message);
+        setBacklogAddContactPosition('left', 'calc(50% - 163px)', '100%');
+    } else {
+        setBacklogContactMessage('backlog-contact-mobile', message);
+        setBacklogAddContactPosition('bottom', '110px', '-74px');
+    }
+}
+
+
+function setBacklogAddContactPosition(position, valueIn, valueOut) {
+    let style = getElement('backlog-add-contact-animation');
+    let cssCode = animateBacklogAddContact(position, valueIn);
+    style.innerHTML = cssCode;
+    setTimeout(() => {
+        cssCode = animateBacklogAddContact(position, valueOut);
+        style.innerHTML = cssCode;
+    }, 800);
+}
+
+
+function animateBacklogAddContact(position, value) {
+    return `
+        .backlog-add-contact-animation {
             ${position}: ${value};
         }
     `;
