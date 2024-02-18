@@ -32,16 +32,6 @@ function resetButton() {
     registerBtn.disabled = false;
 }
 
-// function checkPassword() {
-//     let password = document.getElementById('password-type').value;
-//     let confirmPassword = document.getElementById('password-type2').value;
-//     if (password === confirmPassword) {
-//         addUser();
-//     } else {
-
-//     }
-// }
-
     function passwordValidation() {
 
     let passwordOutline1 = document.getElementById('password-parent');
