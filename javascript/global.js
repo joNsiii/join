@@ -6,7 +6,7 @@ let userId = sessionStorage.getItem('session_token');
 async function init() {
     checkForValidUser();
     await loadUsers();
-    // await loadTasks();
+
     await includeHTML();
     hightlightCurrentButton();
     loadUserData();
@@ -17,6 +17,8 @@ async function init() {
         greetUser();
     }
 }
+
+
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
