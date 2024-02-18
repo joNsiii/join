@@ -7,12 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function loadTasks() {
-        try {
-          boardTasks = JSON.parse(await getItem("boardTasks"));
-        } catch (error) {
-          console.log(error)
-        }
-      
+  try {
+    boardTasks = JSON.parse(await getItem("boardTasks"));
+  } catch (error) {
+    console.log(error)
+  }  
 }
 
 async function scopeTasks() {

@@ -6,7 +6,7 @@ let userId = sessionStorage.getItem('session_token');
 async function init() {
     checkForValidUser();
     await loadUsers();
-    await loadTasks();
+    // await loadTasks();
     await includeHTML();
     hightlightCurrentButton();
     loadUserData();
