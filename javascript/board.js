@@ -1,99 +1,20 @@
 let currentDraggedElement;
 let matchingBoardTask = [];
-let boardTasks = [
-    {
-        taskId: 0,
-        title: "Start with JS",
-        description:
-            "create reusable HTML base templates... asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö asdföjasdfköasdjföasfjöasdjföasdlkfjölasdjflasdökfjöasldjföalsdfjösadlkjfksadfjö",
-        category: "toDo",
-        heading: "Technical Task",
-        subtasks: [
-            {
-                subtaskId: 0,
-                subtasksText: "subtasks Text for checked unchecked",
-                isChecked: false,
-            },
-            {
-                subtaskId: 1,
-                subtasksText: "adsfasdöflasdjfökasdf",
-                isChecked: true,
-            },
-        ],
-        sub_users: [
-            {
-                userId: 0,
-                name: 'Jens Gartsch',
-                userBackgroundColor: "green",
-            },
-        ],
-        priority: "Medium",
-        date: "15/02/2024",
-    },
-    {
-        taskId: 1,
-        title: "What ? ",
-        description: "dont know what to do..",
-        category: "inProgress",
-        heading: "Technical Task",
-        subtasks: [
-            {
-                subtaskId: 2,
-                subtasksText: "hallo das ist ein text ?",
-                isChecked: false,
-            },
-        ],
-        sub_users: [
-            {
-                userId: 0,
-                name: 'Anton Mueller',
-                userBackgroundColor: "green",
-            },
-            {
-                userId: 1,
-                name: 'Oumout Resit',
-                userBackgroundColor: "blue",
-            },
-        ],
-        priority: "Medium",
-        date: "09/08/2023",
-    },
-    {
-        taskId: 2,
-        title: "S234524",
-        description: "adsöfljasödfasdf",
-        category: "awaitFeedback",
-        heading: "User Story",
-        subtasks: [],
-        sub_users: [],
-        priority: "Urgent",
-        date: "25/02/2023",
-    },
-    {
-        taskId: 3,
-        title: "Start blabla",
-        description: " testin bla bla",
-        category: "done",
-        heading: "Technical Task",
-        subtasks: [],
-        sub_users: [],
-        priority: "Low",
-        date: "15/05/2023",
-    },
-    {
-        taskId: 4,
-        title: "Funny Storys",
-        description: "THIS IS FUNNY!!",
-        category: "toDo",
-        heading: "User Story",
-        subtasks: [],
-        sub_users: [],
-        priority: "Urgent",
-        date: "26/11/2023",
-    },
-];
+let boardTasks = [];
 
-function boardInit() {
+async function getTasks(){
+    try {
+        tasks = JSON.parse(await getItem('boardTasks'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+    boardTasks.push(tasks);
+    console.log(boardTasks)
+}
+ 
+
+async function boardInit() {
+    await getTasks();
     renderEachTask();
 }
 
@@ -308,6 +229,7 @@ function insertTodoDataIntoDialog(task, dialog) {
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
+    debugger
     date.innerHTML = task.date;
     subtask.innerHTML = subUsersNames;
     subtaskText.innerHTML = subTasksRender(task);

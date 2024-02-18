@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function loadTasks() {
-      const getTasks = await getItem("boardTasks");
-      const tasks = JSON.parse(getTasks);
-      console.log(tasks)
+        try {
+          boardTasks = JSON.parse(await getItem("boardTasks"));
+        } catch (error) {
+          console.log(error)
+        }
+      
 }
 
 async function scopeTasks() {
-      let getTasks = await getItem("boardTasks");
-      let existingTasks = JSON.parse(getTasks);
+      // let getTasks = await getItem("boardTasks");
+      // let boardTasks = JSON.parse(getTasks);
 
       let title = document.getElementById("title-task").value;
       let description = document.getElementById("description-task").value;
-      let dueDate = document.getElementById('date date-task').value;
+      let dueDate = document.getElementById('date-date-task').value;
 
       let assignTask = document.getElementById("assign-task");
       let sub_users_child = assignTask.options[assignTask.selectedIndex].text;
@@ -56,10 +59,10 @@ async function scopeTasks() {
           priority: priority,
           date: dueDate,
       };
+      // let emptyArray = [];
+      boardTasks.push(task);
 
-      existingTasks.push(task);
-
-      await setItem("boardTasks", JSON.stringify(existingTasks));
+      await setItem("boardTasks", JSON.stringify(boardTasks));
 
       console.log('Task added successfully:', task);
   };
