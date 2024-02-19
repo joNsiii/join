@@ -120,23 +120,38 @@ function closeContactViewerMobile() {
 
 
 async function updateContactList() {
-    // let name = getInputValue('add-contact-name');
-    await addContact();
-    // showUpdatedContactList();
+    let name = getInputValue('add-contact-name');
+    let mail = getInputValue('add-contact-mail');
+    if (name != '' && mail != '') {
+        verifyContactInput(mail);
+    }
 }
 
 
-async function addContact() {
+async function verifyContactInput(mail) {
+    let userData = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
+    if (checkedUser) {
+        showBacklogAddContact('Email already existing');
+    } else {
+        let user = getNewContact();
+        userData['contacts'].push(user);
+        await setItem('users', users);
+        showUpdatedContactList(mail);
+    }
+}
+
+
+function getNewContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
     let phone = getInputValue('add-contact-phone');
-    let user = addUserContact(name, mail, phone);
-    await addToCurrentUser(user, mail);
-    // contactSample.push(user);
+    let contact = createNewContact(name, mail, phone);
+    return contact;
 }
 
 
-function addUserContact(name, mail, phone) {
+function createNewContact(name, mail, phone) {
     return {
         'contact-id': contactSample.length - 1,
         'name': name,
@@ -146,30 +161,13 @@ function addUserContact(name, mail, phone) {
 }
 
 
-async function addToCurrentUser(user, mail) {
-    let userData = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
-    if (checkedUser) {
-        /* PopUp statt console.log()  */
-        // return console.log('already in');
-        showBacklogAddContact('Email already existing');
-    } else {
-        userData['contacts'].push(user);
-        await setItem('users', users);
-        showUpdatedContactList();
-    }
-    // await setItem('users', users);
-}
-
-
-async function showUpdatedContactList() {
-    let name = getInputValue('add-contact-name');
+async function showUpdatedContactList(mail) {
     closeSavedContact('add');
     await initContacts();
-    let createdIndex = contactSample.find(c => c.name == name);
-    let renderIndex = contactSample.indexOf(createdIndex);
-    showContact(renderIndex);
-    location.href = `#contacts-contact-${renderIndex}`;
+    let createdIndex = contactSample.find(c => c.mail == mail);
+    let renderingIndex = contactSample.indexOf(createdIndex);
+    showContact(renderingIndex);
+    location.href = `#contacts-contact-${renderingIndex}`;
     setTimeout(() => {
         showBacklogContact('Contact successfully created');
     }, 125);
