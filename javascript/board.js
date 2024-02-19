@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let matchingBoardTask = [];
-boardTasks = [];
+let boardTasks = [];
 
 // function subtaskTest(boardTasks) {
 //     for (let i = 0; i < boardTasks.length; i++) {
@@ -18,8 +18,17 @@ boardTasks = [];
 //     }
 // }
 
+async function loadTasksInBoard() {
+    try {
+      boardTasks = JSON.parse(await getItem("boardTasks"));
+    } catch (error) {
+      console.log(error)
+    }  
+  }
+
+
 async function boardInit() {
-    await loadTasks();
+    await loadTasksInBoard();
     renderEachTask();
 }
 
