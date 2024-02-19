@@ -2,32 +2,32 @@ let currentDraggedElement;
 let matchingBoardTask = [];
 let boardTasks = [];
 
-async function getTasks(){
+async function getTasks() {
     try {
-        tasks = JSON.parse(await getItem('boardTasks'));
+        tasks = JSON.parse(await getItem("boardTasks"));
     } catch (e) {
-        console.error('Loading error:', e);
+        console.error("Loading error:", e);
     }
     boardTasks.push(tasks);
     console.log(boardTasks);
-    subtaskTest(boardTasks);
+    // subtaskTest(boardTasks);
 }
 
-function subtaskTest(boardTasks) {
-    for (let i = 0; i < boardTasks.length; i++) {
-        let tasks = boardTasks[i];
-        if (tasks.hasOwnProperty('subtasks')) { 
-            let subTasks = tasks['subtasks'];
-            for (let j = 0; j < subTasks.length; j++) {
-                let subTask = subTasks[j];
-                let taskId = subTask['subtaskId'];
-                let subtaskText = subTask['subtasksText'];
-                let isChecked = subTask['isChecked'];
-                console.log(subTask);
-            }
-        }
-    }
-}
+// function subtaskTest(boardTasks) {
+//     for (let i = 0; i < boardTasks.length; i++) {
+//         let tasks = boardTasks[i];
+//         if (tasks.hasOwnProperty('subtasks')) {
+//             let subTasks = tasks['subtasks'];
+//             for (let j = 0; j < subTasks.length; j++) {
+//                 let subTask = subTasks[j];
+//                 let taskId = subTask['subtaskId'];
+//                 let subtaskText = subTask['subtasksText'];
+//                 let isChecked = subTask['isChecked'];
+//                 console.log(subTask);
+//             }
+//         }
+//     }
+// }
 
 async function boardInit() {
     await getTasks();
@@ -35,12 +35,12 @@ async function boardInit() {
 }
 
 // subtasks render
-function renderSubTask(subTaskData) {
-    let subtask = subTaskData.subtasks;
-    for (let i = 0; i < subtask.length; i++) {
-        const task = subtask[i];
-    }
-}
+// function renderSubTask(subTaskData) {
+//     let subtask = subTaskData.subtasks;
+//     for (let i = 0; i < subtask.length; i++) {
+//         const task = subtask[i];
+//     }
+// }
 
 function renderEachTask() {
     clearHTML();
@@ -48,9 +48,9 @@ function renderEachTask() {
     for (let i = 0; i < boardTasks.length; i++) {
         const task = boardTasks[i];
         let containerId = "";
-        checkCategory(task, containerId)
+        checkCategory(task, containerId);
         updateProgressBar(task);
-        renderSubTask(task);
+        // renderSubTask(task);
         noTodoMessage();
     }
 }
@@ -68,7 +68,7 @@ function renderMatchingTask() {
     }
 }
 
-function checkCategory(task,  containerId) {
+function checkCategory(task, containerId) {
     if (task.category === "toDo") {
         containerId = "toDo";
     } else if (task.category === "inProgress") {
@@ -111,7 +111,7 @@ function updateProgressBar(task) {
         percent = Math.round(percent * 100);
         document.getElementById("progress-bar").style.width = `${percent}%`;
         let test = percentageToFraction(percent);
-        console.log(test);
+        // console.log(test);
         // progress bar steps
         document.getElementById("subtask-progress-text").innerHTML += `${test}`;
     } else {
@@ -136,6 +136,7 @@ function percentageToFraction(percentage) {
 // HTML Task Card
 
 function createHTML(task, containerId, returnHtml = false) {
+    // console.log(task.sub_users)
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
     let taskHtml = /*html*/ `
     <div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
@@ -187,7 +188,7 @@ async function openDetails(taskId) {
 
 function renderEditAndDeleteSection(task) {
     let ContentHTML = "";
-    ContentHTML +=/*html*/  `
+    ContentHTML += /*html*/ `
         <button class="dbt-button" onclick="deleteTask(${task.taskId})">
             <img src="./img/delete.png" alt="delete">
             <div class="dbt-button-text">Delete</div>
@@ -204,7 +205,7 @@ function renderEditAndDeleteSection(task) {
 }
 
 function addTaskFromBoard() {
-    console.log('add task button board working')
+    console.log("add task button board working");
 }
 
 // NOT FINISHED YET
@@ -224,7 +225,7 @@ function addTaskFromBoard() {
 function deleteTask(taskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
     boardTasks.splice(taskIndex, 1);
-    closeDialog("dialog")
+    closeDialog("dialog");
     renderEachTask();
 }
 
@@ -285,7 +286,10 @@ function generateSubUsersHtml(subUsers) {
 
     if (subUsers && subUsers.length > 0) {
         subUsers.forEach((user) => {
-            const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
+            const initials = user.name
+                .match(/(\b\S)?/g)
+                .join("")
+                .toUpperCase();
             const fullName = user.name;
             subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
@@ -320,12 +324,19 @@ function setCategoryStyle(heading) {
 }
 
 function generateUserInitialsHtml(subUsers) {
-    let userInitialsHtml = "";
-    for (let user of subUsers) {
-        const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
-        userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
+    if (subUsers === undefined) {
+        return;
+    } else {
+        let userInitialsHtml = "";
+        for (let user of subUsers) {
+            const initials = user.name
+                .match(/(\b\S)?/g)
+                .join("")
+                .toUpperCase();
+            userInitialsHtml += `<div class="board-card-user bcu-${user.userBackgroundColor}">${initials}</div>`;
+        }
+        return userInitialsHtml;
     }
-    return userInitialsHtml;
 }
 
 function setupCloseDialogMechanism() {
@@ -398,8 +409,8 @@ function getDraggedElementData() {
 let searchTimeout;
 function searchForTask() {
     clearTimeout(searchTimeout);
-    let searchInput = document.getElementById('board-search-desktop').value.toLowerCase() || document.getElementById('board-search').value.toLowerCase();
-    if (searchInput === '') {
+    let searchInput = document.getElementById("board-search-desktop").value.toLowerCase() || document.getElementById("board-search").value.toLowerCase();
+    if (searchInput === "") {
         matchingBoardTask = [];
         renderEachTask();
         return;
@@ -409,14 +420,11 @@ function searchForTask() {
         for (let i = 0; i < boardTasks.length; i++) {
             let task = boardTasks[i];
             let lowerCaseTask = task.title.toLowerCase();
-            isTaskInMatching = matchingBoardTask.some(matchingBoardTask => matchingBoardTask.title === lowerCaseTask);
-            if(lowerCaseTask.includes(searchInput) && !isTaskInMatching) {
+            isTaskInMatching = matchingBoardTask.some((matchingBoardTask) => matchingBoardTask.title === lowerCaseTask);
+            if (lowerCaseTask.includes(searchInput) && !isTaskInMatching) {
                 matchingBoardTask.push(task);
             }
             renderMatchingTask();
         }
     }, 300);
 }
-
-
-
