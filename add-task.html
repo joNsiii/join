@@ -8,6 +8,7 @@
     <script src="javascript/storage.js"></script>
     <script src="javascript/register.js"></script>
     <script src="./javascript/global.js"></script>
+    <script src="javascript/board.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/add-task.css">
@@ -18,7 +19,7 @@
     <div w3-include-html="templates/templates.html"></div>
     <div class="add-task-content">
         <div class="add-task-headline">Add Task</div>
-        <form onsubmit="scopeTasks()">
+        <form onsubmit="return false">
             <div class="display-flex" id="taskForm">
                 <div class="left-side-inputs">
                     <div class="single-input-container">
@@ -68,22 +69,22 @@
                     </div>
                     <div class="single-input-container">
                         <label>Subtasks</label>
-                        <div class="input-single-line-subtask" id="subtask-form" onclick="cancelSubtaskSafety()">
-                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
-                            <div class="subtask-add-icons" id="icon-hold">
+                        <div class="input-single-line-subtask" id="subtask-form">
+                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask">
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
-                            </div>
                         </div>
                         <div id="subtask-display">
                         </div>
                     </div>
+
                 </div>
+
             </div>
             <div class="bottom-container">
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
                 <div class="bottom-button-container bottom-flex-right">
-                    <button class="clearBtn" onclick="clear()">Clear <img src="./img/cancel.png" alt="clear"></button>
-                    <button class="createBtn" >Create Task <img src="./img/check.png" alt="check"> </button>
+                    <button class="clearBtn">Clear <img src="./img/cancel.png" alt="clear"></button>
+                    <button class="createBtn" onclick="scopeTasks()">Create Task <img src="./img/check.png" alt="check"> </button>
                 </div>
             </div>
         </form>
