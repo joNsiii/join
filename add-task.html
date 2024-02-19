@@ -24,7 +24,7 @@
                 <div class="left-side-inputs">
                     <div class="single-input-container">
                         <label>Title<label class="red-star">*</label></label>
-                        <input class="input-single-line"  placeholder="Enter a title" type="text" id="title-task">
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" required>
                     </div>
                     <div class="desc-input-container">
                         <label>Description</label>
@@ -35,10 +35,6 @@
                         <label>Assigned to</label>
                         <select class="select-input" id="assign-task">
                             <option value="" disabled selected>Select contacts to assign</option>
-                            <option value="">Rudolf Sachslehner</option>
-                            <option value="">Oumout Resit Ismail</option>
-                            <option value="">Jens Gartsch</option>
-                            <option value="">Janik Stratmann</option>
                         </select>
                     </div>
                 </div>
@@ -47,7 +43,7 @@
                     <div class="single-input-container">
                         <label for="date">Due Date<label class="red-star">*</label></label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                            onblur="(this.type='text')" name="date" id="date-date-task">
+                            onblur="(this.type='text')" name="date" id="date-date-task" required>
                     </div>
                     <div class="prio-container">
                         <label>Prio</label>
@@ -65,7 +61,7 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category<label class="red-star">*</label></label>
-                        <select class="select-input" id="category">
+                        <select class="select-input" id="category" required>
                             <option value="" disabled selected>Select contacts to assign</option>
                             <option value="">Technical Task</option>
                             <option value="">User Story</option>
@@ -78,14 +74,6 @@
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
                         </div>
                         <div id="subtask-display">
-                            <span contenteditable="true" class="span-container">
-                                <div class="subtask-preview"><div class="list-item"></div><p id="sub-content">Content Form</p></div>
-                                <div class="subtask-icon-container">
-                                    <img src="./img/edit-contacts.png" alt="edit-icon" class="hover">
-                                    <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-                                    <img src="./img/delete.png" alt="delete-icon">
-                                </div>
-                            </span>
                         </div>
                     </div>
 
@@ -96,7 +84,7 @@
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
                 <div class="bottom-button-container bottom-flex-right">
                     <button class="clearBtn">Clear <img src="./img/cancel.png" alt="clear"></button>
-                    <button class="createBtn" onclick="scopeTasks()">Create Task <img src="./img/check.png" alt="check"> </button>
+                    <button class="createBtn" onsubmit="scopeTasks()">Create Task <img src="./img/check.png" alt="check"> </button>
                 </div>
             </div>
         </form>

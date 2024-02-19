@@ -384,6 +384,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .subtask-icon-container {
@@ -392,7 +394,7 @@
     justify-content: space-evenly;
     width: 56px;
     gap: 4px;
-    margin-right: 32px;
+    margin-right: 16px;
 }
 
 .span-container {
@@ -403,8 +405,59 @@
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: nowrap;
+    outline: none;
+}
+
+/* .span-container:focus {
+    outline: none;
+    background-color: white !important;
+    border-radius: 0 !important;
+    border-bottom: solid 1px #29ABE2;
+    cursor: text !important;
+}
+
+.span-container:focus .list-item {
+    display: none;
+}
+
+.span-container:focus .subtask-preview {
+    margin-left: 16px;
+} */
+
+.focus-input {
+    outline: none;
+    background-color: white !important;
+    border-radius: 0 !important;
+    border-bottom: solid 1px #29ABE2;
+    cursor: text !important;
+}
+
+.focus-list-item {
+    display: none !important;
+}
+
+.focus-preview {
+    margin-left: 16px;
+}
+
+.span-container:hover {
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.1);
+    border-radius: 10px;
+    transition: all 150ms ease-in-out;
+    margin-top: 1px;
 }
 
 .list-item {
     display: list-item;
+}
+
+.subtask-icon-container img {
+    opacity: 0%;
+    transition: all 250ms ease-in-out;
+}
+
+.span-container:hover .subtask-icon-container img {
+    opacity: 100%;
+    transition: all 250ms ease-in-out;
 }
