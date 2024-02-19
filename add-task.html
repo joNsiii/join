@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="./media/add-task-media.css">
 </head>
 
-<body onload="init()">
+<body onload="init(), addTaskInit()">
     <div w3-include-html="templates/templates.html"></div>
     <div class="add-task-content">
         <div class="add-task-headline">Add Task</div>
-        <form onsubmit="return false">
+        <form onsubmit="scopeTasks(); return false">
             <div class="display-flex" id="taskForm">
                 <div class="left-side-inputs">
                     <div class="single-input-container">
