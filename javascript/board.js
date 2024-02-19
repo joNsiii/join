@@ -1,17 +1,6 @@
 let currentDraggedElement;
 let matchingBoardTask = [];
-let boardTasks = [];
-
-async function getTasks() {
-    try {
-        tasks = JSON.parse(await getItem("boardTasks"));
-    } catch (e) {
-        console.error("Loading error:", e);
-    }
-    boardTasks.push(tasks);
-    console.log(boardTasks);
-    // subtaskTest(boardTasks);
-}
+boardTasks = [];
 
 // function subtaskTest(boardTasks) {
 //     for (let i = 0; i < boardTasks.length; i++) {
@@ -30,7 +19,7 @@ async function getTasks() {
 // }
 
 async function boardInit() {
-    await getTasks();
+    await loadTasks();
     renderEachTask();
 }
 
@@ -44,7 +33,6 @@ async function boardInit() {
 
 function renderEachTask() {
     clearHTML();
-
     for (let i = 0; i < boardTasks.length; i++) {
         const task = boardTasks[i];
         let containerId = "";

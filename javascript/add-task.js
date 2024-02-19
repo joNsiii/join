@@ -1,10 +1,12 @@
 let subtaskInput = [];
 let priorityDefault = ('Medium');
+emptyArray = [];
 priority = priorityDefault;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadTasks();
-});
+})
+
 
 async function loadTasks() {
   try {
@@ -15,9 +17,6 @@ async function loadTasks() {
 }
 
 async function scopeTasks() {
-      // let getTasks = await getItem("boardTasks");
-      // let boardTasks = JSON.parse(getTasks);
-
       let title = document.getElementById("title-task").value;
       let description = document.getElementById("description-task").value;
       let dueDate = document.getElementById('date-date-task').value;
@@ -36,18 +35,7 @@ async function scopeTasks() {
           description: description,
           category: "toDo",
           heading: heading,
-          subtasks: [
-              {
-                  subtaskId: 1,
-                  subtasksText: subtaskInput,
-                  isChecked: false,
-              },
-              {
-                  subtaskId: 2,
-                  subtasksText: subtaskInput,
-                  isChecked: false,
-              },
-          ],
+          subtasks: [],
           sub_users: [
               {
                   userId: 0,
@@ -58,11 +46,8 @@ async function scopeTasks() {
           priority: priority,
           date: dueDate,
       };
-      let emptyArray = [];
-      // boardTasks.push(task);
-
-      await setItem("boardTasks", JSON.stringify(emptyArray));
-
+      boardTasks.push(task);
+      await setItem("boardTasks", JSON.stringify(boardTasks));
       console.log('Task added successfully:', task);
   };
 
@@ -130,3 +115,15 @@ function prioSelection(clickedPrio) {
 
     priority = prio.id;
 }
+
+
+// {
+//   subtaskId: 1,
+//   subtasksText: subtaskInput,
+//   isChecked: false,
+// },
+// {
+//   subtaskId: 2,
+//   subtasksText: subtaskInput,
+//   isChecked: false,
+// },

@@ -2,23 +2,16 @@ let isDropdownOpen = false;
 let contacts = [];
 let currentUserData;
 let userId = sessionStorage.getItem('session_token');
+boardTasks = [];
 
 async function init() {
     checkForValidUser();
     await loadUsers();
-
     await includeHTML();
-    hightlightCurrentButton();
     loadUserData();
     loadUserImage();
-    let greetingName = document.getElementById('greeting-name');
-    if (greetingName) {
-        dayTimeGretting();
-        greetUser();
-    }
+    hightlightCurrentButton();
 }
-
-
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -35,7 +28,7 @@ async function includeHTML() {
 }
 
 function checkForValidUser() {
-    if(userIsLoggedIn() == false && guestIsLoggedIn() == false) {
+    if (userIsLoggedIn() == false && guestIsLoggedIn() == false) {
         window.location.href = 'login.html';
     }
 }

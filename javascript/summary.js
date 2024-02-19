@@ -16,6 +16,14 @@ function changeImageBack1() {
     successImage.src = 'img/success-bg-blue.png'
 }
 
+// function checkGreeting() {
+//     let greetingName = document.getElementById('greeting-name'); 
+//     if (greetingName) {
+//         dayTimeGretting();
+//         greetUser();
+//     }
+// }
+
 function dayTimeGretting() {
     let greet = [
         'What are you doing that early?',
