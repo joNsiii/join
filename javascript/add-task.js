@@ -83,6 +83,17 @@ function assignedTo() {
   }
 }
 
+function subtaskCustomTemplate() {
+  let subtaskForm = document.getElementById("icon-hold");
+  let subtaskValueCheck = document.getElementById("subtask");
+
+    subtaskForm.innerHTML = `
+      <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+      <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+      <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
+    `;
+}
+
 function subtaskTemplate() {
   let subtaskForm = document.getElementById("subtask-form");
   let subtaskValueCheck = document.getElementById("subtask");
@@ -90,30 +101,36 @@ function subtaskTemplate() {
   if (subtaskValueCheck.value == "" || subtaskValueCheck.value == null) {
     subtaskForm.innerHTML = `
     <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" value="Contact Form">
-    <div class="subtask-add-icons">
+    <div class="subtask-add-icons" id="icon-hold">
       <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
       <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
       <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
     </div>
     `;
-  } else {
-    subtaskForm.innerHTML = `
-    <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" value="${subtaskValueCheck.value}">
-    <div class="subtask-add-icons">
-      <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
-      <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-      <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
-    </div>
-    `;
-  }
+  } 
 }
 
 function cancelSubtask() {
   let subtaskForm = document.getElementById("subtask-form");
   subtaskForm.innerHTML = `
-        <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask">
-        <img src="./img/subtask.png" alt="add-icon" class="hover" onclick="subtaskTemplate()">
+    <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+    <div class="subtask-add-icons" id="icon-hold">
+    <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+    </div>
   `;
+}
+
+function cancelSubtaskSafety() {
+  document.addEventListener('click', function(event) {
+    let subtaskForm = document.getElementById('subtask-form');
+    let subtaskInput = document.getElementById('subtask');
+  
+    // Check if the clicked element is not the subtask input field or its parent
+    // and if the input field is empty
+    if (event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === '') {
+      cancelSubtask(); 
+    }
+  });
 }
 
 async function addSubtask() {

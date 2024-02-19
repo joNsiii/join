@@ -71,7 +71,7 @@
 .subtask-add-icons {
     display: flex;
     justify-content: space-between;
-    width: 56px;
+    width: fit-content;
 }
 
 .divider-subtask-icon {
@@ -81,7 +81,7 @@
 
 .subtask-add-icons img {
     width: 24px;
-    height: 22px;
+    height: 24px;
 }
 
 .hover {

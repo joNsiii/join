@@ -69,9 +69,11 @@
                     </div>
                     <div class="single-input-container">
                         <label>Subtasks</label>
-                        <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask">
+                        <div class="input-single-line-subtask" id="subtask-form" onclick="cancelSubtaskSafety()">
+                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+                            <div class="subtask-add-icons" id="icon-hold">
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+                            </div>
                         </div>
                         <div id="subtask-display">
                         </div>
