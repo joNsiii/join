@@ -9,9 +9,25 @@ async function getTasks(){
         console.error('Loading error:', e);
     }
     boardTasks.push(tasks);
-    console.log(boardTasks)
+    console.log(boardTasks);
+    subtaskTest(boardTasks);
 }
- 
+
+function subtaskTest(boardTasks) {
+    for (let i = 0; i < boardTasks.length; i++) {
+        let tasks = boardTasks[i];
+        if (tasks.hasOwnProperty('subtasks')) { 
+            let subTasks = tasks['subtasks'];
+            for (let j = 0; j < subTasks.length; j++) {
+                let subTask = subTasks[j];
+                let taskId = subTask['subtaskId'];
+                let subtaskText = subTask['subtasksText'];
+                let isChecked = subTask['isChecked'];
+                console.log(subTask);
+            }
+        }
+    }
+}
 
 async function boardInit() {
     await getTasks();
