@@ -359,6 +359,7 @@ function moveTo(category) {
     });
     const task = boardTasks.find((task) => task.taskId === currentDraggedElement);
     task.category = category;
+    setItem("boardTasks", JSON.stringify(boardTasks))
     renderEachTask();
 }
 
