@@ -7,7 +7,8 @@ function updateEditForm(j) {
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
-    setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('contact-form-delete-button', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
 
     // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
@@ -93,6 +94,7 @@ async function deleteUserContact(j) {
     currentContact = undefined;
     await setItem('users', users);
 
+    closeDialog('dialog-delete-contact');
     closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-settings');
     showUserInfo(false);
@@ -107,7 +109,8 @@ async function deleteUserContact(j) {
 function openContactSettingsMobile(j) {
     openDialog('dialog-contact-settings');
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
 }
 
 
@@ -217,8 +220,10 @@ function showEditedContact(mail) {
     setUserInfo(userIndex);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
-    setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
+    setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    // setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
+    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
@@ -373,6 +378,15 @@ function showBacklogContactForm(id, message) {
             setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
         }, 125);
     }, 800);
+}
+
+
+function openDialogDeleteContact(j) {
+    openDialog('dialog-delete-contact');
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    let output = getElement('deleting-contact-name');
+    output.innerHTML = name;
+    setElementAttribute('dialog-delete-contact-button', 'onclick', `deleteUserContact(${j})`);
 }
 
 
