@@ -386,7 +386,11 @@ function openDialogDeleteContact(j) {
     let name = getJsonObjectDeepValue(contactSample, j, 'name');
     let output = getElement('deleting-contact-name');
     output.innerHTML = name;
-    setElementAttribute('dialog-delete-contact-button', 'onclick', `deleteUserContact(${j})`);
+    if (!name.includes(' (You)')) {
+        setElementAttribute('dialog-delete-contact-button', 'onclick', `deleteUserContact(${j})`);
+    } else {
+        setElementAttribute('dialog-delete-contact-button', 'onclick', 'closeDialog(\'dialog-delete-contact\')');
+    }
 }
 
 
