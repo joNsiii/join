@@ -7,7 +7,6 @@ function updateEditForm(j) {
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
-    setElementAttribute('save-edited-contact-button', 'onclick', `updateEditedContactList(${j})`);
     setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
 
     // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
@@ -132,7 +131,7 @@ async function verifyContactInput(mail) {
     let userData = users.find(u => u.userId == userId);
     let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
-        showBacklogAddContact('Email already existing');
+        showBacklogContactForm('add', 'Email already existing');
     } else {
         let user = getNewContact();
         userData['contacts'].push(user);
@@ -174,18 +173,46 @@ async function showUpdatedContactList(mail) {
 }
 
 
-// For editUserContact()
 async function updateEditedContactList(j) {
+    let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
-    await editContact(j);
-    closeSavedContact('edit');
-    await initContacts();
+    if (name != '' && mail != '') {
+        verifyEditedContact(j, mail);
+    }
+}
 
+
+async function verifyEditedContact(j, mail) {
+    let userData = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail)) && mail !== contactSample[j].mail;
+    if (checkedUser) {
+        showBacklogContactForm('edit', 'Email already existing');
+    } else {
+        await updateUserData(j, userData);
+        closeSavedContact('edit');
+        await initContacts();
+        showEditedContact(mail);
+    }
+}
+
+
+async function updateUserData(j, userData) {
+    let contactId = contactSample[j]['contact-id'];
+    let name = getInputValue('edit-contact-name');
+    let mail = getInputValue('edit-contact-mail');
+    let phone = getInputValue('edit-contact-phone');
+    userData['contacts'][contactId]['name'] = name;
+    userData['contacts'][contactId]['mail'] = mail;
+    userData['contacts'][contactId]['phone'] = phone;
+    await setItem('users', users);
+}
+
+
+function showEditedContact(mail) {
     let currentUser = contactSample.find(c => c['mail'] == mail);
     let userIndex = contactSample.indexOf(currentUser);
     highlightCurrentContact(userIndex);
-
-    renderContactViewer(userIndex);    // Mobile Version fixen!!!
+    renderContactViewer(userIndex);
     setUserInfo(userIndex);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
@@ -194,32 +221,6 @@ async function updateEditedContactList(j) {
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
-}
-
-
-async function editContact(j) {
-    let currentMail = contactSample[j]['mail'];
-    let contactId = contactSample[j]['contact-id'];
-    let name = getInputValue('edit-contact-name');
-    let mail = getInputValue('edit-contact-mail');
-    let phone = getInputValue('edit-contact-phone');
-
-    // Bedingung hier einfuegen!!!
-    let alreadyExisting = contactSample.find(c => c['mail'] == mail);
-    if (alreadyExisting && mail === alreadyExisting['mail'] && mail != currentMail) {
-        console.log('already existing');
-        console.log(alreadyExisting['name']);
-    } else {
-        let userData = users.find(u => u.userId == userId);
-        let userContact = userData.contacts.find(c => c['contact-id'] == contactId);
-        if (userContact) {
-            userContact['name'] = name;
-            userContact['mail'] = mail;
-            userContact['phone'] = phone;
-        }
-
-        setItem('users', users);
-    }
 }
 
 
@@ -361,14 +362,14 @@ function animateBacklogContact(position, value) {
 }
 
 
-function showBacklogAddContact(message) {
-    setBacklogContactMessage('backlog-add-contact', message);
-    setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-in');
+function showBacklogContactForm(id, message) {
+    setBacklogContactMessage(`backlog-${id}-contact`, message);
+    setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-in');
     setTimeout(() => {
-        setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-in');
-        setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-out');
+        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-in');
+        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
         setTimeout(() => {
-            setClassOnCommand('backlog-add-contact', 'toggle', 'backlog-add-contact-out');
+            setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
         }, 125);
     }, 800);
 }
