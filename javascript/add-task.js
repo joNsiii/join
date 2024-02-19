@@ -205,3 +205,22 @@ function prioSelection(clickedPrio) {
 
   priority = prio.id;
 }
+
+function clear() {
+  let titleInput = document.getElementById("title-task");
+  let descriptionInput = document.getElementById("description-task");
+  let dueDateInput = document.getElementById("date-date-task").value;
+  let assignTaskInput = document.getElementById("assign-task");
+  let sub_users_childInput = assignTaskInput.options[assignTaskInput.selectedIndex].text;
+  let headingOptionInput = document.getElementById("category");
+  let headingInput = headingOptionInput.options[headingOptionInput.selectedIndex].text;
+
+  titleInput = '';
+  descriptionInput = '';
+  dueDateInput = '';
+  sub_users_childInput = '';
+  headingInput = '';
+
+  subtaskInput = [];
+  priority = priorityDefault;
+}
