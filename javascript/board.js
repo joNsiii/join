@@ -210,10 +210,11 @@ function addTaskFromBoard() {
 //     setupCloseDialogMechanism();
 // }
 
-function deleteTask(taskId) {
+async function deleteTask(taskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
     boardTasks.splice(taskIndex, 1);
     closeDialog("dialog");
+    await setItem("boardTasks", JSON.stringify(boardTasks));
     renderEachTask();
 }
 
@@ -356,7 +357,8 @@ function moveTo(category) {
             element.classList.remove("highlight");
         }
     });
-    boardTasks[currentDraggedElement]["category"] = category;
+    const task = boardTasks.find((task) => task.taskId === currentDraggedElement);
+    task.category = category;
     renderEachTask();
 }
 
