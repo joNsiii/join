@@ -92,14 +92,15 @@ async function deleteUserContact(j) {
     currentUser.contacts.splice(contactId, 1);
     currentContact = undefined;
     await setItem('users', users);
-    showUserInfo(false);
+
     closeDialog('dialog-edit-contact');
-    closeDialog('dialog-contact-viewer');
     closeDialog('dialog-contact-settings');
-    await initContacts();
-    setTimeout(() => {
-        showBacklogContact('Contact successfully deleted');
-    }, 125);
+    showUserInfo(false);
+    initContacts();
+    showBacklogContact('Contact successfully deleted');
+    setTimeout(async () => {
+        closeDialog('dialog-contact-viewer');
+    }, 1050);
 }
 
 
