@@ -2,22 +2,6 @@ let currentDraggedElement;
 let matchingBoardTask = [];
 let boardTasks = [];
 
-// function subtaskTest(boardTasks) {
-//     for (let i = 0; i < boardTasks.length; i++) {
-//         let tasks = boardTasks[i];
-//         if (tasks.hasOwnProperty('subtasks')) {
-//             let subTasks = tasks['subtasks'];
-//             for (let j = 0; j < subTasks.length; j++) {
-//                 let subTask = subTasks[j];
-//                 let taskId = subTask['subtaskId'];
-//                 let subtaskText = subTask['subtasksText'];
-//                 let isChecked = subTask['isChecked'];
-//                 console.log(subTask);
-//             }
-//         }
-//     }
-// }
-
 async function loadTasksInBoard() {
     try {
       boardTasks = JSON.parse(await getItem("boardTasks"));
@@ -32,14 +16,6 @@ async function boardInit() {
     renderEachTask();
 }
 
-// subtasks render
-// function renderSubTask(subTaskData) {
-//     let subtask = subTaskData.subtasks;
-//     for (let i = 0; i < subtask.length; i++) {
-//         const task = subtask[i];
-//     }
-// }
-
 function renderEachTask() {
     clearHTML();
     for (let i = 0; i < boardTasks.length; i++) {
@@ -47,7 +23,6 @@ function renderEachTask() {
         let containerId = "";
         checkCategory(task, containerId);
         updateProgressBar(task);
-        // renderSubTask(task);
         noTodoMessage();
     }
 }
@@ -60,7 +35,6 @@ function renderMatchingTask() {
         let containerId = "";
         checkCategory(task, containerId);
         updateProgressBar(task);
-        // renderSubTask(task);
         noTodoMessage();
     }
 }
@@ -429,3 +403,20 @@ function searchForTask() {
         }
     }, 300);
 }
+
+// x axis scroll with mouse wheel
+document.addEventListener('DOMContentLoaded', () => {
+    let scrollElements = document.getElementsByClassName('horizontal-scroll');
+
+    Array.from(scrollElements).forEach(element => {
+        element.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            element.scrollBy({
+                left: event.deltaY < 0 ? -30 : 30,
+            });
+        });
+    });
+});
+
+
+

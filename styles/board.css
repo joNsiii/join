@@ -397,6 +397,6 @@ dialog[open] {
 @media (max-width: 830px){
     .horizontal-scroll {
         overflow-y: hidden;
-        overflow-x: auto; 
+        overflow-x: hidden;
     }
 }
