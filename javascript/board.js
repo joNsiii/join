@@ -270,12 +270,13 @@ function subTasksRender(task) {
     return subtasksHtml;
 }
 
-function subtaskStatus(taskId, subtaskId) {
+async function subtaskStatus(taskId, subtaskId) {
     let task = boardTasks.find((t) => t.taskId === taskId);
     let dialog = document.getElementById("dialog");
     let subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
 
     subtask.isChecked = !subtask.isChecked;
+    await setItem("boardTasks", JSON.stringify(boardTasks));
     insertTaskDataIntoDialog(task, dialog);
 }
 
