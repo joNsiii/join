@@ -29,7 +29,6 @@ function renderEachTask() {
 
 function renderMatchingTask() {
     clearHTML();
-
     for (let i = 0; i < matchingBoardTask.length; i++) {
         const task = matchingBoardTask[i];
         let containerId = "";

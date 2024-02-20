@@ -11,7 +11,6 @@ if (msg) {
     }, "6000");
 }
 
-
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
@@ -24,6 +23,11 @@ function checkLogin() {
     } else {
         wrongPassword();
     }
+}
+
+function guestLogin() {
+    sessionStorage.setItem('guest_token', 'guest');
+    window.location.href = 'summary.html';
 }
 
 function rememberMeStatus() {
@@ -79,11 +83,6 @@ function toggleCheckboxLogin() {
     } else {
         checkBox.src = "./img/checkmark-unchecked.png";
     }
-}
-
-function guestLogin() {
-    sessionStorage.setItem('guest_token', 'guest');
-    window.location.href = 'summary.html';
 }
 
 document.getElementById('password-type').addEventListener('input', togglePasswordLogin);
