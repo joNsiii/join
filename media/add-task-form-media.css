@@ -136,7 +136,7 @@
 }
 
 @media (max-width: 730px) {
-    .dialog[open] {
-        display: none;
+    .dialog-board-task {
+        margin: 16px;
     }
 }
