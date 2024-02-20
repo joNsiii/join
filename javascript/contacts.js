@@ -462,15 +462,17 @@ function showImg(id, image) {
 }
 
 
-/*
-    E3 / US01 - Kontaktliste
-        1. Es gibt eine Seite oder einen Bereich fuer Kontakte. - Check
-        2. Kontakte werden alphabetisch nach ihrem Namen sortiert und ihre E-Mail-Adresse unterhalb ihres Namens angezeigt. - Check
-        3. Die Liste ist in Abschnitte nach Buchstaben unterteilt, sodass
-           Kontakte, die mit einem bestimmten Buchstaben beginnen,
-           zusammen gruppiert sind. - Check
-        4. Ein Klick auf einen Kontakt oeffnet eine Detailansicht mit dem
-           Namen, der E-Mail-Adresse und der Telefonnummer des Kontakts.
 
-    3 von 4 Subtask erledigt.
-*/
+
+async function getAssignableContacts() {
+    let assignableContacts = [];
+    contactSample = await getUserContactList();
+    sortContactsByName(contactSample);
+    for (let i = 0; i < contactSample.length; i++) {
+        let contact = contactSample[i].name;
+        assignableContacts.push(contact);
+    }
+    let currentUser = users.find(u => u.userId == userId);
+    currentUser['assignable-contacts'] = assignableContacts;
+    await setItem('users', users);
+}
