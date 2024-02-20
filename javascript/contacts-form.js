@@ -383,13 +383,138 @@ function showBacklogContactForm(id, message) {
 
 function openDialogDeleteContact(j) {
     openDialog('dialog-delete-contact');
+    renderDeletingConfirmationText(j);
+}
+
+
+function renderDeletingConfirmationText(j) {
     let name = getJsonObjectDeepValue(contactSample, j, 'name');
-    let output = getElement('deleting-contact-name');
-    output.innerHTML = name;
-    if (!name.includes(' (You)')) {
-        setElementAttribute('dialog-delete-contact-button', 'onclick', `deleteUserContact(${j})`);
+    let isUser = (name.includes(' (You)'));
+    if (!isUser) {
+        let dialog = getElement('deleting-confirmation');
+        dialog.innerHTML = `
+            ${generateDeletingContactParagraph(j)}
+            ${generateDeletingContactButtonBar(j)}
+        `;
     } else {
-        setElementAttribute('dialog-delete-contact-button', 'onclick', 'closeDialog(\'dialog-delete-contact\')');
+        let dialog = getElement('deleting-confirmation');
+        dialog.innerHTML = `
+            ${generateDeletingUserParagraph(j)}
+            ${generateDeletingUserButtonBar(j)}
+        `;
+    }
+}
+
+
+function generateDeletingContactParagraph(j) {
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    return `
+        <p class="p-deleting-confirmation">
+            Are you sure to remove<br>
+            <b id="deleting-contact-name" class="b-deleting-contact">${name}</b><br>
+            from your contacts?
+        </p>
+    `;
+}
+
+
+function generateDeletingContactButtonBar(j) {
+    return `
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="deleteUserContact(${j})">
+                <div class="contact-form-button-dark-text">Delete</div>
+            </button>
+        </div>
+    `;
+}
+
+
+function generateDeletingUserParagraph(j) {
+    // let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    return `
+        <p class="p-deleting-confirmation">
+            Are you sure to delete<br>
+            <b id="deleting-contact-name" class="b-deleting-contact c-lightblue">your account</b><br>
+            from this website?
+        </p>
+    `;
+}
+
+
+function generateDeletingUserButtonBar(j) {
+    return `
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="generateDeletingUserForm(${j})">
+                <div class="contact-form-button-dark-text">Continue</div>
+            </button>
+        </div>
+    `;
+}
+
+
+function generateDeletingUserForm(j) {
+    let dialog = getElement('deleting-confirmation');
+    dialog.innerHTML = `
+        <p class="p-deleting-confirmation">
+            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to confirm the deleting of your join account.
+        </p>
+        <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
+            <fieldset class="add-contact-fieldset">
+                <div class="delete-contact-input-group">
+                    <input id="delete-contact-mail" class="add-contact-input" type="email" placeholder="Email" required>
+                    <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                </div>
+                <div class="delete-contact-input-group">
+                    <input id="delete-contact-password" class="add-contact-input" type="password" placeholder="Password" required>
+                    <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                </div>
+            </fieldset>
+        </form>
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" form="delete-contact-form" type="submit">
+                <div class="contact-form-button-dark-text">Delete</div>
+            </button>
+        </div>
+    `;
+}
+
+
+async function generateDeletingConfirmation(j) {
+    let email = getInputValue('delete-contact-mail');
+    let password = getInputValue('delete-contact-password');
+    
+    // compare input + userData!!!
+    if (email != '' && password != '') {
+        let dialog = getElement('deleting-confirmation');
+
+        // Please improve text!!!
+        dialog.innerHTML = `
+        <p class="p-deleting-confirmation">
+            Your account with the name<br>
+            <b class="c-lightblue">name</b> is deleted.<br>
+            You will be logged out.
+        </p>
+    `;
+
+
+        // Please set + verify input + timeout + logout!!!
+
+        // logout();
+        let userData = users.find(u => u.userId == userId);
+        let userIndex = users.indexOf(userData);
+        console.log(userIndex);
+
+        users.splice(userIndex, 1);
+        await setItem('users', users);
     }
 }
 

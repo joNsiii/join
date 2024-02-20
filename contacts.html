@@ -40,20 +40,8 @@
         onclick="closeEditContact()"></dialog>
 
     <dialog id="dialog-delete-contact" class="dialog-delete-contact" onclick="closeDialog('dialog-delete-contact')">
-        <section class="deleting-confirmation" onclick="stop(event)">
-            <p class="p-deleting-confirmation">
-                Are you sure to remove<br>
-                <b id="deleting-contact-name" class="b-deleting-contact">Anton Mayer</b><br>
-                from your contacts?
-            </p>
-            <div class="contact-form-button-bar">
-                <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                    <div class="contact-form-button-text">Cancel</div>
-                </button>
-                <button id="dialog-delete-contact-button" class="contact-form-button-dark">
-                    <div class="contact-form-button-dark-text">Delete</div>
-                </button>
-            </div>
+        <section id="deleting-confirmation" class="deleting-confirmation" onclick="stop(event)">
+            
         </section>
     </dialog>
 
