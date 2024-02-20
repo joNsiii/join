@@ -511,9 +511,9 @@ async function generateDeletingConfirmation(j) {
         </p>
     `;
 
-    setTimeout(() => {
-        window.location.href = `./login.html`;
-    }, 800);
+        setTimeout(() => {
+            window.location.href = `./login.html`;
+        }, 800);
 
 
         // Please set + verify input + timeout + logout!!!
