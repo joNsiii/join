@@ -180,18 +180,18 @@ function addTaskFromBoard() {
 }
 
 // NOT FINISHED YET
-// async function editTask(taskId) {
-//     console.log(taskId)
-//     const task = boardTasks.find((task) => task.taskId === taskId);
+async function editTask(taskId) {
+    console.log(taskId)
+    const task = boardTasks.find((task) => task.taskId === taskId);
 
-//     const dialog = document.getElementById("dialog");
-//     dialog.setAttribute("w3-include-html", "./templates/edit-task.html");
+    const dialog = document.getElementById("dialog");
+    dialog.setAttribute("w3-include-html", "./edit-task.html");
 
-//     await includeHTML();
-//     dialog.showModal();
+    await includeHTML();
+    dialog.showModal();
 
-//     setupCloseDialogMechanism();
-// }
+    setupCloseDialogMechanism();
+}
 
 async function deleteTask(taskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
@@ -314,15 +314,25 @@ function generateUserInitialsHtml(subUsers) {
 
 function setupCloseDialogMechanism() {
     const dialogBoardTask = document.querySelector(".dialog-board-task");
+    const dialogEditTask = document.querySelector(".dialog-edit-task");
     const dialog = document.getElementById("dialog");
 
     dialog.addEventListener("click", function (event) {
         closeDialog("dialog");
     });
     // prevent closing dialog if element itself is clicked
-    dialogBoardTask.addEventListener("click", function (event) {
-        event.stopPropagation();
-    });
+ 
+    if (dialogBoardTask) {
+        dialogBoardTask.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    if (dialogEditTask) {
+        dialogEditTask.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
 }
 
 function startDragging(id) {
@@ -403,11 +413,9 @@ function searchForTask() {
         }
     }, 300);
 }
-
 // x axis scroll with mouse wheel
 document.addEventListener('DOMContentLoaded', () => {
     let scrollElements = document.getElementsByClassName('horizontal-scroll');
-
     Array.from(scrollElements).forEach(element => {
         element.addEventListener('wheel', (event) => {
             event.preventDefault();

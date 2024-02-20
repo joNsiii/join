@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="styles/edit-task.css">
+</head>
+
+<body>
+    <div class="add-task-content dialog-edit-task">
+        <div class="add-task-headline">Edit Task</div>
+        <form >
+            <div class="display-flex" id="taskForm">
+                <div class="left-side-inputs">
+                    <div class="single-input-container">
+                        <label>Title</label>
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" required>
+                    </div>
+                    <div class="desc-input-container">
+                        <label>Description</label>
+                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task" cols="30"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="single-input-container">
+                        <label>Assigned to</label>
+                        <select class="select-input" id="assign-task">
+                            <option value="" disabled selected>Select contacts to assign</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="right-side-inputs">
+                    <div class="single-input-container">
+                        <label for="date">Due Date</label>
+                        <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                            onblur="(this.type='text')" name="date" id="date-date-task" required>
+                    </div>
+                    <div class="prio-container">
+                        <label>Prio</label>
+                        <div class="prio-select-con">
+                            <div class="prio-selection" id="Urgent" onclick="prioSelection(this)">
+                                <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
+                            </div>
+                            <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this)">
+                                <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
+                            </div>
+                            <div class="prio-selection" id="Low" onclick="prioSelection(this)">
+                                <p>Low</p><img src="./img/low.png" alt="low" id="low-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-input-container">
+                        <label>Category</label>
+                        <select class="select-input" id="category" required>
+                            <option value="" disabled selected>Select contacts to assign</option>
+                            <option value="">Technical Task</option>
+                            <option value="">User Story</option>
+                        </select>
+                    </div>
+                    <div class="single-input-container">
+                        <label>Subtasks</label>
+                        <div class="input-single-line-subtask" id="subtask-form">
+                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+                            <div class="subtask-add-icons" id="icon-hold">
+                            <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+                            </div>
+                        </div>
+                        <div id="subtask-display">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="bottom-container">
+                <div class="bottom-button-container bottom-flex-right">
+                    <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
