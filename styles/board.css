@@ -204,7 +204,7 @@ dialog[open] {
 .board-task-card {
     box-sizing: border-box;
     padding: 16px;
-    width: 100%;
+    width: 252px;
     background-color: #ffffff;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
