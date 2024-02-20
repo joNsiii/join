@@ -20,7 +20,6 @@ async function loadTasks() {
   } catch (error) {
     console.log(error);
   }
-  assignedTo()
 }
 
 async function scopeTasks() {
@@ -86,6 +85,7 @@ async function scopeTasks() {
         <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
         <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
       `;
+      cancelSubtaskSafety()
   }
   
   function subtaskTemplate() {
