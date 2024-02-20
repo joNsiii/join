@@ -438,7 +438,7 @@ function generateDeletingUserParagraph(j) {
         <p class="p-deleting-confirmation">
             Are you sure to delete<br>
             <b id="deleting-contact-name" class="b-deleting-contact c-lightblue">your account</b><br>
-            from this website?
+            irreversibly?
         </p>
     `;
 }
@@ -462,17 +462,23 @@ function generateDeletingUserForm(j) {
     let dialog = getElement('deleting-confirmation');
     dialog.innerHTML = `
         <p class="p-deleting-confirmation">
-            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to confirm the deleting of your join account.
+            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
         </p>
         <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
-            <fieldset class="add-contact-fieldset">
-                <div class="delete-contact-input-group">
-                    <input id="delete-contact-mail" class="add-contact-input" type="email" placeholder="Email" required>
-                    <img class="contact-input-img" src="./img/mail.png" alt="mail">
+            <fieldset class="delete-contact-fieldset">
+                <div class="delete-contact-input-box">
+                    <div id="delete-user-mail" class="delete-contact-input-group">
+                        <input id="deleting-account-mail" class="add-contact-input" type="email" placeholder="Email" required>
+                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                    </div>
+                    <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.</div>
                 </div>
-                <div class="delete-contact-input-group">
-                    <input id="delete-contact-password" class="add-contact-input" type="password" placeholder="Password" required>
-                    <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                <div class="delete-contact-input-box">
+                    <div id="delete-user-password" class="delete-contact-input-group">
+                        <input id="deleting-account-password" class="add-contact-input" type="password" placeholder="Password" required>
+                        <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                    </div>
+                    <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your password.</div>
                 </div>
             </fieldset>
         </form>
@@ -489,8 +495,8 @@ function generateDeletingUserForm(j) {
 
 
 async function generateDeletingConfirmation(j) {
-    let email = getInputValue('delete-contact-mail');
-    let password = getInputValue('delete-contact-password');
+    let email = getInputValue('deleting-account-mail');
+    let password = getInputValue('deleting-account-password');
 
     // compare input + userData + input border color!!!
     if (email == currentUserData.email && password == currentUserData.password) {
@@ -505,6 +511,10 @@ async function generateDeletingConfirmation(j) {
         </p>
     `;
 
+    setTimeout(() => {
+        window.location.href = `./login.html`;
+    }, 800);
+
 
         // Please set + verify input + timeout + logout!!!
 
@@ -515,6 +525,21 @@ async function generateDeletingConfirmation(j) {
 
         users.splice(userIndex, 1);
         await setItem('users', users);
+    } else {
+        setClassOnCommand('delete-user-mail', 'remove', 'delete-contact-input-wrong');
+        setClassOnCommand('deleting-hint-mail', 'add', 'd-none');
+        setClassOnCommand('delete-user-password', 'remove', 'delete-contact-input-wrong');
+        setClassOnCommand('deleting-hint-password', 'add', 'd-none');
+        if (email != currentUserData.email) {
+            setClassOnCommand('delete-user-mail', 'add', 'delete-contact-input-wrong');
+            setClassOnCommand('deleting-hint-mail', 'remove', 'd-none');
+        }
+        if (password != currentUserData.password) {
+            setClassOnCommand('delete-user-password', 'add', 'delete-contact-input-wrong');
+            setClassOnCommand('deleting-hint-password', 'remove', 'd-none');
+        }
+
+
     }
 }
 
