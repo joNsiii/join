@@ -24,7 +24,7 @@ async function loadTasksInBoard() {
     } catch (error) {
       console.log(error)
     }  
-  }
+}
 
 
 async function boardInit() {
@@ -178,7 +178,7 @@ async function openDetails(taskId) {
     const dialog = document.getElementById("dialog");
     dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
     await includeHTML();
-    insertTodoDataIntoDialog(task, dialog);
+    insertTaskDataIntoDialog(task, dialog);
     dialog.showModal();
     setupCloseDialogMechanism();
 }
@@ -228,7 +228,7 @@ async function deleteTask(taskId) {
 }
 
 // overlay
-function insertTodoDataIntoDialog(task, dialog) {
+function insertTaskDataIntoDialog(task, dialog) {
     const type = dialog.querySelector(".dbt-type");
     const title = dialog.querySelector(".dbt-title");
     const description = dialog.querySelector(".dbt-description");
@@ -276,7 +276,7 @@ function subtaskStatus(taskId, subtaskId) {
     let subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
 
     subtask.isChecked = !subtask.isChecked;
-    insertTodoDataIntoDialog(task, dialog);
+    insertTaskDataIntoDialog(task, dialog);
 }
 
 function generateSubUsersHtml(subUsers) {
