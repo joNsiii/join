@@ -14,7 +14,7 @@ async function init() {
 }
 
 function checkForValidUser() {
-    if (window.location.href == 'legal_notice.html' || window.location.href == 'privacy_policy.html') {
+    if (window.location.href.includes('legal_notice.html') || window.location.href.includes('privacy_policy.html') || window.location.href.includes('help.html') ) {
         return;
     } else {
         checkForLogin();
