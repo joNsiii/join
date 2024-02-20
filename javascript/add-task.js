@@ -1,5 +1,6 @@
 let subtaskInput = [];
 let priorityDefault = "Medium";
+let subtasks = [];
 priority = priorityDefault;
 
 // document.addEventListener('DOMContentLoaded', async function() {
@@ -23,7 +24,6 @@ async function loadTasks() {
 }
 
 async function scopeTasks() {
-  debugger;
   // let getTasks = await getItem("boardTasks");
   // let boardTasks = JSON.parse(getTasks);
 
@@ -45,7 +45,7 @@ async function scopeTasks() {
           description: description,
           category: "toDo",
           heading: heading,
-          subtasks: [],
+          subtasks: subtasks,
           sub_users: [
               {
                   userId: 0,
@@ -131,11 +131,23 @@ async function scopeTasks() {
     let subtaskAdd = document.getElementById("subtask-display");
     let subtaskInputValue = document.getElementById("subtask").value.trim();
     subtaskAdd.innerHTML = "";
-  
+
     if (subtaskInputValue !== "") {
+
       await subtaskInput.push(subtaskInputValue);
+
+      const subtaskId = Date.now();
+
+      const subtask = {
+        subtaskId: subtaskId,
+        subtasksText: subtaskInputValue,
+        isChecked: false
+      };
+
+      subtasks.push(subtask);
   
       for (let i = 0; i < subtaskInput.length; i++) {
+
         subtaskAdd.innerHTML += `
           <span contenteditable="true" class="span-container" id="sub-span-${i}">
               <div class="subtask-preview" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
@@ -155,6 +167,7 @@ async function scopeTasks() {
     subtaskInput.splice(i, 1);
     let subtaskSpan = document.getElementById(`sub-span-${i}`);
     if (subtaskSpan) {
+      subtasks.splice(i);
       subtaskSpan.remove();
     }
   }
@@ -177,6 +190,13 @@ async function scopeTasks() {
   }
   
   function subtaskOutOfFocus(i) {
+    let subtaskInputValue = document.getElementById(`sub-content-${i}`).innerText;
+    let subtaskIndexValue = subtasks[i]['subtasksText'];
+
+    if (subtaskInputValue !== subtaskIndexValue) {
+      subtasks[i]['subtasksText'] = subtaskInputValue;
+    }
+
     document.getElementById(`sub-span-${i}`).classList.remove("focus-input");
     document.getElementById(`list-item-${i}`).classList.remove("focus-list-item");
     document.getElementById(`preview-${i}`).classList.remove("focus-preview");
