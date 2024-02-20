@@ -39,6 +39,12 @@
     <dialog id="dialog-edit-contact" class="dialog" w3-include-html="./templates/edit-contact-form.html"
         onclick="closeEditContact()"></dialog>
 
+    <dialog id="dialog-delete-contact" class="dialog-delete-contact" onclick="closeDialog('dialog-delete-contact')">
+        <section id="deleting-confirmation" class="deleting-confirmation" onclick="stop(event)">
+            
+        </section>
+    </dialog>
+
     <div w3-include-html="./templates/templates.html"></div>
 
     <main class="content">
@@ -104,7 +110,8 @@
                     </div>
                 </div>
 
-                <div id="backlog-contact" class="backlog-contact backlog-contact-animation">Contact succesfully created</div>
+                <div id="backlog-contact" class="backlog-contact backlog-contact-animation">Contact succesfully created
+                </div>
             </section>
         </div>
     </main>

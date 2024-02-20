@@ -130,6 +130,13 @@
 }
 
 
+@media (max-width: 396px) {
+    .dialog-contacts-position {
+        left: 0;
+    }
+}
+
+
 @media (max-width: 350px) {
     .dialog-contacts-headline {
         height: unset;

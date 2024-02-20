@@ -412,3 +412,16 @@
 .backlog-add-contact-out {
     transition: 125ms left ease-in-out;
 }
+
+.delete-contact-input-group {
+    box-sizing: border-box;
+    padding: 12px 21px;
+    width: 100%;
+    max-width: 422px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}

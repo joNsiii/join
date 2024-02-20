@@ -7,7 +7,8 @@ function updateEditForm(j) {
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
-    setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('contact-form-delete-button', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
 
     // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
@@ -93,6 +94,7 @@ async function deleteUserContact(j) {
     currentContact = undefined;
     await setItem('users', users);
 
+    closeDialog('dialog-delete-contact');
     closeDialog('dialog-edit-contact');
     closeDialog('dialog-contact-settings');
     showUserInfo(false);
@@ -107,7 +109,8 @@ async function deleteUserContact(j) {
 function openContactSettingsMobile(j) {
     openDialog('dialog-contact-settings');
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
 }
 
 
@@ -217,8 +220,10 @@ function showEditedContact(mail) {
     setUserInfo(userIndex);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
-    setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
+    setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    // setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
+    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
@@ -373,6 +378,144 @@ function showBacklogContactForm(id, message) {
             setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
         }, 125);
     }, 800);
+}
+
+
+function openDialogDeleteContact(j) {
+    openDialog('dialog-delete-contact');
+    renderDeletingConfirmationText(j);
+}
+
+
+function renderDeletingConfirmationText(j) {
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    let isUser = (name.includes(' (You)'));
+    if (!isUser) {
+        let dialog = getElement('deleting-confirmation');
+        dialog.innerHTML = `
+            ${generateDeletingContactParagraph(j)}
+            ${generateDeletingContactButtonBar(j)}
+        `;
+    } else {
+        let dialog = getElement('deleting-confirmation');
+        dialog.innerHTML = `
+            ${generateDeletingUserParagraph(j)}
+            ${generateDeletingUserButtonBar(j)}
+        `;
+    }
+}
+
+
+function generateDeletingContactParagraph(j) {
+    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    return `
+        <p class="p-deleting-confirmation">
+            Are you sure to remove<br>
+            <b id="deleting-contact-name" class="b-deleting-contact">${name}</b><br>
+            from your contacts?
+        </p>
+    `;
+}
+
+
+function generateDeletingContactButtonBar(j) {
+    return `
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="deleteUserContact(${j})">
+                <div class="contact-form-button-dark-text">Delete</div>
+            </button>
+        </div>
+    `;
+}
+
+
+function generateDeletingUserParagraph(j) {
+    // let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    return `
+        <p class="p-deleting-confirmation">
+            Are you sure to delete<br>
+            <b id="deleting-contact-name" class="b-deleting-contact c-lightblue">your account</b><br>
+            from this website?
+        </p>
+    `;
+}
+
+
+function generateDeletingUserButtonBar(j) {
+    return `
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="generateDeletingUserForm(${j})">
+                <div class="contact-form-button-dark-text">Continue</div>
+            </button>
+        </div>
+    `;
+}
+
+
+function generateDeletingUserForm(j) {
+    let dialog = getElement('deleting-confirmation');
+    dialog.innerHTML = `
+        <p class="p-deleting-confirmation">
+            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to confirm the deleting of your join account.
+        </p>
+        <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
+            <fieldset class="add-contact-fieldset">
+                <div class="delete-contact-input-group">
+                    <input id="delete-contact-mail" class="add-contact-input" type="email" placeholder="Email" required>
+                    <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                </div>
+                <div class="delete-contact-input-group">
+                    <input id="delete-contact-password" class="add-contact-input" type="password" placeholder="Password" required>
+                    <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                </div>
+            </fieldset>
+        </form>
+        <div class="contact-form-button-bar">
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" form="delete-contact-form" type="submit">
+                <div class="contact-form-button-dark-text">Delete</div>
+            </button>
+        </div>
+    `;
+}
+
+
+async function generateDeletingConfirmation(j) {
+    let email = getInputValue('delete-contact-mail');
+    let password = getInputValue('delete-contact-password');
+
+    // compare input + userData + input border color!!!
+    if (email == currentUserData.email && password == currentUserData.password) {
+        let dialog = getElement('deleting-confirmation');
+
+        // Please improve text!!!
+        dialog.innerHTML = `
+        <p class="p-deleting-confirmation">
+            Your account with the name<br>
+            <b class="c-lightblue">name</b> is deleted.<br>
+            You will be logged out.
+        </p>
+    `;
+
+
+        // Please set + verify input + timeout + logout!!!
+
+        // logout();
+        let userData = users.find(u => u.userId == userId);
+        let userIndex = users.indexOf(userData);
+        console.log(userIndex);
+
+        users.splice(userIndex, 1);
+        await setItem('users', users);
+    }
 }
 
 
