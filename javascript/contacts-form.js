@@ -491,9 +491,9 @@ function generateDeletingUserForm(j) {
 async function generateDeletingConfirmation(j) {
     let email = getInputValue('delete-contact-mail');
     let password = getInputValue('delete-contact-password');
-    
-    // compare input + userData!!!
-    if (email != '' && password != '') {
+
+    // compare input + userData + input border color!!!
+    if (email == currentUserData.email && password == currentUserData.password) {
         let dialog = getElement('deleting-confirmation');
 
         // Please improve text!!!
