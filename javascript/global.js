@@ -5,29 +5,23 @@ let userId = sessionStorage.getItem('session_token');
 boardTasks = [];
 
 async function init() {
-    checkForValidUser();
     await loadUsers();
     await includeHTML();
+    checkForValidUser();
     loadUserData();
     loadUserImage();
     hightlightCurrentButton();
 }
 
-async function includeHTML() {
-    let includeElements = document.querySelectorAll("[w3-include-html]");
-    for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
-        file = element.getAttribute("w3-include-html"); // "includes/header.html"
-        let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = "Page not found";
-        }
+function checkForValidUser() {
+    if (window.location.href == 'legal_notice.html' || window.location.href == 'privacy_policy.html') {
+        return;
+    } else {
+        checkForLogin();
     }
 }
 
-function checkForValidUser() {
+function checkForLogin() {
     if (userIsLoggedIn() == false && guestIsLoggedIn() == false) {
         window.location.href = 'login.html';
     }
@@ -50,6 +44,8 @@ function guestIsLoggedIn() {
     const sessionToken = sessionStorage.getItem('guest_token');
     return sessionToken !== null;
 }
+
+
 
 function loadUserData() {
     let userId = sessionStorage.getItem('session_token');
