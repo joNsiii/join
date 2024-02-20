@@ -388,9 +388,8 @@ dialog[open] {
 @media (max-width: 830px){
     .horizontal-scroll {
         overflow-y: hidden;
-        overflow-x: auto; */
-        /* white-space: nowrap;
-        width: 100%;
+        overflow-x: auto; 
+        white-space: nowrap;
         touch-action: none; 
     }
 }
