@@ -24,6 +24,11 @@ function changeImageBack1() {
 //     }
 // }
 
+function summaryInit() {
+    dayTimeGretting();
+    greetUser();
+}
+
 function dayTimeGretting() {
     let greet = [
         'What are you doing that early?',
