@@ -4,12 +4,11 @@ let boardTasks = [];
 
 async function loadTasksInBoard() {
     try {
-      boardTasks = JSON.parse(await getItem("boardTasks"));
+        boardTasks = JSON.parse(await getItem("boardTasks"));
     } catch (error) {
-      console.log(error)
-    }  
+        console.log(error);
+    }
 }
-
 
 async function boardInit() {
     await loadTasksInBoard();
@@ -170,26 +169,12 @@ function renderEditAndDeleteSection(task) {
         </button>
     
     `;
-
     return ContentHTML;
 }
 
+// TODO linking to add task and overlay
 function addTaskFromBoard() {
     console.log("add task button board working");
-}
-
-// NOT FINISHED YET
-async function editTask(taskId) {
-    console.log(taskId)
-    const task = boardTasks.find((task) => task.taskId === taskId);
-
-    const dialog = document.getElementById("dialog");
-    dialog.setAttribute("w3-include-html", "./edit-task.html");
-
-    await includeHTML();
-    dialog.showModal();
-
-    setupCloseDialogMechanism();
 }
 
 async function deleteTask(taskId) {
@@ -320,7 +305,7 @@ function setupCloseDialogMechanism() {
         closeDialog("dialog");
     });
     // prevent closing dialog if element itself is clicked
- 
+
     if (dialogBoardTask) {
         dialogBoardTask.addEventListener("click", function (event) {
             event.stopPropagation();
@@ -352,7 +337,7 @@ function moveTo(category) {
     });
     const task = boardTasks.find((task) => task.taskId === currentDraggedElement);
     task.category = category;
-    setItem("boardTasks", JSON.stringify(boardTasks))
+    setItem("boardTasks", JSON.stringify(boardTasks));
     renderEachTask();
 }
 
@@ -413,10 +398,10 @@ function searchForTask() {
     }, 300);
 }
 // x axis scroll with mouse wheel
-document.addEventListener('DOMContentLoaded', () => {
-    let scrollElements = document.getElementsByClassName('horizontal-scroll');
-    Array.from(scrollElements).forEach(element => {
-        element.addEventListener('wheel', (event) => {
+document.addEventListener("DOMContentLoaded", () => {
+    let scrollElements = document.getElementsByClassName("horizontal-scroll");
+    Array.from(scrollElements).forEach((element) => {
+        element.addEventListener("wheel", (event) => {
             event.preventDefault();
             element.scrollBy({
                 left: event.deltaY < 0 ? -30 : 30,
@@ -424,6 +409,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
-
