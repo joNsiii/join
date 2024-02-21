@@ -92,7 +92,7 @@
     padding: 28px 48px 28px 48px;
     box-sizing: border-box;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transition: all 100ms ease-in-out;
+    /* transition: all 100ms ease-in-out; */
 }
 
 .summary-urgent-left {
@@ -139,7 +139,7 @@
     border-radius: 30px;
     gap: 13px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transition: all 100ms ease-in-out;
+    /* transition: all 100ms ease-in-out; */
 }
 
 .summary-main-counter-container-task:hover {
@@ -217,7 +217,7 @@
     color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 100ms ease-in-out;
+    /* transition: all 100ms ease-in-out; */
 }
 
 .summary-main-counter-container-task:hover {
@@ -228,5 +228,5 @@
     color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 100ms ease-in-out;
+    /* transition: all 100ms ease-in-out; */
 }

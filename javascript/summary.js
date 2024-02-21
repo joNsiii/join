@@ -36,9 +36,14 @@ function dayTimeGretting() {
 function greetUser() {
     let nameBox = document.getElementById('greeting-name');
     if (currentUserData !== undefined) {
-        let firstCharUppercase = currentUserData.name.charAt(0).toUpperCase();
-        let restOfNameLowercase = currentUserData.name.substring(1).toLowerCase();
-        nameBox.innerHTML = firstCharUppercase + restOfNameLowercase;
+        let fullName = currentUserData.name;
+        let spaceIndex = fullName.indexOf(' ');
+        let firstName = fullName.slice(0, spaceIndex);
+        let lastName = fullName.slice(spaceIndex + 1);
+        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+        nameBox.innerHTML = formattedFullName;
     } else {
         nameBox.innerHTML = 'Guest';
     }
