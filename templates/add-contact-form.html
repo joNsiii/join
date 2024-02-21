@@ -11,25 +11,25 @@
             <img class="dialog-contacts-underline" src="./img/underline-dialog.png" alt="underline-dialog">
         </div>
     </div>
+
     <div class="dialog-contacts-right">
         <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog" onclick="closeAddContact()">
         <div class="contact-form-profile-clear">
             <img src="./img/person-clear.png" alt="person-clear">
         </div>
-        <div class="add-contact-form-group">
-            <form id="add-contact-form" class="add-contact-form" onsubmit="updateContactList(); return false">
-                <fieldset class="add-contact-fieldset">
-                    <div class="add-contact-input-group">
-                        <input id="add-contact-name" class="add-contact-input" type="text" placeholder="Name" required>
+        <div class="contact-form-group">
+            <form id="add-contact-form" class="contact-form" onsubmit="updateContactList(); return false">
+                <fieldset class="contact-fieldset">
+                    <div class="contact-input-group">
+                        <input id="add-contact-name" class="contact-input" type="text" placeholder="Name" required>
                         <img class="contact-input-img" src="./img/person.png" alt="person">
                     </div>
-                    <div class="add-contact-input-group">
-                        <input id="add-contact-mail" class="add-contact-input" type="email" placeholder="Email"
-                            required>
+                    <div class="contact-input-group">
+                        <input id="add-contact-mail" class="contact-input" type="email" placeholder="Email" required>
                         <img class="contact-input-img" src="./img/mail.png" alt="mail">
                     </div>
-                    <div class="add-contact-input-group">
-                        <input id="add-contact-phone" class="add-contact-input" type="tel" placeholder="Phone">
+                    <div class="contact-input-group">
+                        <input id="add-contact-phone" class="contact-input" type="tel" placeholder="Phone">
                         <img class="contact-input-img" src="./img/call.png" alt="call">
                     </div>
                 </fieldset>

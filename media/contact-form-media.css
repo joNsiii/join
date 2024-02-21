@@ -52,22 +52,22 @@
         display: none;
     }
 
-    .add-contact-form {
+    .contact-form {
         margin-top: 0;
         width: 100%;
         gap: 32px;
     }
 
-    .add-contact-fieldset {
+    .contact-fieldset {
         gap: 24px;
     }
 
-    .add-contact-input-group {
+    .contact-input-group {
         width: 100%;
         height: 41px;
     }
 
-    .add-contact-input {
+    .contact-input {
         width: 100%;
     }
 
