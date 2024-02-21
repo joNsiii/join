@@ -215,15 +215,33 @@
     outline: none;
 }
 
-.contact-settings-button-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    color: #2A3647;
+.edit-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/edit-contacts.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.contact-settings-button:hover .contact-settings-button-text {
+.contact-settings-button:hover .edit-contact-img {
+    background-image: url('../img/edit-contacts-blue.png');
+}
+
+.contact-settings-button:hover .contact-button-text {
     font-weight: 700;
     color: #29ABE2;
+}
+
+.delete-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/delete.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-settings-button:hover .delete-contact-img {
+    background-image: url('../img/delete-blue.png');
 }
