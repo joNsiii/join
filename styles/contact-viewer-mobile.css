@@ -16,7 +16,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 300;
 }
 
 .contact-viewer-mobile {
@@ -47,39 +47,6 @@
 .close-contact-viewer:hover {
     background-color: #EEEEEE;
     border-radius: 16px;
-}
-
-.contact-settings-button-mobile {
-    box-sizing: border-box;
-    padding: 12px;
-    width: 56px;
-    height: 56px;
-    background-color: #2A3647;
-    border: none;
-    border-radius: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 16px;
-    bottom: 32px;
-    outline: none;
-}
-
-.contact-settings-button-mobile:hover {
-    background-color: #29ABE2;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.contact-settings-button-mobile:active {
-    background-color: #091931;
-}
-
-.contact-settings-img {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
-    object-position: center;
 }
 
 .contact-viewer-header-mobile {
@@ -164,6 +131,38 @@
     align-items: center;
 }
 
+.contact-settings-button-mobile {
+    box-sizing: border-box;
+    padding: 12px;
+    width: 56px;
+    height: 56px;
+    background-color: #2A3647;
+    border: none;
+    border-radius: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 16px;
+    bottom: 32px;
+    outline: none;
+}
+
+.contact-settings-button-mobile:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.contact-settings-button-mobile:active {
+    background-color: #091931;
+}
+
+.contact-settings-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-position: center;
+}
 
 .dialog-contact-settings {
     margin: 0;
@@ -190,7 +189,6 @@
     border: unset;
     border-radius: 20px 20px 0 20px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    /* display: none; */
     position: absolute;
     bottom: 16px;
     left: calc(100% + 4px);
@@ -215,15 +213,15 @@
     outline: none;
 }
 
-.contact-settings-button-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    color: #2A3647;
+.contact-settings-button:hover .edit-contact-img {
+    background-image: url('../img/edit-contacts-blue.png');
 }
 
-.contact-settings-button:hover .contact-settings-button-text {
+.contact-settings-button:hover .contact-button-text {
     font-weight: 700;
     color: #29ABE2;
+}
+
+.contact-settings-button:hover .delete-contact-img {
+    background-image: url('../img/delete-blue.png');
 }

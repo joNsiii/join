@@ -19,17 +19,17 @@
         transition: 125ms bottom ease-in-out;
     }
 
-    .backlog-add-contact {
+    .backlog-contact-form {
         bottom: -74px;
         left: calc(50% - 163px);
     }
 
-    .backlog-add-contact-in {
+    .backlog-contact-form-in {
         bottom: 33px;
         transition: 125ms bottom ease-in-out;
     }
 
-    .backlog-add-contact-out {
+    .backlog-contact-form-out {
         transition: 125ms bottom ease-in-out;
     }
 }
