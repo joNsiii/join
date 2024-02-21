@@ -310,12 +310,38 @@
     color: #29ABE2;
 }
 
-.contact-button-img {
+.edit-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/edit-contacts.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-user-button:hover .edit-contact-img {
+    background-image: url('../img/edit-contacts-blue.png');
+}
+
+.delete-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/delete.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-user-button:hover .delete-contact-img {
+    background-image: url('../img/delete-blue.png');
+}
+
+/* .contact-button-img {
     width: 24px;
     height: 24px;
     object-fit: cover;
     object-position: center;
-}
+} */
 
 .contact-user-info {
     width: fit-content;

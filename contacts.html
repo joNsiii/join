@@ -41,7 +41,7 @@
 
     <dialog id="dialog-delete-contact" class="dialog-delete-contact" onclick="closeDialog('dialog-delete-contact')">
         <section id="deleting-confirmation" class="deleting-confirmation" onclick="stop(event)">
-            
+            <!-- rendering dialog-delete-contact's content -->
         </section>
     </dialog>
 
@@ -58,7 +58,7 @@
                         </button>
                     </div>
                     <div id="contacts-collector" class="contacts-collector">
-                        <!-- rendering contacs -->
+                        <!-- rendering contacts -->
                     </div>
                 </div>
 
@@ -80,18 +80,12 @@
                         <div class="contact-user-group">
                             <div id="contact-user-name" class="contact-user-name">Anton Mayer</div>
                             <div class="contact-user-button-group">
-                                <button id="edit-contact-button" class="contact-user-button"
-                                    onmouseover="showImg('edit-contact-img', 'edit-contacts-blue')"
-                                    onmouseleave="showImg('edit-contact-img', 'edit-contacts')">
-                                    <img id="edit-contact-img" class="contact-button-img" src="./img/edit-contacts.png"
-                                        alt="edit-contacts">
+                                <button id="edit-contact-button" class="contact-user-button">
+                                    <div class="edit-contact-img"></div>
                                     <div class="contact-button-text">Edit</div>
                                 </button>
-                                <button id="delete-contact-button" class="contact-user-button"
-                                    onmouseover="showImg('delete-contact-img', 'delete-blue')"
-                                    onmouseleave="showImg('delete-contact-img', 'delete')">
-                                    <img id="delete-contact-img" class="contact-button-img" src="./img/delete.png"
-                                        alt="delete">
+                                <button id="delete-contact-button" class="contact-user-button">
+                                    <div class="delete-contact-img"></div>
                                     <div class="contact-button-text">Delete</div>
                                 </button>
                             </div>
