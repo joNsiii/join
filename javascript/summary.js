@@ -1,6 +1,6 @@
 function changeImage() {
     let editImg = document.getElementById('edit-img');
-    editImg.src = 'img/edit-bg-white.png'   
+    editImg.src = 'img/edit-bg-white.png'
 }
 function changeImageBack() {
     let editImg = document.getElementById('edit-img');
@@ -16,15 +16,9 @@ function changeImageBack1() {
     successImage.src = 'img/success-bg-blue.png'
 }
 
-// function checkGreeting() {
-//     let greetingName = document.getElementById('greeting-name'); 
-//     if (greetingName) {
-//         dayTimeGretting();
-//         greetUser();
-//     }
-// }
-
-function summaryInit() {
+async function summaryInit() {
+    await loadUsers();
+    await loadUserData();
     dayTimeGretting();
     greetUser();
 }
@@ -35,15 +29,18 @@ function dayTimeGretting() {
         'Good Morning',
         'Good Afternoon',
         'Good Evening'
-      ][ parseInt(new Date().getHours() / 24 * 4) ];
-      document.getElementById('daytime-greet').innerHTML = greet + ',';
+    ][parseInt(new Date().getHours() / 24 * 4)];
+    document.getElementById('daytime-greet').innerHTML = greet + ',';
 }
 
 function greetUser() {
-    let nameBox = document.getElementById('greeting-name'); 
-    if(currentUserData !== undefined) {
-        nameBox.innerHTML = currentUserData.name;
-    }else {
+    let nameBox = document.getElementById('greeting-name');
+    if (currentUserData !== undefined) {
+        let firstCharUppercase = currentUserData.name.charAt(0).toUpperCase();
+        let restOfNameLowercase = currentUserData.name.substring(1).toLowerCase();
+        nameBox.innerHTML = firstCharUppercase + restOfNameLowercase;
+    } else {
         nameBox.innerHTML = 'Guest';
     }
 }
+
