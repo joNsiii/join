@@ -22,9 +22,8 @@ function renderEachTask() {
         let containerId = "";
         checkCategory(task, containerId);
         updateProgressBar(task);
-
     }
-    noTodoMessage();
+    updateAllNoTaskMessages();
 }
 
 function renderMatchingTask() {
@@ -33,10 +32,9 @@ function renderMatchingTask() {
         const task = matchingBoardTask[i];
         let containerId = "";
         checkCategory(task, containerId);
-        updateProgressBar(task);
-
+        updateProgressBar(task)
     }
-    noTodoMessage();
+    updateAllNoTaskMessages();
 }
 
 function checkCategory(task, containerId) {
@@ -58,21 +56,34 @@ function clearHTML() {
     document.getElementById("awaitFeedback").innerHTML = "";
     document.getElementById("done").innerHTML = "";
 }
-
-function noTodoMessage() {
-    const toDoContainer = document.getElementById("toDo");
-    const hasTasks = toDoContainer.children.length > 0;
-    const noTaskMessage = toDoContainer.querySelector(".board-no-task");
+function updateNoTaskMessage(containerId, message) {
+    const container = document.getElementById(containerId);
+    const hasTasks = container.children.length > 0;
+    const noTaskMessage = container.querySelector(".board-no-task");
     if (!hasTasks && !noTaskMessage) {
-        toDoContainer.innerHTML += /*html*/ `
+        container.innerHTML += /*html*/ `
             <div class="board-content">
-                <div class="board-no-task">No tasks to do</div>
+                <div class="board-no-task">${message}</div>
             </div>
         `;
     } else if (hasTasks && noTaskMessage) {
         noTaskMessage.parentNode.remove();
     }
 }
+
+function updateAllNoTaskMessages() {
+    const columns = [
+        { id: "toDo", message: "No tasks To do" },
+        { id: "inProgress", message: "No tasks In progress" },
+        { id: "awaitFeedback", message: "No tasks Await feedback" },
+        { id: "done", message: "No tasks Done" },
+    ];
+
+    columns.forEach(column => {
+        updateNoTaskMessage(column.id, column.message);
+    });
+}
+
 
 // progress bar
 function updateProgressBar(task) {
