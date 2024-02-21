@@ -142,6 +142,42 @@
     justify-content: center;
 }
 
+.bgc-orange {
+    background-color: #FF7A00;
+}
+
+.bgc-purple {
+    background-color: #9327FF;
+}
+
+.bgc-blue {
+    background-color: #6E52FF;
+}
+
+.bgc-magenta {
+    background-color: #FC71FF;
+}
+
+.bgc-yellow {
+    background-color: #FFBB2B;
+}
+
+.bgc-green {
+    background-color: #1FD7C1;
+}
+
+.bgc-dark-blue {
+    background-color: #462F8A;
+}
+
+.bgc-red {
+    background-color: #FF4646;
+}
+
+.bgc-cyan {
+    background-color: #00BEE8;
+}
+
 .contact-profile-text {
     margin-top: 12px;
     height: 14px;
@@ -178,9 +214,6 @@
     color: #007CEE;
 }
 
-
-
-
 .add-contact-button-mobile {
     padding: 12px;
     border: unset;
@@ -209,57 +242,4 @@
     height: 32px;
     object-fit: cover;
     object-position: center;
-}
-
-.dialog-delete-contact {
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    border: unset;
-    background-color: rgba(0, 0, 0, 0.25);
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.dialog-delete-contact[open] {
-    display: flex;
-}
-
-.deleting-confirmation {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 48px 16px;
-    width: 100%;
-    max-width: 428px;
-    background-color: white;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-}
-
-.p-deleting-confirmation {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: center;
-}
-
-.b-deleting-contact {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 36px;
-    text-align: center;
-}
-
-.c-lightblue {
-    color: #29ABE2;
 }

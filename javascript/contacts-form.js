@@ -409,9 +409,9 @@ function renderDeletingConfirmationText(j) {
 function generateDeletingContactParagraph(j) {
     let name = getJsonObjectDeepValue(contactSample, j, 'name');
     return `
-        <p class="p-deleting-confirmation">
+        <p class="deleting-confirmation-message">
             Are you sure to remove<br>
-            <b id="deleting-contact-name" class="b-deleting-contact">${name}</b><br>
+            <b id="deleting-contact-name" class="deleting-contact-name">${name}</b><br>
             from your contacts?
         </p>
     `;
@@ -435,9 +435,9 @@ function generateDeletingContactButtonBar(j) {
 function generateDeletingUserParagraph(j) {
     // let name = getJsonObjectDeepValue(contactSample, j, 'name');
     return `
-        <p class="p-deleting-confirmation">
+        <p class="deleting-confirmation-message">
             Are you sure to delete<br>
-            <b id="deleting-contact-name" class="b-deleting-contact c-lightblue">your account</b><br>
+            <b id="deleting-contact-name" class="deleting-contact-name c-lightblue">your account</b><br>
             irreversibly?
         </p>
     `;
@@ -461,7 +461,7 @@ function generateDeletingUserButtonBar(j) {
 function generateDeletingUserForm(j) {
     let dialog = getElement('deleting-confirmation');
     dialog.innerHTML = `
-        <p class="p-deleting-confirmation">
+        <p class="deleting-confirmation-message">
             Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
         </p>
         <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
@@ -504,7 +504,7 @@ async function generateDeletingConfirmation(j) {
 
         // Please improve text!!!
         dialog.innerHTML = `
-        <p class="p-deleting-confirmation">
+        <p class="deleting-confirmation-message">
             Your account with the name<br>
             <b class="c-lightblue">name</b> is deleted.<br>
             You will be logged out.
