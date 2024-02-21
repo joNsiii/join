@@ -370,12 +370,12 @@ function animateBacklogContact(position, value) {
 
 function showBacklogContactForm(id, message) {
     setBacklogContactMessage(`backlog-${id}-contact`, message);
-    setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-in');
+    setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-in');
     setTimeout(() => {
-        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-in');
-        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
+        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-in');
+        setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-out');
         setTimeout(() => {
-            setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-add-contact-out');
+            setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-out');
         }, 125);
     }, 800);
 }
