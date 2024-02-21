@@ -69,10 +69,14 @@ function assignedTo() {    // Rudolf
     `;
 
     // Neu
-    let currentUser = users.find(u => u.userId == userId);
-    let contacts = currentUser['assignable-contacts'];
+    assignElement.innerHTML += `
+      <option value="">${currentUserData.name}</option>
+      `;
+
+    let contacts = currentUserData['contacts'];
+    console.log(contacts);
     for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
+        const contact = contacts[i].name;
         assignElement.innerHTML += `
       <option value="">${contact}</option>
       `;

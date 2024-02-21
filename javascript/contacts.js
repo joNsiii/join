@@ -69,7 +69,7 @@ async function initContacts() {
     // ];
     contactSample = await getUserContactList();
     sortContactsByName(contactSample);
-    getAssignableContacts();
+    // getAssignableContacts();
     collectInitials(contactSample);
     renderContacts();
 
