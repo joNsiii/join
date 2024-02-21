@@ -92,7 +92,7 @@ async function getUserContactList() {
 
 
 function getUserContact(userContactList) {
-    if (checkSessionStorage()) {
+    if (userIsLoggedIn()) {
         let userContact = {
             'id': -1,
             'name': currentUserData.name + ' (You)',
@@ -106,7 +106,7 @@ function getUserContact(userContactList) {
 
 
 function getUserSubcontacts(userContactList) {
-    if (checkSessionStorage()) {
+    if (userIsLoggedIn()) {
         // let userSubcontacts = [];
         for (let i = 0; i < currentUserData.contacts.length; i++) {
             let userSubcontact = {
@@ -461,9 +461,6 @@ function animateContactUserOut(value) {
 function showImg(id, image) {
     document.getElementById(id).src = `./img/${image}.png`;
 }
-
-
-
 
 async function getAssignableContacts() {
     let assignableContacts = [];
