@@ -1,5 +1,6 @@
 
 .add-task-content {
+    overflow: auto;
     background-color: #FFFFFF;
     box-sizing: border-box;
     padding: 48px 40px;
@@ -42,7 +43,6 @@
 .single-input-container {
     display: flex;
     flex-direction: column;
-    height: 96px;
     gap: 8px;
 }
 

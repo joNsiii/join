@@ -7,11 +7,11 @@
     <title>Join</title>
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/edit-task.css">
+
 </head>
 
 <body>
     <div class="add-task-content dialog-edit-task">
-        <div class="add-task-headline">Edit Task</div>
         <form >
             <div class="display-flex" id="taskForm">
                 <div class="left-side-inputs">
@@ -55,16 +55,16 @@
                         <label>Category</label>
                         <select class="select-input" id="category" required>
                             <option value="" disabled selected>Select contacts to assign</option>
-                            <option value="">Technical Task</option>
-                            <option value="">User Story</option>
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
                         </select>
                     </div>
                     <div class="single-input-container">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" onclick="initializeSubtaskEditing()">
                             <div class="subtask-add-icons" id="icon-hold">
-                            <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+                            <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="addNewSubtaskForEditing()">
                             </div>
                         </div>
                         <div id="subtask-display">
@@ -74,14 +74,12 @@
                 </div>
 
             </div>
-            <div class="bottom-container">
-                <div class="bottom-button-container bottom-flex-right">
-                    <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
-                </div>
-            </div>
         </form>
+        <div class="bottom-container">
+            <div class="bottom-button-container bottom-flex-right">
+                <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
+            </div>
+        </div>
     </div>
-
 </body>
-
 </html>
