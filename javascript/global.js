@@ -6,23 +6,29 @@ boardTasks = [];
 
 async function init() {
     await loadUsers();
+    await loadUserData();
     await includeHTML();
-    checkForValidUser();
-    loadUserData();
+    checkForLogin();
     loadUserImage();
     hightlightCurrentButton();
 }
 
-function checkForValidUser() {
-    if (window.location.href.includes('legal_notice.html') || window.location.href.includes('privacy_policy.html') || window.location.href.includes('help.html') ) {
-        return;
-    } else {
-        checkForLogin();
+async function includeHTML() {
+    let includeElements = document.querySelectorAll("[w3-include-html]");
+    for (let i = 0; i < includeElements.length; i++) {
+        const element = includeElements[i];
+        file = element.getAttribute("w3-include-html"); // "includes/header.html"
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = "Page not found";
+        }
     }
 }
 
 function checkForLogin() {
-    if (userIsLoggedIn() == false && guestIsLoggedIn() == false) {
+    if (userIsLoggedIn() == '' && guestIsLoggedIn() == '') {
         window.location.href = 'login.html';
     }
 }
@@ -36,19 +42,15 @@ async function loadUsers() {
 }
 
 function userIsLoggedIn() {
-    const sessionToken = sessionStorage.getItem('session_token');
-    return sessionToken !== null;
+    return getCookie('user_session_token');
 }
 
 function guestIsLoggedIn() {
-    const sessionToken = sessionStorage.getItem('guest_token');
-    return sessionToken !== null;
+    return getCookie('guest_session_token')
 }
 
-
-
-function loadUserData() {
-    let userId = sessionStorage.getItem('session_token');
+async function loadUserData() {
+    let userId = getCookie('user_session_token');
     let userData = users.find(u => u.userId == userId);
     if (userData) {
         currentUserData = userData;
@@ -73,16 +75,13 @@ function guestLogo(userLogo) {
     userLogo.innerHTML = 'G'
 }
 
-function checkSessionStorage() {
-    return sessionStorage.getItem('session_token') !== null;
-}
-
-function clearSessionStorage() {
-    sessionStorage.clear();
+function deleteCookie(cookieName) {
+    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
 
 function logout() {
-    clearSessionStorage();
+    deleteCookie('user_session_token');
+    deleteCookie('guest_session_token');
 }
 
 function redirectToPreviousPage() {
