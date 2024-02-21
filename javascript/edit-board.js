@@ -49,10 +49,8 @@ function setPrioritySelection(priority) {
         }
     }
 }
-
-
 function displaySubtasksForEditing(taskId) {
-    const task = boardTasks.find((t) => t.taskId === taskId);
+    const task = boardTasks.find(t => t.taskId === taskId);
     if (!task) {
         console.error("Task not found");
         return;
@@ -61,15 +59,15 @@ function displaySubtasksForEditing(taskId) {
     const subtaskDisplayElement = document.getElementById("subtask-display");
     subtaskDisplayElement.innerHTML = ""; // Bereinigen Sie das Element zuerst
 
-    task.subtasks.forEach((subtask, index) => {
+    task.subtasks.forEach(subtask => {
         const subtaskHtml = `
-            <span contenteditable="true" class="span-container" id="sub-span-${index}">
-                <div class="subtask-preview" id="preview-${index}" onclick="subtaskFocus(${index})">
-                    <div class="list-item" id="list-item-${index}"></div>
-                    <p id="sub-content-${index}">${subtask.subtasksText}</p>
+            <span contenteditable="true" class="span-container" id="sub-span-${subtask.subtaskId}">
+                <div class="subtask-preview" id="preview-${subtask.subtaskId}" onclick="toggleSubtaskFocus(${taskId}, ${subtask.subtaskId}, true)">
+                    <div class="list-item" id="list-item-${subtask.subtaskId}"></div>
+                    <p id="sub-content-${subtask.subtaskId}">${subtask.subtasksText}</p>
                 </div>
-                <div class="subtask-icon-container" id="icon-container-${index}">
-                    <img src="./img/edit-contacts.png" alt="edit-icon" class="hover" onclick="subtaskFocus(${index})">
+                <div class="subtask-icon-container" id="icon-container-${subtask.subtaskId}">
+                    <img src="./img/edit-contacts.png" alt="edit-icon" class="hover" onclick="toggleSubtaskFocus(${taskId}, ${subtask.subtaskId}, true)">
                     <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
                     <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="deleteSubtaskFromEditing(${taskId}, ${subtask.subtaskId})">
                 </div>
@@ -78,6 +76,35 @@ function displaySubtasksForEditing(taskId) {
         subtaskDisplayElement.innerHTML += subtaskHtml;
     });
 }
+
+
+// function displaySubtasksForEditing(taskId) {
+//     const task = boardTasks.find((t) => t.taskId === taskId);
+//     if (!task) {
+//         console.error("Task not found");
+//         return;
+//     }
+
+//     const subtaskDisplayElement = document.getElementById("subtask-display");
+//     subtaskDisplayElement.innerHTML = ""; // Bereinigen Sie das Element zuerst
+
+//     task.subtasks.forEach((subtask, index) => {
+//         const subtaskHtml = `
+//             <span contenteditable="true" class="span-container" id="sub-span-${index}">
+//                 <div class="subtask-preview" id="preview-${index}" onclick="toggleSubtaskFocus(${taskId},${subtask.subtaskId}, true)">
+//                     <div class="list-item" id="list-item-${index}"></div>
+//                     <p id="sub-content-${index}">${subtask.subtasksText}</p>
+//                 </div>
+//                 <div class="subtask-icon-container" id="icon-container-${index}">
+//                     <img src="./img/edit-contacts.png" alt="edit-icon" class="hover" onclick="toggleSubtaskFocus(${taskId},${subtask.subtaskId}, true)">
+//                     <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+//                     <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="deleteSubtaskFromEditing(${taskId}, ${subtask.subtaskId})">
+//                 </div>
+//             </span>
+//         `;
+//         subtaskDisplayElement.innerHTML += subtaskHtml;
+//     });
+// }
 function updateSubtaskText(taskId, subtaskId, newText) {
     const task = boardTasks.find((t) => t.taskId === taskId);
     const subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
@@ -86,19 +113,31 @@ function updateSubtaskText(taskId, subtaskId, newText) {
     // Zum Beispiel: setItem("boardTasks", JSON.stringify(boardTasks));
 }
 
+// function deleteSubtaskFromEditing(taskId, subtaskId) {
+//     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
+//     if (taskIndex > -1) {
+//         const subtaskIndex = boardTasks[taskIndex].subtasks.findIndex((st) => st.subtaskId === subtaskId);
+//         if (subtaskIndex > -1) {
+//             boardTasks[taskIndex].subtasks.splice(subtaskIndex, 1);
+//             // Aktualisieren Sie die Anzeige der Subtasks
+//             displaySubtasksForEditing(taskId);
+//             // Speichern Sie die aktualisierten Daten
+//             // Beispiel: setItem("boardTasks", JSON.stringify(boardTasks));
+//         }
+//     }
+// }
+
 function deleteSubtaskFromEditing(taskId, subtaskId) {
-    const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
+    const taskIndex = boardTasks.findIndex(t => t.taskId === taskId);
     if (taskIndex > -1) {
-        const subtaskIndex = boardTasks[taskIndex].subtasks.findIndex((st) => st.subtaskId === subtaskId);
+        const subtaskIndex = boardTasks[taskIndex].subtasks.findIndex(st => st.subtaskId === subtaskId);
         if (subtaskIndex > -1) {
             boardTasks[taskIndex].subtasks.splice(subtaskIndex, 1);
-            // Aktualisieren Sie die Anzeige der Subtasks
-            displaySubtasksForEditing(taskId);
-            // Speichern Sie die aktualisierten Daten
-            // Beispiel: setItem("boardTasks", JSON.stringify(boardTasks));
+            displaySubtasksForEditing(taskId); // Aktualisieren Sie die Anzeige der Subtasks
         }
     }
 }
+
 function initializeSubtaskEditing() {
     const subtaskInputField = document.getElementById("subtask");
     const addSubtaskIcon = document.getElementById("icon-hold");
@@ -164,4 +203,106 @@ function resetSubtaskIcons() {
     addSubtaskIcon.innerHTML = `
         <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="initializeSubtaskEditing()">
     `;
+}
+
+
+// function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
+//     const task = boardTasks.find(t => t.taskId === taskId);
+//     const subtask = task.subtasks[i];
+//     let subTaskSpan = document.getElementById(`sub-span-${i}`);
+//     let listItem = document.getElementById(`list-item-${i}`);
+//     let preview = document.getElementById(`preview-${i}`);
+//     let editIcon = document.getElementById(`icon-container-${i}`);
+//     let subtaskContent = document.getElementById(`sub-content-${i}`);
+
+//     // Wenn der Subtask fokussiert wird
+//     if (isFocusing) {
+//         subTaskSpan.classList.add("focus-input");
+//         listItem.classList.add("focus-list-item");
+//         preview.classList.add("focus-preview");
+
+//         editIcon.innerHTML = `
+//           <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="toggleSubtaskFocus(${i}, false)">
+//           <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+//           <img src="./img/done.png" alt="done-icon" class="hover" onclick="toggleSubtaskFocus(${i}, false)">
+//         `;
+//     } else {
+//         // Wenn der Subtask nicht mehr fokussiert wird
+//         let currentSubtaskValue = subtaskContent.innerText.trim();
+//         let originalSubtaskValue = subtask['subtasksText'].trim();
+
+//         if (currentSubtaskValue !== originalSubtaskValue) {
+//             subtasks[i]['subtasksText'] = currentSubtaskValue;
+//             // Speichern oder Aktualisieren der Subtask-Informationen hier, falls nötig
+//         }
+
+//         subTaskSpan.classList.remove("focus-input");
+//         listItem.classList.remove("focus-list-item");
+//         preview.classList.remove("focus-preview");
+
+//         editIcon.innerHTML = `
+//           <img src="./img/edit-contacts.png" alt="edit-icon" class="hover" onclick="toggleSubtaskFocus(${i}, true)">
+//           <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+//           <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="deleteSubtask(${i})">
+//         `;
+//     }
+// }
+
+
+function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
+    // Zugriff auf das Task-Objekt basierend auf taskId
+    const task = boardTasks.find(t => t.taskId === taskId);
+    if (!task) {
+        console.error("Task nicht gefunden.");
+        return;
+    }
+
+    // Finden des spezifischen Subtasks innerhalb des Task-Objekts anhand der subtaskId
+    const subtask = task.subtasks.find(st => st.subtaskId === subtaskId);
+    if (!subtask) {
+        console.error("Subtask nicht gefunden.");
+        return;
+    }
+
+    // Referenzen zu den UI-Elementen des Subtasks
+    const subTaskSpan = document.getElementById(`sub-span-${subtaskId}`);
+    const editIcon = document.getElementById(`icon-container-${subtaskId}`);
+    const subtaskContentElement = document.getElementById(`sub-content-${subtaskId}`);
+
+    let listItem = document.getElementById(`list-item-${subtaskId}`);
+    let preview = document.getElementById(`preview-${subtaskId}`);
+
+    if (isFocusing) {
+        // Wenn der Subtask fokussiert wird, aktivieren Sie den Bearbeitungsmodus
+        subTaskSpan.classList.add("focus-input");
+        listItem.classList.add("focus-list-item");
+        preview.classList.add("focus-preview");
+        
+        // Aktualisieren Sie die Icons für den Bearbeitungsmodus
+        editIcon.innerHTML = `
+            <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="deleteSubtaskFromEditing(${taskId}, ${subtaskId})">
+            <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+            <img src="./img/done.png" alt="done-icon" class="hover" onclick="toggleSubtaskFocus(${taskId}, ${subtaskId}, false)">
+        `;
+    } else {
+        // Wenn der Fokus verloren geht, speichern Sie die Änderungen und verlassen Sie den Bearbeitungsmodus
+        let currentSubtaskValue = subtaskContentElement.innerText.trim();
+
+        // Optional: Aktualisieren Sie den Wert des Subtasks im Task-Objekt
+        subtask.subtasksText = currentSubtaskValue;
+
+        // Entfernen Sie die Bearbeitungsklassen
+        subTaskSpan.classList.remove("focus-input");
+        listItem.classList.remove("focus-list-item");
+        preview.classList.remove("focus-preview");
+        
+        // Setzen Sie die Icons auf den Standardzustand zurück
+        editIcon.innerHTML = `
+            <img src="./img/edit-contacts.png" alt="edit-icon" class="hover" onclick="toggleSubtaskFocus(${taskId}, ${subtaskId}, true)">
+            <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+            <img src="./img/delete.png" alt="delete-icon" class="hover" onclick="deleteSubtaskFromEditing(${taskId}, ${subtaskId})">
+        `;
+        
+        // Optional: Speichern Sie die aktualisierten Task- und Subtask-Daten, z.B. in einem lokalen Speicher oder durch Senden an einen Server
+    }
 }
