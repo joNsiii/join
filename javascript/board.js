@@ -22,8 +22,9 @@ function renderEachTask() {
         let containerId = "";
         checkCategory(task, containerId);
         updateProgressBar(task);
-        noTodoMessage();
+
     }
+    noTodoMessage();
 }
 
 function renderMatchingTask() {
@@ -33,8 +34,9 @@ function renderMatchingTask() {
         let containerId = "";
         checkCategory(task, containerId);
         updateProgressBar(task);
-        noTodoMessage();
+
     }
+    noTodoMessage();
 }
 
 function checkCategory(task, containerId) {
