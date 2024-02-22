@@ -17,6 +17,16 @@ function getElement(id) {
 }
 
 
+function getElementAttribute(id, attribute) {
+    return document.getElementById(id).getAttribute(attribute);
+}
+
+
+function getInputValue(id) {
+    return document.getElementById(id).value;
+}
+
+
 /**
  * Provides a a json's deeper object value.
  * @param {json} variable - The providing json.
@@ -46,6 +56,11 @@ function getJsonObjectValue(variable, key) {
  */
 function openDialog(id) {
     document.getElementById(id).show();
+}
+
+
+function removeElementAttribute(id, attribute) {
+    document.getElementById(id).removeAttribute(attribute);
 }
 
 

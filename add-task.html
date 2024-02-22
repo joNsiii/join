@@ -24,18 +24,25 @@
                 <div class="left-side-inputs">
                     <div class="single-input-container">
                         <label>Title<label class="red-star">*</label></label>
-                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" required>
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" rrequired>
                     </div>
                     <div class="desc-input-container">
                         <label>Description</label>
                         <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task" cols="30"
                             rows="3"></textarea>
                     </div>
-                    <div class="single-input-container">
+                    <div class="single-input-container no-gap">
                         <label>Assigned to</label>
-                        <select class="select-input" id="assign-task">
-                            <option value="" disabled selected>Select contacts to assign</option>
-                        </select>
+                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select contacts to assign</div>
+                        <!-- assign-task is old id -->
+                        <div class="dropdown-menu-sub" id="myDropdown">
+                            <div class="subuser-selection-parent">
+                                
+                            </div>
+                        </div>
+                        <div class="sub-profile-container" id="sub-profile">
+
+                        </div>
                     </div>
                 </div>
                 <div class="border-between"></div>
@@ -43,7 +50,7 @@
                     <div class="single-input-container">
                         <label for="date">Due Date<label class="red-star">*</label></label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                            onblur="(this.type='text')" name="date" id="date-date-task" required>
+                            onblur="(this.type='text')" name="date" id="date-date-task" rrequired>
                     </div>
                     <div class="prio-container">
                         <label>Prio</label>
@@ -61,7 +68,7 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category<label class="red-star">*</label></label>
-                        <select class="select-input" id="category" required>
+                        <select class="select-input" id="category" rrequired>
                             <option value="" disabled selected>Select contacts to assign</option>
                             <option value="">Technical Task</option>
                             <option value="">User Story</option>
@@ -70,7 +77,7 @@
                     <div class="single-input-container">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
                             <div class="subtask-add-icons" id="icon-hold">
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
                             </div>
