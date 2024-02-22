@@ -49,6 +49,11 @@ function openDialog(id) {
 }
 
 
+function removeElementAttribute(id, attribute) {
+    document.getElementById(id).removeAttribute(attribute);
+}
+
+
 /**
  * Sets an element's attribute.
  * @param {value} id - The element's id.
