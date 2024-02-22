@@ -12,12 +12,13 @@
 
 <body>
     <div class="add-task-content dialog-edit-task">
-        <form >
+        <form onsubmit="findTaskAndUpdate(document.getElementById('task-id-test').value); return false">
+            <input type="hidden" id="task-id-test" value="">
             <div class="display-flex" id="taskForm">
                 <div class="left-side-inputs">
                     <div class="single-input-container">
                         <label>Title</label>
-                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" required>
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" >
                     </div>
                     <div class="desc-input-container">
                         <label>Description</label>
@@ -35,7 +36,7 @@
                     <div class="single-input-container">
                         <label for="date">Due Date</label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                            onblur="(this.type='text')" name="date" id="date-date-task" required>
+                            onblur="(this.type='text')" name="date" id="date-date-task" >
                     </div>
                     <div class="prio-container">
                         <label>Prio</label>
@@ -53,7 +54,7 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category</label>
-                        <select class="select-input" id="category" required>
+                        <select class="select-input" id="category" >
                             <option value="" disabled selected>Select contacts to assign</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
@@ -62,7 +63,7 @@
                     <div class="single-input-container">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" onclick="initializeSubtaskEditing()">
+                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="initializeSubtaskEditing()">
                             <div class="subtask-add-icons" id="icon-hold">
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="addNewSubtaskForEditing()">
                             </div>
@@ -74,12 +75,12 @@
                 </div>
 
             </div>
-        </form>
-        <div class="bottom-container">
-            <div class="bottom-button-container bottom-flex-right">
-                <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
+            <div class="bottom-container">
+                <div class="bottom-button-container bottom-flex-right">
+                    <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
