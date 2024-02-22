@@ -17,8 +17,7 @@ function checkLogin() {
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
         rememberMe();
-        console.log('Login successfully');
-        sessionStorage.setItem('session_token', loggedInUser.userId);
+        setCookie('user_session_token', loggedInUser.userId, 24);
         window.location.href = 'summary.html';
     } else {
         wrongPassword();
@@ -26,7 +25,7 @@ function checkLogin() {
 }
 
 function guestLogin() {
-    sessionStorage.setItem('guest_token', 'guest');
+    setCookie('guest_session_token', 'guest', 24);
     window.location.href = 'summary.html';
 }
 

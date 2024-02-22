@@ -48,13 +48,78 @@ let currentContact;
 /**
  * Initializes the user's contacts.
  */
-function initContacts() {
+async function initContacts() {
+    await init();
+    // contactSample = [
+    //     {
+    //         'name': currentUserData.name,
+    //         'mail': currentUserData.email,
+    //         'phone': currentUserData.phone
+    //     },
+    //     {
+    //         'name': currentUserData.contacts[0].name,
+    //         'mail': currentUserData.contacts[0].mail,
+    //         'phone': currentUserData.contacts[0].phone
+    //     },
+    //     {
+    //         'name': currentUserData.contacts[1].name,
+    //         'mail': currentUserData.contacts[1].mail,
+    //         'phone': currentUserData.contacts[1].phone
+    //     }
+    // ];
+    contactSample = await getUserContactList();
     sortContactsByName(contactSample);
+    // getAssignableContacts();
     collectInitials(contactSample);
     renderContacts();
 
     // Bitte loeschen!!!
     save('contactSample', contactSample);
+    document.getElementById('dialog-contact-viewer').removeAttribute('w3-include-html');
+}
+
+
+async function getUserContactList() {
+    let userContactList = [];
+    getUserContact(userContactList);
+    // let userContact = getUserContact(userContactList);
+    // userContactList.push(userContact);
+    getUserSubcontacts(userContactList);
+    // let userSubcontacts = getUserSubcontacts(userContactList);
+    // userContactList.push(userSubcontacts);
+    return userContactList;
+}
+
+
+function getUserContact(userContactList) {
+    if (userIsLoggedIn()) {
+        let userContact = {
+            'id': -1,
+            'name': currentUserData.name + ' (You)',
+            'mail': currentUserData.email,
+            'phone': currentUserData.phone
+        };
+        userContactList.push(userContact);
+        // return userContact;
+    }
+}
+
+
+function getUserSubcontacts(userContactList) {
+    if (userIsLoggedIn()) {
+        // let userSubcontacts = [];
+        for (let i = 0; i < currentUserData.contacts.length; i++) {
+            let userSubcontact = {
+                'contact-id': i,
+                'name': currentUserData.contacts[i].name,
+                'mail': currentUserData.contacts[i].mail,
+                'phone': currentUserData.contacts[i].phone
+            }
+            userContactList.push(userSubcontact);
+            // userSubcontacts.push(userSubcontact);
+        }
+        // return userSubcontacts;
+    }
 }
 
 
@@ -255,8 +320,15 @@ function renderNameMailGroup(j) {
 
 
 function showContact(j) {
-    highlightCurrentContact(j);
-    updateContactViewer(j);
+    let element = getElement(`contacts-contact-${j}`);
+    let classes = element.getAttribute('class');
+    let match = getIncludingMatch(classes, 'contacts-contact-active');
+    if (match) {
+        closeContactViewerMobile();
+    } else {
+        highlightCurrentContact(j);
+        updateContactViewer(j);
+    }
 }
 
 
@@ -275,8 +347,10 @@ function updateContactViewer(j) {
     setUserInfo(j);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button', 'onclick', `deleteContact(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteContact(${j})`);
+    setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${j})`);
+    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
+    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
 }
 
 
@@ -359,7 +433,24 @@ function showUserInfo(logical) {
     value = (logical) ? 55 : value;
     value = (value < 55) ? 3840 : value;
     let style = getElement('contact-user-animation');
-    style.innerHTML = `
+    let cssCodeIn = animateContactUserIn(value);
+    let cssCodeOut = animateContactUserOut(value);
+    style.innerHTML = (logical) ? cssCodeIn : cssCodeOut;
+}
+
+
+function animateContactUserIn(value) {
+    return `
+        .contact-user-animation {
+            left: ${value}px;
+            transition: 125ms left ease-in-out;
+        }
+    `;
+}
+
+
+function animateContactUserOut(value) {
+    return `
         .contact-user-animation {
             left: ${value}px;
         }
@@ -371,16 +462,15 @@ function showImg(id, image) {
     document.getElementById(id).src = `./img/${image}.png`;
 }
 
-
-/*
-    E3 / US01 - Kontaktliste
-        1. Es gibt eine Seite oder einen Bereich fuer Kontakte. - Check
-        2. Kontakte werden alphabetisch nach ihrem Namen sortiert und ihre E-Mail-Adresse unterhalb ihres Namens angezeigt. - Check
-        3. Die Liste ist in Abschnitte nach Buchstaben unterteilt, sodass
-           Kontakte, die mit einem bestimmten Buchstaben beginnen,
-           zusammen gruppiert sind. - Check
-        4. Ein Klick auf einen Kontakt oeffnet eine Detailansicht mit dem
-           Namen, der E-Mail-Adresse und der Telefonnummer des Kontakts.
-
-    3 von 4 Subtask erledigt.
-*/
+async function getAssignableContacts() {
+    let assignableContacts = [];
+    contactSample = await getUserContactList();
+    sortContactsByName(contactSample);
+    for (let i = 0; i < contactSample.length; i++) {
+        let contact = contactSample[i].name;
+        assignableContacts.push(contact);
+    }
+    let currentUser = users.find(u => u.userId == userId);
+    currentUser['assignable-contacts'] = assignableContacts;
+    await setItem('users', users);
+}
