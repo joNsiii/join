@@ -1,14 +1,14 @@
-function updateEditForm(j) {
+// jsdoc
+function showEditContactForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
     setElementAttribute('contact-form-delete-button', 'onclick', `openDialogDeleteContact(${j})`);
-
-    // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
 
 
+// jsdoc
 function renderEditForm(j) {
     renderEditFormProfile(j);
     renderEditFormInfo(j, 'name');
@@ -17,6 +17,7 @@ function renderEditForm(j) {
 }
 
 
+// jsdoc
 function renderEditFormProfile(j) {
     let userProfile = getElement('edit-contact-profile');
     let profile = getInitialLetterGroup(userContacts, j);
@@ -24,45 +25,11 @@ function renderEditFormProfile(j) {
 }
 
 
+// jsdoc
 function renderEditFormInfo(j, info) {
     let input = getElement(`edit-contact-${info}`);
     let userInfo = getJsonObjectDeepValue(userContacts, j, info);
     input.value = userInfo;
-}
-
-
-function updateEditedContact(j) {
-    let name = getInputValue('edit-contact-name');
-    let mail = getInputValue('edit-contact-mail');
-    if (name == '' || mail == '') {
-        console.log('no function');
-    } else {
-        updateEditedContactList(j);
-        // saveEditContact(j);
-        closeDialog('dialog-edit-contact');
-        initContacts();
-        updateContactViewer(j);
-        console.log('saved');
-    }
-}
-
-
-function saveEditContact(j) {
-    saveEditedContactInfo(j, 'name');
-    saveEditedContactInfo(j, 'mail');
-    saveEditedContactInfo(j, 'phone');
-}
-
-
-function saveEditedContactInfo(j, info) {
-    let input = getInputValue(`edit-contact-${info}`);
-    userContacts[j][info] = input;
-    // save('contactSample', contactSample);
-}
-
-
-function getInputValue(id) {
-    return document.getElementById(id).value;
 }
 
 

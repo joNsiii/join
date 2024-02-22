@@ -22,6 +22,11 @@ function getElementAttribute(id, attribute) {
 }
 
 
+function getInputValue(id) {
+    return document.getElementById(id).value;
+}
+
+
 /**
  * Provides a a json's deeper object value.
  * @param {json} variable - The providing json.
