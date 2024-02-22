@@ -3,18 +3,18 @@ let userContacts = [];
 let initials;
 let bgcNames = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red', 'cyan'];
 let bgcCodes = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
-let bgcCounter = 0;
 let currentContact;
 
 
 // Functions
-
+// jsdoc
 async function initContacts() {
     await init();
     removeIncludingAttribute();
     await loadUserContacts();
     sortContactsByName(userContacts);
     collectInitials(userContacts);
+    setContactBgc(userContacts);
     renderContacts();
 }
 
@@ -80,10 +80,16 @@ function collectInitials(contacts) {
     initials = [];
     for (let i = 0; i < contacts.length; i++) {
         let initial = getInitialLetter(contacts, i);
-        contacts[i]['register'] = initial;
+        setUserContactsObjectValue(i, 'register', initial);
         let match = getIncludingMatch(initials, initial);
         (!match) ? initials.push(initial) : false;
     }
+}
+
+
+// jsdoc
+function setUserContactsObjectValue(i, key, value) {
+    userContacts[i][key] = value;
 }
 
 
@@ -102,6 +108,31 @@ function getIncludingMatch(array, value) {
 
 
 // jsdoc
+function setContactBgc(contacts) {
+    let counter = 0;
+    for (let i = 0; i < contacts.length; i++) {
+        setContactBgcName(counter, i);
+        setContactBgcCode(counter, i);
+        counter = (counter < bgcNames.length) ? ++counter : 0;
+    }
+}
+
+
+// jsdoc
+function setContactBgcName(counter, i) {
+    let name = bgcNames[counter];
+    setUserContactsObjectValue(i, 'bgc-name', name);
+}
+
+
+// jsdoc
+function setContactBgcCode(counter, i) {
+    let code = bgcCodes[counter];
+    setUserContactsObjectValue(i, 'bgc-code', code);
+}
+
+
+// jsdoc
 function renderContacts() {
     let contactList = getElement('contacts-collector');
     contactList.innerHTML = '';
@@ -109,8 +140,8 @@ function renderContacts() {
 }
 
 
+// jsdoc
 function fillContactList(contactList) {
-    bgcCounter = 0;
     for (let i = 0; i < initials.length; i++) {
         renderRegisterLetter(contactList, i);
         fillRegisterSection(contactList, i);
@@ -161,24 +192,17 @@ function renderContact(contactList, j) {
 }
 
 
+// jsdoc
 function renderContactProfile(j) {
-    let bgc = getUserBgc(bgcNames, false);
-    let bgcHex = getUserBgc(bgcCodes, true);
+    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgc-name');
     let initialLetters = getInitialLetterGroup(userContacts, j);
-    return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}" bgc="${bgcHex}">
+    return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}">
                 <div class="contact-profile-text">${initialLetters}</div>
             </div>`;
 }
 
 
-function getUserBgc(array, logical) {
-    bgcCounter = (bgcCounter < array.length) ? bgcCounter : 0;
-    let bgc = array[bgcCounter];
-    (logical) ? bgcCounter++ : bgcCounter;
-    return bgc;
-}
-
-
+// jsdoc
 function getInitialLetterGroup(variable, i) {
     let first = getInitialLetter(variable, i).toUpperCase();
     let last = getLastInitialLetter(variable, i).toUpperCase();
@@ -186,6 +210,7 @@ function getInitialLetterGroup(variable, i) {
 }
 
 
+// jsdoc
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
@@ -198,19 +223,20 @@ function renderNameMailGroup(j) {
 }
 
 
+// jsdoc
 function showContact(j) {
-    let contact = getElement(`contacts-contact-${j}`);
-    let classes = contact.getAttribute('class');
+    let classes = getElementAttribute(`contacts-contact-${j}`, 'class');
     let match = getIncludingMatch(classes, 'contacts-contact-active');
-    if (match) {
-        closeContactViewerMobile();
-    } else {
+    if (!match) {
         highlightCurrentContact(j);
         updateContactViewer(j);
+    } else {
+        closeContactViewerMobile();
     }
 }
 
 
+// jsdoc
 function highlightCurrentContact(j) {
     if (currentContact !== undefined) {
         setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
@@ -220,14 +246,17 @@ function highlightCurrentContact(j) {
 }
 
 
+// jsdoc
 function updateContactViewer(j) {
     openDialog('dialog-contact-viewer');
     renderContactViewer(j);
-    setUserInfo(j);
+    linkUserInfo(j);
     setContactButtonOnclick(j);
+    showUserInfo(true);
 }
 
 
+// jsdoc
 function renderContactViewer(j) {
     renderUserBgc(j);
     renderContactViewerVersion(j);
@@ -235,19 +264,19 @@ function renderContactViewer(j) {
 }
 
 
+// jsdoc
 function renderUserBgc(j) {
-    let userProfile = getElement(`contact-profile-${j}`);
-    let bgc = userProfile.getAttribute('bgc');
+    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgc-code');
     let bgcCss = getElement('user-bgc-flexible');
     bgcCss.innerHTML = `
         .bgc-flexible {
             background-color: ${bgc};
         }
     `;
-    showUserInfo(true);
 }
 
 
+// jsdoc
 function renderContactViewerVersion(j, extension) {
     (!extension) ? renderUserProfile(j) : renderUserProfile(j, extension);
     (!extension) ? renderUserInfo(j, 'name') : renderUserInfo(j, 'name', extension);
@@ -256,6 +285,7 @@ function renderContactViewerVersion(j, extension) {
 }
 
 
+// jsdoc
 function renderUserProfile(j, extension) {
     let id = 'contact-user-profile';
     id = (!extension) ? id : id + `-${extension}`;
@@ -265,27 +295,31 @@ function renderUserProfile(j, extension) {
 }
 
 
+// jsdoc
 function renderUserInfo(j, info, extension) {
     let id = `contact-user-${info}`;
     id = (!extension) ? id : id + `-${extension}`;
     let userInfo = getElement(id);
-    let name = getJsonObjectDeepValue(userContacts, j, info);
-    userInfo.innerHTML = name;
+    let value = getJsonObjectDeepValue(userContacts, j, info);
+    userInfo.innerHTML = value;
 }
 
 
-function setUserInfo(j) {
+// jsdoc
+function linkUserInfo(j) {
     setUserInfoLinkVersion(j);
     setUserInfoLinkVersion(j, 'mobile');
 }
 
 
+// jsdoc
 function setUserInfoLinkVersion(j, extension) {
     (!extension) ? setUserInfoLink(j, 'mail') : setUserInfoLink(j, 'mail', 'mobile');
     (!extension) ? setUserInfoLink(j, 'phone') : setUserInfoLink(j, 'phone', 'mobile');
 }
 
 
+// jsdoc
 function setUserInfoLink(j, info, extension) {
     let id = `contact-user-${info}`;
     id = (!extension) ? id : id + `-${extension}`;
@@ -294,6 +328,7 @@ function setUserInfoLink(j, info, extension) {
 }
 
 
+// jsdoc
 function setContactButtonOnclick(j) {
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${j})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
@@ -302,50 +337,30 @@ function setContactButtonOnclick(j) {
 }
 
 
+// jsdoc
 function showUserInfo(logical) {
-    let value = getElement('contact-viewer').offsetWidth;
-    value = (logical) ? 55 : value;
-    value = (value < 55) ? 3840 : value;    // 100% setzen + CSS anpassen!!!
+    let value = (logical) ? '55px' : '100%';
     let style = getElement('contact-user-animation');
-    let cssCodeIn = animateContactUserIn(value);
-    let cssCodeOut = animateContactUserOut(value);
-    style.innerHTML = (logical) ? cssCodeIn : cssCodeOut;
+    style.innerHTML = (logical) ? animateContactUserIn(value) : animateContactUserOut(value);
 }
 
 
+// jsdoc
 function animateContactUserIn(value) {
     return `
         .contact-user-animation {
-            left: ${value}px;
+            left: ${value};
             transition: 125ms left ease-in-out;
         }
     `;
 }
 
 
+// jsdoc
 function animateContactUserOut(value) {
     return `
         .contact-user-animation {
-            left: ${value}px;
+            left: ${value};
         }
     `;
 }
-
-
-// function showImg(id, image) {
-//     document.getElementById(id).src = `./img/${image}.png`;
-// }
-
-
-// async function getAssignableContacts() {
-//     let assignableContacts = [];
-//     userContacts = await getUserContactList();
-//     sortContactsByName(userContacts);
-//     for (let i = 0; i < userContacts.length; i++) {
-//         let contact = userContacts[i].name;
-//         assignableContacts.push(contact);
-//     }
-//     let currentUser = users.find(u => u.userId == userId);
-//     currentUser['assignable-contacts'] = assignableContacts;
-//     await setItem('users', users);
-// }

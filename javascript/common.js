@@ -17,6 +17,11 @@ function getElement(id) {
 }
 
 
+function getElementAttribute(id, attribute) {
+    return document.getElementById(id).getAttribute(attribute);
+}
+
+
 /**
  * Provides a a json's deeper object value.
  * @param {json} variable - The providing json.

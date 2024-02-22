@@ -194,7 +194,7 @@ function showEditedContact(mail) {
     let userIndex = userContacts.indexOf(currentUser);
     highlightCurrentContact(userIndex);
     renderContactViewer(userIndex);
-    setUserInfo(userIndex);
+    linkUserInfo(userIndex);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
