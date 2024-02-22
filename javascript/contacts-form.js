@@ -77,8 +77,8 @@ async function updateContactList() {
 
 // jsdoc
 async function verifyContactInput(mail) {
-    let user = await users.find(u => u.userId == userId);
-    let checkedUser = await users.find(u => u.contacts.find(c => c.mail === mail));
+    let user = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
@@ -91,7 +91,7 @@ async function verifyContactInput(mail) {
 // jsdoc
 async function pushNewUserContact(user) {
     let contact = getNewContact();
-    user['contacts'].push(contact);
+    user.contacts.push(contact);
     await setItem('users', users);
 }
 
@@ -146,21 +146,29 @@ async function updateEditedContactList(j) {
 }
 
 
+// jsdoc
 async function verifyEditedContact(j, mail) {
-    let userData = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail)) && mail !== userContacts[j].mail;
-    if (checkedUser) {
+    let thisMail = mail !== userContacts[j].mail;
+    let othersMail = users.find(u => u.contacts.find(c => c.mail === mail))
+    if (thisMail && othersMail) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
-        await updateUserData(j, userData);
-        closeSavedContact('edit');
-        await initContacts();
-        showEditedContact(mail);
+        showEditedContactList(j, mail);
     }
 }
 
 
-async function updateUserData(j, userData) {
+// jsdoc
+async function showEditedContactList(j, mail) {
+    await updateUserData(j);
+    closeSavedContact('edit');
+    await initContacts();
+    showEditedContact(mail);
+}
+
+
+// jsdoc
+async function updateUserData(j) {
     editContactInfo(j, 'name');
     editContactInfo(j, 'mail');
     editContactInfo(j, 'phone');
@@ -168,6 +176,7 @@ async function updateUserData(j, userData) {
 }
 
 
+// jsdoc
 function editContactInfo(j, info) {
     let value = getInputValue(`edit-contact-${info}`);
     userContacts[j][info] = value;
@@ -180,8 +189,8 @@ function showEditedContact(mail) {
     highlightCurrentContact(userIndex);
     renderContactViewer(userIndex);
     linkUserInfo(userIndex);
-    setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
-    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
+    setElementAttribute('edit-contact-button', 'onclick', `showEditContactForm(${userIndex})`);
+    setElementAttribute('edit-contact-button-mobile', 'onclick', `showEditContactForm(${userIndex})`);
     setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
     setTimeout(() => {
