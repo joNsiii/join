@@ -17,8 +17,10 @@ function checkLogin() {
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
         rememberMe();
+        localStorage.removeItem('userId'); // neu
         setCookie('user_session_token', loggedInUser.userId, 24);
         window.location.href = 'summary.html';
+        localStorage.setItem('userId', loggedInUser.userId); // neu
     } else {
         wrongPassword();
     }

@@ -1,6 +1,8 @@
 let subtaskInput = [];
 let priorityDefault = "Medium";
 let subtasks = [];
+let sub_users = [];
+let contactsUser = [];
 priority = priorityDefault;
 
 // document.addEventListener('DOMContentLoaded', async function() {
@@ -61,17 +63,18 @@ async function scopeTasks() {
 }
 
 function assignedTo() {
-  // Rudolf
   let assignElement = document.getElementById("myDropdown");
   assignElement.innerHTML = "";
 
-  // Neu
-  let currentUser = users.find((u) => u.userId == userId);
-  let contacts = currentUser["assignable-contacts"];
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
+  // let currentUser = users.find((u) => u.userId == userId);
+  let currentUserId = parseInt(localStorage.getItem('userId'));
+  let currentUser = users.find((u) => u.userId === currentUserId);
+      contactsUser = currentUser["assignable-contacts"];
+
+  for (let i = 0; i < contactsUser.length; i++) {
+    const contact = contactsUser[i];
     assignElement.innerHTML += `
-        <div class="subuser-selection" onclick="toggleCheckboxLogin(${i})" id="subuser-div-${i}">
+        <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div>${contact}</div>
           <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
             id="checkbox-remember-me-${i}"></div>
@@ -90,13 +93,14 @@ function dropDownMenu() {
     .classList.toggle("dropdown-custom");
 }
 
-function toggleCheckboxLogin(i) {
+function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
   let background = document.getElementById(`subuser-div-${i}`);
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
     checkBox.src = "./img/checkmark-white.png";
     background.classList.add("sub-background");
+    sub_users.push({ userId: userId, name: sub_users_child, userBackgroundColor: "green" });
   } else {
     checkBox.src = "./img/checkmark-unchecked.png";
     background.classList.remove("sub-background");
