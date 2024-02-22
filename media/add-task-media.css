@@ -110,3 +110,15 @@
         width: 55%;
     }
 }
+
+@media (max-width: 1064px) {
+    .sub-profile-container {
+        transform: translateY(175%);
+    }
+}
+
+@media (max-width: 950px) {
+    .sub-profile-container {
+        transform: translateY(125%);
+    }
+}

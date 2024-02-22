@@ -1,19 +1,14 @@
-// Bitte loeschen!!!
-load('contactSample');
-
-
-function updateEditForm(j) {
+// jsdoc
+function showEditContactForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
     setClassOnCommand('section-edit-contact', 'add', 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
     setElementAttribute('contact-form-delete-button', 'onclick', `openDialogDeleteContact(${j})`);
-    // setElementAttribute('contact-form-delete-button', 'onclick', `deleteUserContact(${j})`);
-
-    // setElementAttribute('dialog-contact-settings', 'onclick', `openContactSettingsDialog(${j})`);
 }
 
 
+// jsdoc
 function renderEditForm(j) {
     renderEditFormProfile(j);
     renderEditFormInfo(j, 'name');
@@ -22,74 +17,25 @@ function renderEditForm(j) {
 }
 
 
+// jsdoc
 function renderEditFormProfile(j) {
     let userProfile = getElement('edit-contact-profile');
-    let profile = getInitialLetterGroup(contactSample, j);
+    let profile = getInitialLetterGroup(userContacts, j);
     userProfile.innerHTML = profile;
 }
 
 
+// jsdoc
 function renderEditFormInfo(j, info) {
     let input = getElement(`edit-contact-${info}`);
-    let userInfo = getJsonObjectDeepValue(contactSample, j, info);
+    let userInfo = getJsonObjectDeepValue(userContacts, j, info);
     input.value = userInfo;
-}
-
-
-function updateEditedContact(j) {
-    let name = getInputValue('edit-contact-name');
-    let mail = getInputValue('edit-contact-mail');
-    if (name == '' || mail == '') {
-        console.log('no function');
-    } else {
-        updateEditedContactList(j);
-        // saveEditContact(j);
-        closeDialog('dialog-edit-contact');
-        initContacts();
-        updateContactViewer(j);
-        console.log('saved');
-    }
-}
-
-
-function saveEditContact(j) {
-    saveEditedContactInfo(j, 'name');
-    saveEditedContactInfo(j, 'mail');
-    saveEditedContactInfo(j, 'phone');
-}
-
-
-function saveEditedContactInfo(j, info) {
-    let input = getInputValue(`edit-contact-${info}`);
-    contactSample[j][info] = input;
-    save('contactSample', contactSample);
-}
-
-
-function getInputValue(id) {
-    return document.getElementById(id).value;
-}
-
-
-function deleteContact(j) {
-    contactSample.splice(j, 1);
-    showUserInfo(false);
-    // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
-    closeDialog('dialog-edit-contact');
-    closeDialog('dialog-contact-viewer');
-    sortContactsByName(contactSample);
-    collectInitials(contactSample);
-    renderContacts();
-    save('contactSample', contactSample);
-    // updateContactViewer(j);
-
-    console.log('deleted');
 }
 
 
 async function deleteUserContact(j) {
     let currentUser = users.find(u => u.userId == userId);
-    let contactId = contactSample[j]['contact-id'];
+    let contactId = userContacts[j]['contact-id'];
     currentUser.contacts.splice(contactId, 1);
     currentContact = undefined;
     await setItem('users', users);
@@ -110,14 +56,12 @@ function openContactSettingsMobile(j) {
     openDialog('dialog-contact-settings');
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
-    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${j})`);
 }
 
 
 function closeContactViewerMobile() {
     setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
     showUserInfo(false);
-    // setClassOnCommand('contact-user', 'remove', 'contact-user-enabled');
     closeDialog('dialog-contact-viewer');
 }
 
@@ -132,8 +76,8 @@ async function updateContactList() {
 
 
 async function verifyContactInput(mail) {
-    let userData = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
+    let userData = await users.find(u => u.userId == userId);
+    let checkedUser = await users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
@@ -156,7 +100,7 @@ function getNewContact() {
 
 function createNewContact(name, mail, phone) {
     return {
-        'contact-id': contactSample.length - 1,
+        'contact-id': userContacts.length - 1,
         'name': name,
         'mail': mail,
         'phone': phone
@@ -167,8 +111,8 @@ function createNewContact(name, mail, phone) {
 async function showUpdatedContactList(mail) {
     closeSavedContact('add');
     await initContacts();
-    let createdIndex = contactSample.find(c => c.mail == mail);
-    let renderingIndex = contactSample.indexOf(createdIndex);
+    let createdIndex = userContacts.find(c => c.mail == mail);
+    let renderingIndex = userContacts.indexOf(createdIndex);
     showContact(renderingIndex);
     location.href = `#contacts-contact-${renderingIndex}`;
     setTimeout(() => {
@@ -188,7 +132,7 @@ async function updateEditedContactList(j) {
 
 async function verifyEditedContact(j, mail) {
     let userData = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail)) && mail !== contactSample[j].mail;
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail)) && mail !== userContacts[j].mail;
     if (checkedUser) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
@@ -201,7 +145,7 @@ async function verifyEditedContact(j, mail) {
 
 
 async function updateUserData(j, userData) {
-    let contactId = contactSample[j]['contact-id'];
+    let contactId = userContacts[j]['contact-id'];
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
     let phone = getInputValue('edit-contact-phone');
@@ -213,17 +157,15 @@ async function updateUserData(j, userData) {
 
 
 function showEditedContact(mail) {
-    let currentUser = contactSample.find(c => c['mail'] == mail);
-    let userIndex = contactSample.indexOf(currentUser);
+    let currentUser = userContacts.find(c => c['mail'] == mail);
+    let userIndex = userContacts.indexOf(currentUser);
     highlightCurrentContact(userIndex);
     renderContactViewer(userIndex);
-    setUserInfo(userIndex);
+    linkUserInfo(userIndex);
     setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
     setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
     setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
-    // setElementAttribute('delete-contact-button', 'onclick', `deleteUserContact(${userIndex})`);
-    // setElementAttribute('delete-contact-button-mobile', 'onclick', `deleteUserContact(${userIndex})`);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
@@ -314,22 +256,6 @@ function getLastInitialLetter(variable, i) {
 }
 
 
-// Bitte loeschen!!!
-function save(key, variable) {
-    let variableAsText = JSON.stringify(variable);
-    localStorage.setItem(key, variableAsText)
-}
-
-
-// Bitte loeschen!!!
-function load(key) {
-    let variableAsText = localStorage.getItem(key);
-    if (variableAsText && key == 'contactSample') {
-        contactSample = JSON.parse(variableAsText);
-    }
-}
-
-
 function showBacklogContact(message) {
     let bodyWidth = document.body.offsetWidth;
     if (bodyWidth > 1400) {
@@ -388,7 +314,7 @@ function openDialogDeleteContact(j) {
 
 
 function renderDeletingConfirmationText(j) {
-    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let isUser = (name.includes(' (You)'));
     if (!isUser) {
         let dialog = getElement('deleting-confirmation');
@@ -407,7 +333,7 @@ function renderDeletingConfirmationText(j) {
 
 
 function generateDeletingContactParagraph(j) {
-    let name = getJsonObjectDeepValue(contactSample, j, 'name');
+    let name = getJsonObjectDeepValue(userContacts, j, 'name');
     return `
         <p class="deleting-confirmation-message">
             Are you sure to remove<br>
@@ -468,14 +394,14 @@ function generateDeletingUserForm(j) {
             <fieldset class="delete-contact-fieldset">
                 <div class="delete-contact-input-box">
                     <div id="delete-user-mail" class="delete-contact-input-group">
-                        <input id="deleting-account-mail" class="add-contact-input" type="email" placeholder="Email" required>
+                        <input id="deleting-account-mail" class="contact-input" type="email" placeholder="Email" required>
                         <img class="contact-input-img" src="./img/mail.png" alt="mail">
                     </div>
                     <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.</div>
                 </div>
                 <div class="delete-contact-input-box">
                     <div id="delete-user-password" class="delete-contact-input-group">
-                        <input id="deleting-account-password" class="add-contact-input" type="password" placeholder="Password" required>
+                        <input id="deleting-account-password" class="contact-input" type="password" placeholder="Password" required>
                         <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
                     </div>
                     <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your password.</div>
