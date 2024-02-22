@@ -74,7 +74,6 @@ function assignedTo() {    // Rudolf
       `;
 
     let contacts = currentUserData['contacts'];
-    console.log(contacts);
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i].name;
         assignElement.innerHTML += `
