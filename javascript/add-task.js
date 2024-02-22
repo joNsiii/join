@@ -25,16 +25,10 @@ async function loadTasks() {
 }
 
 async function scopeTasks() {
-  // let getTasks = await getItem("boardTasks");
-  // let boardTasks = JSON.parse(getTasks);
 
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById("date-date-task").value;
-
-  let assignTask = document.getElementById("assign-task");
-  let sub_users_child = assignTask.options[assignTask.selectedIndex].text;
-
   let headingOption = document.getElementById("category");
   let heading = headingOption.options[headingOption.selectedIndex].text;
 
@@ -47,13 +41,7 @@ async function scopeTasks() {
     category: "toDo",
     heading: heading,
     subtasks: subtasks,
-    sub_users: [
-      {
-        userId: 0,
-        name: sub_users_child,
-        userBackgroundColor: "green", // Muss noch definiert werden
-      },
-    ],
+    sub_users: sub_users,
     priority: priority,
     date: dueDate,
   };
@@ -67,17 +55,20 @@ function assignedTo() {
   assignElement.innerHTML = "";
 
   // let currentUser = users.find((u) => u.userId == userId);
-  let currentUserId = parseInt(localStorage.getItem('userId'));
+  let currentUserId = parseInt(localStorage.getItem("userId"));
   let currentUser = users.find((u) => u.userId === currentUserId);
-      contactsUser = currentUser["assignable-contacts"];
+  contactsUser = currentUser["assignable-contacts"];
 
   for (let i = 0; i < contactsUser.length; i++) {
     const contact = contactsUser[i];
     assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
-          <div>${contact}</div>
-          <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-            id="checkbox-remember-me-${i}"></div>
+          <div class="subuser-align">
+            <div class="sub-profile-img">JS</div>
+            <div>${contact}</div>
+          </div>  
+            <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+              id="checkbox-remember-me-${i}"></div>  
         </div>
       `;
   }
@@ -96,19 +87,63 @@ function dropDownMenu() {
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
   let background = document.getElementById(`subuser-div-${i}`);
+  let subProfile = document.getElementById("sub-profile");
+  let subuserTemp = contactsUser[i];
+  subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
     checkBox.src = "./img/checkmark-white.png";
     background.classList.add("sub-background");
-    sub_users.push({ userId: userId, name: sub_users_child, userBackgroundColor: "green" });
+    let sub_users_child = `Temp-${i}`;
+    sub_users.push({
+      userId: sub_users_child,
+      name: subuserTemp,
+      userBackgroundColor: "green",
+    });
   } else {
     checkBox.src = "./img/checkmark-unchecked.png";
     background.classList.remove("sub-background");
+
+    let subuserToRemove = sub_users.findIndex(
+      (user) => user.name === `Temp-${i}`
+    );
+    sub_users.splice(subuserToRemove, 1);
+  }
+
+  for (let j = 0; j < sub_users.length; j++) {
+    let subProfileName = subuserTemp.slice(0, 2);
+    subProfile.innerHTML += `
+        <div class="sub-profile-img sub-p" onclick="removeSubPB(${i})">${subProfileName}</div>
+      `;
+  }
+}
+
+function removeSubPB(i) {
+  sub_users.splice(i, 1);
+  renderSubProfiles(i);
+}
+
+function renderSubProfiles(index) {
+  let subProfile = document.getElementById("sub-profile");
+  document.getElementById(`checkbox-remember-me-${index}`).src =
+    "./img/checkmark-unchecked.png";
+  background = document
+    .getElementById(`subuser-div-${index}`)
+    .classList.remove("sub-background");
+  subProfile.innerHTML = "";
+  for (let j = 0; j < sub_users.length; j++) {
+    let subProfileName = sub_users[j].name.slice(0, 2);
+    subProfile.innerHTML += `
+      <div class="sub-profile-img sub-p" onclick="removeSubPB(${j})">${subProfileName}</div>
+    `;
   }
 }
 
 window.onclick = function (event) {
-  if (!event.target.matches(".dropdown-parent-container") && !event.target.closest(".dropdown-menu-sub")) {
+  if (
+    !event.target.matches(".dropdown-parent-container") &&
+    !event.target.closest(".dropdown-menu-sub")
+  ) {
     let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
 
     for (let i = 0; i < dropdowns.length; i++) {
