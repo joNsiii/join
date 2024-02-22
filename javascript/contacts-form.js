@@ -33,17 +33,10 @@ function renderEditFormInfo(j, info) {
 }
 
 
+// jsdoc
 async function deleteUserContact(j) {
-    let currentUser = users.find(u => u.userId == userId);
-    let contactId = userContacts[j]['contact-id'];
-    currentUser.contacts.splice(contactId, 1);
-    currentContact = undefined;
-    await setItem('users', users);
-
-    closeDialog('dialog-delete-contact');
-    closeDialog('dialog-edit-contact');
-    closeDialog('dialog-contact-settings');
-    showUserInfo(false);
+    await removeUserContact(j);
+    resetDialogs();
     initContacts();
     showBacklogContact('Contact successfully deleted');
     setTimeout(async () => {
@@ -52,20 +45,27 @@ async function deleteUserContact(j) {
 }
 
 
-function openContactSettingsMobile(j) {
-    openDialog('dialog-contact-settings');
-    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
+// jsdoc
+async function removeUserContact(j) {
+    let user = users.find(u => u.userId == userId);
+    let contact = user.contacts.find(c => c.mail == userContacts[j].mail);
+    let contactId = user.contacts.indexOf(contact);
+    user.contacts.splice(contactId, 1);
+    currentContact = undefined;
+    await setItem('users', users);
 }
 
 
-function closeContactViewerMobile() {
-    setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
+// jsdoc
+function resetDialogs() {
+    closeDialog('dialog-delete-contact');
+    closeDialog('dialog-edit-contact');
+    closeDialog('dialog-contact-settings');
     showUserInfo(false);
-    closeDialog('dialog-contact-viewer');
 }
 
 
+// jsdoc
 async function updateContactList() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -75,20 +75,28 @@ async function updateContactList() {
 }
 
 
+// jsdoc
 async function verifyContactInput(mail) {
-    let userData = await users.find(u => u.userId == userId);
+    let user = await users.find(u => u.userId == userId);
     let checkedUser = await users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
-        let user = getNewContact();
-        userData['contacts'].push(user);
-        await setItem('users', users);
+        await pushNewUserContact(user);
         showUpdatedContactList(mail);
     }
 }
 
 
+// jsdoc
+async function pushNewUserContact(user) {
+    let contact = getNewContact();
+    user['contacts'].push(contact);
+    await setItem('users', users);
+}
+
+
+// jsdoc
 function getNewContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -98,9 +106,9 @@ function getNewContact() {
 }
 
 
+// jsdoc
 function createNewContact(name, mail, phone) {
     return {
-        'contact-id': userContacts.length - 1,
         'name': name,
         'mail': mail,
         'phone': phone
@@ -108,19 +116,27 @@ function createNewContact(name, mail, phone) {
 }
 
 
+// jsdoc
 async function showUpdatedContactList(mail) {
     closeSavedContact('add');
     await initContacts();
-    let createdIndex = userContacts.find(c => c.mail == mail);
-    let renderingIndex = userContacts.indexOf(createdIndex);
-    showContact(renderingIndex);
-    location.href = `#contacts-contact-${renderingIndex}`;
+    showAddedContact(mail);
     setTimeout(() => {
         showBacklogContact('Contact successfully created');
     }, 125);
 }
 
 
+// jsdoc
+function showAddedContact(mail) {
+    let createdId = userContacts.find(c => c.mail == mail);
+    let renderingId = userContacts.indexOf(createdId);
+    showContact(renderingId);
+    location.href = `#contacts-contact-${renderingId}`;
+}
+
+
+// jsdoc
 async function updateEditedContactList(j) {
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
@@ -145,14 +161,16 @@ async function verifyEditedContact(j, mail) {
 
 
 async function updateUserData(j, userData) {
-    let contactId = userContacts[j]['contact-id'];
-    let name = getInputValue('edit-contact-name');
-    let mail = getInputValue('edit-contact-mail');
-    let phone = getInputValue('edit-contact-phone');
-    userData['contacts'][contactId]['name'] = name;
-    userData['contacts'][contactId]['mail'] = mail;
-    userData['contacts'][contactId]['phone'] = phone;
-    await setItem('users', users);
+    editContactInfo(j, 'name');
+    editContactInfo(j, 'mail');
+    editContactInfo(j, 'phone');
+    await saveUserContacts();
+}
+
+
+function editContactInfo(j, info) {
+    let value = getInputValue(`edit-contact-${info}`);
+    userContacts[j][info] = value;
 }
 
 
