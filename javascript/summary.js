@@ -20,10 +20,11 @@ async function summaryInit() {
     await loadUsers();
     await loadUserData();
     await loadTasksInBoard();
-    loadTaskCounter();
     dayTimeGretting();
     greetUser();
+    loadTaskCounter();
     taskInCategory();
+    urgentTaskCounter();
 }
 
 function dayTimeGretting() {
@@ -61,40 +62,73 @@ function loadTaskCounter() {
 function taskInCategory() {
     newCounter = {};
     for (task of boardTasks) {
+
         let value = task['category'];
         newCounter[value] = boardTasks.filter(c => c['category'] == value).length;
-        console.log(newCounter[value]);
-        // let toDo = newCounter['toDo'];
-        // let inProgress = newCounter['inProgress'];
-        // let awaitFeedback = newCounter['awaitFeedback'];
-        // let done = newCounter['done'];
-        // toDoCounter(toDo);
-        // taskInProgress(inProgress);
-        // taskInDone(done);
-        // taskInAwaitFeddback(awaitFeedback);
-    }  
+    }
+    let toDo = newCounter['toDo'];
+    let inProgress = newCounter['inProgress'];
+    let awaitFeedback = newCounter['awaitFeedback'];
+    let done = newCounter['done'];
+    toDoCounter(toDo);
+    taskInProgress(inProgress);
+    taskInDone(done);
+    taskInAwaitFeedback(awaitFeedback);
 }
 
 function toDoCounter(toDo) {
-    let counter = document.getElementById('todo-counter');
-    counter.innerHTML = '';
-    counter.innerHTML = toDo;
+    let toDoBox = document.getElementById('todo-counter');
+    if (toDo == undefined) {
+        toDo = 0;
+    }
+    toDoBox.innerHTML = '';
+    toDoBox.innerHTML = toDo;
 }
 
 function taskInProgress(inProgress) {
-    let counter = document.getElementById('task-in-progress');
-    counter.innerHTML = '';
-    counter.innerHTML = inProgress;
+    let inProgressBox = document.getElementById('task-in-progress');
+    if (inProgress == undefined) {
+        inProgress = 0;
+    }
+    inProgressBox.innerHTML = '';
+    inProgressBox.innerHTML = inProgress;
 }
 
 function taskInDone(done) {
-    let counter = document.getElementById('done-counter');
-    counter.innerHTML = '';
-    counter.innerHTML = done;
+    let doneBox = document.getElementById('done-counter');
+    if (done == undefined) {
+        done = 0;
+    }
+    doneBox.innerHTML = '';
+    doneBox.innerHTML = done;
 }
 
-function taskInAwaitFeddback(awaitFeedback) {
-    let counter = document.getElementById('task-in-await-feedback');
-    counter.innerHTML = '';
-    counter.innerHTML = awaitFeedback;
+function taskInAwaitFeedback(awaitFeedback) {
+    let awaitFeedbackBox = document.getElementById('task-in-await-feedback');
+    if (awaitFeedback == undefined) {
+        awaitFeedback = 0;
+    }
+    awaitFeedbackBox.innerHTML = '';
+    awaitFeedbackBox.innerHTML = awaitFeedback;
+}
+
+function urgentTaskCounter() {
+    let urgentBox = document.getElementById('urgent-counter');
+    let urgentTasks = boardTasks.filter(task => task.priority === 'Urgent');
+    let urgentTasksCount = urgentTasks.length;
+    urgentBox.innerHTML = urgentTasksCount;
+    urgentDeadline(urgentTasks);
+}
+
+function urgentDeadline(urgentTasks) {
+    let dateBox = document.getElementById('urgent-date');
+    let closestDeadline = null;
+    for (let task of urgentTasks) {
+        let deadline = new Date(task.date);
+        if (!closestDeadline || deadline < closestDeadline) {
+            closestDeadline = deadline;
+            dateBox.innerHTML = '';
+            dateBox.innerHTML = deadline.toLocaleDateString();
+        }
+    }
 }

@@ -7,7 +7,6 @@ boardTasks = [];
 async function init() {
     await loadUsers();
     await loadUserData();
-    await loadTasksInBoard();
     await includeHTML();
     checkForLogin();
     loadUserImage();
