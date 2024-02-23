@@ -191,30 +191,33 @@ async function generateDeletingConfirmation(j) {
 }
 
 
+// jsdoc
 function closeDeleteContact() {
     closeDialog('dialog-delete-contact');
     resetDeleteContactForm();
 }
 
 
+// jsdoc
 function resetDeleteContactForm() {
+    resetDeleteContactInputClasses();
+    resetDeleteContactInputValues();
+    removeElementAttribute('delete-contact-form', 'onsubmit');
+    setClassOnCommand('delete-contact-form', 'add', 'd-none');
+}
+
+
+// jsdoc
+function resetDeleteContactInputClasses() {
     setClassOnCommand('delete-user-mail', 'remove', 'delete-contact-input-wrong');
     setClassOnCommand('deleting-hint-mail', 'add', 'd-none');
     setClassOnCommand('delete-user-password', 'remove', 'delete-contact-input-wrong');
     setClassOnCommand('deleting-hint-password', 'add', 'd-none');
-
-    let mail = getElement('deleting-account-mail');
-    mail.value = '';
-    let password = getElement('deleting-account-password');
-    password.value = '';
-
-    setClassOnCommand('delete-contact-form', 'add', 'd-none');
-    removeElementAttribute('delete-contact-form', 'onsubmit');
 }
 
 
-async function deleteEmptyContacts(i) {
-    let currentUser = users.find(u => u.userId == userId);
-    currentUser.contacts.splice(i, 1);
-    await setItem('users', users);
+// jsdoc
+function resetDeleteContactInputValues() {
+    document.getElementById('deleting-account-mail').value = '';
+    document.getElementById('deleting-account-password').value = '';
 }
