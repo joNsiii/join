@@ -117,7 +117,7 @@ function renderDeleteAccountMessage() {
 // jsdoc
 function setDeleteAccountForm(j) {
     setClassOnCommand('delete-contact-form', 'remove', 'd-none');
-    setElementAttribute('delete-contact-form', 'onsubmit', `generateDeletingConfirmation(${j}); return false`);
+    setElementAttribute('delete-contact-form', 'onsubmit', `verifyDeleteAccountForm(${j}); return false`);
 }
 
 
@@ -142,7 +142,7 @@ function generateContactFormSubmitButton() {
 
 
 // jsdoc
-async function generateDeletingConfirmation(j) {
+async function verifyDeleteAccountForm(j) {
     let email = getInputValue('deleting-account-mail');
     let password = getInputValue('deleting-account-password');
     if (email == currentUserData.email && password == currentUserData.password) {
@@ -161,7 +161,9 @@ function showDeleteAccountConfirmation() {
     dialog.innerHTML = `
         <p class="deleting-confirmation-message">
             Your account with the user name<br>
-            <b class="c-lightblue">name</b> was successfully deleted.<br>
+            <b class="c-lightblue">${currentUserData.name}</b><br>
+            was successfully deleted.<br>
+            <br>
             Please await logout.
         </p>
     `;
