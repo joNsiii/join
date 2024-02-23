@@ -16,6 +16,7 @@ async function initContacts() {
     collectInitials(userContacts);
     setContactBgc(userContacts);
     renderContacts();
+    saveUserContacts();
 }
 
 
@@ -45,7 +46,6 @@ async function getUserContactList() {
 
 function pushUserContact(userContactList) {
     let userContact = {
-        'contact-id': -1,    // notwendig?
         'name': currentUserData.name + ' (You)',
         'mail': currentUserData.email,
         'phone': currentUserData.phone
@@ -59,7 +59,6 @@ function pushUserSubcontacts(userContactList) {
     for (let i = 0; i < subcontacts.length; i++) {
         let subcontact = subcontacts[i];
         let userSubcontact = {
-            'contact-id': i,    // notwenidg?
             'name': subcontact.name,
             'mail': subcontact.mail,
             'phone': subcontact.phone
@@ -220,4 +219,44 @@ function renderNameMailGroup(j) {
             <div class="contact-email">${mail}</div>
         </div>
     `;
+}
+
+
+// jsdoc
+async function saveUserContacts() {
+    let user = users.find(u => u.userId == userId);
+    pushUserContacts(user);
+    setUserBgc(user);
+    await setItem('users', users);
+}
+
+
+// jsdoc
+function pushUserContacts(user) {
+    user.contacts = [];
+    for (let i = 0; i < userContacts.length; i++) {
+        let userContact = userContacts[i];
+        if (userContact.mail != user.email) {
+            let contact = getUserContactData(userContact);
+            user.contacts.push(contact);
+        }
+    }
+}
+
+
+// jsdoc
+function getUserContactData(userContact) {
+    return {
+        'name': userContact['name'],
+        'mail': userContact['mail'],
+        'phone': userContact['phone'],
+        'bgc-name': userContact['bgc-name'],
+        'bgc-code': userContact['bgc-code']
+    };
+}
+
+
+function setUserBgc(user) {
+    user['bgc-name'] = 'orange';    // save right color!!!
+    user['bgc-code'] = '#FF7A00';
 }

@@ -139,3 +139,11 @@ function animateContactUserOut(value) {
         }
     `;
 }
+
+
+// jsdoc
+function closeContactViewerMobile() {
+    setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
+    showUserInfo(false);
+    closeDialog('dialog-contact-viewer');
+}
