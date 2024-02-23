@@ -139,3 +139,28 @@ window.onclick = function (event) {
         }
     }
 };
+
+function getInitialLetterGroup(variable, i) {
+    let first = getInitialLetter(variable, i).toUpperCase();
+    let last = getLastInitialLetter(variable, i).toUpperCase();
+    return first + last;
+}
+
+function getInitialLetter(contacts, i) {
+    let name = contacts[i]['name'];
+    let initial = name[0];
+    return initial.toLowerCase();
+}
+
+function getLastInitialLetter(variable, i) {
+    let name = variable[i]['name'];
+    name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
+    let space = name.indexOf(' ');
+    let last = '';
+    while (space > -1) {
+        last = name[space];
+        space = name.indexOf(' ');
+        name = (space < 0) ? name : name.replace(' ', '');
+    }
+    return last.toLowerCase();
+}

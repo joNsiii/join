@@ -55,6 +55,7 @@ function assignedTo() {
   assignElement.innerHTML = "";
 
   let user = currentUserData;
+  user.name = user.name + ' (You)';
   contactsUser.push(user);
   for (let i = 0; i < user.contacts.length; i++) {
     let contact = user.contacts[i];
@@ -63,11 +64,12 @@ function assignedTo() {
 
   for (let i = 0; i < contactsUser.length; i++) {
     const bgc = `bgc-${contactsUser[i]['bgc-name']}`;
+    const letterGroup = getInitialLetterGroup(contactsUser, i);
     const contact = contactsUser[i].name;
     assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div class="subuser-align">
-            <div class="sub-profile-img ${bgc}">JS</div>
+            <div class="sub-profile-img ${bgc}">${letterGroup}</div>
             <div>${contact}</div>
           </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
