@@ -87,16 +87,16 @@ function collectInitials(contacts) {
 
 
 // jsdoc
-function setUserContactsObjectValue(i, key, value) {
-    userContacts[i][key] = value;
-}
-
-
-// jsdoc
 function getInitialLetter(contacts, i) {
     let name = getJsonObjectDeepValue(contacts, i, 'name');
     let initial = getJsonObjectValue(name, 0);
     return initial.toLowerCase();
+}
+
+
+// jsdoc
+function setUserContactsObjectValue(i, key, value) {
+    userContacts[i][key] = value;
 }
 
 
@@ -210,6 +210,21 @@ function getInitialLetterGroup(variable, i) {
 
 
 // jsdoc
+function getLastInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
+    let space = name.indexOf(' ');
+    let last = '';
+    while (space > -1) {
+        last = name[space];
+        space = name.indexOf(' ');
+        name = (space < 0) ? name : name.replace(' ', '');
+    }
+    return last.toLowerCase();
+}
+
+
+// jsdoc
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
@@ -256,7 +271,9 @@ function getUserContactData(userContact) {
 }
 
 
+// jsdoc
 function setUserBgc(user) {
-    user['bgc-name'] = 'orange';    // save right color!!!
-    user['bgc-code'] = '#FF7A00';
+    let contact = userContacts.find(c => c.mail == user.email);
+    user['bgc-name'] = contact['bgc-name'];
+    user['bgc-code'] = contact['bgc-code'];
 }
