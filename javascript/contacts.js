@@ -271,7 +271,9 @@ function getUserContactData(userContact) {
 }
 
 
+// jsdoc
 function setUserBgc(user) {
-    user['bgc-name'] = 'orange';    // save right color!!!
-    user['bgc-code'] = '#FF7A00';
+    let contact = userContacts.find(c => c.mail == user.email);
+    user['bgc-name'] = contact['bgc-name'];
+    user['bgc-code'] = contact['bgc-code'];
 }
