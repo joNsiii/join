@@ -351,79 +351,74 @@ function showBacklogContactForm(id, message) {
 }
 
 
+// jsdoc
 function openDialogDeleteContact(j) {
     openDialog('dialog-delete-contact');
-    renderDeletingConfirmationText(j);
+    renderDeletingConfirmation(j);
 }
 
 
-function renderDeletingConfirmationText(j) {
+function renderDeletingConfirmation(j) {
+    let dialog = getElement('deleting-confirmation');
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let isUser = (name.includes(' (You)'));
     if (!isUser) {
-        let dialog = getElement('deleting-confirmation');
+        let message = getDeletingMessageContact(j);
         dialog.innerHTML = `
-            ${generateDeletingContactParagraph(j)}
-            ${generateDeletingContactButtonBar(j)}
+            ${generateDeletingParagraph(message)}
+            ${generateDeletingButtonBar(j, 'Delete')}
         `;
     } else {
-        let dialog = getElement('deleting-confirmation');
+        let message = getDeletingMessageUser();
         dialog.innerHTML = `
-            ${generateDeletingUserParagraph(j)}
-            ${generateDeletingUserButtonBar(j)}
+            ${generateDeletingParagraph(message)}
+            ${generateDeletingButtonBar(j, 'Continue')}
         `;
     }
 }
 
 
-function generateDeletingContactParagraph(j) {
+// jsdoc
+function getDeletingMessageContact(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     return `
+        Are you sure to remove<br>
+        <b id="deleting-contact-name" class="deleting-contact-name">${name}</b><br>
+        from your contacts?
+    `;
+}
+
+
+function generateDeletingParagraph(message) {    // fester Text!!!
+    return `
         <p class="deleting-confirmation-message">
-            Are you sure to remove<br>
-            <b id="deleting-contact-name" class="deleting-contact-name">${name}</b><br>
-            from your contacts?
+            ${message}
         </p>
     `;
 }
 
 
-function generateDeletingContactButtonBar(j) {
+function generateDeletingButtonBar(j, name) {    // fester Text!!!
+    let method = (name == 'Delete') ? 'deleteUserContact' : 'generateDeletingUserForm';
     return `
         <div class="contact-form-button-bar">
             <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
                 <div class="contact-form-button-text">Cancel</div>
             </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="deleteUserContact(${j})">
-                <div class="contact-form-button-dark-text">Delete</div>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="${method}(${j})">
+                <div class="contact-form-button-dark-text">${name}</div>
             </button>
         </div>
     `;
 }
 
 
-function generateDeletingUserParagraph(j) {
-    // let name = getJsonObjectDeepValue(contactSample, j, 'name');
+// jsdoc
+function getDeletingMessageUser() {
     return `
-        <p class="deleting-confirmation-message">
-            Are you sure to delete<br>
-            <b id="deleting-contact-name" class="deleting-contact-name c-lightblue">your account</b><br>
-            irreversibly?
-        </p>
-    `;
-}
-
-
-function generateDeletingUserButtonBar(j) {
-    return `
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="generateDeletingUserForm(${j})">
-                <div class="contact-form-button-dark-text">Continue</div>
-            </button>
-        </div>
+        Are you sure to delete<br>
+        <b id="deleting-contact-name" class="deleting-contact-name c-lightblue">your account</b><br>
+        irreversibly?
     `;
 }
 
