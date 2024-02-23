@@ -20,7 +20,9 @@ async function addUser() {
         'contacts': [],
         'phone': '',
         'boardTasks': [],
-        'userId': userId
+        'userId': userId,
+        'bgc-name': 'orange',
+        'bgc-code': '#FF7A00'
     }
     users.push(newUser);
     await setItem('users', JSON.stringify(users));
