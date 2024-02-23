@@ -49,20 +49,21 @@ function generateDeleteContactMessage(j) {
 
 // jsdoc
 function renderDeleteContactButtonBar(j, isContact) {
-    let onclick = (isContact) ? `onlick="deleteUserContact(${j})"` : `onclick="generateDeletingUserForm(${j})"`;
+    let onclick = (isContact) ? `onlick="deleteUserContact(${j})"` : `onclick="renderDeleteAccountConfirmation(${j})"`;
     let name = (isContact) ? 'Delete' : 'Confirm';
     let buttonBar = getElement('contact-form-button-bar');
     buttonBar.innerHTML = `
-        ${generateContactFormCancelButton()}
+        ${generateContactFormCancelButton(isContact)}
         ${generateContactFormDeleteButton(onclick, name)}
     `;
 }
 
 
 // jsdoc
-function generateContactFormCancelButton() {
+function generateContactFormCancelButton(isContact) {
+    let onclick = (isContact) ? `closeDialog('dialog-delete-contact')` : `closeDeleteContact()`;
     return `
-        <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+        <button class="contact-form-button" onclick="${onclick}">
             <div class="contact-form-button-text">Cancel</div>
         </button>
     `;
@@ -96,28 +97,46 @@ function generateDeleteUserMessage() {
 }
 
 
-function generateDeletingUserForm(j) {
+// jsdoc
+function renderDeleteAccountConfirmation(j) {
+    renderDeleteAccountMessage();
+    setDeleteAccountForm(j);
+    renderDeleteAccountButtonBar(j);
+}
+
+
+// jsdsoc
+function renderDeleteAccountMessage() {
     let messageBox = getElement('deleting-confirmation-message');
-    let buttonBar = getElement('contact-form-button-bar');
     messageBox.innerHTML = `
-            ${generateDeletingMessageForm()}
-    `;
-    setClassOnCommand('delete-contact-form', 'remove', 'd-none');
-    setElementAttribute('delete-contact-form', 'onsubmit', `generateDeletingConfirmation(${j}); return false`);
-    buttonBar.innerHTML = `
-        <button class="contact-form-button" onclick="closeDeleteContact()">
-            <div class="contact-form-button-text">Cancel</div>
-        </button>
-        <button id="dialog-delete-contact-button" class="contact-form-button-dark" type="submit" form="delete-contact-form">
-            <div id="delete-contact-button-name" class="contact-form-button-dark-text">Delete</div>
-        </button>
+        Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
     `;
 }
 
 
-function generateDeletingMessageForm() {
+// jsdoc
+function setDeleteAccountForm(j) {
+    setClassOnCommand('delete-contact-form', 'remove', 'd-none');
+    setElementAttribute('delete-contact-form', 'onsubmit', `renderDeleteAccountConfirmation(${j}); return false`);
+}
+
+
+// jsdoc
+function renderDeleteAccountButtonBar(j) {
+    let buttonBar = getElement('contact-form-button-bar');
+    buttonBar.innerHTML = `
+        ${generateContactFormCancelButton(j, false)}
+        ${generateContactFormSubmitButton()}
+    `;
+}
+
+
+// jsdoc
+function generateContactFormSubmitButton() {
     return `
-        Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
+        <button id="dialog-delete-contact-button" class="contact-form-button-dark" type="submit" form="delete-contact-form">
+            <div id="delete-contact-button-name" class="contact-form-button-dark-text">Delete</div>
+        </button>
     `;
 }
 
@@ -188,6 +207,9 @@ function resetDeleteContactForm() {
     mail.value = '';
     let password = getElement('deleting-account-password');
     password.value = '';
+
+    setClassOnCommand('delete-contact-form', 'add', 'd-none');
+    removeElementAttribute('delete-contact-form', 'onsubmit');
 }
 
 
