@@ -359,22 +359,36 @@ function openDialogDeleteContact(j) {
 
 
 function renderDeletingConfirmation(j) {
-    let dialog = getElement('deleting-confirmation');
+    let messageBox = getElement('deleting-confirmation-message');
+    let buttonBar = getElement('contact-form-button-bar');
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let isUser = (name.includes(' (You)'));
     if (!isUser) {
-        let message = getDeletingMessageContact(j);
-        dialog.innerHTML = `
-            ${generateDeletingParagraph(message)}
-            ${generateDeletingButtonBar(j, 'Delete')}
+        messageBox.innerHTML = `
+            ${getDeletingMessageContact(j)}
+        `;
+        buttonBar.innerHTML = `
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onlick="deleteUserContact(${j})">
+                <div id="delete-contact-button-name" class="contact-form-button-dark-text">Delete</div>
+            </button>
         `;
     } else {
-        let message = getDeletingMessageUser();
-        dialog.innerHTML = `
-            ${generateDeletingParagraph(message)}
-            ${generateDeletingButtonBar(j, 'Continue')}
+        messageBox.innerHTML = `
+            ${getDeletingMessageUser()}
+        `;
+        buttonBar.innerHTML = `
+            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
+                <div class="contact-form-button-text">Cancel</div>
+            </button>
+            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="generateDeletingUserForm(${j})">
+                <div id="delete-contact-button-name" class="contact-form-button-dark-text">Confirm</div>
+            </button>
         `;
     }
+    setClassOnCommand('delete-contact-form', 'add', 'd-none');
 }
 
 
@@ -385,30 +399,6 @@ function getDeletingMessageContact(j) {
         Are you sure to remove<br>
         <b id="deleting-contact-name" class="deleting-contact-name">${name}</b><br>
         from your contacts?
-    `;
-}
-
-
-function generateDeletingParagraph(message) {    // fester Text!!!
-    return `
-        <p class="deleting-confirmation-message">
-            ${message}
-        </p>
-    `;
-}
-
-
-function generateDeletingButtonBar(j, name) {    // fester Text!!!
-    let method = (name == 'Delete') ? 'deleteUserContact' : 'generateDeletingUserForm';
-    return `
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="${method}(${j})">
-                <div class="contact-form-button-dark-text">${name}</div>
-            </button>
-        </div>
     `;
 }
 
@@ -424,37 +414,27 @@ function getDeletingMessageUser() {
 
 
 function generateDeletingUserForm(j) {
-    let dialog = getElement('deleting-confirmation');
-    dialog.innerHTML = `
-        <p class="deleting-confirmation-message">
-            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
-        </p>
-        <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
-            <fieldset class="delete-contact-fieldset">
-                <div class="delete-contact-input-box">
-                    <div id="delete-user-mail" class="delete-contact-input-group">
-                        <input id="deleting-account-mail" class="contact-input" type="email" placeholder="Email" required>
-                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
-                    </div>
-                    <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.</div>
-                </div>
-                <div class="delete-contact-input-box">
-                    <div id="delete-user-password" class="delete-contact-input-group">
-                        <input id="deleting-account-password" class="contact-input" type="password" placeholder="Password" required>
-                        <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
-                    </div>
-                    <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your password.</div>
-                </div>
-            </fieldset>
-        </form>
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" form="delete-contact-form" type="submit">
-                <div class="contact-form-button-dark-text">Delete</div>
-            </button>
-        </div>
+    let messageBox = getElement('deleting-confirmation-message');
+    let buttonBar = getElement('contact-form-button-bar');
+    messageBox.innerHTML = `
+            ${generateDeletingMessageForm()}
+    `;
+    setClassOnCommand('delete-contact-form', 'remove', 'd-none');
+    setElementAttribute('delete-contact-form', 'onsubmit', `generateDeletingConfirmation(${j}); return false`);
+    buttonBar.innerHTML = `
+        <button class="contact-form-button" onclick="closeDeleteContact()">
+            <div class="contact-form-button-text">Cancel</div>
+        </button>
+        <button id="dialog-delete-contact-button" class="contact-form-button-dark" type="submit" form="delete-contact-form">
+            <div id="delete-contact-button-name" class="contact-form-button-dark-text">Delete</div>
+        </button>
+    `;
+}
+
+
+function generateDeletingMessageForm() {
+    return `
+        Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
     `;
 }
 
@@ -506,6 +486,25 @@ async function generateDeletingConfirmation(j) {
 
 
     }
+}
+
+
+function closeDeleteContact() {
+    closeDialog('dialog-delete-contact');
+    resetDeleteContactForm();
+}
+
+
+function resetDeleteContactForm() {
+    setClassOnCommand('delete-user-mail', 'remove', 'delete-contact-input-wrong');
+    setClassOnCommand('deleting-hint-mail', 'add', 'd-none');
+    setClassOnCommand('delete-user-password', 'remove', 'delete-contact-input-wrong');
+    setClassOnCommand('deleting-hint-password', 'add', 'd-none');
+
+    let mail = getElement('deleting-account-mail');
+    mail.value = '';
+    let password = getElement('deleting-account-password');
+    password.value = '';
 }
 
 
