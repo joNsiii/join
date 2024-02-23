@@ -160,7 +160,7 @@ function showDeleteAccountConfirmation() {
     let dialog = getElement('deleting-confirmation');
     dialog.innerHTML = `
         <p class="deleting-confirmation-message">
-            Your account with the user name<br>
+            Your user account<br>
             <b class="c-lightblue">${currentUserData.name}</b><br>
             was successfully deleted.<br>
             <br>
