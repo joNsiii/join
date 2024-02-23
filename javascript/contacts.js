@@ -87,11 +87,11 @@ function collectInitials(contacts) {
 
 
 // jsdoc
-// function getInitialLetter(contacts, i) {
-//     let name = getJsonObjectDeepValue(contacts, i, 'name');
-//     let initial = getJsonObjectValue(name, 0);
-//     return initial.toLowerCase();
-// }
+function getInitialLetter(contacts, i) {
+    let name = getJsonObjectDeepValue(contacts, i, 'name');
+    let initial = getJsonObjectValue(name, 0);
+    return initial.toLowerCase();
+}
 
 
 // jsdoc
@@ -202,26 +202,26 @@ function renderContactProfile(j) {
 
 
 // jsdoc
-// function getInitialLetterGroup(variable, i) {
-//     let first = getInitialLetter(variable, i).toUpperCase();
-//     let last = getLastInitialLetter(variable, i).toUpperCase();
-//     return first + last;
-// }
+function getInitialLetterGroup(variable, i) {
+    let first = getInitialLetter(variable, i).toUpperCase();
+    let last = getLastInitialLetter(variable, i).toUpperCase();
+    return first + last;
+}
 
 
 // jsdoc
-// function getLastInitialLetter(variable, i) {
-//     let name = getJsonObjectDeepValue(variable, i, 'name');
-//     name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
-//     let space = name.indexOf(' ');
-//     let last = '';
-//     while (space > -1) {
-//         last = name[space];
-//         space = name.indexOf(' ');
-//         name = (space < 0) ? name : name.replace(' ', '');
-//     }
-//     return last.toLowerCase();
-// }
+function getLastInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
+    let space = name.indexOf(' ');
+    let last = '';
+    while (space > -1) {
+        last = name[space];
+        space = name.indexOf(' ');
+        name = (space < 0) ? name : name.replace(' ', '');
+    }
+    return last.toLowerCase();
+}
 
 
 // jsdoc
