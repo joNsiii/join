@@ -49,7 +49,7 @@ function generateDeleteContactMessage(j) {
 
 // jsdoc
 function renderDeleteContactButtonBar(j, isContact) {
-    let onclick = (isContact) ? `onlick="deleteUserContact(${j})"` : `onclick="renderDeleteAccountConfirmation(${j})"`;
+    let onclick = (isContact) ? `deleteUserContact(${j})` : `renderDeleteAccountConfirmation(${j})`;
     let name = (isContact) ? 'Delete' : 'Confirm';
     let buttonBar = getElement('contact-form-button-bar');
     buttonBar.innerHTML = `
@@ -73,7 +73,7 @@ function generateContactFormCancelButton(isContact) {
 // jsdoc
 function generateContactFormDeleteButton(onclick, name) {
     return `
-        <button id="dialog-delete-contact-button" class="contact-form-button-dark" ${onclick}>
+        <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="${onclick}">
             <div id="delete-contact-button-name" class="contact-form-button-dark-text">${name}</div>
         </button>
     `;
@@ -117,7 +117,7 @@ function renderDeleteAccountMessage() {
 // jsdoc
 function setDeleteAccountForm(j) {
     setClassOnCommand('delete-contact-form', 'remove', 'd-none');
-    setElementAttribute('delete-contact-form', 'onsubmit', `renderDeleteAccountConfirmation(${j}); return false`);
+    setElementAttribute('delete-contact-form', 'onsubmit', `generateDeletingConfirmation(${j}); return false`);
 }
 
 
@@ -173,21 +173,30 @@ async function generateDeletingConfirmation(j) {
         users.splice(userIndex, 1);
         await setItem('users', users);
     } else {
-        setClassOnCommand('delete-user-mail', 'remove', 'delete-contact-input-wrong');
-        setClassOnCommand('deleting-hint-mail', 'add', 'd-none');
-        setClassOnCommand('delete-user-password', 'remove', 'delete-contact-input-wrong');
-        setClassOnCommand('deleting-hint-password', 'add', 'd-none');
-        if (email != currentUserData.email) {
-            setClassOnCommand('delete-user-mail', 'add', 'delete-contact-input-wrong');
-            setClassOnCommand('deleting-hint-mail', 'remove', 'd-none');
-        }
-        if (password != currentUserData.password) {
-            setClassOnCommand('delete-user-password', 'add', 'delete-contact-input-wrong');
-            setClassOnCommand('deleting-hint-password', 'remove', 'd-none');
-        }
-
-
+        showUpWrongUserInput(email, password);
     }
+}
+
+
+// jsdoc
+function showUpWrongUserInput(email, password) {
+    highlightWrongUserInput('mail', false);
+    highlightWrongUserInput('password', false);
+    if (email != currentUserData.email) {
+        highlightWrongUserInput('mail', true);
+    }
+    if (password != currentUserData.password) {
+        highlightWrongUserInput('password', true);
+    }
+}
+
+
+// jsdoc
+function highlightWrongUserInput(info, logical) {
+    let command = (logical) ? 'add' : 'remove';
+    setClassOnCommand(`delete-user-${info}`, command, 'delete-contact-input-wrong');
+    command = (logical) ? 'remove' : 'add';
+    setClassOnCommand(`deleting-hint-${info}`, command, 'd-none');
 }
 
 
