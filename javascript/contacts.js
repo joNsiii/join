@@ -226,6 +226,7 @@ function renderNameMailGroup(j) {
 async function saveUserContacts() {
     let user = users.find(u => u.userId == userId);
     pushUserContacts(user);
+    setUserBgc(user);
     await setItem('users', users);
 }
 
@@ -252,4 +253,10 @@ function getUserContactData(userContact) {
         'bgc-name': userContact['bgc-name'],
         'bgc-code': userContact['bgc-code']
     };
+}
+
+
+function setUserBgc(user) {
+    user['bgc-name'] = 'orange';    // save right color!!!
+    user['bgc-code'] = '#FF7A00';
 }

@@ -129,10 +129,16 @@ async function showUpdatedContactList(mail) {
 
 // jsdoc
 function showAddedContact(mail) {
-    let createdId = userContacts.find(c => c.mail == mail);
-    let renderingId = userContacts.indexOf(createdId);
-    showContact(renderingId);
-    location.href = `#contacts-contact-${renderingId}`;
+    let contactId = getContactId(mail);
+    showContact(contactId);
+    location.href = `#contacts-contact-${contactId}`;
+}
+
+
+// jsdoc
+function getContactId(mail) {
+    let contact = userContacts.find(c => c.mail == mail);
+    return userContacts.indexOf(contact);
 }
 
 
@@ -183,22 +189,20 @@ function editContactInfo(j, info) {
 }
 
 
+// jsdoc
 function showEditedContact(mail) {
-    let currentUser = userContacts.find(c => c['mail'] == mail);
-    let userIndex = userContacts.indexOf(currentUser);
-    highlightCurrentContact(userIndex);
-    renderContactViewer(userIndex);
-    linkUserInfo(userIndex);
-    setElementAttribute('edit-contact-button', 'onclick', `showEditContactForm(${userIndex})`);
-    setElementAttribute('edit-contact-button-mobile', 'onclick', `showEditContactForm(${userIndex})`);
-    setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    let contactId = getContactId(mail);
+    highlightCurrentContact(contactId);
+    renderContactViewer(contactId);
+    linkUserInfo(contactId);
+    setContactButtonOnclick(contactId);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
 }
 
 
+// jsdoc
 function closeEditContact() {
     setClassOnCommand('section-edit-contact', 'remove', 'dialog-contacts-position');
     setTimeout(() => {
@@ -207,12 +211,14 @@ function closeEditContact() {
 }
 
 
+// jsdoc
 function openAddContact() {
     openDialog('dialog-add-contact');
     setClassOnCommand('section-add-contact', 'add', 'dialog-contacts-position');
 }
 
 
+// jsdoc
 function closeAddContact() {
     setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
     setTimeout(() => {
@@ -222,6 +228,7 @@ function closeAddContact() {
 }
 
 
+// jsdoc
 function closeSavedContact(id) {
     let style = getElement('save-contact-animation');
     let cssCode = animateSavedContact();
@@ -235,6 +242,7 @@ function closeSavedContact(id) {
 }
 
 
+// jsdoc
 function animateSavedContact() {
     return `
         .dialog-contacts-position {
@@ -245,12 +253,14 @@ function animateSavedContact() {
 }
 
 
+// jsdoc
 function openContactSettings() {
     openDialog('dialog-contact-settings');
     setClassOnCommand('section-contact-settings', 'add', 'section-contact-settings-position');
 }
 
 
+// jsdoc
 function closeContactSettings() {
     setClassOnCommand('section-contact-settings', 'remove', 'section-contact-settings-position');
     setTimeout(() => {
@@ -259,6 +269,7 @@ function closeContactSettings() {
 }
 
 
+// jsdoc
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];
     for (let i = 0; i < ids.length; i++) {
@@ -269,6 +280,7 @@ function resetAddContactInput() {
 }
 
 
+// jsdoc
 function getLastInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
     name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
@@ -283,6 +295,7 @@ function getLastInitialLetter(variable, i) {
 }
 
 
+// jsdoc
 function showBacklogContact(message) {
     let bodyWidth = document.body.offsetWidth;
     if (bodyWidth > 1400) {
@@ -295,12 +308,14 @@ function showBacklogContact(message) {
 }
 
 
+// jsdoc
 function setBacklogContactMessage(id, message) {
     let backlog = getElement(id);
     backlog.innerHTML = message;
 }
 
 
+// jsdoc
 function setBacklogContactPosition(position, valueIn, valueOut) {
     let style = getElement('backlog-contact-animation');
     let cssCode = animateBacklogContact(position, valueIn);
@@ -312,6 +327,7 @@ function setBacklogContactPosition(position, valueIn, valueOut) {
 }
 
 
+// jsdoc
 function animateBacklogContact(position, value) {
     return `
         .backlog-contact-animation {
@@ -321,6 +337,7 @@ function animateBacklogContact(position, value) {
 }
 
 
+// jsdoc
 function showBacklogContactForm(id, message) {
     setBacklogContactMessage(`backlog-${id}-contact`, message);
     setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-in');
