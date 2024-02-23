@@ -141,40 +141,47 @@ function generateContactFormSubmitButton() {
 }
 
 
+// jsdoc
 async function generateDeletingConfirmation(j) {
     let email = getInputValue('deleting-account-mail');
     let password = getInputValue('deleting-account-password');
-
-    // compare input + userData + input border color!!!
     if (email == currentUserData.email && password == currentUserData.password) {
-        let dialog = getElement('deleting-confirmation');
-
-        // Please improve text!!!
-        dialog.innerHTML = `
-        <p class="deleting-confirmation-message">
-            Your account with the name<br>
-            <b class="c-lightblue">name</b> is deleted.<br>
-            You will be logged out.
-        </p>
-    `;
-
-        setTimeout(() => {
-            window.location.href = `./login.html`;
-        }, 800);
-
-
-        // Please set + verify input + timeout + logout!!!
-
-        // logout();
-        let userData = users.find(u => u.userId == userId);
-        let userIndex = users.indexOf(userData);
-        console.log(userIndex);
-
-        users.splice(userIndex, 1);
-        await setItem('users', users);
+        showDeleteAccountConfirmation();
+        redirectToLoginPage();
+        deleteUserAccount();
     } else {
         showUpWrongUserInput(email, password);
     }
+}
+
+
+// jsdoc
+function showDeleteAccountConfirmation() {
+    let dialog = getElement('deleting-confirmation');
+    dialog.innerHTML = `
+        <p class="deleting-confirmation-message">
+            Your account with the user name<br>
+            <b class="c-lightblue">name</b> was successfully deleted.<br>
+            Please await logout.
+        </p>
+    `;
+}
+
+
+// jsdoc
+function redirectToLoginPage() {
+    setTimeout(() => {
+        window.location.href = `./login.html`;
+    }, 800);
+}
+
+
+// jsdoc
+async function deleteUserAccount() {
+    let user = users.find(u => u.userId == userId);
+    let userIndex = users.indexOf(user);
+    users.splice(userIndex, 1);
+    await setItem('users', users);
 }
 
 
