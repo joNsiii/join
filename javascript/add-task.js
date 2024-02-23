@@ -54,17 +54,20 @@ function assignedTo() {
   let assignElement = document.getElementById("myDropdown");
   assignElement.innerHTML = "";
 
-  // let currentUser = users.find((u) => u.userId == userId);
-  let currentUserId = parseInt(localStorage.getItem("userId"));
-  let currentUser = users.find((u) => u.userId === currentUserId);
-  contactsUser = currentUser["assignable-contacts"];
+  let user = currentUserData;
+  contactsUser.push(user);
+  for (let i = 0; i < user.contacts.length; i++) {
+    let contact = user.contacts[i];
+    contactsUser.push(contact);
+  }
 
   for (let i = 0; i < contactsUser.length; i++) {
-    const contact = contactsUser[i];
+    const bgc = `bgc-${contactsUser[i]['bgc-name']}`;
+    const contact = contactsUser[i].name;
     assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div class="subuser-align">
-            <div class="sub-profile-img">JS</div>
+            <div class="sub-profile-img ${bgc}">JS</div>
             <div>${contact}</div>
           </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
