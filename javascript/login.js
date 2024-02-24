@@ -3,6 +3,7 @@ let checkStatus;
 /**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
+const popup = urlParams.get('greet-popup');
 if (msg) {
     document.getElementById('msgPopup').classList.remove('d-none');
     msgPopup.innerHTML = msg;
@@ -19,7 +20,7 @@ function checkLogin() {
         rememberMe();
         localStorage.removeItem('userId'); // neu
         setCookie('user_session_token', loggedInUser.userId, 24);
-        window.location.href = 'summary.html';
+        window.location.href = 'summary.html?popup=';
         localStorage.setItem('userId', loggedInUser.userId); // neu
     } else {
         wrongPassword();

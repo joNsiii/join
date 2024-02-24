@@ -1,3 +1,14 @@
+async function summaryInit() {
+    await loadUsers();
+    await loadUserData();
+    await loadTasksInBoard();
+    dayTimeGretting();
+    greetUser();
+    loadTaskCounter();
+    taskInCategory();
+    urgentTaskCounter();
+}
+
 function changeImage() {
     let editImg = document.getElementById('edit-img');
     editImg.src = 'img/edit-bg-white.png'
@@ -16,15 +27,11 @@ function changeImageBack1() {
     successImage.src = 'img/success-bg-blue.png'
 }
 
-async function summaryInit() {
-    await loadUsers();
-    await loadUserData();
-    await loadTasksInBoard();
-    dayTimeGretting();
-    greetUser();
-    loadTaskCounter();
-    taskInCategory();
-    urgentTaskCounter();
+function mobilLoginScreen() {
+    document.getElementById('greet-popup').classList.remove('d-none');
+    setTimeout(() => {
+        document.getElementById('greet-popup').classList.add('d-none');
+    }, "2000");
 }
 
 function dayTimeGretting() {

@@ -239,7 +239,7 @@ function findTaskAndUpdate(taskId) {
         return;
     }
     const taskToUpdate = boardTasks[taskIndex];
-    const subtaskId = taskToUpdate.find((subtask) => subtask.subtasks.find((s)=> s.subtaskId));
+    // const subtaskId = taskToUpdate.find((subtask) => subtask.subtasks.find((s)=> s.subtaskId));
     console.log("die subtask id ist:", subtaskId);
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
