@@ -100,7 +100,7 @@ function stop(event) {
 }
 
 
-function setClassOnCommand(id, command, className) {
+function setClass(id, command, className) {
     command(id, className);
 }
 

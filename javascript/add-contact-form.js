@@ -1,13 +1,13 @@
 // jsdoc
 function openAddContact() {
     openDialog('dialog-add-contact');
-    setClassOnCommand('section-add-contact', addClass, 'dialog-contacts-position');
+    setClass('section-add-contact', addClass, 'dialog-contacts-position');
 }
 
 
 // jsdoc
 function closeAddContact() {
-    setClassOnCommand('section-add-contact', removeClass, 'dialog-contacts-position');
+    setClass('section-add-contact', removeClass, 'dialog-contacts-position');
     setTimeout(() => {
         closeDialog('dialog-add-contact');
         resetAddContactInput();

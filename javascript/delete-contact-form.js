@@ -10,7 +10,7 @@ function renderDeletingConfirmation(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let isUser = (name.includes(' (You)'));
     (!isUser) ? renderDeleteContactForm(j) : renderDeleteUserForm(j);
-    setClassOnCommand('delete-contact-form', addClass, 'd-none');
+    setClass('delete-contact-form', addClass, 'd-none');
 }
 
 
@@ -116,7 +116,7 @@ function renderDeleteAccountMessage() {
 
 // jsdoc
 function setDeleteAccountForm(j) {
-    setClassOnCommand('delete-contact-form', removeClass, 'd-none');
+    setClass('delete-contact-form', removeClass, 'd-none');
     setElementAttribute('delete-contact-form', 'onsubmit', `verifyDeleteAccountForm(${j}); return false`);
 }
 
@@ -203,11 +203,11 @@ function showUpWrongUserInput(email, password) {
 // jsdoc
 function highlightWrongUserInput(info, logical) {
     if (logical) {
-        setClassOnCommand(`delete-user-${info}`, addClass, 'delete-contact-input-wrong');
-        setClassOnCommand(`deleting-hint-${info}`, removeClass, 'd-none');
+        setClass(`delete-user-${info}`, addClass, 'delete-contact-input-wrong');
+        setClass(`deleting-hint-${info}`, removeClass, 'd-none');
     } else {
-        setClassOnCommand(`delete-user-${info}`, removeClass, 'delete-contact-input-wrong');
-        setClassOnCommand(`deleting-hint-${info}`, addClass, 'd-none');
+        setClass(`delete-user-${info}`, removeClass, 'delete-contact-input-wrong');
+        setClass(`deleting-hint-${info}`, addClass, 'd-none');
     }
 }
 
@@ -224,16 +224,16 @@ function resetDeleteContactForm() {
     resetDeleteContactInputClasses();
     resetDeleteContactInputValues();
     removeElementAttribute('delete-contact-form', 'onsubmit');
-    setClassOnCommand('delete-contact-form', addClass, 'd-none');
+    setClass('delete-contact-form', addClass, 'd-none');
 }
 
 
 // jsdoc
 function resetDeleteContactInputClasses() {
-    setClassOnCommand('delete-user-mail', removeClass, 'delete-contact-input-wrong');
-    setClassOnCommand('deleting-hint-mail', addClass, 'd-none');
-    setClassOnCommand('delete-user-password', removeClass, 'delete-contact-input-wrong');
-    setClassOnCommand('deleting-hint-password', addClass, 'd-none');
+    setClass('delete-user-mail', removeClass, 'delete-contact-input-wrong');
+    setClass('deleting-hint-mail', addClass, 'd-none');
+    setClass('delete-user-password', removeClass, 'delete-contact-input-wrong');
+    setClass('deleting-hint-password', addClass, 'd-none');
 }
 
 

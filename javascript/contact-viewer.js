@@ -14,10 +14,10 @@ function showContact(j) {
 // jsdoc
 function highlightCurrentContact(j) {
     if (currentContact !== undefined) {
-        setClassOnCommand(currentContact, removeClass, 'contacts-contact-active');
+        setClass(currentContact, removeClass, 'contacts-contact-active');
     }
     currentContact = `contacts-contact-${j}`;
-    setClassOnCommand(currentContact, addClass, 'contacts-contact-active');
+    setClass(currentContact, addClass, 'contacts-contact-active');
 }
 
 
@@ -143,7 +143,7 @@ function animateContactUserOut(value) {
 
 // jsdoc
 function closeContactViewerMobile() {
-    setClassOnCommand(currentContact, removeClass, 'contacts-contact-active');
+    setClass(currentContact, removeClass, 'contacts-contact-active');
     showUserInfo(false);
     closeDialog('dialog-contact-viewer');
 }

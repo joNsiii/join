@@ -2,7 +2,7 @@
 function showEditContactForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
-    setClassOnCommand('section-edit-contact', addClass, 'dialog-contacts-position');
+    setClass('section-edit-contact', addClass, 'dialog-contacts-position');
     setElementAttribute('edit-contact-form', 'onsubmit', `updateEditedContactList(${j}); return false`);
     setElementAttribute('contact-form-delete-button', 'onclick', `openDialogDeleteContact(${j})`);
 }
@@ -35,7 +35,7 @@ function renderEditFormInfo(j, info) {
 
 // jsdoc
 function closeEditContact() {
-    setClassOnCommand('section-edit-contact', removeClass, 'dialog-contacts-position');
+    setClass('section-edit-contact', removeClass, 'dialog-contacts-position');
     setTimeout(() => {
         closeDialog('dialog-edit-contact')
     }, 100);
@@ -97,7 +97,7 @@ function closeSavedContact(id) {
     setTimeout(() => {
         closeDialog(`dialog-${id}-contact`);
         resetAddContactInput();
-        setClassOnCommand(`dialog-${id}-contact`, removeClass, 'dialog-contacts-position');
+        setClass(`dialog-${id}-contact`, removeClass, 'dialog-contacts-position');
         style.innerHTML = '';
     }, 100);
 }
@@ -162,13 +162,13 @@ function resetDialogs() {
 // jsdoc
 function openContactSettings() {
     openDialog('dialog-contact-settings');
-    setClassOnCommand('section-contact-settings', addClass, 'section-contact-settings-position');
+    setClass('section-contact-settings', addClass, 'section-contact-settings-position');
 }
 
 
 // jsdoc
 function closeContactSettings() {
-    setClassOnCommand('section-contact-settings', removeClass, 'section-contact-settings-position');
+    setClass('section-contact-settings', removeClass, 'section-contact-settings-position');
     setTimeout(() => {
         closeDialog('dialog-contact-settings');
     }, 100);
@@ -178,12 +178,12 @@ function closeContactSettings() {
 // jsdoc
 function showBacklogContactForm(id, message) {
     setBacklogContactMessage(`backlog-${id}-contact`, message);
-    setClassOnCommand(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-in');
+    setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-in');
     setTimeout(() => {
-        setClassOnCommand(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-in');
-        setClassOnCommand(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-out');
+        setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-in');
+        setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-out');
         setTimeout(() => {
-            setClassOnCommand(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-out');
+            setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-out');
         }, 100);
     }, 800);
 }
