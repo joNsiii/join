@@ -1,4 +1,14 @@
 /**
+ * Adds a class to an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The adding class name.
+ */
+function addClass(id, className) {
+    document.getElementById(id).classList.add(className);
+}
+
+
+/**
  * Closes a dialog by id.
  * @param {String} id - The requested dialog's id.
  */
@@ -71,12 +81,33 @@ function openDialog(id) {
 
 
 /**
+ * Removes a class from an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The removing class name.
+ */
+function removeClass(id, className) {
+    document.getElementById(id).classList.remove(className);
+}
+
+
+/**
  * Removes an element's attribute.
  * @param {String} id - The requested element's id.
  * @param {String} attribute - The removing attribute's name.
  */
 function removeElementAttribute(id, attribute) {
     document.getElementById(id).removeAttribute(attribute);
+}
+
+
+/**
+ * Sets an element's class.
+ * @param {String} id - The requested element's id.
+ * @param {function} command - The running function.
+ * @param {String} className - The setting class name.
+ */
+function setClass(id, command, className) {
+    command(id, className);
 }
 
 
@@ -100,21 +131,11 @@ function stop(event) {
 }
 
 
-function setClass(id, command, className) {
-    command(id, className);
-}
-
-
+/**
+ * Toggles a class of an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The toggling class name.
+ */
 function toggleClass(id, className) {
     document.getElementById(id).classList.toggle(className);
-}
-
-
-function addClass(id, className) {
-    document.getElementById(id).classList.add(className);
-}
-
-
-function removeClass(id, className) {
-    document.getElementById(id).classList.remove(className);
 }
