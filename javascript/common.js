@@ -101,19 +101,12 @@ function stop(event) {
 
 
 function setClassOnCommand(id, command, className) {
-    let toggling = command == 'toggle';
-    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);
+    command(id, className);
 }
 
 
 function toggleClass(id, className) {
     document.getElementById(id).classList.toggle(className);
-}
-
-
-function addOrRemoveClass(id, command, className) {
-    let adding = command == 'add';
-    (adding) ? addClass(id, className) : removeClass(id, className);
 }
 
 
@@ -125,8 +118,3 @@ function addClass(id, className) {
 function removeClass(id, className) {
     document.getElementById(id).classList.remove(className);
 }
-
-
-// function setClassOnCommand(id, command, className) {
-//     command(id, className);
-// }
