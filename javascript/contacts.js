@@ -44,16 +44,18 @@ async function getUserContactList() {
 }
 
 
+// jsdoc
 function pushUserContact(userContactList) {
     let userContact = {
         'name': currentUserData.name + ' (You)',
         'mail': currentUserData.email,
         'phone': currentUserData.phone
-    };    // Objekt auslagern?
+    };
     userContactList.push(userContact);
 }
 
 
+// jsdoc
 function pushUserSubcontacts(userContactList) {
     let subcontacts = currentUserData.contacts;
     for (let i = 0; i < subcontacts.length; i++) {
@@ -62,7 +64,7 @@ function pushUserSubcontacts(userContactList) {
             'name': subcontact.name,
             'mail': subcontact.mail,
             'phone': subcontact.phone
-        }    // Object auslagern?
+        }
         userContactList.push(userSubcontact);
     }
 }
