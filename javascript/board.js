@@ -84,39 +84,23 @@ function updateAllNoTaskMessages() {
     });
 }
 
-
 // progress bar
 function updateProgressBar(task) {
-    let currentSubtask = 0;
-    let percent = (currentSubtask + 1) / task["subtasks"].length;
-    if (percent !== Infinity) {
-        percent = Math.round(percent * 100);
-        document.getElementById("progress-bar").style.width = `${percent}%`;
-        let test = percentageToFraction(percent);
-        // console.log(test);
-        // progress bar steps
-        document.getElementById("subtask-progress-text").innerHTML += `${test}`;
-    } else {
-        return;
-    }
+    let isChecked = [];
+    let length = task.subtasks.length;
+    let checked = task.subtasks['isChecked'];
+    isChecked[checked] = task.subtasks.filter((c) => c['isChecked'] == true);
+    checkedLength = isChecked[checked].length; 
+    document.getElementById(`subtask-progress-text-${task.taskId}`).innerHTML += checkedLength + '/' + length;
+    progressBarPercent(task, length, checkedLength);
 }
 
-function percentageToFraction(percentage) {
-    let decimal = percentage / 100;
-    let gcd = function (a, b) {
-        if (b < 0.0000001) return a;
-        return gcd(b, Math.floor(a % b));
-    };
-    let numerator = decimal * 10000;
-    let denominator = 10000;
-    let divisor = gcd(numerator, denominator);
-    numerator /= divisor;
-    denominator /= divisor;
-    return numerator + "/" + denominator;
+function progressBarPercent(task, length, checkedLength) {
+    let percent = (100 * checkedLength) / length
+    document.getElementById(`progress-bar-${task.taskId}`).style.width = percent + '%';
 }
 
 // HTML Task Card
-
 function createHTML(task, containerId, returnHtml = false) {
     // console.log(task.sub_users)
     let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
@@ -131,9 +115,9 @@ function createHTML(task, containerId, returnHtml = false) {
                 </div>
                 <div class="board-task-progress-group">
                     <div class="board-task-max-bar">
-                        <div id="progress-bar" class="board-task-value-bar"></div>
+                        <div id="progress-bar-${task.taskId}" class="board-task-value-bar"></div>
                     </div>
-                    <div id="subtask-progress-text" class="board-task-progress-text"></div>
+                    <div id="subtask-progress-text-${task.taskId}" class="board-task-progress-text"></div>
                 </div>
                 <div class="user-priority-group">
                     <div class="board-user-group">
@@ -322,14 +306,17 @@ function setupCloseDialogMechanism() {
     if (dialogBoardTask) {
         dialogBoardTask.addEventListener("click", function (event) {
             event.stopPropagation();
+            renderEachTask();
         });
     }
 
     if (dialogEditTask) {
         dialogEditTask.addEventListener("click", function (event) {
             event.stopPropagation();
+            renderEachTask();
         });
     }
+    renderEachTask();
 }
 
 function startDragging(id) {
