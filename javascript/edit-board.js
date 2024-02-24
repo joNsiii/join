@@ -1,7 +1,8 @@
+currentTask = {}
 // NOT FINISHED YET
 async function editTask(taskId) {
-    console.log(taskId);
     const task = boardTasks.find((task) => task.taskId === taskId);
+    console.log(task);
     const dialog = document.getElementById("dialog");
     dialog.setAttribute("w3-include-html", "./edit-task.html");
     await includeHTML();
@@ -124,6 +125,13 @@ function addNewSubtaskForEditing() {
         `;
         document.getElementById("subtask").value = "";
         resetSubtaskIcons();
+        let subtask = {
+            subtaskId: newSubtaskId,
+            subtasksText: subtaskInputValue,
+            isChecked: false,
+        };
+        currentTask = subtask;
+
     }
 }
 function cancelSubtaskEditSafety() {
@@ -231,7 +239,7 @@ function updatePriority(taskToUpdate) {
 }
 
 // finds task and updates it
-function findTaskAndUpdate(taskId) {
+async function findTaskAndUpdate(taskId) {
     taskId = parseInt(taskId, 10);
     const taskIndex = boardTasks.findIndex((task) => task.taskId === taskId);
     if (taskIndex === -1) {
@@ -239,13 +247,19 @@ function findTaskAndUpdate(taskId) {
         return;
     }
     const taskToUpdate = boardTasks[taskIndex];
-    const subtaskId = taskToUpdate.find((subtask) => subtask.subtasks.find((s)=> s.subtaskId));
-    console.log("die subtask id ist:", subtaskId);
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    // TODO SUBTASKS
+    if(Object.keys(currentTask).length !== 0) {
+        taskToUpdate.subtasks.push(currentTask);
+    }
     // TODO ASSIGNED TO
     boardTasks[taskIndex] = taskToUpdate;
-    //currently not saving only console login all edit changes
-    console.log("Änderungen gespeichert", boardTasks);
+
+    await setItem("boardTasks", JSON.stringify(boardTasks));
+
 }
+
+
+// function updateSubtasks(task) {
+
+// }
