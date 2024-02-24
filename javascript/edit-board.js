@@ -249,7 +249,8 @@ async function findTaskAndUpdate(taskId) {
     const taskToUpdate = boardTasks[taskIndex];
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    if(Object.keys(currentTask).length !== 0) {
+    console.log(currentTask)
+    if(Object.entries(currentTask).length !== 0) {
         taskToUpdate.subtasks.push(currentTask);
     }
     // TODO ASSIGNED TO
