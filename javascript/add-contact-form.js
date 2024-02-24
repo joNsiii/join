@@ -11,7 +11,7 @@ function closeAddContact() {
     setTimeout(() => {
         closeDialog('dialog-add-contact');
         resetAddContactInput();
-    }, 125);
+    }, 100);
 }
 
 
@@ -84,7 +84,7 @@ async function showUpdatedContactList(mail) {
     showAddedContact(mail);
     setTimeout(() => {
         showBacklogContact('Contact successfully created');
-    }, 125);
+    }, 100);
 }
 
 

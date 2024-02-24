@@ -125,7 +125,7 @@ function animateContactUserIn(value) {
     return `
         .contact-user-animation {
             left: ${value};
-            transition: 125ms left ease-in-out;
+            transition: 100ms left ease-in-out;
         }
     `;
 }

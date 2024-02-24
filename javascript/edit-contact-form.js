@@ -38,7 +38,7 @@ function closeEditContact() {
     setClassOnCommand('section-edit-contact', 'remove', 'dialog-contacts-position');
     setTimeout(() => {
         closeDialog('dialog-edit-contact')
-    }, 125);
+    }, 100);
 }
 
 
@@ -99,7 +99,7 @@ function closeSavedContact(id) {
         resetAddContactInput();
         setClassOnCommand(`dialog-${id}-contact`, 'remove', 'dialog-contacts-position');
         style.innerHTML = '';
-    }, 125);
+    }, 100);
 }
 
 
@@ -108,7 +108,7 @@ function animateSavedContact() {
     return `
         .dialog-contacts-position {
             opacity: 0;
-            transition: 125ms opacity ease-in-out;
+            transition: 100ms opacity ease-in-out;
         }
     `;
 }
@@ -123,7 +123,7 @@ function showEditedContact(mail) {
     setContactButtonOnclick(contactId);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
-    }, 125);
+    }, 100);
 }
 
 
@@ -135,7 +135,7 @@ async function deleteUserContact(j) {
     showBacklogContact('Contact successfully deleted');
     setTimeout(async () => {
         closeDialog('dialog-contact-viewer');
-    }, 1050);
+    }, 1000);
 }
 
 
@@ -171,7 +171,7 @@ function closeContactSettings() {
     setClassOnCommand('section-contact-settings', 'remove', 'section-contact-settings-position');
     setTimeout(() => {
         closeDialog('dialog-contact-settings');
-    }, 125);
+    }, 100);
 }
 
 
@@ -184,6 +184,6 @@ function showBacklogContactForm(id, message) {
         setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-out');
         setTimeout(() => {
             setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-out');
-        }, 125);
+        }, 100);
     }, 800);
 }
