@@ -80,6 +80,7 @@
 .summary-main-counter-container {
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 .summary-main-counter {
@@ -118,6 +119,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 13px;
+    padding-left: 10px;
 }
 
 .summary-urgent-right-date {
@@ -192,14 +194,12 @@
 }
 
 .summary-urgent:hover {
-    width: 576px;
-    height: 184px;
     border-radius: 30px;
     background-color: #2A3647;
     color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    scale: 1.03;
+    scale: 1.1;
 }
 
 .summary-urgent-sub-container {

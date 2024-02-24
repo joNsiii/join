@@ -52,22 +52,22 @@
                 </div>
                 <div class="summary-urgent">
                     <div class="summary-urgent-sub-container">
-                    <div class="summary-urgent-left">
-                        <div class="summary-main-img-container-urgent">
-                            <img src="./img/urgent-red.png" alt="urgent">
+                        <div class="summary-urgent-left">
+                            <div class="summary-main-img-container-urgent">
+                                <img src="./img/urgent-red.png" alt="urgent">
+                            </div>
+                            <div class="summary-main-counter-container">
+                                <span id="urgent-counter" class="summary-main-counter"></span>
+                                <span class="summary-main-text">Urgent</span>
+                            </div>
                         </div>
-                        <div class="summary-main-counter-container">
-                            <span id="urgent-counter" class="summary-main-counter"></span>
-                            <span class="summary-main-text">Urgent</span>
+                        <div class="summary-urgent-border"></div>
+                        <div class="summary-urgent-right">
+                            <span id="urgent-date" class="summary-urgent-right-date"></span>
+                            <span class="summary-urgent-right-text">Upcoming Deadline</span>
                         </div>
-                    </div>
-                    <div class="summary-urgent-border"></div>
-                    <div class="summary-urgent-right">
-                        <span id="urgent-date" class="summary-urgent-right-date"></span>
-                        <span class="summary-urgent-right-text">Upcoming Deadline</span>
                     </div>
                 </div>
-            </div>
                 <div class="summary-main-tasks">
                     <div class="summary-main-counter-container-task">
                         <span id="task-in-boards" class="summary-main-counter"></span>
@@ -86,7 +86,13 @@
 
             <div class="summary-greeting-container">
                 <span class="summary-daytime-container" id="daytime-greet">,</span>
-                <span class="summary-name-container" id="greeting-name">Sofia Müller</span>
+                <span class="summary-name-container" id="greeting-name"></span>
+            </div>
+            <div id="greet-popup" class="bg-white d-none">
+                <div class="summary-greeting-container-popup">
+                    <span class="summary-daytime-container" id="daytime-greet">Good Evening,</span>
+                    <span class="summary-name-container" id="greeting-name">JEns</span>
+                </div>
             </div>
         </div>
     </div>
