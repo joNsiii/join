@@ -100,28 +100,33 @@ function stop(event) {
 }
 
 
-function setClassOnCommand(id, command, className) {    // adds or removes an element's class on command
-    let toggling = command == 'toggle';    // true or false
-    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);    // true: toggle | false: add or remove
+function setClassOnCommand(id, command, className) {
+    let toggling = command == 'toggle';
+    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);
 }
 
 
-function toggleClass(id, className) {    // toggles an element's class
+function toggleClass(id, className) {
     document.getElementById(id).classList.toggle(className);
 }
 
 
-function addOrRemoveClass(id, command, className) {    // adds or removes an element's class
-    let adding = command == 'add';    // true or false
-    (adding) ? addClass(id, className) : removeClass(id, className);    // true: add | false: remove
+function addOrRemoveClass(id, command, className) {
+    let adding = command == 'add';
+    (adding) ? addClass(id, className) : removeClass(id, className);
 }
 
 
-function addClass(id, className) {    // adds an element's class
+function addClass(id, className) {
     document.getElementById(id).classList.add(className);
 }
 
 
-function removeClass(id, className) {    // removes an element's class
+function removeClass(id, className) {
     document.getElementById(id).classList.remove(className);
 }
+
+
+// function setClassOnCommand(id, command, className) {
+//     command(id, className);
+// }
