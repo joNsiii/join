@@ -299,7 +299,7 @@ header span {
     }
 
     .header-mobile-img {
-        display: flex;
+        display: flex !important;
     }
 
     .header-text {
