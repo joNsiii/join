@@ -55,7 +55,7 @@ function assignedTo() {
   assignElement.innerHTML = "";
 
   let user = currentUserData;
-  user.name = user.name + ' (You)';
+  user.name = user.name;
   contactsUser.push(user);
   for (let i = 0; i < user.contacts.length; i++) {
     let contact = user.contacts[i];
