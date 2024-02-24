@@ -64,12 +64,19 @@ function assignedTo() {
 
   for (let i = 0; i < contactsUser.length; i++) {
     const bgc = `bgc-${contactsUser[i]['bgc-name']}`;
-    // const letterGroup = getInitialLetterGroup(contactsUser, i);
     const contact = contactsUser[i].name;
+    let yourName = (contact.includes(' (You')) ? true : false;
+    let names = contact.split((' '));
+    let letterGroup;
+    if (!yourName) {
+      letterGroup = names[0][0] + names[names.length-1][0];
+    } else {
+      letterGroup = names[0][0] + names[names.length-2][0];
+    }
     assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div class="subuser-align">
-            <div class="sub-profile-img ${bgc}">JS</div>
+            <div class="sub-profile-img ${bgc}">${letterGroup}</div>
             <div>${contact}</div>
           </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
@@ -101,9 +108,9 @@ function toggleCheckbox(i) {
     background.classList.add("sub-background");
     let sub_users_child = `Temp-${i}`;
     sub_users.push({
-      userId: sub_users_child,
-      name: subuserTemp,
-      userBackgroundColor: "green",
+      userId: i,
+      name: subuserTemp.name,
+      userBackgroundColor: subuserTemp['bgc-name'],
     });
   } else {
     checkBox.src = "./img/checkmark-unchecked.png";
@@ -116,9 +123,19 @@ function toggleCheckbox(i) {
   }
 
   for (let j = 0; j < sub_users.length; j++) {
-    let subProfileName = subuserTemp.slice(0, 2);
+    let subBgc = 'bgc-' + sub_users[j].userBackgroundColor;
+    let subProfileName = sub_users[j].name;
+    let yourName = (subProfileName.includes(' (You')) ? true : false;
+    let names = subProfileName.split((' '));
+    let letterGroup;
+    if (!yourName) {
+      letterGroup = names[0][0] + names[names.length-1][0];
+    } else {
+      letterGroup = names[0][0] + names[names.length-2][0];
+    }
+    // let subProfileName = subuserTemp.slice(0, 2);
     subProfile.innerHTML += `
-        <div class="sub-profile-img sub-p" onclick="removeSubPB(${i})">${subProfileName}</div>
+        <div class="sub-profile-img sub-p ${subBgc}" onclick="removeSubPB(${i})">${letterGroup}</div>
       `;
   }
 }
