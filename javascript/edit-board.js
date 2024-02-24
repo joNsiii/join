@@ -129,7 +129,7 @@ function addNewSubtaskForEditing() {
 function cancelSubtaskEditSafety() {
     document.addEventListener("click", function (event) {
         let subtaskForm = document.getElementById("subtask-form");
-        let subtaskInput = document.getElementById("subtask")
+        let subtaskInput = document.getElementById("subtask");
         if (event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
             cancelSubtaskEdit();
         }
@@ -190,7 +190,7 @@ function updateUIForBlur(subtaskId, taskId, currentSubtaskValue) {
     `;
 }
 
-// main function 
+// main function
 function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
     const task = findTask(taskId);
     if (!task) {
@@ -207,7 +207,7 @@ function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
     } else {
         const subtaskContentElement = document.getElementById(`sub-content-${subtaskId}`);
         let currentSubtaskValue = subtaskContentElement.innerText.trim();
-        subtask.subtasksText = currentSubtaskValue; 
+        subtask.subtasksText = currentSubtaskValue;
         updateUIForBlur(subtaskId, taskId, currentSubtaskValue);
     }
 }
@@ -239,14 +239,13 @@ function findTaskAndUpdate(taskId) {
         return;
     }
     const taskToUpdate = boardTasks[taskIndex];
-
+    const subtaskId = taskToUpdate.find((subtask) => subtask.subtasks.find((s)=> s.subtaskId));
+    console.log("die subtask id ist:", subtaskId);
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    // TODO SUBTASKS 
+    // TODO SUBTASKS
     // TODO ASSIGNED TO
     boardTasks[taskIndex] = taskToUpdate;
     //currently not saving only console login all edit changes
     console.log("Änderungen gespeichert", boardTasks);
 }
-
-
