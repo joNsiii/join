@@ -292,6 +292,7 @@
     border-radius: 10px;
     gap: 4px;
     cursor: pointer;
+    margin-top: 16px;
 }
 
 .createBtn img {
