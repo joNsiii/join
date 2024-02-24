@@ -257,7 +257,7 @@ async function findTaskAndUpdate(taskId) {
     boardTasks[taskIndex] = taskToUpdate;
 
     await setItem("boardTasks", JSON.stringify(boardTasks));
-
+    closeDialog("dialog");
 }
 
 
