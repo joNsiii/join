@@ -11,7 +11,9 @@
     <script src="./javascript/common.js"></script>
     <script src="./javascript/contacts.js"></script>
     <script src="./javascript/contact-viewer.js"></script>
-    <script src="./javascript/contacts-form.js"></script>
+    <script src="./javascript/add-contact-form.js"></script>
+    <script src="./javascript/edit-contact-form.js"></script>
+    <script src="./javascript/delete-contact-form.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="./styles/contacts.css">
@@ -21,7 +23,6 @@
     <link rel="stylesheet" href="./styles/add-contact-form.css">
     <link rel="stylesheet" href="./media/contacts-media.css">
     <link rel="stylesheet" href="./media/contact-form-media.css">
-
     <style id="save-contact-animation"></style>
     <style id="backlog-contact-animation"></style>
     <style id="contact-user-animation"></style>
@@ -39,7 +40,34 @@
 
     <dialog id="dialog-delete-contact" class="dialog-delete-contact" onclick="closeDialog('dialog-delete-contact')">
         <section id="deleting-confirmation" class="deleting-confirmation" onclick="stop(event)">
-            <!-- rendering dialog-delete-contact's content -->
+            <p id="deleting-confirmation-message" class="deleting-confirmation-message">
+                <!-- rendering deleting-confirmation-message -->
+            </p>
+            <form id="delete-contact-form" class="d-none">
+                <fieldset class="delete-contact-fieldset">
+                    <div class="delete-contact-input-box">
+                        <div id="delete-user-mail" class="delete-contact-input-group">
+                            <input id="deleting-account-mail" class="contact-input" type="email" placeholder="Email"
+                                required>
+                            <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                        </div>
+                        <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.
+                        </div>
+                    </div>
+                    <div class="delete-contact-input-box">
+                        <div id="delete-user-password" class="delete-contact-input-group">
+                            <input id="deleting-account-password" class="contact-input" type="password"
+                                placeholder="Password" required>
+                            <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                        </div>
+                        <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your
+                            password.</div>
+                    </div>
+                </fieldset>
+            </form>
+            <div id="contact-form-button-bar" class="contact-form-button-bar">
+                <!-- rendering contact-form-button-bar -->
+            </div>
         </section>
     </dialog>
 

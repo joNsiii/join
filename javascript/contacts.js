@@ -16,6 +16,7 @@ async function initContacts() {
     collectInitials(userContacts);
     setContactBgc(userContacts);
     renderContacts();
+    saveUserContacts();
 }
 
 
@@ -43,27 +44,27 @@ async function getUserContactList() {
 }
 
 
+// jsdoc
 function pushUserContact(userContactList) {
     let userContact = {
-        'contact-id': -1,    // notwendig?
         'name': currentUserData.name + ' (You)',
         'mail': currentUserData.email,
         'phone': currentUserData.phone
-    };    // Objekt auslagern?
+    };
     userContactList.push(userContact);
 }
 
 
+// jsdoc
 function pushUserSubcontacts(userContactList) {
     let subcontacts = currentUserData.contacts;
     for (let i = 0; i < subcontacts.length; i++) {
         let subcontact = subcontacts[i];
         let userSubcontact = {
-            'contact-id': i,    // notwenidg?
             'name': subcontact.name,
             'mail': subcontact.mail,
             'phone': subcontact.phone
-        }    // Object auslagern?
+        }
         userContactList.push(userSubcontact);
     }
 }
@@ -88,16 +89,16 @@ function collectInitials(contacts) {
 
 
 // jsdoc
-function setUserContactsObjectValue(i, key, value) {
-    userContacts[i][key] = value;
-}
-
-
-// jsdoc
 function getInitialLetter(contacts, i) {
     let name = getJsonObjectDeepValue(contacts, i, 'name');
     let initial = getJsonObjectValue(name, 0);
     return initial.toLowerCase();
+}
+
+
+// jsdoc
+function setUserContactsObjectValue(i, key, value) {
+    userContacts[i][key] = value;
 }
 
 
@@ -211,6 +212,21 @@ function getInitialLetterGroup(variable, i) {
 
 
 // jsdoc
+function getLastInitialLetter(variable, i) {
+    let name = getJsonObjectDeepValue(variable, i, 'name');
+    name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
+    let space = name.indexOf(' ');
+    let last = '';
+    while (space > -1) {
+        last = name[space];
+        space = name.indexOf(' ');
+        name = (space < 0) ? name : name.replace(' ', '');
+    }
+    return last.toLowerCase();
+}
+
+
+// jsdoc
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
@@ -220,4 +236,46 @@ function renderNameMailGroup(j) {
             <div class="contact-email">${mail}</div>
         </div>
     `;
+}
+
+
+// jsdoc
+async function saveUserContacts() {
+    let user = users.find(u => u.userId == userId);
+    pushUserContacts(user);
+    setUserBgc(user);
+    await setItem('users', users);
+}
+
+
+// jsdoc
+function pushUserContacts(user) {
+    user.contacts = [];
+    for (let i = 0; i < userContacts.length; i++) {
+        let userContact = userContacts[i];
+        if (userContact.mail != user.email) {
+            let contact = getUserContactData(userContact);
+            user.contacts.push(contact);
+        }
+    }
+}
+
+
+// jsdoc
+function getUserContactData(userContact) {
+    return {
+        'name': userContact['name'],
+        'mail': userContact['mail'],
+        'phone': userContact['phone'],
+        'bgc-name': userContact['bgc-name'],
+        'bgc-code': userContact['bgc-code']
+    };
+}
+
+
+// jsdoc
+function setUserBgc(user) {
+    let contact = userContacts.find(c => c.mail == user.email);
+    user['bgc-name'] = contact['bgc-name'];
+    user['bgc-code'] = contact['bgc-code'];
 }

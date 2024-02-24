@@ -9,6 +9,7 @@
     <script src="javascript/register.js"></script>
     <script src="javascript/summary.js"></script>
     <script src="./javascript/global.js"></script>
+    <script src="javascript/board.js"></script>
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/summary.css">
@@ -34,7 +35,7 @@
                             <img id="edit-img" src="./img/edit-bg-blue.png" alt="edit">
                         </div>
                         <div class="summary-main-counter-container">
-                            <span class="summary-main-counter">1</span>
+                            <span id="todo-counter" class="summary-main-counter">1</span>
                             <span class="summary-main-text">To-do</span>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
                             <img id="success-img" src="./img/success-bg-blue.png" alt="done">
                         </div>
                         <div class="summary-main-counter-container">
-                            <span class="summary-main-counter">1</span>
+                            <span id="done-counter" class="summary-main-counter"></span>
                             <span class="summary-main-text">Done</span>
                         </div>
                     </div>
@@ -56,28 +57,28 @@
                             <img src="./img/urgent-red.png" alt="urgent">
                         </div>
                         <div class="summary-main-counter-container">
-                            <span class="summary-main-counter">1</span>
+                            <span id="urgent-counter" class="summary-main-counter"></span>
                             <span class="summary-main-text">Urgent</span>
                         </div>
                     </div>
                     <div class="summary-urgent-border"></div>
                     <div class="summary-urgent-right">
-                        <span class="summary-urgent-right-date">October 16, 2022</span>
+                        <span id="urgent-date" class="summary-urgent-right-date"></span>
                         <span class="summary-urgent-right-text">Upcoming Deadline</span>
                     </div>
                 </div>
             </div>
                 <div class="summary-main-tasks">
                     <div class="summary-main-counter-container-task">
-                        <span class="summary-main-counter">5</span>
+                        <span id="task-in-boards" class="summary-main-counter"></span>
                         <span class="summary-main-name">Tasks in Board</span>
                     </div>
                     <div class="summary-main-counter-container-task">
-                        <span class="summary-main-counter">2</span>
+                        <span id="task-in-progress" class="summary-main-counter"></span>
                         <span class="summary-main-name">Tasks in Progress</span>
                     </div>
                     <div class="summary-main-counter-container-task">
-                        <span class="summary-main-counter">2</span>
+                        <span id="task-in-await-feedback" class="summary-main-counter"></span>
                         <span class="summary-main-name">Awaiting Feedback</span>
                     </div>
                 </div>

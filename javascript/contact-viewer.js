@@ -14,10 +14,10 @@ function showContact(j) {
 // jsdoc
 function highlightCurrentContact(j) {
     if (currentContact !== undefined) {
-        setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
+        setClass(currentContact, removeClass, 'contacts-contact-active');
     }
     currentContact = `contacts-contact-${j}`;
-    setClassOnCommand(currentContact, 'add', 'contacts-contact-active');
+    setClass(currentContact, addClass, 'contacts-contact-active');
 }
 
 
@@ -125,7 +125,7 @@ function animateContactUserIn(value) {
     return `
         .contact-user-animation {
             left: ${value};
-            transition: 125ms left ease-in-out;
+            transition: 100ms left ease-in-out;
         }
     `;
 }
@@ -138,4 +138,12 @@ function animateContactUserOut(value) {
             left: ${value};
         }
     `;
+}
+
+
+// jsdoc
+function closeContactViewerMobile() {
+    setClass(currentContact, removeClass, 'contacts-contact-active');
+    showUserInfo(false);
+    closeDialog('dialog-contact-viewer');
 }

@@ -33,17 +33,10 @@ function renderEditFormInfo(j, info) {
 }
 
 
+// jsdoc
 async function deleteUserContact(j) {
-    let currentUser = users.find(u => u.userId == userId);
-    let contactId = userContacts[j]['contact-id'];
-    currentUser.contacts.splice(contactId, 1);
-    currentContact = undefined;
-    await setItem('users', users);
-
-    closeDialog('dialog-delete-contact');
-    closeDialog('dialog-edit-contact');
-    closeDialog('dialog-contact-settings');
-    showUserInfo(false);
+    await removeUserContact(j);
+    resetDialogs();
     initContacts();
     showBacklogContact('Contact successfully deleted');
     setTimeout(async () => {
@@ -52,20 +45,27 @@ async function deleteUserContact(j) {
 }
 
 
-function openContactSettingsMobile(j) {
-    openDialog('dialog-contact-settings');
-    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${j})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${j})`);
+// jsdoc
+async function removeUserContact(j) {
+    let user = users.find(u => u.userId == userId);
+    let contact = user.contacts.find(c => c.mail == userContacts[j].mail);
+    let contactId = user.contacts.indexOf(contact);
+    user.contacts.splice(contactId, 1);
+    currentContact = undefined;
+    await setItem('users', users);
 }
 
 
-function closeContactViewerMobile() {
-    setClassOnCommand(currentContact, 'remove', 'contacts-contact-active');
+// jsdoc
+function resetDialogs() {
+    closeDialog('dialog-delete-contact');
+    closeDialog('dialog-edit-contact');
+    closeDialog('dialog-contact-settings');
     showUserInfo(false);
-    closeDialog('dialog-contact-viewer');
 }
 
 
+// jsdoc
 async function updateContactList() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -75,20 +75,28 @@ async function updateContactList() {
 }
 
 
+// jsdoc
 async function verifyContactInput(mail) {
-    let userData = await users.find(u => u.userId == userId);
-    let checkedUser = await users.find(u => u.contacts.find(c => c.mail === mail));
+    let user = users.find(u => u.userId == userId);
+    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
     if (checkedUser) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
-        let user = getNewContact();
-        userData['contacts'].push(user);
-        await setItem('users', users);
+        await pushNewUserContact(user);
         showUpdatedContactList(mail);
     }
 }
 
 
+// jsdoc
+async function pushNewUserContact(user) {
+    let contact = getNewContact();
+    user.contacts.push(contact);
+    await setItem('users', users);
+}
+
+
+// jsdoc
 function getNewContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -98,9 +106,9 @@ function getNewContact() {
 }
 
 
+// jsdoc
 function createNewContact(name, mail, phone) {
     return {
-        'contact-id': userContacts.length - 1,
         'name': name,
         'mail': mail,
         'phone': phone
@@ -108,19 +116,33 @@ function createNewContact(name, mail, phone) {
 }
 
 
+// jsdoc
 async function showUpdatedContactList(mail) {
     closeSavedContact('add');
     await initContacts();
-    let createdIndex = userContacts.find(c => c.mail == mail);
-    let renderingIndex = userContacts.indexOf(createdIndex);
-    showContact(renderingIndex);
-    location.href = `#contacts-contact-${renderingIndex}`;
+    showAddedContact(mail);
     setTimeout(() => {
         showBacklogContact('Contact successfully created');
     }, 125);
 }
 
 
+// jsdoc
+function showAddedContact(mail) {
+    let contactId = getContactId(mail);
+    showContact(contactId);
+    location.href = `#contacts-contact-${contactId}`;
+}
+
+
+// jsdoc
+function getContactId(mail) {
+    let contact = userContacts.find(c => c.mail == mail);
+    return userContacts.indexOf(contact);
+}
+
+
+// jsdoc
 async function updateEditedContactList(j) {
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
@@ -130,48 +152,57 @@ async function updateEditedContactList(j) {
 }
 
 
+// jsdoc
 async function verifyEditedContact(j, mail) {
-    let userData = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail)) && mail !== userContacts[j].mail;
-    if (checkedUser) {
+    let thisMail = mail !== userContacts[j].mail;
+    let othersMail = users.find(u => u.contacts.find(c => c.mail === mail))
+    if (thisMail && othersMail) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
-        await updateUserData(j, userData);
-        closeSavedContact('edit');
-        await initContacts();
-        showEditedContact(mail);
+        showEditedContactList(j, mail);
     }
 }
 
 
-async function updateUserData(j, userData) {
-    let contactId = userContacts[j]['contact-id'];
-    let name = getInputValue('edit-contact-name');
-    let mail = getInputValue('edit-contact-mail');
-    let phone = getInputValue('edit-contact-phone');
-    userData['contacts'][contactId]['name'] = name;
-    userData['contacts'][contactId]['mail'] = mail;
-    userData['contacts'][contactId]['phone'] = phone;
-    await setItem('users', users);
+// jsdoc
+async function showEditedContactList(j, mail) {
+    await updateUserData(j);
+    closeSavedContact('edit');
+    await initContacts();
+    showEditedContact(mail);
 }
 
 
+// jsdoc
+async function updateUserData(j) {
+    editContactInfo(j, 'name');
+    editContactInfo(j, 'mail');
+    editContactInfo(j, 'phone');
+    await saveUserContacts();
+}
+
+
+// jsdoc
+function editContactInfo(j, info) {
+    let value = getInputValue(`edit-contact-${info}`);
+    userContacts[j][info] = value;
+}
+
+
+// jsdoc
 function showEditedContact(mail) {
-    let currentUser = userContacts.find(c => c['mail'] == mail);
-    let userIndex = userContacts.indexOf(currentUser);
-    highlightCurrentContact(userIndex);
-    renderContactViewer(userIndex);
-    linkUserInfo(userIndex);
-    setElementAttribute('edit-contact-button', 'onclick', `updateEditForm(${userIndex})`);
-    setElementAttribute('edit-contact-button-mobile', 'onclick', `updateEditForm(${userIndex})`);
-    setElementAttribute('delete-contact-button', 'onclick', `openDialogDeleteContact(${userIndex})`);
-    setElementAttribute('delete-contact-button-mobile', 'onclick', `openDialogDeleteContact(${userIndex})`);
+    let contactId = getContactId(mail);
+    highlightCurrentContact(contactId);
+    renderContactViewer(contactId);
+    linkUserInfo(contactId);
+    setContactButtonOnclick(contactId);
     setTimeout(() => {
         showBacklogContact('Contact successfully saved');
     }, 125);
 }
 
 
+// jsdoc
 function closeEditContact() {
     setClassOnCommand('section-edit-contact', 'remove', 'dialog-contacts-position');
     setTimeout(() => {
@@ -180,12 +211,14 @@ function closeEditContact() {
 }
 
 
+// jsdoc
 function openAddContact() {
     openDialog('dialog-add-contact');
     setClassOnCommand('section-add-contact', 'add', 'dialog-contacts-position');
 }
 
 
+// jsdoc
 function closeAddContact() {
     setClassOnCommand('section-add-contact', 'remove', 'dialog-contacts-position');
     setTimeout(() => {
@@ -195,6 +228,7 @@ function closeAddContact() {
 }
 
 
+// jsdoc
 function closeSavedContact(id) {
     let style = getElement('save-contact-animation');
     let cssCode = animateSavedContact();
@@ -208,6 +242,7 @@ function closeSavedContact(id) {
 }
 
 
+// jsdoc
 function animateSavedContact() {
     return `
         .dialog-contacts-position {
@@ -218,12 +253,14 @@ function animateSavedContact() {
 }
 
 
+// jsdoc
 function openContactSettings() {
     openDialog('dialog-contact-settings');
     setClassOnCommand('section-contact-settings', 'add', 'section-contact-settings-position');
 }
 
 
+// jsdoc
 function closeContactSettings() {
     setClassOnCommand('section-contact-settings', 'remove', 'section-contact-settings-position');
     setTimeout(() => {
@@ -232,6 +269,7 @@ function closeContactSettings() {
 }
 
 
+// jsdoc
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];
     for (let i = 0; i < ids.length; i++) {
@@ -242,6 +280,7 @@ function resetAddContactInput() {
 }
 
 
+// jsdoc
 function getLastInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
     name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
@@ -256,6 +295,7 @@ function getLastInitialLetter(variable, i) {
 }
 
 
+// jsdoc
 function showBacklogContact(message) {
     let bodyWidth = document.body.offsetWidth;
     if (bodyWidth > 1400) {
@@ -268,12 +308,14 @@ function showBacklogContact(message) {
 }
 
 
+// jsdoc
 function setBacklogContactMessage(id, message) {
     let backlog = getElement(id);
     backlog.innerHTML = message;
 }
 
 
+// jsdoc
 function setBacklogContactPosition(position, valueIn, valueOut) {
     let style = getElement('backlog-contact-animation');
     let cssCode = animateBacklogContact(position, valueIn);
@@ -285,6 +327,7 @@ function setBacklogContactPosition(position, valueIn, valueOut) {
 }
 
 
+// jsdoc
 function animateBacklogContact(position, value) {
     return `
         .backlog-contact-animation {
@@ -294,6 +337,7 @@ function animateBacklogContact(position, value) {
 }
 
 
+// jsdoc
 function showBacklogContactForm(id, message) {
     setBacklogContactMessage(`backlog-${id}-contact`, message);
     setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-in');
@@ -304,174 +348,4 @@ function showBacklogContactForm(id, message) {
             setClassOnCommand(`backlog-${id}-contact`, 'toggle', 'backlog-contact-form-out');
         }, 125);
     }, 800);
-}
-
-
-function openDialogDeleteContact(j) {
-    openDialog('dialog-delete-contact');
-    renderDeletingConfirmationText(j);
-}
-
-
-function renderDeletingConfirmationText(j) {
-    let name = getJsonObjectDeepValue(userContacts, j, 'name');
-    let isUser = (name.includes(' (You)'));
-    if (!isUser) {
-        let dialog = getElement('deleting-confirmation');
-        dialog.innerHTML = `
-            ${generateDeletingContactParagraph(j)}
-            ${generateDeletingContactButtonBar(j)}
-        `;
-    } else {
-        let dialog = getElement('deleting-confirmation');
-        dialog.innerHTML = `
-            ${generateDeletingUserParagraph(j)}
-            ${generateDeletingUserButtonBar(j)}
-        `;
-    }
-}
-
-
-function generateDeletingContactParagraph(j) {
-    let name = getJsonObjectDeepValue(userContacts, j, 'name');
-    return `
-        <p class="deleting-confirmation-message">
-            Are you sure to remove<br>
-            <b id="deleting-contact-name" class="deleting-contact-name">${name}</b><br>
-            from your contacts?
-        </p>
-    `;
-}
-
-
-function generateDeletingContactButtonBar(j) {
-    return `
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="deleteUserContact(${j})">
-                <div class="contact-form-button-dark-text">Delete</div>
-            </button>
-        </div>
-    `;
-}
-
-
-function generateDeletingUserParagraph(j) {
-    // let name = getJsonObjectDeepValue(contactSample, j, 'name');
-    return `
-        <p class="deleting-confirmation-message">
-            Are you sure to delete<br>
-            <b id="deleting-contact-name" class="deleting-contact-name c-lightblue">your account</b><br>
-            irreversibly?
-        </p>
-    `;
-}
-
-
-function generateDeletingUserButtonBar(j) {
-    return `
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="generateDeletingUserForm(${j})">
-                <div class="contact-form-button-dark-text">Continue</div>
-            </button>
-        </div>
-    `;
-}
-
-
-function generateDeletingUserForm(j) {
-    let dialog = getElement('deleting-confirmation');
-    dialog.innerHTML = `
-        <p class="deleting-confirmation-message">
-            Please enter <b class="c-lightblue">email</b> and <b class="c-lightblue">password</b> to resign your join account.
-        </p>
-        <form id="delete-contact-form" onsubmit="generateDeletingConfirmation(${j}); return false">
-            <fieldset class="delete-contact-fieldset">
-                <div class="delete-contact-input-box">
-                    <div id="delete-user-mail" class="delete-contact-input-group">
-                        <input id="deleting-account-mail" class="contact-input" type="email" placeholder="Email" required>
-                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
-                    </div>
-                    <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.</div>
-                </div>
-                <div class="delete-contact-input-box">
-                    <div id="delete-user-password" class="delete-contact-input-group">
-                        <input id="deleting-account-password" class="contact-input" type="password" placeholder="Password" required>
-                        <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
-                    </div>
-                    <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your password.</div>
-                </div>
-            </fieldset>
-        </form>
-        <div class="contact-form-button-bar">
-            <button class="contact-form-button" onclick="closeDialog('dialog-delete-contact')">
-                <div class="contact-form-button-text">Cancel</div>
-            </button>
-            <button id="dialog-delete-contact-button" class="contact-form-button-dark" form="delete-contact-form" type="submit">
-                <div class="contact-form-button-dark-text">Delete</div>
-            </button>
-        </div>
-    `;
-}
-
-
-async function generateDeletingConfirmation(j) {
-    let email = getInputValue('deleting-account-mail');
-    let password = getInputValue('deleting-account-password');
-
-    // compare input + userData + input border color!!!
-    if (email == currentUserData.email && password == currentUserData.password) {
-        let dialog = getElement('deleting-confirmation');
-
-        // Please improve text!!!
-        dialog.innerHTML = `
-        <p class="deleting-confirmation-message">
-            Your account with the name<br>
-            <b class="c-lightblue">name</b> is deleted.<br>
-            You will be logged out.
-        </p>
-    `;
-
-        setTimeout(() => {
-            window.location.href = `./login.html`;
-        }, 800);
-
-
-        // Please set + verify input + timeout + logout!!!
-
-        // logout();
-        let userData = users.find(u => u.userId == userId);
-        let userIndex = users.indexOf(userData);
-        console.log(userIndex);
-
-        users.splice(userIndex, 1);
-        await setItem('users', users);
-    } else {
-        setClassOnCommand('delete-user-mail', 'remove', 'delete-contact-input-wrong');
-        setClassOnCommand('deleting-hint-mail', 'add', 'd-none');
-        setClassOnCommand('delete-user-password', 'remove', 'delete-contact-input-wrong');
-        setClassOnCommand('deleting-hint-password', 'add', 'd-none');
-        if (email != currentUserData.email) {
-            setClassOnCommand('delete-user-mail', 'add', 'delete-contact-input-wrong');
-            setClassOnCommand('deleting-hint-mail', 'remove', 'd-none');
-        }
-        if (password != currentUserData.password) {
-            setClassOnCommand('delete-user-password', 'add', 'delete-contact-input-wrong');
-            setClassOnCommand('deleting-hint-password', 'remove', 'd-none');
-        }
-
-
-    }
-}
-
-
-async function deleteEmptyContacts(i) {
-    let currentUser = users.find(u => u.userId == userId);
-    currentUser.contacts.splice(i, 1);
-    await setItem('users', users);
 }
