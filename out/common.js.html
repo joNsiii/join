@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: common.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: common.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Adds a class to an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The adding class name.
+ */
+function addClass(id, className) {
+    document.getElementById(id).classList.add(className);
+}
+
+
+/**
+ * Closes a dialog by id.
+ * @param {String} id - The requested dialog's id.
+ */
+function closeDialog(id) {
+    document.getElementById(id).close();
+}
+
+
+/**
+ * Provides an element by id.
+ * @param {String} id - The requested element's id.
+ * @returns - The requested element.
+ */
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+
+/**
+ * Provides an element's attribute.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The requested attribute's name.
+ * @returns - The requested attribute's value.
+ */
+function getElementAttribute(id, attribute) {
+    return document.getElementById(id).getAttribute(attribute);
+}
+
+
+/**
+ * Provides an input's value.
+ * @param {String} id - The requested element's id.
+ * @returns - The requested input's value.
+ */
+function getInputValue(id) {
+    return document.getElementById(id).value;
+}
+
+
+/**
+ * Provides a json's deep object value.
+ * @param {json} variable - The providing json.
+ * @param {value} key - The requested object's key.
+ * @param {value} subkey - The requested object's subkey.
+ * @returns - The requested object's deep value.
+ */
+function getJsonObjectDeepValue(variable, key, subkey) {
+    return variable[key][subkey];
+}
+
+
+/**
+ * Provides a json's object value.
+ * @param {json} variable - The providing json.
+ * @param {value} key - The requested object's key.
+ * @returns - The requested object's value.
+ */
+function getJsonObjectValue(variable, key) {
+    return variable[key];
+}
+
+
+/**
+ * Opens a dialog by id.
+ * @param {String} id - The requested dialog's id.
+ */
+function openDialog(id) {
+    document.getElementById(id).show();
+}
+
+
+/**
+ * Removes a class from an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The removing class name.
+ */
+function removeClass(id, className) {
+    document.getElementById(id).classList.remove(className);
+}
+
+
+/**
+ * Removes an element's attribute.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The removing attribute's name.
+ */
+function removeElementAttribute(id, attribute) {
+    document.getElementById(id).removeAttribute(attribute);
+}
+
+
+/**
+ * Sets an element's class.
+ * @param {String} id - The requested element's id.
+ * @param {function} command - The running function.
+ * @param {String} className - The setting class name.
+ */
+function setClass(id, command, className) {
+    command(id, className);
+}
+
+
+/**
+ * Sets an element's attribute.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The setting attribute's name.
+ * @param {value} value - The setting attribute's value.
+ */
+function setElementAttribute(id, attribute, value) {
+    document.getElementById(id).setAttribute(attribute, value);
+}
+
+
+/**
+ * Prevents closing of a dialog by clicking on the dialog window.
+ * @param {event} event - The onclick event.
+ */
+function stop(event) {
+    event.stopPropagation();
+}
+
+
+/**
+ * Toggles a class of an element.
+ * @param {String} id - The requested element's id.
+ * @param {String} className - The toggling class name.
+ */
+function toggleClass(id, className) {
+    document.getElementById(id).classList.toggle(className);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getElementAttribute">getElementAttribute</a></li><li><a href="global.html#getInputValue">getInputValue</a></li><li><a href="global.html#getJsonObjectDeepValue">getJsonObjectDeepValue</a></li><li><a href="global.html#getJsonObjectValue">getJsonObjectValue</a></li><li><a href="global.html#openDialog">openDialog</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeElementAttribute">removeElementAttribute</a></li><li><a href="global.html#setClass">setClass</a></li><li><a href="global.html#setElementAttribute">setElementAttribute</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#toggleClass">toggleClass</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Feb 24 2024 15:54:27 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
