@@ -1,6 +1,6 @@
 /**
  * Closes a dialog by id.
- * @param {String} id - The dialog's id.
+ * @param {String} id - The requested dialog's id.
  */
 function closeDialog(id) {
     document.getElementById(id).close();
@@ -17,18 +17,29 @@ function getElement(id) {
 }
 
 
+/**
+ * Provides an element's attribute.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The requested attribute's name.
+ * @returns - The requested attribute's value.
+ */
 function getElementAttribute(id, attribute) {
     return document.getElementById(id).getAttribute(attribute);
 }
 
 
+/**
+ * Provides an input's value.
+ * @param {String} id - The requested element's id.
+ * @returns - The requested input's value.
+ */
 function getInputValue(id) {
     return document.getElementById(id).value;
 }
 
 
 /**
- * Provides a a json's deeper object value.
+ * Provides a json's deep object value.
  * @param {json} variable - The providing json.
  * @param {value} key - The requested object's key.
  * @param {value} subkey - The requested object's subkey.
@@ -40,7 +51,7 @@ function getJsonObjectDeepValue(variable, key, subkey) {
 
 
 /**
-//  * Provides a json's object value.
+ * Provides a json's object value.
  * @param {json} variable - The providing json.
  * @param {value} key - The requested object's key.
  * @returns - The requested object's value.
@@ -52,13 +63,18 @@ function getJsonObjectValue(variable, key) {
 
 /**
  * Opens a dialog by id.
- * @param {String} id - The dialog's id.
+ * @param {String} id - The requested dialog's id.
  */
 function openDialog(id) {
     document.getElementById(id).show();
 }
 
 
+/**
+ * Removes an element's attribute.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The removing attribute's name.
+ */
 function removeElementAttribute(id, attribute) {
     document.getElementById(id).removeAttribute(attribute);
 }
@@ -66,9 +82,9 @@ function removeElementAttribute(id, attribute) {
 
 /**
  * Sets an element's attribute.
- * @param {value} id - The element's id.
- * @param {String} attribute - The setting attribute.
- * @param {value} value - The setting value.
+ * @param {String} id - The requested element's id.
+ * @param {String} attribute - The setting attribute's name.
+ * @param {value} value - The setting attribute's value.
  */
 function setElementAttribute(id, attribute, value) {
     document.getElementById(id).setAttribute(attribute, value);
@@ -76,8 +92,8 @@ function setElementAttribute(id, attribute, value) {
 
 
 /**
- * Prevents closing of the dialog by clicking on the dialog window.
- * @param {event} event
+ * Prevents closing of a dialog by clicking on the dialog window.
+ * @param {event} event - The onclick event.
  */
 function stop(event) {
     event.stopPropagation();
