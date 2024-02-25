@@ -15,6 +15,7 @@ async function editTask(taskId) {
     displaySubtasksForEditing(task.taskId);
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
+    editAssignedToUser(task);
 }
 
 function setPrioritySelection(priority) {
@@ -255,3 +256,35 @@ async function findTaskAndUpdate(taskId) {
     closeDialog("dialog");
     renderEachTask();
 }
+
+
+
+// test
+
+function editAssignedToUser(task){
+    let selectField =  document.getElementById('assign-task');
+    getSelectedUsers(task, selectField)
+    
+}
+
+function getSelectedUsers(task, selectField) {
+    let selectedUsers = task.sub_users;
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i].name;
+        // user = generateHTMLUser();
+        selectField.innerHTML += /*html*/ `
+            <option>${user}</option>
+        `
+    }
+}
+
+function generateHTMLUser() {
+    return `<div class="subuser-selection" onclick="toggleCheckbox()" id="subuser-div-">
+    <div class="subuser-align">
+        <div class="sub-profile-img "></div>
+        <div></div>
+    </div>  
+        <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+        id="checkbox-remember-me-$"></div>  
+    </div>`
+} 
