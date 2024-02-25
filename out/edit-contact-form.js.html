@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: edit-contact-form.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: edit-contact-form.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Shows the edit contact form.
  * @param {number} j - The editing contact's id.
  */
@@ -64,7 +92,7 @@ function closeEditContact() {
 async function updateEditedContactList(j) {
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
-    if (name != '' && mail != '') {
+    if (name != '' &amp;&amp; mail != '') {
         verifyEditedContact(j, mail);
     }
 }
@@ -78,7 +106,7 @@ async function updateEditedContactList(j) {
 async function verifyEditedContact(j, mail) {
     let thisMail = mail !== userContacts[j].mail;
     let othersMail = users.find(u => u.contacts.find(c => c.mail === mail))
-    if (thisMail && othersMail) {
+    if (thisMail &amp;&amp; othersMail) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
         showEditedContactList(j, mail);
@@ -243,4 +271,26 @@ function showBacklogContactForm(id, message) {
             setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-out');
         }, 100);
     }, 800);
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#animateBacklogContact">animateBacklogContact</a></li><li><a href="global.html#animateContactUserIn">animateContactUserIn</a></li><li><a href="global.html#animateContactUserOut">animateContactUserOut</a></li><li><a href="global.html#animateSavedContact">animateSavedContact</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#closeContactSettings">closeContactSettings</a></li><li><a href="global.html#closeContactViewerMobile">closeContactViewerMobile</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeSavedContact">closeSavedContact</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#deleteUserContact">deleteUserContact</a></li><li><a href="global.html#editContactInfo">editContactInfo</a></li><li><a href="global.html#getContactId">getContactId</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getElementAttribute">getElementAttribute</a></li><li><a href="global.html#getInputValue">getInputValue</a></li><li><a href="global.html#getJsonObjectDeepValue">getJsonObjectDeepValue</a></li><li><a href="global.html#getJsonObjectValue">getJsonObjectValue</a></li><li><a href="global.html#getNewContact">getNewContact</a></li><li><a href="global.html#highlightCurrentContact">highlightCurrentContact</a></li><li><a href="global.html#linkUserInfo">linkUserInfo</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openContactSettings">openContactSettings</a></li><li><a href="global.html#openDialog">openDialog</a></li><li><a href="global.html#pushNewUserContact">pushNewUserContact</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeElementAttribute">removeElementAttribute</a></li><li><a href="global.html#removeUserContact">removeUserContact</a></li><li><a href="global.html#renderContactViewer">renderContactViewer</a></li><li><a href="global.html#renderContactViewerVersion">renderContactViewerVersion</a></li><li><a href="global.html#renderEditForm">renderEditForm</a></li><li><a href="global.html#renderEditFormInfo">renderEditFormInfo</a></li><li><a href="global.html#renderEditFormProfile">renderEditFormProfile</a></li><li><a href="global.html#renderUserBgc">renderUserBgc</a></li><li><a href="global.html#renderUserInfo">renderUserInfo</a></li><li><a href="global.html#renderUserProfile">renderUserProfile</a></li><li><a href="global.html#resetAddContactInput">resetAddContactInput</a></li><li><a href="global.html#resetDialogs">resetDialogs</a></li><li><a href="global.html#setBacklogContactMessage">setBacklogContactMessage</a></li><li><a href="global.html#setBacklogContactPosition">setBacklogContactPosition</a></li><li><a href="global.html#setClass">setClass</a></li><li><a href="global.html#setContactButtonOnclick">setContactButtonOnclick</a></li><li><a href="global.html#setElementAttribute">setElementAttribute</a></li><li><a href="global.html#setUserInfoLink">setUserInfoLink</a></li><li><a href="global.html#setUserInfoLinkVersion">setUserInfoLinkVersion</a></li><li><a href="global.html#showAddedContact">showAddedContact</a></li><li><a href="global.html#showBacklogContact">showBacklogContact</a></li><li><a href="global.html#showBacklogContactForm">showBacklogContactForm</a></li><li><a href="global.html#showContact">showContact</a></li><li><a href="global.html#showEditContactForm">showEditContactForm</a></li><li><a href="global.html#showEditedContact">showEditedContact</a></li><li><a href="global.html#showEditedContactList">showEditedContactList</a></li><li><a href="global.html#showUpdatedContactList">showUpdatedContactList</a></li><li><a href="global.html#showUserInfo">showUserInfo</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#toggleClass">toggleClass</a></li><li><a href="global.html#updateContactList">updateContactList</a></li><li><a href="global.html#updateContactViewer">updateContactViewer</a></li><li><a href="global.html#updateEditedContactList">updateEditedContactList</a></li><li><a href="global.html#updateUserData">updateUserData</a></li><li><a href="global.html#verifyContactInput">verifyContactInput</a></li><li><a href="global.html#verifyEditedContact">verifyEditedContact</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Feb 25 2024 22:44:03 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
