@@ -1,4 +1,4 @@
-currentTask = {}
+currentTask = [];
 // NOT FINISHED YET
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
@@ -79,22 +79,20 @@ function updateSubtaskText(taskId, subtaskId, newText) {
     subtask.subtasksText = newText;
 }
 
-function deleteSubtaskFromEditing(taskId, subtaskId) {
+async function deleteSubtaskFromEditing(taskId, subtaskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
     if (taskIndex > -1) {
         const subtaskIndex = boardTasks[taskIndex].subtasks.findIndex((st) => st.subtaskId === subtaskId);
         if (subtaskIndex > -1) {
             boardTasks[taskIndex].subtasks.splice(subtaskIndex, 1);
             displaySubtasksForEditing(taskId);
+           
         }
     }
 }
 
 function initializeSubtaskEditing() {
-    const subtaskInputField = document.getElementById("subtask");
     const addSubtaskIcon = document.getElementById("icon-hold");
-
-    // Anpassung des Layouts für die Eingabe
     addSubtaskIcon.innerHTML = `
             <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtaskEdit()">
             <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
@@ -129,8 +127,8 @@ function addNewSubtaskForEditing() {
             subtasksText: subtaskInputValue,
             isChecked: false,
         };
-        currentTask = subtask;
-
+        currentTask.push(subtask);
+        console.log(currentTask);
     }
 }
 function cancelSubtaskEditSafety() {
@@ -248,13 +246,12 @@ async function findTaskAndUpdate(taskId) {
     const taskToUpdate = boardTasks[taskIndex];
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    console.log(currentTask)
     if(Object.entries(currentTask).length !== 0) {
-        taskToUpdate.subtasks.push(currentTask);
+        taskToUpdate.subtasks.push(...currentTask);
     }
     // TODO ASSIGNED TO
     boardTasks[taskIndex] = taskToUpdate;
-
     await setItem("boardTasks", JSON.stringify(boardTasks));
     closeDialog("dialog");
+    renderEachTask();
 }
