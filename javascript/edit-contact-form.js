@@ -1,4 +1,7 @@
-// jsdoc
+/**
+ * Shows the edit contact form.
+ * @param {number} j - The editing contact's id.
+ */
 function showEditContactForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
@@ -8,7 +11,10 @@ function showEditContactForm(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the edit contact form's input values.
+ * @param {number} j - The editing contact's id.
+ */
 function renderEditForm(j) {
     renderEditFormProfile(j);
     renderEditFormInfo(j, 'name');
@@ -17,7 +23,10 @@ function renderEditForm(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the edit contact form's profile.
+ * @param {number} j - The editing contact's id.
+ */
 function renderEditFormProfile(j) {
     let userProfile = getElement('edit-contact-profile');
     let profile = getInitialLetterGroup(userContacts, j);
@@ -25,7 +34,11 @@ function renderEditFormProfile(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders an edit contact form's input value.
+ * @param {number} j - The editing contact's id.
+ * @param {String} info - The requested element's id.
+ */
 function renderEditFormInfo(j, info) {
     let input = getElement(`edit-contact-${info}`);
     let userInfo = getJsonObjectDeepValue(userContacts, j, info);
@@ -33,7 +46,9 @@ function renderEditFormInfo(j, info) {
 }
 
 
-// jsdoc
+/**
+ * Closes the edit contact form.
+ */
 function closeEditContact() {
     setClass('section-edit-contact', removeClass, 'dialog-contacts-position');
     setTimeout(() => {
@@ -42,7 +57,10 @@ function closeEditContact() {
 }
 
 
-// jsdoc
+/**
+ * Updates the contact list after editing.
+ * @param {number} j - The editing contact's id.
+ */
 async function updateEditedContactList(j) {
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
