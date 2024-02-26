@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <div class="add-task-content dialog-edit-task">
+    <div class="add-task-content dialog-edit-task wrapper-scroll">
+        <img src="./img/close.png" alt="close" class="closeOverlayIMG" onclick="closeDialog('dialog')">
         <form onsubmit="findTaskAndUpdate(document.getElementById('task-id-test').value); return false">
             <input type="hidden" id="task-id-test" value="">
             <div class="display-flex" id="taskForm">

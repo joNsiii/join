@@ -42,6 +42,7 @@
     position: absolute;
     top: 48px;
     right: 16px;
+    cursor: pointer;
 }
 
 .close-contact-viewer:hover {
@@ -98,7 +99,9 @@
 .contact-user-profile-mobile {
     box-sizing: border-box;
     width: 80px;
+    min-width: 80px;
     height: 80px;
+    min-height: 80px;
     font-family: 'Inter', sans-serif;
     font-size: 27px;
     font-weight: 400;
@@ -145,6 +148,7 @@
     position: absolute;
     right: 16px;
     bottom: 32px;
+    cursor: pointer;
     outline: none;
 }
 
@@ -210,6 +214,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
     outline: none;
 }
 

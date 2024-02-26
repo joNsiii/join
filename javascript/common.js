@@ -103,11 +103,11 @@ function removeElementAttribute(id, attribute) {
 /**
  * Sets an element's class.
  * @param {String} id - The requested element's id.
- * @param {function} command - The running function.
+ * @param {function} subfunction - The running function.
  * @param {String} className - The setting class name.
  */
-function setClass(id, command, className) {
-    command(id, className);
+function setClass(id, subfunction, className) {
+    subfunction(id, className);
 }
 
 

@@ -1,4 +1,4 @@
-currentTask = {}
+currentTask = [];
 // NOT FINISHED YET
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
@@ -16,6 +16,7 @@ async function editTask(taskId) {
     displaySubtasksForEditing(task.taskId);
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
+    editAssignedToUser(task);
 }
 
 function setPrioritySelection(priority) {
@@ -80,22 +81,20 @@ function updateSubtaskText(taskId, subtaskId, newText) {
     subtask.subtasksText = newText;
 }
 
-function deleteSubtaskFromEditing(taskId, subtaskId) {
+async function deleteSubtaskFromEditing(taskId, subtaskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
     if (taskIndex > -1) {
         const subtaskIndex = boardTasks[taskIndex].subtasks.findIndex((st) => st.subtaskId === subtaskId);
         if (subtaskIndex > -1) {
             boardTasks[taskIndex].subtasks.splice(subtaskIndex, 1);
             displaySubtasksForEditing(taskId);
+           
         }
     }
 }
 
 function initializeSubtaskEditing() {
-    const subtaskInputField = document.getElementById("subtask");
     const addSubtaskIcon = document.getElementById("icon-hold");
-
-    // Anpassung des Layouts für die Eingabe
     addSubtaskIcon.innerHTML = `
             <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtaskEdit()">
             <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
@@ -131,6 +130,7 @@ function addNewSubtaskForEditing() {
             isChecked: false,
         };
         currentTask.push(subtask);
+        console.log(currentTask);
     }
 }
 function cancelSubtaskEditSafety() {
@@ -248,13 +248,44 @@ async function findTaskAndUpdate(taskId) {
     const taskToUpdate = boardTasks[taskIndex];
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    console.log(currentTask)
     if(Object.entries(currentTask).length !== 0) {
-        taskToUpdate.subtasks.push(currentTask);
+        taskToUpdate.subtasks.push(...currentTask);
     }
     // TODO ASSIGNED TO
     boardTasks[taskIndex] = taskToUpdate;
-
     await setItem("boardTasks", JSON.stringify(boardTasks));
     closeDialog("dialog");
+    renderEachTask();
 }
+
+
+
+// test
+
+function editAssignedToUser(task){
+    let selectField =  document.getElementById('assign-task');
+    getSelectedUsers(task, selectField)
+    
+}
+
+function getSelectedUsers(task, selectField) {
+    let selectedUsers = task.sub_users;
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i].name;
+        // user = generateHTMLUser();
+        selectField.innerHTML += /*html*/ `
+            <option>${user}</option>
+        `
+    }
+}
+
+function generateHTMLUser() {
+    return `<div class="subuser-selection" onclick="toggleCheckbox()" id="subuser-div-">
+    <div class="subuser-align">
+        <div class="sub-profile-img "></div>
+        <div></div>
+    </div>  
+        <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+        id="checkbox-remember-me-$"></div>  
+    </div>`
+} 

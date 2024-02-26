@@ -11,8 +11,19 @@
     overflow-wrap: break-word;
 }
 
+
+
 .closeOverlayIMG {
     cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+}
+
+.closeOverlayIMG:hover {
+    background-color: #d1d1d1;
+    scale: 1.2;
+    border-radius: 50%;
 }
 
 .dbt-top-group {

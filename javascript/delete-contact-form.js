@@ -1,11 +1,17 @@
-// jsdoc
+/**
+ * Opens the delete contact form's dialog.
+ * @param {number} j - The deleting contact's id.
+ */
 function openDialogDeleteContact(j) {
     openDialog('dialog-delete-contact');
     renderDeletingConfirmation(j);
 }
 
 
-// jsdoc
+/**
+ * Renders the deleting confirmation.
+ * @param {number} j - The deleting contact's id.
+ */
 function renderDeletingConfirmation(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let isUser = (name.includes(' (You)'));
@@ -14,14 +20,19 @@ function renderDeletingConfirmation(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the delete contact form.
+ * @param {number} j - The deleting contact's id.
+ */
 function renderDeleteContactForm(j) {
     renderDeleteContactMessage(j, true);
     renderDeleteContactButtonBar(j, true);
 }
 
 
-// jsdoc
+/**
+ * Renders the deleting confirmation's message.
+ */
 function renderDeleteContactMessage(j, isContact) {
     let messageBox = getElement('deleting-confirmation-message');
     messageBox.innerHTML = `
@@ -30,13 +41,22 @@ function renderDeleteContactMessage(j, isContact) {
 }
 
 
-// jsdoc
+/**
+ * Generates the deleting confirmation's message.
+ * @param {number} j - The deleting contact's id.
+ * @param {Boolean} isContact - True or false.
+ * @returns - The appropriate function to generate the deleting confirmation's message.
+ */
 function generateDeletingMessage(j, isContact) {
     return (isContact) ? generateDeleteContactMessage(j) : generateDeleteUserMessage();
 }
 
 
-// jsdoc
+/**
+ * Generates the deleting confirmation's message of a contact.
+ * @param {number} j - The deleting contact's id.
+ * @returns - The inner html code for the element 'deleting-confirmation-message'.
+ */
 function generateDeleteContactMessage(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     return `
@@ -47,7 +67,11 @@ function generateDeleteContactMessage(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the delete contact form's button bar.
+ * @param {number} j - The deleting contact's id.
+ * @param {Boolean} isContact - True or false.
+ */
 function renderDeleteContactButtonBar(j, isContact) {
     let onclick = (isContact) ? `deleteUserContact(${j})` : `renderDeleteAccountConfirmation(${j})`;
     let name = (isContact) ? 'Delete' : 'Confirm';
@@ -59,7 +83,11 @@ function renderDeleteContactButtonBar(j, isContact) {
 }
 
 
-// jsdoc
+/**
+ * Generates the delete contact form's cancel button.
+ * @param {Boolean} isContact - True or false.
+ * @returns The inner html code for the element 'contact-form-button-bar'.
+ */
 function generateContactFormCancelButton(isContact) {
     let onclick = (isContact) ? `closeDialog('dialog-delete-contact')` : `closeDeleteContact()`;
     return `
@@ -70,7 +98,12 @@ function generateContactFormCancelButton(isContact) {
 }
 
 
-// jsdoc
+/**
+ * Generates the delete contact form's delete button.
+ * @param {String} onclick - The onclick attribute's value.
+ * @param {String} name - The button's name.
+ * @returns - The inner html code for the element 'contact-form-button-bar'.
+ */
 function generateContactFormDeleteButton(onclick, name) {
     return `
         <button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="${onclick}">
@@ -80,14 +113,20 @@ function generateContactFormDeleteButton(onclick, name) {
 }
 
 
-// jsdoc
+/**
+ * Renders the delete user form.
+ * @param {number} j - The deleting user's id.
+ */
 function renderDeleteUserForm(j) {
     renderDeleteContactMessage(j, false);
     renderDeleteContactButtonBar(j, false);
 }
 
 
-// jsdoc
+/**
+ * Generates the deleting confirmation's message of the user.
+ * @returns - The inner html code for the element 'deleting-confirmation-message'.
+ */
 function generateDeleteUserMessage() {
     return `
         Are you sure to delete<br>
@@ -97,7 +136,10 @@ function generateDeleteUserMessage() {
 }
 
 
-// jsdoc
+/**
+ * Renders the delete account confirmation.
+ * @param {number} j - The deleting user's id.
+ */
 function renderDeleteAccountConfirmation(j) {
     renderDeleteAccountMessage();
     setDeleteAccountForm(j);
@@ -105,7 +147,9 @@ function renderDeleteAccountConfirmation(j) {
 }
 
 
-// jsdsoc
+/**
+ * Renders the delete account message.
+ */
 function renderDeleteAccountMessage() {
     let messageBox = getElement('deleting-confirmation-message');
     messageBox.innerHTML = `
@@ -114,14 +158,20 @@ function renderDeleteAccountMessage() {
 }
 
 
-// jsdoc
+/**
+ * Sets the delete account form.
+ * @param {number} j - The deleting user's id.
+ */
 function setDeleteAccountForm(j) {
     setClass('delete-contact-form', removeClass, 'd-none');
     setElementAttribute('delete-contact-form', 'onsubmit', `verifyDeleteAccountForm(${j}); return false`);
 }
 
 
-// jsdoc
+/**
+ * Renders the delete user account button bar.
+ * @param {number} j - The deleting user's id.
+ */
 function renderDeleteAccountButtonBar(j) {
     let buttonBar = getElement('contact-form-button-bar');
     buttonBar.innerHTML = `
@@ -131,7 +181,10 @@ function renderDeleteAccountButtonBar(j) {
 }
 
 
-// jsdoc
+/**
+ * Generates the delete contact form's submit button.
+ * @returns - The inner html code for the element 'contact-form-button-bar'.
+ */
 function generateContactFormSubmitButton() {
     return `
         <button id="dialog-delete-contact-button" class="contact-form-button-dark" type="submit" form="delete-contact-form">
@@ -141,7 +194,10 @@ function generateContactFormSubmitButton() {
 }
 
 
-// jsdoc
+/**
+ * Verifies the delete contact form's input values.
+ * @param {number} j The deleting user's id.
+ */
 async function verifyDeleteAccountForm(j) {
     let email = getInputValue('deleting-account-mail');
     let password = getInputValue('deleting-account-password');
@@ -155,7 +211,9 @@ async function verifyDeleteAccountForm(j) {
 }
 
 
-// jsdoc
+/**
+ * Shows the delete account confirmation.
+ */
 function showDeleteAccountConfirmation() {
     let dialog = getElement('deleting-confirmation');
     dialog.innerHTML = `
@@ -170,7 +228,9 @@ function showDeleteAccountConfirmation() {
 }
 
 
-// jsdoc
+/**
+ * Redirects to the login page.
+ */
 function redirectToLoginPage() {
     setTimeout(() => {
         window.location.href = `./login.html`;
@@ -178,7 +238,9 @@ function redirectToLoginPage() {
 }
 
 
-// jsdoc
+/**
+ * Deletes the user's account.
+ */
 async function deleteUserAccount() {
     let user = users.find(u => u.userId == userId);
     let userIndex = users.indexOf(user);
@@ -187,7 +249,11 @@ async function deleteUserAccount() {
 }
 
 
-// jsdoc
+/**
+ * Shows up a wrong input value.
+ * @param {String} email - The entered email address.
+ * @param {String} password - The entered password.
+ */
 function showUpWrongUserInput(email, password) {
     highlightWrongUserInput('mail', false);
     highlightWrongUserInput('password', false);
@@ -200,7 +266,11 @@ function showUpWrongUserInput(email, password) {
 }
 
 
-// jsdoc
+/**
+ * Highlights a wrong input.
+ * @param {String} info - The input element's id.
+ * @param {String} logical - True or false.
+ */
 function highlightWrongUserInput(info, logical) {
     if (logical) {
         setClass(`delete-user-${info}`, addClass, 'delete-contact-input-wrong');
@@ -212,14 +282,18 @@ function highlightWrongUserInput(info, logical) {
 }
 
 
-// jsdoc
+/**
+ * Closes the delete contact form.
+ */
 function closeDeleteContact() {
     closeDialog('dialog-delete-contact');
     resetDeleteContactForm();
 }
 
 
-// jsdoc
+/**
+ * Resets the delete contact form.
+ */
 function resetDeleteContactForm() {
     resetDeleteContactInputClasses();
     resetDeleteContactInputValues();
@@ -228,7 +302,9 @@ function resetDeleteContactForm() {
 }
 
 
-// jsdoc
+/**
+ * Resets the delete contact form's input classes.
+ */
 function resetDeleteContactInputClasses() {
     setClass('delete-user-mail', removeClass, 'delete-contact-input-wrong');
     setClass('deleting-hint-mail', addClass, 'd-none');
@@ -237,7 +313,9 @@ function resetDeleteContactInputClasses() {
 }
 
 
-// jsdoc
+/**
+ * Resets the delete contact form's input values.
+ */
 function resetDeleteContactInputValues() {
     document.getElementById('deleting-account-mail').value = '';
     document.getElementById('deleting-account-password').value = '';
