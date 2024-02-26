@@ -13,6 +13,7 @@ async function editTask(taskId) {
     document.getElementById("description-task").value = task.description;
     document.getElementById("date-date-task").value = task.date;
     document.getElementById("category").value = task.heading;
+    
     displaySubtasksForEditing(task.taskId);
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
