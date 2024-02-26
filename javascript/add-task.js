@@ -25,7 +25,6 @@ async function loadTasks() {
 }
 
 async function scopeTasks() {
-
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById("date-date-task").value;
@@ -63,15 +62,15 @@ function assignedTo() {
   }
 
   for (let i = 0; i < contactsUser.length; i++) {
-    const bgc = `bgc-${contactsUser[i]['bgc-name']}`;
+    const bgc = `bgc-${contactsUser[i]["bgc-name"]}`;
     const contact = contactsUser[i].name;
-    let yourName = (contact.includes(' (You')) ? true : false;
-    let names = contact.split((' '));
+    let yourName = contact.includes(" (You") ? true : false;
+    let names = contact.split(" ");
     let letterGroup;
     if (!yourName) {
-      letterGroup = names[0][0] + names[names.length-1][0];
+      letterGroup = names[0][0] + names[names.length - 1][0];
     } else {
-      letterGroup = names[0][0] + names[names.length-2][0];
+      letterGroup = names[0][0] + names[names.length - 2][0];
     }
     assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
@@ -101,6 +100,7 @@ function toggleCheckbox(i) {
   let background = document.getElementById(`subuser-div-${i}`);
   let subProfile = document.getElementById("sub-profile");
   let subuserTemp = contactsUser[i];
+  let subUserIdTemp = contactsUser[i]["userId"];
   subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
@@ -110,7 +110,7 @@ function toggleCheckbox(i) {
     sub_users.push({
       userId: i,
       name: subuserTemp.name,
-      userBackgroundColor: subuserTemp['bgc-name'],
+      userBackgroundColor: subuserTemp["bgc-name"],
     });
   } else {
     checkBox.src = "./img/checkmark-unchecked.png";
@@ -123,26 +123,30 @@ function toggleCheckbox(i) {
   }
 
   for (let j = 0; j < sub_users.length; j++) {
-    let subBgc = 'bgc-' + sub_users[j].userBackgroundColor;
+    let subBgc = "bgc-" + sub_users[j].userBackgroundColor;
     let subProfileName = sub_users[j].name;
-    let yourName = (subProfileName.includes(' (You')) ? true : false;
-    let names = subProfileName.split((' '));
+    let contactId = sub_users[j]["userId"];
+    let yourName = subProfileName.includes(" (You") ? true : false;
+    let names = subProfileName.split(" ");
     let letterGroup;
     if (!yourName) {
-      letterGroup = names[0][0] + names[names.length-1][0];
+      letterGroup = names[0][0] + names[names.length - 1][0];
     } else {
-      letterGroup = names[0][0] + names[names.length-2][0];
+      letterGroup = names[0][0] + names[names.length - 2][0];
     }
     // let subProfileName = subuserTemp.slice(0, 2);
     subProfile.innerHTML += `
-        <div class="sub-profile-img sub-p ${subBgc}" onclick="removeSubPB(${i})">${letterGroup}</div>
+        <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
   }
 }
 
-function removeSubPB(i) {
-  sub_users.splice(i, 1);
-  renderSubProfiles(i);
+function removeSubPB(subuserId) {
+  let indexToRemove = sub_users.findIndex((user) => user.userId === subuserId);
+  if (indexToRemove !== -1) {
+    sub_users.splice(indexToRemove, 1);
+    renderSubProfiles(subuserId);
+  }
 }
 
 function renderSubProfiles(index) {
@@ -152,13 +156,9 @@ function renderSubProfiles(index) {
   background = document
     .getElementById(`subuser-div-${index}`)
     .classList.remove("sub-background");
-  subProfile.innerHTML = "";
-  for (let j = 0; j < sub_users.length; j++) {
-    let subProfileName = sub_users[j].name.slice(0, 2);
-    subProfile.innerHTML += `
-      <div class="sub-profile-img sub-p" onclick="removeSubPB(${j})">${subProfileName}</div>
-    `;
-  }
+
+  let deleteContact = document.getElementById(`contact-id-${index}`);
+  deleteContact.remove();
 }
 
 window.onclick = function (event) {
@@ -226,8 +226,6 @@ function cancelSubtaskSafety() {
     let subtaskForm = document.getElementById("subtask-form");
     let subtaskInput = document.getElementById("subtask");
 
-    // Check if the clicked element is not the subtask input field or its parent
-    // and if the input field is empty
     if (
       event.target !== subtaskInput &&
       !subtaskForm.contains(event.target) &&
@@ -366,14 +364,3 @@ function clear() {
   subtaskInput = [];
   priority = priorityDefault;
 }
-
-// {
-//   subtaskId: 1,
-//   subtasksText: subtaskInput,
-//   isChecked: false,
-// },
-// {
-//   subtaskId: 2,
-//   subtasksText: subtaskInput,
-//   isChecked: false,
-// },
