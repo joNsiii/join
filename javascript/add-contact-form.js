@@ -1,11 +1,15 @@
-// jsdoc
+/**
+ * Opens the add contact form.
+ */
 function openAddContact() {
     openDialog('dialog-add-contact');
     setClass('section-add-contact', addClass, 'dialog-contacts-position');
 }
 
 
-// jsdoc
+/**
+ * Closes the add contact form.
+ */
 function closeAddContact() {
     setClass('section-add-contact', removeClass, 'dialog-contacts-position');
     setTimeout(() => {
@@ -15,7 +19,9 @@ function closeAddContact() {
 }
 
 
-// jsdoc
+/**
+ * Resets the add contact form's input elements.
+ */
 function resetAddContactInput() {
     let ids = ['name', 'mail', 'phone'];
     for (let i = 0; i < ids.length; i++) {
@@ -26,7 +32,9 @@ function resetAddContactInput() {
 }
 
 
-// jsdoc
+/**
+ * Updates the contact list.
+ */
 async function updateContactList() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -36,7 +44,10 @@ async function updateContactList() {
 }
 
 
-// jsdoc
+/**
+ * Verifies the contact form's input values.
+ * @param {String} mail - The entered mail address.
+ */
 async function verifyContactInput(mail) {
     let user = users.find(u => u.userId == userId);
     let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
@@ -49,7 +60,10 @@ async function verifyContactInput(mail) {
 }
 
 
-// jsdoc
+/**
+ * Pushes a new user contact.
+ * @param {object} user - The user object which receives the new contact.
+ */
 async function pushNewUserContact(user) {
     let contact = getNewContact();
     user.contacts.push(contact);
@@ -57,7 +71,10 @@ async function pushNewUserContact(user) {
 }
 
 
-// jsdoc
+/**
+ * Provides the new contact's data.
+ * @returns - The new contact object.
+ */
 function getNewContact() {
     let name = getInputValue('add-contact-name');
     let mail = getInputValue('add-contact-mail');
@@ -67,7 +84,13 @@ function getNewContact() {
 }
 
 
-// jsdoc
+/**
+ * Creates a new contact object.
+ * @param {String} name - The new contact's name.
+ * @param {String} mail - The new contact's mail address.
+ * @param {String} phone - The new contact's phone number.
+ * @returns - A new contact object.
+ */
 function createNewContact(name, mail, phone) {
     return {
         'name': name,
@@ -77,7 +100,10 @@ function createNewContact(name, mail, phone) {
 }
 
 
-// jsdoc
+/**
+ * Shows the updated contact list.
+ * @param {String} mail - The entered mail address.
+ */
 async function showUpdatedContactList(mail) {
     closeSavedContact('add');
     await initContacts();
@@ -88,7 +114,10 @@ async function showUpdatedContactList(mail) {
 }
 
 
-// jsdoc
+/**
+ * Shows the added contact.
+ * @param {String} mail - The entered mail address.
+ */
 function showAddedContact(mail) {
     let contactId = getContactId(mail);
     showContact(contactId);
@@ -96,14 +125,21 @@ function showAddedContact(mail) {
 }
 
 
-// jsdoc
+/**
+ * Provides the added contact's rendering index.
+ * @param {String} mail - The entered mail address.
+ * @returns - The added contact's rendering index.
+ */
 function getContactId(mail) {
     let contact = userContacts.find(c => c.mail == mail);
     return userContacts.indexOf(contact);
 }
 
 
-// jsdoc
+/**
+ * Shows the contacts' backlog.
+ * @param {String} message - The displaying message.
+ */
 function showBacklogContact(message) {
     let bodyWidth = document.body.offsetWidth;
     if (bodyWidth > 1400) {
@@ -116,14 +152,23 @@ function showBacklogContact(message) {
 }
 
 
-// jsdoc
+/**
+ * Sets the message of contacts' backlog.
+ * @param {String} id - The requested element's id.
+ * @param {String} message - The displaying message.
+ */
 function setBacklogContactMessage(id, message) {
     let backlog = getElement(id);
     backlog.innerHTML = message;
 }
 
 
-// jsdoc
+/**
+ * Sets the contacts' backlog position.
+ * @param {String} position - The appropriate css property's name.
+ * @param {value} valueIn - The contacts' backlog coming in value.
+ * @param {value} valueOut - The contacts' backlog coming out value.
+ */
 function setBacklogContactPosition(position, valueIn, valueOut) {
     let style = getElement('backlog-contact-animation');
     let cssCode = animateBacklogContact(position, valueIn);
@@ -135,7 +180,12 @@ function setBacklogContactPosition(position, valueIn, valueOut) {
 }
 
 
-// jsdoc
+/**
+ * Animates the contacts' backlog.
+ * @param {String} position - The appropriate css property's name.
+ * @param {value} value - The contacts' backlog coming value.
+ * @returns The css code for the element 'backlog-contact-animation'.
+ */
 function animateBacklogContact(position, value) {
     return `
         .backlog-contact-animation {

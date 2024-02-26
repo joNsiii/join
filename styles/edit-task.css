@@ -1,19 +1,21 @@
-
 .add-task-content {
-    overflow: auto;
-    background-color: #FFFFFF;
+    height: 870px;
+    overflow-y: auto;
+    background-color: #ffffff;
     box-sizing: border-box;
     padding: 48px 40px;
-    width: 525px;
+    width: 530px;
     border-radius: 30px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     display: flex;
     flex-direction: column;
     gap: 24px;
     overflow-wrap: break-word;
+    position: relative;
 }
 
-.single-input-container, .desc-input-container{
+.single-input-container,
+.desc-input-container {
     display: flex;
     flex-direction: column;
 }
@@ -29,8 +31,6 @@
     font-size: 61px;
     font-weight: 700;
 }
-
-
 
 .left-side-inputs {
     display: flex;
@@ -52,7 +52,7 @@
 
 .input-single-line {
     display: flex;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
     gap: 10px;
@@ -62,9 +62,9 @@
 .input-single-line-subtask {
     display: flex;
     justify-content: space-between;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding: 12px 21px 12px 21px;
     width: auto;
 }
@@ -104,7 +104,7 @@
 }
 
 .input-single-line-subtask:focus-within {
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
     outline: none;
 }
 
@@ -123,24 +123,24 @@
 }
 
 .input-single-line::placeholder {
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-family: inter;
     font-size: 20px;
 }
 
 .sub-task-child::placeholder {
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-family: inter;
     font-size: 20px;
 }
 
 .input-single-line-subtask:focus {
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
     outline: none;
 }
 
 .input-single-line:focus {
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
     outline: none;
 }
 
@@ -154,21 +154,21 @@
 
 .desc-textarea {
     display: flex;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 18px 16px 18px 16px;
     gap: 10px;
-    font-size: 20px
+    font-size: 20px;
 }
 
 .desc-textarea::placeholder {
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-family: inter;
     font-size: 20px;
 }
 
 .desc-textarea:focus {
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
     outline: none;
 }
 
@@ -177,9 +177,9 @@
     height: 48px;
     appearance: none;
     background: center right 10px;
-    background-image: url('../img/arrow_drop_downaa.png');
+    background-image: url("../img/arrow_drop_downaa.png");
     background-repeat: no-repeat;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     background-color: white;
     border-radius: 10px;
     padding: 12px 16px 12px 16px;
@@ -187,14 +187,13 @@
 }
 
 .select-input:focus {
-    background-image: url('../img/arrow_drop_down-up.png');
+    background-image: url("../img/arrow_drop_down-up.png");
     outline: none;
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
 }
 
 .border-between {
-
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
 }
 
 .right-side-inputs {
@@ -244,7 +243,7 @@
     width: 136px;
     height: 56px;
     padding: 16px 10px 16px 10px;
-    background-color: #FFA800;
+    background-color: #ffa800;
     color: white;
     border-radius: 10px;
     gap: 8px;
@@ -257,9 +256,9 @@
     height: 48px;
     appearance: none;
     background: center right 10px;
-    background-image: url('./img/arrow_drop_downaa.png');
+    background-image: url("./img/arrow_drop_downaa.png");
     background-repeat: no-repeat;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     background-color: white;
     border-radius: 10px;
     padding: 12px 16px 12px 16px;
@@ -270,7 +269,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-
 }
 
 .bottom-button-container {
@@ -286,12 +284,13 @@
     font-weight: 700;
     width: 183px;
     padding: 16px;
-    background-color: #2A3647;
+    background-color: #2a3647;
     color: white;
     border: unset;
     border-radius: 10px;
     gap: 4px;
     cursor: pointer;
+    margin-top: 16px;
 }
 
 .createBtn img {
@@ -303,27 +302,26 @@
     display: flex;
     padding: 16px;
     gap: 4px;
-    border: 1px solid #2A3647;
+    border: 1px solid #2a3647;
     border-radius: 10px;
     width: 110px;
     height: 56px;
     font-size: 21px;
     font-weight: 400;
     cursor: pointer;
-
 }
 
 .createBtn:hover {
     cursor: pointer;
-    background-color: #29ABE2;
+    background-color: #29abe2;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     transition: all 150ms ease;
 }
 
 .clearBtn:hover {
     cursor: pointer;
-    color: #29ABE2;
-    border: 2px solid #29ABE2;
+    color: #29abe2;
+    border: 2px solid #29abe2;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     transition: all 150ms ease;
 }
@@ -343,19 +341,19 @@
 }
 
 .prioUrgent {
-    background-color: #FF3D00;
+    background-color: #ff3d00;
     font-weight: 700;
     color: white;
 }
 
 .prioMedium {
-    background-color: #FFA800;
+    background-color: #ffa800;
     font-weight: 700;
     color: white;
 }
 
 .prioLow {
-    background-color: #7AE229;
+    background-color: #7ae229;
     font-weight: 700;
     color: white;
 }
@@ -370,14 +368,14 @@
 }
 
 .subtask-preview:focus {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: block;
     outline: none;
-    border-bottom: 1px solid #005DFF;
+    border-bottom: 1px solid #005dff;
     margin: 0;
 }
 
-.subtask-container:hover  {
+.subtask-container:hover {
     background-color: #cdcdcd6e;
     border-radius: 10px;
     margin: 0;
@@ -433,7 +431,7 @@
     outline: none;
     background-color: white !important;
     border-radius: 0 !important;
-    border-bottom: solid 1px #29ABE2;
+    border-bottom: solid 1px #29abe2;
     cursor: text !important;
 }
 
@@ -465,4 +463,47 @@
 .span-container:hover .subtask-icon-container img {
     opacity: 100%;
     transition: all 250ms ease-in-out;
+}
+
+/*scrollbar */
+/* width */
+.wrapper-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.wrapper-scroll::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 10px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Handle */
+.wrapper-scroll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.wrapper-scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    cursor: pointer;
+}
+
+
+.closeOverlayIMG {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 8px;
+}
+
+.closeOverlayIMG:hover {
+    background-color: #d1d1d1;
+    scale: 1.2;
+    border-radius: 50%;
 }

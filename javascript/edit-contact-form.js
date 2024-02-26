@@ -1,4 +1,7 @@
-// jsdoc
+/**
+ * Shows the edit contact form.
+ * @param {number} j - The editing contact's id.
+ */
 function showEditContactForm(j) {
     openDialog('dialog-edit-contact');
     renderEditForm(j);
@@ -8,7 +11,10 @@ function showEditContactForm(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the edit contact form's input values.
+ * @param {number} j - The editing contact's id.
+ */
 function renderEditForm(j) {
     renderEditFormProfile(j);
     renderEditFormInfo(j, 'name');
@@ -17,7 +23,10 @@ function renderEditForm(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders the edit contact form's profile.
+ * @param {number} j - The editing contact's id.
+ */
 function renderEditFormProfile(j) {
     let userProfile = getElement('edit-contact-profile');
     let profile = getInitialLetterGroup(userContacts, j);
@@ -25,7 +34,11 @@ function renderEditFormProfile(j) {
 }
 
 
-// jsdoc
+/**
+ * Renders an edit contact form's input value.
+ * @param {number} j - The editing contact's id.
+ * @param {String} info - The requested element's id.
+ */
 function renderEditFormInfo(j, info) {
     let input = getElement(`edit-contact-${info}`);
     let userInfo = getJsonObjectDeepValue(userContacts, j, info);
@@ -33,7 +46,9 @@ function renderEditFormInfo(j, info) {
 }
 
 
-// jsdoc
+/**
+ * Closes the edit contact form.
+ */
 function closeEditContact() {
     setClass('section-edit-contact', removeClass, 'dialog-contacts-position');
     setTimeout(() => {
@@ -42,7 +57,10 @@ function closeEditContact() {
 }
 
 
-// jsdoc
+/**
+ * Updates the contact list after editing.
+ * @param {number} j - The editing contact's id.
+ */
 async function updateEditedContactList(j) {
     let name = getInputValue('edit-contact-name');
     let mail = getInputValue('edit-contact-mail');
@@ -52,7 +70,11 @@ async function updateEditedContactList(j) {
 }
 
 
-// jsdoc
+/**
+ * Verfies the edited contact input values.
+ * @param {number} j - The editing contact's id.
+ * @param {String} mail The edited mail address.
+ */
 async function verifyEditedContact(j, mail) {
     let thisMail = mail !== userContacts[j].mail;
     let othersMail = users.find(u => u.contacts.find(c => c.mail === mail))
@@ -64,7 +86,11 @@ async function verifyEditedContact(j, mail) {
 }
 
 
-// jsdoc
+/**
+ * Shows the edited contact list.
+ * @param {number} j - The editing contact's id.
+ * @param {String} mail - The edited mail address.
+ */
 async function showEditedContactList(j, mail) {
     await updateUserData(j);
     closeSavedContact('edit');
@@ -73,7 +99,10 @@ async function showEditedContactList(j, mail) {
 }
 
 
-// jsdoc
+/**
+ * Updates the edited contact's data.
+ * @param {number} j - The editing contact's id.
+ */
 async function updateUserData(j) {
     editContactInfo(j, 'name');
     editContactInfo(j, 'mail');
@@ -82,14 +111,21 @@ async function updateUserData(j) {
 }
 
 
-// jsdoc
+/**
+ * Edits the editing contact's information.
+ * @param {number} j - The editing contact's id.
+ * @param {String} info - The requested element's id.
+ */
 function editContactInfo(j, info) {
     let value = getInputValue(`edit-contact-${info}`);
     userContacts[j][info] = value;
 }
 
 
-// jsdoc
+/**
+ * Closes a dialog after saving an edited contact.
+ * @param {String} id - The closing dialog's id.
+ */
 function closeSavedContact(id) {
     let style = getElement('save-contact-animation');
     let cssCode = animateSavedContact();
@@ -103,7 +139,10 @@ function closeSavedContact(id) {
 }
 
 
-// jsdoc
+/**
+ * Animates the closing of a dialog window.
+ * @returns - The css code for the element 'dialog-contacts-position'.
+ */
 function animateSavedContact() {
     return `
         .dialog-contacts-position {
@@ -114,7 +153,10 @@ function animateSavedContact() {
 }
 
 
-// jsdoc
+/**
+ * Shows the edited contact in the contact viewer.
+ * @param {String} mail - The showing contact's mail address.
+ */
 function showEditedContact(mail) {
     let contactId = getContactId(mail);
     highlightCurrentContact(contactId);
@@ -127,7 +169,10 @@ function showEditedContact(mail) {
 }
 
 
-// jsdoc
+/**
+ * Deletes a user's contact.
+ * @param {number} j - The deleting contact's id.
+ */
 async function deleteUserContact(j) {
     await removeUserContact(j);
     resetDialogs();
@@ -139,7 +184,9 @@ async function deleteUserContact(j) {
 }
 
 
-// jsdoc
+/**
+ * Removes a contact from the user's data.
+ */
 async function removeUserContact(j) {
     let user = users.find(u => u.userId == userId);
     let contact = user.contacts.find(c => c.mail == userContacts[j].mail);
@@ -150,7 +197,9 @@ async function removeUserContact(j) {
 }
 
 
-// jsdoc
+/**
+ * Closes all dialog windows.
+ */
 function resetDialogs() {
     closeDialog('dialog-delete-contact');
     closeDialog('dialog-edit-contact');
@@ -159,14 +208,18 @@ function resetDialogs() {
 }
 
 
-// jsdoc
+/**
+ * Opens the contact settings' dialog.
+ */
 function openContactSettings() {
     openDialog('dialog-contact-settings');
     setClass('section-contact-settings', addClass, 'section-contact-settings-position');
 }
 
 
-// jsdoc
+/**
+ * Closes the contact settings' dialog.
+ */
 function closeContactSettings() {
     setClass('section-contact-settings', removeClass, 'section-contact-settings-position');
     setTimeout(() => {
@@ -175,7 +228,11 @@ function closeContactSettings() {
 }
 
 
-// jsdoc
+/**
+ * Shows the backlog of the contact forms.
+ * @param {String} id - The showing backlog's id.
+ * @param {String} message - The showing backlog's message.
+ */
 function showBacklogContactForm(id, message) {
     setBacklogContactMessage(`backlog-${id}-contact`, message);
     setClass(`backlog-${id}-contact`, toggleClass, 'backlog-contact-form-in');
