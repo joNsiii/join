@@ -330,12 +330,12 @@ function renderNameMailGroup(j) {
 
 
 /**
- * Saves the user's contacts.
+ * Saves the user contacts.
  */
 async function saveUserContacts() {
     let user = users.find(u => u.userId == userId);
     pushUserContacts(user);
-    setUserBgc(user);
+    saveUserInfo(user);
     await setItem('users', users);
 }
 
@@ -373,11 +373,26 @@ function getUserContactData(userContact) {
 
 
 /**
- * Sets the user's background color.
- * @param {json} user - The setting json.
+ * Saves the user's info.
+ * @param {json} user - The saving json.
  */
-function setUserBgc(user) {
+function saveUserInfo(user) {
     let contact = userContacts.find(c => c.mail == user.email);
+    user['name'] = getUserName(contact);
+    user['email'] = contact['mail'];
+    user['phone'] = contact['phone'];
     user['bgc-name'] = contact['bgc-name'];
     user['bgc-code'] = contact['bgc-code'];
+}
+
+
+/**
+ * Provides the user's name without ' (You)'.
+ * @param {json} contact - The providing json.
+ * @returns - The user's name without ' (You)'.
+ */
+function getUserName(contact) {
+    let name = contact['name'].split(' (You)');
+    name = name[0];
+    return name;
 }
