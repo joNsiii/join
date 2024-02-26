@@ -61,7 +61,9 @@
 .contact-user-profile {
     box-sizing: border-box;
     width: 120px;
+    min-width: 120px;
     height: 120px;
+    min-height: 120px;
     font-family: 'Inter', sans-serif;
     font-size: 47px;
     font-weight: 500;
