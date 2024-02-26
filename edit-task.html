@@ -26,11 +26,24 @@
                         <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task" cols="30"
                             rows="3"></textarea>
                     </div>
-                    <div class="single-input-container">
+                    <!-- <div class="single-input-container">
                         <label>Assigned to</label>
                         <select class="select-input" id="assign-task">
                             <option value="" disabled selected>Select contacts to assign</option>
                         </select>
+                    </div> -->
+                    <div class="single-input-container no-gap">
+                        <label>Assigned to</label>
+                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select contacts to assign</div>
+                        <!-- assign-task is old id -->
+                        <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown">
+                            <div class="subuser-selection-parent">
+                                
+                            </div>
+                        </div>
+                        <div class="sub-profile-container" id="sub-profile">
+
+                        </div>
                     </div>
                 </div>
                 <div class="right-side-inputs">
@@ -42,13 +55,13 @@
                     <div class="prio-container">
                         <label>Prio</label>
                         <div class="prio-select-con">
-                            <div class="prio-selection" id="Urgent" onclick="prioSelection(this)">
+                            <div class="prio-selection" id="Urgent" onclick="prioSelection(this);saveNewPrio(this)">
                                 <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
                             </div>
-                            <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this)">
+                            <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this);saveNewPrio(this)">
                                 <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
                             </div>
-                            <div class="prio-selection" id="Low" onclick="prioSelection(this)">
+                            <div class="prio-selection" id="Low" onclick="prioSelection(this);saveNewPrio(this)">
                                 <p>Low</p><img src="./img/low.png" alt="low" id="low-img">
                             </div>
                         </div>

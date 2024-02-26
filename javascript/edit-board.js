@@ -1,4 +1,5 @@
 currentTask = [];
+let priority;
 // NOT FINISHED YET
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
@@ -88,7 +89,6 @@ async function deleteSubtaskFromEditing(taskId, subtaskId) {
         if (subtaskIndex > -1) {
             boardTasks[taskIndex].subtasks.splice(subtaskIndex, 1);
             displaySubtasksForEditing(taskId);
-           
         }
     }
 }
@@ -236,7 +236,12 @@ function updatePriority(taskToUpdate) {
         }
     });
 }
-
+function saveNewPrio(clickedPrio){
+    ["Urgent", "Medium", "Low"].forEach(prio => {
+        document.getElementById(prio).classList.remove("selected");
+    });
+    clickedPrio.classList.add("selected");
+}
 // finds task and updates it
 async function findTaskAndUpdate(taskId) {
     taskId = parseInt(taskId, 10);
@@ -248,7 +253,7 @@ async function findTaskAndUpdate(taskId) {
     const taskToUpdate = boardTasks[taskIndex];
     updateTaskProperties(taskToUpdate);
     updatePriority(taskToUpdate);
-    if(Object.entries(currentTask).length !== 0) {
+    if (Object.entries(currentTask).length !== 0) {
         taskToUpdate.subtasks.push(...currentTask);
     }
     // TODO ASSIGNED TO
@@ -259,33 +264,31 @@ async function findTaskAndUpdate(taskId) {
 }
 
 
-
 // test
 
-function editAssignedToUser(task){
-    let selectField =  document.getElementById('assign-task');
-    getSelectedUsers(task, selectField)
-    
+function editAssignedToUser(task) {
+    let selectField = document.getElementById("myDropdown");
+    getSelectedUsers(task, selectField);
 }
 
 function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
     for (let i = 0; i < users.length; i++) {
         let user = users[i].name;
+        let bgc = users[i]['bgc-name'];
         // user = generateHTMLUser();
-        selectField.innerHTML += /*html*/ `
-            <option>${user}</option>
-        `
+        selectField.innerHTML += generateHTMLUser(i, bgc, user);
     }
 }
 
-function generateHTMLUser() {
-    return `<div class="subuser-selection" onclick="toggleCheckbox()" id="subuser-div-">
-    <div class="subuser-align">
-        <div class="sub-profile-img "></div>
-        <div></div>
-    </div>  
-        <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-        id="checkbox-remember-me-$"></div>  
-    </div>`
-} 
+function generateHTMLUser(i, bgc, user) {
+    return ` <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+            <div class="subuser-align">
+            <div class="sub-profile-img ${bgc}">test</div>
+            <div>${user}</div>
+            </div>  
+            <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+                id="checkbox-remember-me-${i}"></div>  
+        </div>
+    `;
+}
