@@ -7,7 +7,9 @@ let currentContact;
 
 
 // Functions
-// jsdoc
+/**
+ * Initializes the contacts' content.
+ */
 async function initContacts() {
     await init();
     removeIncludingAttribute();
@@ -20,14 +22,18 @@ async function initContacts() {
 }
 
 
-// jsdoc
+/**
+ * Removes the attribute 'w3-include-html' from the dialog elements.
+ */
 function removeIncludingAttribute() {
     removeElementAttribute('dialog-contact-viewer', 'w3-include-html');
     removeElementAttribute('dialog-add-contact', 'w3-include-html');
     removeElementAttribute('dialog-edit-contact', 'w3-include-html');
 }
 
-// jsdoc
+/**
+ * Loads the user's contacts from the server.
+ */
 async function loadUserContacts() {
     if (userIsLoggedIn()) {
         userId = currentUserData.userId;
@@ -35,7 +41,10 @@ async function loadUserContacts() {
     }
 }
 
-// jsdoc
+/**
+ * Provides the user's contact list.
+ * @returns - The user's contact list.
+ */
 async function getUserContactList() {
     let userContactList = [];
     pushUserContact(userContactList);
@@ -44,7 +53,10 @@ async function getUserContactList() {
 }
 
 
-// jsdoc
+/**
+ * Pushes the user's data to the user's contact list.
+ * @param {json} userContactList - The receiving json.
+ */
 function pushUserContact(userContactList) {
     let userContact = {
         'name': currentUserData.name + ' (You)',
@@ -55,7 +67,10 @@ function pushUserContact(userContactList) {
 }
 
 
-// jsdoc
+/**
+ * Pushes the user's contact data to the user's contact list.
+ * @param {json} userContactList - The receiving json.
+ */
 function pushUserSubcontacts(userContactList) {
     let subcontacts = currentUserData.contacts;
     for (let i = 0; i < subcontacts.length; i++) {
@@ -70,13 +85,20 @@ function pushUserSubcontacts(userContactList) {
 }
 
 
-// jsdoc
+/**
+ * Sorts a contact list by name.
+ * @param {json} contacts - The sorting json.
+ * @returns - The sorted contact list.
+ */
 function sortContactsByName(contacts) {
     return contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 
-// jsdoc
+/**
+ * Collects the initials of the register.
+ * @param {json} contacts - The providing json.
+ */
 function collectInitials(contacts) {
     initials = [];
     for (let i = 0; i < contacts.length; i++) {
@@ -88,7 +110,12 @@ function collectInitials(contacts) {
 }
 
 
-// jsdoc
+/**
+ * Provides the initial letter of a contact's name.
+ * @param {json} contacts - The providing json.
+ * @param {number} i - The providing contact's id.
+ * @returns - The initial letter of a contact's name.
+ */
 function getInitialLetter(contacts, i) {
     let name = getJsonObjectDeepValue(contacts, i, 'name');
     let initial = getJsonObjectValue(name, 0);
@@ -96,19 +123,32 @@ function getInitialLetter(contacts, i) {
 }
 
 
-// jsdoc
+/**
+ * Sets an object value of the json userConctacts.
+ * @param {number} i - The setting contact's id.
+ * @param {value} key - The setting object's key.
+ * @param {value} value - The setting value.
+ */
 function setUserContactsObjectValue(i, key, value) {
     userContacts[i][key] = value;
 }
 
 
-// jsdoc
+/**
+ * Provides a Boolean value by comparing two values.
+ * @param {array} array - The comparing array.
+ * @param {value} value - The comparing value.
+ * @returns - True or false.
+ */
 function getIncludingMatch(array, value) {
     return array.includes(value);
 }
 
 
-// jsdoc
+/**
+ * Sets a contact's background color.
+ * @param {json} contacts - The settting json.
+ */
 function setContactBgc(contacts) {
     let counter = 0;
     for (let i = 0; i < contacts.length; i++) {
@@ -119,14 +159,22 @@ function setContactBgc(contacts) {
 }
 
 
-// jsdoc
+/**
+ * Sets a contact's background color's name.
+ * @param {number} counter - The background color's counter.
+ * @param {number} i - The background color's name's index.
+ */
 function setContactBgcName(counter, i) {
     let name = bgcNames[counter];
     setUserContactsObjectValue(i, 'bgc-name', name);
 }
 
 
-// jsdoc
+/**
+ * Sets a contact's background color's code.
+ * @param {number} counter - The background color's counter.
+ * @param {number} i - The background color's code's index.
+ */
 function setContactBgcCode(counter, i) {
     let code = bgcCodes[counter];
     setUserContactsObjectValue(i, 'bgc-code', code);
@@ -141,7 +189,9 @@ function renderContacts() {
 }
 
 
-// jsdoc
+/**
+ * Fills the contact list.
+ */
 function fillContactList(contactList) {
     for (let i = 0; i < initials.length; i++) {
         renderRegisterLetter(contactList, i);
@@ -150,14 +200,22 @@ function fillContactList(contactList) {
 }
 
 
-// jsdoc
+/**
+ * Renders a register letter.
+ * @param {json} contactList - The providing json.
+ * @param {number} i - The register letter's index.
+ */
 function renderRegisterLetter(contactList, i) {
     let initial = getJsonObjectValue(initials, i).toUpperCase();
     contactList.innerHTML += `<div class="contacts-letter">${initial}</div>`;
 }
 
 
-// jsdoc
+/**
+ * Fills a register section.
+ * @param {json} contactList - The providing json.
+ * @param {number} i - The register letter's index.
+ */
 function fillRegisterSection(contactList, i) {
     for (let j = 0; j < userContacts.length; j++) {
         let match = getInitialsMatch(i, j);
@@ -168,7 +226,12 @@ function fillRegisterSection(contactList, i) {
 }
 
 
-// jsdoc
+/**
+ * Provides a Boolean value by comparing initial letters.
+ * @param {number} i - The register letter's index.
+ * @param {number} j - The contact's id.
+ * @returns - True or false.
+ */
 function getInitialsMatch(i, j) {
     let first = getInitialLetter(userContacts, j);
     let initial = getJsonObjectValue(initials, i);
@@ -176,13 +239,22 @@ function getInitialsMatch(i, j) {
 }
 
 
-// jsdoc
+/**
+ * Compares two values.
+ * @param {value} valueA - The comparing value A.
+ * @param {value} valueB - The comparing value B.
+ * @returns - True or false.
+ */
 function compareValues(valueA, valueB) {
     return valueA == valueB;
 }
 
 
-// jsdoc
+/**
+ * Renders a contact.
+ * @param {json} contactList - The providing json.
+ * @param {number} j - The rendering contact's id.
+ */
 function renderContact(contactList, j) {
     contactList.innerHTML += `
         <div id="contacts-contact-${j}" class="contacts-contact" onclick="showContact(${j})">
@@ -193,7 +265,11 @@ function renderContact(contactList, j) {
 }
 
 
-// jsdoc
+/**
+ * Renders a contact's profile.
+ * @param {number} j - The rendering contact's id.
+ * @returns - The html code of a contact's profile.
+ */
 function renderContactProfile(j) {
     let bgc = getJsonObjectDeepValue(userContacts, j, 'bgc-name');
     let initialLetters = getInitialLetterGroup(userContacts, j);
@@ -203,7 +279,12 @@ function renderContactProfile(j) {
 }
 
 
-// jsdoc
+/**
+ * Provides a contact's initial letters.
+ * @param {variable} variable - The providing variable.
+ * @param {number} i - The providing cntact's id.
+ * @returns - A contact's initial letters.
+ */
 function getInitialLetterGroup(variable, i) {
     let first = getInitialLetter(variable, i).toUpperCase();
     let last = getLastInitialLetter(variable, i).toUpperCase();
@@ -211,7 +292,12 @@ function getInitialLetterGroup(variable, i) {
 }
 
 
-// jsdoc
+/**
+ * Provides a contact's last initial letter.
+ * @param {variable} variable - The providing variable.
+ * @param {number} i - The providing contact's id.
+ * @returns - A contact's last initial letter.
+ */
 function getLastInitialLetter(variable, i) {
     let name = getJsonObjectDeepValue(variable, i, 'name');
     name = (name.includes(' (You)')) ? name.replace(' (You)', '') : name;
@@ -226,7 +312,11 @@ function getLastInitialLetter(variable, i) {
 }
 
 
-// jsdoc
+/**
+ * Renders a contact's name and mail address.
+ * @param {number} j - The rendering contact's id.
+ * @returns - The html code of a contact's name and mail address.
+ */
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
@@ -239,7 +329,9 @@ function renderNameMailGroup(j) {
 }
 
 
-// jsdoc
+/**
+ * Saves the user's contacts.
+ */
 async function saveUserContacts() {
     let user = users.find(u => u.userId == userId);
     pushUserContacts(user);
@@ -248,7 +340,10 @@ async function saveUserContacts() {
 }
 
 
-// jsdoc
+/**
+ * Pushes the user's contacts to the global json.
+ * @param {json} user - The receiving json.
+ */
 function pushUserContacts(user) {
     user.contacts = [];
     for (let i = 0; i < userContacts.length; i++) {
@@ -261,7 +356,11 @@ function pushUserContacts(user) {
 }
 
 
-// jsdoc
+/**
+ * Provides a user contact's saving data.
+ * @param {object} userContact - The providing json.
+ * @returns - A user contact's saving data.
+ */
 function getUserContactData(userContact) {
     return {
         'name': userContact['name'],
@@ -273,7 +372,10 @@ function getUserContactData(userContact) {
 }
 
 
-// jsdoc
+/**
+ * Sets the user's background color.
+ * @param {json} user - The setting json.
+ */
 function setUserBgc(user) {
     let contact = userContacts.find(c => c.mail == user.email);
     user['bgc-name'] = contact['bgc-name'];
