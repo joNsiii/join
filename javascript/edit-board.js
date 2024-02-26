@@ -13,7 +13,7 @@ async function editTask(taskId) {
     document.getElementById("description-task").value = task.description;
     document.getElementById("date-date-task").value = task.date;
     document.getElementById("category").value = task.heading;
-    
+
     displaySubtasksForEditing(task.taskId);
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
@@ -236,8 +236,8 @@ function updatePriority(taskToUpdate) {
         }
     });
 }
-function saveNewPrio(clickedPrio){
-    ["Urgent", "Medium", "Low"].forEach(prio => {
+function saveNewPrio(clickedPrio) {
+    ["Urgent", "Medium", "Low"].forEach((prio) => {
         document.getElementById(prio).classList.remove("selected");
     });
     clickedPrio.classList.add("selected");
@@ -263,7 +263,6 @@ async function findTaskAndUpdate(taskId) {
     renderEachTask();
 }
 
-
 // test
 
 function editAssignedToUser(task) {
@@ -275,20 +274,28 @@ function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
     for (let i = 0; i < users.length; i++) {
         let user = users[i].name;
-        let bgc = users[i]['bgc-name'];
+        let bgc = users[i]["bgc-name"];
         // user = generateHTMLUser();
-        selectField.innerHTML += generateHTMLUser(i, bgc, user);
+        selectField.innerHTML += generateHTMLUser(i, bgc, user, selectedUsers);
     }
 }
 
-function generateHTMLUser(i, bgc, user) {
-    return ` <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+function generateHTMLUser(i, bgc, user,selectedUsers) {
+    console.log(selectedUsers)
+    if(selectedUsers.length < 0){
+        console.log("selectedUser if abfrage funktioniert", selectedUsers)
+    }
+    return ` <div class="subuser-selection" onclick="selectUser(${i})" id="subuser-div-${i}">
             <div class="subuser-align">
-            <div class="sub-profile-img ${bgc}">test</div>
+            <div class="sub-profile-img bgc-${bgc}">test</div>
             <div>${user}</div>
             </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
                 id="checkbox-remember-me-${i}"></div>  
         </div>
     `;
+}
+
+function selectUser(i) {
+    console.log("user selected:", i);
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="media/signup-media.css">
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./styles/checkbox.css">
 </head>
 
 <body onload="loadUsers()" class="signup-body">
@@ -45,16 +46,15 @@
                             </div>
                         <p class="no-match" id="message"></p>
                     </div>
-
                     <div class="checkbox-button-container">
                         <div class="policy">
-                            <div aria-required="true" class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-                                id="checkbox-remember-me" onclick="toggleCheckboxLogin()"></div>
+                                <input type="checkbox" name="checkbox" id="customCheckbox" required class="checkmark">
+                                <label for="customCheckbox" class="custom-checkbox"></label>
                             <p>I accept the </p><a href="./privacy_policy.html">Privacy Policy</a>
                         </div>
 
                         <div class="button-signup-container">
-                            <button class="button button-signup" id="registerBtn">Sign up </button>
+                            <button class="button button-signup" onclick="checkFormValidation()" id="registerBtn">Sign up </button>
                         </div>
                     </div>
                 </form>

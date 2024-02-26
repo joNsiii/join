@@ -103,16 +103,6 @@ function togglePasswordIcon(passwordField, toggleImg) {
     }
 };
 
-function toggleCheckboxLogin() {
-    let checkBox = document.getElementById('checkbox-remember-me');
-
-    if (checkBox.src.includes("checkmark-unchecked.png")) {
-        checkBox.src = "./img/checkmark_2_18x18.png";
-    } else {
-        checkBox.src = "./img/checkmark-unchecked.png";
-    }
-};
-
 function wrongPassword() {
     let warning = document.getElementById('wrong-pw');
     let input = document.getElementById('password-parent');
