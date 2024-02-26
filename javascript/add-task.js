@@ -24,6 +24,10 @@ async function loadTasks() {
   }
 }
 
+function reloadPage() {
+  location.reload();
+}
+
 async function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
@@ -344,23 +348,32 @@ function prioSelection(clickedPrio) {
   priority = prio.id;
 }
 
-function clear() {
-  let titleInput = document.getElementById("title-task");
-  let descriptionInput = document.getElementById("description-task");
-  let dueDateInput = document.getElementById("date-date-task").value;
-  let assignTaskInput = document.getElementById("assign-task");
-  let sub_users_childInput =
-    assignTaskInput.options[assignTaskInput.selectedIndex].text;
-  let headingOptionInput = document.getElementById("category");
-  let headingInput =
-    headingOptionInput.options[headingOptionInput.selectedIndex].text;
+function clearAddTask() {
+  document.getElementById("title-task").value = "";
+  document.getElementById("description-task").value = "";
+  document.getElementById("date-date-task").value = "";
+  document.getElementById("category").selectedIndex = 0;
+  document.getElementById("sub-profile").innerHTML = "";
+  document.getElementById("subtask-display").innerHTML = "";
 
-  titleInput = "";
-  descriptionInput = "";
-  dueDateInput = "";
-  sub_users_childInput = "";
-  headingInput = "";
+  let subProfile = document.getElementById("sub-profile");
+  subProfile.innerHTML = "";
 
   subtaskInput = [];
+  subtasks = [];
+  sub_users = [];
+  contactsUser = [];
   priority = priorityDefault;
+
+  assignedTo();
+  prioSelection(Medium);
+}
+
+function addedTask() {
+  let backLog = document.getElementById('task-added-success');
+  backLog.classList.remove('d-none')
+
+    setTimeout(function(){
+      window.location.href = "board.html";
+  }, 1000);
 }

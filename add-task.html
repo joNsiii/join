@@ -93,12 +93,13 @@
             <div class="bottom-container">
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
                 <div class="bottom-button-container bottom-flex-right">
-                    <button class="clearBtn">Clear <img src="./img/cancel.png" alt="clear"></button>
-                    <button class="createBtn">Create Task <img src="./img/check.png" alt="check"> </button>
+                    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+                    <button class="createBtn" onclick="addedTask()">Create Task <img src="./img/check.png" alt="check"> </button>
                 </div>
             </div>
         </form>
     </div>
+    <div class="added-task d-none" id="task-added-success">Task added to board<img src="./img/Vector-white.png" alt="board.icon"></div>
 
     <script src="./javascript/add-task.js"></script>
 </body>
