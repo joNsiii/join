@@ -45,13 +45,13 @@ async function updateContactList() {
 
 
 /**
- * Verifies the contact form's input values.
+ * Verifies the added contact's input values.
  * @param {String} mail - The entered mail address.
  */
 async function verifyContactInput(mail) {
     let user = users.find(u => u.userId == userId);
-    let checkedUser = users.find(u => u.contacts.find(c => c.mail === mail));
-    if (checkedUser) {
+    let othersMail = userContacts.find(c => c.mail === mail);
+    if (othersMail) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
         await pushNewUserContact(user);

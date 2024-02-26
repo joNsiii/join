@@ -71,7 +71,7 @@ async function updateEditedContactList(j) {
 
 
 /**
- * Verfies the edited contact input values.
+ * Verfies the edited contact's input values.
  * @param {number} j - The editing contact's id.
  * @param {String} mail The edited mail address.
  */
