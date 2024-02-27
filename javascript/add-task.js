@@ -3,6 +3,7 @@ let priorityDefault = "Medium";
 let subtasks = [];
 let sub_users = [];
 let contactsUser = [];
+let heading = "";
 priority = priorityDefault;
 
 // document.addEventListener('DOMContentLoaded', async function() {
@@ -123,7 +124,7 @@ function toggleCheckbox(i) {
     background.classList.add("sub-background");
     let sub_users_child = `Temp-${i}`;
     sub_users.push({
-      userId: subUserIdTemp,
+      userId: i,
       name: subuserTemp.name,
       userBackgroundColor: subuserTemp["bgc-name"],
     });
@@ -182,7 +183,7 @@ window.onclick = function (event) {
     !event.target.closest(".dropdown-menu-sub")
   ) {
     let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
-
+    let icon = document.getElementById("drop-down-icon");
     for (let i = 0; i < dropdowns.length; i++) {
       let openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("show")) {
@@ -193,6 +194,9 @@ window.onclick = function (event) {
         document
           .getElementById("dropdown-parent")
           .classList.toggle("dropdown-custom");
+      }
+      if (icon.src.includes("arrow_drop_down-up.png")) {
+        icon.src = "./img/arrow_drop_downaa.png";
       }
     }
   }
@@ -388,3 +392,56 @@ function addedTask() {
       window.location.href = "board.html";
   }, 1000);
 }
+
+function dropDownMenuCategory() {
+  document.getElementById("myDropdown-category").classList.toggle("show");
+  let icon = document.getElementById("drop-down-icon-2");
+  document
+    .getElementById("dropdown-parent-category")
+    .classList.toggle("dropdown-outline-focus");
+  document
+    .getElementById("dropdown-parent-category")
+    .classList.toggle("dropdown-custom");
+
+  if (icon.src.includes("arrow_drop_downaa.png")) {
+    icon.src = "./img/arrow_drop_down-up.png";
+  } else {
+    icon.src = "./img/arrow_drop_downaa.png";
+  }
+}
+
+function selectCategory(clickedCategory) {
+  let cat = clickedCategory;
+  let categoryContainer = document.getElementById('chosen-task');
+  heading = cat.id;
+
+  categoryContainer.innerHTML = `${heading}`;
+  dropDownMenuCategory()
+}
+
+// not working with assigned to dropdown
+
+// window.onclick = function (event) {
+//   if (
+//     !event.target.matches(".dropdown-parent-container") &&
+//     !event.target.closest(".dropdown-menu-category")
+//   ) {
+//     let dropdowns = document.getElementsByClassName("dropdown-menu-category");
+//     let icon = document.getElementById("drop-down-icon-2");
+//     for (let i = 0; i < dropdowns.length; i++) {
+//       let openDropdown = dropdowns[i];
+//       if (openDropdown.classList.contains("show")) {
+//         openDropdown.classList.remove("show");
+//         document
+//           .getElementById("dropdown-parent-category")
+//           .classList.toggle("dropdown-outline-focus");
+//         document
+//           .getElementById("dropdown-parent-category")
+//           .classList.toggle("dropdown-custom");
+//       }
+//       if (icon.src.includes("arrow_drop_down-up.png")) {
+//         icon.src = "./img/arrow_drop_downaa.png";
+//       }
+//     }
+//   }
+// };
