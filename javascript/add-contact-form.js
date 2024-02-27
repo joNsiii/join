@@ -106,7 +106,7 @@ function createNewContact(name, mail, phone) {
  */
 async function showUpdatedContactList(mail) {
     closeSavedContact('add');
-    await initContacts();
+    await initContactsUser();
     showAddedContact(mail);
     setTimeout(() => {
         showBacklogContact('Contact successfully created');
