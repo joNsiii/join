@@ -60,19 +60,15 @@ async function loadUserData() {
 function loadUserImage() {
     let userLogo = document.getElementById('user-initials');
     if (userIsLoggedIn()) {
-        userInitials(userLogo);
+        userLogo.innerHTML = currentUserData.initials;
     } else if (guestIsLoggedIn()) {
-        guestLogo(userLogo);
+        userLogo.innerHTML = 'G';
     }
 }
 
-function userInitials(userLogo) {
-    let initials = currentUserData.name.match(/(\b\S)?/g).join("").toUpperCase()
-    userLogo.innerHTML = initials;
-}
-
-function guestLogo(userLogo) {
-    userLogo.innerHTML = 'G'
+function userInitials(name) {
+    let initials = name.match(/(\b\S)?/g).join("").toUpperCase();
+    return initials;
 }
 
 function deleteCookie(cookieName) {

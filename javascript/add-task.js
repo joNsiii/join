@@ -58,6 +58,9 @@ function assignedTo() {
   assignElement.innerHTML = "";
 
   let user = currentUserData;
+  if (user == undefined || user == null || user == "") {
+    assignElement.innerHTML = "<div class=subuser-align>No Contacts Found</div>";
+  } else {
   user.name = user.name;
   contactsUser.push(user);
   for (let i = 0; i < user.contacts.length; i++) {
@@ -86,10 +89,12 @@ function assignedTo() {
               id="checkbox-remember-me-${i}"></div>  
         </div>
       `;
+    }
   }
 }
 
 function dropDownMenu() {
+  let icon = document.getElementById("drop-down-icon");
   document.getElementById("myDropdown").classList.toggle("show");
   document
     .getElementById("dropdown-parent")
@@ -97,6 +102,12 @@ function dropDownMenu() {
   document
     .getElementById("dropdown-parent")
     .classList.toggle("dropdown-custom");
+
+    if (icon.src.includes("arrow_drop_downaa.png")) {
+      icon.src = "./img/arrow_drop_down-up.png";
+    } else {
+      icon.src = "./img/arrow_drop_downaa.png";
+    }
 }
 
 function toggleCheckbox(i) {
@@ -112,7 +123,7 @@ function toggleCheckbox(i) {
     background.classList.add("sub-background");
     let sub_users_child = `Temp-${i}`;
     sub_users.push({
-      userId: i,
+      userId: subUserIdTemp,
       name: subuserTemp.name,
       userBackgroundColor: subuserTemp["bgc-name"],
     });

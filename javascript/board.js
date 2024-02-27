@@ -150,6 +150,7 @@ async function openDetails(taskId) {
     insertTaskDataIntoDialog(task, dialog);
     dialog.showModal();
     setupCloseDialogMechanism();
+    loadUserImage();
 }
 
 function renderEditAndDeleteSection(task) {

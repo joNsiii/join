@@ -31,9 +31,13 @@
             <section class="board-top-group">
                 <h1 class="board-headline">Board</h1>
                 <div class="board-top-right">
+                    
                     <div class="board-search-group p-relative">
-                        <input id="board-search-desktop" class="board-search" type="search" onkeyup="searchForTask()" placeholder="Find Task" />
-                        <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
+                        <input id="board-search-desktop" class="board-search-2" type="search" onkeyup="searchForTask()" placeholder="Find Task" />
+                            <div class="subtask-add-icons" id="icon-hold">
+                                <img src="./img/divider-subtask.png" alt="divider" class="board-divider-search">
+                                <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
+                            </div>
                     </div>
                     <button class="board-task-button" onclick="addTaskFromBoard()">
                         <div class="btb-text">Add task</div>
@@ -44,7 +48,7 @@
             <section class="board-search-mobile">
                 <div class="p-relative">
                     <input id="board-search" class="board-search" type="search" onkeyup="searchForTask()" placeholder="Find Task" />
-                    <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
+                    <img class="board-search-img-mobile" src="./img/search-input.png" alt="search-input" />
                 </div>
             </section>
 

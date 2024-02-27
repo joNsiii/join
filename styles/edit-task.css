@@ -83,7 +83,7 @@
     display: inline-block;
 }
 
-.subtask-add-icons {
+.subtask-add-icons-edit {
     display: flex;
     justify-content: space-between;
     width: fit-content;
@@ -94,7 +94,7 @@
     height: 24px;
 }
 
-.subtask-add-icons img {
+.subtask-add-icons-edit img {
     width: 24px;
     height: 24px;
 }
@@ -491,7 +491,6 @@
     cursor: pointer;
 }
 
-
 .closeOverlayIMG {
     cursor: pointer;
     width: 16px;
@@ -511,36 +510,36 @@
 /* test assigned to*/
 
 .subuser-selection-parent {
-height: auto;
-overflow: auto;
+    height: auto;
+    overflow: auto;
 }
 
 .dropdown-parent-container {
-display: flex;
-height: auto;
-appearance: none;
-background: center right 10px;
-background-image: url("../img/arrow_drop_downaa.png");
-background-repeat: no-repeat;
-border: 1px solid #d1d1d1;
-background-color: white;
-border-radius: 10px;
-padding: 12px 16px 12px 16px;
-gap: 10px;
-font-size: 20px;
+    display: flex;
+    height: auto;
+    appearance: none;
+    background: center right 10px;
+    background-image: url("../img/arrow_drop_downaa.png");
+    background-repeat: no-repeat;
+    border: 1px solid #d1d1d1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 12px 16px 12px 16px;
+    gap: 10px;
+    font-size: 20px;
 }
 
 .dropdown-menu-sub {
-display: none;
-flex-direction: column;
-background-color: white;
-border-radius: 10px;
-padding: 20px 20px 12px 0px;
-gap: 2px;
-margin-top: -8px;
-height: 220px;
-z-index: 999;
-overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 20px 12px 0px;
+    gap: 2px;
+    margin-top: -8px;
+    height: 220px;
+    z-index: 999;
+    overflow-y: auto;
 }
 
 .subuser-selection {
@@ -553,27 +552,27 @@ overflow-y: auto;
     height: 56px;
     border-radius: 10px;
     font-size: 20px;
-  }
-  
-  .subuser-selection:hover {
+}
+
+.subuser-selection:hover {
     background-color: rgba(128, 128, 128, 0.1);
     cursor: pointer;
-  }
+}
 
-  .subuser-align {
+.subuser-align {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-  }
+}
 
-  .sub-profile-img {
+.sub-profile-img {
     display: flex;
     flex-shrink: 0;
     height: 42px;
     width: 42px;
     border-radius: 50%;
-    background-color: #29ABE2;
+    background-color: #29abe2;
     border: 2px solid white;
     display: flex;
     align-items: center;
@@ -582,16 +581,26 @@ overflow-y: auto;
     font-size: 12px;
     margin-right: 16px;
     text-transform: uppercase;
-  }
-  .checkbox {
+}
+.checkbox {
     width: 18px;
     height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 8px;
-  }
+}
 
 .show {
-display: flex;
+    display: flex;
+}
+
+.sub-background {
+    background-color: #2a3647;
+    color: white;
+}
+
+.sub-background:hover {
+    background-color: #091931 !important;
+    color: white;
 }
