@@ -281,8 +281,7 @@ function getSelectedUsers(task, selectField) {
 }
 
 function generateHTMLUser(i, bgc, user,selectedUsers) {
-    console.log(selectedUsers)
-    if(selectedUsers.length < 0){
+    if(selectedUsers.length > 0){
         console.log("selectedUser if abfrage funktioniert", selectedUsers)
     }
     return ` <div class="subuser-selection" onclick="selectUser(${i})" id="subuser-div-${i}">

@@ -36,17 +36,12 @@ let currentContact;
 
 // Functions
 /**
- * Initializes the contacts' content.
+ * Initializes the contacts.
  */
 async function initContacts() {
     await init();
     removeIncludingAttribute();
-    await loadUserContacts();
-    sortContactsByName(userContacts);
-    collectInitials(userContacts);
-    setContactBgc(userContacts);
-    renderContacts();
-    saveUserContacts();
+    (userIsLoggedIn()) ? initContactsUser() : initContactsGuest();
 }
 
 
@@ -59,15 +54,52 @@ function removeIncludingAttribute() {
     removeElementAttribute('dialog-edit-contact', 'w3-include-html');
 }
 
+
 /**
- * Loads the user's contacts from the server.
+ * Initializes the contacts for guests.
+ */
+function initContactsGuest() {
+    setElementAttribute('add-contact-button', 'disabled', true);
+    setElementAttribute('add-contact-button-mobile', 'disabled', true);
+    renderContactsGuestHint();
+}
+
+
+/**
+ * Renders the contacts' guest hint.
+ */
+function renderContactsGuestHint() {
+    let contactList = getElement('contacts-collector');
+    contactList.innerHTML = `
+        &lt;p class="contacts-guest-hint">
+            Would you like to add a contact?&lt;br>
+            Then sign up &lt;a href="./signup.html" target="_blank">here&lt;/a>.
+        &lt;/p>
+    `;
+}
+
+
+/**
+ * Initializes the user's contacts.
+ */
+async function initContactsUser() {
+    await loadUserContacts();
+    sortContactsByName(userContacts);
+    collectInitials(userContacts);
+    setContactBgc(userContacts);
+    renderContacts();
+    saveUserContacts();
+}
+
+
+/**
+ * Loads the user contacts.
  */
 async function loadUserContacts() {
-    if (userIsLoggedIn()) {
-        userId = currentUserData.userId;
-        userContacts = await getUserContactList();
-    }
+    userId = currentUserData.userId;
+    userContacts = await getUserContactList();
 }
+
 
 /**
  * Provides the user's contact list.
@@ -209,7 +241,9 @@ function setContactBgcCode(counter, i) {
 }
 
 
-// jsdoc
+/**
+ * Renders the user contacts.
+ */
 function renderContacts() {
     let contactList = getElement('contacts-collector');
     contactList.innerHTML = '';
@@ -354,60 +388,6 @@ function renderNameMailGroup(j) {
             &lt;div class="contact-email">${mail}&lt;/div>
         &lt;/div>
     `;
-}
-
-
-/**
- * Saves the user's contacts.
- */
-async function saveUserContacts() {
-    let user = users.find(u => u.userId == userId);
-    pushUserContacts(user);
-    setUserBgc(user);
-    await setItem('users', users);
-}
-
-
-/**
- * Pushes the user's contacts to the global json.
- * @param {json} user - The receiving json.
- */
-function pushUserContacts(user) {
-    user.contacts = [];
-    for (let i = 0; i &lt; userContacts.length; i++) {
-        let userContact = userContacts[i];
-        if (userContact.mail != user.email) {
-            let contact = getUserContactData(userContact);
-            user.contacts.push(contact);
-        }
-    }
-}
-
-
-/**
- * Provides a user contact's saving data.
- * @param {object} userContact - The providing json.
- * @returns - A user contact's saving data.
- */
-function getUserContactData(userContact) {
-    return {
-        'name': userContact['name'],
-        'mail': userContact['mail'],
-        'phone': userContact['phone'],
-        'bgc-name': userContact['bgc-name'],
-        'bgc-code': userContact['bgc-code']
-    };
-}
-
-
-/**
- * Sets the user's background color.
- * @param {json} user - The setting json.
- */
-function setUserBgc(user) {
-    let contact = userContacts.find(c => c.mail == user.email);
-    user['bgc-name'] = contact['bgc-name'];
-    user['bgc-code'] = contact['bgc-code'];
 }</code></pre>
         </article>
     </section>
@@ -418,13 +398,13 @@ function setUserBgc(user) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#animateBacklogContact">animateBacklogContact</a></li><li><a href="global.html#animateContactUserIn">animateContactUserIn</a></li><li><a href="global.html#animateContactUserOut">animateContactUserOut</a></li><li><a href="global.html#animateSavedContact">animateSavedContact</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#closeContactSettings">closeContactSettings</a></li><li><a href="global.html#closeContactViewerMobile">closeContactViewerMobile</a></li><li><a href="global.html#closeDeleteContact">closeDeleteContact</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeSavedContact">closeSavedContact</a></li><li><a href="global.html#collectInitials">collectInitials</a></li><li><a href="global.html#compareValues">compareValues</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#deleteUserAccount">deleteUserAccount</a></li><li><a href="global.html#deleteUserContact">deleteUserContact</a></li><li><a href="global.html#editContactInfo">editContactInfo</a></li><li><a href="global.html#fillContactList">fillContactList</a></li><li><a href="global.html#fillRegisterSection">fillRegisterSection</a></li><li><a href="global.html#generateContactFormCancelButton">generateContactFormCancelButton</a></li><li><a href="global.html#generateContactFormDeleteButton">generateContactFormDeleteButton</a></li><li><a href="global.html#generateContactFormSubmitButton">generateContactFormSubmitButton</a></li><li><a href="global.html#generateDeleteContactMessage">generateDeleteContactMessage</a></li><li><a href="global.html#generateDeleteUserMessage">generateDeleteUserMessage</a></li><li><a href="global.html#generateDeletingMessage">generateDeletingMessage</a></li><li><a href="global.html#getContactId">getContactId</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getElementAttribute">getElementAttribute</a></li><li><a href="global.html#getIncludingMatch">getIncludingMatch</a></li><li><a href="global.html#getInitialLetter">getInitialLetter</a></li><li><a href="global.html#getInitialLetterGroup">getInitialLetterGroup</a></li><li><a href="global.html#getInitialsMatch">getInitialsMatch</a></li><li><a href="global.html#getInputValue">getInputValue</a></li><li><a href="global.html#getJsonObjectDeepValue">getJsonObjectDeepValue</a></li><li><a href="global.html#getJsonObjectValue">getJsonObjectValue</a></li><li><a href="global.html#getLastInitialLetter">getLastInitialLetter</a></li><li><a href="global.html#getNewContact">getNewContact</a></li><li><a href="global.html#getUserContactData">getUserContactData</a></li><li><a href="global.html#getUserContactList">getUserContactList</a></li><li><a href="global.html#highlightCurrentContact">highlightCurrentContact</a></li><li><a href="global.html#highlightWrongUserInput">highlightWrongUserInput</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#linkUserInfo">linkUserInfo</a></li><li><a href="global.html#loadUserContacts">loadUserContacts</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openContactSettings">openContactSettings</a></li><li><a href="global.html#openDialog">openDialog</a></li><li><a href="global.html#openDialogDeleteContact">openDialogDeleteContact</a></li><li><a href="global.html#pushNewUserContact">pushNewUserContact</a></li><li><a href="global.html#pushUserContact">pushUserContact</a></li><li><a href="global.html#pushUserContacts">pushUserContacts</a></li><li><a href="global.html#pushUserSubcontacts">pushUserSubcontacts</a></li><li><a href="global.html#redirectToLoginPage">redirectToLoginPage</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeElementAttribute">removeElementAttribute</a></li><li><a href="global.html#removeIncludingAttribute">removeIncludingAttribute</a></li><li><a href="global.html#removeUserContact">removeUserContact</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactProfile">renderContactProfile</a></li><li><a href="global.html#renderContactViewer">renderContactViewer</a></li><li><a href="global.html#renderContactViewerVersion">renderContactViewerVersion</a></li><li><a href="global.html#renderDeleteAccountButtonBar">renderDeleteAccountButtonBar</a></li><li><a href="global.html#renderDeleteAccountConfirmation">renderDeleteAccountConfirmation</a></li><li><a href="global.html#renderDeleteAccountMessage">renderDeleteAccountMessage</a></li><li><a href="global.html#renderDeleteContactButtonBar">renderDeleteContactButtonBar</a></li><li><a href="global.html#renderDeleteContactForm">renderDeleteContactForm</a></li><li><a href="global.html#renderDeleteContactMessage">renderDeleteContactMessage</a></li><li><a href="global.html#renderDeleteUserForm">renderDeleteUserForm</a></li><li><a href="global.html#renderDeletingConfirmation">renderDeletingConfirmation</a></li><li><a href="global.html#renderEditForm">renderEditForm</a></li><li><a href="global.html#renderEditFormInfo">renderEditFormInfo</a></li><li><a href="global.html#renderEditFormProfile">renderEditFormProfile</a></li><li><a href="global.html#renderNameMailGroup">renderNameMailGroup</a></li><li><a href="global.html#renderRegisterLetter">renderRegisterLetter</a></li><li><a href="global.html#renderUserBgc">renderUserBgc</a></li><li><a href="global.html#renderUserInfo">renderUserInfo</a></li><li><a href="global.html#renderUserProfile">renderUserProfile</a></li><li><a href="global.html#resetAddContactInput">resetAddContactInput</a></li><li><a href="global.html#resetDeleteContactForm">resetDeleteContactForm</a></li><li><a href="global.html#resetDeleteContactInputClasses">resetDeleteContactInputClasses</a></li><li><a href="global.html#resetDeleteContactInputValues">resetDeleteContactInputValues</a></li><li><a href="global.html#resetDialogs">resetDialogs</a></li><li><a href="global.html#saveUserContacts">saveUserContacts</a></li><li><a href="global.html#setBacklogContactMessage">setBacklogContactMessage</a></li><li><a href="global.html#setBacklogContactPosition">setBacklogContactPosition</a></li><li><a href="global.html#setClass">setClass</a></li><li><a href="global.html#setContactBgc">setContactBgc</a></li><li><a href="global.html#setContactBgcCode">setContactBgcCode</a></li><li><a href="global.html#setContactBgcName">setContactBgcName</a></li><li><a href="global.html#setContactButtonOnclick">setContactButtonOnclick</a></li><li><a href="global.html#setDeleteAccountForm">setDeleteAccountForm</a></li><li><a href="global.html#setElementAttribute">setElementAttribute</a></li><li><a href="global.html#setUserBgc">setUserBgc</a></li><li><a href="global.html#setUserContactsObjectValue">setUserContactsObjectValue</a></li><li><a href="global.html#setUserInfoLink">setUserInfoLink</a></li><li><a href="global.html#setUserInfoLinkVersion">setUserInfoLinkVersion</a></li><li><a href="global.html#showAddedContact">showAddedContact</a></li><li><a href="global.html#showBacklogContact">showBacklogContact</a></li><li><a href="global.html#showBacklogContactForm">showBacklogContactForm</a></li><li><a href="global.html#showContact">showContact</a></li><li><a href="global.html#showDeleteAccountConfirmation">showDeleteAccountConfirmation</a></li><li><a href="global.html#showEditContactForm">showEditContactForm</a></li><li><a href="global.html#showEditedContact">showEditedContact</a></li><li><a href="global.html#showEditedContactList">showEditedContactList</a></li><li><a href="global.html#showUpWrongUserInput">showUpWrongUserInput</a></li><li><a href="global.html#showUpdatedContactList">showUpdatedContactList</a></li><li><a href="global.html#showUserInfo">showUserInfo</a></li><li><a href="global.html#sortContactsByName">sortContactsByName</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#toggleClass">toggleClass</a></li><li><a href="global.html#updateContactList">updateContactList</a></li><li><a href="global.html#updateContactViewer">updateContactViewer</a></li><li><a href="global.html#updateEditedContactList">updateEditedContactList</a></li><li><a href="global.html#updateUserData">updateUserData</a></li><li><a href="global.html#verifyContactInput">verifyContactInput</a></li><li><a href="global.html#verifyDeleteAccountForm">verifyDeleteAccountForm</a></li><li><a href="global.html#verifyEditedContact">verifyEditedContact</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#animateBacklogContact">animateBacklogContact</a></li><li><a href="global.html#animateContactUserIn">animateContactUserIn</a></li><li><a href="global.html#animateContactUserOut">animateContactUserOut</a></li><li><a href="global.html#animateSavedContact">animateSavedContact</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#closeContactSettings">closeContactSettings</a></li><li><a href="global.html#closeContactViewerMobile">closeContactViewerMobile</a></li><li><a href="global.html#closeDeleteContact">closeDeleteContact</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeSavedContact">closeSavedContact</a></li><li><a href="global.html#collectInitials">collectInitials</a></li><li><a href="global.html#compareValues">compareValues</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#deleteUserAccount">deleteUserAccount</a></li><li><a href="global.html#deleteUserContact">deleteUserContact</a></li><li><a href="global.html#editContactInfo">editContactInfo</a></li><li><a href="global.html#fillContactList">fillContactList</a></li><li><a href="global.html#fillRegisterSection">fillRegisterSection</a></li><li><a href="global.html#generateContactFormCancelButton">generateContactFormCancelButton</a></li><li><a href="global.html#generateContactFormDeleteButton">generateContactFormDeleteButton</a></li><li><a href="global.html#generateContactFormSubmitButton">generateContactFormSubmitButton</a></li><li><a href="global.html#generateDeleteContactMessage">generateDeleteContactMessage</a></li><li><a href="global.html#generateDeleteUserMessage">generateDeleteUserMessage</a></li><li><a href="global.html#generateDeletingMessage">generateDeletingMessage</a></li><li><a href="global.html#getContactId">getContactId</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getElementAttribute">getElementAttribute</a></li><li><a href="global.html#getIncludingMatch">getIncludingMatch</a></li><li><a href="global.html#getInitialLetter">getInitialLetter</a></li><li><a href="global.html#getInitialLetterGroup">getInitialLetterGroup</a></li><li><a href="global.html#getInitialsMatch">getInitialsMatch</a></li><li><a href="global.html#getInputValue">getInputValue</a></li><li><a href="global.html#getJsonObjectDeepValue">getJsonObjectDeepValue</a></li><li><a href="global.html#getJsonObjectValue">getJsonObjectValue</a></li><li><a href="global.html#getLastInitialLetter">getLastInitialLetter</a></li><li><a href="global.html#getNewContact">getNewContact</a></li><li><a href="global.html#getUserContactData">getUserContactData</a></li><li><a href="global.html#getUserContactList">getUserContactList</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#highlightCurrentContact">highlightCurrentContact</a></li><li><a href="global.html#highlightWrongUserInput">highlightWrongUserInput</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initContactsGuest">initContactsGuest</a></li><li><a href="global.html#initContactsUser">initContactsUser</a></li><li><a href="global.html#linkUserInfo">linkUserInfo</a></li><li><a href="global.html#loadUserContacts">loadUserContacts</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openContactSettings">openContactSettings</a></li><li><a href="global.html#openDialog">openDialog</a></li><li><a href="global.html#openDialogDeleteContact">openDialogDeleteContact</a></li><li><a href="global.html#pushNewUserContact">pushNewUserContact</a></li><li><a href="global.html#pushUserContact">pushUserContact</a></li><li><a href="global.html#pushUserContacts">pushUserContacts</a></li><li><a href="global.html#pushUserSubcontacts">pushUserSubcontacts</a></li><li><a href="global.html#redirectToLoginPage">redirectToLoginPage</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeElementAttribute">removeElementAttribute</a></li><li><a href="global.html#removeIncludingAttribute">removeIncludingAttribute</a></li><li><a href="global.html#removeUserContact">removeUserContact</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactProfile">renderContactProfile</a></li><li><a href="global.html#renderContactViewer">renderContactViewer</a></li><li><a href="global.html#renderContactViewerVersion">renderContactViewerVersion</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsGuestHint">renderContactsGuestHint</a></li><li><a href="global.html#renderDeleteAccountButtonBar">renderDeleteAccountButtonBar</a></li><li><a href="global.html#renderDeleteAccountConfirmation">renderDeleteAccountConfirmation</a></li><li><a href="global.html#renderDeleteAccountMessage">renderDeleteAccountMessage</a></li><li><a href="global.html#renderDeleteContactButtonBar">renderDeleteContactButtonBar</a></li><li><a href="global.html#renderDeleteContactForm">renderDeleteContactForm</a></li><li><a href="global.html#renderDeleteContactMessage">renderDeleteContactMessage</a></li><li><a href="global.html#renderDeleteUserForm">renderDeleteUserForm</a></li><li><a href="global.html#renderDeletingConfirmation">renderDeletingConfirmation</a></li><li><a href="global.html#renderEditForm">renderEditForm</a></li><li><a href="global.html#renderEditFormInfo">renderEditFormInfo</a></li><li><a href="global.html#renderEditFormProfile">renderEditFormProfile</a></li><li><a href="global.html#renderNameMailGroup">renderNameMailGroup</a></li><li><a href="global.html#renderRegisterLetter">renderRegisterLetter</a></li><li><a href="global.html#renderUserBgc">renderUserBgc</a></li><li><a href="global.html#renderUserInfo">renderUserInfo</a></li><li><a href="global.html#renderUserProfile">renderUserProfile</a></li><li><a href="global.html#resetAddContactInput">resetAddContactInput</a></li><li><a href="global.html#resetDeleteContactForm">resetDeleteContactForm</a></li><li><a href="global.html#resetDeleteContactInputClasses">resetDeleteContactInputClasses</a></li><li><a href="global.html#resetDeleteContactInputValues">resetDeleteContactInputValues</a></li><li><a href="global.html#resetDialogs">resetDialogs</a></li><li><a href="global.html#saveUserContacts">saveUserContacts</a></li><li><a href="global.html#saveUserInfo">saveUserInfo</a></li><li><a href="global.html#setBacklogContactMessage">setBacklogContactMessage</a></li><li><a href="global.html#setBacklogContactPosition">setBacklogContactPosition</a></li><li><a href="global.html#setClass">setClass</a></li><li><a href="global.html#setContactBgc">setContactBgc</a></li><li><a href="global.html#setContactBgcCode">setContactBgcCode</a></li><li><a href="global.html#setContactBgcName">setContactBgcName</a></li><li><a href="global.html#setContactButtonOnclick">setContactButtonOnclick</a></li><li><a href="global.html#setDeleteAccountForm">setDeleteAccountForm</a></li><li><a href="global.html#setElementAttribute">setElementAttribute</a></li><li><a href="global.html#setUserContactsObjectValue">setUserContactsObjectValue</a></li><li><a href="global.html#setUserInfoLink">setUserInfoLink</a></li><li><a href="global.html#setUserInfoLinkVersion">setUserInfoLinkVersion</a></li><li><a href="global.html#showAddedContact">showAddedContact</a></li><li><a href="global.html#showBacklogContact">showBacklogContact</a></li><li><a href="global.html#showBacklogContactForm">showBacklogContactForm</a></li><li><a href="global.html#showContact">showContact</a></li><li><a href="global.html#showDeleteAccountConfirmation">showDeleteAccountConfirmation</a></li><li><a href="global.html#showEditContactForm">showEditContactForm</a></li><li><a href="global.html#showEditedContact">showEditedContact</a></li><li><a href="global.html#showEditedContactList">showEditedContactList</a></li><li><a href="global.html#showUpWrongUserInput">showUpWrongUserInput</a></li><li><a href="global.html#showUpdatedContactList">showUpdatedContactList</a></li><li><a href="global.html#showUserInfo">showUserInfo</a></li><li><a href="global.html#sortContactsByName">sortContactsByName</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#toggleClass">toggleClass</a></li><li><a href="global.html#updateContactList">updateContactList</a></li><li><a href="global.html#updateContactViewer">updateContactViewer</a></li><li><a href="global.html#updateEditedContactList">updateEditedContactList</a></li><li><a href="global.html#updateUserData">updateUserData</a></li><li><a href="global.html#verifyContactInput">verifyContactInput</a></li><li><a href="global.html#verifyDeleteAccountForm">verifyDeleteAccountForm</a></li><li><a href="global.html#verifyEditedContact">verifyEditedContact</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Feb 26 2024 17:00:43 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 27 2024 12:34:12 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

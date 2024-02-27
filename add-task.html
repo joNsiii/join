@@ -9,6 +9,7 @@
     <script src="javascript/register.js"></script>
     <script src="./javascript/global.js"></script>
     <script src="javascript/board.js"></script>
+    <link rel="icon" href="./img/favicon.svg">
     <link rel="stylesheet" href="styles/templates.css">
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/add-task.css">
@@ -49,7 +50,7 @@
                 <div class="border-between"></div>
                 <div class="right-side-inputs">
                     <div class="single-input-container">
-                        <label for="date">Due Date<label class="red-star">*</label></label>
+                        <label for="date-date-task">Due Date<label class="red-star">*</label></label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                             onblur="(this.type='text')" name="date" id="date-date-task" required>
                     </div>
@@ -93,12 +94,13 @@
             <div class="bottom-container">
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
                 <div class="bottom-button-container bottom-flex-right">
-                    <button class="clearBtn">Clear <img src="./img/cancel.png" alt="clear"></button>
-                    <button class="createBtn">Create Task <img src="./img/check.png" alt="check"> </button>
+                    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+                    <button class="createBtn" onclick="addedTask()">Create Task <img src="./img/check.png" alt="check"> </button>
                 </div>
             </div>
         </form>
     </div>
+    <div class="added-task d-none" id="task-added-success">Task added to board<img src="./img/Vector-white.png" alt="board.icon"></div>
 
     <script src="./javascript/add-task.js"></script>
 </body>

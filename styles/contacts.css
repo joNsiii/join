@@ -65,6 +65,17 @@
     background-color: #091931;
 }
 
+.add-contact-button:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: unset;
+}
+
+.add-contact-button:disabled:hover {
+    background-color: #2A3647;
+    box-shadow: unset;
+}
+
 .add-contact-text {
     width: 175px;
     height: 25px;
@@ -88,6 +99,13 @@
     width: 400px;
     display: flex;
     flex-direction: column;
+}
+
+.contacts-guest-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
 }
 
 .contacts-letter {
@@ -235,6 +253,17 @@
 
 .add-contact-button-mobile:active {
     background-color: #091931;
+}
+
+.add-contact-button-mobile:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: unset;
+}
+
+.add-contact-button-mobile:disabled:hover {
+    background-color: #2A3647;
+    box-shadow: unset;
 }
 
 .add-contact-img-mobile {
