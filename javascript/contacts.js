@@ -8,19 +8,12 @@ let currentContact;
 
 // Functions
 /**
- * Initializes the user contacts.
+ * Initializes the contacts.
  */
 async function initContacts() {
     await init();
     removeIncludingAttribute();
-    if (userIsLoggedIn()) {
-        await loadUserContacts();
-        sortContactsByName(userContacts);
-        collectInitials(userContacts);
-        setContactBgc(userContacts);
-        renderContacts();
-        saveUserContacts();
-    }
+    (userIsLoggedIn()) ? initContactsUser() : initContactsGuest();
 }
 
 
@@ -35,12 +28,50 @@ function removeIncludingAttribute() {
 
 
 /**
+ * Initializes the contacts for guests.
+ */
+function initContactsGuest() {
+    setElementAttribute('add-contact-button', 'disabled', true);
+    setElementAttribute('add-contact-button-mobile', 'disabled', true);
+    renderContactsGuestHint();
+}
+
+
+/**
+ * Renders the contacts' guest hint.
+ */
+function renderContactsGuestHint() {
+    let contactList = getElement('contacts-collector');
+    contactList.innerHTML = `
+        <p class="contacts-guest-hint">
+            Would you like to add a contact?<br>
+            Then sign up <a href="./signup.html" target="_blank">here</a>.
+        </p>
+    `;
+}
+
+
+/**
+ * Initializes the user's contacts.
+ */
+async function initContactsUser() {
+    await loadUserContacts();
+    sortContactsByName(userContacts);
+    collectInitials(userContacts);
+    setContactBgc(userContacts);
+    renderContacts();
+    saveUserContacts();
+}
+
+
+/**
  * Loads the user contacts.
  */
 async function loadUserContacts() {
     userId = currentUserData.userId;
     userContacts = await getUserContactList();
 }
+
 
 /**
  * Provides the user's contact list.
@@ -329,72 +360,4 @@ function renderNameMailGroup(j) {
             <div class="contact-email">${mail}</div>
         </div>
     `;
-}
-
-
-/**
- * Saves the user contacts.
- */
-async function saveUserContacts() {
-    let user = users.find(u => u.userId == userId);
-    pushUserContacts(user);
-    saveUserInfo(user);
-    await setItem('users', users);
-}
-
-
-/**
- * Pushes the user's contacts to the global json.
- * @param {json} user - The receiving json.
- */
-function pushUserContacts(user) {
-    user.contacts = [];
-    for (let i = 0; i < userContacts.length; i++) {
-        let userContact = userContacts[i];
-        if (userContact.mail != user.email) {
-            let contact = getUserContactData(userContact);
-            user.contacts.push(contact);
-        }
-    }
-}
-
-
-/**
- * Provides a user contact's saving data.
- * @param {object} userContact - The providing json.
- * @returns - A user contact's saving data.
- */
-function getUserContactData(userContact) {
-    return {
-        'name': userContact['name'],
-        'mail': userContact['mail'],
-        'phone': userContact['phone'],
-        'bgc-name': userContact['bgc-name'],
-        'bgc-code': userContact['bgc-code']
-    };
-}
-
-
-/**
- * Saves the user's info.
- * @param {json} user - The saving json.
- */
-function saveUserInfo(user) {
-    let contact = userContacts.find(c => c.mail == user.email);
-    user['name'] = getUserName(contact);
-    user['email'] = contact['mail'];
-    user['phone'] = contact['phone'];
-    user['bgc-name'] = contact['bgc-name'];
-    user['bgc-code'] = contact['bgc-code'];
-}
-
-
-/**
- * Provides the user's name without ' (You)'.
- * @param {json} contact - The providing json.
- * @returns - The user's name without ' (You)'.
- */
-function getUserName(contact) {
-    let name = contact['name'].split(' (You)');
-    return name = name[0];
 }
