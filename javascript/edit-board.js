@@ -18,6 +18,7 @@ async function editTask(taskId) {
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
     editAssignedToUser(task);
+    loadUserImage();
 }
 
 function setPrioritySelection(priority) {
@@ -268,6 +269,16 @@ async function findTaskAndUpdate(taskId) {
 function editAssignedToUser(task) {
     let selectField = document.getElementById("myDropdown");
     getSelectedUsers(task, selectField);
+    debugger;
+
+    let allUserIds = users.find((u) => u.userId);
+    let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
+    console.log(subUser);
+
+
+    // if(task.sub_users.userId.includes(users.userId)) {
+    //     console.log(task.sub_users)
+    // }
 }
 
 function getSelectedUsers(task, selectField) {
@@ -279,18 +290,19 @@ function getSelectedUsers(task, selectField) {
         let user = users[i].name;
         let bgc = users[i]["bgc-name"];
         let userId = users[i].userId;
+        let initials = users[i].initials;
         // user = generateHTMLUser();
-        selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers);
+        selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers, initials);
     }
 }
 
-function generateHTMLUser(i, userId, bgc, user,selectedUsers) {
+function generateHTMLUser(i, userId, bgc, user,selectedUsers, initials) {
     if(selectedUsers.length > 0){
         // console.log("selectedUser if abfrage funktioniert", selectedUsers)
     }
-    return ` <div class="subuser-selection" onclick="selectUser(${userId})" id="subuser-div-${i}">
+    return ` <div class="subuser-selection" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
             <div class="subuser-align">
-            <div class="sub-profile-img bgc-${bgc}">test</div>
+            <div class="sub-profile-img bgc-${bgc}">${initials}</div>
             <div>${user}</div>
             </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
@@ -299,6 +311,19 @@ function generateHTMLUser(i, userId, bgc, user,selectedUsers) {
     `;
 }
 
-function selectUser(i) {
-    console.log("user selected:", i);
+function selectUser(id, i) {
+
+    toggleSelectedUser(id, i);
+}
+
+function toggleSelectedUser(id, i) {
+    let imgSource = document.getElementById(`checkbox-remember-me-${i}`);
+    let background = document.getElementById(`subuser-div-${i}`);
+    if(imgSource.src.includes('img/checkmark-white.png')) {
+        background.classList.remove("sub-background");
+        imgSource.src = 'img/checkmark-unchecked.png';
+    }else {
+        imgSource.src = 'img/checkmark-white.png';
+        background.classList.add("sub-background");
+    }
 }

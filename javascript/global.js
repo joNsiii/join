@@ -57,23 +57,19 @@ async function loadUserData() {
     }
 }
 
-// function loadUserImage() {
-//     let userLogo = document.getElementById('user-initials');
-//     if (userIsLoggedIn()) {
-//         userInitials(userLogo);
-//     } else if (guestIsLoggedIn()) {
-//         guestLogo(userLogo);
-//     }
-// }
+function loadUserImage() {
+    let userLogo = document.getElementById('user-initials');
+    if (userIsLoggedIn()) {
+        userLogo.innerHTML = currentUserData.initials;
+    } else if (guestIsLoggedIn()) {
+        userLogo.innerHTML = 'G';
+    }
+}
 
 function userInitials(name) {
     let initials = name.match(/(\b\S)?/g).join("").toUpperCase();
     return initials;
 }
-
-// function guestLogo(userLogo) {
-//     userLogo.innerHTML = 'G'
-// }
 
 function deleteCookie(cookieName) {
     document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
