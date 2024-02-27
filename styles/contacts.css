@@ -90,6 +90,13 @@
     flex-direction: column;
 }
 
+.contacts-guest-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
 .contacts-letter {
     box-sizing: border-box;
     margin-bottom: 8px;

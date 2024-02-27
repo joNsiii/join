@@ -8,17 +8,19 @@ let currentContact;
 
 // Functions
 /**
- * Initializes the contacts' content.
+ * Initializes the user contacts.
  */
 async function initContacts() {
     await init();
     removeIncludingAttribute();
-    await loadUserContacts();
-    sortContactsByName(userContacts);
-    collectInitials(userContacts);
-    setContactBgc(userContacts);
-    renderContacts();
-    saveUserContacts();
+    if (userIsLoggedIn()) {
+        await loadUserContacts();
+        sortContactsByName(userContacts);
+        collectInitials(userContacts);
+        setContactBgc(userContacts);
+        renderContacts();
+        saveUserContacts();
+    }
 }
 
 
@@ -31,14 +33,13 @@ function removeIncludingAttribute() {
     removeElementAttribute('dialog-edit-contact', 'w3-include-html');
 }
 
+
 /**
- * Loads the user's contacts from the server.
+ * Loads the user contacts.
  */
 async function loadUserContacts() {
-    if (userIsLoggedIn()) {
-        userId = currentUserData.userId;
-        userContacts = await getUserContactList();
-    }
+    userId = currentUserData.userId;
+    userContacts = await getUserContactList();
 }
 
 /**
@@ -181,7 +182,9 @@ function setContactBgcCode(counter, i) {
 }
 
 
-// jsdoc
+/**
+ * Renders the user contacts.
+ */
 function renderContacts() {
     let contactList = getElement('contacts-collector');
     contactList.innerHTML = '';
@@ -393,6 +396,5 @@ function saveUserInfo(user) {
  */
 function getUserName(contact) {
     let name = contact['name'].split(' (You)');
-    name = name[0];
-    return name;
+    return name = name[0];
 }
