@@ -545,10 +545,6 @@ body {
   border: 1px solid #a8a8a8;
 }
 
-.dropdown-parent-container p {
-  margin: 0;
-}
-
 .dropdown-outline-focus {
   border: 1px solid #29abe2 !important;
   outline: none;
@@ -774,4 +770,13 @@ body {
   border-radius: 10px;
   gap: 10px;
   font-size: 20px;
+}
+
+.dropdown-parent-container-2:hover {
+  cursor: pointer;
+  border: 1px solid #a8a8a8;
+}
+
+.dropdown-parent-container-2 p {
+  margin: 0;
 }

@@ -61,6 +61,9 @@ function assignedTo() {
   let user = currentUserData;
   if (user == undefined || user == null || user == "") {
     assignElement.innerHTML = "<div class=subuser-align>No Contacts Found</div>";
+    document.getElementById('button-container').innerHTML = `                    
+    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+    <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
   } else {
   user.name = user.name;
   contactsUser.push(user);
