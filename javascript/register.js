@@ -8,6 +8,7 @@ async function addUser() {
     let name = document.getElementById('username');
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
+    let initials = userInitials(name.value);
     if (users.find(u => name.value === u.name )) {
         return alert('Username already exist!!');
     } if (users.find(u => email.value === u.email)) {
@@ -19,7 +20,7 @@ async function addUser() {
         'password': password.value,
         'contacts': [],
         'phone': '',
-        'boardTasks': [],
+        'initials': initials,
         'userId': userId,
         'bgc-name': 'orange',
         'bgc-code': '#FF7A00'
