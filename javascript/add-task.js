@@ -112,7 +112,7 @@ function toggleCheckbox(i) {
     background.classList.add("sub-background");
     let sub_users_child = `Temp-${i}`;
     sub_users.push({
-      userId: i,
+      userId: subUserIdTemp,
       name: subuserTemp.name,
       userBackgroundColor: subuserTemp["bgc-name"],
     });

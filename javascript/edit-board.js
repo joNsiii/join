@@ -272,19 +272,23 @@ function editAssignedToUser(task) {
 
 function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
+    let allUser = users;
+
+
     for (let i = 0; i < users.length; i++) {
         let user = users[i].name;
         let bgc = users[i]["bgc-name"];
+        let userId = users[i].userId;
         // user = generateHTMLUser();
-        selectField.innerHTML += generateHTMLUser(i, bgc, user, selectedUsers);
+        selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers);
     }
 }
 
-function generateHTMLUser(i, bgc, user,selectedUsers) {
+function generateHTMLUser(i, userId, bgc, user,selectedUsers) {
     if(selectedUsers.length > 0){
-        console.log("selectedUser if abfrage funktioniert", selectedUsers)
+        // console.log("selectedUser if abfrage funktioniert", selectedUsers)
     }
-    return ` <div class="subuser-selection" onclick="selectUser(${i})" id="subuser-div-${i}">
+    return ` <div class="subuser-selection" onclick="selectUser(${userId})" id="subuser-div-${i}">
             <div class="subuser-align">
             <div class="sub-profile-img bgc-${bgc}">test</div>
             <div>${user}</div>
