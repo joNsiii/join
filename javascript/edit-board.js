@@ -5,7 +5,7 @@ let priority;
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
     console.log(task);
-    selectedUsers = task.sub_users;
+    selectedUsers = JSON.parse(JSON.stringify(task.sub_users));
     const dialog = document.getElementById("dialog");
     dialog.setAttribute("w3-include-html", "./edit-task.html");
     await includeHTML();
@@ -140,11 +140,23 @@ function cancelSubtaskEditSafety() {
     document.addEventListener("click", function (event) {
         let subtaskForm = document.getElementById("subtask-form");
         let subtaskInput = document.getElementById("subtask");
-        if (event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
+        // Überprüfe, ob subtaskForm existiert, bevor du contains aufrufst
+        if (subtaskForm && event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
             cancelSubtaskEdit();
         }
     });
 }
+function deleteSubtask(subtaskId) {
+    // Finde den Index der Subtask, die entfernt werden soll
+    const subtaskIndex = currentTask.findIndex(subtask => subtask.subtaskId === subtaskId);
+        currentTask.splice(subtaskIndex, 1);
+        const subtaskSpan = document.getElementById(`sub-span-${subtaskId}`);
+        if (subtaskSpan) {
+            subtaskSpan.parentNode.removeChild(subtaskSpan);
+        }
+}
+
+
 function cancelSubtaskEdit(event) {
     if (event) event.stopPropagation();
     document.getElementById("subtask").value = "";
@@ -260,10 +272,12 @@ async function findTaskAndUpdate(taskId) {
         taskToUpdate.subtasks.push(...currentTask);
     }
     // TODO ASSIGNED TO
+    taskToUpdate.sub_users = [...selectedUsers];
     boardTasks[taskIndex] = taskToUpdate;
     await setItem("boardTasks", JSON.stringify(boardTasks));
     closeDialog("dialog");
     renderEachTask();
+    currentTask = [];
 }
 
 // assigned to
@@ -271,23 +285,11 @@ async function findTaskAndUpdate(taskId) {
 function editAssignedToUser(task) {
     let selectField = document.getElementById("myDropdown");
     getSelectedUsers(task, selectField);
-    for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        let allUserIds = user.userId;
-        console.log(`editAssignedToUser ${i}:`, allUserIds);
-    }
-    // let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
-    // console.log(subUser);
-
-    // if(task.sub_users.userId.includes(users.userId)) {
-    //     console.log(task.sub_users)
-    // }
 }
 
 function userIsSelected(userId, selectedUsers) {
     // Überprüfen, ob der Benutzer bereits ausgewählt wurde
     const isSelected = selectedUsers.some(user => user.userId === userId);
-    
     // Rückgabe der Daten für die UI-Anpassung
     return {
         checkboxImage: isSelected ? "./img/checkmark-white.png" : "./img/checkmark-unchecked.png",
