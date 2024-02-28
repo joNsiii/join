@@ -331,7 +331,8 @@ function selectUser(id, i) {
         console.log("selectedUsers:", selectedUsers);
     } else {
         //if user selected remove
-        selectedUsers = selectedUsers.filter((user) => user.userId !== id);
+        current = selectedUsers.findIndex((user) => user.userId == id);
+        selectedUsers.splice(current, 1);
         console.log("selectedUsers nach Entfernung:", selectedUsers);
     }
     toggleSelectedUser(id, i);

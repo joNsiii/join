@@ -248,7 +248,7 @@ function generateSubUsersHtml(subUsers) {
             const fullName = user.name;
             subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
-                        <div class="dbt-contact-profile bgc-${user.userBackgroundColor}">${initials}</div>
+                        <div class="dbt-contact-profile bgc-${user["bgc-name"]}">${initials}</div>
                         <div class="dbt-contact-name">${fullName}</div>
                 </div>
             `;
@@ -288,7 +288,7 @@ function generateUserInitialsHtml(subUsers) {
                 .match(/(\b\S)?/g)
                 .join("")
                 .toUpperCase();
-            userInitialsHtml += `<div class="board-card-user bgc-${user.userBackgroundColor}">${initials}</div>`;
+            userInitialsHtml += `<div class="board-card-user bgc-${user["bgc-name"]}">${initials}</div>`;
         }
         return userInitialsHtml;
     }

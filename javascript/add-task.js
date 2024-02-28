@@ -133,7 +133,7 @@ function toggleCheckbox(i) {
       userIdIterate: i,
       userId: subUserIdTemp,
       name: subuserTemp.name,
-      userBackgroundColor: subuserTemp["bgc-name"],
+      "bgc-name": subuserTemp["bgc-name"],
     });
   } else {
     checkBox.src = "./img/checkmark-unchecked.png";
