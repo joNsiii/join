@@ -264,7 +264,6 @@ async function findTaskAndUpdate(taskId) {
     await setItem("boardTasks", JSON.stringify(boardTasks));
     closeDialog("dialog");
     renderEachTask();
-    loadUserImage();
 }
 
 // assigned to
