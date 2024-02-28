@@ -15,6 +15,16 @@ body {
     color: #29abe2;
 }
 
+.help-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow-back {
+    cursor: pointer;
+}
+
 .step {
     display: flex;
     gap: 35px;

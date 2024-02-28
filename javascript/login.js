@@ -140,3 +140,20 @@ function togglePasswordIcon(passwordField, toggleImg) {
 function changePasswordIcon() {
     document.getElementById('password-lock').src = "./img/visibility_off.png";
 }
+
+function loadLogoAnimation() {
+    const logo = document.querySelector('.joinLogo');
+    const startup = document.querySelector('.startup');
+
+    setTimeout(function(){
+        logo.classList.add('selected');
+    }, 1000);
+
+    setTimeout(function(){
+        startup.classList.add('blend-out');
+    }, 1250);
+
+    setTimeout(function(){
+        startup.classList.add('d-none');
+    }, 1350);
+}
