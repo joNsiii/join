@@ -14,20 +14,16 @@
     <link rel="stylesheet" href="./media/board-media.css" />
     <link rel="stylesheet" href="./media/add-task-form-media.css" />
     <link rel="stylesheet" href="./styles/background-color.css">
-    <link rel="stylesheet" href="./styles/add-task-form.css">
-    <link rel="stylesheet" href="./media/add-task-form-media.css">
     <script src="./javascript/global.js"></script>
     <script src="./javascript/common.js"></script>
     <script src="javascript/register.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/board.js"></script>
     <script src="./javascript/edit-board.js"></script>
-    <script src="./javascript/add-task-form.js"></script>
 
 </head>
 
 <body onload="init(), boardInit()">
-    <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html" onclick="closeAddTaskForm()"></dialog>
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
 
     <div w3-include-html="templates/templates.html"></div>
@@ -45,7 +41,7 @@
                         <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                     </div>
                 </div>
-                <button class="board-task-button" onclick="openAddTaskForm()">
+                <button class="board-task-button" onclick="addTaskFromBoard()">
                     <div class="btb-text">Add task</div>
                     <img class="btb-img" src="./img/add.png" alt="add-task" />
                 </button>

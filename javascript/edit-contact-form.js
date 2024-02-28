@@ -94,7 +94,7 @@ async function verifyEditedContact(j, mail) {
 async function showEditedContactList(j, mail) {
     await updateUserData(j);
     closeSavedContact('edit');
-    await initContacts();
+    await initContactsUser();
     showEditedContact(mail);
 }
 
@@ -244,7 +244,7 @@ function showEditedContact(mail) {
 async function deleteUserContact(j) {
     await removeUserContact(j);
     resetDialogs();
-    initContacts();
+    initContactsUser();
     showBacklogContact('Contact successfully deleted');
     setTimeout(async () => {
         closeDialog('dialog-contact-viewer');

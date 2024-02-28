@@ -1,24 +1,3 @@
-#dialog-add-task[open] {
-    display: flex;
-}
-
-.dialog-add-task {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
-    color: #000000;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: unset;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 300;
-}
-
 .add-task-headline {
     margin: 0;
     padding: 110px 0 0 96px;
@@ -154,11 +133,9 @@
 }
 
 .task-drop-down-arrow {
-    background-color: white;
     position: absolute;
     top: 12px;
     right: 17px;
-    pointer-events: none;
 }
 
 .vertical-line-task-form {

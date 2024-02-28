@@ -38,7 +38,6 @@
                         <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
-                        <!-- assign-task is old id -->
                         <div class="dropdown-menu-sub" id="myDropdown">
                             <div class="subuser-selection-parent">
                                 
@@ -72,12 +71,16 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category<label class="red-star">*</label></label>
-                        <select class="select-input" id="category" required>
-                            <option value="" disabled selected>Select task category</option>
-                            <option value="">Technical Task</option>
-                            <option value="">User Story</option>
-                        </select>
-                    </div>
+                        <div onclick="dropDownMenuCategory()" class="dropdown-parent-container-2" id="dropdown-parent-category"><p id="chosen-task">Select task category</p>
+                            <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-2">
+                        </div>
+                        <div class="dropdown-menu-category sleep" id="myDropdown-category">
+                            <div class="category-content">
+                                <div id="Technical Task" onclick="selectCategory(this)">Technical Task</div>
+                                <div id="User Story" onclick="selectCategory(this)">User Story</div>
+                            </div>
+                        </div>
+                    </div> 
                     <div class="single-input-container">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
@@ -95,9 +98,9 @@
             </div>
             <div class="bottom-container">
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
-                <div class="bottom-button-container bottom-flex-right">
+                <div class="bottom-button-container bottom-flex-right" id="button-container">
                     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-                    <button class="createBtn" onclick="addedTask()">Create Task <img src="./img/check.png" alt="check"> </button>
+                    <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>
                 </div>
             </div>
         </form>

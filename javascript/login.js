@@ -60,6 +60,7 @@ function loadRememberMe() {
     }
     if (savedPassword) {
         document.getElementById('password-type').value = savedPassword;
+        changePasswordIcon()
     }
 }
 
@@ -114,4 +115,28 @@ function wrongPassword() {
         warning.classList.remove("d-none");
         input.classList.add("bad-outline");
     }
+}
+
+document.querySelectorAll('input[type="password"]').forEach(passwordField => {
+    let toggleImg = passwordField.nextElementSibling.querySelector('img');
+    toggleImg.addEventListener('click', function () {
+        togglePasswordIcon(passwordField, toggleImg);
+    });
+});
+
+function togglePasswordIcon(passwordField, toggleImg) {
+    if (passwordField) {
+        let currentType = passwordField.type;
+        if (passwordField.value !== "") {
+            passwordField.type = (currentType === "password") ? "text" : "password";
+            toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
+        } else {
+            toggleImg.src = "./img/lock.png";
+            passwordField.type = "password";
+        }
+    }
+};
+
+function changePasswordIcon() {
+    document.getElementById('password-lock').src = "./img/visibility_off.png";
 }
