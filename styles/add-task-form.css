@@ -345,3 +345,54 @@
     justify-content: space-between;
     align-items: flex-start;
 }
+
+
+
+
+.assignable-contacts-collector {
+    width: 100%;
+    max-height: 168px;
+    background-color: #FFFFFF;
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    overflow-y: auto;
+}
+
+.assignable-contact-group {
+    box-sizing: border-box;
+    padding: 7px 16px;
+    width: 100%;
+    max-width: 416px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignable-contact {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+.assignable-contact-initials {
+    box-sizing: border-box;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: center;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
