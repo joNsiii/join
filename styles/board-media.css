@@ -161,14 +161,14 @@
 
     .user-priority-group {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+
     }
 
     .board-user-group {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        margin-left: 5px;
     }
 
     .board-card-user {
@@ -185,6 +185,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: -8px;
     }
 
     .bcu-orange {
