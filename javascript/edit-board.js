@@ -1,9 +1,11 @@
 currentTask = [];
+selectedUsers = [];
 let priority;
 // NOT FINISHED YET
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
     console.log(task);
+    selectedUsers = task.sub_users;
     const dialog = document.getElementById("dialog");
     dialog.setAttribute("w3-include-html", "./edit-task.html");
     await includeHTML();
@@ -265,19 +267,18 @@ async function findTaskAndUpdate(taskId) {
     loadUserImage();
 }
 
-// test
+// assigned to
 
 function editAssignedToUser(task) {
     let selectField = document.getElementById("myDropdown");
     getSelectedUsers(task, selectField);
     for (let i = 0; i < users.length; i++) {
-        const element = users[i];
-        let allUserIds = element.find((u) => u.userId);
-        console.log(allUserIds);
-        
+        const user = users[i];
+        let allUserIds = user.userId;
+        console.log(`editAssignedToUser ${i}:`,allUserIds);
     }
-    let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
-    console.log(subUser);
+    // let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
+    // console.log(subUser);
 
 
     // if(task.sub_users.userId.includes(users.userId)) {
@@ -288,7 +289,6 @@ function editAssignedToUser(task) {
 function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
     let allUser = users;
-
 
     for (let i = 0; i < users.length; i++) {
         let user = users[i].name;
@@ -316,7 +316,11 @@ function generateHTMLUser(i, userId, bgc, user,selectedUsers, initials) {
 }
 
 function selectUser(id, i) {
+    let userObject = users.find((u) => u.userId === id);
+    console.log(userObject);
 
+    selectedUsers.push(userObject);
+    console.log('selectedUsers:', selectedUsers);
     toggleSelectedUser(id, i);
 }
 
