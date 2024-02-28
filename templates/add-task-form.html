@@ -39,7 +39,8 @@
             <div class="task-label-input-group d-none-mobile">
                 <label class="task-label-text" for="task-assignment">Assigned to</label>
                 <div class="p-relative">
-                    <select name="task-assignment" id="task-assignment" class="task-select">
+                    <select id="assignable-contacts-form" name="task-assignment" id="task-assignment"
+                        class="task-select">
                         <option value="0">Select contacts to assign</option>
                         <option value="1">You</option>
                         <option value="i">User i</option>
@@ -52,10 +53,13 @@
         <fieldset class="add-task-fieldset gap-24">
             <div class="task-label-input-group">
                 <label class="task-label-text" for="task-due-date">Due date<span class="tlt-required">*</span></label>
-                <div class="task-input-hint-group">
-                    <input id="task-due-date" class="task-input c-gray" type="date" placeholder="dd/mm/yyyy"
-                        onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                    <div class="task-hint">This field is required</div>
+                <div class="p-relative">
+                    <div class="task-input-hint-group">
+                        <input id="task-due-date" class="task-input c-gray" type="date" placeholder="dd/mm/yyyy"
+                            onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                        <img class="task-drop-down-arrow" src="./img/calendar.png" alt="calendar">
+                        <div class="task-hint">This field is required</div>
+                    </div>
                 </div>
             </div>
             <div class="task-label-input-group d-none-mobile">

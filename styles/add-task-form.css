@@ -154,9 +154,11 @@
 }
 
 .task-drop-down-arrow {
+    background-color: white;
     position: absolute;
     top: 12px;
     right: 17px;
+    pointer-events: none;
 }
 
 .vertical-line-task-form {

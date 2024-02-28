@@ -22,11 +22,12 @@
     <script src="javascript/storage.js"></script>
     <script src="javascript/board.js"></script>
     <script src="./javascript/edit-board.js"></script>
+    <script src="./javascript/add-task-form.js"></script>
 
 </head>
 
 <body onload="init(), boardInit()">
-    <dialog open id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"></dialog>
+    <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"></dialog>
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
 
     <div w3-include-html="templates/templates.html"></div>
