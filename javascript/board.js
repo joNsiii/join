@@ -318,6 +318,7 @@ function setupCloseDialogMechanism() {
         });
     }
     renderEachTask();
+    loadUserImage();
 }
 
 function startDragging(id) {
