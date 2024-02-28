@@ -64,7 +64,12 @@ function assignedTo() {
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
     <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
-  } else {
+  } 
+  if (user !== undefined) {
+    assignElement.innerHTML = "";
+    document.getElementById('button-container').innerHTML = `                    
+    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+    <button class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
   user.name = user.name;
   contactsUser.push(user);
   for (let i = 0; i < user.contacts.length; i++) {
@@ -370,7 +375,7 @@ function clearAddTask() {
   document.getElementById("title-task").value = "";
   document.getElementById("description-task").value = "";
   document.getElementById("date-date-task").value = "";
-  document.getElementById("category").selectedIndex = 0;
+  document.getElementById("chosen-task").innerHTML = "Select task category";
   document.getElementById("sub-profile").innerHTML = "";
   document.getElementById("subtask-display").innerHTML = "";
 
