@@ -130,3 +130,27 @@
         transform: translateY(175%);
     }
 }
+
+@media (max-width: 1135px) {
+    .dropdown-menu-sub {
+        top: 100px;
+      }
+}
+
+@media (max-width: 1050px) {
+    .dropdown-menu-category {
+        top: 103px;
+      }
+}
+
+@media (max-width: 950px) {
+    .dropdown-menu-category {
+        top: 79px;
+      }
+}
+
+@media (max-width: 950px) {
+    .dropdown-menu-sub {
+        top: 75px;
+      }
+}
