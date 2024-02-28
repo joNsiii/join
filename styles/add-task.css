@@ -31,12 +31,13 @@ body {
   width: 440px;
   min-width: 200px;
   height: 376px;
+  gap: 32px;
 }
 
 .single-input-container {
   display: flex;
   flex-direction: column;
-  height: 96px;
+  height: fit-content;
   gap: 8px;
   position: relative;
 }
@@ -209,7 +210,7 @@ body {
   min-width: 200px;
   margin-left: 96px;
   margin-right: 48px;
-  gap: 16px;
+  gap: 32px;
   box-sizing: border-box;
 }
 
@@ -278,11 +279,12 @@ body {
 .bottom-container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin-left: 328px;
   max-width: 1026px;
   margin-right: 48px;
   margin-top: 146px;
+  height: fit-content;
 }
 
 .bottom-button-container {
@@ -403,13 +405,28 @@ body {
 }
 
 #subtask-display {
+  height: 112px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   gap: 8px;
   padding-bottom: 0px;
+  z-index: 999;
+  overflow: auto;
+  margin-bottom: 16px;
+}
+
+#subtask-display::-webkit-scrollbar {
+  width: 3px;
+  background: rgba(128, 128, 128, 0.15);
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+}
+
+#subtask-display::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
 }
 
 .subtask-icon-container {
@@ -518,6 +535,8 @@ body {
 
 .dropdown-menu-sub {
   display: none;
+  width: 100%;
+  box-sizing: border-box;
   flex-direction: column;
   background-color: white;
   border-radius: 10px;
@@ -526,8 +545,27 @@ body {
   margin-top: -8px;
   height: 220px;
   z-index: 999;
+  overflow: auto;
+  position: absolute;
+  top: 75px;
 }
 
+.dropdown-menu-sub::-webkit-scrollbar {
+  width: 7px;
+  background: rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+}
+
+.dropdown-menu-sub::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+  height: 10px;
+}
+
+.dropdown-menu-sub::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 11px;
+}
 .subuser-selection-parent {
   height: auto;
   overflow: auto;
@@ -740,8 +778,15 @@ body {
   border-radius: 10px;
   gap: 2px;
   margin-top: -8px;
-  height: 220px;
   z-index: 999;
+  position: absolute;
+  width: 100%;
+  top: 79px;
+  padding-top: 8px;
+}
+
+.category-height {
+  height: 220px;
 }
 
 .category-content {
@@ -777,6 +822,7 @@ body {
   border-radius: 10px;
   gap: 10px;
   font-size: 20px;
+  position: relative;
 }
 
 .dropdown-parent-container-2:hover {

@@ -165,7 +165,7 @@ function toggleCheckbox(i) {
 }
 
 function removeSubPB(subuserId) {
-  let indexToRemove = sub_users.findIndex((user) => user.userId === subuserId);
+  let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
   if (indexToRemove !== -1) {
     sub_users.splice(indexToRemove, 1);
     renderSubProfiles(subuserId);
