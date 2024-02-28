@@ -56,7 +56,7 @@ function fillAssigningSelection(assigningSelection) {
                     <div class="assignable-contact-initials bgc-${contact['bgc-name']}">${initialLetters}</div>
                     <div class="assignable-contact-name">${contact.name}</div>
                 </div>
-                <img id="assignable-contact-checkbox-${i}" src="../img/check-button-false.png" alt="check-button-false">
+                <img id="assignable-contact-checkbox-${i}" src="./img/check-button-false.png" alt="check-button-false">
             </div>
         `;
     }
@@ -74,10 +74,10 @@ function selectAssignableContact(i, selecting) {
     let image = document.getElementById(`assignable-contact-checkbox-${i}`);
     let contact = document.getElementById(`assignable-contact-${i}`);
     if (selecting) {
-        image.src = '../img/check-button-true.png';
+        image.src = './img/check-button-true.png';
         contact.setAttribute('onclick', `selectAssignableContact(${i}, false)`);
     } else {
-        image.src = '../img/check-button-false.png';
+        image.src = './img/check-button-false.png';
         contact.setAttribute('onclick', `selectAssignableContact(${i}, true)`);
     }
 }
