@@ -27,7 +27,7 @@
 </head>
 
 <body onload="init(), boardInit()">
-    <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"></dialog>
+    <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html" onclick="closeAddTaskForm()"></dialog>
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
 
     <div w3-include-html="templates/templates.html"></div>
@@ -45,7 +45,7 @@
                         <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                     </div>
                 </div>
-                <button class="board-task-button" onclick="addTaskFromBoard()">
+                <button class="board-task-button" onclick="openAddTaskForm()">
                     <div class="btb-text">Add task</div>
                     <img class="btb-img" src="./img/add.png" alt="add-task" />
                 </button>

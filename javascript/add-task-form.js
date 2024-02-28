@@ -1,6 +1,17 @@
 let assignableContacts = [];
 
 
+function openAddTaskForm() {
+    document.getElementById('dialog-add-task').show();
+    initAddTaskForm();
+}
+
+
+function closeAddTaskForm() {
+    document.getElementById('dialog-add-task').close();
+}
+
+
 async function initAddTaskForm() {
     await loadAssignableContacts();
     renderAssignableContacts();

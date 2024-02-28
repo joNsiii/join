@@ -1,6 +1,6 @@
-/* #dialog-add-task[open] {
-    display: none;
-} */
+#dialog-add-task[open] {
+    display: flex;
+}
 
 .dialog-add-task {
     margin: 0;
