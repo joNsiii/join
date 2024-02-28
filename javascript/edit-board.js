@@ -269,9 +269,12 @@ async function findTaskAndUpdate(taskId) {
 function editAssignedToUser(task) {
     let selectField = document.getElementById("myDropdown");
     getSelectedUsers(task, selectField);
-    debugger;
-
-    let allUserIds = users.find((u) => u.userId);
+    for (let i = 0; i < users.length; i++) {
+        const element = users[i];
+        let allUserIds = element.find((u) => u.userId);
+        console.log(allUserIds);
+        
+    }
     let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
     console.log(subUser);
 
