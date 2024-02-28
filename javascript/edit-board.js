@@ -271,7 +271,7 @@ async function findTaskAndUpdate(taskId) {
     if (Object.entries(currentTask).length !== 0) {
         taskToUpdate.subtasks.push(...currentTask);
     }
-    // TODO ASSIGNED TO
+    // ASSIGNED TO
     taskToUpdate.sub_users = [...selectedUsers];
     boardTasks[taskIndex] = taskToUpdate;
     await setItem("boardTasks", JSON.stringify(boardTasks));
