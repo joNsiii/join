@@ -284,9 +284,19 @@ function editAssignedToUser(task) {
     // }
 }
 
+function userIsSelected(userId, selectedUsers) {
+    // Überprüfen, ob der Benutzer bereits ausgewählt wurde
+    const isSelected = selectedUsers.some(user => user.userId === userId);
+    
+    // Rückgabe der Daten für die UI-Anpassung
+    return {
+        checkboxImage: isSelected ? "./img/checkmark-white.png" : "./img/checkmark-unchecked.png",
+        backgroundClass: isSelected ? "sub-background" : ""
+    };
+}
+
 function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
-    let allUser = users;
 
     for (let i = 0; i < users.length; i++) {
         let user = users[i].name;
@@ -299,15 +309,13 @@ function getSelectedUsers(task, selectField) {
 }
 
 function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
-    if (selectedUsers.length > 0) {
-        // console.log("selectedUser if abfrage funktioniert", selectedUsers)
-    }
-    return ` <div class="subuser-selection" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
+    const {checkboxImage, backgroundClass } = userIsSelected(userId, selectedUsers);
+    return ` <div class="subuser-selection ${backgroundClass}" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
             <div class="subuser-align">
             <div class="sub-profile-img bgc-${bgc}">${initials}</div>
             <div>${user}</div>
             </div>  
-            <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+            <div class="checkbox"><img src="${checkboxImage}" alt="checkbox"
                 id="checkbox-remember-me-${i}"></div>  
         </div>
     `;
@@ -315,10 +323,6 @@ function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
 
 function selectUser(id, i) {
     let userObject = users.find((u) => u.userId === id);
-    // console.log(userObject);
-    // selectedUsers.push(userObject);
-    // console.log('selectedUsers:', selectedUsers);
-
     let isUserAlreadySelected = selectedUsers.some((selectedUser) => selectedUser.userId === id);
 
     if (!isUserAlreadySelected) {
