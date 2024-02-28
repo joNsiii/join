@@ -274,11 +274,10 @@ function editAssignedToUser(task) {
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         let allUserIds = user.userId;
-        console.log(`editAssignedToUser ${i}:`,allUserIds);
+        console.log(`editAssignedToUser ${i}:`, allUserIds);
     }
     // let subUser = task.sub_users.find((u) => u.userId == allUserIds.userId);
     // console.log(subUser);
-
 
     // if(task.sub_users.userId.includes(users.userId)) {
     //     console.log(task.sub_users)
@@ -299,8 +298,8 @@ function getSelectedUsers(task, selectField) {
     }
 }
 
-function generateHTMLUser(i, userId, bgc, user,selectedUsers, initials) {
-    if(selectedUsers.length > 0){
+function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
+    if (selectedUsers.length > 0) {
         // console.log("selectedUser if abfrage funktioniert", selectedUsers)
     }
     return ` <div class="subuser-selection" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
@@ -316,21 +315,32 @@ function generateHTMLUser(i, userId, bgc, user,selectedUsers, initials) {
 
 function selectUser(id, i) {
     let userObject = users.find((u) => u.userId === id);
-    console.log(userObject);
+    // console.log(userObject);
+    // selectedUsers.push(userObject);
+    // console.log('selectedUsers:', selectedUsers);
 
-    selectedUsers.push(userObject);
-    console.log('selectedUsers:', selectedUsers);
+    let isUserAlreadySelected = selectedUsers.some((selectedUser) => selectedUser.userId === id);
+
+    if (!isUserAlreadySelected) {
+        // if user not selected push in array
+        selectedUsers.push(userObject);
+        console.log("selectedUsers:", selectedUsers);
+    } else {
+        //if user selected remove
+        selectedUsers = selectedUsers.filter((user) => user.userId !== id);
+        console.log("selectedUsers nach Entfernung:", selectedUsers);
+    }
     toggleSelectedUser(id, i);
 }
 
 function toggleSelectedUser(id, i) {
     let imgSource = document.getElementById(`checkbox-remember-me-${i}`);
     let background = document.getElementById(`subuser-div-${i}`);
-    if(imgSource.src.includes('img/checkmark-white.png')) {
+    if (imgSource.src.includes("img/checkmark-white.png")) {
         background.classList.remove("sub-background");
-        imgSource.src = 'img/checkmark-unchecked.png';
-    }else {
-        imgSource.src = 'img/checkmark-white.png';
+        imgSource.src = "img/checkmark-unchecked.png";
+    } else {
+        imgSource.src = "img/checkmark-white.png";
         background.classList.add("sub-background");
     }
 }
