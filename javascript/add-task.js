@@ -33,8 +33,6 @@ async function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById("date-date-task").value;
-  let headingOption = document.getElementById("category");
-  let heading = headingOption.options[headingOption.selectedIndex].text;
 
   const taskId = Date.now();
 
@@ -77,9 +75,9 @@ function assignedTo() {
     contactsUser.push(contact);
   }
 
-  for (let i = 0; i < contactsUser.length; i++) {
-    const bgc = `bgc-${contactsUser[i]["bgc-name"]}`;
-    const contact = contactsUser[i].name;
+  for (let i = 0; i < users.length; i++) {
+    const bgc = `bgc-${users[i]["bgc-name"]}`;
+    const contact = users[i].name;
     let yourName = contact.includes(" (You") ? true : false;
     let names = contact.split(" ");
     let letterGroup;
@@ -123,8 +121,8 @@ function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
   let background = document.getElementById(`subuser-div-${i}`);
   let subProfile = document.getElementById("sub-profile");
-  let subuserTemp = contactsUser[i];
-  let subUserIdTemp = contactsUser[i]["userId"];
+  let subuserTemp = users[i];
+  let subUserIdTemp = users[i]["userId"];
   subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
@@ -132,7 +130,8 @@ function toggleCheckbox(i) {
     background.classList.add("sub-background");
     let sub_users_child = `Temp-${i}`;
     sub_users.push({
-      userId: i,
+      userIdIterate: i,
+      userId: subUserIdTemp,
       name: subuserTemp.name,
       userBackgroundColor: subuserTemp["bgc-name"],
     });
@@ -149,7 +148,7 @@ function toggleCheckbox(i) {
   for (let j = 0; j < sub_users.length; j++) {
     let subBgc = "bgc-" + sub_users[j].userBackgroundColor;
     let subProfileName = sub_users[j].name;
-    let contactId = sub_users[j]["userId"];
+    let contactId = sub_users[j]["userIdIterate"];
     let yourName = subProfileName.includes(" (You") ? true : false;
     let names = subProfileName.split(" ");
     let letterGroup;

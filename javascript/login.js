@@ -12,6 +12,12 @@ if (msg) {
     }, "6000");
 }
 
+function loginInit() {
+    loadLogoAnimation();
+    loadUsers();
+    loadRememberMe();
+}
+
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
     let password = document.getElementById('password-type').value;
@@ -145,15 +151,15 @@ function loadLogoAnimation() {
     const logo = document.querySelector('.joinLogo');
     const startup = document.querySelector('.startup');
 
-    setTimeout(function(){
+    setTimeout(function () {
         logo.classList.add('selected');
     }, 1000);
 
-    setTimeout(function(){
+    setTimeout(function () {
         startup.classList.add('blend-out');
     }, 1250);
 
-    setTimeout(function(){
+    setTimeout(function () {
         startup.classList.add('d-none');
     }, 1350);
 }

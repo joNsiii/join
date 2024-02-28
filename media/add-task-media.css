@@ -75,14 +75,16 @@
     }
 
     .bottom-container {
-        position: sticky;
-        bottom: 80px;
+        position: fixed;
+        bottom: 0;
+        width: 95%;
         height: 88px;
         align-items: center;
         margin-left: 16px;
         margin-right: 16px;
         justify-content: space-between;
         background-color: #f6f7f8;
+        margin-bottom: 76px;
     }
 
     .bottom-button-container {
