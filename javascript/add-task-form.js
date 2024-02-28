@@ -49,17 +49,32 @@ function renderAssignableContacts() {
 function fillAssigningSelection(assigningSelection) {
     for (let i = 0; i < assignableContacts.length; i++) {
         let contact = assignableContacts[i];
-        let initialLetters = getInitialLetterGroup(contact);
-        assigningSelection.innerHTML += `
-            <div id="assignable-contact-${i}" class="assignable-contact-group" onclick="selectAssignableContact(${i}, true)">
-                <div class="assignable-contact">
-                    <div class="assignable-contact-initials bgc-${contact['bgc-name']}">${initialLetters}</div>
-                    <div class="assignable-contact-name">${contact.name}</div>
+        filter = filterAssignableContact(contact);
+        if (filter) {
+            let assigned = (contact.assigned) ? 'assignable-contact-group-selected' : '';
+            let check = (contact.assigned) ? 'assignable-contact-checkbox-active' : '';
+            let initialLetters = getInitialLetterGroup(contact);
+            assigningSelection.innerHTML += `
+                <div id="assignable-contact-${i}" class="assignable-contact-group ${assigned}" onclick="selectAssignableContact(${i}, true)">
+                    <div class="assignable-contact">
+                        <div class="assignable-contact-initials bgc-${contact['bgc-name']}">${initialLetters}</div>
+                        <div class="assignable-contact-name">${contact.name}</div>
+                    </div>
+                    <div id="assignable-contact-checkbox-${i}" class="assignable-contact-checkbox ${check}"></div>
                 </div>
-                <img id="assignable-contact-checkbox-${i}" src="./img/check-button-false.png" alt="check-button-false">
-            </div>
-        `;
+            `;
+        }
     }
+}
+
+
+function filterAssignableContact(contact) {
+    let input = document.getElementById('assigning-input-form').value.toLowerCase();
+    let name = '';
+    for (let i = 0; i < input.length; i++) {
+        name += contact.name[i];
+    }
+    return input == '' || name.toLowerCase().includes(input);
 }
 
 
@@ -74,10 +89,19 @@ function selectAssignableContact(i, selecting) {
     let image = document.getElementById(`assignable-contact-checkbox-${i}`);
     let contact = document.getElementById(`assignable-contact-${i}`);
     if (selecting) {
-        image.src = './img/check-button-true.png';
+        image.style.backgroundImage = 'url(./img/check-button-true.png)';
+        contact.classList.add('assignable-contact-group-selected');
         contact.setAttribute('onclick', `selectAssignableContact(${i}, false)`);
+        assignableContacts[i]['assigned'] = true;
     } else {
-        image.src = './img/check-button-false.png';
+        image.style.backgroundImage = 'url(./img/check-button-false.png)';
+        contact.classList.remove('assignable-contact-group-selected');
         contact.setAttribute('onclick', `selectAssignableContact(${i}, true)`);
+        assignableContacts[i]['assigned'] = false;
     }
+}
+
+
+function showAssignableContacts(value) {
+    document.getElementById('assignable-contacts-collector').style.display = value;
 }
