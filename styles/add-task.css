@@ -292,10 +292,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 328px;
   max-width: 1026px;
-  margin-right: 48px;
-  margin-top: 146px;
+  margin: 32px 48px 32px 328px;
   height: fit-content;
 }
 
