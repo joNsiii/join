@@ -29,6 +29,12 @@ body {
     position: absolute;
     top: 64px;
     right: 74px;
+    cursor: pointer;
+}
+
+.close-add-task-overlay:hover {
+    background-color: #EEEEEE;
+    border-radius: 16px;
 }
 
 .add-task-headline-overlay {
