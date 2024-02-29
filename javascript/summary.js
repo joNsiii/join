@@ -1,5 +1,4 @@
 let greet = [];
-let formattedFirstName = '';
 
 async function summaryInit() {
     await loadUsers();

@@ -65,7 +65,8 @@ function checkLogin() {
 
 function guestLogin() {
     setCookie('guest_session_token', 'guest', 24);
-    window.location.href = 'summary.html';
+    window.location.href = 'summary.html?login=true';
+    localStorage.setItem("GreetName", "Guest ");
 }
 
 function rememberMeStatus() {
