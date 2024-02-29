@@ -123,12 +123,12 @@ function toggleCheckbox(i) {
   let subProfile = document.getElementById("sub-profile");
   let subuserTemp = users[i];
   let subUserIdTemp = users[i]["userId"];
+  console.log(subuserTemp)
   subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
     checkBox.src = "./img/checkmark-white.png";
     background.classList.add("sub-background");
-    let sub_users_child = `Temp-${i}`;
     sub_users.push({
       userIdIterate: i,
       userId: subUserIdTemp,
@@ -146,7 +146,7 @@ function toggleCheckbox(i) {
   }
 
   for (let j = 0; j < sub_users.length; j++) {
-    let subBgc = "bgc-" + sub_users[j].userBackgroundColor;
+    let subBgc = "bgc-" + sub_users[j]["bgc-name"];
     let subProfileName = sub_users[j].name;
     let contactId = sub_users[j]["userIdIterate"];
     let yourName = subProfileName.includes(" (You") ? true : false;
@@ -157,7 +157,6 @@ function toggleCheckbox(i) {
     } else {
       letterGroup = names[0][0] + names[names.length - 2][0];
     }
-    // let subProfileName = subuserTemp.slice(0, 2);
     subProfile.innerHTML += `
         <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
@@ -173,13 +172,8 @@ function removeSubPB(subuserId) {
 }
 
 function renderSubProfiles(index) {
-  let subProfile = document.getElementById("sub-profile");
-  document.getElementById(`checkbox-remember-me-${index}`).src =
-    "./img/checkmark-unchecked.png";
-  background = document
-    .getElementById(`subuser-div-${index}`)
-    .classList.remove("sub-background");
-
+  document.getElementById(`checkbox-remember-me-${index}`).src = "./img/checkmark-unchecked.png";
+  background = document.getElementById(`subuser-div-${index}`).classList.remove("sub-background");
   let deleteContact = document.getElementById(`contact-id-${index}`);
   deleteContact.remove();
 }
@@ -359,36 +353,32 @@ function clearAddTask() {
 
   let subProfile = document.getElementById("sub-profile");
   subProfile.innerHTML = "";
+  clearArrays();
+  assignedTo();
+  prioSelection(Medium);
+}
 
+function clearArrays() {
   subtaskInput = [];
   subtasks = [];
   sub_users = [];
   contactsUser = [];
   priority = priorityDefault;
-
-  assignedTo();
-  prioSelection(Medium);
 }
 
 function addedTask() {
   let backLog = document.getElementById('task-added-success');
   backLog.classList.remove('d-none')
-
     setTimeout(function(){
       window.location.href = "board.html";
   }, 1000);
 }
 
 function dropDownMenuCategory() {
-  document.getElementById("myDropdown-category").classList.toggle("show");
   let icon = document.getElementById("drop-down-icon-2");
-  document
-    .getElementById("dropdown-parent-category")
-    .classList.toggle("dropdown-outline-focus");
-  document
-    .getElementById("dropdown-parent-category")
-    .classList.toggle("dropdown-custom");
-
+  document.getElementById("myDropdown-category").classList.toggle("show");
+  document.getElementById("dropdown-parent-category").classList.toggle("dropdown-outline-focus");
+  document.getElementById("dropdown-parent-category").classList.toggle("dropdown-custom");
   if (icon.src.includes("arrow_drop_downaa.png")) {
     icon.src = "./img/arrow_drop_down-up.png";
   } else {

@@ -154,3 +154,10 @@
         top: 75px;
       }
 }
+
+@media (max-width: 1070px) {
+    .subuser-selection {
+        font-size: 18px;
+        word-break: break-all;
+      }
+}
