@@ -1,4 +1,4 @@
-@media (max-width: 950px) {
+@media (max-width: 1070px) {
     .display-flex {
         flex-direction: column;
     }
@@ -21,14 +21,18 @@
     .bottom-button-container {
         max-width: 440px;
         margin-right: 54px;
-        margin-bottom: 32px;
     }
 
     .bottom-container {
         margin: 0;
+        margin-bottom: 32px;
         margin-left: 328px;
         align-items: normal;
     }
+
+    .dropdown-menu-sub {
+        top: 67px !important;
+      }
 }
 
 @media (max-width: 730px) {
@@ -78,10 +82,12 @@
         position: fixed;
         bottom: 0;
         width: 95%;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
         height: 88px;
         align-items: center;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin-left: 0;
+        margin-right: 0;
         justify-content: space-between;
         background-color: #f6f7f8;
         margin-bottom: 76px;
@@ -109,7 +115,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        width: 55%;
+        width: 65%;
     }
 }
 
@@ -119,7 +125,7 @@
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1070px) {
     .sub-profile-container {
         transform: translateY(130%) !important;
     }
@@ -149,11 +155,11 @@
       }
 }
 
-@media (max-width: 950px) {
+/* @media (max-width: 950px) {
     .dropdown-menu-sub {
         top: 75px;
       }
-}
+} */
 
 @media (max-width: 1070px) {
     .subuser-selection {
