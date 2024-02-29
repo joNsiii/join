@@ -1,7 +1,7 @@
 currentTask = [];
 selectedUsers = [];
 let priority;
-// NOT FINISHED YET
+
 async function editTask(taskId) {
     const task = boardTasks.find((task) => task.taskId === taskId);
     console.log(task);
@@ -23,49 +23,35 @@ async function editTask(taskId) {
     loadUserImage();
 }
 
-function renderUserProfile() {
-    const subProfileContainer = document.getElementById("sub-profile");
-    subProfileContainer.innerHTML = "";
-
-    selectedUsers.forEach((user) => {
-        const initials = user.name
-            .match(/(\b\S)?/g)
-            .join("")
-            .toUpperCase();
-        subProfileContainer.innerHTML += `
-        <div class="board-card-user-edit bgc-${user["bgc-name"]}">${initials}</div>
-        `;
-    });
+function updateTaskProperties(taskToUpdate) {
+    taskToUpdate.title = document.getElementById("title-task").value || taskToUpdate.title;
+    taskToUpdate.description = document.getElementById("description-task").value || taskToUpdate.description;
+    taskToUpdate.dueDate = document.getElementById("date-date-task").value || taskToUpdate.date;
+    taskToUpdate.heading = document.getElementById("category").value || taskToUpdate.heading;
 }
 
-function setPrioritySelection(priority) {
-    document.getElementById("Urgent").classList.remove("prioUrgent");
-    document.getElementById("Medium").classList.remove("prioMedium");
-    document.getElementById("Low").classList.remove("prioLow");
-
-    let lowImg = document.getElementById("low-img");
-    let mediumImg = document.getElementById("medium-img");
-    let urgentImg = document.getElementById("urgent-img");
-
-    lowImg.src = "./img/low.png";
-    mediumImg.src = "./img/medium-prio.png";
-    urgentImg.src = "./img/urgent-red-arrows.png";
-    const priorityElement = document.getElementById(priority);
-    if (priorityElement) {
-        priorityElement.classList.add(`prio${priority}`);
-        switch (priority) {
-            case "Urgent":
-                urgentImg.src = "./img/urgent-white-arrows.png";
-                break;
-            case "Medium":
-                mediumImg.src = "./img/medium.png";
-                break;
-            case "Low":
-                lowImg.src = "./img/low-white-arrows.png";
-                break;
-        }
+// finds task and updates it
+async function findTaskAndUpdate(taskId) {
+    taskId = parseInt(taskId, 10);
+    const taskIndex = boardTasks.findIndex((task) => task.taskId === taskId);
+    if (taskIndex === -1) {
+        console.error("Task not found.");
+        return;
     }
+    const taskToUpdate = boardTasks[taskIndex];
+    updateTaskProperties(taskToUpdate);
+    updatePriority(taskToUpdate);
+    if (Object.entries(currentTask).length !== 0) {
+        taskToUpdate.subtasks.push(...currentTask);
+    }
+    taskToUpdate.sub_users = [...selectedUsers];
+    boardTasks[taskIndex] = taskToUpdate;
+    await setItem("boardTasks", JSON.stringify(boardTasks));
+    closeDialog("dialog");
+    renderEachTask();
+    currentTask = [];
 }
+
 function displaySubtasksForEditing(taskId) {
     const task = boardTasks.find((t) => t.taskId === taskId);
     if (!task) {
@@ -93,13 +79,11 @@ function displaySubtasksForEditing(taskId) {
         subtaskDisplayElement.innerHTML += subtaskHtml;
     });
 }
-
 function updateSubtaskText(taskId, subtaskId, newText) {
     const task = boardTasks.find((t) => t.taskId === taskId);
     const subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
     subtask.subtasksText = newText;
 }
-
 async function deleteSubtaskFromEditing(taskId, subtaskId) {
     const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
     if (taskIndex > -1) {
@@ -110,17 +94,6 @@ async function deleteSubtaskFromEditing(taskId, subtaskId) {
         }
     }
 }
-
-function initializeSubtaskEditing() {
-    const addSubtaskIcon = document.getElementById("icon-hold");
-    addSubtaskIcon.innerHTML = `
-            <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtaskEdit()">
-            <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-            <img src="./img/done.png" alt="add-icon" class="hover" onclick="addNewSubtaskForEditing()">
-        `;
-    cancelSubtaskEditSafety();
-}
-
 function addNewSubtaskForEditing() {
     const subtaskInputValue = document.getElementById("subtask").value.trim();
     const subtaskDisplayElement = document.getElementById("subtask-display");
@@ -151,18 +124,8 @@ function addNewSubtaskForEditing() {
         console.log(currentTask);
     }
 }
-function cancelSubtaskEditSafety() {
-    document.addEventListener("click", function (event) {
-        let subtaskForm = document.getElementById("subtask-form");
-        let subtaskInput = document.getElementById("subtask");
-        // Überprüfe, ob subtaskForm existiert, bevor du contains aufrufst
-        if (subtaskForm && event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
-            cancelSubtaskEdit();
-        }
-    });
-}
+
 function deleteSubtask(subtaskId) {
-    // Finde den Index der Subtask, die entfernt werden soll
     const subtaskIndex = currentTask.findIndex((subtask) => subtask.subtaskId === subtaskId);
     currentTask.splice(subtaskIndex, 1);
     const subtaskSpan = document.getElementById(`sub-span-${subtaskId}`);
@@ -170,11 +133,28 @@ function deleteSubtask(subtaskId) {
         subtaskSpan.parentNode.removeChild(subtaskSpan);
     }
 }
-
+function initializeSubtaskEditing() {
+    const addSubtaskIcon = document.getElementById("icon-hold");
+    addSubtaskIcon.innerHTML = `
+            <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtaskEdit()">
+            <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+            <img src="./img/done.png" alt="add-icon" class="hover" onclick="addNewSubtaskForEditing()">
+        `;
+    cancelSubtaskEditSafety();
+}
 function cancelSubtaskEdit(event) {
     if (event) event.stopPropagation();
     document.getElementById("subtask").value = "";
     resetSubtaskIcons();
+}
+function cancelSubtaskEditSafety() {
+    document.addEventListener("click", function (event) {
+        let subtaskForm = document.getElementById("subtask-form");
+        let subtaskInput = document.getElementById("subtask");
+        if (subtaskForm && event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
+            cancelSubtaskEdit();
+        }
+    });
 }
 
 function resetSubtaskIcons() {
@@ -190,7 +170,6 @@ function findSubtask(task, subtaskId) {
     return task.subtasks.find((st) => st.subtaskId === subtaskId);
 }
 
-// Funktion 3: Aktualisiere UI für Fokussierung
 function updateUIForFocus(subtaskId, taskId) {
     const subTaskSpan = document.getElementById(`sub-span-${subtaskId}`);
     const editIcon = document.getElementById(`icon-container-${subtaskId}`);
@@ -208,7 +187,6 @@ function updateUIForFocus(subtaskId, taskId) {
     `;
 }
 
-// Funktion 4: Aktualisiere UI für Nicht-Fokussierung
 function updateUIForBlur(subtaskId, taskId, currentSubtaskValue) {
     const subTaskSpan = document.getElementById(`sub-span-${subtaskId}`);
     const editIcon = document.getElementById(`icon-container-${subtaskId}`);
@@ -226,7 +204,6 @@ function updateUIForBlur(subtaskId, taskId, currentSubtaskValue) {
     `;
 }
 
-// main function
 function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
     const task = findTask(taskId);
     if (!task) {
@@ -248,15 +225,35 @@ function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
     }
 }
 
-// Aktualisiert die grundlegenden Eigenschaften der Aufgabe
-function updateTaskProperties(taskToUpdate) {
-    taskToUpdate.title = document.getElementById("title-task").value || taskToUpdate.title;
-    taskToUpdate.description = document.getElementById("description-task").value || taskToUpdate.description;
-    taskToUpdate.dueDate = document.getElementById("date-date-task").value || taskToUpdate.date;
-    taskToUpdate.heading = document.getElementById("category").value || taskToUpdate.heading;
+function setPrioritySelection(priority) {
+    document.getElementById("Urgent").classList.remove("prioUrgent");
+    document.getElementById("Medium").classList.remove("prioMedium");
+    document.getElementById("Low").classList.remove("prioLow");
+
+    let lowImg = document.getElementById("low-img");
+    let mediumImg = document.getElementById("medium-img");
+    let urgentImg = document.getElementById("urgent-img");
+
+    lowImg.src = "./img/low.png";
+    mediumImg.src = "./img/medium-prio.png";
+    urgentImg.src = "./img/urgent-red-arrows.png";
+    const priorityElement = document.getElementById(priority);
+    if (priorityElement) {
+        priorityElement.classList.add(`prio${priority}`);
+        switch (priority) {
+            case "Urgent":
+                urgentImg.src = "./img/urgent-white-arrows.png";
+                break;
+            case "Medium":
+                mediumImg.src = "./img/medium.png";
+                break;
+            case "Low":
+                lowImg.src = "./img/low-white-arrows.png";
+                break;
+        }
+    }
 }
 
-// updates priority
 function updatePriority(taskToUpdate) {
     const priorities = ["Urgent", "Medium", "Low"];
     priorities.forEach((priority) => {
@@ -271,72 +268,25 @@ function saveNewPrio(clickedPrio) {
     });
     clickedPrio.classList.add("selected");
 }
-// finds task and updates it
-async function findTaskAndUpdate(taskId) {
-    taskId = parseInt(taskId, 10);
-    const taskIndex = boardTasks.findIndex((task) => task.taskId === taskId);
-    if (taskIndex === -1) {
-        console.error("Task not found.");
-        return;
-    }
-    const taskToUpdate = boardTasks[taskIndex];
-    updateTaskProperties(taskToUpdate);
-    updatePriority(taskToUpdate);
-    if (Object.entries(currentTask).length !== 0) {
-        taskToUpdate.subtasks.push(...currentTask);
-    }
-    // ASSIGNED TO
-    taskToUpdate.sub_users = [...selectedUsers];
-    boardTasks[taskIndex] = taskToUpdate;
-    await setItem("boardTasks", JSON.stringify(boardTasks));
-    closeDialog("dialog");
-    renderEachTask();
-    currentTask = [];
-}
+function renderUserProfile() {
+    const subProfileContainer = document.getElementById("sub-profile");
+    subProfileContainer.innerHTML = "";
 
-// assigned to
+    selectedUsers.forEach((user) => {
+        const initials = user.name
+            .match(/(\b\S)?/g)
+            .join("")
+            .toUpperCase();
+        subProfileContainer.innerHTML += `
+        <div class="board-card-user-edit bgc-${user["bgc-name"]}">${initials}</div>
+        `;
+    });
+}
 
 function editAssignedToUser(task) {
     let selectField = document.getElementById("myDropdown");
     getSelectedUsers(task, selectField);
 }
-
-function userIsSelected(userId, selectedUsers) {
-    // Überprüfen, ob der Benutzer bereits ausgewählt wurde
-    const isSelected = selectedUsers.some((user) => user.userId === userId);
-    // Rückgabe der Daten für die UI-Anpassung
-    return {
-        checkboxImage: isSelected ? "./img/checkmark-white.png" : "./img/checkmark-unchecked.png",
-        backgroundClass: isSelected ? "sub-background" : "",
-    };
-}
-
-function getSelectedUsers(task, selectField) {
-    let selectedUsers = task.sub_users;
-
-    for (let i = 0; i < users.length; i++) {
-        let user = users[i].name;
-        let bgc = users[i]["bgc-name"];
-        let userId = users[i].userId;
-        let initials = users[i].initials;
-        // user = generateHTMLUser();
-        selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers, initials);
-    }
-}
-
-function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
-    const { checkboxImage, backgroundClass } = userIsSelected(userId, selectedUsers);
-    return ` <div class="subuser-selection ${backgroundClass}" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
-            <div class="subuser-align">
-            <div class="sub-profile-img bgc-${bgc}">${initials}</div>
-            <div>${user}</div>
-            </div>  
-            <div class="checkbox"><img src="${checkboxImage}" alt="checkbox"
-                id="checkbox-remember-me-${i}"></div>  
-        </div>
-    `;
-}
-
 function selectUser(id, i) {
     let userObject = users.find((u) => u.userId === id);
     let isUserAlreadySelected = selectedUsers.some((selectedUser) => selectedUser.userId === id);
@@ -354,7 +304,6 @@ function selectUser(id, i) {
     toggleSelectedUser(id, i);
     renderUserProfile();
 }
-
 function toggleSelectedUser(id, i) {
     let imgSource = document.getElementById(`checkbox-remember-me-${i}`);
     let background = document.getElementById(`subuser-div-${i}`);
@@ -365,4 +314,37 @@ function toggleSelectedUser(id, i) {
         imgSource.src = "img/checkmark-white.png";
         background.classList.add("sub-background");
     }
+}
+function getSelectedUsers(task, selectField) {
+    let selectedUsers = task.sub_users;
+
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i].name;
+        let bgc = users[i]["bgc-name"];
+        let userId = users[i].userId;
+        let initials = users[i].initials;
+        // user = generateHTMLUser();
+        selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers, initials);
+    }
+}
+function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
+    const { checkboxImage, backgroundClass } = userIsSelected(userId, selectedUsers);
+    return ` <div class="subuser-selection ${backgroundClass}" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
+            <div class="subuser-align">
+            <div class="sub-profile-img bgc-${bgc}">${initials}</div>
+            <div>${user}</div>
+            </div>  
+            <div class="checkbox"><img src="${checkboxImage}" alt="checkbox"
+                id="checkbox-remember-me-${i}"></div>  
+        </div>
+    `;
+}
+function userIsSelected(userId, selectedUsers) {
+    // Überprüfen, ob der Benutzer bereits ausgewählt wurde
+    const isSelected = selectedUsers.some((user) => user.userId === userId);
+    // Rückgabe der Daten für die UI-Anpassung
+    return {
+        checkboxImage: isSelected ? "./img/checkmark-white.png" : "./img/checkmark-unchecked.png",
+        backgroundClass: isSelected ? "sub-background" : "",
+    };
 }
