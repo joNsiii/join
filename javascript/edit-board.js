@@ -15,12 +15,27 @@ async function editTask(taskId) {
     document.getElementById("description-task").value = task.description;
     document.getElementById("date-date-task").value = task.date;
     document.getElementById("category").value = task.heading;
-
+    renderUserProfile();
     displaySubtasksForEditing(task.taskId);
     setPrioritySelection(task.priority);
     document.getElementById("task-id-test").value = taskId;
     editAssignedToUser(task);
     loadUserImage();
+}
+
+function renderUserProfile() {
+    const subProfileContainer = document.getElementById("sub-profile");
+    subProfileContainer.innerHTML = "";
+
+    selectedUsers.forEach((user) => {
+        const initials = user.name
+            .match(/(\b\S)?/g)
+            .join("")
+            .toUpperCase();
+        subProfileContainer.innerHTML += `
+        <div class="board-card-user-edit bgc-${user["bgc-name"]}">${initials}</div>
+        `;
+    });
 }
 
 function setPrioritySelection(priority) {
@@ -148,14 +163,13 @@ function cancelSubtaskEditSafety() {
 }
 function deleteSubtask(subtaskId) {
     // Finde den Index der Subtask, die entfernt werden soll
-    const subtaskIndex = currentTask.findIndex(subtask => subtask.subtaskId === subtaskId);
-        currentTask.splice(subtaskIndex, 1);
-        const subtaskSpan = document.getElementById(`sub-span-${subtaskId}`);
-        if (subtaskSpan) {
-            subtaskSpan.parentNode.removeChild(subtaskSpan);
-        }
+    const subtaskIndex = currentTask.findIndex((subtask) => subtask.subtaskId === subtaskId);
+    currentTask.splice(subtaskIndex, 1);
+    const subtaskSpan = document.getElementById(`sub-span-${subtaskId}`);
+    if (subtaskSpan) {
+        subtaskSpan.parentNode.removeChild(subtaskSpan);
+    }
 }
-
 
 function cancelSubtaskEdit(event) {
     if (event) event.stopPropagation();
@@ -289,11 +303,11 @@ function editAssignedToUser(task) {
 
 function userIsSelected(userId, selectedUsers) {
     // Überprüfen, ob der Benutzer bereits ausgewählt wurde
-    const isSelected = selectedUsers.some(user => user.userId === userId);
+    const isSelected = selectedUsers.some((user) => user.userId === userId);
     // Rückgabe der Daten für die UI-Anpassung
     return {
         checkboxImage: isSelected ? "./img/checkmark-white.png" : "./img/checkmark-unchecked.png",
-        backgroundClass: isSelected ? "sub-background" : ""
+        backgroundClass: isSelected ? "sub-background" : "",
     };
 }
 
@@ -311,7 +325,7 @@ function getSelectedUsers(task, selectField) {
 }
 
 function generateHTMLUser(i, userId, bgc, user, selectedUsers, initials) {
-    const {checkboxImage, backgroundClass } = userIsSelected(userId, selectedUsers);
+    const { checkboxImage, backgroundClass } = userIsSelected(userId, selectedUsers);
     return ` <div class="subuser-selection ${backgroundClass}" onclick="selectUser(${userId}, ${i})" id="subuser-div-${i}">
             <div class="subuser-align">
             <div class="sub-profile-img bgc-${bgc}">${initials}</div>
@@ -338,6 +352,7 @@ function selectUser(id, i) {
         console.log("selectedUsers nach Entfernung:", selectedUsers);
     }
     toggleSelectedUser(id, i);
+    renderUserProfile();
 }
 
 function toggleSelectedUser(id, i) {

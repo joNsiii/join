@@ -78,4 +78,48 @@
         flex-direction: column;
         gap: 8px;
     }
+    .left-side-inputs {
+        width: auto !important;
+    }
+}
+
+@media (max-width: 600px){
+    .add-task-content {
+        margin: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .dialog-board-task {
+        padding: 24px 16px;
+        margin: 0;
+    }
+    .dbt-title {
+        font-size: 32px;
+    }
+    .dbt-button-bar {
+        justify-content: center;
+    }
+    .dbt-type {
+        font-size: 16px;
+    }
+    .add-task-content {
+        padding: 48px 16px !important;
+    }
+    .prio-selection {
+        width: 100% !important;
+    }
+    .dropdown-menu-sub {
+        width: 90% !important;
+        right: -4px !important;
+    }
+}
+
+
+@media (max-width: 380px) {
+    .dropdown-menu-sub {
+        width: 90% !important;
+        right: -4px !important;
+        top: 110px !important
+    }
 }
