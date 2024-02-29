@@ -26,11 +26,13 @@
     <script src="javascript/board.js"></script>
     <script src="./javascript/edit-board.js"></script>
     <script src="./javascript/add-task-form.js"></script>
+    <script src="./javascript/add-task-overlay.js"></script>
 
 </head>
 
 <body onload="init(), boardInit()">
-    <dialog id="add-task-overlay" class="dialog-add-task" w3-include-html="./templates/add-task-overlay.html"></dialog>
+    <dialog id="add-task-overlay" class="dialog-add-task" w3-include-html="./templates/add-task-overlay.html"
+        onclick="closeAddTaskOverlay()"></dialog>
     <!-- <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"
         onclick="closeAddTaskForm()"></dialog> -->
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
@@ -50,7 +52,7 @@
                         <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                     </div>
                 </div>
-                <button class="board-task-button" onclick="openAddTaskForm()">
+                <button class="board-task-button" onclick="openAddTaskOverlay()">
                     <div class="btb-text">Add task</div>
                     <img class="btb-img" src="./img/add.png" alt="add-task" />
                 </button>

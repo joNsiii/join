@@ -1,4 +1,5 @@
-<section class="add-task-overlay">
+<section class="add-task-overlay" onclick="stop(event)">
+    <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog" onclick="closeAddTaskOverlay()">
     <div class="add-task-headline-overlay">Add Task</div>
     <form onsubmit="scopeTasks(); return false">
         <div class="task-form-overlay" id="taskForm">
@@ -69,7 +70,7 @@
                     <div class="input-single-line-subtask" id="subtask-form">
                         <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"
                             onclick="subtaskCustomTemplate()">
-                        <div class="subtask-add-icons" id="icon-hold">
+                        <div class="subtask-add-icons-overlay" id="icon-hold">
                             <img src="./img/subtask.png" alt="add-icon" class="hover add-hover"
                                 onclick="subtaskTemplate()">
                         </div>
@@ -81,7 +82,7 @@
             </div>
 
         </div>
-        <div class="bottom-container">
+        <div class="bottom-container-overlay">
             <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
             <div class="bottom-button-container bottom-flex-right" id="button-container">
                 <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear">

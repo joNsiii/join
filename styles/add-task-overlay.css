@@ -21,6 +21,16 @@ body {
     position: relative;
 }
 
+.close-add-task-overlay {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-fit: center;
+    position: absolute;
+    top: 64px;
+    right: 74px;
+}
+
 .add-task-headline-overlay {
     display: flex;
     height: 73px;
@@ -109,7 +119,7 @@ body {
     display: inline-block;
 }
 
-.subtask-add-icons {
+.subtask-add-icons-overlay {
     display: flex;
     justify-content: space-between;
     width: fit-content;
@@ -120,7 +130,7 @@ body {
     height: 24px;
 }
 
-.subtask-add-icons img {
+.subtask-add-icons-overlay img {
     width: 24px;
     height: 24px;
 }
@@ -302,13 +312,11 @@ body {
     gap: 10px;
 }
 
-.bottom-container {
+.bottom-container-overlay {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 328px;
     max-width: 1026px;
-    margin-right: 48px;
     margin-top: 146px;
     height: fit-content;
 }
