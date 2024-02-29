@@ -100,6 +100,56 @@ function assignedTo() {
     }
 }
 
+
+// function assignedTo() {
+//     let assignElement = document.getElementById("myDropdown");
+//     assignElement.innerHTML = "";
+
+//     let user = currentUserData;
+//     if (user == undefined || user == null || user == "") {
+//         assignElement.innerHTML = "<div class=subuser-align>No Contacts Found</div>";
+//         document.getElementById('button-container').innerHTML = `                    
+//     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+//     <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
+//     }
+//     if (user !== undefined) {
+//         assignElement.innerHTML = "";
+//         document.getElementById('button-container').innerHTML = `                    
+//     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+//     <button class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
+//         user.name = user.name;
+//         contactsUser.push(user);
+//         for (let i = 0; i < user.contacts.length; i++) {
+//             let contact = user.contacts[i];
+//             contactsUser.push(contact);
+//         }
+
+//         for (let i = 0; i < users.length; i++) {
+//             const bgc = `bgc-${users[i]["bgc-name"]}`;
+//             const contact = users[i].name;
+//             let yourName = contact.includes(" (You") ? true : false;
+//             let names = contact.split(" ");
+//             let letterGroup;
+//             if (!yourName) {
+//                 letterGroup = names[0][0] + names[names.length - 1][0];
+//             } else {
+//                 letterGroup = names[0][0] + names[names.length - 2][0];
+//             }
+//             assignElement.innerHTML += `
+//         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+//           <div class="subuser-align">
+//             <div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div>
+//             <div>${contact}</div>
+//           </div>  
+//             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+//               id="checkbox-remember-me-${i}"></div>  
+//         </div>
+//       `;
+//         }
+//     }
+// }
+
+
 function dropDownMenu() {
     let icon = document.getElementById("drop-down-icon");
     document.getElementById("myDropdown").classList.toggle("show");

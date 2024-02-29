@@ -4,8 +4,8 @@
     }
 
     .add-task-overlay {
-        /* height: calc(100vh - 96px);
-        max-height: 870px; */
+        margin-top: 96px;
+        height: calc(100vh - 172px);
         width: 428px;
 
         padding: 48px 16px;
@@ -23,6 +23,7 @@
     .task-form-overlay {
         flex-direction: column;
         max-width: 496px;
+        overflow-y: auto;
     }
 
     .left-side-inputs-overlay {
@@ -53,9 +54,28 @@
         max-width: 396px;
     }
 
-    /* .right-side-inputs-overlay {
+    .right-side-inputs-overlay {
         width: 100%;
-    } */
+    }
+
+    /* prio-button fixen!!! */
+
+    .bottom-container-overlay {
+        margin-top: 0;
+        padding: 16px;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+    }
+
+    .bottom-container-overlay .clearBtn {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container {
+        height: 56px;
+    }
 }
 
 @media (max-width: 950px) {
