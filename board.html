@@ -71,7 +71,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">To do</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="toDo" ondragover="allowDrop(event)"
                     ondrop="moveTo('toDo')" ondragenter="highlight(event, 'toDo')"
@@ -82,7 +83,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">In progress</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="inProgress" ondragover="allowDrop(event)"
                     ondrop="moveTo('inProgress')" ondragenter="highlight(event, 'inProgress')"
@@ -92,7 +94,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">Await feedback</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="awaitFeedback" ondragover="allowDrop(event)"
                     ondrop="moveTo('awaitFeedback')" ondragenter="highlight(event, 'awaitFeedback')"
