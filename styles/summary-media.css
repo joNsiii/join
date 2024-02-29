@@ -119,7 +119,12 @@
         left: 0;
         right: 0;
         bottom: 0;
+        opacity: 100%;
+    }
 
+    .mobile-greet-animation {
+        transition: all 2s ease;
+        opacity: 1%;
     }
 
     .summary-greeting-container-popup {

@@ -123,12 +123,12 @@ function toggleCheckbox(i) {
   let subProfile = document.getElementById("sub-profile");
   let subuserTemp = users[i];
   let subUserIdTemp = users[i]["userId"];
+  console.log(subuserTemp)
   subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
     checkBox.src = "./img/checkmark-white.png";
     background.classList.add("sub-background");
-    let sub_users_child = `Temp-${i}`;
     sub_users.push({
       userIdIterate: i,
       userId: subUserIdTemp,
@@ -146,7 +146,7 @@ function toggleCheckbox(i) {
   }
 
   for (let j = 0; j < sub_users.length; j++) {
-    let subBgc = "bgc-" + sub_users[j].userBackgroundColor;
+    let subBgc = "bgc-" + sub_users[j]["bgc-name"];
     let subProfileName = sub_users[j].name;
     let contactId = sub_users[j]["userIdIterate"];
     let yourName = subProfileName.includes(" (You") ? true : false;
@@ -157,7 +157,6 @@ function toggleCheckbox(i) {
     } else {
       letterGroup = names[0][0] + names[names.length - 2][0];
     }
-    // let subProfileName = subuserTemp.slice(0, 2);
     subProfile.innerHTML += `
         <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
@@ -173,46 +172,14 @@ function removeSubPB(subuserId) {
 }
 
 function renderSubProfiles(index) {
-  let subProfile = document.getElementById("sub-profile");
-  document.getElementById(`checkbox-remember-me-${index}`).src =
-    "./img/checkmark-unchecked.png";
-  background = document
-    .getElementById(`subuser-div-${index}`)
-    .classList.remove("sub-background");
-
+  document.getElementById(`checkbox-remember-me-${index}`).src = "./img/checkmark-unchecked.png";
+  background = document.getElementById(`subuser-div-${index}`).classList.remove("sub-background");
   let deleteContact = document.getElementById(`contact-id-${index}`);
   deleteContact.remove();
 }
 
-window.onclick = function (event) {
-  if (
-    !event.target.matches(".dropdown-parent-container") &&
-    !event.target.closest(".dropdown-menu-sub")
-  ) {
-    let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
-    let icon = document.getElementById("drop-down-icon");
-    for (let i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-        document
-          .getElementById("dropdown-parent")
-          .classList.toggle("dropdown-outline-focus");
-        document
-          .getElementById("dropdown-parent")
-          .classList.toggle("dropdown-custom");
-      }
-      if (icon.src.includes("arrow_drop_down-up.png")) {
-        icon.src = "./img/arrow_drop_downaa.png";
-      }
-    }
-  }
-};
-
 function subtaskCustomTemplate() {
   let subtaskForm = document.getElementById("icon-hold");
-  let subtaskValueCheck = document.getElementById("subtask");
-
   subtaskForm.innerHTML = `
         <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
         <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
@@ -237,6 +204,50 @@ function subtaskTemplate() {
   }
 }
 
+function cancelSubtaskSafety() {
+  document.addEventListener("click", function (event) {
+    let subtaskForm = document.getElementById("subtask-form");
+    let subtaskInput = document.getElementById("subtask");
+    if ( event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "" ) {
+      cancelSubtask();
+    }});
+}
+
+async function addSubtask() {
+  let subtaskInputValue = document.getElementById("subtask").value.trim();
+  if (subtaskInputValue !== "") {
+    await subtaskInput.push(subtaskInputValue);
+    const subtaskId = Date.now();
+    const subtask = {
+      subtaskId: subtaskId,
+      subtasksText: subtaskInputValue,
+      isChecked: false,
+    }; await subtasks.push(subtask);
+   renderSubtasks() };
+  if (subtaskInputValue === "" || subtaskInputValue === undefined || subtaskInputValue === null) {
+    cancelSubtask();
+  };
+  cancelSubtask();
+};
+
+function renderSubtasks() {
+  let subtaskAdd = document.getElementById("subtask-display");
+  subtaskAdd.innerHTML = "";
+
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtaskValue = subtaskInput[i] || '';
+    subtaskAdd.innerHTML += `
+        <span contenteditable="true" class="span-container" id="sub-span-${i}">
+            <div class="subtask-preview" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskValue}</p></div>
+            <div class="subtask-icon-container" id="icon-container-${i}">
+                <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover" onclick="subtaskFocus(${i})">
+                <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+                <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})">
+            </div>
+        </span> `;
+  }
+}
+
 function cancelSubtask() {
   let subtaskForm = document.getElementById("subtask-form");
   subtaskForm.innerHTML = `
@@ -247,62 +258,24 @@ function cancelSubtask() {
     `;
 }
 
-function cancelSubtaskSafety() {
-  document.addEventListener("click", function (event) {
-    let subtaskForm = document.getElementById("subtask-form");
-    let subtaskInput = document.getElementById("subtask");
-
-    if (
-      event.target !== subtaskInput &&
-      !subtaskForm.contains(event.target) &&
-      subtaskInput.value === ""
-    ) {
-      cancelSubtask();
-    }
-  });
-}
-
-async function addSubtask() {
-  let subtaskAdd = document.getElementById("subtask-display");
-  let subtaskInputValue = document.getElementById("subtask").value.trim();
-  subtaskAdd.innerHTML = "";
-
-  if (subtaskInputValue !== "") {
-    await subtaskInput.push(subtaskInputValue);
-
-    const subtaskId = Date.now();
-
-    const subtask = {
-      subtaskId: subtaskId,
-      subtasksText: subtaskInputValue,
-      isChecked: false,
-    };
-
-    subtasks.push(subtask);
-
-    for (let i = 0; i < subtaskInput.length; i++) {
-      subtaskAdd.innerHTML += `
-          <span contenteditable="true" class="span-container" id="sub-span-${i}">
-              <div class="subtask-preview" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
-              <div class="subtask-icon-container" id="icon-container-${i}">
-                  <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover" onclick="subtaskFocus(${i})">
-                  <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-                  <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})">
-              </div>
-          </span>
-        `;
-    }
-  }
-  cancelSubtask();
-}
-
 function deleteSubtask(i) {
   subtaskInput.splice(i, 1);
+  subtasks.splice(i, 1);
   let subtaskSpan = document.getElementById(`sub-span-${i}`);
   if (subtaskSpan) {
-    subtasks.splice(i);
-    subtaskSpan.remove();
+    subtaskSpan.remove(); }
+  for (let j = i; j < subtasks.length; j++) {
+    let span = document.getElementById(`sub-span-${j + 1}`);
+    let preview = document.getElementById(`preview-${j + 1}`);
+    let iconContainer = document.getElementById(`icon-container-${j + 1}`);
+    if (span) {
+      span.id = `sub-span-${j}`; }
+    if (preview) {
+      preview.id = `preview-${j}`; }
+    if (iconContainer) {
+      iconContainer.id = `icon-container-${j}`; }
   }
+  renderSubtasks();
 }
 
 function subtaskFocus(i) {
@@ -380,36 +353,32 @@ function clearAddTask() {
 
   let subProfile = document.getElementById("sub-profile");
   subProfile.innerHTML = "";
+  clearArrays();
+  assignedTo();
+  prioSelection(Medium);
+}
 
+function clearArrays() {
   subtaskInput = [];
   subtasks = [];
   sub_users = [];
   contactsUser = [];
   priority = priorityDefault;
-
-  assignedTo();
-  prioSelection(Medium);
 }
 
 function addedTask() {
   let backLog = document.getElementById('task-added-success');
   backLog.classList.remove('d-none')
-
     setTimeout(function(){
       window.location.href = "board.html";
   }, 1000);
 }
 
 function dropDownMenuCategory() {
-  document.getElementById("myDropdown-category").classList.toggle("show");
   let icon = document.getElementById("drop-down-icon-2");
-  document
-    .getElementById("dropdown-parent-category")
-    .classList.toggle("dropdown-outline-focus");
-  document
-    .getElementById("dropdown-parent-category")
-    .classList.toggle("dropdown-custom");
-
+  document.getElementById("myDropdown-category").classList.toggle("show");
+  document.getElementById("dropdown-parent-category").classList.toggle("dropdown-outline-focus");
+  document.getElementById("dropdown-parent-category").classList.toggle("dropdown-custom");
   if (icon.src.includes("arrow_drop_downaa.png")) {
     icon.src = "./img/arrow_drop_down-up.png";
   } else {
@@ -425,6 +394,31 @@ function selectCategory(clickedCategory) {
   categoryContainer.innerHTML = `${heading}`;
   dropDownMenuCategory()
 }
+
+window.onclick = function (event) {
+  if (
+    !event.target.matches(".dropdown-parent-container") &&
+    !event.target.closest(".dropdown-menu-sub")
+  ) {
+    let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
+    let icon = document.getElementById("drop-down-icon");
+    for (let i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+        document
+          .getElementById("dropdown-parent")
+          .classList.toggle("dropdown-outline-focus");
+        document
+          .getElementById("dropdown-parent")
+          .classList.toggle("dropdown-custom");
+      }
+      if (icon.src.includes("arrow_drop_down-up.png")) {
+        icon.src = "./img/arrow_drop_downaa.png";
+      }
+    }
+  }
+};
 
 // not working with assigned to dropdown
 

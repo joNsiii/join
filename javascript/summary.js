@@ -1,9 +1,11 @@
+let greet = [];
+
 async function summaryInit() {
     await loadUsers();
     await loadUserData();
     await loadTasksInBoard();
     dayTimeGretting();
-    greetUser();
+    // greetUser();
     loadTaskCounter();
     taskInCategory();
     urgentTaskCounter();
@@ -27,37 +29,72 @@ function changeImageBack1() {
     successImage.src = 'img/success-bg-blue.png'
 }
 
-function mobilLoginScreen() {
-    document.getElementById('greet-popup').classList.remove('d-none');
-    setTimeout(() => {
-        document.getElementById('greet-popup').classList.add('d-none');
-    }, "2000");
-}
-
 function dayTimeGretting() {
-    let greet = [
+    return new Promise((resolve) => {
+        greet = [
         'What are you doing that early?',
         'Good Morning',
         'Good Afternoon',
         'Good Evening'
     ][parseInt(new Date().getHours() / 24 * 4)];
-    document.getElementById('daytime-greet').innerHTML = greet + ',';
+        resolve()
+    });
 }
 
-function greetUser() {
-    let nameBox = document.getElementById('greeting-name');
-    if (currentUserData !== undefined) {
-        let fullName = currentUserData.name;
-        let spaceIndex = fullName.indexOf(' ');
-        let firstName = fullName.slice(0, spaceIndex);
-        let lastName = fullName.slice(spaceIndex + 1);
-        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
-        nameBox.innerHTML = formattedFullName;
-    } else {
-        nameBox.innerHTML = 'Guest';
+// function greetUser() {
+//     let nameBox = document.getElementById('greeting-name');
+//     if (currentUserData !== undefined) {
+//         let fullName = currentUserData.name;
+//         let spaceIndex = fullName.indexOf(' ');
+//         let firstName = fullName.slice(0, spaceIndex);
+//         let lastName = fullName.slice(spaceIndex + 1);
+//             formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+//         let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+//         let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+//         nameBox.innerHTML = formattedFullName;
+//         console.log(formattedFirstName)
+//     } else {
+//         nameBox.innerHTML = 'Guest';
+//     }
+// }
+
+window.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const loginFlag = urlParams.get('login');
+
+    if (loginFlag === 'true' && !localStorage.getItem('loginAnimationShown')) {
+        Promise.all([dayTimeGretting()])
+        .then(() => {
+            localStorage.setItem('loginAnimationShown', true);
+            mobilLoginScreen()
+        })
     }
+});
+
+function mobilLoginScreen() {
+    if (window.innerWidth <= 730) {
+        let greetContainer = document.getElementById('greet-popup');
+        renderMobileUser(greetContainer);
+        greetContainer.classList.remove('mobile-greet-animation');
+        greetContainer.classList.remove('d-none');
+        setTimeout(() => {
+            greetContainer.classList.add('mobile-greet-animation');
+        }, 1500);
+        setTimeout(() => {
+            greetContainer.classList.add('d-none');
+        }, 3500);
+    }
+}
+
+function renderMobileUser(greetContainer) {
+    let fullName = localStorage.getItem("GreetName");
+    let spaceIndex = fullName.indexOf(' ');
+    let firstName = fullName.slice(0, spaceIndex);
+    greetContainer.innerHTML += `
+    <div class="summary-greeting-container-popup">
+        <span class="summary-daytime-container" id="daytime-greet">${greet},</span>
+        <span class="summary-name-container" id="greeting-name">${firstName}</span>
+    </div>`;
 }
 
 function loadTaskCounter() {
