@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="./media/board-media.css" />
     <link rel="stylesheet" href="./media/add-task-form-media.css" />
     <link rel="stylesheet" href="./styles/background-color.css">
-    <link rel="stylesheet" href="./styles/add-task-form.css">
-    <link rel="stylesheet" href="./media/add-task-form-media.css">
+    <link rel="stylesheet" href="styles/add-task.css">
+    <link rel="stylesheet" href="styles/add-task-overlay.css">
+    <link rel="stylesheet" href="./media/add-task-overlay-media.css">
     <script src="./javascript/global.js"></script>
     <script src="./javascript/common.js"></script>
     <script src="javascript/register.js"></script>
@@ -23,11 +24,15 @@
     <script src="javascript/board.js"></script>
     <script src="./javascript/edit-board.js"></script>
     <script src="./javascript/add-task-form.js"></script>
-
+    <script src="./javascript/add-task-overlay.js"></script>
+    <style id="add-task-overlay-position"></style>
 </head>
 
-<body onload="init(), boardInit()">
-    <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html" onclick="closeAddTaskForm()"></dialog>
+<body id="body" onload="init(), boardInit()">
+    <dialog id="add-task-overlay" class="dialog-add-task" w3-include-html="./templates/add-task-overlay.html"
+        onclick="closeAddTaskOverlay()"></dialog>
+    <!-- <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"
+        onclick="closeAddTaskForm()"></dialog> -->
     <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
 
     <div w3-include-html="templates/templates.html"></div>
@@ -45,7 +50,7 @@
                         <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
                     </div>
                 </div>
-                <button class="board-task-button" onclick="openAddTaskForm()">
+                <button class="board-task-button" onclick="openAddTaskOverlay()">
                     <div class="btb-text">Add task</div>
                     <img class="btb-img" src="./img/add.png" alt="add-task" />
                 </button>
@@ -64,7 +69,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">To do</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="toDo" ondragover="allowDrop(event)"
                     ondrop="moveTo('toDo')" ondragenter="highlight(event, 'toDo')"
@@ -75,7 +81,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">In progress</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="inProgress" ondragover="allowDrop(event)"
                     ondrop="moveTo('inProgress')" ondragenter="highlight(event, 'inProgress')"
@@ -85,7 +92,8 @@
             <div class="board-content">
                 <div class="board-header">
                     <div class="board-header-title">Await feedback</div>
-                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button" />
+                    <img class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
                 </div>
                 <div class="board-body horizontal-scroll" id="awaitFeedback" ondragover="allowDrop(event)"
                     ondrop="moveTo('awaitFeedback')" ondragenter="highlight(event, 'awaitFeedback')"
@@ -104,8 +112,6 @@
     </main>
 
     <!-- dialog für Popup von einzelnen Tasks -->
-
-    <script src="./javascript/add-task.js"></script>
 </body>
 
 </html>

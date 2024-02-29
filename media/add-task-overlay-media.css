@@ -1,0 +1,236 @@
+@media (max-width: 1200px) {
+    .add-task-overlay-positon {
+        top: 96px;
+    }
+
+    .add-task-overlay {
+        margin-top: 96px;
+        height: calc(100vh - 172px);
+        width: 428px;
+
+        padding: 48px 16px;
+    }
+
+    .close-add-task-overlay {
+        top: 48px;
+        right: 16px;
+    }
+
+    .add-task-headline-overlay {
+        font-size: 47px;
+    }
+
+    .task-form-overlay {
+        flex-direction: column;
+        max-width: 496px;
+        overflow-y: auto;
+    }
+
+    .left-side-inputs-overlay {
+        margin-bottom: 16px;
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+        gap: 16px;
+    }
+
+    .input-single-line-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .desc-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+    }
+
+    .border-between-overlay {
+        display: none;
+    }
+
+    .single-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .right-side-inputs-overlay {
+        width: 100%;
+    }
+
+    /* prio-button fixen!!! */
+
+    .bottom-container-overlay {
+        margin-top: 0;
+        padding: 16px;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+    }
+
+    .bottom-container-overlay .clearBtn {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container {
+        height: 56px;
+    }
+}
+
+@media (max-width: 950px) {
+    .display-flex {
+        flex-direction: column;
+    }
+
+    .border-between {
+        display: none;
+    }
+
+    .right-side-inputs {
+        margin-left: 0;
+        margin-right: 96px;
+        max-width: 100%;
+    }
+
+    .left-side-inputs {
+        margin-right: 96px;
+        width: auto;
+    }
+
+    .bottom-button-container {
+        max-width: 440px;
+        margin-right: 54px;
+        margin-bottom: 32px;
+    }
+
+    .bottom-container {
+        margin: 0;
+        margin-left: 328px;
+        align-items: normal;
+    }
+}
+
+@media (max-width: 730px) {
+    .add-task-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .add-task-headline {
+        font-size: 47px;
+    }
+
+    .add-task-headline {
+        margin-left: 0;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 112px;
+    }
+
+    .right-side-inputs {
+        margin-right: 16px;
+        margin-left: 16px;
+
+    }
+
+    .left-side-inputs {
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+
+    .display-flex {
+        margin-left: 0;
+    }
+
+    .prio-selection {
+        height: 41px;
+        width: 121px;
+    }
+
+    .medium-selection {
+        height: 41px;
+        width: 121px;
+    }
+
+    .bottom-container {
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        height: 88px;
+        align-items: center;
+        margin-left: 16px;
+        margin-right: 16px;
+        justify-content: space-between;
+        background-color: #f6f7f8;
+        margin-bottom: 76px;
+    }
+
+    .bottom-button-container {
+        margin-right: 0;
+    }
+
+    .clearBtn {
+        display: none;
+    }
+}
+
+@media (max-width: 983px) {
+    .bottom-flex-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+    .bottom-flex-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 55%;
+    }
+}
+
+@media (max-width: 1064px) {
+    .sub-profile-container {
+        transform: translateY(175%);
+    }
+}
+
+@media (max-width: 950px) {
+    .sub-profile-container {
+        transform: translateY(130%) !important;
+    }
+}
+
+@media (max-width: 1133px) {
+    .sub-profile-container {
+        transform: translateY(175%);
+    }
+}
+
+@media (max-width: 1135px) {
+    .dropdown-menu-sub {
+        top: 100px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .dropdown-menu-category {
+        top: 103px;
+    }
+}
+
+@media (max-width: 950px) {
+    .dropdown-menu-category {
+        top: 79px;
+    }
+}
+
+@media (max-width: 950px) {
+    .dropdown-menu-sub {
+        top: 75px;
+    }
+}
