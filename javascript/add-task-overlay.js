@@ -89,7 +89,7 @@ function assignedTo() {
             assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div class="subuser-align">
-            <div class="sub-profile-img ${bgc}">${letterGroup}</div>
+            <div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div>
             <div>${contact}</div>
           </div>  
             <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
@@ -159,7 +159,7 @@ function toggleCheckbox(i) {
         }
         // let subProfileName = subuserTemp.slice(0, 2);
         subProfile.innerHTML += `
-        <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
+        <div class="sub-profile-img-overlay sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
     }
 }
@@ -457,6 +457,7 @@ function selectCategory(clickedCategory) {
 
 
 function openAddTaskOverlay() {
+    addTaskInit();
     document.getElementById('add-task-overlay').show();
 }
 

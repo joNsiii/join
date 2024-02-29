@@ -687,13 +687,12 @@ body {
     color: white;
 }
 
-.sub-profile-img {
+.sub-profile-img-overlay {
     display: flex;
     flex-shrink: 0;
     height: 42px;
     width: 42px;
     border-radius: 50%;
-    background-color: #29ABE2;
     border: 2px solid white;
     display: flex;
     align-items: center;
