@@ -78,7 +78,8 @@ function deleteCookie(cookieName) {
 function logout() {
     deleteCookie('user_session_token');
     deleteCookie('guest_session_token');
-    localStorage.removeItem('userId'); // neu
+    localStorage.removeItem('userId');
+    localStorage.removeItem('loginAnimationShown');
 }
 
 function redirectToPreviousPage() {

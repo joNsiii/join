@@ -16,7 +16,34 @@ function loginInit() {
     loadLogoAnimation();
     loadUsers();
     loadRememberMe();
+    removeMobileAnimation();
 }
+
+function removeMobileAnimation() {
+    if (localStorage.getItem('loginAnimationShown')) {
+        localStorage.removeItem('loginAnimationShown');
+    }
+    if (localStorage.getItem('GreetName')) {
+        localStorage.removeItem('GreetName');
+    }
+}
+
+// function greetUser() {
+//     let nameBox = document.getElementById('greeting-name');
+//     if (currentUserData !== undefined) {
+//         let fullName = currentUserData.name;
+//         let spaceIndex = fullName.indexOf(' ');
+//         let firstName = fullName.slice(0, spaceIndex);
+//         let lastName = fullName.slice(spaceIndex + 1);
+//             formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+//         let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+//         // let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+//         // nameBox.innerHTML = formattedFullName;
+//         console.log(formattedFirstName)
+//     } else {
+//         nameBox.innerHTML = 'Guest';
+//     }
+// }
 
 function checkLogin() {
     let email = document.getElementById('email-field').value.toLowerCase();
@@ -24,10 +51,13 @@ function checkLogin() {
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
         rememberMe();
-        localStorage.removeItem('userId'); // neu
+        localStorage.removeItem('userId'); 
         setCookie('user_session_token', loggedInUser.userId, 24);
-        window.location.href = 'summary.html?popup=';
-        localStorage.setItem('userId', loggedInUser.userId); // neu
+        window.location.href = 'summary.html?login=true';
+        console.log(loggedInUser)
+        localStorage.setItem('userId', loggedInUser.userId); 
+        localStorage.setItem("GreetName", loggedInUser.name);
+        greetUser()
     } else {
         wrongPassword();
     }
