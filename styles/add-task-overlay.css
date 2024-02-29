@@ -7,29 +7,47 @@ body {
     background: transparent;
 }
 
-.add-task-headline {
+.add-task-overlay {
+    height: 870px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 64px 74px;
+    width: 1116px;
+    border-radius: 30px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+}
+
+.add-task-headline-overlay {
     display: flex;
     height: 73px;
-    margin-top: 206px;
-    margin-left: 328px;
     gap: 1px;
     font-size: 61px;
     font-weight: 700;
 }
 
+.task-form-overlay {
+    display: flex;
+    max-width: 1074px;
+    max-height: 416px;
+}
+
+/* Bitte loeschen */
 .display-flex {
     display: flex;
     margin-left: 328px;
     max-width: 1074px;
 }
 
-.left-side-inputs {
+.left-side-inputs-overlay {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 48px;
     width: 440px;
-    min-width: 200px;
+    min-width: 440px;
     height: 376px;
     gap: 32px;
 }
@@ -46,13 +64,25 @@ body {
     color: red;
 }
 
-.input-single-line {
-    display: flex;
+.input-single-line-overlay {
+    box-sizing: border-box;
+    max-height: 49px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
-    gap: 10px;
     font-size: 20px;
+}
+
+.input-single-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    object-position: center;
+    background-color: white;
+    position: absolute;
+    right: 21px;
+    bottom: 12.5px;
+    pointer-events: none;
 }
 
 .input-single-line-subtask {
@@ -135,7 +165,7 @@ body {
     outline: none;
 }
 
-.input-single-line:focus {
+.input-single-line-overlay:focus {
     border: 1px solid #29abe2;
     outline: none;
 }
@@ -195,21 +225,17 @@ body {
     border: 1px solid #29abe2;
 }
 
-.border-between {
+.border-between-overlay {
     height: 424px;
-    margin-top: 48px;
-    margin-left: 48px;
+    margin: 0 48.25px;
     border: 1px solid #d1d1d1;
 }
 
-.right-side-inputs {
+.right-side-inputs-overlay {
     display: flex;
     flex-direction: column;
-    margin-top: 48px;
     max-width: 440px;
-    min-width: 200px;
-    margin-left: 96px;
-    margin-right: 48px;
+    min-width: 440px;
     gap: 32px;
     box-sizing: border-box;
 }

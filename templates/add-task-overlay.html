@@ -1,8 +1,8 @@
-<div class="add-task-content">
-    <div class="add-task-headline">Add Task</div>
+<section class="add-task-overlay">
+    <div class="add-task-headline-overlay">Add Task</div>
     <form onsubmit="scopeTasks(); return false">
-        <div class="display-flex" id="taskForm">
-            <div class="left-side-inputs">
+        <div class="task-form-overlay" id="taskForm">
+            <div class="left-side-inputs-overlay">
                 <div class="single-input-container">
                     <label>Title<label class="red-star">*</label></label>
                     <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" required>
@@ -28,12 +28,13 @@
                     </div>
                 </div>
             </div>
-            <div class="border-between"></div>
-            <div class="right-side-inputs">
+            <div class="border-between-overlay"></div>
+            <div class="right-side-inputs-overlay">
                 <div class="single-input-container">
                     <label for="date-date-task">Due Date<label class="red-star">*</label></label>
-                    <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                    <input class="input-single-line-overlay" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                         onblur="(this.type='text')" name="date" id="date-date-task" required>
+                    <img class="input-single-img" src="./img/calendar.png" alt="calendar">
                 </div>
                 <div class="prio-container">
                     <label>Prio</label>
@@ -91,4 +92,4 @@
         </div>
         <div class="bottom-push"></div>
     </form>
-</div>
+</section>
