@@ -6,19 +6,19 @@
         <form onsubmit="scopeTasks(); return false">
             <div class="task-form-overlay" id="taskForm">
                 <div class="left-side-inputs-overlay">
-                    <div class="single-input-container">
+                    <div class="single-input-container-overlay">
                         <label>Title<label class="red-star">*</label></label>
-                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task"
+                        <input class="input-single-line-overlay" placeholder="Enter a title" type="text" id="title-task"
                             required>
                     </div>
-                    <div class="desc-input-container">
+                    <div class="desc-input-container-overlay">
                         <label>Description</label>
-                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task"
+                        <textarea class="desc-textarea-overlay" placeholder="Enter a Description" id="description-task"
                             cols="30" rows="3"></textarea>
                     </div>
-                    <div class="single-input-container no-gap">
+                    <div class="single-input-container-overlay no-gap">
                         <label>Assigned to</label>
-                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select
+                        <div onclick="dropDownMenu()" class="dropdown-parent-container-overlay" id="dropdown-parent">Select
                             contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="border-between-overlay"></div>
                 <div class="right-side-inputs-overlay">
-                    <div class="single-input-container">
+                    <div class="single-input-container-overlay">
                         <label for="date-date-task">Due Date<label class="red-star">*</label></label>
                         <input class="input-single-line-overlay" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                             onblur="(this.type='text')" name="date" id="date-date-task" required>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-input-container">
+                    <div class="single-input-container-overlay">
                         <label>Category<label class="red-star">*</label></label>
                         <div onclick="dropDownMenuCategory()" class="dropdown-parent-container-2"
                             id="dropdown-parent-category">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-input-container">
+                    <div class="single-input-container-overlay">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
                             <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"

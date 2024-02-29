@@ -1,3 +1,63 @@
+@media (max-width: 1200px) {
+    .add-task-overlay-positon {
+        top: 96px;
+    }
+
+    .add-task-overlay {
+        /* height: calc(100vh - 96px);
+        max-height: 870px; */
+        width: 428px;
+
+        padding: 48px 16px;
+    }
+
+    .close-add-task-overlay {
+        top: 48px;
+        right: 16px;
+    }
+
+    .add-task-headline-overlay {
+        font-size: 47px;
+    }
+
+    .task-form-overlay {
+        flex-direction: column;
+        max-width: 496px;
+    }
+
+    .left-side-inputs-overlay {
+        margin-bottom: 16px;
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+        gap: 16px;
+    }
+
+    .input-single-line-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .desc-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+    }
+
+    .border-between-overlay {
+        display: none;
+    }
+
+    .single-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    /* .right-side-inputs-overlay {
+        width: 100%;
+    } */
+}
+
 @media (max-width: 950px) {
     .display-flex {
         flex-direction: column;
