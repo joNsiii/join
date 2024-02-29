@@ -1,10 +1,13 @@
 @media (max-width: 1200px) {
-    .add-task-overlay-positon {
+    .add-task-overlay-out {
         top: 96px;
     }
 
+    .add-task-overlay-in {
+        left: calc(50% - 214px);
+    }
+
     .add-task-overlay {
-        margin-top: 96px;
         height: calc(100vh - 172px);
         width: 428px;
 
@@ -20,10 +23,16 @@
         font-size: 47px;
     }
 
+    .add-task-form-group {
+        height: calc(100% - 161px);
+        overflow-y: auto;
+    }
+
     .task-form-overlay {
         flex-direction: column;
-        max-width: 496px;
-        overflow-y: auto;
+        max-width: unset;
+        /* max-width: 496px;
+        overflow-y: auto; */
     }
 
     .left-side-inputs-overlay {
@@ -58,11 +67,15 @@
         width: 100%;
     }
 
-    /* prio-button fixen!!! */
+    .prio-selection-overlay {
+        width: 121px;
+        height: 41px;
+        padding: 18px 10px;
+    }
 
     .bottom-container-overlay {
         margin-top: 0;
-        padding: 16px;
+        padding-top: 16px;
         position: absolute;
         right: 16px;
         bottom: 16px;

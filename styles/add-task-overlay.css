@@ -24,10 +24,15 @@ body {
     z-index: 300;
 }
 
-.add-task-overlay-position {
+.add-task-overlay-out {
     position: absolute;
     top: calc(50vh - 435px);
     left: 100%;
+    transition: 100ms left ease-in-out;
+}
+
+.add-task-overlay-in {
+    left: calc(50% - 558px);
 }
 
 .add-task-overlay {
@@ -297,7 +302,7 @@ body {
     flex-wrap: wrap;
 }
 
-.prio-selection {
+.prio-selection-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -307,6 +312,7 @@ body {
     padding: 16px 10px 16px 10px;
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     gap: 8px;
     font-size: 20px;
 }
@@ -350,7 +356,7 @@ body {
     height: fit-content;
 }
 
-.bottom-button-container {
+.bottom-button-container-overlay {
     display: flex;
     gap: 16px;
     height: 59px;
@@ -418,8 +424,9 @@ body {
     justify-content: flex-end;
 }
 
-.bottom-flex-left {
+.bottom-flex-left-overlay {
     width: 50%;
+    min-width: 198px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

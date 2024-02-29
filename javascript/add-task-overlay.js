@@ -512,12 +512,7 @@ async function openAddTaskOverlay() {
         addTaskInit();
         await document.getElementById('add-task-overlay').show();
         let overlay = document.getElementById('add-task-overlay-position');
-        overlay.innerHTML = `
-        .add-task-overlay-position {
-            left: calc(50% - 558px);
-            transition: 100ms left ease-in-out;
-        }
-    `;
+        overlay.classList.add('add-task-overlay-in');
     } else {
         window.location.href = './add-task.html';
     }
@@ -525,12 +520,7 @@ async function openAddTaskOverlay() {
 
 async function closeAddTaskOverlay() {
     let overlay = document.getElementById('add-task-overlay-position');
-    overlay.innerHTML = `
-        .add-task-overlay-position {
-            left: 100%;
-            transition: 100ms left ease-in-out;
-        }
-    `;
+    overlay.classList.remove('add-task-overlay-in');
     setTimeout(() => {
         document.getElementById('add-task-overlay').close();
         clearAddTask();

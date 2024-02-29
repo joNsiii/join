@@ -1,9 +1,9 @@
-<section class="add-task-overlay-position">
+<section id="add-task-overlay-position" class="add-task-overlay-out">
     <div class="add-task-overlay" onclick="stop(event)">
         <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog"
             onclick="closeAddTaskOverlay()">
         <div class="add-task-headline-overlay">Add Task</div>
-        <form onsubmit="scopeTasks(); return false">
+        <form class="add-task-form-group" onsubmit="scopeTasks(); return false">
             <div class="task-form-overlay" id="taskForm">
                 <div class="left-side-inputs-overlay">
                     <div class="single-input-container-overlay">
@@ -44,13 +44,13 @@
                     <div class="prio-container">
                         <label>Prio</label>
                         <div class="prio-select-con">
-                            <div class="prio-selection" id="Urgent" onclick="prioSelection(this)">
+                            <div class="prio-selection-overlay" id="Urgent" onclick="prioSelection(this)">
                                 <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
                             </div>
-                            <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this)">
+                            <div class="prio-selection-overlay prioMedium" id="Medium" onclick="prioSelection(this)">
                                 <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
                             </div>
-                            <div class="prio-selection" id="Low" onclick="prioSelection(this)">
+                            <div class="prio-selection-overlay" id="Low" onclick="prioSelection(this)">
                                 <p>Low</p><img src="./img/low.png" alt="low" id="low-img">
                             </div>
                         </div>
@@ -87,8 +87,8 @@
 
             </div>
             <div class="bottom-container-overlay">
-                <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
-                <div class="bottom-button-container bottom-flex-right" id="button-container">
+                <span class="bottom-flex-left-overlay"><label class="red-star">*</label>This field is required</span>
+                <div class="bottom-button-container-overlay bottom-flex-right" id="button-container">
                     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear">
                     </div>
                     <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png"
