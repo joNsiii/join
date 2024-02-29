@@ -456,12 +456,28 @@ function selectCategory(clickedCategory) {
 
 
 
-function openAddTaskOverlay() {
+async function openAddTaskOverlay() {
     addTaskInit();
-    document.getElementById('add-task-overlay').show();
+    await document.getElementById('add-task-overlay').show();
+    let overlay = document.getElementById('add-task-overlay-position');
+    overlay.innerHTML = `
+        .add-task-overlay-position {
+            left: calc(50% - 558px);
+            transition: 100ms left ease-in-out;
+        }
+    `;
 }
 
-function closeAddTaskOverlay() {
-    document.getElementById('add-task-overlay').close();
-    clearAddTask();
+async function closeAddTaskOverlay() {
+    let overlay = document.getElementById('add-task-overlay-position');
+    overlay.innerHTML = `
+        .add-task-overlay-position {
+            left: 100%;
+            transition: 100ms left ease-in-out;
+        }
+    `;
+    setTimeout(() => {
+        document.getElementById('add-task-overlay').close();
+        clearAddTask();
+    }, 100);
 }

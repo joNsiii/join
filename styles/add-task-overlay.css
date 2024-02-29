@@ -7,6 +7,12 @@ body {
     background: transparent;
 }
 
+.add-task-overlay-position {
+    position: absolute;
+    top: calc(50vh - 435px);
+    left: 100%;
+}
+
 .add-task-overlay {
     height: 870px;
     background-color: #ffffff;
