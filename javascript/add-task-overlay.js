@@ -457,15 +457,20 @@ function selectCategory(clickedCategory) {
 
 
 async function openAddTaskOverlay() {
-    addTaskInit();
-    await document.getElementById('add-task-overlay').show();
-    let overlay = document.getElementById('add-task-overlay-position');
-    overlay.innerHTML = `
+    let bodyWidth = document.getElementById('body').offsetWidth;
+    if (bodyWidth > 730) {
+        addTaskInit();
+        await document.getElementById('add-task-overlay').show();
+        let overlay = document.getElementById('add-task-overlay-position');
+        overlay.innerHTML = `
         .add-task-overlay-position {
             left: calc(50% - 558px);
             transition: 100ms left ease-in-out;
         }
     `;
+    } else {
+        window.location.href = './add-task.html';
+    }
 }
 
 async function closeAddTaskOverlay() {

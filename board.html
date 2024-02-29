@@ -28,7 +28,7 @@
     <style id="add-task-overlay-position"></style>
 </head>
 
-<body onload="init(), boardInit()">
+<body id="body" onload="init(), boardInit()">
     <dialog id="add-task-overlay" class="dialog-add-task" w3-include-html="./templates/add-task-overlay.html"
         onclick="closeAddTaskOverlay()"></dialog>
     <!-- <dialog id="dialog-add-task" class="dialog-add-task" w3-include-html="./templates/add-task-form.html"
