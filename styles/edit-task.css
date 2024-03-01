@@ -161,6 +161,7 @@
     padding: 18px 16px 18px 16px;
     gap: 10px;
     font-size: 20px;
+    font-family: 'Inter';
 }
 
 .desc-textarea::placeholder {
