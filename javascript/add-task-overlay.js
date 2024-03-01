@@ -1,5 +1,5 @@
 let subtaskInput = [];
-let priorityDefault = "Medium";
+let priorityDefault = "medium-overlay";
 let subtasks = [];
 let sub_users = [];
 let contactsUser = [];
@@ -30,9 +30,9 @@ function reloadPage() {
 }
 
 async function scopeTasks() {
-    let title = document.getElementById("title-task").value;
-    let description = document.getElementById("description-task").value;
-    let dueDate = document.getElementById("date-date-task").value;
+    let title = document.getElementById("title-task-overlay").value;
+    let description = document.getElementById("description-task-overlay").value;
+    let dueDate = document.getElementById("date-date-task-overlay").value;
 
     const taskId = Date.now();
 
@@ -53,19 +53,19 @@ async function scopeTasks() {
 }
 
 function assignedTo() {
-    let assignElement = document.getElementById("myDropdown");
+    let assignElement = document.getElementById("myDropdown-overlay");
     assignElement.innerHTML = "";
 
     let user = currentUserData;
     if (user == undefined || user == null || user == "") {
         assignElement.innerHTML = '<div class="subuser-align-overlay">No Contacts Found</div>';
-        document.getElementById('button-container').innerHTML = `                    
+        document.getElementById('button-container-overlay').innerHTML = `                    
     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
     <button class="createBtn-overlay" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
     }
     if (user !== undefined) {
         assignElement.innerHTML = "";
-        document.getElementById('button-container').innerHTML = `                    
+        document.getElementById('button-container-overlay').innerHTML = `                    
     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
     <button class="createBtn-overlay" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
         user.name = user.name;
@@ -102,19 +102,19 @@ function assignedTo() {
 
 
 // function assignedTo() {
-//     let assignElement = document.getElementById("myDropdown");
+//     let assignElement = document.getElementById("myDropdown-overlay");
 //     assignElement.innerHTML = "";
 
 //     let user = currentUserData;
 //     if (user == undefined || user == null || user == "") {
 //         assignElement.innerHTML = '<div class="subuser-align-overlay">No Contacts Found</div>';
-//         document.getElementById('button-container').innerHTML = `                    
+//         document.getElementById('button-container-overlay').innerHTML = `                    
 //     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
 //     <button class="createBtn-overlay" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
 //     }
 //     if (user !== undefined) {
 //         assignElement.innerHTML = "";
-//         document.getElementById('button-container').innerHTML = `                    
+//         document.getElementById('button-container-overlay').innerHTML = `                    
 //     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
 //     <button class="createBtn-overlay" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
 //         user.name = user.name;
@@ -152,12 +152,28 @@ function assignedTo() {
 
 function dropDownMenu() {
     let icon = document.getElementById("drop-down-icon");
-    document.getElementById("myDropdown").classList.toggle("show-overlay");
+    document.getElementById("myDropdown").classList.toggle("show");
     document
         .getElementById("dropdown-parent")
+        .classList.toggle("dropdown-outline-focus");
+    document
+        .getElementById("dropdown-parent")
+        .classList.toggle("dropdown-custom");
+
+    if (icon.src.includes("arrow_drop_downaa.png")) {
+        icon.src = "./img/arrow_drop_down-up.png";
+    } else {
+        icon.src = "./img/arrow_drop_downaa.png";
+    }
+}
+function dropDownMenuOverlay() {
+    let icon = document.getElementById("drop-down-icon-overlay");
+    document.getElementById("myDropdown-overlay").classList.toggle("show-overlay");
+    document
+        .getElementById("dropdown-parent-overlay")
         .classList.toggle("dropdown-outline-focus-overlay");
     document
-        .getElementById("dropdown-parent")
+        .getElementById("dropdown-parent-overlay")
         .classList.toggle("dropdown-custom");
 
     if (icon.src.includes("arrow_drop_downaa.png")) {
@@ -170,7 +186,7 @@ function dropDownMenu() {
 function toggleCheckbox(i) {
     let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
     let background = document.getElementById(`subuser-div-${i}`);
-    let subProfile = document.getElementById("sub-profile");
+    let subProfile = document.getElementById("sub-profile-overlay");
     let subuserTemp = users[i];
     let subUserIdTemp = users[i]["userId"];
     subProfile.innerHTML = "";
@@ -223,7 +239,7 @@ function removeSubPB(subuserId) {
 }
 
 function renderSubProfiles(index) {
-    let subProfile = document.getElementById("sub-profile");
+    let subProfile = document.getElementById("sub-profile-overlay");
     document.getElementById(`checkbox-remember-me-${index}`).src =
         "./img/checkmark-unchecked.png";
     background = document
@@ -240,16 +256,16 @@ window.onclick = function (event) {
         !event.target.closest(".dropdown-menu-sub-overlay")
     ) {
         let dropdowns = document.getElementsByClassName("dropdown-menu-sub-overlay");
-        let icon = document.getElementById("drop-down-icon");
+        let icon = document.getElementById("drop-down-icon-overlay");
         for (let i = 0; i < dropdowns.length; i++) {
             let openDropdown = dropdowns[i];
             if (openDropdown.classList.contains("show-overlay")) {
                 openDropdown.classList.remove("show-overlay");
                 document
-                    .getElementById("dropdown-parent")
+                    .getElementById("dropdown-parent-overlay")
                     .classList.toggle("dropdown-outline-focus-overlay");
                 document
-                    .getElementById("dropdown-parent")
+                    .getElementById("dropdown-parent-overlay")
                     .classList.toggle("dropdown-custom");
             }
             if (icon.src.includes("arrow_drop_down-up.png")) {
@@ -260,8 +276,8 @@ window.onclick = function (event) {
 };
 
 function subtaskCustomTemplate() {
-    let subtaskForm = document.getElementById("icon-hold");
-    let subtaskValueCheck = document.getElementById("subtask");
+    let subtaskForm = document.getElementById("icon-hold-overlay");
+    let subtaskValueCheck = document.getElementById("subtask-overlay");
 
     subtaskForm.innerHTML = `
         <img src="./img/cancel.png" alt="cancel-icon" class="hover-overlay" onclick="cancelSubtask()">
@@ -272,13 +288,13 @@ function subtaskCustomTemplate() {
 }
 
 function subtaskTemplate() {
-    let subtaskForm = document.getElementById("subtask-form");
-    let subtaskValueCheck = document.getElementById("subtask");
+    let subtaskForm = document.getElementById("subtask-form-overlay");
+    let subtaskValueCheck = document.getElementById("subtask-overlay");
 
     if (subtaskValueCheck.value == "" || subtaskValueCheck.value == null) {
         subtaskForm.innerHTML = `
-      <input class="sub-task-child-overlay" required placeholder="Add new subtask" type="text" id="subtask" value="Contact Form">
-      <div class="subtask-add-icons-overlay" id="icon-hold">
+      <input class="sub-task-child-overlay" required placeholder="Add new subtask" type="text" id="subtask-overlay" value="Contact Form">
+      <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
         <img src="./img/cancel.png" alt="cancel-icon" class="hover-overlay" onclick="cancelSubtask()">
         <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
         <img src="./img/done.png" alt="add-icon" class="hover-overlay" onclick="addSubtask()">
@@ -288,10 +304,10 @@ function subtaskTemplate() {
 }
 
 function cancelSubtask() {
-    let subtaskForm = document.getElementById("subtask-form");
+    let subtaskForm = document.getElementById("subtask-form-overlay");
     subtaskForm.innerHTML = `
-      <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
-      <div class="subtask-add-icons-overlay" id="icon-hold">
+      <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask-overlay" onclick="subtaskCustomTemplate()">
+      <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
       <img src="./img/subtask.png" alt="add-icon" class="hover-overlay add-hover-overlay" onclick="subtaskTemplate()">
       </div>
     `;
@@ -299,8 +315,8 @@ function cancelSubtask() {
 
 function cancelSubtaskSafety() {
     document.addEventListener("click", function (event) {
-        let subtaskForm = document.getElementById("subtask-form");
-        let subtaskInput = document.getElementById("subtask");
+        let subtaskForm = document.getElementById("subtask-form-overlay");
+        let subtaskInput = document.getElementById("subtask-overlay");
 
         if (
             event.target !== subtaskInput &&
@@ -314,7 +330,7 @@ function cancelSubtaskSafety() {
 
 async function addSubtask() {
     let subtaskAdd = document.getElementById("subtask-display-overlay");
-    let subtaskInputValue = document.getElementById("subtask").value.trim();
+    let subtaskInputValue = document.getElementById("subtask-overlay").value.trim();
     subtaskAdd.innerHTML = "";
 
     if (subtaskInputValue !== "") {
@@ -420,15 +436,43 @@ function prioSelection(clickedPrio) {
     priority = prio.id;
 }
 
+function prioSelectionOverlay(clickedPrio) {
+    let prio = clickedPrio;
+    let lowImg = document.getElementById("low-img-overlay");
+    let mediumImg = document.getElementById("medium-img-overlay");
+    let urgentImg = document.getElementById("urgent-img-overlay");
+
+    document.getElementById("urgent-overlay").classList.remove("prioUrgent");
+    document.getElementById("medium-overlay").classList.remove("prioMedium");
+    document.getElementById("low-overlay").classList.remove("prioLow");
+
+    lowImg.src = "./img/low.png";
+    mediumImg.src = "./img/medium-prio.png";
+    urgentImg.src = "./img/urgent-red-arrows.png";
+
+    if (prio.id === "urgent-overlay") {
+        prio.classList.add("prioUrgent");
+        urgentImg.src = "./img/urgent-white-arrows.png";
+    } else if (prio.id === "medium-overlay") {
+        prio.classList.add("prioMedium");
+        mediumImg.src = "./img/medium.png";
+    } else if (prio.id === "low-overlay") {
+        prio.classList.add("prioLow");
+        lowImg.src = "./img/low-white-arrows.png";
+    }
+
+    priority = prio.id;
+}
+
 function clearAddTask() {
-    document.getElementById("title-task").value = "";
-    document.getElementById("description-task").value = "";
-    document.getElementById("date-date-task").value = "";
-    document.getElementById("chosen-task").innerHTML = "Select task category";
-    document.getElementById("sub-profile").innerHTML = "";
+    document.getElementById("title-task-overlay").value = "";
+    document.getElementById("description-task-overlay").value = "";
+    document.getElementById("date-date-task-overlay").value = "";
+    document.getElementById("chosen-task-overlay").innerHTML = "Select task category";
+    document.getElementById("sub-profile-overlay").innerHTML = "";
     document.getElementById("subtask-display-overlay").innerHTML = "";
 
-    let subProfile = document.getElementById("sub-profile");
+    let subProfile = document.getElementById("sub-profile-overlay");
     subProfile.innerHTML = "";
 
     subtaskInput = [];
@@ -438,11 +482,11 @@ function clearAddTask() {
     priority = priorityDefault;
 
     assignedTo();
-    prioSelection(Medium);
+    prioSelectionOverlay('medium-overlay');
 }
 
 function addedTask() {
-    let backLog = document.getElementById('task-added-success');
+    let backLog = document.getElementById('task-added-success-overlay');
     backLog.classList.remove('d-none-overlay')
 
     setTimeout(function () {
@@ -451,13 +495,13 @@ function addedTask() {
 }
 
 function dropDownMenuCategory() {
-    document.getElementById("myDropdown-category").classList.toggle("show-overlay");
-    let icon = document.getElementById("drop-down-icon-2");
+    document.getElementById("myDropdown-category-overlay").classList.toggle("show-overlay");
+    let icon = document.getElementById("drop-down-icon-2-overlay");
     document
-        .getElementById("dropdown-parent-category")
+        .getElementById("dropdown-parent-category-overlay")
         .classList.toggle("dropdown-outline-focus-overlay");
     document
-        .getElementById("dropdown-parent-category")
+        .getElementById("dropdown-parent-category-overlay")
         .classList.toggle("dropdown-custom");
 
     if (icon.src.includes("arrow_drop_downaa.png")) {
@@ -469,7 +513,7 @@ function dropDownMenuCategory() {
 
 function selectCategory(clickedCategory) {
     let cat = clickedCategory;
-    let categoryContainer = document.getElementById('chosen-task');
+    let categoryContainer = document.getElementById('chosen-task-overlay');
     heading = cat.id;
 
     categoryContainer.innerHTML = `${heading}`;
@@ -484,16 +528,16 @@ function selectCategory(clickedCategory) {
 //     !event.target.closest(".dropdown-menu-category-overlay")
 //   ) {
 //     let dropdowns = document.getElementsByClassName("dropdown-menu-category-overlay");
-//     let icon = document.getElementById("drop-down-icon-2");
+//     let icon = document.getElementById("drop-down-icon-2-overlay");
 //     for (let i = 0; i < dropdowns.length; i++) {
 //       let openDropdown = dropdowns[i];
 //       if (openDropdown.classList.contains("show-overlay")) {
 //         openDropdown.classList.remove("show-overlay");
 //         document
-//           .getElementById("dropdown-parent-category")
+//           .getElementById("dropdown-parent-category-overlay")
 //           .classList.toggle("dropdown-outline-focus-overlay");
 //         document
-//           .getElementById("dropdown-parent-category")
+//           .getElementById("dropdown-parent-category-overlay")
 //           .classList.toggle("dropdown-custom");
 //       }
 //       if (icon.src.includes("arrow_drop_down-up.png")) {

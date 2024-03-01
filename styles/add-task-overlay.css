@@ -260,6 +260,24 @@
     font-size: 20px;
 }
 
+.prioUrgent {
+    background-color: #ff3d00;
+    font-weight: 700;
+    color: white;
+}
+
+.prioMedium {
+    background-color: #ffa800;
+    font-weight: 700;
+    color: white;
+}
+
+.prioLow {
+    background-color: #7ae229;
+    font-weight: 700;
+    color: white;
+}
+
 .bottom-container-overlay {
     display: flex;
     justify-content: space-between;

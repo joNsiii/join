@@ -24,6 +24,7 @@
     display: flex;
     gap: 32px;
 }
+
 .add-task-headline {
     display: flex;
     height: 73px;
@@ -185,7 +186,9 @@
     border-radius: 10px;
     padding: 12px 16px 12px 16px;
     gap: 10px;
+    font-size: 20px;
 }
+
 
 .select-input:focus {
     background-image: url("../img/arrow_drop_down-up.png");
@@ -545,7 +548,7 @@
     right: -15px;
     width: 100%;
     position: absolute;
-    box-shadow: 0px 5px 5px 4px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 5px 4px rgba(0, 0, 0, 0.4);
 }
 
 .subuser-selection {
@@ -588,6 +591,7 @@
     margin-right: 16px;
     text-transform: uppercase;
 }
+
 .checkbox {
     width: 18px;
     height: 18px;
