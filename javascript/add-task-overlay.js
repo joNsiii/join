@@ -480,9 +480,10 @@ function clearAddTask() {
     sub_users = [];
     contactsUser = [];
     priority = priorityDefault;
+    let medium = document.getElementById("medium-overlay");
 
     assignedTo();
-    prioSelectionOverlay('medium-overlay');
+    prioSelectionOverlay(medium);
 }
 
 function addedTask() {
