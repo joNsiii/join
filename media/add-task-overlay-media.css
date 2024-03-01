@@ -90,3 +90,92 @@
         height: 56px;
     }
 }
+
+@media (max-width: 428px) {
+    .add-task-overlay-in {
+        left: 0;
+        right: 0;
+    }
+
+    .add-task-overlay {
+        width: 100%;
+        max-width: 428px;
+    }
+
+    .left-side-inputs-overlay {
+        min-width: unset;
+    }
+
+    .input-single-line-overlay {
+        height: 49px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .input-single-line-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .desc-textarea-overlay {
+        box-sizing: border-box;
+        height: 110px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .desc-textarea-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .dropdown-parent-container-overlay {
+        font-size: 16px;
+    }
+
+    .subuser-selection-overlay {
+        font-size: 16px;
+    }
+
+    .right-side-inputs-overlay {
+        min-width: unset;
+    }
+
+    .dropdown-parent-container-2-overlay {
+        font-size: 16px;
+    }
+
+    .category-content-overlay {
+        font-size: 16px;
+    }
+
+    .sub-task-child-overlay {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .sub-task-child-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .bottom-container-overlay {
+        justify-content: flex-end;
+    }
+
+    .bottom-flex-left-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .clearBtn-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container-overlay {
+        height: 56px;
+    }
+
+    .createBtn-overlay {
+        min-width: 183px;
+    }
+}
