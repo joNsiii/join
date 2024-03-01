@@ -53,12 +53,25 @@
 }
 
 .input-single-line {
-    display: flex;
+    box-sizing: border-box;
+    max-height: 49px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
-    gap: 10px;
     font-size: 20px;
+    font-family: 'Inter';
+}
+
+.input-single-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    object-position: center;
+    background-color: white;
+    position: absolute;
+    right: 21px;
+    bottom: 12.5px;
+    pointer-events: none;
 }
 
 .input-single-line-subtask {
