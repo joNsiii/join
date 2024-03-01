@@ -398,22 +398,22 @@ function prioSelection(clickedPrio) {
     let mediumImg = document.getElementById("medium-img");
     let urgentImg = document.getElementById("urgent-img");
 
-    document.getElementById("Urgent").classList.remove("prioUrgent-overlay");
-    document.getElementById("Medium").classList.remove("prioMedium-overlay");
-    document.getElementById("Low").classList.remove("prioLow-overlay");
+    document.getElementById("Urgent").classList.remove("prioUrgent");
+    document.getElementById("Medium").classList.remove("prioMedium");
+    document.getElementById("Low").classList.remove("prioLow");
 
     lowImg.src = "./img/low.png";
     mediumImg.src = "./img/medium-prio.png";
     urgentImg.src = "./img/urgent-red-arrows.png";
 
     if (prio.id === "Urgent") {
-        prio.classList.add("prioUrgent-overlay");
+        prio.classList.add("prioUrgent");
         urgentImg.src = "./img/urgent-white-arrows.png";
     } else if (prio.id === "Medium") {
-        prio.classList.add("prioMedium-overlay");
+        prio.classList.add("prioMedium");
         mediumImg.src = "./img/medium.png";
     } else if (prio.id === "Low") {
-        prio.classList.add("prioLow-overlay");
+        prio.classList.add("prioLow");
         lowImg.src = "./img/low-white-arrows.png";
     }
 

@@ -345,24 +345,6 @@
     justify-content: flex-start;
 }
 
-.prioUrgent-overlay {
-    background-color: #ff3d00;
-    font-weight: 700;
-    color: white;
-}
-
-.prioMedium-overlay {
-    background-color: #ffa800;
-    font-weight: 700;
-    color: white;
-}
-
-.prioLow-overlay {
-    background-color: #7ae229;
-    font-weight: 700;
-    color: white;
-}
-
 .subtask-preview-overlay {
     display: flex;
     align-items: center;
