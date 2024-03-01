@@ -1,10 +1,13 @@
 @media (max-width: 1200px) {
-    .add-task-overlay-positon {
+    .add-task-overlay-out {
         top: 96px;
     }
 
+    .add-task-overlay-in {
+        left: calc(50% - 214px);
+    }
+
     .add-task-overlay {
-        margin-top: 96px;
         height: calc(100vh - 172px);
         width: 428px;
 
@@ -20,10 +23,16 @@
         font-size: 47px;
     }
 
+    .add-task-form-group {
+        height: calc(100% - 161px);
+        overflow-y: auto;
+    }
+
     .task-form-overlay {
         flex-direction: column;
-        max-width: 496px;
-        overflow-y: auto;
+        max-width: unset;
+        /* max-width: 496px;
+        overflow-y: auto; */
     }
 
     .left-side-inputs-overlay {
@@ -58,179 +67,115 @@
         width: 100%;
     }
 
-    /* prio-button fixen!!! */
+    .prio-selection-overlay {
+        width: 121px;
+        height: 41px;
+        padding: 18px 10px;
+    }
 
     .bottom-container-overlay {
         margin-top: 0;
-        padding: 16px;
+        padding-top: 16px;
         position: absolute;
         right: 16px;
         bottom: 16px;
         left: 16px;
     }
 
-    .bottom-container-overlay .clearBtn {
+    .bottom-container-overlay .clearBtn-overlay {
         display: none;
     }
 
-    .bottom-container-overlay .bottom-button-container {
+    .bottom-container-overlay .bottom-button-container-overlay {
         height: 56px;
     }
 }
 
-@media (max-width: 950px) {
-    .display-flex {
-        flex-direction: column;
+@media (max-width: 428px) {
+    .add-task-overlay-in {
+        left: 0;
+        right: 0;
     }
 
-    .border-between {
-        display: none;
-    }
-
-    .right-side-inputs {
-        margin-left: 0;
-        margin-right: 96px;
-        max-width: 100%;
-    }
-
-    .left-side-inputs {
-        margin-right: 96px;
-        width: auto;
-    }
-
-    .bottom-button-container {
-        max-width: 440px;
-        margin-right: 54px;
-        margin-bottom: 32px;
-    }
-
-    .bottom-container {
-        margin: 0;
-        margin-left: 328px;
-        align-items: normal;
-    }
-}
-
-@media (max-width: 730px) {
-    .add-task-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .add-task-headline {
-        font-size: 47px;
-    }
-
-    .add-task-headline {
-        margin-left: 0;
-        margin-left: 16px;
-        margin-right: 16px;
-        margin-top: 112px;
-    }
-
-    .right-side-inputs {
-        margin-right: 16px;
-        margin-left: 16px;
-
-    }
-
-    .left-side-inputs {
-        margin-right: 16px;
-        margin-left: 16px;
-    }
-
-    .display-flex {
-        margin-left: 0;
-    }
-
-    .prio-selection {
-        height: 41px;
-        width: 121px;
-    }
-
-    .medium-selection {
-        height: 41px;
-        width: 121px;
-    }
-
-    .bottom-container {
-        position: fixed;
-        bottom: 0;
-        width: 95%;
-        height: 88px;
-        align-items: center;
-        margin-left: 16px;
-        margin-right: 16px;
-        justify-content: space-between;
-        background-color: #f6f7f8;
-        margin-bottom: 76px;
-    }
-
-    .bottom-button-container {
-        margin-right: 0;
-    }
-
-    .clearBtn {
-        display: none;
-    }
-}
-
-@media (max-width: 983px) {
-    .bottom-flex-right {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+    .add-task-overlay {
         width: 100%;
-
+        max-width: 428px;
     }
 
-    .bottom-flex-left {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 55%;
+    .left-side-inputs-overlay {
+        min-width: unset;
     }
-}
 
-@media (max-width: 1064px) {
-    .sub-profile-container {
-        transform: translateY(175%);
+    .input-single-line-overlay {
+        height: 49px;
+        font-size: 16px;
+        line-height: 20px;
     }
-}
 
-@media (max-width: 950px) {
-    .sub-profile-container {
-        transform: translateY(130%) !important;
+    .input-single-line-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
     }
-}
 
-@media (max-width: 1133px) {
-    .sub-profile-container {
-        transform: translateY(175%);
+    .desc-textarea-overlay {
+        box-sizing: border-box;
+        height: 110px;
+        font-size: 16px;
+        line-height: 20px;
     }
-}
 
-@media (max-width: 1135px) {
-    .dropdown-menu-sub {
-        top: 100px;
+    .desc-textarea-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
     }
-}
 
-@media (max-width: 1050px) {
-    .dropdown-menu-category {
-        top: 103px;
+    .dropdown-parent-container-overlay {
+        font-size: 16px;
     }
-}
 
-@media (max-width: 950px) {
-    .dropdown-menu-category {
-        top: 79px;
+    .subuser-selection-overlay {
+        font-size: 16px;
     }
-}
 
-@media (max-width: 950px) {
-    .dropdown-menu-sub {
-        top: 75px;
+    .right-side-inputs-overlay {
+        min-width: unset;
+    }
+
+    .dropdown-parent-container-2-overlay {
+        font-size: 16px;
+    }
+
+    .category-content-overlay {
+        font-size: 16px;
+    }
+
+    .sub-task-child-overlay {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .sub-task-child-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .bottom-container-overlay {
+        justify-content: flex-end;
+    }
+
+    .bottom-flex-left-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .clearBtn-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container-overlay {
+        height: 56px;
+    }
+
+    .createBtn-overlay {
+        min-width: 183px;
     }
 }
