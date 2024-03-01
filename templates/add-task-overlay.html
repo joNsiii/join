@@ -7,7 +7,7 @@
             <div class="task-form-overlay" id="taskForm">
                 <div class="left-side-inputs-overlay">
                     <div class="single-input-container-overlay">
-                        <label>Title<label class="red-star">*</label></label>
+                        <label>Title<label class="red-star-overlay">*</label></label>
                         <input class="input-single-line-overlay" placeholder="Enter a title" type="text" id="title-task"
                             required>
                     </div>
@@ -16,19 +16,19 @@
                         <textarea class="desc-textarea-overlay" placeholder="Enter a Description" id="description-task"
                             cols="30" rows="3"></textarea>
                     </div>
-                    <div class="single-input-container-overlay no-gap">
+                    <div class="single-input-container-overlay no-gap-overlay">
                         <label>Assigned to</label>
                         <div onclick="dropDownMenu()" class="dropdown-parent-container-overlay" id="dropdown-parent">
                             Select
                             contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
-                        <div class="dropdown-menu-sub category-height" id="myDropdown">
-                            <div class="subuser-selection-parent">
+                        <div class="dropdown-menu-sub-overlay category-height-overlay" id="myDropdown">
+                            <div class="subuser-selection-parent-overlay">
 
                             </div>
                         </div>
-                        <div class="sub-profile-container" id="sub-profile">
+                        <div class="sub-profile-container-overlay" id="sub-profile">
 
                         </div>
                     </div>
@@ -36,18 +36,19 @@
                 <div class="border-between-overlay"></div>
                 <div class="right-side-inputs-overlay">
                     <div class="single-input-container-overlay">
-                        <label for="date-date-task">Due Date<label class="red-star">*</label></label>
+                        <label for="date-date-task">Due Date<label class="red-star-overlay">*</label></label>
                         <input class="input-single-line-overlay" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                             onblur="(this.type='text')" name="date" id="date-date-task" required>
                         <img class="input-single-img" src="./img/calendar.png" alt="calendar">
                     </div>
-                    <div class="prio-container">
+                    <div class="prio-container-overlay">
                         <label>Prio</label>
-                        <div class="prio-select-con">
+                        <div class="prio-select-con-overlay">
                             <div class="prio-selection-overlay" id="Urgent" onclick="prioSelection(this)">
                                 <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
                             </div>
-                            <div class="prio-selection-overlay prioMedium" id="Medium" onclick="prioSelection(this)">
+                            <div class="prio-selection-overlay prioMedium-overlay" id="Medium"
+                                onclick="prioSelection(this)">
                                 <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
                             </div>
                             <div class="prio-selection-overlay" id="Low" onclick="prioSelection(this)">
@@ -56,14 +57,14 @@
                         </div>
                     </div>
                     <div class="single-input-container-overlay">
-                        <label>Category<label class="red-star">*</label></label>
-                        <div onclick="dropDownMenuCategory()" class="dropdown-parent-container-2"
+                        <label>Category<label class="red-star-overlay">*</label></label>
+                        <div onclick="dropDownMenuCategory()" class="dropdown-parent-container-2-overlay"
                             id="dropdown-parent-category">
                             <p id="chosen-task">Select task category</p>
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-2">
                         </div>
-                        <div class="dropdown-menu-category sleep" id="myDropdown-category">
-                            <div class="category-content">
+                        <div class="dropdown-menu-category-overlay sleep-overlay" id="myDropdown-category">
+                            <div class="category-content-overlay">
                                 <div id="Technical Task" onclick="selectCategory(this)">Technical Task</div>
                                 <div id="User Story" onclick="selectCategory(this)">User Story</div>
                             </div>
@@ -71,15 +72,15 @@
                     </div>
                     <div class="single-input-container-overlay">
                         <label>Subtasks</label>
-                        <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"
+                        <div class="input-single-line-subtask-overlay" id="subtask-form">
+                            <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask"
                                 onclick="subtaskCustomTemplate()">
                             <div class="subtask-add-icons-overlay" id="icon-hold">
-                                <img src="./img/subtask.png" alt="add-icon" class="hover add-hover"
+                                <img src="./img/subtask.png" alt="add-icon" class="hover-overlay add-hover-overlay"
                                     onclick="subtaskTemplate()">
                             </div>
                         </div>
-                        <div id="subtask-display">
+                        <div id="subtask-display-overlay">
                         </div>
                     </div>
 
@@ -87,17 +88,19 @@
 
             </div>
             <div class="bottom-container-overlay">
-                <span class="bottom-flex-left-overlay"><label class="red-star">*</label>This field is required</span>
-                <div class="bottom-button-container-overlay bottom-flex-right" id="button-container">
-                    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear">
+                <span class="bottom-flex-left-overlay"><label class="red-star-overlay">*</label>This field is
+                    required</span>
+                <div class="bottom-button-container-overlay bottom-flex-right-overlay" id="button-container">
+                    <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png"
+                            alt="clear">
                     </div>
-                    <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png"
-                            alt="check"></button>
+                    <button class="createBtn-overlay" onclick="addedTask()" disabled>Create Task <img
+                            src="./img/check.png" alt="check"></button>
                 </div>
             </div>
-            <div class="bottom-push"></div>
+            <div class="bottom-push-overlay"></div>
         </form>
-        <div class="added-task d-none" id="task-added-success">Task added to board<img src="./img/Vector-white.png"
-                alt="board.icon"></div>
+        <div class="added-task-overlay d-none-overlay" id="task-added-success">Task added to board<img
+                src="./img/Vector-white.png" alt="board.icon"></div>
     </div>
 </section>
