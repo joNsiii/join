@@ -7,7 +7,25 @@ body {
   background: transparent;
 }
 
+.add-task-content {
+  width: calc(100% - 232px);
+  height: calc(100vh - 96px);
+  position: relative;
+  top: 96px;
+  left: 232px;
+}
+
 .add-task-headline {
+  display: flex;
+  height: 73px;
+  margin-top: 110px;
+  margin-left: 96px;
+  gap: 1px;
+  font-size: 61px;
+  font-weight: 700;
+}
+
+/* .add-task-headline {
   display: flex;
   height: 73px;
   margin-top: 206px;
@@ -15,13 +33,19 @@ body {
   gap: 1px;
   font-size: 61px;
   font-weight: 700;
-}
+} */
 
 .display-flex {
   display: flex;
-  margin-left: 328px;
+  margin-left: 96px;
   max-width: 1074px;
 }
+
+/* .display-flex {
+  display: flex;
+  margin-left: 328px;
+  max-width: 1074px;
+} */
 
 .left-side-inputs {
   display: flex;
@@ -53,6 +77,7 @@ body {
   border-radius: 10px;
   padding: 12px 21px 12px 21px;
   font-size: 20px;
+  font-family: 'Inter';
 }
 
 .input-single-img {
@@ -293,9 +318,19 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 1026px;
+  margin: 32px 48px 32px 96px;
+  height: fit-content;
+  padding-bottom: 71px;
+}
+
+/* .bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1026px;
   margin: 32px 48px 32px 328px;
   height: fit-content;
-}
+} */
 
 .bottom-button-container {
   display: flex;
@@ -318,7 +353,7 @@ body {
   border-radius: 10px;
   gap: 4px;
   cursor: pointer;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .createBtn img {
