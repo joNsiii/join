@@ -1,5 +1,5 @@
-<section id="add-task-overlay-position" class="add-task-overlay-out">
-    <div class="add-task-overlay" onclick="stop(event)">
+<section id="add-task-overlay-position" class="add-task-overlay-out" onclick="stop(event)">
+    <div class="add-task-overlay" onclick="flipDropDownMenuOverlay(false); flipDropDownMenuCategoryOverlay(false)">
         <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog"
             onclick="closeAddTaskOverlay()">
         <div class="add-task-headline-overlay">Add Task</div>
@@ -16,15 +16,16 @@
                         <textarea class="desc-textarea-overlay" placeholder="Enter a Description"
                             id="description-task-overlay" cols="30" rows="3"></textarea>
                     </div>
-                    <div class="single-input-container-overlay no-gap-overlay">
+                    <div class="single-input-container-overlay no-gap-overlay" onclick="stop(event)">
                         <label>Assigned to</label>
-                        <div onclick="dropDownMenuOverlay()" class="dropdown-parent-container-overlay"
+                        <div onclick="flipDropDownMenuOverlay(true)" class="dropdown-parent-container-overlay"
                             id="dropdown-parent-overlay">
                             Select
                             contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-overlay">
                         </div>
-                        <div class="dropdown-menu-sub-overlay category-height-overlay" id="myDropdown-overlay">
+                        <div class="dropdown-menu-sub-overlay category-height-overlay" id="myDropdown-overlay"
+                            onclick="stop(event)">
                             <div class="subuser-selection-parent-overlay">
 
                             </div>
@@ -59,9 +60,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-input-container-overlay">
+                    <div class="single-input-container-overlay" onclick="stop(event)">
                         <label>Category<label class="red-star-overlay">*</label></label>
-                        <div onclick="dropDownMenuCategory()" class="dropdown-parent-container-2-overlay"
+                        <div onclick="flipDropDownMenuCategoryOverlay(true)" class="dropdown-parent-container-2-overlay"
                             id="dropdown-parent-category-overlay">
                             <p id="chosen-task-overlay">Select task category</p>
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-2-overlay">
