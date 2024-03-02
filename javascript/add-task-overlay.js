@@ -33,6 +33,9 @@ async function scopeTasks() {
     let title = document.getElementById("title-task-overlay").value;
     let description = document.getElementById("description-task-overlay").value;
     let dueDate = document.getElementById("date-date-task-overlay").value;
+    priority = priority.split('-');
+    priority = priority[0];
+    priority = priority.replace(priority[0], priority[0].toUpperCase());
 
     const taskId = Date.now();
 
@@ -45,7 +48,7 @@ async function scopeTasks() {
         subtasks: subtasks,
         sub_users: sub_users,
         priority: priority,
-        date: dueDate,
+        dueDate: dueDate,
     };
     boardTasks.push(task);
     await setItem("boardTasks", JSON.stringify(boardTasks));
