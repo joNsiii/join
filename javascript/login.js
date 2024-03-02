@@ -1,6 +1,5 @@
 let checkStatus;
 
-/**After singup u will automaticly directioned to 'login'-page and a popup 'signup successfully' will shown up */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 const popup = urlParams.get('greet-popup');

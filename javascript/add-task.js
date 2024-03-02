@@ -6,12 +6,6 @@ let contactsUser = [];
 let heading = "";
 priority = priorityDefault;
 
-// document.addEventListener('DOMContentLoaded', async function() {
-//   await loadTasks();
-//   await loadUsers();
-//   assignedTo();
-// })
-
 async function addTaskInit() {
   await init();
   await applyGuestSettingsAddTask();
@@ -39,11 +33,10 @@ function reloadPage() {
   location.reload();
 }
 
-async function scopeTasks() {
+function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
   let dueDate = document.getElementById("date-date-task").value;
-
   const taskId = Date.now();
 
   let task = {
@@ -57,6 +50,10 @@ async function scopeTasks() {
     priority: priority,
     dueDate: dueDate,
   };
+  pushTasks(task)
+}
+
+async function pushTasks(task) {
   boardTasks.push(task);
   await setItem("boardTasks", JSON.stringify(boardTasks));
   console.log("Task added successfully:", task);
@@ -71,54 +68,58 @@ function assignedTo() {
     assignElement.innerHTML = "<div class=subuser-align>No Contacts Found</div>";
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
+      <button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
   }
   if (user !== undefined) {
-    assignElement.innerHTML = "";
-    document.getElementById('button-container').innerHTML = `                    
-    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button id="create-new-task-button" class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
-    user.name = user.name;
-    contactsUser.push(user);
-    for (let i = 0; i < user.contacts.length; i++) {
-      let contact = user.contacts[i];
-      contactsUser.push(contact);
-    }
+    subtaskFocusOptions(assignElement, user);
+  }
+}
 
-    for (let i = 0; i < users.length; i++) {
-      const bgc = `bgc-${users[i]["bgc-name"]}`;
-      const contact = users[i].name;
-      let yourName = contact.includes(" (You") ? true : false;
-      let names = contact.split(" ");
-      let letterGroup;
-      if (!yourName) {
-        letterGroup = names[0][0] + names[names.length - 1][0];
-      } else {
-        letterGroup = names[0][0] + names[names.length - 2][0];
-      }
-      assignElement.innerHTML += `
-        <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
-          <div class="subuser-align">
-            <div class="sub-profile-img ${bgc}">${letterGroup}</div>
-            <div>${contact}</div>
-          </div>  
-            <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-              id="checkbox-remember-me-${i}"></div>  
-        </div>
-      `;
+function subtaskFocusOptions(assignElement, user) {
+  subtaskSecondaryOptions(assignElement, user);
+  for (let i = 0; i < users.length; i++) {
+    const bgc = `bgc-${users[i]["bgc-name"]}`;
+    const contact = users[i].name;
+    let yourName = contact.includes(" (You") ? true : false;
+    let names = contact.split(" ");
+    let letterGroup;
+    if (!yourName) {
+      letterGroup = names[0][0] + names[names.length - 1][0];
+    } else {
+      letterGroup = names[0][0] + names[names.length - 2][0];
     }
+    renderFocusOptions(assignElement, i, bgc, letterGroup, contact);
+  } 
+}
+
+function renderFocusOptions(assignElement, i, bgc, letterGroup, contact) {
+  assignElement.innerHTML += `
+  <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+    <div class="subuser-align">
+      <div class="sub-profile-img ${bgc}">${letterGroup}</div>
+        <div>${contact}</div> </div>  
+          <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+            id="checkbox-remember-me-${i}"></div> </div> `;
+}
+
+function subtaskSecondaryOptions(assignElement, user) {
+  assignElement.innerHTML = "";
+  document.getElementById('button-container').innerHTML = `                    
+    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
+     <button id="create-new-task-button" class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button> `;
+  user.name = user.name;
+  contactsUser.push(user);
+  for (let i = 0; i < user.contacts.length; i++) {
+    let contact = user.contacts[i];
+    contactsUser.push(contact);
   }
 }
 
 function dropDownMenu() {
   let icon = document.getElementById("drop-down-icon");
   document.getElementById("myDropdown").classList.toggle("show");
-  document
-    .getElementById("dropdown-parent")
-    .classList.toggle("dropdown-outline-focus");
-  document
-    .getElementById("dropdown-parent")
-    .classList.toggle("dropdown-custom");
+  document.getElementById("dropdown-parent").classList.toggle("dropdown-outline-focus");
+  document.getElementById("dropdown-parent").classList.toggle("dropdown-custom");
 
   if (icon.src.includes("arrow_drop_downaa.png")) {
     icon.src = "./img/arrow_drop_down-up.png";
@@ -133,55 +134,64 @@ function toggleCheckbox(i) {
   let subProfile = document.getElementById("sub-profile");
   let subuserTemp = users[i];
   let subUserIdTemp = users[i]["userId"];
-  console.log(subuserTemp)
   subProfile.innerHTML = "";
 
   if (checkBox.src.includes("checkmark-unchecked.png")) {
-    checkBox.src = "./img/checkmark-white.png";
-    background.classList.add("sub-background");
-    sub_users.push({
-      userIdIterate: i,
-      userId: subUserIdTemp,
-      name: subuserTemp.name,
-      "bgc-name": subuserTemp["bgc-name"],
-    });
+    addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp)
   } else {
-    checkBox.src = "./img/checkmark-unchecked.png";
-    background.classList.remove("sub-background");
-
-    let subuserToRemove = sub_users.findIndex(
-      (user) => user.name === `Temp-${i}`
-    );
-    sub_users.splice(subuserToRemove, 1);
+    checkboxDeselect(i, checkBox, background)
   }
-
   for (let j = 0; j < sub_users.length; j++) {
-    let subBgc = "bgc-" + sub_users[j]["bgc-name"];
-    let subProfileName = sub_users[j].name;
-    let contactId = sub_users[j]["userIdIterate"];
-    let yourName = subProfileName.includes(" (You") ? true : false;
-    let names = subProfileName.split(" ");
-    let letterGroup;
-    if (!yourName) {
-      letterGroup = names[0][0] + names[names.length - 1][0];
-    } else {
-      letterGroup = names[0][0] + names[names.length - 2][0];
-    }
-    subProfile.innerHTML += `
-        <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
-      `;
+    renderSubProfiles(j, subProfile)
   }
+}
+
+function checkboxDeselect(i, checkBox, background) {
+  checkBox.src = "./img/checkmark-unchecked.png";
+  background.classList.remove("sub-background");
+
+  let subuserToRemove = sub_users.findIndex(
+    (user) => user.name === `Temp-${i}`
+  );
+  sub_users.splice(subuserToRemove, 1);
+}
+
+function addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp) {
+  checkBox.src = "./img/checkmark-white.png";
+  background.classList.add("sub-background");
+  sub_users.push({
+    userIdIterate: i,
+    userId: subUserIdTemp,
+    name: subuserTemp.name,
+    "bgc-name": subuserTemp["bgc-name"],
+  });
+}
+
+function renderSubProfiles(j, subProfile) {
+  let subBgc = "bgc-" + sub_users[j]["bgc-name"];
+  let subProfileName = sub_users[j].name;
+  let contactId = sub_users[j]["userIdIterate"];
+  let yourName = subProfileName.includes(" (You") ? true : false;
+  let names = subProfileName.split(" ");
+  let letterGroup;
+  if (!yourName) {
+    letterGroup = names[0][0] + names[names.length - 1][0];
+  } else {
+    letterGroup = names[0][0] + names[names.length - 2][0];
+  }
+  subProfile.innerHTML += `
+      <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div> `;
 }
 
 function removeSubPB(subuserId) {
   let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
   if (indexToRemove !== -1) {
     sub_users.splice(indexToRemove, 1);
-    renderSubProfiles(subuserId);
+    clearDropdown(subuserId);
   }
 }
 
-function renderSubProfiles(index) {
+function clearDropdown(index) {
   document.getElementById(`checkbox-remember-me-${index}`).src = "./img/checkmark-unchecked.png";
   background = document.getElementById(`subuser-div-${index}`).classList.remove("sub-background");
   let deleteContact = document.getElementById(`contact-id-${index}`);
@@ -191,10 +201,9 @@ function renderSubProfiles(index) {
 function subtaskCustomTemplate() {
   let subtaskForm = document.getElementById("icon-hold");
   subtaskForm.innerHTML = `
-        <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
-        <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-        <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
-      `;
+    <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+    <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+    <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()"> `;
   cancelSubtaskSafety();
 }
 
@@ -205,11 +214,11 @@ function subtaskTemplate() {
   if (subtaskValueCheck.value == "" || subtaskValueCheck.value == null) {
     subtaskForm.innerHTML = `
       <input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" value="Contact Form">
-      <div class="subtask-add-icons" id="icon-hold">
-        <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
-        <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-        <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
-      </div>
+        <div class="subtask-add-icons" id="icon-hold">
+          <img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+          <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+          <img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
+        </div>
       `;
   }
 }
@@ -264,8 +273,8 @@ function cancelSubtask() {
   let subtaskForm = document.getElementById("subtask-form");
   subtaskForm.innerHTML = `
       <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
-      <div class="subtask-add-icons" id="icon-hold">
-      <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+        <div class="subtask-add-icons" id="icon-hold">
+          <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
       </div>
     `;
 }
@@ -278,20 +287,22 @@ function deleteSubtask(i) {
     subtaskSpan.remove();
   }
   for (let j = i; j < subtasks.length; j++) {
-    let span = document.getElementById(`sub-span-${j + 1}`);
-    let preview = document.getElementById(`preview-${j + 1}`);
-    let iconContainer = document.getElementById(`icon-container-${j + 1}`);
-    if (span) {
-      span.id = `sub-span-${j}`;
-    }
-    if (preview) {
-      preview.id = `preview-${j}`;
-    }
-    if (iconContainer) {
-      iconContainer.id = `icon-container-${j}`;
-    }
+    renderSubtaskSafety(j)
   }
   renderSubtasks();
+}
+
+function renderSubtaskSafety(j) {
+  let span = document.getElementById(`sub-span-${j + 1}`);
+  let preview = document.getElementById(`preview-${j + 1}`);
+  let iconContainer = document.getElementById(`icon-container-${j + 1}`);
+  if (span) {
+    span.id = `sub-span-${j}`;
+  } if (preview) {
+    preview.id = `preview-${j}`;
+  } if (iconContainer) {
+    iconContainer.id = `icon-container-${j}`;
+  }
 }
 
 function subtaskFocus(i) {
@@ -318,7 +329,6 @@ function subtaskOutOfFocus(i) {
   if (subtaskInputValue !== subtaskIndexValue) {
     subtasks[i]["subtasksText"] = subtaskInputValue;
   }
-
   document.getElementById(`sub-span-${i}`).classList.remove("focus-input");
   document.getElementById(`list-item-${i}`).classList.remove("focus-list-item");
   document.getElementById(`preview-${i}`).classList.remove("focus-preview");
@@ -327,8 +337,7 @@ function subtaskOutOfFocus(i) {
   editIcon.innerHTML = `
       <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover" onclick="subtaskFocus(${i})">
       <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
-      <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})">
-    `;
+      <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})"> `;
 }
 
 function prioSelection(clickedPrio) {
@@ -345,6 +354,10 @@ function prioSelection(clickedPrio) {
   mediumImg.src = "./img/medium-prio.png";
   urgentImg.src = "./img/urgent-red-arrows.png";
 
+  prioDecision(prio, lowImg, mediumImg, urgentImg);
+}
+
+function prioDecision(prio, lowImg, mediumImg, urgentImg){
   if (prio.id === "Urgent") {
     prio.classList.add("prioUrgent");
     urgentImg.src = "./img/urgent-white-arrows.png";
@@ -412,53 +425,24 @@ function selectCategory(clickedCategory) {
 }
 
 window.onclick = function (event) {
-  if (
-    !event.target.matches(".dropdown-parent-container") &&
-    !event.target.closest(".dropdown-menu-sub")
-  ) {
+  if (!event.target.matches(".dropdown-parent-container") && !event.target.closest(".dropdown-menu-sub")) {
     let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
     let icon = document.getElementById("drop-down-icon");
     for (let i = 0; i < dropdowns.length; i++) {
       let openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("show")) {
         openDropdown.classList.remove("show");
-        document
-          .getElementById("dropdown-parent")
-          .classList.toggle("dropdown-outline-focus");
-        document
-          .getElementById("dropdown-parent")
-          .classList.toggle("dropdown-custom");
+        document.getElementById("dropdown-parent").classList.toggle("dropdown-outline-focus");
+        document.getElementById("dropdown-parent").classList.toggle("dropdown-custom");
       }
       if (icon.src.includes("arrow_drop_down-up.png")) {
         icon.src = "./img/arrow_drop_downaa.png";
-      }
-    }
-  }
+      }}};
 };
 
-// not working with assigned to dropdown
+const scrollContainer = document.getElementById("sub-profile");
 
-// window.onclick = function (event) {
-//   if (
-//     !event.target.matches(".dropdown-parent-container") &&
-//     !event.target.closest(".dropdown-menu-category")
-//   ) {
-//     let dropdowns = document.getElementsByClassName("dropdown-menu-category");
-//     let icon = document.getElementById("drop-down-icon-2");
-//     for (let i = 0; i < dropdowns.length; i++) {
-//       let openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains("show")) {
-//         openDropdown.classList.remove("show");
-//         document
-//           .getElementById("dropdown-parent-category")
-//           .classList.toggle("dropdown-outline-focus");
-//         document
-//           .getElementById("dropdown-parent-category")
-//           .classList.toggle("dropdown-custom");
-//       }
-//       if (icon.src.includes("arrow_drop_down-up.png")) {
-//         icon.src = "./img/arrow_drop_downaa.png";
-//       }
-//     }
-//   }
-// };
+scrollContainer.addEventListener("wheel", (evt) => {
+    evt.preventDefault();
+    scrollContainer.scrollLeft += evt.deltaY;
+});
