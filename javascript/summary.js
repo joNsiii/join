@@ -1,5 +1,3 @@
-let greet = [];
-
 async function summaryInit() {
     await loadUsers();
     await loadUserData();
@@ -12,37 +10,50 @@ async function summaryInit() {
 }
 
 function changeImage() {
-    let editImg = document.getElementById('edit-img');
-    editImg.src = 'img/edit-bg-white.png'
+    document.getElementById('edit-img').src = 'img/edit-bg-white.png';
 }
 function changeImageBack() {
-    let editImg = document.getElementById('edit-img');
-    editImg.src = 'img/edit-bg-blue.png'
+    document.getElementById('edit-img').src = 'img/edit-bg-blue.png';
 }
-
 function changeImage1() {
-    let successImage = document.getElementById('success-img');
-    successImage.src = 'img/success-bg-white.png';
+    document.getElementById('success-img').src = 'img/success-bg-white.png';
 }
 function changeImageBack1() {
-    let successImage = document.getElementById('success-img');
-    successImage.src = 'img/success-bg-blue.png'
+    document.getElementById('success-img').src = 'img/success-bg-blue.png';
 }
+
+window.addEventListener('resize', function () {
+    let windowWidth = window.innerWidth;
+    let actionWidth = 730;
+    if (windowWidth >= actionWidth) {
+        dayTimeGretting();
+        greetUser();
+    }
+});
 
 function dayTimeGretting() {
-    return new Promise((resolve) => {
-        greet = [
-            'What are you doing that early?',
-            'Good Morning',
-            'Good Afternoon',
-            'Good Evening'
-        ][parseInt(new Date().getHours() / 24 * 4)];
-        resolve()
-    });
-}
+    greet = [
+        'What are you doing that early?',
+        'Good Morning',
+        'Good Afternoon',
+        'Good Evening'
+    ][parseInt(new Date().getHours() / 24 * 4)];
+    if (window.innerWidth <= 730) {
+        document.getElementById('daytime-greet-mobile').innerHTML = greet + ',';
+    } else {
+        document.getElementById('daytime-greet').innerHTML = greet + ',';
+    }
+};
 
 function greetUser() {
-    let nameBox = document.getElementById('greeting-name');
+    if (window.innerWidth <= 730) {
+        document.getElementById('greeting-name-mobile').innerHTML = formatUserName();
+    } else {
+        document.getElementById('greeting-name').innerHTML = formatUserName();
+    }
+}
+
+function formatUserName() {
     if (currentUserData !== undefined) {
         let fullName = currentUserData.name;
         let spaceIndex = fullName.indexOf(' ');
@@ -51,50 +62,32 @@ function greetUser() {
         let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
         let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
         let formattedFullName = formattedFirstName + ' ' + formattedLastName;
-        nameBox.innerHTML = formattedFullName;
-        console.log(formattedFirstName)
+        return formattedFullName;
     } else {
-        nameBox.innerHTML = 'Guest';
+        return 'Guest';
     }
 }
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const loginFlag = urlParams.get('login');
-
-    if (loginFlag === 'true' && !localStorage.getItem('loginAnimationShown')) {
-        Promise.all([dayTimeGretting()])
-            .then(() => {
-                localStorage.setItem('loginAnimationShown', true);
-                mobilLoginScreen()
-            })
+    if (loginFlag === 'true') {
+        await loadUsers();
+        await loadUserData();
+        mobilLoginScreen();
     }
-});
+})
 
 function mobilLoginScreen() {
     if (window.innerWidth <= 730) {
         let greetContainer = document.getElementById('greet-popup');
-        renderMobileUser(greetContainer);
-        greetContainer.classList.remove('mobile-greet-animation');
         greetContainer.classList.remove('d-none');
-        setTimeout(() => {
-            greetContainer.classList.add('mobile-greet-animation');
-        }, 1500);
+        dayTimeGretting();
+        greetUser();
         setTimeout(() => {
             greetContainer.classList.add('d-none');
         }, 2000);
     }
-}
-
-function renderMobileUser(greetContainer) {
-    let fullName = localStorage.getItem("GreetName");
-    let spaceIndex = fullName.indexOf(' ');
-    let firstName = fullName.slice(0, spaceIndex);
-    greetContainer.innerHTML += `
-    <div class="summary-greeting-container-popup">
-        <span class="summary-daytime-container" id="daytime-greet">${greet},</span>
-        <span class="summary-name-container" id="greeting-name">${firstName}</span>
-    </div>`;
 }
 
 function loadTaskCounter() {

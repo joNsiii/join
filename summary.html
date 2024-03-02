@@ -30,7 +30,7 @@
         <div class="flex-column">
             <div class="summary-main-content">
                 <div class="summary-main-overview">
-                    <div id="edit" onmousemove="changeImage()" onmouseleave="changeImageBack()"
+                    <div id="edit" onmouseover="changeImage()" onmouseleave="changeImageBack()"
                         class="summary-main-overview-container">
                         <div class="summary-main-img-container">
                             <img id="edit-img" src="./img/edit-bg-blue.png" alt="edit">
@@ -90,6 +90,10 @@
                 <span class="summary-name-container" id="greeting-name"></span>
             </div>
             <div id="greet-popup" class="bg-white d-none">
+                <div class="summary-greeting-container-popup">
+                    <span class="summary-daytime-container" id="daytime-greet-mobile"></span>
+                    <span class="summary-name-container" id="greeting-name-mobile"></span>
+                </div>
             </div>
         </div>
     </div>

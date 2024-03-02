@@ -122,10 +122,10 @@
         opacity: 100%;
     }
 
-    .mobile-greet-animation {
+    /* .mobile-greet-animation {
         transition: all 2s ease;
         opacity: 1%;
-    }
+    } */
 
     .summary-greeting-container-popup {
         display: flex;
