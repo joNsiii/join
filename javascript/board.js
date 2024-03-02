@@ -200,7 +200,7 @@ function insertTaskDataIntoDialog(task, dialog) {
     title.innerText = task.title;
     description.innerText = task.description;
     priority.innerHTML = task.priority + showPriority(task);
-    date.innerHTML = task.date;
+    date.innerHTML = task.dueDate;
     subtask.innerHTML = subUsersNames;
     subtaskText.innerHTML = subTasksRender(task);
     contentHTML.innerHTML = renderEditAndDeleteSection(task);
