@@ -5,7 +5,7 @@ async function summaryInit() {
     await loadUserData();
     await loadTasksInBoard();
     dayTimeGretting();
-    // greetUser();
+    greetUser();
     loadTaskCounter();
     taskInCategory();
     urgentTaskCounter();
@@ -32,42 +32,42 @@ function changeImageBack1() {
 function dayTimeGretting() {
     return new Promise((resolve) => {
         greet = [
-        'What are you doing that early?',
-        'Good Morning',
-        'Good Afternoon',
-        'Good Evening'
-    ][parseInt(new Date().getHours() / 24 * 4)];
+            'What are you doing that early?',
+            'Good Morning',
+            'Good Afternoon',
+            'Good Evening'
+        ][parseInt(new Date().getHours() / 24 * 4)];
         resolve()
     });
 }
 
-// function greetUser() {
-//     let nameBox = document.getElementById('greeting-name');
-//     if (currentUserData !== undefined) {
-//         let fullName = currentUserData.name;
-//         let spaceIndex = fullName.indexOf(' ');
-//         let firstName = fullName.slice(0, spaceIndex);
-//         let lastName = fullName.slice(spaceIndex + 1);
-//             formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-//         let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-//         let formattedFullName = formattedFirstName + ' ' + formattedLastName;
-//         nameBox.innerHTML = formattedFullName;
-//         console.log(formattedFirstName)
-//     } else {
-//         nameBox.innerHTML = 'Guest';
-//     }
-// }
+function greetUser() {
+    let nameBox = document.getElementById('greeting-name');
+    if (currentUserData !== undefined) {
+        let fullName = currentUserData.name;
+        let spaceIndex = fullName.indexOf(' ');
+        let firstName = fullName.slice(0, spaceIndex);
+        let lastName = fullName.slice(spaceIndex + 1);
+        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+        nameBox.innerHTML = formattedFullName;
+        console.log(formattedFirstName)
+    } else {
+        nameBox.innerHTML = 'Guest';
+    }
+}
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const loginFlag = urlParams.get('login');
 
     if (loginFlag === 'true' && !localStorage.getItem('loginAnimationShown')) {
         Promise.all([dayTimeGretting()])
-        .then(() => {
-            localStorage.setItem('loginAnimationShown', true);
-            mobilLoginScreen()
-        })
+            .then(() => {
+                localStorage.setItem('loginAnimationShown', true);
+                mobilLoginScreen()
+            })
     }
 });
 
@@ -82,7 +82,7 @@ function mobilLoginScreen() {
         }, 1500);
         setTimeout(() => {
             greetContainer.classList.add('d-none');
-        }, 3500);
+        }, 2000);
     }
 }
 
