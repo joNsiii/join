@@ -13,6 +13,11 @@ priority = priorityDefault;
 // })
 
 async function addTaskInit() {
+  await init();
+  if (!userIsLoggedIn()) {
+    let addTaskButton = document.getElementById('create-new-task-button');
+    addTaskButton.disabled = true;
+  }
   await loadTasks();
   await loadUsers();
   assignedTo();
@@ -61,13 +66,13 @@ function assignedTo() {
     assignElement.innerHTML = "<div class=subuser-align>No Contacts Found</div>";
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
+    <button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
   }
   if (user !== undefined) {
     assignElement.innerHTML = "";
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
+    <button id="create-new-task-button" class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
     user.name = user.name;
     contactsUser.push(user);
     for (let i = 0; i < user.contacts.length; i++) {

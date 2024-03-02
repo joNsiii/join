@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./styles/background-color.css">
 </head>
 
-<body onload="init(), addTaskInit()">
+<body onload="addTaskInit()">
     <div w3-include-html="templates/templates.html"></div>
     <div class="add-task-content">
         <div class="add-task-headline">Add Task</div>
@@ -101,7 +101,7 @@
                 <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
                 <div class="bottom-button-container bottom-flex-right" id="button-container">
                     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-                    <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>
+                    <button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>
                 </div>
             </div>
             <div class="bottom-push"></div>
