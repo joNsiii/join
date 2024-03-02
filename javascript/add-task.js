@@ -45,7 +45,7 @@ async function scopeTasks() {
     subtasks: subtasks,
     sub_users: sub_users,
     priority: priority,
-    date: dueDate,
+    dueDate: dueDate,
   };
   boardTasks.push(task);
   await setItem("boardTasks", JSON.stringify(boardTasks));
@@ -62,31 +62,31 @@ function assignedTo() {
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
     <button class="createBtn" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
-  } 
+  }
   if (user !== undefined) {
     assignElement.innerHTML = "";
     document.getElementById('button-container').innerHTML = `                    
     <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
     <button class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
-  user.name = user.name;
-  contactsUser.push(user);
-  for (let i = 0; i < user.contacts.length; i++) {
-    let contact = user.contacts[i];
-    contactsUser.push(contact);
-  }
-
-  for (let i = 0; i < users.length; i++) {
-    const bgc = `bgc-${users[i]["bgc-name"]}`;
-    const contact = users[i].name;
-    let yourName = contact.includes(" (You") ? true : false;
-    let names = contact.split(" ");
-    let letterGroup;
-    if (!yourName) {
-      letterGroup = names[0][0] + names[names.length - 1][0];
-    } else {
-      letterGroup = names[0][0] + names[names.length - 2][0];
+    user.name = user.name;
+    contactsUser.push(user);
+    for (let i = 0; i < user.contacts.length; i++) {
+      let contact = user.contacts[i];
+      contactsUser.push(contact);
     }
-    assignElement.innerHTML += `
+
+    for (let i = 0; i < users.length; i++) {
+      const bgc = `bgc-${users[i]["bgc-name"]}`;
+      const contact = users[i].name;
+      let yourName = contact.includes(" (You") ? true : false;
+      let names = contact.split(" ");
+      let letterGroup;
+      if (!yourName) {
+        letterGroup = names[0][0] + names[names.length - 1][0];
+      } else {
+        letterGroup = names[0][0] + names[names.length - 2][0];
+      }
+      assignElement.innerHTML += `
         <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
           <div class="subuser-align">
             <div class="sub-profile-img ${bgc}">${letterGroup}</div>
@@ -110,11 +110,11 @@ function dropDownMenu() {
     .getElementById("dropdown-parent")
     .classList.toggle("dropdown-custom");
 
-    if (icon.src.includes("arrow_drop_downaa.png")) {
-      icon.src = "./img/arrow_drop_down-up.png";
-    } else {
-      icon.src = "./img/arrow_drop_downaa.png";
-    }
+  if (icon.src.includes("arrow_drop_downaa.png")) {
+    icon.src = "./img/arrow_drop_down-up.png";
+  } else {
+    icon.src = "./img/arrow_drop_downaa.png";
+  }
 }
 
 function toggleCheckbox(i) {
@@ -208,9 +208,10 @@ function cancelSubtaskSafety() {
   document.addEventListener("click", function (event) {
     let subtaskForm = document.getElementById("subtask-form");
     let subtaskInput = document.getElementById("subtask");
-    if ( event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "" ) {
+    if (event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
       cancelSubtask();
-    }});
+    }
+  });
 }
 
 async function addSubtask() {
@@ -223,7 +224,8 @@ async function addSubtask() {
       subtasksText: subtaskInputValue,
       isChecked: false,
     }; await subtasks.push(subtask);
-   renderSubtasks() };
+    renderSubtasks()
+  };
   if (subtaskInputValue === "" || subtaskInputValue === undefined || subtaskInputValue === null) {
     cancelSubtask();
   };
@@ -263,17 +265,21 @@ function deleteSubtask(i) {
   subtasks.splice(i, 1);
   let subtaskSpan = document.getElementById(`sub-span-${i}`);
   if (subtaskSpan) {
-    subtaskSpan.remove(); }
+    subtaskSpan.remove();
+  }
   for (let j = i; j < subtasks.length; j++) {
     let span = document.getElementById(`sub-span-${j + 1}`);
     let preview = document.getElementById(`preview-${j + 1}`);
     let iconContainer = document.getElementById(`icon-container-${j + 1}`);
     if (span) {
-      span.id = `sub-span-${j}`; }
+      span.id = `sub-span-${j}`;
+    }
     if (preview) {
-      preview.id = `preview-${j}`; }
+      preview.id = `preview-${j}`;
+    }
     if (iconContainer) {
-      iconContainer.id = `icon-container-${j}`; }
+      iconContainer.id = `icon-container-${j}`;
+    }
   }
   renderSubtasks();
 }
@@ -369,8 +375,8 @@ function clearArrays() {
 function addedTask() {
   let backLog = document.getElementById('task-added-success');
   backLog.classList.remove('d-none')
-    setTimeout(function(){
-      window.location.href = "board.html";
+  setTimeout(function () {
+    window.location.href = "board.html";
   }, 1000);
 }
 
