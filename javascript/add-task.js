@@ -14,14 +14,19 @@ priority = priorityDefault;
 
 async function addTaskInit() {
   await init();
-  if (!userIsLoggedIn()) {
-    let addTaskButton = document.getElementById('create-new-task-button');
-    addTaskButton.disabled = true;
-  }
+  await applyGuestSettingsAddTask();
   await loadTasks();
   await loadUsers();
   assignedTo();
 }
+
+async function applyGuestSettingsAddTask() {
+  if (!userIsLoggedIn()) {
+    let addTaskButton = document.getElementById('create-new-task-button');
+    addTaskButton.disabled = true;
+  }
+}
+
 async function loadTasks() {
   try {
     boardTasks = JSON.parse(await getItem("boardTasks"));
