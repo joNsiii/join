@@ -22,6 +22,28 @@ function changeImageBack1() {
     document.getElementById('success-img').src = 'img/success-bg-blue.png';
 }
 
+window.addEventListener('DOMContentLoaded', async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const loginFlag = urlParams.get('login');
+    if (loginFlag === 'true') {
+        await loadUsers();
+        await loadUserData();
+        mobilLoginScreen();
+    }
+})
+
+function mobilLoginScreen() {
+    if (window.innerWidth <= 730) {
+        let greetContainer = document.getElementById('greet-popup');
+        greetContainer.classList.remove('d-none');
+        dayTimeGretting();
+        greetUser();
+        setTimeout(() => {
+            greetContainer.classList.add('d-none');
+        }, 2000);
+    }
+}
+
 window.addEventListener('resize', function () {
     let windowWidth = window.innerWidth;
     let actionWidth = 730;
@@ -65,28 +87,6 @@ function formatUserName() {
         return formattedFullName;
     } else {
         return 'Guest';
-    }
-}
-
-window.addEventListener('DOMContentLoaded', async function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const loginFlag = urlParams.get('login');
-    if (loginFlag === 'true') {
-        await loadUsers();
-        await loadUserData();
-        mobilLoginScreen();
-    }
-})
-
-function mobilLoginScreen() {
-    if (window.innerWidth <= 730) {
-        let greetContainer = document.getElementById('greet-popup');
-        greetContainer.classList.remove('d-none');
-        dayTimeGretting();
-        greetUser();
-        setTimeout(() => {
-            greetContainer.classList.add('d-none');
-        }, 2000);
     }
 }
 
