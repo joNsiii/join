@@ -153,6 +153,24 @@ function assignedTo() {
 // }
 
 
+function flipDropDownMenu(dropDown) {
+    let icon = document.getElementById("drop-down-icon");
+    if (dropDown) {
+        document.getElementById("myDropdown").classList.add("show");
+        document.getElementById("dropdown-parent").classList.add("dropdown-outline-focus");
+        document.getElementById("dropdown-parent").classList.add("dropdown-custom");
+        icon.src = "./img/arrow_drop_down-up.png";
+        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(false)');
+    } else {
+        document.getElementById("myDropdown").classList.remove("show");
+        document.getElementById("dropdown-parent").classList.remove("dropdown-outline-focus");
+        document.getElementById("dropdown-parent").classList.remove("dropdown-custom");
+        icon.src = "./img/arrow_drop_downaa.png";
+        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true)');
+    }
+}
+
+
 function flipDropDownMenuOverlay(dropDown) {
     let icon = document.getElementById("drop-down-icon-overlay");
     if (dropDown) {

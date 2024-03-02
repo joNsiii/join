@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="add-task-content dialog-edit-task wrapper-scroll">
+    <div class="add-task-content dialog-edit-task wrapper-scroll" onclick="flipDropDownMenu(false)">
         <img src="./img/close.png" alt="close" class="closeOverlayIMG" onclick="closeDialog('dialog')">
         <form onsubmit="findTaskAndUpdate(document.getElementById('task-id-test').value); return false">
             <input type="hidden" id="task-id-test" value="">
@@ -34,14 +34,15 @@
                             <option value="" disabled selected>Select contacts to assign</option>
                         </select>
                     </div> -->
-                    <div class="single-input-container no-gap">
+                    <div class="single-input-container no-gap" onclick="stop(event)">
                         <label>Assigned to</label>
-                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select
+                        <div onclick="flipDropDownMenu(true)" class="dropdown-parent-container" id="dropdown-parent">
+                            Select
                             contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
                         <!-- assign-task is old id -->
-                        <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown">
+                        <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown" onclick="stop(event)">
                             <div class="subuser-selection-parent">
 
                             </div>
