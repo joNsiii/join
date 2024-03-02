@@ -24,6 +24,7 @@
     display: flex;
     gap: 32px;
 }
+
 .add-task-headline {
     display: flex;
     height: 73px;
@@ -44,6 +45,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
 }
 
 .red-star {
@@ -51,12 +53,25 @@
 }
 
 .input-single-line {
-    display: flex;
+    box-sizing: border-box;
+    max-height: 49px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
-    gap: 10px;
     font-size: 20px;
+    font-family: 'Inter';
+}
+
+.input-single-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    object-position: center;
+    background-color: white;
+    position: absolute;
+    right: 21px;
+    bottom: 12.5px;
+    pointer-events: none;
 }
 
 .input-single-line-subtask {
@@ -159,6 +174,7 @@
     padding: 18px 16px 18px 16px;
     gap: 10px;
     font-size: 20px;
+    font-family: 'Inter';
 }
 
 .desc-textarea::placeholder {
@@ -184,7 +200,9 @@
     border-radius: 10px;
     padding: 12px 16px 12px 16px;
     gap: 10px;
+    font-size: 20px;
 }
+
 
 .select-input:focus {
     background-image: url("../img/arrow_drop_down-up.png");
@@ -526,6 +544,7 @@
     padding: 12px 16px 12px 16px;
     gap: 10px;
     font-size: 20px;
+    justify-content: space-between;
 }
 
 .dropdown-menu-sub {
@@ -533,12 +552,17 @@
     flex-direction: column;
     background-color: white;
     border-radius: 10px;
-    padding: 20px 20px 12px 0px;
+    padding: 20px 16px 12px 16px;
     gap: 2px;
     margin-top: -8px;
     height: 220px;
     z-index: 999;
     overflow-y: auto;
+    top: 90px;
+    right: -15px;
+    width: 100%;
+    position: absolute;
+    box-shadow: 0px 5px 5px 4px rgba(0, 0, 0, 0.4);
 }
 
 .subuser-selection {
@@ -581,6 +605,7 @@
     margin-right: 16px;
     text-transform: uppercase;
 }
+
 .checkbox {
     width: 18px;
     height: 18px;
@@ -602,4 +627,26 @@
 .sub-background:hover {
     background-color: #091931 !important;
     color: white;
+}
+
+
+.sub-profile-container {
+    display: flex;
+    padding-bottom: 16px;
+}
+
+.board-card-user-edit {
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

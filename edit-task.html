@@ -21,12 +21,12 @@
                 <div class="left-side-inputs">
                     <div class="single-input-container">
                         <label>Title</label>
-                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task" >
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task">
                     </div>
                     <div class="desc-input-container">
                         <label>Description</label>
-                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task" cols="30"
-                            rows="3"></textarea>
+                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task"
+                            cols="30" rows="3"></textarea>
                     </div>
                     <!-- <div class="single-input-container">
                         <label>Assigned to</label>
@@ -36,13 +36,14 @@
                     </div> -->
                     <div class="single-input-container no-gap">
                         <label>Assigned to</label>
-                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select contacts to assign
+                        <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select
+                            contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
                         <!-- assign-task is old id -->
                         <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown">
                             <div class="subuser-selection-parent">
-                                
+
                             </div>
                         </div>
                         <div class="sub-profile-container" id="sub-profile">
@@ -54,7 +55,8 @@
                     <div class="single-input-container">
                         <label for="date">Due Date</label>
                         <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                            onblur="(this.type='text')" name="date" id="date-date-task" >
+                            onblur="(this.type='text')" name="date" id="date-date-task">
+                        <img class="input-single-img" src="./img/calendar.png" alt="calendar">
                     </div>
                     <div class="prio-container">
                         <label>Prio</label>
@@ -62,7 +64,8 @@
                             <div class="prio-selection" id="Urgent" onclick="prioSelection(this);saveNewPrio(this)">
                                 <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
                             </div>
-                            <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this);saveNewPrio(this)">
+                            <div class="prio-selection prioMedium" id="Medium"
+                                onclick="prioSelection(this);saveNewPrio(this)">
                                 <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
                             </div>
                             <div class="prio-selection" id="Low" onclick="prioSelection(this);saveNewPrio(this)">
@@ -72,7 +75,7 @@
                     </div>
                     <div class="single-input-container">
                         <label>Category</label>
-                        <select class="select-input" id="category" >
+                        <select class="select-input" id="category">
                             <option value="" disabled selected>Select Category</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
@@ -81,9 +84,11 @@
                     <div class="single-input-container">
                         <label>Subtasks</label>
                         <div class="input-single-line-subtask" id="subtask-form">
-                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="initializeSubtaskEditing()">
+                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"
+                                onclick="initializeSubtaskEditing()">
                             <div class="subtask-add-icons-edit" id="icon-hold">
-                            <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="addNewSubtaskForEditing()">
+                                <img src="./img/subtask.png" alt="add-icon" class="hover add-hover"
+                                    onclick="addNewSubtaskForEditing()">
                             </div>
                         </div>
                         <div id="subtask-display">
@@ -101,4 +106,5 @@
         </form>
     </div>
 </body>
+
 </html>
