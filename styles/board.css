@@ -165,6 +165,17 @@ dialog[open] {
     background-color: #2FBAF5;
 }
 
+.board-task-button:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: unset;
+}
+
+.board-task-button:disabled:hover {
+    background-color: #2A3647;
+    box-shadow: unset;
+}
+
 .btb-text {
     width: 92px;
     height: 24px;

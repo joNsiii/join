@@ -11,6 +11,17 @@ async function loadTasksInBoard() {
 }
 
 async function boardInit() {
+    await init();
+    if (!userIsLoggedIn()) {
+        let boardTaskButton = document.getElementById('board-task-button');
+        boardTaskButton.disabled = true;
+        let boardTaskIcon = document.getElementById('board-task-icon-1');
+        boardTaskIcon.style.display = 'none';
+        boardTaskIcon = document.getElementById('board-task-icon-2');
+        boardTaskIcon.style.display = 'none';
+        boardTaskIcon = document.getElementById('board-task-icon-3');
+        boardTaskIcon.style.display = 'none';
+    }
     await loadTasksInBoard();
     renderEachTask();
 }
@@ -90,7 +101,7 @@ function updateProgressBar(task) {
     let length = task.subtasks.length;
     let checked = task.subtasks['isChecked'];
     isChecked[checked] = task.subtasks.filter((c) => c['isChecked'] == true);
-    checkedLength = isChecked[checked].length; 
+    checkedLength = isChecked[checked].length;
     document.getElementById(`subtask-progress-text-${task.taskId}`).innerHTML += checkedLength + '/' + length;
     progressBarPercent(task, length, checkedLength);
 }
@@ -151,6 +162,10 @@ async function openDetails(taskId) {
     dialog.showModal();
     setupCloseDialogMechanism();
     loadUserImage();
+    if (!userIsLoggedIn()) {
+        let overlayButtonBar = document.getElementById('deleteAndEditTask');
+        overlayButtonBar.style.display = 'none';
+    }
 }
 
 function renderEditAndDeleteSection(task) {
