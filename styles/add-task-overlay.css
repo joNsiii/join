@@ -536,6 +536,7 @@
     border-radius: 10px;
     gap: 10px;
     font-size: 20px;
+    margin-bottom: 48px;
 }
 
 .dropdown-parent-container-overlay:hover {
