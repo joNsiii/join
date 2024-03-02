@@ -229,6 +229,7 @@ dialog[open] {
     height: 24px;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
 }
 
 .board-content-group {
@@ -455,23 +456,27 @@ dialog[open] {
 
 
 @media (max-width: 870px) {
-    .highlight-placeholder{
+    .highlight-placeholder {
         height: 250px;
         padding: 8px;
     }
+
     .board-content {
         flex-direction: column;
         width: 100%;
     }
+
     .board-body {
         flex-direction: row;
         padding: 8px;
     }
+
     /* .board-task-card {
         min-height: 240px;
     } */
 }
-@media (max-width: 830px){
+
+@media (max-width: 830px) {
     .horizontal-scroll {
         overflow-y: hidden;
         overflow-x: hidden;

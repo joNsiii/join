@@ -12,18 +12,20 @@ async function loadTasksInBoard() {
 
 async function boardInit() {
     await init();
+    await applyGuestSettings();
+    await loadTasksInBoard();
+    renderEachTask();
+}
+
+async function applyGuestSettings() {
     if (!userIsLoggedIn()) {
         let boardTaskButton = document.getElementById('board-task-button');
         boardTaskButton.disabled = true;
-        let boardTaskIcon = document.getElementById('board-task-icon-1');
-        boardTaskIcon.style.display = 'none';
-        boardTaskIcon = document.getElementById('board-task-icon-2');
-        boardTaskIcon.style.display = 'none';
-        boardTaskIcon = document.getElementById('board-task-icon-3');
-        boardTaskIcon.style.display = 'none';
+        for (let i = 1; i < 4; i++) {
+            let boardTaskIcon = document.getElementById(`board-task-icon-${i}`);
+            boardTaskIcon.style.display = 'none';
+        }
     }
-    await loadTasksInBoard();
-    renderEachTask();
 }
 
 function renderEachTask() {
