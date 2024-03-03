@@ -35,7 +35,6 @@
     }
 
     .checkbox-container {
-        /* flex-direction: column; Brauchen wir das? Falls nicht, bitte löschen. @Janik*/ 
         align-items: flex-start;
         gap: 10px;
     }

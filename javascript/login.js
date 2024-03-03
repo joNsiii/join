@@ -18,6 +18,20 @@ function loginInit() {
     loadLogoAnimation();
     loadUsers();
     loadRememberMe();
+    fillEmailAfterSignup();
+}
+
+/**
+ * Searching for URL parameter and localStoragekey. If both true adding localStoragevalue to email-input
+ */
+function fillEmailAfterSignup() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const loginFlag = urlParams.get('msg');
+    if (loginFlag === 'You Signed Up successfully') {
+        let email = document.getElementById('email-field');
+        let userInput = localStorage.getItem('email');
+        email.value = userInput;
+    }
 }
 
 /**
@@ -28,6 +42,7 @@ function checkLogin() {
     let password = document.getElementById('password-type').value;
     let loggedInUser = users.find(u => email === u.email && password === u.password);
     if (loggedInUser) {
+        localStorage.clear('email')
         rememberMe();
         setCookie('user_session_token', loggedInUser.userId, 24);
         window.location.href = 'summary.html?login=true';
@@ -65,7 +80,7 @@ function rememberMe() {
     if (checkStatus == true) {
         localStorage.setItem('remember-me-email', email);
         localStorage.setItem('remember-me-password', password);
-    }else {
+    } else {
         localStorage.clear('remember-me-email');
         localStorage.clear('remember-me-password');
     }

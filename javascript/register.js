@@ -31,10 +31,13 @@ async function addUser() {
         'bgc-code': '#FF7A00'
     }
     users.push(newUser);
+    localStorage.setItem('email', email.value);
     await setItem('users', JSON.stringify(users));
     resetButton();
     window.location.href = 'login.html?msg=You Signed Up successfully';
 }
+
+
 
 /**
  * reset button 
@@ -47,7 +50,6 @@ function resetButton() {
  * Checking for the same password in both inputfields and returning green color if matching and red color if not
  */
 function passwordValidation() {
-
     let passwordOutline1 = document.getElementById('password-parent');
     let passwordOutline2 = document.getElementById('password-input2');
     if (document.getElementById('password-type').value ==
@@ -59,7 +61,6 @@ function passwordValidation() {
         document.getElementById('message').innerHTML = 'Ups! Your password\'s don\'t match';
         passwordOutline1.classList.add('bad-outline');
         passwordOutline2.classList.add('bad-outline');
-        //Green-Outline 2.
         passwordOutline1.classList.remove('good-outline');
         passwordOutline2.classList.remove('good-outline');
     }
@@ -67,17 +68,14 @@ function passwordValidation() {
         document.getElementById('password-type2').value == '') {
         passwordOutline1.classList.remove('good-outline');
         passwordOutline2.classList.remove('good-outline');
-        //Green-Outline 3.
         passwordOutline1.classList.remove('bad-outline');
         passwordOutline2.classList.remove('bad-outline');
         document.getElementById('message').innerHTML = '';
     }
 }
-
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
     passwordField.addEventListener('input', togglePassword);
 });
-
 document.querySelectorAll('input[type="password"]').forEach(passwordField => {
     let toggleImg = passwordField.nextElementSibling.querySelector('img');
     toggleImg.addEventListener('click', function () {
