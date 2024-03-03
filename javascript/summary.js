@@ -105,18 +105,23 @@ function greetUser() {
 /**
  * Formating the username to uppercase for first and lastname(if no user found "guest" will be displayed) 
  * 
- * @returns - returning formattedFullName or "guest"
+ * @returns - returning formatted name
  */
 function formatUserName() {
     if (currentUserData !== undefined) {
         let fullName = currentUserData.name;
         let spaceIndex = fullName.indexOf(' ');
-        let firstName = fullName.slice(0, spaceIndex);
-        let lastName = fullName.slice(spaceIndex + 1);
-        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
-        return formattedFullName;
+        if (spaceIndex === -1) {
+            let formattedName = fullName.charAt(0).toUpperCase() + fullName.slice(1).toLowerCase();
+            return formattedName;
+        } else {
+            let firstName = fullName.slice(0, spaceIndex);
+            let lastName = fullName.slice(spaceIndex + 1);
+            let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+            let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+            let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+            return formattedFullName;
+        }
     } else {
         return 'Guest';
     }
