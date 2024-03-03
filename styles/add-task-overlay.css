@@ -733,3 +733,7 @@
 .dropdown-parent-container-2-overlay p {
     margin: 0;
 }
+
+.dropdown-parent-container-wrong-overlay {
+    border: 1px solid #FF001F;
+}

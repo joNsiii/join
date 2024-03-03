@@ -3,7 +3,7 @@
         <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog"
             onclick="closeAddTaskOverlay()">
         <div class="add-task-headline-overlay">Add Task</div>
-        <form class="add-task-form-group" onsubmit="scopeTasks(); return false">
+        <form id="create-new-task-form" class="add-task-form-group" onsubmit="scopeTasks(); return false">
             <div class="task-form-overlay" id="taskForm-overlay">
                 <div class="left-side-inputs-overlay">
                     <div class="single-input-container-overlay">
@@ -100,7 +100,7 @@
                     <div class="clearBtn-overlay" onclick="clearAddTask()">
                         Clear <img src="./img/cancel.png" alt="clear">
                     </div>
-                    <button class="createBtn-overlay" onclick="addedTask()" disabled>
+                    <button class="createBtn-overlay" disabled>
                         Create Task <img src="./img/check.png" alt="check">
                     </button>
                 </div>

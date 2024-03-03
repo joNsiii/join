@@ -6,17 +6,14 @@ let contactsUser = [];
 let heading = "";
 priority = priorityDefault;
 
-// document.addEventListener('DOMContentLoaded', async function() {
-//   await loadTasks();
-//   await loadUsers();
-//   assignedTo();
-// })
 
 async function addTaskInit() {
     await loadTasks();
     await loadUsers();
     assignedTo();
 }
+
+
 async function loadTasks() {
     try {
         boardTasks = JSON.parse(await getItem("boardTasks"));
@@ -25,35 +22,66 @@ async function loadTasks() {
     }
 }
 
+
 function reloadPage() {
     location.reload();
 }
 
+
 async function scopeTasks() {
-    let title = document.getElementById("title-task-overlay").value;
-    let description = document.getElementById("description-task-overlay").value;
-    let dueDate = document.getElementById("date-date-task-overlay").value;
-    priority = priority.split('-');
-    priority = priority[0];
-    priority = priority.replace(priority[0], priority[0].toUpperCase());
+    if (verifyAddTaskInput()) {
+        let title = getInputValue('title-task-overlay');
+        let description = getInputValue('description-task-overlay');
+        let dueDate = getInputValue('date-date-task-overlay');
+        let category = getElement('chosen-task-overlay').innerHTML;
+        let priorityName = getPriorityName(priority);
+        const taskId = Date.now();
+        let taskParameter = [taskId, title, description, dueDate, priorityName, category];
+        createNewTask(taskParameter);
+    }
+}
 
-    const taskId = Date.now();
 
+function verifyAddTaskInput() {
+    let title = getInputValue('title-task-overlay');
+    let dueDate = getInputValue('date-date-task-overlay');
+    let category = getElement('chosen-task-overlay').innerHTML;
+    let formInputValid = (title != '' && dueDate != '' && category != 'Select task category') ? true : false;
+    setClass('dropdown-parent-category-overlay', addClass, 'dropdown-parent-container-wrong-overlay');
+    return formInputValid;
+}
+
+
+function getPriorityName(priority) {
+    let priorityName = priority.split('-');
+    priorityName = priorityName[0];
+    priorityName = priorityName.replace(priorityName[0], priorityName[0].toUpperCase());
+    return priorityName;
+}
+
+
+function createNewTask(taskParameter) {
     let task = {
-        taskId: taskId,
-        title: title,
-        description: description,
+        taskId: taskParameter[0],
+        title: taskParameter[1],
+        description: taskParameter[2],
         category: "toDo",
-        heading: heading,
+        heading: taskParameter[5],
         subtasks: subtasks,
         sub_users: sub_users,
-        priority: priority,
-        dueDate: dueDate,
+        priority: taskParameter[4],
+        dueDate: taskParameter[3]
     };
+    updateBoardTasks(task);
+}
+
+
+async function updateBoardTasks(task) {
     boardTasks.push(task);
     await setItem("boardTasks", JSON.stringify(boardTasks));
-    console.log("Task added successfully:", task);
+    addedTask();
 }
+
 
 function assignedTo() {
     let assignElement = document.getElementById("myDropdown-overlay");
@@ -64,13 +92,13 @@ function assignedTo() {
         assignElement.innerHTML = '<div class="subuser-align-overlay">No Contacts Found</div>';
         document.getElementById('button-container-overlay').innerHTML = `                    
     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn-overlay" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
+    <button class="createBtn-overlay" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
     }
     if (user !== undefined) {
         assignElement.innerHTML = "";
         document.getElementById('button-container-overlay').innerHTML = `                    
     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn-overlay" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
+    <button class="createBtn-overlay"> Create Task <img src="./img/check.png" alt="check"></button>`;
         user.name = user.name;
         contactsUser.push(user);
         for (let i = 0; i < user.contacts.length; i++) {
@@ -529,6 +557,7 @@ function clearAddTask() {
 
     assignedTo();
     prioSelectionOverlay(medium);
+    setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
 function addedTask() {
@@ -581,6 +610,7 @@ function selectCategory(clickedCategory) {
 
     categoryContainer.innerHTML = `${heading}`;
     flipDropDownMenuCategoryOverlay(false);
+    setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
     // dropDownMenuCategory();
 }
 
