@@ -14,12 +14,13 @@ async function addUser() {
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
     let initials = userInitials(name.value);
+    formatName(name.value);
     if (users.find(u => name.value === u.name)) {
         return alert('Username already exist!!');
     } if (users.find(u => email.value === u.email)) {
         return alert('Email already exist!!');
     }
-    saveAsObject(name, email, password, initials, userId);
+    saveAsObject(formatName(name.value), email, password, initials, userId);
     await setItem('users', JSON.stringify(users));
     resetButton();
     window.location.href = 'login.html?msg=You Signed Up successfully';
@@ -36,7 +37,7 @@ async function addUser() {
  */
 function saveAsObject(name, email, password, initials, userId) {
     let newUser = {
-        'name': name.value,
+        'name': name,
         'email': email.value,
         'password': password.value,
         'contacts': [],
@@ -46,10 +47,32 @@ function saveAsObject(name, email, password, initials, userId) {
         'bgc-name': 'orange',
         'bgc-code': '#FF7A00'
     }
+
     users.push(newUser);
     localStorage.clear('remember-me-email');
     localStorage.clear('remember-me-password');
     localStorage.setItem('email', email.value);
+}
+
+/**
+ * format the first letter of the name to uppercase
+ * 
+ * @param {string} fullName - name of the user
+ * @returns formatted name of the user
+ */
+function formatName(fullName) {
+    let spaceIndex = fullName.indexOf(' ');
+    if (spaceIndex === -1) {
+        let formattedName = fullName.charAt(0).toUpperCase() + fullName.slice(1).toLowerCase();
+        return formattedName;
+    } else {
+        let firstName = fullName.slice(0, spaceIndex);
+        let lastName = fullName.slice(spaceIndex + 1);
+        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+        return formattedFullName;
+    }
 }
 
 /**
