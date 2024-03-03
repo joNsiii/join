@@ -123,3 +123,16 @@
         line-height: 34px;
     }
 }
+
+@media (max-width: 326px) {
+    .backlog-contact {
+        width: 100%;
+        max-width: 326px;
+        height: 56px;
+        font-size: 16px;
+    }
+
+    .backlog-contact-animation {
+        left: 0;
+    }
+}
