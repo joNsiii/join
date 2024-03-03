@@ -212,15 +212,14 @@ function renderEditAndDeleteSection(task) {
     let ContentHTML = "";
     ContentHTML += /*html*/ `
         <button class="dbt-button" onclick="deleteTask(${task.taskId})">
-            <img src="./img/delete.png" alt="delete">
+            <img  class="delete-contact-img">
             <div class="dbt-button-text">Delete</div>
         </button>
         <img class="dbt-button-separator" src="./img/vector-board-form.png" alt="vertical-line-dbt">
         <button class="dbt-button" onclick="editTask(${task.taskId})">
-            <img src="./img/edit2.png" alt="edit">
+            <img src="./img/edit2.png" alt="edit" class="edit-contact-img">
             <div class="dbt-button-text">Edit</div>
         </button>
-    
     `;
     return ContentHTML;
 }
