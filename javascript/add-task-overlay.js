@@ -153,6 +153,46 @@ function assignedTo() {
 // }
 
 
+function flipDropDownMenu(dropDown) {
+    let icon = document.getElementById("drop-down-icon");
+    if (dropDown) {
+        document.getElementById("myDropdown").classList.add("show");
+        document.getElementById("dropdown-parent").classList.add("dropdown-outline-focus");
+        document.getElementById("dropdown-parent").classList.add("dropdown-custom");
+        icon.src = "./img/arrow_drop_down-up.png";
+        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(false)');
+    } else {
+        document.getElementById("myDropdown").classList.remove("show");
+        document.getElementById("dropdown-parent").classList.remove("dropdown-outline-focus");
+        document.getElementById("dropdown-parent").classList.remove("dropdown-custom");
+        icon.src = "./img/arrow_drop_downaa.png";
+        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true)');
+    }
+}
+
+
+function flipDropDownMenuOverlay(dropDown) {
+    let icon = document.getElementById("drop-down-icon-overlay");
+    if (dropDown) {
+        document.getElementById("myDropdown-overlay").classList.add("show-overlay");
+        document.getElementById("dropdown-parent-overlay").classList.add("dropdown-outline-focus-overlay");
+        document.getElementById("dropdown-parent-overlay").classList.add("dropdown-custom-overlay");
+        icon.src = "./img/arrow_drop_down-up.png";
+        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(false)');
+    } else {
+        document.getElementById("myDropdown-overlay").classList.remove("show-overlay");
+        document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-outline-focus-overlay");
+        document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-custom-overlay");
+        icon.src = "./img/arrow_drop_downaa.png";
+        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(true)');
+    }
+}
+
+function stop(event) {
+    event.stopPropagation();
+}
+
+
 function dropDownMenu() {
     let icon = document.getElementById("drop-down-icon");
     document.getElementById("myDropdown").classList.toggle("show");
@@ -169,22 +209,24 @@ function dropDownMenu() {
         icon.src = "./img/arrow_drop_downaa.png";
     }
 }
-function dropDownMenuOverlay() {
-    let icon = document.getElementById("drop-down-icon-overlay");
-    document.getElementById("myDropdown-overlay").classList.toggle("show-overlay");
-    document
-        .getElementById("dropdown-parent-overlay")
-        .classList.toggle("dropdown-outline-focus-overlay");
-    document
-        .getElementById("dropdown-parent-overlay")
-        .classList.toggle("dropdown-custom");
 
-    if (icon.src.includes("arrow_drop_downaa.png")) {
-        icon.src = "./img/arrow_drop_down-up.png";
-    } else {
-        icon.src = "./img/arrow_drop_downaa.png";
-    }
-}
+
+// function dropDownMenuOverlay() {
+//     let icon = document.getElementById("drop-down-icon-overlay");
+//     document.getElementById("myDropdown-overlay").classList.toggle("show-overlay");
+//     document
+//         .getElementById("dropdown-parent-overlay")
+//         .classList.toggle("dropdown-outline-focus-overlay");
+//     document
+//         .getElementById("dropdown-parent-overlay")
+//         .classList.toggle("dropdown-custom");
+
+//     if (icon.src.includes("arrow_drop_downaa.png")) {
+//         icon.src = "./img/arrow_drop_down-up.png";
+//     } else {
+//         icon.src = "./img/arrow_drop_downaa.png";
+//     }
+// }
 
 function toggleCheckbox(i) {
     let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
@@ -215,7 +257,7 @@ function toggleCheckbox(i) {
     }
 
     for (let j = 0; j < sub_users.length; j++) {
-        let subBgc = "bgc-" + sub_users[j].userBackgroundColor;
+        let subBgc = "bgc-" + sub_users[j]['bgc-name'];
         let subProfileName = sub_users[j].name;
         let contactId = sub_users[j]["userIdIterate"];
         let yourName = subProfileName.includes(" (You") ? true : false;
@@ -498,22 +540,39 @@ function addedTask() {
     }, 1000);
 }
 
-function dropDownMenuCategory() {
-    document.getElementById("myDropdown-category-overlay").classList.toggle("show-overlay");
+function flipDropDownMenuCategoryOverlay(dropDown) {
     let icon = document.getElementById("drop-down-icon-2-overlay");
-    document
-        .getElementById("dropdown-parent-category-overlay")
-        .classList.toggle("dropdown-outline-focus-overlay");
-    document
-        .getElementById("dropdown-parent-category-overlay")
-        .classList.toggle("dropdown-custom");
-
-    if (icon.src.includes("arrow_drop_downaa.png")) {
+    if (dropDown) {
+        document.getElementById("myDropdown-category-overlay").classList.add("show-overlay");
+        document.getElementById("dropdown-parent-category-overlay").classList.add("dropdown-outline-focus-overlay");
+        document.getElementById("dropdown-parent-category-overlay").classList.add("dropdown-custom-overlay");
         icon.src = "./img/arrow_drop_down-up.png";
+        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuCategoryOverlay(false)');
     } else {
+        document.getElementById("myDropdown-category-overlay").classList.remove("show-overlay");
+        document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-outline-focus-overlay");
+        document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-custom-overlay");
         icon.src = "./img/arrow_drop_downaa.png";
+        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuCategoryOverlay(true)');
     }
 }
+
+// function dropDownMenuCategory() {
+//     document.getElementById("myDropdown-category-overlay").classList.toggle("show-overlay");
+//     let icon = document.getElementById("drop-down-icon-2-overlay");
+//     document
+//         .getElementById("dropdown-parent-category-overlay")
+//         .classList.toggle("dropdown-outline-focus-overlay");
+//     document
+//         .getElementById("dropdown-parent-category-overlay")
+//         .classList.toggle("dropdown-custom");
+
+//     if (icon.src.includes("arrow_drop_downaa.png")) {
+//         icon.src = "./img/arrow_drop_down-up.png";
+//     } else {
+//         icon.src = "./img/arrow_drop_downaa.png";
+//     }
+// }
 
 function selectCategory(clickedCategory) {
     let cat = clickedCategory;
@@ -521,7 +580,8 @@ function selectCategory(clickedCategory) {
     heading = cat.id;
 
     categoryContainer.innerHTML = `${heading}`;
-    dropDownMenuCategory()
+    flipDropDownMenuCategoryOverlay(false);
+    // dropDownMenuCategory();
 }
 
 // not working with assigned to dropdown
