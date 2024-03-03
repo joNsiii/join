@@ -184,7 +184,7 @@ function flipDropDownMenuOverlay(dropDown) {
         document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-outline-focus-overlay");
         document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-custom-overlay");
         icon.src = "./img/arrow_drop_downaa.png";
-        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(true)');
+        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(true); flipDropDownMenuCategoryOverlay(false)');
     }
 }
 
@@ -553,7 +553,7 @@ function flipDropDownMenuCategoryOverlay(dropDown) {
         document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-outline-focus-overlay");
         document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-custom-overlay");
         icon.src = "./img/arrow_drop_downaa.png";
-        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuCategoryOverlay(true)');
+        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(false); flipDropDownMenuCategoryOverlay(true)');
     }
 }
 

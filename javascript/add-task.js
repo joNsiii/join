@@ -128,7 +128,7 @@ function flipDropDownMenu(dropDown) {
     document.getElementById("dropdown-parent").classList.remove("dropdown-outline-focus");
     document.getElementById("dropdown-parent").classList.remove("dropdown-custom");
     icon.src = "./img/arrow_drop_downaa.png";
-    document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true)');
+    document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true); flipDropDownMenuCategory(false)');
   }
 }
 
@@ -437,7 +437,7 @@ function flipDropDownMenuCategory(dropDown) {
     document.getElementById("dropdown-parent-category").classList.remove("dropdown-outline-focus");
     document.getElementById("dropdown-parent-category").classList.remove("dropdown-custom");
     icon.src = "./img/arrow_drop_downaa.png";
-    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenuCategory(true)');
+    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenu(false); flipDropDownMenuCategory(true)');
   }
 }
 
