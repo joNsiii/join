@@ -6,7 +6,7 @@ let newArray = []; /* delete our backend-users-array */
  * 
  * @returns alert if name or email already in use
  */
-function addUser() {
+async function addUser() {
     registerBtn.disabled = true;
     let date = new Date();
     let userId = date.getTime();
@@ -20,6 +20,7 @@ function addUser() {
         return alert('Email already exist!!');
     }
     saveAsObject(name, email, password, initials, userId);
+    await setItem('users', JSON.stringify(users));
     resetButton();
     window.location.href = 'login.html?msg=You Signed Up successfully';
 }
@@ -33,7 +34,7 @@ function addUser() {
  * @param {string} initials - will automaticlly created from username
  * @param {number} userId - will automaticlly created from actual date and time
  */
-async function saveAsObject(name, email, password, initials, userId) {
+function saveAsObject(name, email, password, initials, userId) {
     let newUser = {
         'name': name.value,
         'email': email.value,
@@ -49,7 +50,6 @@ async function saveAsObject(name, email, password, initials, userId) {
     localStorage.clear('remember-me-email');
     localStorage.clear('remember-me-password');
     localStorage.setItem('email', email.value);
-    await setItem('users', JSON.stringify(users));
 }
 
 /**

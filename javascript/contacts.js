@@ -354,10 +354,26 @@ function getLastInitialLetter(variable, i) {
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
+    formatName(name);
     return `
         <div class="name-email-group">
-            <div class="contact-name">${name}</div>
+            <div class="contact-name">${formatName(name)}</div>
             <div class="contact-email">${mail}</div>
         </div>
     `;
+}
+
+function formatName(fullName) {
+    let spaceIndex = fullName.indexOf(' ');
+    if (spaceIndex === -1) {
+        let formattedName = fullName.charAt(0).toUpperCase() + fullName.slice(1).toLowerCase();
+        return formattedName;
+    } else {
+        let firstName = fullName.slice(0, spaceIndex);
+        let lastName = fullName.slice(spaceIndex + 1);
+        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
+        return formattedFullName;
+    }
 }
