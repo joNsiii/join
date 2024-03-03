@@ -426,22 +426,6 @@
     outline: none;
 }
 
-/* .span-container-overlay:focus {
-      outline: none;
-      background-color: white !important;
-      border-radius: 0 !important;
-      border-bottom: solid 1px #29ABE2;
-      cursor: text !important;
-  }
-  
-  .span-container-overlay:focus .list-item-overlay {
-      display: none;
-  }
-  
-  .span-container-overlay:focus .subtask-preview-overlay {
-      margin-left: 16px;
-  } */
-
 .focus-input-overlay {
     outline: none;
     background-color: white !important;
@@ -549,14 +533,6 @@
     outline: none;
     z-index: 1000;
 }
-
-/* die class würde den unteren border entfernen. */
-
-/* .dropdown-custom {
-    border-bottom: none !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
-  } */
 
 .no-gap-overlay {
     gap: 0 !important;
