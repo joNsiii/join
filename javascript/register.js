@@ -2,11 +2,11 @@ let users = [];
 let newArray = []; /* delete our backend-users-array */
 
 /**
- * Disable register button. Adding new user to our JSON and saving on our server
+ * adding new user to users-array if name and email not existing
  * 
- * @returns - return alert is username and/or email already exist
+ * @returns alert if name or email already in use
  */
-async function addUser() {
+function addUser() {
     registerBtn.disabled = true;
     let date = new Date();
     let userId = date.getTime();
@@ -19,6 +19,21 @@ async function addUser() {
     } if (users.find(u => email.value === u.email)) {
         return alert('Email already exist!!');
     }
+    saveAsObject(name, email, password, initials, userId);
+    resetButton();
+    window.location.href = 'login.html?msg=You Signed Up successfully';
+}
+
+/**
+ * creating a new object in users-array // clearing localStorage if rememberme is set // add localStorage to show new signed up user-email after redirected to login.html
+ * 
+ * @param {string} name - userinput
+ * @param {string} email - userinput
+ * @param {string} password - userinput
+ * @param {string} initials - will automaticlly created from username
+ * @param {number} userId - will automaticlly created from actual date and time
+ */
+async function saveAsObject(name, email, password, initials, userId) {
     let newUser = {
         'name': name.value,
         'email': email.value,
@@ -31,13 +46,11 @@ async function addUser() {
         'bgc-code': '#FF7A00'
     }
     users.push(newUser);
+    localStorage.clear('remember-me-email');
+    localStorage.clear('remember-me-password');
     localStorage.setItem('email', email.value);
     await setItem('users', JSON.stringify(users));
-    resetButton();
-    window.location.href = 'login.html?msg=You Signed Up successfully';
 }
-
-
 
 /**
  * reset button 
