@@ -65,6 +65,9 @@ function rememberMe() {
     if (checkStatus == true) {
         localStorage.setItem('remember-me-email', email);
         localStorage.setItem('remember-me-password', password);
+    }else {
+        localStorage.clear('remember-me-email');
+        localStorage.clear('remember-me-password');
     }
 }
 
