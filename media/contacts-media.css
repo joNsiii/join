@@ -135,4 +135,15 @@
     .backlog-contact-animation {
         left: 0;
     }
+
+    .backlog-contact-form {
+        width: 100%;
+        max-width: 326px;
+        height: 56px;
+        font-size: 16px;
+    }
+
+    .backlog-contact-form-in {
+        left: 0;
+    }
 }
