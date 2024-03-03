@@ -135,51 +135,68 @@ function updateDropDownOnclick(dropDown, extension, overlay) {
 
 
 function toggleCheckbox(i) {
-    let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
-    let background = document.getElementById(`subuser-div-${i}`);
-    let subProfile = document.getElementById("sub-profile-overlay");
+    let checkBox = getElement(`checkbox-remember-me-${i}`);
+    let unchecked = checkBox.src.includes('checkmark-unchecked.png');
+    (unchecked) ? setCheckBox(i, true) : setCheckBox(i, false);
+}
+
+
+function setCheckBox(i, logical) {
+    setCheckBoxBackground(i, logical);
+    setCheckBoxImage(i, logical);
+    (logical) ? pushAssignedSubuser(i) : spliceAssignedSubuser(i);
+    renderAssigendSubuser();
+}
+
+
+function setCheckBoxBackground(i, logical) {
+    let subfunction = (logical) ? addClass : removeClass;
+    setClass(`subuser-div-${i}`, subfunction, 'sub-background-overlay');
+}
+
+
+function setCheckBoxImage(i, logical) {
+    let checkmark = (logical) ? './img/checkmark-white.png' : './img/checkmark-unchecked.png';
+    let checkBox = getElement(`checkbox-remember-me-${i}`);
+    checkBox.src = checkmark;
+}
+
+
+function pushAssignedSubuser(i) {
     let subuserTemp = users[i];
     let subUserIdTemp = users[i]["userId"];
-    subProfile.innerHTML = "";
-
-    if (checkBox.src.includes("checkmark-unchecked.png")) {
-        checkBox.src = "./img/checkmark-white.png";
-        background.classList.add("sub-background-overlay");
-        let sub_users_child = `Temp-${i}`;
-        sub_users.push({
+    sub_users.push(
+        {
             userIdIterate: i,
             userId: subUserIdTemp,
             name: subuserTemp.name,
             "bgc-name": subuserTemp["bgc-name"],
-        });
-    } else {
-        checkBox.src = "./img/checkmark-unchecked.png";
-        background.classList.remove("sub-background-overlay");
+        }
+    );
+}
 
-        let subuserToRemove = sub_users.findIndex(
-            (user) => user.name === `Temp-${i}`
-        );
-        sub_users.splice(subuserToRemove, 1);
-    }
 
+// Funktioniert nicht!!!
+function spliceAssignedSubuser(i) {
+    let subuserToRemove = sub_users.findIndex((user) => user.name === `Temp-${i}`);
+    sub_users.splice(subuserToRemove, 1);
+}
+
+
+function renderAssigendSubuser() {
+    let subProfile = getElement("sub-profile-overlay");
+    subProfile.innerHTML = '';
     for (let j = 0; j < sub_users.length; j++) {
         let subBgc = "bgc-" + sub_users[j]['bgc-name'];
-        let subProfileName = sub_users[j].name;
         let contactId = sub_users[j]["userIdIterate"];
-        let yourName = subProfileName.includes(" (You") ? true : false;
-        let names = subProfileName.split(" ");
-        let letterGroup;
-        if (!yourName) {
-            letterGroup = names[0][0] + names[names.length - 1][0];
-        } else {
-            letterGroup = names[0][0] + names[names.length - 2][0];
-        }
-        // let subProfileName = subuserTemp.slice(0, 2);
+        let subProfileName = sub_users[j].name;
+        let letterGroup = userInitials(subProfileName);
         subProfile.innerHTML += `
         <div class="sub-profile-img-overlay sub-p-overlay ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
     }
 }
+
 
 function removeSubPB(subuserId) {
     let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
@@ -189,42 +206,13 @@ function removeSubPB(subuserId) {
     }
 }
 
-function renderSubProfiles(index) {
-    let subProfile = document.getElementById("sub-profile-overlay");
-    document.getElementById(`checkbox-remember-me-${index}`).src =
-        "./img/checkmark-unchecked.png";
-    background = document
-        .getElementById(`subuser-div-${index}`)
-        .classList.remove("sub-background-overlay");
 
-    let deleteContact = document.getElementById(`contact-id-${index}`);
-    deleteContact.remove();
+function renderSubProfiles(i) {
+    setElementAttribute(`checkbox-remember-me-${i}`, 'src', './img/checkmark-unchecked.png');
+    setClass(`subuser-div-${i}`, removeClass, 'sub-background-overlay');
+    getElement(`contact-id-${i}`).remove();
 }
 
-window.onclick = function (event) {
-    if (
-        !event.target.matches(".dropdown-parent-container-overlay") &&
-        !event.target.closest(".dropdown-menu-sub-overlay")
-    ) {
-        let dropdowns = document.getElementsByClassName("dropdown-menu-sub-overlay");
-        let icon = document.getElementById("drop-down-icon-overlay");
-        for (let i = 0; i < dropdowns.length; i++) {
-            let openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains("show-overlay")) {
-                openDropdown.classList.remove("show-overlay");
-                document
-                    .getElementById("dropdown-parent-overlay")
-                    .classList.toggle("dropdown-outline-focus-overlay");
-                document
-                    .getElementById("dropdown-parent-overlay")
-                    .classList.toggle("dropdown-custom");
-            }
-            if (icon.src.includes("arrow_drop_down-up.png")) {
-                icon.src = "./img/arrow_drop_downaa.png";
-            }
-        }
-    }
-};
 
 function subtaskCustomTemplate() {
     let subtaskForm = document.getElementById("icon-hold-overlay");
@@ -473,36 +461,6 @@ function selectCategory(clickedCategory) {
     flipDropDownMenuCategory(false, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
-
-// not working with assigned to dropdown
-
-// window.onclick = function (event) {
-//   if (
-//     !event.target.matches(".dropdown-parent-container-overlay") &&
-//     !event.target.closest(".dropdown-menu-category-overlay")
-//   ) {
-//     let dropdowns = document.getElementsByClassName("dropdown-menu-category-overlay");
-//     let icon = document.getElementById("drop-down-icon-2-overlay");
-//     for (let i = 0; i < dropdowns.length; i++) {
-//       let openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains("show-overlay")) {
-//         openDropdown.classList.remove("show-overlay");
-//         document
-//           .getElementById("dropdown-parent-category-overlay")
-//           .classList.toggle("dropdown-outline-focus-overlay");
-//         document
-//           .getElementById("dropdown-parent-category-overlay")
-//           .classList.toggle("dropdown-custom");
-//       }
-//       if (icon.src.includes("arrow_drop_down-up.png")) {
-//         icon.src = "./img/arrow_drop_downaa.png";
-//       }
-//     }
-//   }
-// };
-
-
-
 
 async function openAddTaskOverlay() {
     let bodyWidth = document.getElementById('body').offsetWidth;
