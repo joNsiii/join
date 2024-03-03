@@ -1,5 +1,5 @@
 <section id="add-task-overlay-position" class="add-task-overlay-out" onclick="stop(event)">
-    <div class="add-task-overlay" onclick="flipDropDownMenuOverlay(false); flipDropDownMenuCategoryOverlay(false)">
+    <div class="add-task-overlay" onclick="flipDropDownMenu(false, true); flipDropDownMenuCategory(false, true)">
         <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog"
             onclick="closeAddTaskOverlay()">
         <div class="add-task-headline-overlay">Add Task</div>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="single-input-container-overlay no-gap-overlay" onclick="stop(event)">
                         <label>Assigned to</label>
-                        <div onclick="flipDropDownMenuOverlay(true)" class="dropdown-parent-container-overlay"
+                        <div onclick="flipDropDownMenu(true, true)" class="dropdown-parent-container-overlay"
                             id="dropdown-parent-overlay">
                             Select
                             contacts to assign
@@ -64,7 +64,7 @@
                     </div>
                     <div class="single-input-container-overlay" onclick="stop(event)">
                         <label>Category<label class="red-star-overlay">*</label></label>
-                        <div onclick="flipDropDownMenuCategoryOverlay(true)" class="dropdown-parent-container-2-overlay"
+                        <div onclick="flipDropDownMenuCategory(true, true)" class="dropdown-parent-container-2-overlay"
                             id="dropdown-parent-category-overlay">
                             <p id="chosen-task-overlay">Select task category</p>
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-2-overlay">

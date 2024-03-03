@@ -86,175 +86,53 @@ async function updateBoardTasks(task) {
 function assignedTo() {
     let assignElement = document.getElementById("myDropdown-overlay");
     assignElement.innerHTML = "";
+    fillSelectAssignedTo(assignElement);
+}
 
-    let user = currentUserData;
-    if (user == undefined || user == null || user == "") {
-        assignElement.innerHTML = '<div class="subuser-align-overlay">No Contacts Found</div>';
-        document.getElementById('button-container-overlay').innerHTML = `                    
-    <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn-overlay" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
-    }
-    if (user !== undefined) {
-        assignElement.innerHTML = "";
-        document.getElementById('button-container-overlay').innerHTML = `                    
-    <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-    <button class="createBtn-overlay"> Create Task <img src="./img/check.png" alt="check"></button>`;
-        user.name = user.name;
-        contactsUser.push(user);
-        for (let i = 0; i < user.contacts.length; i++) {
-            let contact = user.contacts[i];
-            contactsUser.push(contact);
-        }
 
-        for (let i = 0; i < users.length; i++) {
-            const bgc = `bgc-${users[i]["bgc-name"]}`;
-            const contact = users[i].name;
-            let yourName = contact.includes(" (You") ? true : false;
-            let names = contact.split(" ");
-            let letterGroup;
-            if (!yourName) {
-                letterGroup = names[0][0] + names[names.length - 1][0];
-            } else {
-                letterGroup = names[0][0] + names[names.length - 2][0];
-            }
-            assignElement.innerHTML += `
-        <div class="subuser-selection-overlay" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
-          <div class="subuser-align-overlay">
-            <div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div>
-            <div>${contact}</div>
-          </div>  
-            <div class="checkbox-overlay"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-              id="checkbox-remember-me-${i}"></div>  
-        </div>
-      `;
-        }
+function fillSelectAssignedTo(assignElement) {
+    for (let i = 0; i < users.length; i++) {
+        const bgc = `bgc-${users[i]["bgc-name"]}`;
+        const contact = users[i].name;
+        let letterGroup = userInitials(contact);
+        assignElement.innerHTML += `
+            <div class="subuser-selection-overlay" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+                <div class="subuser-align-overlay"><div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div><div>${contact}</div></div>  
+                <div class="checkbox-overlay"><img src="./img/checkmark-unchecked.png" alt="checkbox" id="checkbox-remember-me-${i}"></div>  
+            </div>
+        `;
     }
 }
 
 
-// function assignedTo() {
-//     let assignElement = document.getElementById("myDropdown-overlay");
-//     assignElement.innerHTML = "";
-
-//     let user = currentUserData;
-//     if (user == undefined || user == null || user == "") {
-//         assignElement.innerHTML = '<div class="subuser-align-overlay">No Contacts Found</div>';
-//         document.getElementById('button-container-overlay').innerHTML = `                    
-//     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-//     <button class="createBtn-overlay" onclick="addedTask()" disabled>Create Task <img src="./img/check.png" alt="check"></button>`;
-//     }
-//     if (user !== undefined) {
-//         assignElement.innerHTML = "";
-//         document.getElementById('button-container-overlay').innerHTML = `                    
-//     <div class="clearBtn-overlay" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-//     <button class="createBtn-overlay" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button>`;
-//         user.name = user.name;
-//         contactsUser.push(user);
-//         for (let i = 0; i < user.contacts.length; i++) {
-//             let contact = user.contacts[i];
-//             contactsUser.push(contact);
-//         }
-
-//         for (let i = 0; i < users.length; i++) {
-//             const bgc = `bgc-${users[i]["bgc-name"]}`;
-//             const contact = users[i].name;
-//             let yourName = contact.includes(" (You") ? true : false;
-//             let names = contact.split(" ");
-//             let letterGroup;
-//             if (!yourName) {
-//                 letterGroup = names[0][0] + names[names.length - 1][0];
-//             } else {
-//                 letterGroup = names[0][0] + names[names.length - 2][0];
-//             }
-//             assignElement.innerHTML += `
-//         <div class="subuser-selection-overlay" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
-//           <div class="subuser-align-overlay">
-//             <div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div>
-//             <div>${contact}</div>
-//           </div>  
-//             <div class="checkbox-overlay"><img src="./img/checkmark-unchecked.png" alt="checkbox"
-//               id="checkbox-remember-me-${i}"></div>  
-//         </div>
-//       `;
-//         }
-//     }
-// }
-
-
-function flipDropDownMenu(dropDown) {
-    let icon = document.getElementById("drop-down-icon");
-    if (dropDown) {
-        document.getElementById("myDropdown").classList.add("show");
-        document.getElementById("dropdown-parent").classList.add("dropdown-outline-focus");
-        document.getElementById("dropdown-parent").classList.add("dropdown-custom");
-        icon.src = "./img/arrow_drop_down-up.png";
-        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(false)');
-    } else {
-        document.getElementById("myDropdown").classList.remove("show");
-        document.getElementById("dropdown-parent").classList.remove("dropdown-outline-focus");
-        document.getElementById("dropdown-parent").classList.remove("dropdown-custom");
-        icon.src = "./img/arrow_drop_downaa.png";
-        document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true)');
-    }
+function flipDropDownMenu(dropDown, extension) {
+    let overlay = (!extension) ? '' : '-overlay';
+    setDropDownIcon(dropDown, overlay);
+    setDropDownClasses(dropDown, overlay);
+    updateDropDownOnclick(dropDown, extension, overlay);
 }
 
 
-function flipDropDownMenuOverlay(dropDown) {
-    let icon = document.getElementById("drop-down-icon-overlay");
-    if (dropDown) {
-        document.getElementById("myDropdown-overlay").classList.add("show-overlay");
-        document.getElementById("dropdown-parent-overlay").classList.add("dropdown-outline-focus-overlay");
-        document.getElementById("dropdown-parent-overlay").classList.add("dropdown-custom-overlay");
-        icon.src = "./img/arrow_drop_down-up.png";
-        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(false)');
-    } else {
-        document.getElementById("myDropdown-overlay").classList.remove("show-overlay");
-        document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-outline-focus-overlay");
-        document.getElementById("dropdown-parent-overlay").classList.remove("dropdown-custom-overlay");
-        icon.src = "./img/arrow_drop_downaa.png";
-        document.getElementById('dropdown-parent-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(true); flipDropDownMenuCategoryOverlay(false)');
-    }
-}
-
-function stop(event) {
-    event.stopPropagation();
+function setDropDownIcon(dropDown, overlay) {
+    let icon = getElement('drop-down-icon' + overlay);
+    icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
 }
 
 
-function dropDownMenu() {
-    let icon = document.getElementById("drop-down-icon");
-    document.getElementById("myDropdown").classList.toggle("show");
-    document
-        .getElementById("dropdown-parent")
-        .classList.toggle("dropdown-outline-focus");
-    document
-        .getElementById("dropdown-parent")
-        .classList.toggle("dropdown-custom");
-
-    if (icon.src.includes("arrow_drop_downaa.png")) {
-        icon.src = "./img/arrow_drop_down-up.png";
-    } else {
-        icon.src = "./img/arrow_drop_downaa.png";
-    }
+function setDropDownClasses(dropDown, overlay) {
+    let subfunction = (dropDown) ? addClass : removeClass;
+    setClass('myDropdown' + overlay, subfunction, 'show' + overlay);
+    setClass('dropdown-parent' + overlay, subfunction, 'dropdown-outline-focus' + overlay);
+    setClass('dropdown-parent' + overlay, subfunction, 'dropdown-custom' + overlay);
 }
 
 
-// function dropDownMenuOverlay() {
-//     let icon = document.getElementById("drop-down-icon-overlay");
-//     document.getElementById("myDropdown-overlay").classList.toggle("show-overlay");
-//     document
-//         .getElementById("dropdown-parent-overlay")
-//         .classList.toggle("dropdown-outline-focus-overlay");
-//     document
-//         .getElementById("dropdown-parent-overlay")
-//         .classList.toggle("dropdown-custom");
+function updateDropDownOnclick(dropDown, extension, overlay) {
+    let closeOtherMenu = (!dropDown && extension) ? 'flipDropDownMenuCategory(false, true)' : '';
+    nextFunction = (!extension) ? `flipDropDownMenu(${!dropDown}); ${closeOtherMenu}` : `flipDropDownMenu(${!dropDown}, ${extension}); ${closeOtherMenu}`;
+    setElementAttribute('dropdown-parent' + overlay, 'onclick', nextFunction);
+}
 
-//     if (icon.src.includes("arrow_drop_downaa.png")) {
-//         icon.src = "./img/arrow_drop_down-up.png";
-//     } else {
-//         icon.src = "./img/arrow_drop_downaa.png";
-//     }
-// }
 
 function toggleCheckbox(i) {
     let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
@@ -569,39 +447,22 @@ function addedTask() {
     }, 1000);
 }
 
-function flipDropDownMenuCategoryOverlay(dropDown) {
-    let icon = document.getElementById("drop-down-icon-2-overlay");
-    if (dropDown) {
-        document.getElementById("myDropdown-category-overlay").classList.add("show-overlay");
-        document.getElementById("dropdown-parent-category-overlay").classList.add("dropdown-outline-focus-overlay");
-        document.getElementById("dropdown-parent-category-overlay").classList.add("dropdown-custom-overlay");
-        icon.src = "./img/arrow_drop_down-up.png";
-        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuCategoryOverlay(false)');
-    } else {
-        document.getElementById("myDropdown-category-overlay").classList.remove("show-overlay");
-        document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-outline-focus-overlay");
-        document.getElementById("dropdown-parent-category-overlay").classList.remove("dropdown-custom-overlay");
-        icon.src = "./img/arrow_drop_downaa.png";
-        document.getElementById('dropdown-parent-category-overlay').setAttribute('onclick', 'flipDropDownMenuOverlay(false); flipDropDownMenuCategoryOverlay(true)');
-    }
+
+// Bitte pruefen!!!
+function flipDropDownMenuCategory(dropDown, extension) {
+    let overlay = (!extension) ? '' : '-overlay';
+    let icon = getElement(`drop-down-icon-2${overlay}`);
+    icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
+    let subfunction = (dropDown) ? addClass : removeClass;
+    setClass(`myDropdown-category${overlay}`, subfunction, `show${overlay}`);
+    setClass(`dropdown-parent-category${overlay}`, subfunction, `dropdown-outline-focus${overlay}`);
+    setClass(`dropdown-parent-category${overlay}`, subfunction, `dropdown-custom${overlay}`);
+    dropDown = (dropDown) ? false : true;
+    let closeOtherMenu = (dropDown && extension) ? '; flipDropDownMenu(false, true)' : '';
+    nextFunction = (!extension) ? `flipDropDownMenuCategory(${dropDown})${closeOtherMenu}` : `flipDropDownMenuCategory(${dropDown}, ${extension})${closeOtherMenu}`;
+    setElementAttribute(`dropdown-parent-category${overlay}`, 'onclick', nextFunction);
 }
 
-// function dropDownMenuCategory() {
-//     document.getElementById("myDropdown-category-overlay").classList.toggle("show-overlay");
-//     let icon = document.getElementById("drop-down-icon-2-overlay");
-//     document
-//         .getElementById("dropdown-parent-category-overlay")
-//         .classList.toggle("dropdown-outline-focus-overlay");
-//     document
-//         .getElementById("dropdown-parent-category-overlay")
-//         .classList.toggle("dropdown-custom");
-
-//     if (icon.src.includes("arrow_drop_downaa.png")) {
-//         icon.src = "./img/arrow_drop_down-up.png";
-//     } else {
-//         icon.src = "./img/arrow_drop_downaa.png";
-//     }
-// }
 
 function selectCategory(clickedCategory) {
     let cat = clickedCategory;
@@ -609,9 +470,8 @@ function selectCategory(clickedCategory) {
     heading = cat.id;
 
     categoryContainer.innerHTML = `${heading}`;
-    flipDropDownMenuCategoryOverlay(false);
+    flipDropDownMenuCategory(false, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
-    // dropDownMenuCategory();
 }
 
 // not working with assigned to dropdown
