@@ -11,8 +11,6 @@
     overflow-wrap: break-word;
 }
 
-
-
 .closeOverlayIMG {
     cursor: pointer;
     width: 16px;
@@ -177,22 +175,35 @@
     gap: 16px;
     cursor: pointer;
 }
+
 .dbt-subtask-group:hover {
     background-color: #d1d1d1;
     border-radius: 12px;
     scale: 1.01;
 }
-.delete-contact-img {
+
+.delete-contact-img-form {
     width: 24px;
     height: 24px;
     background-image: url('../img/delete.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
-.delete-contact-img:hover {
+.dbt-button:hover .delete-contact-img-form {
     background-image: url('../img/delete-blue.png');
+}
+
+.edit-contact-img-form {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/edit2.png');
+}
+
+.dbt-button:hover .edit-contact-img-form {
+    background-image: url('../img/edit-blue.png');
+}
+
+.dbt-button:hover .dbt-button-text {
+    color: #2FBAF5;
 }
 
 .dbt-subtask-img {
@@ -226,10 +237,12 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
 }
+
 .dbt-button:hover {
     scale: 1.05;
+    color: #2FBAF5;
 }
 
 .dbt-button-text {
@@ -240,9 +253,10 @@
     line-height: 19.2px;
     color: #2A3647;
 }
-.dbt-button-text:hover {
+
+/* .dbt-button-text:hover {
     color: #2FBAF5;
-}
+} */
 
 .dbt-button-separator {
     width: 1px;
