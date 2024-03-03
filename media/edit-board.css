@@ -1,0 +1,21 @@
+@media (max-width: 410px) {
+    .sub-profile-img {
+        height: 24px;
+        width: 24px;
+    }
+    .subuser-selection {
+        font-size: 14px;
+        padding: 2px 8px;
+    }
+    .checkbox img {
+        width: 12px;
+        height: 12px;
+    }
+    .add-task-content {
+        height: 600px;
+    }
+    .closeOverlayIMG {
+        top: 37px;
+        right: 2px;
+    }
+}

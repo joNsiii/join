@@ -95,8 +95,6 @@ function updateTaskDetails(task) {
     updateTaskProperties(task);
     updatePriority(task);
 }
-
-
 /**
  * displays subtasks of a specific task for editing.
  * @param {number} taskId The ID of the task whose subtasks are to be displayed.
@@ -185,11 +183,11 @@ function addNewSubtaskForEditing() {
  * creates a new subtask with the given input value and ID, then adds it to the current task list.
  * this function assumes a global variable `currentTask` exists and is an array that tracks the current set of subtasks.
  * each subtask is represented as an object with an ID, text, and a checked status to indicate if it's completed.
- * 
+ *
  * @param {string} subtaskInputValue The text content for the new subtask.
  * @param {number|string} newSubtaskId A unique identifier for the new subtask. Can be a number or string depending on the ID generation strategy.
  */
-function createNewSubtask(subtaskInputValue, newSubtaskId){
+function createNewSubtask(subtaskInputValue, newSubtaskId) {
     let subtask = {
         subtaskId: newSubtaskId,
         subtasksText: subtaskInputValue,
@@ -339,22 +337,17 @@ function toggleSubtaskFocus(taskId, subtaskId, isFocusing) {
     }
 }
 /**
- * sets the priority for the task in the editing dialog.
+ * Sets the priority for the task in the editing dialog.
  * @param {string} priority The priority of the task ('Low', 'Medium', 'Urgent').
  */
 function setPrioritySelection(priority) {
-    document.getElementById("Urgent").classList.remove("prioUrgent");
-    document.getElementById("Medium").classList.remove("prioMedium");
-    document.getElementById("Low").classList.remove("prioLow");
+    resetPrioritySelection(); 
 
+    const priorityElement = document.getElementById(priority);
     let lowImg = document.getElementById("low-img");
     let mediumImg = document.getElementById("medium-img");
     let urgentImg = document.getElementById("urgent-img");
 
-    lowImg.src = "./img/low.png";
-    mediumImg.src = "./img/medium-prio.png";
-    urgentImg.src = "./img/urgent-red-arrows.png";
-    const priorityElement = document.getElementById(priority);
     if (priorityElement) {
         priorityElement.classList.add(`prio${priority}`);
         switch (priority) {
@@ -370,6 +363,23 @@ function setPrioritySelection(priority) {
         }
     }
 }
+/**
+ * Resets the priority selection visuals to their default state.
+ */
+function resetPrioritySelection() {
+    document.getElementById("Urgent").classList.remove("prioUrgent");
+    document.getElementById("Medium").classList.remove("prioMedium");
+    document.getElementById("Low").classList.remove("prioLow");
+
+    let lowImg = document.getElementById("low-img");
+    let mediumImg = document.getElementById("medium-img");
+    let urgentImg = document.getElementById("urgent-img");
+
+    lowImg.src = "./img/low.png";
+    mediumImg.src = "./img/medium-prio.png";
+    urgentImg.src = "./img/urgent-red-arrows.png";
+}
+
 /**
  * updates the priority of a task based on user selection.
  * @param {Object} taskToUpdate The task object to be updated.
@@ -467,8 +477,7 @@ function getSelectedUsers(task, selectField) {
         let user = users[i].name;
         let bgc = users[i]["bgc-name"];
         let userId = users[i].userId;
-        let initials = users[i].initials;
-        // user = generateHTMLUser();
+        let initials = users[i].initials
         selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers, initials);
     }
 }

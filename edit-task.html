@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./fonts/fonts.css">
     <link rel="stylesheet" href="styles/edit-task.css">
     <link rel="stylesheet" href="./styles/background-color.css">
-
+    <link rel="stylesheet" href="./media/edit-board.css">
 </head>
 
 <body>
@@ -28,19 +28,12 @@
                         <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task"
                             cols="30" rows="3"></textarea>
                     </div>
-                    <!-- <div class="single-input-container">
-                        <label>Assigned to</label>
-                        <select class="select-input" id="assign-task">
-                            <option value="" disabled selected>Select contacts to assign</option>
-                        </select>
-                    </div> -->
                     <div class="single-input-container no-gap">
                         <label>Assigned to</label>
                         <div onclick="dropDownMenu()" class="dropdown-parent-container" id="dropdown-parent">Select
                             contacts to assign
                             <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
                         </div>
-                        <!-- assign-task is old id -->
                         <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown">
                             <div class="subuser-selection-parent">
 
