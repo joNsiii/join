@@ -146,6 +146,10 @@
         margin: 0 10% 0 15%;
     }
 
+    .summary-content a {
+        text-decoration: none;
+    }
+
     .flex-column {
         margin: 0;
     }
