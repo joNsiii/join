@@ -31,8 +31,6 @@
     .task-form-overlay {
         flex-direction: column;
         max-width: unset;
-        /* max-width: 496px;
-        overflow-y: auto; */
     }
 
     .left-side-inputs-overlay {
