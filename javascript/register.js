@@ -1,5 +1,7 @@
 let users = [];
 let newArray = []; /* delete our backend-users-array */
+let bgcNames = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red', 'cyan'];
+let bgcCodes = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
 
 /**
  * adding new user to users-array if name and email not existing
@@ -44,8 +46,8 @@ function saveAsObject(name, email, password, initials, userId) {
         'phone': '',
         'initials': initials,
         'userId': userId,
-        'bgc-name': 'orange',
-        'bgc-code': '#FF7A00'
+        'bgc-name': bgcNames[users.length % bgcNames.length],
+        'bgc-code': bgcCodes[users.length % bgcCodes.length]
     }
 
     users.push(newUser);
