@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-contact-form.js</title>
+    <title>JSDoc: Source: board.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-contact-form.js</h1>
+    <h1 class="page-title">Source: board.js</h1>
 
     
 
@@ -26,201 +26,538 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Opens the add contact form.
- */
-function openAddContact() {
-    openDialog('dialog-add-contact');
-    setClass('section-add-contact', addClass, 'dialog-contacts-position');
-}
-
-
+            <pre class="prettyprint source linenums"><code>let currentDraggedElement;
+let matchingBoardTask = [];
+let boardTasks = [];
+let searchTimeout;
 /**
- * Closes the add contact form.
+ * Loads tasks into the board from storage.
  */
-function closeAddContact() {
-    setClass('section-add-contact', removeClass, 'dialog-contacts-position');
-    setTimeout(() => {
-        closeDialog('dialog-add-contact');
-        resetAddContactInput();
-    }, 100);
-}
-
-
-/**
- * Resets the add contact form's input elements.
- */
-function resetAddContactInput() {
-    let ids = ['name', 'mail', 'phone'];
-    for (let i = 0; i &lt; ids.length; i++) {
-        let id = ids[i];
-        let info = getElement(`add-contact-${id}`);
-        info.value = '';
+async function loadTasksInBoard() {
+    try {
+        boardTasks = JSON.parse(await getItem("boardTasks"));
+    } catch (error) {
+        console.log(error);
     }
 }
-
-
 /**
- * Updates the contact list.
+ * Initializes the board by loading tasks and applying guest settings.
  */
-async function updateContactList() {
-    let name = getInputValue('add-contact-name');
-    let mail = getInputValue('add-contact-mail');
-    if (name != '' &amp;&amp; mail != '') {
-        verifyContactInput(mail);
-    }
+async function boardInit() {
+    await init();
+    await applyGuestSettings();
+    await loadTasksInBoard();
+    renderEachTask();
 }
-
-
 /**
- * Verifies the added contact's input values.
- * @param {String} mail - The entered mail address.
+ * Applies settings for guest users such as disabling the task addition button and hiding task management icons.
  */
-async function verifyContactInput(mail) {
-    let user = users.find(u => u.userId == userId);
-    let othersMail = userContacts.find(c => c.mail === mail);
-    if (othersMail) {
-        showBacklogContactForm('add', 'Email already existing');
-    } else {
-        await pushNewUserContact(user);
-        showUpdatedContactList(mail);
-    }
-}
-
-
-/**
- * Pushes a new user contact.
- * @param {object} user - The user object which receives the new contact.
- */
-async function pushNewUserContact(user) {
-    let contact = getNewContact();
-    user.contacts.push(contact);
-    await setItem('users', users);
-}
-
-
-/**
- * Provides the new contact's data.
- * @returns - The new contact object.
- */
-function getNewContact() {
-    let name = getInputValue('add-contact-name');
-    let mail = getInputValue('add-contact-mail');
-    let phone = getInputValue('add-contact-phone');
-    let contact = createNewContact(name, mail, phone);
-    return contact;
-}
-
-
-/**
- * Creates a new contact object.
- * @param {String} name - The new contact's name.
- * @param {String} mail - The new contact's mail address.
- * @param {String} phone - The new contact's phone number.
- * @returns - A new contact object.
- */
-function createNewContact(name, mail, phone) {
-    return {
-        'name': name,
-        'mail': mail,
-        'phone': phone
-    };
-}
-
-
-/**
- * Shows the updated contact list.
- * @param {String} mail - The entered mail address.
- */
-async function showUpdatedContactList(mail) {
-    closeSavedContact('add');
-    await initContactsUser();
-    showAddedContact(mail);
-    setTimeout(() => {
-        showBacklogContact('Contact successfully created');
-    }, 100);
-}
-
-
-/**
- * Shows the added contact.
- * @param {String} mail - The entered mail address.
- */
-function showAddedContact(mail) {
-    let contactId = getContactId(mail);
-    showContact(contactId);
-    location.href = `#contacts-contact-${contactId}`;
-}
-
-
-/**
- * Provides the added contact's rendering index.
- * @param {String} mail - The entered mail address.
- * @returns - The added contact's rendering index.
- */
-function getContactId(mail) {
-    let contact = userContacts.find(c => c.mail == mail);
-    return userContacts.indexOf(contact);
-}
-
-
-/**
- * Shows the contacts' backlog.
- * @param {String} message - The displaying message.
- */
-function showBacklogContact(message) {
-    let bodyWidth = document.body.offsetWidth;
-    if (bodyWidth > 1400) {
-        setBacklogContactMessage('backlog-contact', message);
-        setBacklogContactPosition('left', '55px', '100%');
-    } else {
-        setBacklogContactMessage('backlog-contact-mobile', message);
-        setBacklogContactPosition('bottom', '110px', '-74px');
-    }
-}
-
-
-/**
- * Sets the message of contacts' backlog.
- * @param {String} id - The requested element's id.
- * @param {String} message - The displaying message.
- */
-function setBacklogContactMessage(id, message) {
-    let backlog = getElement(id);
-    backlog.innerHTML = message;
-}
-
-
-/**
- * Sets the contacts' backlog position.
- * @param {String} position - The appropriate css property's name.
- * @param {value} valueIn - The contacts' backlog coming in value.
- * @param {value} valueOut - The contacts' backlog coming out value.
- */
-function setBacklogContactPosition(position, valueIn, valueOut) {
-    let style = getElement('backlog-contact-animation');
-    let cssCode = animateBacklogContact(position, valueIn);
-    style.innerHTML = cssCode;
-    setTimeout(() => {
-        cssCode = animateBacklogContact(position, valueOut);
-        style.innerHTML = cssCode;
-    }, 800);
-}
-
-
-/**
- * Animates the contacts' backlog.
- * @param {String} position - The appropriate css property's name.
- * @param {value} value - The contacts' backlog coming value.
- * @returns The css code for the element 'backlog-contact-animation'.
- */
-function animateBacklogContact(position, value) {
-    return `
-        .backlog-contact-animation {
-            ${position}: ${value};
+async function applyGuestSettings() {
+    if (!userIsLoggedIn()) {
+        let boardTaskButton = document.getElementById("board-task-button");
+        boardTaskButton.disabled = true;
+        for (let i = 1; i &lt; 4; i++) {
+            let boardTaskIcon = document.getElementById(`board-task-icon-${i}`);
+            boardTaskIcon.style.display = "none";
         }
+    }
+}
+/**
+ * Renders each task in the board.
+ */
+function renderEachTask() {
+    clearHTML();
+    for (let i = 0; i &lt; boardTasks.length; i++) {
+        const task = boardTasks[i];
+        let containerId = "";
+        checkCategory(task, containerId);
+        updateProgressBar(task);
+    }
+    updateAllNoTaskMessages();
+}
+/**
+ * Renders tasks that match the search criteria.
+ */
+function renderMatchingTask() {
+    clearHTML();
+    for (let i = 0; i &lt; matchingBoardTask.length; i++) {
+        const task = matchingBoardTask[i];
+        let containerId = "";
+        checkCategory(task, containerId);
+        updateProgressBar(task);
+    }
+    updateAllNoTaskMessages();
+}
+/**
+ * Determines the tasks category and assigns it to the correct container.
+ * @param {Object} task - The task object.
+ * @param {string} containerId - The ID of the container where the task belongs.
+ */
+function checkCategory(task, containerId) {
+    if (task.category === "toDo") {
+        containerId = "toDo";
+    } else if (task.category === "inProgress") {
+        containerId = "inProgress";
+    } else if (task.category === "awaitFeedback") {
+        containerId = "awaitFeedback";
+    } else if (task.category === "done") {
+        containerId = "done";
+    }
+    createHTML(task, containerId);
+}
+/**
+ * Clears the HTML content of each category container.
+ */
+function clearHTML() {
+    document.getElementById("toDo").innerHTML = "";
+    document.getElementById("inProgress").innerHTML = "";
+    document.getElementById("awaitFeedback").innerHTML = "";
+    document.getElementById("done").innerHTML = "";
+}
+/**
+ * Updates the "no task" message for a specific category if there are no tasks.
+ * @param {string} containerId - The container ID to update the message for.
+ * @param {string} message - The message to display.
+ */
+function updateNoTaskMessage(containerId, message) {
+    const container = document.getElementById(containerId);
+    const hasTasks = container.children.length > 0;
+    const noTaskMessage = container.querySelector(".board-no-task");
+    if (!hasTasks &amp;&amp; !noTaskMessage) {
+        container.innerHTML += /*html*/ `
+            &lt;div class="board-content">
+                &lt;div class="board-no-task">${message}&lt;/div>
+            &lt;/div>
+        `;
+    } else if (hasTasks &amp;&amp; noTaskMessage) {
+        noTaskMessage.parentNode.remove();
+    }
+}
+/**
+ * Updates the "no task" messages for all categories.
+ */
+function updateAllNoTaskMessages() {
+    const columns = [
+        { id: "toDo", message: "No tasks To do" },
+        { id: "inProgress", message: "No tasks In progress" },
+        { id: "awaitFeedback", message: "No tasks Await feedback" },
+        { id: "done", message: "No tasks Done" },
+    ];
+
+    columns.forEach((column) => {
+        updateNoTaskMessage(column.id, column.message);
+    });
+}
+/**
+ * Updates the progress bar for a task based on the completion status of its subtasks.
+ * @param {Object} task - The task to update the progress for.
+ */
+function updateProgressBar(task) {
+    let isChecked = [];
+    let length = task.subtasks.length;
+    let checked = task.subtasks["isChecked"];
+    isChecked[checked] = task.subtasks.filter((c) => c["isChecked"] == true);
+    checkedLength = isChecked[checked].length;
+    document.getElementById(`subtask-progress-text-${task.taskId}`).innerHTML += checkedLength + "/" + length;
+    progressBarPercent(task, length, checkedLength);
+}
+
+function progressBarPercent(task, length, checkedLength) {
+    let percent = (100 * checkedLength) / length;
+    document.getElementById(`progress-bar-${task.taskId}`).style.width = percent + "%";
+}
+
+/**
+ * Generates HTML content for a task card and appends it to the specified container.
+ * @param {Object} task - The task object to create HTML for.
+ * @param {string} containerId - The container ID to append the task card to.
+ * @param {boolean} returnHtml - If true, returns the generated HTML string instead of appending it.
+ * @returns {string|undefined} The task HTML if returnHtml is true, otherwise undefined.
+ */
+function createHTML(task, containerId, returnHtml = false) {
+    let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
+    let taskHtml = /*html*/ `
+    &lt;div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
+        &lt;div class="board-body">
+            &lt;div class="board-task-card">
+                &lt;h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}&lt;/h3>
+                &lt;div class="btc-group">
+                    &lt;div class="btc-title">${task.title}&lt;/div>
+                    &lt;div class="btc-description">${task.description}&lt;/div>
+                &lt;/div>
+                &lt;div class="board-task-progress-group">
+                    &lt;div class="board-task-max-bar">
+                        &lt;div id="progress-bar-${task.taskId}" class="board-task-value-bar">&lt;/div>
+                    &lt;/div>
+                    &lt;div id="subtask-progress-text-${task.taskId}" class="board-task-progress-text">&lt;/div>
+                &lt;/div>
+                &lt;div class="user-priority-group">
+                    &lt;div class="board-user-group">
+                        ${userInitialsHtml}
+                    &lt;/div>
+                    ${showPriority(task)}
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>`;
+    if (returnHtml) {
+        return taskHtml;
+    } else {
+        if (containerId) {
+            document.getElementById(containerId).innerHTML += taskHtml;
+        }
+    }
+}
+/**
+ * Opens the task details dialog for editing or viewing.
+ * @param {number} taskId - The ID of the task to open details for.
+ */
+async function openDetails(taskId) {
+    currentDisplayedTaskId = taskId;
+    const task = boardTasks.find((task) => task.taskId === taskId);
+    if (!task) {
+        console.error("Todo item not found");
+        return;
+    }
+    const dialog = document.getElementById("dialog");
+    dialog.setAttribute("w3-include-html", "./templates/board-overlay-blue.html");
+    await includeHTML();
+    insertTaskDataIntoDialog(task, dialog);
+    dialog.showModal();
+    setupCloseDialogMechanism();
+    loadUserImage();
+    if (!userIsLoggedIn()) {
+        let overlayButtonBar = document.getElementById("deleteAndEditTask");
+        overlayButtonBar.style.display = "none";
+    }
+}
+/**
+ * Generates HTML content for editing and deleting task options.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML content for the edit and delete section.
+ */
+function renderEditAndDeleteSection(task) {
+    let ContentHTML = "";
+    ContentHTML += /*html*/ `
+        &lt;button class="dbt-button" onclick="deleteTask(${task.taskId})">
+            &lt;div class="delete-contact-img-form">&lt;/div>
+            &lt;div class="dbt-button-text">Delete&lt;/div>
+        &lt;/button>
+        &lt;img class="dbt-button-separator" src="./img/vector-board-form.png" alt="vertical-line-dbt">
+        &lt;button class="dbt-button" onclick="editTask(${task.taskId})">
+            &lt;div class="edit-contact-img-form">&lt;/div>
+            &lt;div class="dbt-button-text">Edit&lt;/div>
+        &lt;/button>
     `;
-}</code></pre>
+    return ContentHTML;
+}
+/**
+ * Deletes a task from the board.
+ * @param {number} taskId - The ID of the task to delete.
+ */
+async function deleteTask(taskId) {
+    const taskIndex = boardTasks.findIndex((t) => t.taskId === taskId);
+    boardTasks.splice(taskIndex, 1);
+    closeDialog("dialog");
+    await setItem("boardTasks", JSON.stringify(boardTasks));
+    renderEachTask();
+}
+/**
+ * inserts task data into a dialog for viewing.
+ * @param {Object} task - The task object to insert data for.
+ * @param {HTMLElement} dialog - The dialog element to insert data into.
+ */
+function insertTaskDataIntoDialog(task, dialog) {
+    basicTaskDetails(task, dialog);
+    insertSubTasks(task, dialog);
+    const priority = dialog.querySelector(".dbt-priority");
+    const date = dialog.querySelector(".dbt-date");
+    let contentHTML = document.getElementById("deleteAndEditTask");
+    priority.innerHTML = task.priority + showPriority(task);
+    date.innerHTML = task.dueDate;
+    contentHTML.innerHTML = renderEditAndDeleteSection(task);
+}
+/**
+ * Inserts basic task details into the dialog.
+ * @param {Object} task - The task object.
+ * @param {HTMLElement} dialog - The dialog element.
+ */
+function basicTaskDetails(task, dialog) {
+    const type = dialog.querySelector(".dbt-type");
+    const title = dialog.querySelector(".dbt-title");
+    const description = dialog.querySelector(".dbt-description");
+
+    type.classList.add(setCategoryStyle(task.heading));
+    type.innerText = task.heading;
+    title.innerText = task.title;
+    description.innerText = task.description;
+}
+/**
+ * Inserts sub-tasks and sub-users names into the dialog.
+ * @param {Object} task - The task object.
+ * @param {HTMLElement} dialog - The dialog element.
+ */
+function insertSubTasks(task, dialog) {
+    const subtaskCollector = dialog.querySelector(".dbt-collector");
+    const subtaskContent = document.getElementById("subtask-content");
+
+    const subUsersNames = generateSubUsersHtml(task.sub_users);
+    subtaskCollector.innerHTML = subUsersNames;
+    subtaskContent.innerHTML = subTasksRender(task);
+}
+/**
+ * Renders the subtasks of a task.
+ * @param {Object} task - The task object.
+ * @returns {string} HTML content of subtasks.
+ */
+function subTasksRender(task) {
+    let subtasksHtml = "";
+    for (let i = 0; i &lt; task["subtasks"].length; i++) {
+        const subtask = task["subtasks"][i];
+        let imagePath;
+        if (subtask.isChecked) {
+            imagePath = "./img/checkmark.png";
+        } else {
+            imagePath = "./img/checkmark-unchecked.png";
+        }
+        subtasksHtml += /*html */ `
+            &lt;div onclick="subtaskStatus(${task.taskId}, ${subtask.subtaskId})" class="dbt-subtask-group">
+                &lt;img class="dbt-subtask-img" src="${imagePath}" alt="check-button-complete">
+                &lt;div class="dbt-subtask-text">${subtask.subtasksText}&lt;/div>
+            &lt;/div>
+        `;
+    }
+    return subtasksHtml;
+}
+/**
+ * Toggles the completion status of a subtask.
+ * @param {number} taskId - The parent task ID.
+ * @param {number} subtaskId - The subtask ID to toggle status for.
+ */
+async function subtaskStatus(taskId, subtaskId) {
+    let task = boardTasks.find((t) => t.taskId === taskId);
+    let dialog = document.getElementById("dialog");
+    let subtask = task.subtasks.find((st) => st.subtaskId === subtaskId);
+
+    subtask.isChecked = !subtask.isChecked;
+    await setItem("boardTasks", JSON.stringify(boardTasks));
+    insertTaskDataIntoDialog(task, dialog);
+}
+/**
+ * Generates HTML content for displaying user initials.
+ * @param {Array} subUsers - The array of user objects.
+ * @returns {string} HTML content of user initials.
+ */
+function generateSubUsersHtml(subUsers) {
+    let subUserNamesHtml = "";
+
+    if (subUsers &amp;&amp; subUsers.length > 0) {
+        subUsers.forEach((user) => {
+            const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
+            const fullName = user.name;
+            subUserNamesHtml += /*html*/ `
+                &lt;div class="dbt-contact-group">
+                        &lt;div class="dbt-contact-profile bgc-${user["bgc-name"]}">${initials}&lt;/div>
+                        &lt;div class="dbt-contact-name">${fullName}&lt;/div>
+                &lt;/div>
+            `;
+        });
+    } else {
+        subUserNamesHtml = '&lt;div class="dbt-contact-name">No users assigned&lt;/div>';
+    }
+    return subUserNamesHtml;
+}
+
+/**
+ * Shows the priority icon for a task based on its priority level.
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string of the priority icon.
+ */
+function showPriority(task) {
+    if (task.priority === "Urgent") {
+        return '&lt;img src="./img/urgent-board.png">&lt;/img>';
+    } else if (task.priority === "Medium") {
+        return '&lt;img src="./img/medium-board.png">&lt;/img>';
+    } else if (task.priority === "Low") {
+        return '&lt;img src="./img/low-board.png">&lt;/img>';
+    }
+}
+/**
+ * Sets the category style class for a task based on its heading.
+ * @param {string} heading - The task heading.
+ * @returns {string} The class name for the task category.
+ */
+function setCategoryStyle(heading) {
+    if (heading == "User Story") {
+        return "btc-type-blue";
+    } else if (heading == "Technical Task") {
+        return "btc-type-green";
+    }
+}
+/**
+ * Generates HTML for user initials to be displayed on the task card.
+ * @param {Array} subUsers - The array of user objects.
+ * @returns {string} HTML content of user initials for the task card.
+ */
+function generateUserInitialsHtml(subUsers) {
+    if (subUsers === undefined) {
+        return;
+    } else {
+        let userInitialsHtml = "";
+        for (let user of subUsers) {
+            const initials = user.name
+                .match(/(\b\S)?/g)
+                .join("")
+                .toUpperCase();
+            userInitialsHtml += `&lt;div class="board-card-user bgc-${user["bgc-name"]}">${initials}&lt;/div>`;
+        }
+        return userInitialsHtml;
+    }
+}
+/**
+ * sets up mechanisms to close the task details dialog and render all tasks.
+ */
+function setupCloseDialogMechanism() {
+    const dialogBoardTask = document.querySelector(".dialog-board-task");
+    const dialogEditTask = document.querySelector(".dialog-edit-task");
+    const dialog = document.getElementById("dialog");
+    dialog.addEventListener("click", function (event) {
+        closeDialog("dialog");
+    });
+    // prevent closing dialog if element itself is clicked
+    if (dialogBoardTask) {
+        dialogBoardTask.addEventListener("click", function (event) {
+            event.stopPropagation();
+            renderEachTask();
+        });
+    }
+    if (dialogEditTask) {
+        dialogEditTask.addEventListener("click", function (event) {
+            event.stopPropagation();
+            renderEachTask();
+        });
+    }
+    renderEachTask();
+    loadUserImage();
+}
+/**
+ * Initiates dragging of a task card.
+ * @param {number} id - The ID of the task being dragged.
+ */
+function startDragging(id) {
+    currentDraggedElement = id;
+}
+/**
+ * Allows dropping of a task card into a category.
+ * @param {Event} event - The drag event.
+ */
+function allowDrop(event) {
+    event.preventDefault();
+}
+/**
+ * Moves a dragged task to a specified category.
+ * @param {string} category - The category to move the task to.
+ */
+function moveTo(category) {
+    const categories = ["toDo", "inProgress", "awaitFeedback", "done"];
+    categories.forEach((cat) => {
+        const element = document.getElementById(cat);
+        if (element.classList.contains("highlight")) {
+            element.classList.remove("highlight");
+        }
+    });
+    const task = boardTasks.find((task) => task.taskId === currentDraggedElement);
+    task.category = category;
+    setItem("boardTasks", JSON.stringify(boardTasks));
+    renderEachTask();
+}
+/**
+ * Highlights a drop area when a task card is dragged over it.
+ * @param {Event} event - The dragover event.
+ * @param {string} category - The category being dragged over.
+ */
+function highlight(event, category) {
+    event.preventDefault();
+    const categoryElement = document.getElementById(category);
+    let highlightElement = categoryElement.querySelector(".highlight-placeholder");
+    if (!highlightElement) {
+        highlightElement = document.createElement("div");
+        highlightElement.className = "highlight-placeholder";
+        categoryElement.appendChild(highlightElement);
+    }
+    const draggedElementHtml = getDraggedElementData();
+    highlightElement.innerHTML = draggedElementHtml;
+}
+/**
+ * removes highlight from a drop area when a task card is dragged away.
+ * @param {Event} event - The dragleave event.
+ * @param {string} category - The category being dragged away from.
+ */
+function removeHighlight(event, category) {
+    const categoryElement = document.getElementById(category);
+    if (!categoryElement.contains(event.relatedTarget)) {
+        const existingHighlight = categoryElement.querySelector(".highlight-placeholder");
+        if (existingHighlight) {
+            existingHighlight.remove();
+        }
+    }
+}
+/**
+ * gets the HTML data of the currently dragged element.
+ * @returns {string} HTML content of the dragged element.
+ */
+function getDraggedElementData() {
+    const task = boardTasks.find((t) => t.taskId === currentDraggedElement);
+    if (!task) {
+        console.error("Dragged element not found");
+        return "";
+    }
+    // use createHTML with boolean true to get the html for rendering of the dragged element
+    const taskHtml = createHTML(task, null, true);
+    return taskHtml;
+}
+
+/**
+ * searches for a task based on user input and updates the board with matching tasks.
+ */
+function searchForTask() {
+    clearTimeout(searchTimeout);
+    let searchInput = document.getElementById("board-search-desktop").value.toLowerCase() || document.getElementById("board-search").value.toLowerCase();
+    if (searchInput === "") {
+        matchingBoardTask = [];
+        renderEachTask();
+        return;
+    }
+    searchTimeout = setTimeout(function () {
+        matchingBoardTask = [];
+        for (let i = 0; i &lt; boardTasks.length; i++) {
+            let task = boardTasks[i];
+            let lowerCaseTask = task.title.toLowerCase();
+            isTaskInMatching = matchingBoardTask.some((matchingBoardTask) => matchingBoardTask.title === lowerCaseTask);
+            if (lowerCaseTask.includes(searchInput) &amp;&amp; !isTaskInMatching) {
+                matchingBoardTask.push(task);
+            }
+            renderMatchingTask();
+        }
+    }, 300);
+}
+/**
+ * Enables horizontal scrolling for elements with the "horizontal-scroll" class using the mouse wheel.
+ * attaches a 'wheel' event listener to each element upon DOM content load
+ * allowing users to scroll horizontally.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    let scrollElements = document.getElementsByClassName("horizontal-scroll");
+    Array.from(scrollElements).forEach((element) => {
+        element.addEventListener("wheel", (event) => {
+            event.preventDefault();
+            element.scrollBy({
+                left: event.deltaY &lt; 0 ? -30 : 30,
+            });
+        });
+    });
+});
+</code></pre>
         </article>
     </section>
 

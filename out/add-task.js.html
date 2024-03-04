@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-contact-form.js</title>
+    <title>JSDoc: Source: add-task.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-contact-form.js</h1>
+    <h1 class="page-title">Source: add-task.js</h1>
 
     
 
@@ -26,201 +26,579 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Opens the add contact form.
- */
-function openAddContact() {
-    openDialog('dialog-add-contact');
-    setClass('section-add-contact', addClass, 'dialog-contacts-position');
-}
-
-
-/**
- * Closes the add contact form.
- */
-function closeAddContact() {
-    setClass('section-add-contact', removeClass, 'dialog-contacts-position');
-    setTimeout(() => {
-        closeDialog('dialog-add-contact');
-        resetAddContactInput();
-    }, 100);
-}
-
+            <pre class="prettyprint source linenums"><code>// Variables
+let subtaskInput = [];
+let priorityDefault = "Medium";
+let subtasks = [];
+let sub_users = [];
+let contactsUser = [];
+let heading = "";
+priority = priorityDefault;
 
 /**
- * Resets the add contact form's input elements.
+ * Initializing Functions out of the global.js to apply guest aswell as user settings.
  */
-function resetAddContactInput() {
-    let ids = ['name', 'mail', 'phone'];
-    for (let i = 0; i &lt; ids.length; i++) {
-        let id = ids[i];
-        let info = getElement(`add-contact-${id}`);
-        info.value = '';
-    }
+async function addTaskInit() {
+  await init();
+  await applyGuestSettingsAddTask();
+  await loadTasks();
+  await loadUsers();
+  assignedTo();
 }
 
-
 /**
- * Updates the contact list.
+ * Disables the add-task-button if a guest is logged in. 
  */
-async function updateContactList() {
-    let name = getInputValue('add-contact-name');
-    let mail = getInputValue('add-contact-mail');
-    if (name != '' &amp;&amp; mail != '') {
-        verifyContactInput(mail);
-    }
+async function applyGuestSettingsAddTask() {
+  let addTaskButton = document.getElementById('create-new-task-button');
+  if (!userIsLoggedIn()) {
+    addTaskButton.disabled = true;
+  } else {
+    addTaskButton.disabled = false;
+  }
 }
 
+/**
+ * Fetches the boardTasks array from the server.
+ */
+async function loadTasks() {
+  try {
+    boardTasks = JSON.parse(await getItem("boardTasks"));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 /**
- * Verifies the added contact's input values.
- * @param {String} mail - The entered mail address.
+ * Reloads the page.
  */
-async function verifyContactInput(mail) {
-    let user = users.find(u => u.userId == userId);
-    let othersMail = userContacts.find(c => c.mail === mail);
-    if (othersMail) {
-        showBacklogContactForm('add', 'Email already existing');
+function reloadPage() {
+  location.reload();
+}
+
+/**
+ * Declares the task input values into the task array that was chosen by the user inputs.
+ */
+function scopeTasks() {
+  let title = document.getElementById("title-task").value;
+  let description = document.getElementById("description-task").value;
+  let dueDate = document.getElementById("date-date-task").value;
+  const taskId = Date.now();
+
+  let task = {
+    taskId: taskId,
+    title: title,
+    description: description,
+    category: "toDo",
+    heading: heading,
+    subtasks: subtasks,
+    sub_users: sub_users,
+    priority: priority,
+    dueDate: dueDate,
+  };
+  pushTasks(task)
+}
+
+/**
+ * task is being pushed to the boardTasks array which stores it on the server.
+ * @param {Object} task - The task object that will be added.
+ */
+async function pushTasks(task) {
+  boardTasks.push(task);
+  await setItem("boardTasks", JSON.stringify(boardTasks));
+  console.log("Task added successfully:", task);
+}
+
+/**
+ * Renders the users to which the task can be assigned too.
+ */
+function assignedTo() {
+  let assignElement = document.getElementById("myDropdown");
+  assignElement.innerHTML = "";
+
+  let user = currentUserData;
+  if (user == undefined || user == null || user == "") {
+    assignElement.innerHTML = "&lt;div class=subuser-align>No Contacts Found&lt;/div>";
+    document.getElementById('button-container').innerHTML = `                    
+    &lt;div class="clearBtn" onclick="clearAddTask()">Clear &lt;img src="./img/cancel.png" alt="clear">&lt;/div>
+      &lt;button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create Task &lt;img src="./img/check.png" alt="check">&lt;/button>`;
+  }
+  if (user !== undefined) {
+    subtaskFocusOptions(assignElement, user);
+  }
+}
+
+/**
+ * Declares the index of the total users, the individual background color of the profile, the inititials and yourself to pass it to the render function.
+ * @param {HTMLElement} assignElement - HTML element which renders the options (users to add).
+ * @param {Object} user - Current user object.
+ */
+function subtaskFocusOptions(assignElement, user) {
+  for (let i = 0; i &lt; users.length; i++) {
+    const bgc = `bgc-${users[i]["bgc-name"]}`;
+    const contact = users[i].name;
+    let yourName = contact.includes(" (You") ? true : false;
+    let names = contact.split(" ");
+    let letterGroup;
+    if (!yourName) {
+      letterGroup = names[0][0] + names[names.length - 1][0];
     } else {
-        await pushNewUserContact(user);
-        showUpdatedContactList(mail);
+      letterGroup = names[0][0] + names[names.length - 2][0];
     }
+    renderFocusOptions(assignElement, i, bgc, letterGroup, contact);
+  }
 }
 
-
 /**
- * Pushes a new user contact.
- * @param {object} user - The user object which receives the new contact.
+ * Renders the the dropdown menu for the Assigned to element.
+ * @param {HTMLElement} assignElement - HTML element which renders the options (users to add).
+ * @param {Object} user - Current user object.
  */
-async function pushNewUserContact(user) {
-    let contact = getNewContact();
-    user.contacts.push(contact);
-    await setItem('users', users);
+function renderFocusOptions(assignElement, i, bgc, letterGroup, contact) {
+  assignElement.innerHTML += `
+  &lt;div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
+    &lt;div class="subuser-align">
+      &lt;div class="sub-profile-img ${bgc}">${letterGroup}&lt;/div>
+        &lt;div>${contact}&lt;/div> &lt;/div>  
+          &lt;div class="checkbox">&lt;img src="./img/checkmark-unchecked.png" alt="checkbox"
+            id="checkbox-remember-me-${i}">&lt;/div> &lt;/div> `;
 }
 
-
 /**
- * Provides the new contact's data.
- * @returns - The new contact object.
+ * Toggles the visibity of the Assigned To dropdown menu.
+ * @param {boolean} dropDown - Boolean value whether to show or not show the dropdown menu.
  */
-function getNewContact() {
-    let name = getInputValue('add-contact-name');
-    let mail = getInputValue('add-contact-mail');
-    let phone = getInputValue('add-contact-phone');
-    let contact = createNewContact(name, mail, phone);
-    return contact;
+function flipDropDownMenu(dropDown) {
+  let icon = document.getElementById("drop-down-icon");
+  if (dropDown) {
+    document.getElementById("myDropdown").classList.add("show");
+    document.getElementById("dropdown-parent").classList.add("dropdown-outline-focus");
+    document.getElementById("dropdown-parent").classList.add("dropdown-custom");
+    icon.src = "./img/arrow_drop_down-up.png";
+    document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(false)');
+  } else {
+    document.getElementById("myDropdown").classList.remove("show");
+    document.getElementById("dropdown-parent").classList.remove("dropdown-outline-focus");
+    document.getElementById("dropdown-parent").classList.remove("dropdown-custom");
+    icon.src = "./img/arrow_drop_downaa.png";
+    document.getElementById('dropdown-parent').setAttribute('onclick', 'flipDropDownMenu(true); flipDropDownMenuCategory(false)');
+  }
 }
 
-
 /**
- * Creates a new contact object.
- * @param {String} name - The new contact's name.
- * @param {String} mail - The new contact's mail address.
- * @param {String} phone - The new contact's phone number.
- * @returns - A new contact object.
+ * Toggles the visibity of the Category dropdown menu.
+ * @param {boolean} dropDown - Boolean value whether to show or not show the dropdown menu.
  */
-function createNewContact(name, mail, phone) {
-    return {
-        'name': name,
-        'mail': mail,
-        'phone': phone
-    };
+function flipDropDownMenuCategory(dropDown) {
+  let icon = document.getElementById("drop-down-icon-2");
+  if (dropDown) {
+    document.getElementById("myDropdown-category").classList.add("show");
+    document.getElementById("dropdown-parent-category").classList.add("dropdown-outline-focus");
+    document.getElementById("dropdown-parent-category").classList.add("dropdown-custom");
+    icon.src = "./img/arrow_drop_down-up.png";
+    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenuCategory(false)');
+  } else {
+    document.getElementById("myDropdown-category").classList.remove("show");
+    document.getElementById("dropdown-parent-category").classList.remove("dropdown-outline-focus");
+    document.getElementById("dropdown-parent-category").classList.remove("dropdown-custom");
+    icon.src = "./img/arrow_drop_downaa.png";
+    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenu(false); flipDropDownMenuCategory(true)');
+  }
 }
 
-
 /**
- * Shows the updated contact list.
- * @param {String} mail - The entered mail address.
+ * Prevents event propagation.
+ * @param {Event} event - The event object.
  */
-async function showUpdatedContactList(mail) {
-    closeSavedContact('add');
-    await initContactsUser();
-    showAddedContact(mail);
-    setTimeout(() => {
-        showBacklogContact('Contact successfully created');
-    }, 100);
+function stop(event) {
+  event.stopPropagation();
 }
 
-
 /**
- * Shows the added contact.
- * @param {String} mail - The entered mail address.
+ * Toggles the checkbox of the Assigned to dropdown element wether to add or remove a subuser.
+ * @param {number} i - Index of the subuser.
  */
-function showAddedContact(mail) {
-    let contactId = getContactId(mail);
-    showContact(contactId);
-    location.href = `#contacts-contact-${contactId}`;
+function toggleCheckbox(i) {
+  let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
+  let background = document.getElementById(`subuser-div-${i}`);
+  let subProfile = document.getElementById("sub-profile");
+  let subuserTemp = users[i];
+  let subUserIdTemp = users[i]["userId"];
+  subProfile.innerHTML = "";
+
+  if (checkBox.src.includes("checkmark-unchecked.png")) {
+    addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp)
+  } else {
+    checkboxDeselect(i, checkBox, background)
+  }
+  for (let j = 0; j &lt; sub_users.length; j++) {
+    renderSubProfiles(j, subProfile)
+  }
 }
 
-
 /**
- * Provides the added contact's rendering index.
- * @param {String} mail - The entered mail address.
- * @returns - The added contact's rendering index.
+ * Deselects the corresponding subuser and resets the checkbox.
+ * @param {number} i - Index of the subuser.
+ * @param {Element} checkBox - The checkbox element.
+ * @param {Element} background - The background element.
  */
-function getContactId(mail) {
-    let contact = userContacts.find(c => c.mail == mail);
-    return userContacts.indexOf(contact);
+function checkboxDeselect(i, checkBox, background) {
+  checkBox.src = "./img/checkmark-unchecked.png";
+  background.classList.remove("sub-background");
+
+  let subuserToRemove = sub_users.findIndex(
+    (user) => user.name === `Temp-${i}`
+  );
+  sub_users.splice(subuserToRemove, 1);
 }
 
+/**
+ * Adds the selected subuser from Assigned To and pushes them into an array.
+ * @param {number} i 
+ * @param {Element} checkBox 
+ * @param {Element} background 
+ * @param {Object} subuserTemp 
+ * @param {string} subUserIdTemp 
+ */
+function addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp) {
+  checkBox.src = "./img/checkmark-white.png";
+  background.classList.add("sub-background");
+  sub_users.push({
+    userIdIterate: i,
+    userId: subUserIdTemp,
+    name: subuserTemp.name,
+    "bgc-name": subuserTemp["bgc-name"],
+  });
+}
 
 /**
- * Shows the contacts' backlog.
- * @param {String} message - The displaying message.
+ * Renders the selected subusers into an container below the dropdown.
+ * @param {number} j - Index of the subuser.
+ * @param {Element} subProfile - The subprofile element.
  */
-function showBacklogContact(message) {
-    let bodyWidth = document.body.offsetWidth;
-    if (bodyWidth > 1400) {
-        setBacklogContactMessage('backlog-contact', message);
-        setBacklogContactPosition('left', '55px', '100%');
-    } else {
-        setBacklogContactMessage('backlog-contact-mobile', message);
-        setBacklogContactPosition('bottom', '110px', '-74px');
+function renderSubProfiles(j, subProfile) {
+  let subBgc = "bgc-" + sub_users[j]["bgc-name"];
+  let subProfileName = sub_users[j].name;
+  let contactId = sub_users[j]["userIdIterate"];
+  let yourName = subProfileName.includes(" (You") ? true : false;
+  let names = subProfileName.split(" ");
+  let letterGroup;
+  if (!yourName) {
+    letterGroup = names[0][0] + names[names.length - 1][0];
+  } else {
+    letterGroup = names[0][0] + names[names.length - 2][0];
+  }
+  subProfile.innerHTML += `
+      &lt;div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}&lt;/div> `;
+}
+
+/**
+ * Removes a subuser by clicking on their profile image which is rendered by renderSubProfiles().
+ * @param {number} subuserId - ID of the subuser.
+ */
+function removeSubPB(subuserId) {
+  let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
+  if (indexToRemove !== -1) {
+    sub_users.splice(indexToRemove, 1);
+    clearDropdown(subuserId);
+  }
+}
+
+/**
+ * Clears the dropdown and resets the corresponding elements. 
+ * Removes the removed user from the array.
+ * @param {number} index - Index of the subuser.
+ */
+function clearDropdown(index) {
+  document.getElementById(`checkbox-remember-me-${index}`).src = "./img/checkmark-unchecked.png";
+  background = document.getElementById(`subuser-div-${index}`).classList.remove("sub-background");
+  let deleteContact = document.getElementById(`contact-id-${index}`);
+  deleteContact.remove();
+}
+
+/**
+ * Displays a cancel and add (checkmark) icon if the Subtask-Input element is focused.
+ */
+function subtaskCustomTemplate() {
+  let subtaskForm = document.getElementById("icon-hold");
+  subtaskForm.innerHTML = `
+    &lt;img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+    &lt;img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+    &lt;img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()"> `;
+  cancelSubtaskSafety();
+}
+
+/**
+ * Generates a template for a Subtask if clicked on the + (plus) icon.
+ */
+function subtaskTemplate() {
+  let subtaskForm = document.getElementById("subtask-form");
+  let subtaskValueCheck = document.getElementById("subtask");
+
+  if (subtaskValueCheck.value == "" || subtaskValueCheck.value == null) {
+    subtaskForm.innerHTML = `
+      &lt;input class="sub-task-child" required placeholder="Add new subtask" type="text" id="subtask" value="Contact Form">
+        &lt;div class="subtask-add-icons" id="icon-hold">
+          &lt;img src="./img/cancel.png" alt="cancel-icon" class="hover" onclick="cancelSubtask()">
+          &lt;img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+          &lt;img src="./img/done.png" alt="add-icon" class="hover" onclick="addSubtask()">
+        &lt;/div>
+      `;
+  }
+}
+
+/**
+ * Cancels the subtask creation if the x (cancel) icon is being clicked.
+ */
+function cancelSubtaskSafety() {
+  document.addEventListener("click", function (event) {
+    let subtaskForm = document.getElementById("subtask-form");
+    let subtaskInput = document.getElementById("subtask");
+    if (event.target !== subtaskInput &amp;&amp; !subtaskForm.contains(event.target) &amp;&amp; subtaskInput.value === "") {
+      cancelSubtask();
     }
+  });
 }
 
-
 /**
- * Sets the message of contacts' backlog.
- * @param {String} id - The requested element's id.
- * @param {String} message - The displaying message.
+ * Cancels the subtask input by re-rendering the subtask input element.
  */
-function setBacklogContactMessage(id, message) {
-    let backlog = getElement(id);
-    backlog.innerHTML = message;
-}
-
-
-/**
- * Sets the contacts' backlog position.
- * @param {String} position - The appropriate css property's name.
- * @param {value} valueIn - The contacts' backlog coming in value.
- * @param {value} valueOut - The contacts' backlog coming out value.
- */
-function setBacklogContactPosition(position, valueIn, valueOut) {
-    let style = getElement('backlog-contact-animation');
-    let cssCode = animateBacklogContact(position, valueIn);
-    style.innerHTML = cssCode;
-    setTimeout(() => {
-        cssCode = animateBacklogContact(position, valueOut);
-        style.innerHTML = cssCode;
-    }, 800);
-}
-
-
-/**
- * Animates the contacts' backlog.
- * @param {String} position - The appropriate css property's name.
- * @param {value} value - The contacts' backlog coming value.
- * @returns The css code for the element 'backlog-contact-animation'.
- */
-function animateBacklogContact(position, value) {
-    return `
-        .backlog-contact-animation {
-            ${position}: ${value};
-        }
+function cancelSubtask() {
+  let subtaskForm = document.getElementById("subtask-form");
+  subtaskForm.innerHTML = `
+      &lt;input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+        &lt;div class="subtask-add-icons" id="icon-hold">
+          &lt;img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+      &lt;/div>
     `;
-}</code></pre>
+}
+
+/**
+ * Takes the subtask given input value and pushes it to the subtask array. 
+ */
+async function addSubtask() {
+  let subtaskInputValue = document.getElementById("subtask").value.trim();
+  if (subtaskInputValue !== "") {
+    await subtaskInput.push(subtaskInputValue);
+    const subtaskId = Date.now();
+    const subtask = {
+      subtaskId: subtaskId,
+      subtasksText: subtaskInputValue,
+      isChecked: false,
+    }; await subtasks.push(subtask);
+    renderSubtasks()
+  };
+  if (subtaskInputValue === "" || subtaskInputValue === undefined || subtaskInputValue === null) {
+    cancelSubtask();
+  };
+  cancelSubtask();
+};
+
+/**
+ * Renders the added subtask.
+ */
+function renderSubtasks() {
+  let subtaskAdd = document.getElementById("subtask-display");
+  subtaskAdd.innerHTML = "";
+
+  for (let i = 0; i &lt; subtasks.length; i++) {
+    let subtaskValue = subtaskInput[i] || '';
+    subtaskAdd.innerHTML += `
+        &lt;span contenteditable="true" class="span-container" id="sub-span-${i}">
+            &lt;div class="subtask-preview" id="preview-${i}" onclick="subtaskFocus(${i})">&lt;div class="list-item" id="list-item-${i}">&lt;/div>&lt;p id="sub-content-${i}">${subtaskValue}&lt;/p>&lt;/div>
+            &lt;div class="subtask-icon-container" id="icon-container-${i}">
+                &lt;img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover" onclick="subtaskFocus(${i})">
+                &lt;img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+                &lt;img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})">
+            &lt;/div>
+        &lt;/span> `;
+  }
+}
+
+/**
+ * Deletes the selected subtask.
+ * @param {number} i - Index of the subtask to be deleted.
+ */
+function deleteSubtask(i) {
+  subtaskInput.splice(i, 1);
+  subtasks.splice(i, 1);
+  let subtaskSpan = document.getElementById(`sub-span-${i}`);
+  if (subtaskSpan) {
+    subtaskSpan.remove();
+  }
+  for (let j = i; j &lt; subtasks.length; j++) {
+    renderSubtaskSafety(j)
+  }
+  renderSubtasks();
+}
+
+/**
+ * Adjusts IDs and classes after a subtask is deleted to maintain consistency.
+ * @param {number} j - Index of the subtask.
+ */
+function renderSubtaskSafety(j) {
+  let span = document.getElementById(`sub-span-${j + 1}`);
+  let preview = document.getElementById(`preview-${j + 1}`);
+  let iconContainer = document.getElementById(`icon-container-${j + 1}`);
+  if (span) {
+    span.id = `sub-span-${j}`;
+  } if (preview) {
+    preview.id = `preview-${j}`;
+  } if (iconContainer) {
+    iconContainer.id = `icon-container-${j}`;
+  }
+}
+
+/**
+ * Renders extra icon options to delete the subtask while being focused on the subtask and / or get out of focus from the subtask. 
+ * @param {number} i - Index of the focused subtask. 
+ */
+function subtaskFocus(i) {
+  let subTaskSpan = document.getElementById(`sub-span-${i}`);
+  let listItem = document.getElementById(`list-item-${i}`);
+  let preview = document.getElementById(`preview-${i}`);
+  let editIcon = document.getElementById(`icon-container-${i}`);
+
+  subTaskSpan.classList.add("focus-input");
+  listItem.classList.add("focus-list-item");
+  preview.classList.add("focus-preview");
+
+  editIcon.innerHTML = `
+      &lt;img src="./img/delete.png" alt="delete-icon" id="first-icon" class="hover" onclick="deleteSubtask(${i})">
+      &lt;img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+      &lt;img src="./img/done.png" alt="done-icon" id="third-icon" class="hover" onclick="subtaskOutOfFocus(${i})">
+    `;
+}
+
+/**
+ * Reverts the subtaskFocus() changes by removing the added classes and re-rendering the subtask element.
+ * @param {number} i - Index of the focused subtask. 
+ */
+function subtaskOutOfFocus(i) {
+  let subtaskInputValue = document.getElementById(`sub-content-${i}`).innerText;
+  let subtaskIndexValue = subtasks[i]["subtasksText"];
+
+  if (subtaskInputValue !== subtaskIndexValue) {
+    subtasks[i]["subtasksText"] = subtaskInputValue;
+  }
+  document.getElementById(`sub-span-${i}`).classList.remove("focus-input");
+  document.getElementById(`list-item-${i}`).classList.remove("focus-list-item");
+  document.getElementById(`preview-${i}`).classList.remove("focus-preview");
+  let editIcon = document.getElementById(`icon-container-${i}`);
+
+  editIcon.innerHTML = `
+      &lt;img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover" onclick="subtaskFocus(${i})">
+      &lt;img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon">
+      &lt;img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})"> `;
+}
+
+/**
+ * Handles which priority is clicked.
+ * @param {HTMLElement} clickedPrio - The priority element clicked.
+ */
+function prioSelection(clickedPrio) {
+  let prio = clickedPrio;
+  let lowImg = document.getElementById("low-img");
+  let mediumImg = document.getElementById("medium-img");
+  let urgentImg = document.getElementById("urgent-img");
+
+  document.getElementById("Urgent").classList.remove("prioUrgent");
+  document.getElementById("Medium").classList.remove("prioMedium");
+  document.getElementById("Low").classList.remove("prioLow");
+
+  lowImg.src = "./img/low.png";
+  mediumImg.src = "./img/medium-prio.png";
+  urgentImg.src = "./img/urgent-red-arrows.png";
+
+  prioDecision(prio, lowImg, mediumImg, urgentImg);
+}
+
+/**
+ * Resets the non selected priority elements.
+ * @param {HTMLElement} prio - The priority element selected.
+ * @param {HTMLElement} lowImg - The low priority image element.
+ * @param {HTMLElement} mediumImg - The medium priority image element.
+ * @param {HTMLElement} urgentImg - The urgent priority image element.
+ */
+function prioDecision(prio, lowImg, mediumImg, urgentImg) {
+  if (prio.id === "Urgent") {
+    prio.classList.add("prioUrgent");
+    urgentImg.src = "./img/urgent-white-arrows.png";
+  } else if (prio.id === "Medium") {
+    prio.classList.add("prioMedium");
+    mediumImg.src = "./img/medium.png";
+  } else if (prio.id === "Low") {
+    prio.classList.add("prioLow");
+    lowImg.src = "./img/low-white-arrows.png";
+  }
+
+  priority = prio.id;
+}
+
+/**
+ * 
+ * @param {HTMLElement} clickedCategory - The category which was clicked on.
+ */
+function selectCategory(clickedCategory) {
+  let cat = clickedCategory;
+  let categoryContainer = document.getElementById('chosen-task');
+  heading = cat.id;
+
+  categoryContainer.innerHTML = `${heading}`;
+  flipDropDownMenuCategory(false);
+}
+
+/**
+ * Clears the input field of subtasks when a task has been added.
+ */
+function clearAddTask() {
+  document.getElementById("title-task").value = "";
+  document.getElementById("description-task").value = "";
+  document.getElementById("date-date-task").value = "";
+  document.getElementById("chosen-task").innerHTML = "Select task category";
+  document.getElementById("sub-profile").innerHTML = "";
+  document.getElementById("subtask-display").innerHTML = "";
+
+  let subProfile = document.getElementById("sub-profile");
+  subProfile.innerHTML = "";
+  clearArrays();
+  assignedTo();
+  prioSelection(Medium);
+}
+
+/**
+ * Clears / Resets all global arrays.
+ */
+function clearArrays() {
+  subtaskInput = [];
+  subtasks = [];
+  sub_users = [];
+  contactsUser = [];
+  priority = priorityDefault;
+}
+
+/**
+ * Enables a "Task added to board" animation and redirects the user to the board.html after successfully adding a task.
+ */
+function addedTask() {
+  if (!document.getElementById("title-task").value == "" || !document.getElementById("date-date-task").value == "" || !heading == "") {
+    let backLog = document.getElementById('task-added-success');
+    backLog.classList.remove('d-none')
+    setTimeout(function () {
+      window.location.href = "board.html";
+    }, 1500);
+  }
+}
+
+const scrollContainer = document.getElementById("sub-profile");
+
+/**
+ * Enables vertical scrolling if the sub-profile elements content is overflowing.
+ */
+scrollContainer.addEventListener("wheel", (evt) => {
+  evt.preventDefault();
+  scrollContainer.scrollLeft += evt.deltaY;
+});</code></pre>
         </article>
     </section>
 
