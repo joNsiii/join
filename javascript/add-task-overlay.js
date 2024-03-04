@@ -440,38 +440,38 @@ function resetAddTaskGlobalVariables() {
 function addedTask() {
     setClass('task-added-success-overlay', removeClass, 'd-none-overlay');
     setTimeout(function () {
-        window.location.href = "./board.html";
+        closeAddTaskOverlay();
+        boardInit();
+        // window.location.href = "./board.html";
     }, 1000);
 }
 
 
 function selectCategory(clickedCategory) {
-    let cat = clickedCategory;
-    let categoryContainer = document.getElementById('chosen-task-overlay');
-    heading = cat.id;
-
+    heading = clickedCategory.id;
+    let categoryContainer = getElement('chosen-task-overlay');
     categoryContainer.innerHTML = `${heading}`;
     flipDropDownMenu(false, true, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
+
 async function openAddTaskOverlay() {
-    let bodyWidth = document.getElementById('body').offsetWidth;
+    let bodyWidth = getElement('body').offsetWidth;
     if (bodyWidth > 730) {
         addTaskInit();
-        await document.getElementById('add-task-overlay').show();
-        let overlay = document.getElementById('add-task-overlay-position');
-        overlay.classList.add('add-task-overlay-in');
+        openDialog('add-task-overlay');
+        setClass('add-task-overlay-position', addClass, 'add-task-overlay-in');
     } else {
         window.location.href = './add-task.html';
     }
 }
 
+
 async function closeAddTaskOverlay() {
-    let overlay = document.getElementById('add-task-overlay-position');
-    overlay.classList.remove('add-task-overlay-in');
+    setClass('add-task-overlay-position', removeClass, 'add-task-overlay-in');
     setTimeout(() => {
-        document.getElementById('add-task-overlay').close();
+        closeDialog('add-task-overlay');
         clearAddTask();
     }, 100);
 }
