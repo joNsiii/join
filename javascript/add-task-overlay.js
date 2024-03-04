@@ -264,38 +264,44 @@ function cancelSubtaskSafety() {
 
 
 async function addSubtask() {
-    let subtaskAdd = document.getElementById("subtask-display-overlay");
-    let subtaskInputValue = document.getElementById("subtask-overlay").value.trim();
+    let subtaskAdd = getElement('subtask-display-overlay');
+    let subtaskInputValue = getElement('subtask-overlay').value.trim();
     subtaskAdd.innerHTML = "";
-
     if (subtaskInputValue !== "") {
         await subtaskInput.push(subtaskInputValue);
-
         const subtaskId = Date.now();
-
-        const subtask = {
-            subtaskId: subtaskId,
-            subtasksText: subtaskInputValue,
-            isChecked: false,
-        };
-
+        const subtask = getSubtask(subtaskId, subtaskInputValue)
         subtasks.push(subtask);
-
-        for (let i = 0; i < subtaskInput.length; i++) {
-            subtaskAdd.innerHTML += `
-          <span contenteditable="true" class="span-container-overlay" id="sub-span-${i}">
-              <div class="subtask-preview-overlay" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item-overlay" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
-              <div class="subtask-icon-container-overlay" id="icon-container-${i}">
-                  <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="subtaskFocus(${i})">
-                  <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
-                  <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
-              </div>
-          </span>
-        `;
-        }
+        renderSubtasks(subtaskAdd, subtaskInput);
     }
     cancelSubtask();
 }
+
+
+function getSubtask(subtaskId, subtaskInputValue) {
+    return {
+        subtaskId: subtaskId,
+        subtasksText: subtaskInputValue,
+        isChecked: false,
+    };
+}
+
+
+function renderSubtasks(subtaskAdd, subtaskInput) {
+    for (let i = 0; i < subtaskInput.length; i++) {
+        subtaskAdd.innerHTML += `
+            <span contenteditable="true" class="span-container-overlay" id="sub-span-${i}">
+            <div class="subtask-preview-overlay" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item-overlay" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
+            <div class="subtask-icon-container-overlay" id="icon-container-${i}">
+                <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="subtaskFocus(${i})">
+                <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
+                <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
+            </div>
+            </span>
+        `;
+    }
+}
+
 
 function deleteSubtask(i) {
     subtaskInput.splice(i, 1);
