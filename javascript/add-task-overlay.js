@@ -47,7 +47,7 @@ function verifyAddTaskInput() {
     let dueDate = getInputValue('date-date-task-overlay');
     let category = getElement('chosen-task-overlay').innerHTML;
     let formInputValid = (title != '' && dueDate != '' && category != 'Select task category') ? true : false;
-    setClass('dropdown-parent-category-overlay', addClass, 'dropdown-parent-container-wrong-overlay');
+    (category == 'Select task category') ? setClass('dropdown-parent-category-overlay', addClass, 'dropdown-parent-container-wrong-overlay') : false;
     return formInputValid;
 }
 
@@ -395,34 +395,46 @@ function setPrioButton(prio, overlay) {
 
 
 function clearAddTask() {
-    document.getElementById("title-task-overlay").value = "";
-    document.getElementById("description-task-overlay").value = "";
-    document.getElementById("date-date-task-overlay").value = "";
-    document.getElementById("chosen-task-overlay").innerHTML = "Select task category";
-    document.getElementById("sub-profile-overlay").innerHTML = "";
-    document.getElementById("subtask-display-overlay").innerHTML = "";
+    resetAddTaskFormData();
+    resetAddTaskGlobalVariables();
+    assignedTo();
+    prioSelection(getElement('medium-overlay'), true);
+    setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
+}
 
-    let subProfile = document.getElementById("sub-profile-overlay");
-    subProfile.innerHTML = "";
 
+function resetAddTaskFormData() {
+    resetElementData('title-task-overlay', 'value');
+    resetElementData('description-task-overlay', 'value');
+    resetElementData('date-date-task-overlay', 'value');
+    resetElementData('chosen-task-overlay', 'innerHTML', 'Select task category');
+    resetElementData('sub-profile-overlay', 'value');
+    resetElementData('subtask-display-overlay', 'innerHTML');
+    resetElementData('sub-profile-overlay', 'innerHTML');
+}
+
+
+function resetElementData(id, type, value) {
+    let element = getElement(id);
+    value = (!value) ? '' : value;
+    (type != 'value') ? element.innerHTML = value : element.value = value;
+    console.log('delete data');
+}
+
+
+function resetAddTaskGlobalVariables() {
     subtaskInput = [];
     subtasks = [];
     sub_users = [];
     contactsUser = [];
     priority = priorityDefault;
-    let medium = document.getElementById("medium-overlay");
-
-    assignedTo();
-    prioSelection(medium, true);
-    setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
-function addedTask() {
-    let backLog = document.getElementById('task-added-success-overlay');
-    backLog.classList.remove('d-none-overlay')
 
+function addedTask() {
+    setClass('task-added-success-overlay', removeClass, 'd-none-overlay');
     setTimeout(function () {
-        window.location.href = "board.html";
+        window.location.href = "./board.html";
     }, 1000);
 }
 
