@@ -1,3 +1,4 @@
+// Variables
 let subtaskInput = [];
 let priorityDefault = "Medium";
 let subtasks = [];
@@ -6,6 +7,9 @@ let contactsUser = [];
 let heading = "";
 priority = priorityDefault;
 
+/**
+ * Initializing Functions out of the global.js to apply guest aswell as user settings.
+ */
 async function addTaskInit() {
   await init();
   await applyGuestSettingsAddTask();
@@ -14,13 +18,21 @@ async function addTaskInit() {
   assignedTo();
 }
 
+/**
+ * Disables the add-task-button if a guest is logged in. 
+ */
 async function applyGuestSettingsAddTask() {
+  let addTaskButton = document.getElementById('create-new-task-button');
   if (!userIsLoggedIn()) {
-    let addTaskButton = document.getElementById('create-new-task-button');
     addTaskButton.disabled = true;
+  } else {
+    addTaskButton.disabled = false;
   }
 }
 
+/**
+ * Fetches the boardTasks array from the server.
+ */
 async function loadTasks() {
   try {
     boardTasks = JSON.parse(await getItem("boardTasks"));
@@ -29,10 +41,16 @@ async function loadTasks() {
   }
 }
 
+/**
+ * Reloads the page.
+ */
 function reloadPage() {
   location.reload();
 }
 
+/**
+ * Declares the task input values into the task array that was chosen by the user inputs.
+ */
 function scopeTasks() {
   let title = document.getElementById("title-task").value;
   let description = document.getElementById("description-task").value;
@@ -53,12 +71,19 @@ function scopeTasks() {
   pushTasks(task)
 }
 
+/**
+ * task is being pushed to the boardTasks array which stores it on the server.
+ * @param {Object} task - The task object that will be added.
+ */
 async function pushTasks(task) {
   boardTasks.push(task);
   await setItem("boardTasks", JSON.stringify(boardTasks));
   console.log("Task added successfully:", task);
 }
 
+/**
+ * Renders the users to which the task can be assigned too.
+ */
 function assignedTo() {
   let assignElement = document.getElementById("myDropdown");
   assignElement.innerHTML = "";
@@ -75,8 +100,12 @@ function assignedTo() {
   }
 }
 
+/**
+ * Declares the index of the total users, the individual background color of the profile, the inititials and yourself to pass it to the render function.
+ * @param {HTMLElement} assignElement - HTML element which renders the options (users to add).
+ * @param {Object} user - Current user object.
+ */
 function subtaskFocusOptions(assignElement, user) {
-  subtaskSecondaryOptions(assignElement, user);
   for (let i = 0; i < users.length; i++) {
     const bgc = `bgc-${users[i]["bgc-name"]}`;
     const contact = users[i].name;
@@ -92,6 +121,11 @@ function subtaskFocusOptions(assignElement, user) {
   }
 }
 
+/**
+ * Renders the the dropdown menu for the Assigned to element.
+ * @param {HTMLElement} assignElement - HTML element which renders the options (users to add).
+ * @param {Object} user - Current user object.
+ */
 function renderFocusOptions(assignElement, i, bgc, letterGroup, contact) {
   assignElement.innerHTML += `
   <div class="subuser-selection" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
@@ -102,19 +136,10 @@ function renderFocusOptions(assignElement, i, bgc, letterGroup, contact) {
             id="checkbox-remember-me-${i}"></div> </div> `;
 }
 
-function subtaskSecondaryOptions(assignElement, user) {
-  assignElement.innerHTML = "";
-  document.getElementById('button-container').innerHTML = `                    
-    <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear"></div>
-     <button id="create-new-task-button" class="createBtn" onclick="addedTask()"> Create Task <img src="./img/check.png" alt="check"></button> `;
-  user.name = user.name;
-  contactsUser.push(user);
-  for (let i = 0; i < user.contacts.length; i++) {
-    let contact = user.contacts[i];
-    contactsUser.push(contact);
-  }
-}
-
+/**
+ * Toggles the visibity of the Assigned To dropdown menu.
+ * @param {boolean} dropDown - Boolean value whether to show or not show the dropdown menu.
+ */
 function flipDropDownMenu(dropDown) {
   let icon = document.getElementById("drop-down-icon");
   if (dropDown) {
@@ -132,23 +157,39 @@ function flipDropDownMenu(dropDown) {
   }
 }
 
+/**
+ * Toggles the visibity of the Category dropdown menu.
+ * @param {boolean} dropDown - Boolean value whether to show or not show the dropdown menu.
+ */
+function flipDropDownMenuCategory(dropDown) {
+  let icon = document.getElementById("drop-down-icon-2");
+  if (dropDown) {
+    document.getElementById("myDropdown-category").classList.add("show");
+    document.getElementById("dropdown-parent-category").classList.add("dropdown-outline-focus");
+    document.getElementById("dropdown-parent-category").classList.add("dropdown-custom");
+    icon.src = "./img/arrow_drop_down-up.png";
+    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenuCategory(false)');
+  } else {
+    document.getElementById("myDropdown-category").classList.remove("show");
+    document.getElementById("dropdown-parent-category").classList.remove("dropdown-outline-focus");
+    document.getElementById("dropdown-parent-category").classList.remove("dropdown-custom");
+    icon.src = "./img/arrow_drop_downaa.png";
+    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenu(false); flipDropDownMenuCategory(true)');
+  }
+}
+
+/**
+ * Prevents event propagation.
+ * @param {Event} event - The event object.
+ */
 function stop(event) {
   event.stopPropagation();
 }
 
-// function dropDownMenu() {
-//   let icon = document.getElementById("drop-down-icon");
-//   document.getElementById("myDropdown").classList.toggle("show");
-//   document.getElementById("dropdown-parent").classList.toggle("dropdown-outline-focus");
-//   document.getElementById("dropdown-parent").classList.toggle("dropdown-custom");
-
-//   if (icon.src.includes("arrow_drop_downaa.png")) {
-//     icon.src = "./img/arrow_drop_down-up.png";
-//   } else {
-//     icon.src = "./img/arrow_drop_downaa.png";
-//   }
-// }
-
+/**
+ * Toggles the checkbox of the Assigned to dropdown element wether to add or remove a subuser.
+ * @param {number} i - Index of the subuser.
+ */
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkbox-remember-me-${i}`);
   let background = document.getElementById(`subuser-div-${i}`);
@@ -167,6 +208,12 @@ function toggleCheckbox(i) {
   }
 }
 
+/**
+ * Deselects the corresponding subuser and resets the checkbox.
+ * @param {number} i - Index of the subuser.
+ * @param {Element} checkBox - The checkbox element.
+ * @param {Element} background - The background element.
+ */
 function checkboxDeselect(i, checkBox, background) {
   checkBox.src = "./img/checkmark-unchecked.png";
   background.classList.remove("sub-background");
@@ -177,6 +224,14 @@ function checkboxDeselect(i, checkBox, background) {
   sub_users.splice(subuserToRemove, 1);
 }
 
+/**
+ * Adds the selected subuser from Assigned To and pushes them into an array.
+ * @param {number} i 
+ * @param {Element} checkBox 
+ * @param {Element} background 
+ * @param {Object} subuserTemp 
+ * @param {string} subUserIdTemp 
+ */
 function addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp) {
   checkBox.src = "./img/checkmark-white.png";
   background.classList.add("sub-background");
@@ -188,6 +243,11 @@ function addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp) {
   });
 }
 
+/**
+ * Renders the selected subusers into an container below the dropdown.
+ * @param {number} j - Index of the subuser.
+ * @param {Element} subProfile - The subprofile element.
+ */
 function renderSubProfiles(j, subProfile) {
   let subBgc = "bgc-" + sub_users[j]["bgc-name"];
   let subProfileName = sub_users[j].name;
@@ -204,6 +264,10 @@ function renderSubProfiles(j, subProfile) {
       <div class="sub-profile-img sub-p ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div> `;
 }
 
+/**
+ * Removes a subuser by clicking on their profile image which is rendered by renderSubProfiles().
+ * @param {number} subuserId - ID of the subuser.
+ */
 function removeSubPB(subuserId) {
   let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
   if (indexToRemove !== -1) {
@@ -212,6 +276,11 @@ function removeSubPB(subuserId) {
   }
 }
 
+/**
+ * Clears the dropdown and resets the corresponding elements. 
+ * Removes the removed user from the array.
+ * @param {number} index - Index of the subuser.
+ */
 function clearDropdown(index) {
   document.getElementById(`checkbox-remember-me-${index}`).src = "./img/checkmark-unchecked.png";
   background = document.getElementById(`subuser-div-${index}`).classList.remove("sub-background");
@@ -219,6 +288,9 @@ function clearDropdown(index) {
   deleteContact.remove();
 }
 
+/**
+ * Displays a cancel and add (checkmark) icon if the Subtask-Input element is focused.
+ */
 function subtaskCustomTemplate() {
   let subtaskForm = document.getElementById("icon-hold");
   subtaskForm.innerHTML = `
@@ -228,6 +300,9 @@ function subtaskCustomTemplate() {
   cancelSubtaskSafety();
 }
 
+/**
+ * Generates a template for a Subtask if clicked on the + (plus) icon.
+ */
 function subtaskTemplate() {
   let subtaskForm = document.getElementById("subtask-form");
   let subtaskValueCheck = document.getElementById("subtask");
@@ -244,6 +319,9 @@ function subtaskTemplate() {
   }
 }
 
+/**
+ * Cancels the subtask creation if the x (cancel) icon is being clicked.
+ */
 function cancelSubtaskSafety() {
   document.addEventListener("click", function (event) {
     let subtaskForm = document.getElementById("subtask-form");
@@ -254,6 +332,22 @@ function cancelSubtaskSafety() {
   });
 }
 
+/**
+ * Cancels the subtask input by re-rendering the subtask input element.
+ */
+function cancelSubtask() {
+  let subtaskForm = document.getElementById("subtask-form");
+  subtaskForm.innerHTML = `
+      <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
+        <div class="subtask-add-icons" id="icon-hold">
+          <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
+      </div>
+    `;
+}
+
+/**
+ * Takes the subtask given input value and pushes it to the subtask array. 
+ */
 async function addSubtask() {
   let subtaskInputValue = document.getElementById("subtask").value.trim();
   if (subtaskInputValue !== "") {
@@ -272,6 +366,9 @@ async function addSubtask() {
   cancelSubtask();
 };
 
+/**
+ * Renders the added subtask.
+ */
 function renderSubtasks() {
   let subtaskAdd = document.getElementById("subtask-display");
   subtaskAdd.innerHTML = "";
@@ -290,16 +387,10 @@ function renderSubtasks() {
   }
 }
 
-function cancelSubtask() {
-  let subtaskForm = document.getElementById("subtask-form");
-  subtaskForm.innerHTML = `
-      <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask" onclick="subtaskCustomTemplate()">
-        <div class="subtask-add-icons" id="icon-hold">
-          <img src="./img/subtask.png" alt="add-icon" class="hover add-hover" onclick="subtaskTemplate()">
-      </div>
-    `;
-}
-
+/**
+ * Deletes the selected subtask.
+ * @param {number} i - Index of the subtask to be deleted.
+ */
 function deleteSubtask(i) {
   subtaskInput.splice(i, 1);
   subtasks.splice(i, 1);
@@ -313,6 +404,10 @@ function deleteSubtask(i) {
   renderSubtasks();
 }
 
+/**
+ * Adjusts IDs and classes after a subtask is deleted to maintain consistency.
+ * @param {number} j - Index of the subtask.
+ */
 function renderSubtaskSafety(j) {
   let span = document.getElementById(`sub-span-${j + 1}`);
   let preview = document.getElementById(`preview-${j + 1}`);
@@ -326,6 +421,10 @@ function renderSubtaskSafety(j) {
   }
 }
 
+/**
+ * Renders extra icon options to delete the subtask while being focused on the subtask and / or get out of focus from the subtask. 
+ * @param {number} i - Index of the focused subtask. 
+ */
 function subtaskFocus(i) {
   let subTaskSpan = document.getElementById(`sub-span-${i}`);
   let listItem = document.getElementById(`list-item-${i}`);
@@ -343,6 +442,10 @@ function subtaskFocus(i) {
     `;
 }
 
+/**
+ * Reverts the subtaskFocus() changes by removing the added classes and re-rendering the subtask element.
+ * @param {number} i - Index of the focused subtask. 
+ */
 function subtaskOutOfFocus(i) {
   let subtaskInputValue = document.getElementById(`sub-content-${i}`).innerText;
   let subtaskIndexValue = subtasks[i]["subtasksText"];
@@ -361,6 +464,10 @@ function subtaskOutOfFocus(i) {
       <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover" onclick="deleteSubtask(${i})"> `;
 }
 
+/**
+ * Handles which priority is clicked.
+ * @param {HTMLElement} clickedPrio - The priority element clicked.
+ */
 function prioSelection(clickedPrio) {
   let prio = clickedPrio;
   let lowImg = document.getElementById("low-img");
@@ -378,6 +485,13 @@ function prioSelection(clickedPrio) {
   prioDecision(prio, lowImg, mediumImg, urgentImg);
 }
 
+/**
+ * Resets the non selected priority elements.
+ * @param {HTMLElement} prio - The priority element selected.
+ * @param {HTMLElement} lowImg - The low priority image element.
+ * @param {HTMLElement} mediumImg - The medium priority image element.
+ * @param {HTMLElement} urgentImg - The urgent priority image element.
+ */
 function prioDecision(prio, lowImg, mediumImg, urgentImg) {
   if (prio.id === "Urgent") {
     prio.classList.add("prioUrgent");
@@ -393,6 +507,22 @@ function prioDecision(prio, lowImg, mediumImg, urgentImg) {
   priority = prio.id;
 }
 
+/**
+ * 
+ * @param {HTMLElement} clickedCategory - The category which was clicked on.
+ */
+function selectCategory(clickedCategory) {
+  let cat = clickedCategory;
+  let categoryContainer = document.getElementById('chosen-task');
+  heading = cat.id;
+
+  categoryContainer.innerHTML = `${heading}`;
+  flipDropDownMenuCategory(false);
+}
+
+/**
+ * Clears the input field of subtasks when a task has been added.
+ */
 function clearAddTask() {
   document.getElementById("title-task").value = "";
   document.getElementById("description-task").value = "";
@@ -408,6 +538,9 @@ function clearAddTask() {
   prioSelection(Medium);
 }
 
+/**
+ * Clears / Resets all global arrays.
+ */
 function clearArrays() {
   subtaskInput = [];
   subtasks = [];
@@ -416,71 +549,24 @@ function clearArrays() {
   priority = priorityDefault;
 }
 
+/**
+ * Enables a "Task added to board" animation and redirects the user to the board.html after successfully adding a task.
+ */
 function addedTask() {
-  let backLog = document.getElementById('task-added-success');
-  backLog.classList.remove('d-none')
-  setTimeout(function () {
-    window.location.href = "board.html";
-  }, 1000);
-}
-
-function flipDropDownMenuCategory(dropDown) {
-  let icon = document.getElementById("drop-down-icon-2");
-  if (dropDown) {
-    document.getElementById("myDropdown-category").classList.add("show");
-    document.getElementById("dropdown-parent-category").classList.add("dropdown-outline-focus");
-    document.getElementById("dropdown-parent-category").classList.add("dropdown-custom");
-    icon.src = "./img/arrow_drop_down-up.png";
-    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenuCategory(false)');
-  } else {
-    document.getElementById("myDropdown-category").classList.remove("show");
-    document.getElementById("dropdown-parent-category").classList.remove("dropdown-outline-focus");
-    document.getElementById("dropdown-parent-category").classList.remove("dropdown-custom");
-    icon.src = "./img/arrow_drop_downaa.png";
-    document.getElementById('dropdown-parent-category').setAttribute('onclick', 'flipDropDownMenu(false); flipDropDownMenuCategory(true)');
+  if (!document.getElementById("title-task").value == "" || !document.getElementById("date-date-task").value == "" || !heading == "") {
+    let backLog = document.getElementById('task-added-success');
+    backLog.classList.remove('d-none')
+    setTimeout(function () {
+      window.location.href = "board.html";
+    }, 1500);
   }
 }
 
-// function dropDownMenuCategory() {
-//   let icon = document.getElementById("drop-down-icon-2");
-//   document.getElementById("myDropdown-category").classList.toggle("show");
-//   document.getElementById("dropdown-parent-category").classList.toggle("dropdown-outline-focus");
-//   document.getElementById("dropdown-parent-category").classList.toggle("dropdown-custom");
-//   if (icon.src.includes("arrow_drop_downaa.png")) {
-//     icon.src = "./img/arrow_drop_down-up.png";
-//   } else {
-//     icon.src = "./img/arrow_drop_downaa.png";
-//   }
-// }
-
-function selectCategory(clickedCategory) {
-  let cat = clickedCategory;
-  let categoryContainer = document.getElementById('chosen-task');
-  heading = cat.id;
-
-  categoryContainer.innerHTML = `${heading}`;
-  flipDropDownMenuCategory(false);
-  // dropDownMenuCategory();
-}
-
-// window.onclick = function (event) {
-//   if (!event.target.matches(".dropdown-parent-container") && !event.target.closest(".dropdown-menu-sub")) {
-//     let dropdowns = document.getElementsByClassName("dropdown-menu-sub");
-//     let icon = document.getElementById("drop-down-icon");
-//     for (let i = 0; i < dropdowns.length; i++) {
-//       let openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains("show")) {
-//         openDropdown.classList.remove("show");
-//         document.getElementById("dropdown-parent").classList.toggle("dropdown-outline-focus");
-//         document.getElementById("dropdown-parent").classList.toggle("dropdown-custom");
-//       }
-//       if (icon.src.includes("arrow_drop_down-up.png")) {
-//         icon.src = "./img/arrow_drop_downaa.png";
-//       }}};
-// };
-
 const scrollContainer = document.getElementById("sub-profile");
 
+/**
+ * Enables vertical scrolling if the sub-profile elements content is overflowing.
+ */
 scrollContainer.addEventListener("wheel", (evt) => {
   evt.preventDefault();
   scrollContainer.scrollLeft += evt.deltaY;

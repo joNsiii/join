@@ -117,12 +117,10 @@
     }
 
     .sub-profile-container {
-        transform: translateY(132%) !important; 
         overflow-x: auto;
         white-space: nowrap;
         flex-wrap: nowrap;
         overflow-y: hidden;
-        height: 56px !important;
     }
 
     #sub-profile {

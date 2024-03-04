@@ -735,6 +735,7 @@ body {
   align-items: center;
   justify-content: space-evenly;
   animation: moving 0.5s ease-in-out;
+  z-index: 999;
 }
 
 .added-task img {
