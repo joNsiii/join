@@ -265,6 +265,9 @@ function spliceAssignedSubuser(i) {
 }
 
 
+/**
+ * Renders the assigned subusers.
+ */
 function renderAssigendSubuser() {
     let subProfile = getElement("sub-profile-overlay");
     subProfile.innerHTML = '';
@@ -280,12 +283,20 @@ function renderAssigendSubuser() {
 }
 
 
+/**
+ * Removes an assigned subuser from the array sub_users.
+ * @param {number} subuserId - The id of the subuser to remove.
+ */
 function removeSubPB(subuserId) {
     spliceAssignedSubuser(subuserId);
     renderSubProfiles(subuserId);
 }
 
 
+/**
+ * Renders a subuser's profile.
+ * @param {number} i - The subuser's id to render.
+ */
 function renderSubProfiles(i) {
     setElementAttribute(`checkbox-remember-me-${i}`, 'src', './img/checkmark-unchecked.png');
     setClass(`subuser-div-${i}`, removeClass, 'sub-background-overlay');
@@ -293,6 +304,9 @@ function renderSubProfiles(i) {
 }
 
 
+/**
+ * Provides the subtask input's icons.
+ */
 function subtaskCustomTemplate() {
     let subtaskForm = getElement('icon-hold-overlay');
     subtaskForm.innerHTML = `
@@ -304,6 +318,9 @@ function subtaskCustomTemplate() {
 }
 
 
+/**
+ * Provides the subtask input's default settings.
+ */
 function subtaskTemplate() {
     let subtaskForm = getElement('subtask-form-overlay');
     let subtaskValueCheck = getElement('subtask-overlay');
@@ -320,8 +337,11 @@ function subtaskTemplate() {
 }
 
 
+/**
+ * Cancels an entered subtask.
+ */
 function cancelSubtask() {
-    let subtaskForm = document.getElementById("subtask-form-overlay");
+    let subtaskForm = getElement("subtask-form-overlay");
     subtaskForm.innerHTML = `
         <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask-overlay" onclick="subtaskCustomTemplate()">
         <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
@@ -331,21 +351,23 @@ function cancelSubtask() {
 }
 
 
+/**
+ * Cancels the subtask safety.
+ */
 function cancelSubtaskSafety() {
     document.addEventListener("click", function (event) {
         let subtaskForm = getElement('subtask-form-overlay');
         let subtaskInput = getElement('subtask-overlay');
-        if (
-            event.target !== subtaskInput &&
-            !subtaskForm.contains(event.target) &&
-            subtaskInput.value === ""
-        ) {
+        if (event.target !== subtaskInput && !subtaskForm.contains(event.target) && subtaskInput.value === "") {
             cancelSubtask();
         }
     });
 }
 
 
+/**
+ * Adds a new subtask.
+ */
 async function addSubtask() {
     let subtaskAdd = getElement('subtask-display-overlay');
     let subtaskInputValue = getElement('subtask-overlay').value.trim();
@@ -353,7 +375,7 @@ async function addSubtask() {
     if (subtaskInputValue !== "") {
         await subtaskInput.push(subtaskInputValue);
         const subtaskId = Date.now();
-        const subtask = getSubtask(subtaskId, subtaskInputValue)
+        const subtask = getSubtask(subtaskId, subtaskInputValue);
         subtasks.push(subtask);
         renderSubtasks(subtaskAdd, subtaskInput);
     }
@@ -361,6 +383,12 @@ async function addSubtask() {
 }
 
 
+/**
+ * Provides a new subtask object.
+ * @param {number} subtaskId - The new subtask's id.
+ * @param {value} subtaskInputValue - The new subtask's input value.
+ * @returns - The new subtask object.
+ */
 function getSubtask(subtaskId, subtaskInputValue) {
     return {
         subtaskId: subtaskId,
@@ -370,6 +398,11 @@ function getSubtask(subtaskId, subtaskInputValue) {
 }
 
 
+/**
+ * Renders the subtasks.
+ * @param {element} subtaskAdd - The receiving element.
+ * @param {value} subtaskInput - The subtasks' input value.
+ */
 function renderSubtasks(subtaskAdd, subtaskInput) {
     for (let i = 0; i < subtaskInput.length; i++) {
         subtaskAdd.innerHTML += `
@@ -386,6 +419,10 @@ function renderSubtasks(subtaskAdd, subtaskInput) {
 }
 
 
+/**
+ * Deletes a subtask.
+ * @param {number} i - The subtask's id to delete. 
+ */
 function deleteSubtask(i) {
     subtaskInput.splice(i, 1);
     let subtaskSpan = getElement(`sub-span-${i}`);
@@ -396,6 +433,11 @@ function deleteSubtask(i) {
 }
 
 
+/**
+ * Sets a subtask's focus.
+ * @param {number} i - The subtask's id to focus.
+ * @param {Boolean} logical - True or false.
+ */
 function setSubtaskFocus(i, logical) {
     let subfunction = (logical) ? addClass : removeClass;
     setClass(`sub-span-${i}`, subfunction, 'focus-input-overlay');
@@ -405,12 +447,20 @@ function setSubtaskFocus(i, logical) {
 }
 
 
+/**
+ * Renders the subtask's edit icon.
+ * @param {Boolean} logical - True or false.
+ */
 function renderEditIcon(logical) {
     let editIcon = getElement(`icon-container-${i}`);
     (logical) ? renderEditIconTypeA(editIcon) : renderEditIconTypeB(editIcon);
 }
 
 
+/**
+ * Renders the subtask's edit icon (type A).
+ * @param {element} editIcon - The receiving element.
+ */
 function renderEditIconTypeA(editIcon) {
     editIcon.innerHTML = `
         <img src="./img/delete.png" alt="delete-icon" id="first-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
@@ -420,6 +470,10 @@ function renderEditIconTypeA(editIcon) {
 }
 
 
+/**
+ * Renders the subtask's edit icon (type B).
+ * @param {element} editIcon - The receiving element.
+ */
 function renderEditIconTypeB(editIcon) {
     editIcon.innerHTML = `
         <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="setSubtaskFocus(${i}, true)">
@@ -429,6 +483,10 @@ function renderEditIconTypeB(editIcon) {
 }
 
 
+/**
+ * Defocus a subtask.
+ * @param {number} i - The subtask's id to defocus.
+ */
 function subtaskOutOfFocus(i) {
     let subtaskInputValue = getElement(`sub-content-${i}`).innerText;
     let subtaskIndexValue = subtasks[i]["subtasksText"];
@@ -440,6 +498,11 @@ function subtaskOutOfFocus(i) {
 }
 
 
+/**
+ * Sets the selected priority.
+ * @param {element} clickedPrio - The clicked element's id.
+ * @param {Boolean} overlay - True or false.
+ */
 function prioSelection(clickedPrio, overlay) {
     let prio = clickedPrio.id;
     priority = prio;
@@ -449,6 +512,10 @@ function prioSelection(clickedPrio, overlay) {
 }
 
 
+/**
+ * Resets a priority button's image.
+ * @param {Boolean} overlay - True or false.
+ */
 function resetPrioImg(overlay) {
     (!overlay) ? setElementAttribute(`urgent-img`, 'src', './img/urgent-red-arrows.png') : setElementAttribute(`urgent-img-overlay`, 'src', './img/urgent-red-arrows.png');
     (!overlay) ? setElementAttribute(`medium-img`, 'src', './img/medium-prio.png') : setElementAttribute(`medium-img-overlay`, 'src', './img/medium-prio.png');
@@ -456,6 +523,10 @@ function resetPrioImg(overlay) {
 }
 
 
+/**
+ * Resets a priority buttons classes.
+ * @param {Boolean} overlay - True or false.
+ */
 function resetPrioClass(overlay) {
     (!overlay) ? setClass('Urgent', removeClass, 'prioUrgent') : setClass('urgent-overlay', removeClass, 'prioUrgent');
     (!overlay) ? setClass('Medium', removeClass, 'prioMedium') : setClass('medium-overlay', removeClass, 'prioMedium');
@@ -463,6 +534,11 @@ function resetPrioClass(overlay) {
 }
 
 
+/**
+ * Sets a priority buttons settings.
+ * @param {String} prio - The clicked element's id.
+ * @param {Boolean} overlay - True or false.
+ */
 function setPrioButton(prio, overlay) {
     if (prio === 'Urgent' || prio === 'urgent-overlay') {
         setClass(prio, addClass, 'prioUrgent');
