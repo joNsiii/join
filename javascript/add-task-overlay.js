@@ -105,32 +105,36 @@ function fillSelectAssignedTo(assignElement) {
 }
 
 
-function flipDropDownMenu(dropDown, extension) {
-    let overlay = (!extension) ? '' : '-overlay';
-    setDropDownIcon(dropDown, overlay);
-    setDropDownClasses(dropDown, overlay);
-    updateDropDownOnclick(dropDown, extension, overlay);
+function flipDropDownMenu(dropDown, extCategory, extOverlay) {
+    let category = (!extCategory) ? '' : '-category';
+    let overlay = (!extOverlay) ? '' : '-overlay';
+    setDropDownIcon(dropDown, category, overlay);
+    setDropDownClasses(dropDown, category, overlay);
+    updateDropDownOnclick(dropDown, category, overlay);
 }
 
 
-function setDropDownIcon(dropDown, overlay) {
-    let icon = getElement('drop-down-icon' + overlay);
+function setDropDownIcon(dropDown, category, overlay) {
+    let icon = getElement('drop-down-icon' + category + overlay);
     icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
 }
 
 
-function setDropDownClasses(dropDown, overlay) {
+function setDropDownClasses(dropDown, category, overlay) {
     let subfunction = (dropDown) ? addClass : removeClass;
-    setClass('myDropdown' + overlay, subfunction, 'show' + overlay);
-    setClass('dropdown-parent' + overlay, subfunction, 'dropdown-outline-focus' + overlay);
-    setClass('dropdown-parent' + overlay, subfunction, 'dropdown-custom' + overlay);
+    setClass('myDropdown' + category + overlay, subfunction, 'show' + overlay);
+    setClass('dropdown-parent' + category + overlay, subfunction, 'dropdown-outline-focus' + overlay);
+    setClass('dropdown-parent' + category + overlay, subfunction, 'dropdown-custom' + overlay);
 }
 
 
-function updateDropDownOnclick(dropDown, extension, overlay) {
-    let closeOtherMenu = (!dropDown && extension) ? 'flipDropDownMenuCategory(false, true)' : '';
-    nextFunction = (!extension) ? `flipDropDownMenu(${!dropDown}); ${closeOtherMenu}` : `flipDropDownMenu(${!dropDown}, ${extension}); ${closeOtherMenu}`;
-    setElementAttribute('dropdown-parent' + overlay, 'onclick', nextFunction);
+function updateDropDownOnclick(dropDown, category, overlay) {
+    let isCategory = (category != '') ? true : false;
+    let isOverlay = (overlay != '') ? true : false;
+    let extOverlay = (isOverlay) ? ', true' : '';
+    let closeOtherMenu = (!dropDown && isOverlay) ? `flipDropDownMenu(false, ${!isCategory}${extOverlay})` : '';
+    nextFunction = (!overlay) ? `flipDropDownMenu(${!dropDown}, ${isCategory}); ${closeOtherMenu}` : `flipDropDownMenu(${!dropDown}, ${isCategory}, true); ${closeOtherMenu}`;
+    setElementAttribute('dropdown-parent' + category + overlay, 'onclick', nextFunction);
 }
 
 
@@ -399,6 +403,8 @@ function clearAddTask() {
     resetAddTaskGlobalVariables();
     assignedTo();
     prioSelection(getElement('medium-overlay'), true);
+    flipDropDownMenu(false, false, true);
+    flipDropDownMenu(false, true, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
@@ -439,42 +445,13 @@ function addedTask() {
 }
 
 
-function flipDropDownMenuCategory(dropDown, extension) {
-    let overlay = (!extension) ? '' : '-overlay';
-    setDropDownIconCategory(dropDown, overlay);
-    setDropDownClassesCategory(dropDown, overlay);
-    updateDropDownOnclickCategory(dropDown, extension, overlay);
-}
-
-
-function setDropDownIconCategory(dropDown, overlay) {
-    let icon = getElement('drop-down-icon-2' + overlay);
-    icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
-}
-
-
-function setDropDownClassesCategory(dropDown, overlay) {
-    let subfunction = (dropDown) ? addClass : removeClass;
-    setClass('myDropdown-category' + overlay, subfunction, 'show' + overlay);
-    setClass('dropdown-parent-category' + overlay, subfunction, 'dropdown-outline-focus' + overlay);
-    setClass('dropdown-parent-category' + overlay, subfunction, 'dropdown-custom' + overlay);
-}
-
-
-function updateDropDownOnclickCategory(dropDown, extension, overlay) {
-    let closeOtherMenu = (!dropDown && extension) ? 'flipDropDownMenu(false, true)' : '';
-    nextFunction = (!extension) ? `flipDropDownMenuCategory(${!dropDown}); ${closeOtherMenu}` : `flipDropDownMenuCategory(${!dropDown}, ${extension}); ${closeOtherMenu}`;
-    setElementAttribute('dropdown-parent-category' + overlay, 'onclick', nextFunction);
-}
-
-
 function selectCategory(clickedCategory) {
     let cat = clickedCategory;
     let categoryContainer = document.getElementById('chosen-task-overlay');
     heading = cat.id;
 
     categoryContainer.innerHTML = `${heading}`;
-    flipDropDownMenuCategory(false, true);
+    flipDropDownMenu(false, true, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
