@@ -291,9 +291,9 @@ function renderSubtasks(subtaskAdd, subtaskInput) {
     for (let i = 0; i < subtaskInput.length; i++) {
         subtaskAdd.innerHTML += `
             <span contenteditable="true" class="span-container-overlay" id="sub-span-${i}">
-            <div class="subtask-preview-overlay" id="preview-${i}" onclick="subtaskFocus(${i})"><div class="list-item-overlay" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
+            <div class="subtask-preview-overlay" id="preview-${i}" onclick="setSubtaskFocus(${i}, true)"><div class="list-item-overlay" id="list-item-${i}"></div><p id="sub-content-${i}">${subtaskInput[i]}</p></div>
             <div class="subtask-icon-container-overlay" id="icon-container-${i}">
-                <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="subtaskFocus(${i})">
+                <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="setSubtaskFocus(${i}, true)">
                 <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
                 <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
             </div>
@@ -305,77 +305,94 @@ function renderSubtasks(subtaskAdd, subtaskInput) {
 
 function deleteSubtask(i) {
     subtaskInput.splice(i, 1);
-    let subtaskSpan = document.getElementById(`sub-span-${i}`);
+    let subtaskSpan = getElement(`sub-span-${i}`);
     if (subtaskSpan) {
         subtasks.splice(i);
         subtaskSpan.remove();
     }
 }
 
-function subtaskFocus(i) {
-    let subTaskSpan = document.getElementById(`sub-span-${i}`);
-    let listItem = document.getElementById(`list-item-${i}`);
-    let preview = document.getElementById(`preview-${i}`);
-    let editIcon = document.getElementById(`icon-container-${i}`);
 
-    subTaskSpan.classList.add("focus-input-overlay");
-    listItem.classList.add("focus-list-item-overlay");
-    preview.classList.add("focus-preview-overlay");
+function setSubtaskFocus(i, logical) {
+    let subfunction = (logical) ? addClass : removeClass;
+    setClass(`sub-span-${i}`, subfunction, 'focus-input-overlay');
+    setClass(`list-item-${i}`, subfunction, 'focus-list-item-overlay');
+    setClass(`preview-${i}`, subfunction, 'focus-preview-overlay');
+    renderEditIcon(true);
+}
 
+
+function renderEditIcon(logical) {
+    let editIcon = getElement(`icon-container-${i}`);
+    (logical) ? renderEditIconTypeA(editIcon) : renderEditIconTypeB(editIcon);
+}
+
+
+function renderEditIconTypeA(editIcon) {
     editIcon.innerHTML = `
-      <img src="./img/delete.png" alt="delete-icon" id="first-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
-      <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
-      <img src="./img/done.png" alt="done-icon" id="third-icon" class="hover-overlay" onclick="subtaskOutOfFocus(${i})">
+        <img src="./img/delete.png" alt="delete-icon" id="first-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
+        <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
+        <img src="./img/done.png" alt="done-icon" id="third-icon" class="hover-overlay" onclick="subtaskOutOfFocus(${i})">
     `;
 }
 
-function subtaskOutOfFocus(i) {
-    let subtaskInputValue = document.getElementById(`sub-content-${i}`).innerText;
-    let subtaskIndexValue = subtasks[i]["subtasksText"];
 
+function renderEditIconTypeB(editIcon) {
+    editIcon.innerHTML = `
+        <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="setSubtaskFocus(${i}, true)">
+        <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
+        <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
+    `;
+}
+
+
+function subtaskOutOfFocus(i) {
+    let subtaskInputValue = getElement(`sub-content-${i}`).innerText;
+    let subtaskIndexValue = subtasks[i]["subtasksText"];
     if (subtaskInputValue !== subtaskIndexValue) {
         subtasks[i]["subtasksText"] = subtaskInputValue;
     }
-
-    document.getElementById(`sub-span-${i}`).classList.remove("focus-input-overlay");
-    document.getElementById(`list-item-${i}`).classList.remove("focus-list-item-overlay");
-    document.getElementById(`preview-${i}`).classList.remove("focus-preview-overlay");
-    let editIcon = document.getElementById(`icon-container-${i}`);
-
-    editIcon.innerHTML = `
-      <img src="./img/edit-contacts.png" alt="edit-icon" id="first-icon" class="hover-overlay" onclick="subtaskFocus(${i})">
-      <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
-      <img src="./img/delete.png" alt="delete-icon" id="third-icon" class="hover-overlay" onclick="deleteSubtask(${i})">
-    `;
+    setSubtaskFocus(i, false);
+    renderEditIcon(false);
 }
+
 
 function prioSelection(clickedPrio) {
-    let prio = clickedPrio;
-    let lowImg = document.getElementById("low-img");
-    let mediumImg = document.getElementById("medium-img");
-    let urgentImg = document.getElementById("urgent-img");
-
-    document.getElementById("Urgent").classList.remove("prioUrgent");
-    document.getElementById("Medium").classList.remove("prioMedium");
-    document.getElementById("Low").classList.remove("prioLow");
-
-    lowImg.src = "./img/low.png";
-    mediumImg.src = "./img/medium-prio.png";
-    urgentImg.src = "./img/urgent-red-arrows.png";
-
-    if (prio.id === "Urgent") {
-        prio.classList.add("prioUrgent");
-        urgentImg.src = "./img/urgent-white-arrows.png";
-    } else if (prio.id === "Medium") {
-        prio.classList.add("prioMedium");
-        mediumImg.src = "./img/medium.png";
-    } else if (prio.id === "Low") {
-        prio.classList.add("prioLow");
-        lowImg.src = "./img/low-white-arrows.png";
-    }
-
-    priority = prio.id;
+    let prio = clickedPrio.id;
+    priority = prio;
+    resetPrioImg();
+    resetPrioClass();
+    setPrioButton(prio);
 }
+
+
+function resetPrioImg() {
+    setElementAttribute('urgent-img', 'src', './img/urgent-red-arrows.png');
+    setElementAttribute('medium-img', 'src', './img/medium-prio.png');
+    setElementAttribute('low-img', 'src', './img/low.png');
+}
+
+
+function resetPrioClass() {
+    setClass('Urgent', removeClass, 'prioUrgent');
+    setClass('Medium', removeClass, 'prioMedium');
+    setClass('Low', removeClass, 'prioLow');
+}
+
+
+function setPrioButton(prio) {
+    if (prio === "Urgent") {
+        setClass(prio, addClass, 'prioUrgent');
+        setElementAttribute('urgent-img', 'src', './img/urgent-white-arrows.png');
+    } else if (prio === "Medium") {
+        setClass(prio, addClass, 'prioMedium');
+        setElementAttribute('medium-img', 'src', './img/medium.png');
+    } else if (prio === "Low") {
+        setClass(prio, addClass, 'prioLow');
+        setElementAttribute('low-img', 'src', './img/low-white-arrows.png');
+    }
+}
+
 
 function prioSelectionOverlay(clickedPrio) {
     let prio = clickedPrio;
