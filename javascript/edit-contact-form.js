@@ -185,8 +185,12 @@ function saveUserInfo(user) {
  * @returns - The user's name without ' (You)'.
  */
 function getUserName(contact) {
-    let name = contact['name'].split(' (You)');
-    return name = name[0];
+    let name = contact['name'];
+    if (name.includes(' (You)')) {
+        let nameSplit = name.split(' (You)');
+        name = nameSplit[0];
+    }
+    return name;
 }
 
 
