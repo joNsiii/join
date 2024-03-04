@@ -198,11 +198,8 @@ function renderAssigendSubuser() {
 
 
 function removeSubPB(subuserId) {
-    let indexToRemove = sub_users.findIndex((user) => user.userIdIterate === subuserId);
-    if (indexToRemove !== -1) {
-        sub_users.splice(indexToRemove, 1);
-        renderSubProfiles(subuserId);
-    }
+    spliceAssignedSubuser(subuserId);
+    renderSubProfiles(subuserId);
 }
 
 
@@ -214,48 +211,47 @@ function renderSubProfiles(i) {
 
 
 function subtaskCustomTemplate() {
-    let subtaskForm = document.getElementById("icon-hold-overlay");
-    let subtaskValueCheck = document.getElementById("subtask-overlay");
-
+    let subtaskForm = getElement('icon-hold-overlay');
     subtaskForm.innerHTML = `
         <img src="./img/cancel.png" alt="cancel-icon" class="hover-overlay" onclick="cancelSubtask()">
         <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
         <img src="./img/done.png" alt="add-icon" class="hover-overlay" onclick="addSubtask()">
-      `;
+    `;
     cancelSubtaskSafety();
 }
 
-function subtaskTemplate() {
-    let subtaskForm = document.getElementById("subtask-form-overlay");
-    let subtaskValueCheck = document.getElementById("subtask-overlay");
 
+function subtaskTemplate() {
+    let subtaskForm = getElement('subtask-form-overlay');
+    let subtaskValueCheck = getElement('subtask-overlay');
     if (subtaskValueCheck.value == "" || subtaskValueCheck.value == null) {
         subtaskForm.innerHTML = `
-      <input class="sub-task-child-overlay" required placeholder="Add new subtask" type="text" id="subtask-overlay" value="Contact Form">
-      <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
-        <img src="./img/cancel.png" alt="cancel-icon" class="hover-overlay" onclick="cancelSubtask()">
-        <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
-        <img src="./img/done.png" alt="add-icon" class="hover-overlay" onclick="addSubtask()">
-      </div>
-      `;
+            <input class="sub-task-child-overlay" required placeholder="Add new subtask" type="text" id="subtask-overlay" value="Contact Form">
+            <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
+                <img src="./img/cancel.png" alt="cancel-icon" class="hover-overlay" onclick="cancelSubtask()">
+                <img src="./img/divider-subtask.png" alt="divider" class="divider-subtask-icon-overlay">
+                <img src="./img/done.png" alt="add-icon" class="hover-overlay" onclick="addSubtask()">
+            </div>
+        `;
     }
 }
+
 
 function cancelSubtask() {
     let subtaskForm = document.getElementById("subtask-form-overlay");
     subtaskForm.innerHTML = `
-      <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask-overlay" onclick="subtaskCustomTemplate()">
-      <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
-      <img src="./img/subtask.png" alt="add-icon" class="hover-overlay add-hover-overlay" onclick="subtaskTemplate()">
-      </div>
+        <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text" id="subtask-overlay" onclick="subtaskCustomTemplate()">
+        <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
+            <img src="./img/subtask.png" alt="add-icon" class="hover-overlay add-hover-overlay" onclick="subtaskTemplate()">
+        </div>
     `;
 }
 
+
 function cancelSubtaskSafety() {
     document.addEventListener("click", function (event) {
-        let subtaskForm = document.getElementById("subtask-form-overlay");
-        let subtaskInput = document.getElementById("subtask-overlay");
-
+        let subtaskForm = getElement('subtask-form-overlay');
+        let subtaskInput = getElement('subtask-overlay');
         if (
             event.target !== subtaskInput &&
             !subtaskForm.contains(event.target) &&
@@ -265,6 +261,7 @@ function cancelSubtaskSafety() {
         }
     });
 }
+
 
 async function addSubtask() {
     let subtaskAdd = document.getElementById("subtask-display-overlay");
