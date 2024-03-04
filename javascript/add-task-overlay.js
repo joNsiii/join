@@ -439,19 +439,32 @@ function addedTask() {
 }
 
 
-// Bitte pruefen!!!
 function flipDropDownMenuCategory(dropDown, extension) {
     let overlay = (!extension) ? '' : '-overlay';
-    let icon = getElement(`drop-down-icon-2${overlay}`);
+    setDropDownIconCategory(dropDown, overlay);
+    setDropDownClassesCategory(dropDown, overlay);
+    updateDropDownOnclickCategory(dropDown, extension, overlay);
+}
+
+
+function setDropDownIconCategory(dropDown, overlay) {
+    let icon = getElement('drop-down-icon-2' + overlay);
     icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
+}
+
+
+function setDropDownClassesCategory(dropDown, overlay) {
     let subfunction = (dropDown) ? addClass : removeClass;
-    setClass(`myDropdown-category${overlay}`, subfunction, `show${overlay}`);
-    setClass(`dropdown-parent-category${overlay}`, subfunction, `dropdown-outline-focus${overlay}`);
-    setClass(`dropdown-parent-category${overlay}`, subfunction, `dropdown-custom${overlay}`);
-    dropDown = (dropDown) ? false : true;
-    let closeOtherMenu = (dropDown && extension) ? '; flipDropDownMenu(false, true)' : '';
-    nextFunction = (!extension) ? `flipDropDownMenuCategory(${dropDown})${closeOtherMenu}` : `flipDropDownMenuCategory(${dropDown}, ${extension})${closeOtherMenu}`;
-    setElementAttribute(`dropdown-parent-category${overlay}`, 'onclick', nextFunction);
+    setClass('myDropdown-category' + overlay, subfunction, 'show' + overlay);
+    setClass('dropdown-parent-category' + overlay, subfunction, 'dropdown-outline-focus' + overlay);
+    setClass('dropdown-parent-category' + overlay, subfunction, 'dropdown-custom' + overlay);
+}
+
+
+function updateDropDownOnclickCategory(dropDown, extension, overlay) {
+    let closeOtherMenu = (!dropDown && extension) ? 'flipDropDownMenu(false, true)' : '';
+    nextFunction = (!extension) ? `flipDropDownMenuCategory(${!dropDown}); ${closeOtherMenu}` : `flipDropDownMenuCategory(${!dropDown}, ${extension}); ${closeOtherMenu}`;
+    setElementAttribute('dropdown-parent-category' + overlay, 'onclick', nextFunction);
 }
 
 
