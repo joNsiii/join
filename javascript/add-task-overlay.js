@@ -170,16 +170,15 @@ function pushAssignedSubuser(i) {
             userIdIterate: i,
             userId: subUserIdTemp,
             name: subuserTemp.name,
-            "bgc-name": subuserTemp["bgc-name"],
+            "bgc-name": subuserTemp["bgc-name"]
         }
     );
 }
 
 
-// Funktioniert nicht!!!
 function spliceAssignedSubuser(i) {
-    let subuserToRemove = sub_users.findIndex((user) => user.name === `Temp-${i}`);
-    sub_users.splice(subuserToRemove, 1);
+    let subuser = sub_users.findIndex(u => u.userIdIterate == i);
+    sub_users.splice(subuser, 1);
 }
 
 
