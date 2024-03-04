@@ -7,6 +7,9 @@ let heading = "";
 priority = priorityDefault;
 
 
+/**
+ * Initializes the add task overlay.
+ */
 async function addTaskInit() {
     await loadTasks();
     await loadUsers();
@@ -14,6 +17,9 @@ async function addTaskInit() {
 }
 
 
+/**
+ * Loads the tasks of the board.
+ */
 async function loadTasks() {
     try {
         boardTasks = JSON.parse(await getItem("boardTasks"));
@@ -23,11 +29,9 @@ async function loadTasks() {
 }
 
 
-function reloadPage() {
-    location.reload();
-}
-
-
+/**
+ * Scopes the entered tasks.
+ */
 async function scopeTasks() {
     if (verifyAddTaskInput()) {
         let title = getInputValue('title-task-overlay');
@@ -42,6 +46,10 @@ async function scopeTasks() {
 }
 
 
+/**
+ * Verifies the entered task's input values.
+ * @returns - True or false.
+ */
 function verifyAddTaskInput() {
     let title = getInputValue('title-task-overlay');
     let dueDate = getInputValue('date-date-task-overlay');
@@ -52,6 +60,11 @@ function verifyAddTaskInput() {
 }
 
 
+/**
+ * Provides a priority's related id.
+ * @param {String} priority - The priority's coding id.
+ * @returns - A priority's related id.
+ */
 function getPriorityName(priority) {
     let priorityName = priority.split('-');
     priorityName = priorityName[0];
@@ -60,6 +73,10 @@ function getPriorityName(priority) {
 }
 
 
+/**
+ * Creates a new task.
+ * @param {array} taskParameter - Provides some values for the new task.
+ */
 function createNewTask(taskParameter) {
     let task = {
         taskId: taskParameter[0],
@@ -76,6 +93,10 @@ function createNewTask(taskParameter) {
 }
 
 
+/**
+ * Updates the board's tasks.
+ * @param {object} task - The new created task's object.
+ */
 async function updateBoardTasks(task) {
     boardTasks.push(task);
     await setItem("boardTasks", JSON.stringify(boardTasks));
@@ -83,13 +104,20 @@ async function updateBoardTasks(task) {
 }
 
 
+/**
+ * Renders the drop-down menu 'assigned to'.
+ */
 function assignedTo() {
-    let assignElement = document.getElementById("myDropdown-overlay");
-    assignElement.innerHTML = "";
+    let assignElement = document.getElementById('myDropdown-overlay');
+    assignElement.innerHTML = '';
     fillSelectAssignedTo(assignElement);
 }
 
 
+/**
+ * Fills the drop-down menu 'assigned-to'.
+ * @param {element} assignElement - The element to fill.
+ */
 function fillSelectAssignedTo(assignElement) {
     for (let i = 0; i < users.length; i++) {
         const bgc = `bgc-${users[i]["bgc-name"]}`;
@@ -105,6 +133,12 @@ function fillSelectAssignedTo(assignElement) {
 }
 
 
+/**
+ * Flips the drop-down menu.
+ * @param {Boolean} dropDown - True or false.
+ * @param {Boolean} extCategory - True or false.
+ * @param {Boolean} extOverlay - True or false.
+ */
 function flipDropDownMenu(dropDown, extCategory, extOverlay) {
     let category = (!extCategory) ? '' : '-category';
     let overlay = (!extOverlay) ? '' : '-overlay';
@@ -114,12 +148,24 @@ function flipDropDownMenu(dropDown, extCategory, extOverlay) {
 }
 
 
+/**
+ * Sets the drop-down menu's icon.
+ * @param {Boolean} dropDown - True or false.
+ * @param {String} category - Elements' id extension.
+ * @param {String} overlay - Elements' id extension.
+ */
 function setDropDownIcon(dropDown, category, overlay) {
     let icon = getElement('drop-down-icon' + category + overlay);
     icon.src = (dropDown) ? './img/arrow_drop_down-up.png' : './img/arrow_drop_downaa.png';
 }
 
 
+/**
+ * Sets the drop-down menu's classes.
+ * @param {Boolean} dropDown - True or false.
+ * @param {String} category - Elements' id extension.
+ * @param {String} overlay - Elements' id extension.
+ */
 function setDropDownClasses(dropDown, category, overlay) {
     let subfunction = (dropDown) ? addClass : removeClass;
     setClass('myDropdown' + category + overlay, subfunction, 'show' + overlay);
@@ -128,6 +174,12 @@ function setDropDownClasses(dropDown, category, overlay) {
 }
 
 
+/**
+ * Updates the drop-down menu by click.
+ * @param {Booelan} dropDown - True or false.
+ * @param {String} category - Elements' id extension.
+ * @param {String} overlay - Elements' id extension.
+ */
 function updateDropDownOnclick(dropDown, category, overlay) {
     let isCategory = (category != '') ? true : false;
     let isOverlay = (overlay != '') ? true : false;
@@ -138,6 +190,10 @@ function updateDropDownOnclick(dropDown, category, overlay) {
 }
 
 
+/**
+ * Toggles a checkbox.
+ * @param {number} i - The id of the checkbox.
+ */
 function toggleCheckbox(i) {
     let checkBox = getElement(`checkbox-remember-me-${i}`);
     let unchecked = checkBox.src.includes('checkmark-unchecked.png');
@@ -145,6 +201,11 @@ function toggleCheckbox(i) {
 }
 
 
+/**
+ * Applies the checkbox settings.
+ * @param {number} i - The id of the checkbox.
+ * @param {Boolean} logical - True or false.
+ */
 function setCheckBox(i, logical) {
     setCheckBoxBackground(i, logical);
     setCheckBoxImage(i, logical);
@@ -153,12 +214,22 @@ function setCheckBox(i, logical) {
 }
 
 
+/**
+ * Sets the background color of a checkbox.
+ * @param {number} i - The id of the checkbox.
+ * @param {Boolean} logical - True or false.
+ */
 function setCheckBoxBackground(i, logical) {
     let subfunction = (logical) ? addClass : removeClass;
     setClass(`subuser-div-${i}`, subfunction, 'sub-background-overlay');
 }
 
 
+/**
+ * Sets the image of a checkbox.
+ * @param {number} i - The id of the checkbox.
+ * @param {Boolean} logical - True or false.
+ */
 function setCheckBoxImage(i, logical) {
     let checkmark = (logical) ? './img/checkmark-white.png' : './img/checkmark-unchecked.png';
     let checkBox = getElement(`checkbox-remember-me-${i}`);
@@ -166,6 +237,10 @@ function setCheckBoxImage(i, logical) {
 }
 
 
+/**
+ * Pushes a assignable subuser to the array sub_users.
+ * @param {number} i - The assignable subuser's id.
+ */
 function pushAssignedSubuser(i) {
     let subuserTemp = users[i];
     let subUserIdTemp = users[i]["userId"];
@@ -180,6 +255,10 @@ function pushAssignedSubuser(i) {
 }
 
 
+/**
+ * Removes a assigned subuser from the array sub_users.
+ * @param {number} i - The id of the subuser to remove.
+ */
 function spliceAssignedSubuser(i) {
     let subuser = sub_users.findIndex(u => u.userIdIterate == i);
     sub_users.splice(subuser, 1);
