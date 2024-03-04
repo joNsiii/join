@@ -357,70 +357,42 @@ function subtaskOutOfFocus(i) {
 }
 
 
-function prioSelection(clickedPrio) {
+function prioSelection(clickedPrio, overlay) {
     let prio = clickedPrio.id;
     priority = prio;
-    resetPrioImg();
-    resetPrioClass();
-    setPrioButton(prio);
+    (!overlay) ? resetPrioImg() : resetPrioImg(true);
+    (!overlay) ? resetPrioClass() : resetPrioClass(true);
+    (!overlay) ? setPrioButton(prio) : setPrioButton(prio, true);
 }
 
 
-function resetPrioImg() {
-    setElementAttribute('urgent-img', 'src', './img/urgent-red-arrows.png');
-    setElementAttribute('medium-img', 'src', './img/medium-prio.png');
-    setElementAttribute('low-img', 'src', './img/low.png');
+function resetPrioImg(overlay) {
+    (!overlay) ? setElementAttribute(`urgent-img`, 'src', './img/urgent-red-arrows.png') : setElementAttribute(`urgent-img-overlay`, 'src', './img/urgent-red-arrows.png');
+    (!overlay) ? setElementAttribute(`medium-img`, 'src', './img/medium-prio.png') : setElementAttribute(`medium-img-overlay`, 'src', './img/medium-prio.png');
+    (!overlay) ? setElementAttribute(`low-img`, 'src', './img/low.png') : setElementAttribute(`low-img-overlay`, 'src', './img/low.png');
 }
 
 
-function resetPrioClass() {
-    setClass('Urgent', removeClass, 'prioUrgent');
-    setClass('Medium', removeClass, 'prioMedium');
-    setClass('Low', removeClass, 'prioLow');
+function resetPrioClass(overlay) {
+    (!overlay) ? setClass('Urgent', removeClass, 'prioUrgent') : setClass('urgent-overlay', removeClass, 'prioUrgent');
+    (!overlay) ? setClass('Medium', removeClass, 'prioMedium') : setClass('medium-overlay', removeClass, 'prioMedium');
+    (!overlay) ? setClass('Low', removeClass, 'prioLow') : setClass('low-overlay', removeClass, 'prioLow');
 }
 
 
-function setPrioButton(prio) {
-    if (prio === "Urgent") {
+function setPrioButton(prio, overlay) {
+    if (prio === 'Urgent' || prio === 'urgent-overlay') {
         setClass(prio, addClass, 'prioUrgent');
-        setElementAttribute('urgent-img', 'src', './img/urgent-white-arrows.png');
-    } else if (prio === "Medium") {
+        (!overlay) ? setElementAttribute('urgent-img', 'src', './img/urgent-white-arrows.png') : setElementAttribute('urgent-img-overlay', 'src', './img/urgent-white-arrows.png');
+    } else if (prio === 'Medium' || prio === 'medium-overlay') {
         setClass(prio, addClass, 'prioMedium');
-        setElementAttribute('medium-img', 'src', './img/medium.png');
-    } else if (prio === "Low") {
+        (!overlay) ? setElementAttribute('medium-img', 'src', './img/medium.png') : setElementAttribute('medium-img-overlay', 'src', './img/medium.png');
+    } else if (prio === 'Low' || prio === 'low-overlay') {
         setClass(prio, addClass, 'prioLow');
-        setElementAttribute('low-img', 'src', './img/low-white-arrows.png');
+        (!overlay) ? setElementAttribute('low-img', 'src', './img/low-white-arrows.png') : setElementAttribute('low-img-overlay', 'src', './img/low-white-arrows.png');
     }
 }
 
-
-function prioSelectionOverlay(clickedPrio) {
-    let prio = clickedPrio;
-    let lowImg = document.getElementById("low-img-overlay");
-    let mediumImg = document.getElementById("medium-img-overlay");
-    let urgentImg = document.getElementById("urgent-img-overlay");
-
-    document.getElementById("urgent-overlay").classList.remove("prioUrgent");
-    document.getElementById("medium-overlay").classList.remove("prioMedium");
-    document.getElementById("low-overlay").classList.remove("prioLow");
-
-    lowImg.src = "./img/low.png";
-    mediumImg.src = "./img/medium-prio.png";
-    urgentImg.src = "./img/urgent-red-arrows.png";
-
-    if (prio.id === "urgent-overlay") {
-        prio.classList.add("prioUrgent");
-        urgentImg.src = "./img/urgent-white-arrows.png";
-    } else if (prio.id === "medium-overlay") {
-        prio.classList.add("prioMedium");
-        mediumImg.src = "./img/medium.png";
-    } else if (prio.id === "low-overlay") {
-        prio.classList.add("prioLow");
-        lowImg.src = "./img/low-white-arrows.png";
-    }
-
-    priority = prio.id;
-}
 
 function clearAddTask() {
     document.getElementById("title-task-overlay").value = "";
@@ -441,7 +413,7 @@ function clearAddTask() {
     let medium = document.getElementById("medium-overlay");
 
     assignedTo();
-    prioSelectionOverlay(medium);
+    prioSelection(medium, true);
     setClass('dropdown-parent-category-overlay', removeClass, 'dropdown-parent-container-wrong-overlay');
 }
 
