@@ -285,7 +285,6 @@ function resetElementData(id, type, value) {
     let element = getElement(id);
     value = (!value) ? '' : value;
     (type != 'value') ? element.innerHTML = value : element.value = value;
-    console.log('delete data');
 }
 
 
