@@ -553,6 +553,9 @@ function setPrioButton(prio, overlay) {
 }
 
 
+/**
+ * Clears the add task form.
+ */
 function clearAddTask() {
     resetAddTaskFormData();
     resetAddTaskGlobalVariables();
@@ -564,6 +567,9 @@ function clearAddTask() {
 }
 
 
+/**
+ * Resets the add task form's data.
+ */
 function resetAddTaskFormData() {
     resetElementData('title-task-overlay', 'value');
     resetElementData('description-task-overlay', 'value');
@@ -575,6 +581,12 @@ function resetAddTaskFormData() {
 }
 
 
+/**
+ * Resets an element's data.
+ * @param {String} id - The element's id to reset.
+ * @param {String} type - The type of value to reset.
+ * @param {value} value - The default value.
+ */
 function resetElementData(id, type, value) {
     let element = getElement(id);
     value = (!value) ? '' : value;
@@ -583,6 +595,9 @@ function resetElementData(id, type, value) {
 }
 
 
+/**
+ * Resets the global variables of the add task page.
+ */
 function resetAddTaskGlobalVariables() {
     subtaskInput = [];
     subtasks = [];
@@ -592,16 +607,22 @@ function resetAddTaskGlobalVariables() {
 }
 
 
+/**
+ * Gives a user feedback after creating a new task.
+ */
 function addedTask() {
     setClass('task-added-success-overlay', removeClass, 'd-none-overlay');
     setTimeout(function () {
         closeAddTaskOverlay();
         boardInit();
-        // window.location.href = "./board.html";
     }, 1000);
 }
 
 
+/**
+ * Selects the clicked drop-down category.
+ * @param {element} clickedCategory - The clicked element.
+ */
 function selectCategory(clickedCategory) {
     heading = clickedCategory.id;
     let categoryContainer = getElement('chosen-task-overlay');
@@ -611,6 +632,9 @@ function selectCategory(clickedCategory) {
 }
 
 
+/**
+ * Opens the add task overlay.
+ */
 async function openAddTaskOverlay() {
     let bodyWidth = getElement('body').offsetWidth;
     if (bodyWidth > 730) {
@@ -623,6 +647,9 @@ async function openAddTaskOverlay() {
 }
 
 
+/**
+ * Closes the add task overlay.
+ */
 async function closeAddTaskOverlay() {
     setClass('add-task-overlay-position', removeClass, 'add-task-overlay-in');
     setTimeout(() => {
