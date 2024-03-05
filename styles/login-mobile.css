@@ -22,10 +22,18 @@
     }
 
     .joinLogo {
-        width: 50px !important;
-        height: 64px !important;
-        top: -50px !important;
-        left: -50px !important;
+        width: 100px !important;
+        height: 122px !important;
+    }
+
+    .startup {
+        background-color: #2A3647;
+    }
+
+    .joinLogoWhite {
+        display: flex;
+        width: 100px !important;
+        height: 122px !important;
     }
 }
 
@@ -65,7 +73,7 @@
     }
 
     .checkbox-container {
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .checkbox {
@@ -80,5 +88,57 @@
         align-items: center;
         flex-direction: row;
         justify-content: space-between;
+    }
+}
+
+@media (max-height: 1000px) {
+
+    .joinLogo.selected {
+        margin: 32px !important;
+    }
+
+
+    .joinLogoWhite.selected {
+        margin: 32px !important;
+    }
+}
+
+@media (max-height: 935px) {
+
+    .joinLogo.selected {
+        width: auto !important;
+        height: 95px !important;
+        margin: 32px !important;
+    }
+
+
+    .joinLogoWhite.selected {
+        width: auto !important;
+        height: 95px !important;
+        margin: 32px !important;
+    }
+}
+
+@media (max-height: 870px) {
+    .joinLogo.selected {
+        width: auto !important;
+        height: 64px !important;
+        margin: 32px !important;
+    }
+
+    .joinLogo {
+        width: auto !important;
+        height: 64px !important;
+    }
+
+    .joinLogoWhite {
+        width: auto !important;
+        height: 64px !important;
+    }
+
+    .joinLogoWhite.selected {
+        width: auto !important;
+        height: 84px !important;
+        margin: 32px !important;
     }
 }

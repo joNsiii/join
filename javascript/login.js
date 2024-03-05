@@ -203,17 +203,20 @@ function changePasswordIcon() {
  */
 function loadLogoAnimation() {
     const logo = document.querySelector('.joinLogo');
+    const logoMobile = document.querySelector('.joinLogoWhite');
     const startup = document.querySelector('.startup');
 
     setTimeout(function () {
         logo.classList.add('selected');
+        logoMobile.classList.add('selected');
     }, 1000);
 
     setTimeout(function () {
         startup.classList.add('blend-out');
-    }, 1250);
+    }, 1000);
 
     setTimeout(function () {
         startup.classList.add('d-none');
-    }, 1350);
+        logoMobile.classList.add('d-none')
+    }, 1500);
 }

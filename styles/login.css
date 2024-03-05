@@ -25,8 +25,32 @@ body {
     transform: translate(-50%, -50%);
     width: 274px;
     height: 334px;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     z-index: 999;
+}
+
+.joinLogoWhite {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 274px;
+    height: 334px;
+    transition: all 0.5s ease;
+    z-index: 999;
+    opacity: 100%;
+}
+
+.joinLogoWhite.selected {
+    left: 0;
+    top: 0;
+    transform: translate(0%, 0%);
+    margin: 64px;
+    width: 100px;
+    height: 122px;
+    opacity: 0%;
+    transition: all 0.5s ease;
 }
 
 .joinLogo.selected {
@@ -36,7 +60,7 @@ body {
     margin: 64px;
     width: 100px;
     height: 122px;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .startup {
@@ -49,7 +73,7 @@ body {
 }
 
 .blend-out {
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     background-color: #ffffff00;
 }
 
@@ -67,7 +91,7 @@ body {
 }
 
 .sign-up-mobile {
-    display: flex;
+    display: none;
     align-items: center;
     margin-top: 58px;
     gap: 35px;
