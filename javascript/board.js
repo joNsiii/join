@@ -310,8 +310,9 @@ function searchForTask() {
         for (let i = 0; i < boardTasks.length; i++) {
             let task = boardTasks[i];
             let lowerCaseTask = task.title.toLowerCase();
+            let taskDescription = task.description.toLowerCase();
             isTaskInMatching = matchingBoardTask.some((matchingBoardTask) => matchingBoardTask.title === lowerCaseTask);
-            if (lowerCaseTask.includes(searchInput) && !isTaskInMatching) {
+            if (lowerCaseTask.includes(searchInput) || taskDescription.includes(searchInput) && !isTaskInMatching) {
                 matchingBoardTask.push(task);
             }
             renderMatchingTask();
