@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="addUser"><span class="type-signature">(async) </span>addUser<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addTaskInit"><span class="type-signature">(async) </span>addTaskInit<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    adding new user to users-array if name and email not existing
+    Initializes the add task overlay.
 </div>
 
 
@@ -156,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line23">line 23</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -181,16 +181,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    alert if name or email already in use
-</div>
-
-
-
-    
 
 
 
@@ -202,7 +192,7 @@
     
 
     
-    <h4 class="name" id="formatName"><span class="type-signature"></span>formatName<span class="signature">(fullName)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="assignedTo"><span class="type-signature"></span>assignedTo<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -210,7 +200,95 @@
 
 
 <div class="description">
-    format the first letter of the name to uppercase
+    Renders the drop-down menu 'assigned to'.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createNewTask"><span class="type-signature"></span>createNewTask<span class="signature">(taskParameter)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a new task.
 </div>
 
 
@@ -246,13 +324,13 @@
 
         <tr>
             
-                <td class="name"><code>fullName</code></td>
+                <td class="name"><code>taskParameter</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">array</span>
 
 
             
@@ -262,7 +340,7 @@
 
             
 
-            <td class="description last">name of the user</td>
+            <td class="description last">Provides some values for the new task.</td>
         </tr>
 
     
@@ -303,7 +381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line82">line 82</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -328,16 +406,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    formatted name of the user
-</div>
-
-
-
-    
 
 
 
@@ -349,7 +417,7 @@
     
 
     
-    <h4 class="name" id="loadContactsDefault"><span class="type-signature">(async) </span>loadContactsDefault<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="fillSelectAssignedTo"><span class="type-signature"></span>fillSelectAssignedTo<span class="signature">(assignElement)</span><span class="type-signature"></span></h4>
     
 
     
@@ -357,7 +425,327 @@
 
 
 <div class="description">
-    Loads the default contact list.
+    Fills the drop-down menu 'assigned-to'.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>assignElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The element to fill.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line158">line 158</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="flipDropDownMenu"><span class="type-signature"></span>flipDropDownMenu<span class="signature">(dropDown, extCategory, extOverlay)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Flips the drop-down menu.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dropDown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extCategory</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extOverlay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line197">line 197</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAssignableContacts"><span class="type-signature"></span>getAssignableContacts<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Provides the assignable contacts.
 </div>
 
 
@@ -401,7 +789,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line12">line 12</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -426,16 +814,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The default contact list.
-</div>
-
-
-
-    
 
 
 
@@ -447,7 +825,7 @@
     
 
     
-    <h4 class="name" id="passwordValidation"><span class="type-signature"></span>passwordValidation<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getAssignableUser"><span class="type-signature"></span>getAssignableUser<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -455,7 +833,7 @@
 
 
 <div class="description">
-    Checking for the same password in both inputfields and returning green color if matching and red color if not
+    Provides the assignable user.
 </div>
 
 
@@ -499,7 +877,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line107">line 107</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -535,7 +913,7 @@
     
 
     
-    <h4 class="name" id="resetButton"><span class="type-signature"></span>resetButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFirstLastInitial"><span class="type-signature"></span>getFirstLastInitial<span class="signature">(name)</span><span class="type-signature"></span></h4>
     
 
     
@@ -543,95 +921,7 @@
 
 
 <div class="description">
-    reset button
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line100">line 100</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="saveAsObject"><span class="type-signature">(async) </span>saveAsObject<span class="signature">(name, email, password, initials, userId)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    creating a new object in users-array // clearing localStorage if rememberme is set // add localStorage to show new signed up user-email after redirected to login.html
+    Provides a name's initial letters.
 </div>
 
 
@@ -673,7 +963,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
             
@@ -683,99 +973,7 @@
 
             
 
-            <td class="description last">userinput</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">userinput</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">userinput</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>initials</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">will automaticlly created from username</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>userId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">will automaticlly created from actual date and time</td>
+            <td class="description last">The providing name.</td>
         </tr>
 
     
@@ -816,7 +1014,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line57">line 57</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -841,94 +1039,16 @@
 
 
 
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="togglePassword"><span class="type-signature"></span>togglePassword<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    toogle the type of the inputfield
+<div class="param-desc">
+    - The name's initial letters.
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line144">line 144</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -940,7 +1060,7 @@
     
 
     
-    <h4 class="name" id="togglePasswordIcon"><span class="type-signature"></span>togglePasswordIcon<span class="signature">(passwordField, toggleImg)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getPriorityName"><span class="type-signature"></span>getPriorityName<span class="signature">(priority)</span><span class="type-signature"></span></h4>
     
 
     
@@ -948,7 +1068,7 @@
 
 
 <div class="description">
-    toggle image in password input to hide or show the input
+    Provides a priority's related id.
 </div>
 
 
@@ -984,13 +1104,13 @@
 
         <tr>
             
-                <td class="name"><code>passwordField</code></td>
+                <td class="name"><code>priority</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">variable</span>
+<span class="param-type">String</span>
 
 
             
@@ -1000,30 +1120,7 @@
 
             
 
-            <td class="description last">passwordfield input</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>toggleImg</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">img</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">image in passwordfield</td>
+            <td class="description last">The priority's coding id.</td>
         </tr>
 
     
@@ -1064,7 +1161,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line163">line 163</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line105">line 105</a>
     </li></ul></dd>
     
 
@@ -1089,6 +1186,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - A priority's related id.
+</div>
+
+
+
+    
 
 
 
@@ -1100,7 +1207,7 @@
     
 
     
-    <h4 class="name" id="wrongPassword"><span class="type-signature"></span>wrongPassword<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="loadAssignableContacts"><span class="type-signature">(async) </span>loadAssignableContacts<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1108,7 +1215,7 @@
 
 
 <div class="description">
-    Showing red border in inputfield if password is wrong
+    Loads the assignable contacts.
 </div>
 
 
@@ -1152,7 +1259,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="register.js.html">register.js</a>, <a href="register.js.html#line179">line 179</a>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -1183,6 +1290,2219 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="loadTasks"><span class="type-signature">(async) </span>loadTasks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Loads the tasks of the board.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushAssignedSubuser"><span class="type-signature"></span>pushAssignedSubuser<span class="signature">(i)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Pushes a assignable subuser to the array sub_users.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The assignable subuser's id.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line312">line 312</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="removeSubPB"><span class="type-signature"></span>removeSubPB<span class="signature">(subuserId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes an assigned subuser from the array sub_users.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subuserId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the subuser to remove.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line358">line 358</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderAssigendSubuser"><span class="type-signature"></span>renderAssigendSubuser<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Renders the assigned subusers.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line339">line 339</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderSubProfiles"><span class="type-signature"></span>renderSubProfiles<span class="signature">(i)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Renders a subuser's profile.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subuser's id to render.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line368">line 368</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scopeTasks"><span class="type-signature">(async) </span>scopeTasks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Scopes the entered tasks.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setCheckBox"><span class="type-signature"></span>setCheckBox<span class="signature">(i, logical)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies the checkbox settings.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the checkbox.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logical</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line264">line 264</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setCheckBoxBackground"><span class="type-signature"></span>setCheckBoxBackground<span class="signature">(i, logical)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the background color of a checkbox.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the checkbox.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logical</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line277">line 277</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setCheckBoxImage"><span class="type-signature"></span>setCheckBoxImage<span class="signature">(i, logical)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the image of a checkbox.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the checkbox.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logical</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line288">line 288</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setDropDownClasses"><span class="type-signature"></span>setDropDownClasses<span class="signature">(dropDown, category, overlay)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the drop-down menu's classes.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dropDown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overlay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line224">line 224</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setDropDownIcon"><span class="type-signature"></span>setDropDownIcon<span class="signature">(dropDown, category, overlay)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the drop-down menu's icon.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dropDown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overlay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line212">line 212</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="spliceAssignedSubuser"><span class="type-signature"></span>spliceAssignedSubuser<span class="signature">(i)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes a assigned subuser from the array sub_users.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the subuser to remove.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line330">line 330</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toggleCheckbox"><span class="type-signature"></span>toggleCheckbox<span class="signature">(i)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Toggles a checkbox.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the checkbox.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line252">line 252</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateBoardTasks"><span class="type-signature">(async) </span>updateBoardTasks<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the board's tasks.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new created task's object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line137">line 137</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateDropDownOnclick"><span class="type-signature"></span>updateDropDownOnclick<span class="signature">(dropDown, category, overlay)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the drop-down menu by click.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dropDown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Booelan</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True or false.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overlay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Elements' id extension.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line238">line 238</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="verifyAddTaskInput"><span class="type-signature"></span>verifyAddTaskInput<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Verifies the entered task's input values.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add-task-overlay-left.js.html">add-task-overlay-left.js</a>, <a href="add-task-overlay-left.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - True or false.
+</div>
+
+
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1198,13 +3518,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#formatName">formatName</a></li><li><a href="global.html#loadContactsDefault">loadContactsDefault</a></li><li><a href="global.html#passwordValidation">passwordValidation</a></li><li><a href="global.html#resetButton">resetButton</a></li><li><a href="global.html#saveAsObject">saveAsObject</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#togglePasswordIcon">togglePasswordIcon</a></li><li><a href="global.html#wrongPassword">wrongPassword</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTaskInit">addTaskInit</a></li><li><a href="global.html#assignedTo">assignedTo</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#fillSelectAssignedTo">fillSelectAssignedTo</a></li><li><a href="global.html#flipDropDownMenu">flipDropDownMenu</a></li><li><a href="global.html#getAssignableContacts">getAssignableContacts</a></li><li><a href="global.html#getAssignableUser">getAssignableUser</a></li><li><a href="global.html#getFirstLastInitial">getFirstLastInitial</a></li><li><a href="global.html#getPriorityName">getPriorityName</a></li><li><a href="global.html#loadAssignableContacts">loadAssignableContacts</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#pushAssignedSubuser">pushAssignedSubuser</a></li><li><a href="global.html#removeSubPB">removeSubPB</a></li><li><a href="global.html#renderAssigendSubuser">renderAssigendSubuser</a></li><li><a href="global.html#renderSubProfiles">renderSubProfiles</a></li><li><a href="global.html#scopeTasks">scopeTasks</a></li><li><a href="global.html#setCheckBox">setCheckBox</a></li><li><a href="global.html#setCheckBoxBackground">setCheckBoxBackground</a></li><li><a href="global.html#setCheckBoxImage">setCheckBoxImage</a></li><li><a href="global.html#setDropDownClasses">setDropDownClasses</a></li><li><a href="global.html#setDropDownIcon">setDropDownIcon</a></li><li><a href="global.html#spliceAssignedSubuser">spliceAssignedSubuser</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#updateBoardTasks">updateBoardTasks</a></li><li><a href="global.html#updateDropDownOnclick">updateDropDownOnclick</a></li><li><a href="global.html#verifyAddTaskInput">verifyAddTaskInput</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 06 2024 22:43:04 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 06 2024 23:49:31 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

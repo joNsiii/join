@@ -5,6 +5,7 @@ let sub_users = [];
 let contactsUser = [];
 let heading = "";
 priority = priorityDefault;
+let assignableContacts = [];
 
 
 /**
@@ -13,6 +14,7 @@ priority = priorityDefault;
 async function addTaskInit() {
     await loadTasks();
     await loadUsers();
+    await loadAssignableContacts();
     assignedTo();
 }
 
@@ -25,6 +27,41 @@ async function loadTasks() {
         boardTasks = JSON.parse(await getItem("boardTasks"));
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+/**
+ * Loads the assignable contacts.
+ */
+async function loadAssignableContacts() {
+    getAssignableUser();
+    getAssignableContacts();
+}
+
+
+/**
+ * Provides the assignable user.
+ */
+function getAssignableUser() {
+    let user = currentUserData;
+    if (user.name.includes(' (You)')) {
+        assignableContacts.push(user);
+    } else {
+        user.name += ' (You)';
+        assignableContacts.push(user);
+    }
+}
+
+
+/**
+ * Provides the assignable contacts.
+ */
+function getAssignableContacts() {
+    let contacts = currentUserData.contacts;
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        assignableContacts.push(contact);
     }
 }
 
@@ -119,17 +156,35 @@ function assignedTo() {
  * @param {element} assignElement - The element to fill.
  */
 function fillSelectAssignedTo(assignElement) {
-    for (let i = 0; i < users.length; i++) {
-        const bgc = `bgc-${users[i]["bgc-name"]}`;
-        const contact = users[i].name;
-        let letterGroup = userInitials(contact);
+    for (let i = 0; i < assignableContacts.length; i++) {
+        const contact = assignableContacts[i];
+        const bgc = `bgc-${contact['bgc-name']}`;
+        let letterGroup = getFirstLastInitial(contact.name);
         assignElement.innerHTML += `
             <div class="subuser-selection-overlay" onclick="toggleCheckbox(${i})" id="subuser-div-${i}">
-                <div class="subuser-align-overlay"><div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div><div>${contact}</div></div>  
+                <div class="subuser-align-overlay"><div class="sub-profile-img-overlay ${bgc}">${letterGroup}</div><div>${contact.name}</div></div>  
                 <div class="checkbox-overlay"><img src="./img/checkmark-unchecked.png" alt="checkbox" id="checkbox-remember-me-${i}"></div>  
             </div>
         `;
     }
+}
+
+
+/**
+ * Provides a name's initial letters.
+ * @param {String} name - The providing name.
+ * @returns - The name's initial letters.
+ */
+function getFirstLastInitial(name) {
+    let last;
+    if (name != currentUserData.name) {
+        name = name.split(' ');
+        last = name.length - 1;
+    } else {
+        name = name.split(' ');
+        last = name.length - 2;
+    }
+    return name[0][0] + name[last][0]
 }
 
 
@@ -209,7 +264,7 @@ function toggleCheckbox(i) {
 function setCheckBox(i, logical) {
     setCheckBoxBackground(i, logical);
     setCheckBoxImage(i, logical);
-    (logical) ? pushAssignedSubuser(i) : spliceAssignedSubuser(i);
+    (logical) ? pushAssignedContact(i) : spliceAssignedSubuser(i);
     renderAssigendSubuser();
 }
 
@@ -234,6 +289,19 @@ function setCheckBoxImage(i, logical) {
     let checkmark = (logical) ? './img/checkmark-white.png' : './img/checkmark-unchecked.png';
     let checkBox = getElement(`checkbox-remember-me-${i}`);
     checkBox.src = checkmark;
+}
+
+
+function pushAssignedContact(i) {
+    let contact = assignableContacts[i];
+    sub_users.push(
+        {
+            userIdIterate: i,
+            userId: i,
+            name: contact.name,
+            "bgc-name": contact["bgc-name"]
+        }
+    );
 }
 
 
