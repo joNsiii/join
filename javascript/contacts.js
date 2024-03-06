@@ -84,18 +84,18 @@ async function getUserContactList() {
 }
 
 
-/**
- * Pushes the user's data to the user's contact list.
- * @param {json} userContactList - The receiving json.
- */
-function pushUserContact(userContactList) {
-    let userContact = {
-        'name': currentUserData.name + ' (You)',
-        'mail': currentUserData.email,
-        'phone': currentUserData.phone
-    };
-    userContactList.push(userContact);
-}
+// /**
+//  * Pushes the user's data to the user's contact list.
+//  * @param {json} userContactList - The receiving json.
+//  */
+// function pushUserContact(userContactList) {
+//     let userContact = {
+//         'name': currentUserData.name + ' (You)',
+//         'mail': currentUserData.email,
+//         'phone': currentUserData.phone
+//     };
+//     userContactList.push(userContact);
+// }
 
 
 // /**
@@ -122,7 +122,7 @@ function registredUser(userContactList) {
             'name': registredUsers.name,
             'mail': registredUsers.email,
             'phone': registredUsers.phone,
-            'id': registredUsers.userId
+            'id': registredUsers.userId,
         }
         userContactList.push(registredUser);
     }
@@ -368,7 +368,7 @@ function renderNameMailGroup(j) {
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
     let userMail = identifyUser().mail;
     if(userMail == mail) {
-        name = '<b>(you)</b>';
+        name += ' <b>(you)</b>';
     }
         return `
         <div class="name-email-group">
