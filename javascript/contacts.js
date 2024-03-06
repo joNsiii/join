@@ -77,8 +77,9 @@ async function loadUserContacts() {
  */
 async function getUserContactList() {
     let userContactList = [];
-    pushUserContact(userContactList);
-    pushUserSubcontacts(userContactList);
+    // pushUserContact(userContactList);
+    // pushUserSubcontacts(userContactList);
+    registredUser(userContactList);
     return userContactList;
 }
 
@@ -97,20 +98,33 @@ function pushUserContact(userContactList) {
 }
 
 
-/**
- * Pushes the user's contact data to the user's contact list.
- * @param {json} userContactList - The receiving json.
- */
-function pushUserSubcontacts(userContactList) {
-    let subcontacts = currentUserData.contacts;
-    for (let i = 0; i < subcontacts.length; i++) {
-        let subcontact = subcontacts[i];
-        let userSubcontact = {
-            'name': subcontact.name,
-            'mail': subcontact.mail,
-            'phone': subcontact.phone
+// /**
+//  * Pushes the user's contact data to the user's contact list.
+//  * @param {json} userContactList - The receiving json.
+//  */
+// function pushUserSubcontacts(userContactList) {
+//     let subcontacts = currentUserData.contacts;
+//     for (let i = 0; i < subcontacts.length; i++) {
+//         let subcontact = subcontacts[i];
+//         let userSubcontact = {
+//             'name': subcontact.name,
+//             'mail': subcontact.mail,
+//             'phone': subcontact.phone
+//         }
+//         userContactList.push(userSubcontact);
+//     }
+// }
+
+function registredUser(userContactList) {
+    for (let i = 0; i < users.length; i++) {
+        let registredUsers = users[i];
+        let registredUser = {
+            'name': registredUsers.name,
+            'mail': registredUsers.email,
+            'phone': registredUsers.phone,
+            'id': registredUsers.userId
         }
-        userContactList.push(userSubcontact);
+        userContactList.push(registredUser);
     }
 }
 
@@ -352,10 +366,21 @@ function getLastInitialLetter(variable, i) {
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
-    return `
+    let userMail = identifyUser().mail;
+    if(userMail == mail) {
+        name = '<b>(you)</b>';
+    }
+        return `
         <div class="name-email-group">
-            <div class="contact-name">${name}</div>
-            <div class="contact-email">${mail}</div>
+        <div id="identifed-user" class="contact-name">${name}</div>
+        <div class="contact-email">${mail}</div>
         </div>
-    `;
+        `;
+}
+
+function identifyUser() {
+    let userId = currentUserData.userId;
+    let matchingId = userContacts.find((uId) => userId === uId.id);
+    return matchingId;
+    
 }
