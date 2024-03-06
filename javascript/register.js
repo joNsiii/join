@@ -16,7 +16,12 @@ async function addUser() {
     let email = document.getElementById('useremail');
     let password = document.getElementById('password-type');
     let initials = userInitials(name.value);
+    let nameRegex = /^[a-zA-Z\s]+$/;
     formatName(name.value);
+    if (!name.value.match(nameRegex)) {
+        resetButton();
+        return alert('Please enter a valid name with letters and spaces only.');
+    }
     if (users.find(u => name.value === u.name)) {
         return alert('Username already exist!!');
     } if (users.find(u => email.value === u.email)) {

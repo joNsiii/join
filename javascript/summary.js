@@ -219,7 +219,7 @@ function urgentDeadline(urgentTasks) {
     let dateBox = document.getElementById('urgent-date');
     let closestDeadline = null;
     for (let task of urgentTasks) {
-        let deadline = new Date(task.date);
+        let deadline = new Date(task.dueDate);
         if (!closestDeadline || deadline < closestDeadline) {
             closestDeadline = deadline;
             dateBox.innerHTML = '';
