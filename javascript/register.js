@@ -63,8 +63,8 @@ async function saveAsObject(name, email, password, initials, userId) {
         'phone': '',
         'initials': initials,
         'userId': userId,
-        'bgc-name': bgcNames[users.length % bgcNames.length],
-        'bgc-code': bgcCodes[users.length % bgcCodes.length]
+        'bgc-name': 'lightblue',
+        'bgc-code': '#29ABE2'
     }
 
     users.push(newUser);

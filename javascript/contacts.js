@@ -182,9 +182,14 @@ function getIncludingMatch(array, value) {
 function setContactBgc(contacts) {
     let counter = 0;
     for (let i = 0; i < contacts.length; i++) {
-        setContactBgcName(counter, i);
-        setContactBgcCode(counter, i);
-        counter = (counter < bgcNames.length - 1) ? ++counter : 0;
+        if (userContacts[i].mail != currentUserData.email) {
+            setContactBgcName(counter, i);
+            setContactBgcCode(counter, i);
+            counter = (counter < bgcNames.length - 1) ? ++counter : 0;
+        } else {
+            userContacts[i]['bgc-name'] = 'lightblue';
+            userContacts[i]['bgc-code'] = '#29ABE2';
+        }
     }
 }
 
