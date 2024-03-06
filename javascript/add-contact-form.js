@@ -3,6 +3,7 @@
  */
 function openAddContact() {
     openDialog('dialog-add-contact');
+    getElement('add-contact-phone').value = 49;
     setClass('section-add-contact', addClass, 'dialog-contacts-position');
 }
 

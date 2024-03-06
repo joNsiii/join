@@ -316,3 +316,17 @@ function showBacklogContactForm(id, message) {
         }, 100);
     }, 800);
 }
+
+
+function renderPhoneNumber() {
+    let phoneNumber = '+';
+    phone = '494444333221';
+    for (let i = 0; i < phone.length; i++) {
+        if (i == 2 || i == 6 || i == 9 || i == 11) {
+            phoneNumber = phoneNumber + ' ' + phone[i];
+        } else {
+            phoneNumber += phone[i]
+        }
+    }
+    console.log(phoneNumber);
+}
