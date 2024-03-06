@@ -177,7 +177,7 @@ function fillSelectAssignedTo(assignElement) {
  */
 function getFirstLastInitial(name) {
     let last;
-    if (name != currentUserData.name) {
+    if (!name.includes(' (You)')) {
         name = name.split(' ');
         last = name.length - 1;
     } else {
