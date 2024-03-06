@@ -51,8 +51,8 @@ function saveAsObject(name, email, password, initials, userId) {
         'phone': '',
         'initials': initials,
         'userId': userId,
-        'bgc-name': bgcNames[users.length % bgcNames.length -1],
-        'bgc-code': bgcCodes[users.length % bgcCodes.length -1]
+        'bgc-name': bgcNames[users.length % bgcNames.length],
+        'bgc-code': bgcCodes[users.length % bgcCodes.length]
     }
 
     users.push(newUser);

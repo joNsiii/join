@@ -56,7 +56,7 @@ async function initContactsUser() {
     await loadUserContacts();
     sortContactsByName(userContacts);
     collectInitials(userContacts);
-    // setContactBgc(userContacts);
+    setContactBgc(userContacts);
     renderContacts();
     saveUserContacts();
 }
@@ -77,11 +77,11 @@ async function loadUserContacts() {
  */
 async function getUserContactList() {
     let userContactList = [];
-    // pushUserContact(userContactList);
-    // pushUserSubcontacts(userContactList);
-    registredUser(userContactList);
+    pushUserContact(userContactList);
+    pushUserSubcontacts(userContactList);
     return userContactList;
 }
+
 
 /**
  * Pushes the user's data to the user's contact list.
@@ -97,35 +97,20 @@ function pushUserContact(userContactList) {
 }
 
 
-// /**
-//  * Pushes the user's contact data to the user's contact list.
-//  * @param {json} userContactList - The receiving json.
-//  */
-// function pushUserSubcontacts(userContactList) {
-//     let subcontacts = currentUserData.contacts;
-//     for (let i = 0; i < subcontacts.length; i++) {
-//         let subcontact = subcontacts[i];
-//         let userSubcontact = {
-//             'name': subcontact.name,
-//             'mail': subcontact.mail,
-//             'phone': subcontact.phone
-//         }
-//         userContactList.push(userSubcontact);
-//     }
-// }
-
-function registredUser(userContactList) {
-    for (let i = 0; i < users.length; i++) {
-        let registredUsers = users[i];
-        let registredUser = {
-            'name': registredUsers.name,
-            'mail': registredUsers.email,
-            'phone': registredUsers.phone,
-            'id': registredUsers.userId,
-            'bgcCode': registredUsers['bgc-code'],
-            'bgcName': registredUsers['bgc-name']
+/**
+ * Pushes the user's contact data to the user's contact list.
+ * @param {json} userContactList - The receiving json.
+ */
+function pushUserSubcontacts(userContactList) {
+    let subcontacts = currentUserData.contacts;
+    for (let i = 0; i < subcontacts.length; i++) {
+        let subcontact = subcontacts[i];
+        let userSubcontact = {
+            'name': subcontact.name,
+            'mail': subcontact.mail,
+            'phone': subcontact.phone
         }
-        userContactList.push(registredUser);
+        userContactList.push(userSubcontact);
     }
 }
 
@@ -190,40 +175,40 @@ function getIncludingMatch(array, value) {
 }
 
 
-// /**
-//  * Sets a contact's background color.
-//  * @param {json} contacts - The settting json.
-//  */
-// function setContactBgc(contacts) {
-//     let counter = 0;
-//     for (let i = 0; i < contacts.length; i++) {
-//         setContactBgcName(counter, i);
-//         setContactBgcCode(counter, i);
-//         counter = (counter < bgcNames.length) ? ++counter : 0;
-//     }
-// }
+/**
+ * Sets a contact's background color.
+ * @param {json} contacts - The settting json.
+ */
+function setContactBgc(contacts) {
+    let counter = 0;
+    for (let i = 0; i < contacts.length; i++) {
+        setContactBgcName(counter, i);
+        setContactBgcCode(counter, i);
+        counter = (counter < bgcNames.length) ? ++counter : 0;
+    }
+}
 
 
-// /**
-//  * Sets a contact's background color's name.
-//  * @param {number} counter - The background color's counter.
-//  * @param {number} i - The background color's name's index.
-//  */
-// function setContactBgcName(counter, i) {
-//     let name = bgcNames[counter];
-//     setUserContactsObjectValue(i, 'bgc-name', name);
-// }
+/**
+ * Sets a contact's background color's name.
+ * @param {number} counter - The background color's counter.
+ * @param {number} i - The background color's name's index.
+ */
+function setContactBgcName(counter, i) {
+    let name = bgcNames[counter];
+    setUserContactsObjectValue(i, 'bgc-name', name);
+}
 
 
-// /**
-//  * Sets a contact's background color's code.
-//  * @param {number} counter - The background color's counter.
-//  * @param {number} i - The background color's code's index.
-//  */
-// function setContactBgcCode(counter, i) {
-//     let code = bgcCodes[counter];
-//     setUserContactsObjectValue(i, 'bgc-code', code);
-// }
+/**
+ * Sets a contact's background color's code.
+ * @param {number} counter - The background color's counter.
+ * @param {number} i - The background color's code's index.
+ */
+function setContactBgcCode(counter, i) {
+    let code = bgcCodes[counter];
+    setUserContactsObjectValue(i, 'bgc-code', code);
+}
 
 
 /**
@@ -318,7 +303,7 @@ function renderContact(contactList, j) {
  * @returns - The html code of a contact's profile.
  */
 function renderContactProfile(j) {
-    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgcName');
+    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgc-name');
     let initialLetters = getInitialLetterGroup(userContacts, j);
     return `<div id="contact-profile-${j}" class="contact-profile bgc-${bgc}">
                 <div class="contact-profile-text">${initialLetters}</div>
@@ -367,21 +352,10 @@ function getLastInitialLetter(variable, i) {
 function renderNameMailGroup(j) {
     let name = getJsonObjectDeepValue(userContacts, j, 'name');
     let mail = getJsonObjectDeepValue(userContacts, j, 'mail');
-    let userMail = identifyUser().mail;
-    if(userMail == mail) {
-        name += ' <b>(you)</b>';
-    }
-        return `
+    return `
         <div class="name-email-group">
-        <div id="identifed-user" class="contact-name">${name}</div>
-        <div class="contact-email">${mail}</div>
+            <div class="contact-name">${name}</div>
+            <div class="contact-email">${mail}</div>
         </div>
-        `;
-}
-
-function identifyUser() {
-    let userId = currentUserData.userId;
-    let matchingId = userContacts.find((uId) => userId === uId.id);
-    return matchingId;
-    
+    `;
 }
