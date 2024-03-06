@@ -56,7 +56,7 @@ function renderContactViewer(j) {
  * @param {number} j - The showing contact's id.
  */
 function renderUserBgc(j) {
-    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgc-code');
+    let bgc = getJsonObjectDeepValue(userContacts, j, 'bgcCode');
     let bgcCss = getElement('user-bgc-flexible');
     bgcCss.innerHTML = `
         .bgc-flexible {
