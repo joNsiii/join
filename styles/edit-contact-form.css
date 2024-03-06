@@ -148,12 +148,6 @@
     color: #D1D1D1;
 }
 
-.contact-input::-webkit-outer-spin-button,
-.contact-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 .contact-input-img {
     width: 24px;
     height: 24px;

@@ -16,18 +16,19 @@
             <form id="edit-contact-form" class="contact-form" onsubmit="return false">
                 <fieldset class="contact-fieldset">
                     <div class="contact-input-group">
-                        <input id="edit-contact-name" class="contact-input" type="text" minlength="2" maxlength="30"
+                        <input id="edit-contact-name" class="contact-input" type="text" minlength="2" maxlength="25"
                             placeholder="Name" required value="Tatjana Wolf">
                         <img class="contact-input-img" src="./img/person.png" alt="person">
                     </div>
                     <div class="contact-input-group">
-                        <input id="edit-contact-mail" class="contact-input" type="email" minlength="8" maxlength="30"
+                        <input id="edit-contact-mail" class="contact-input" type="email" minlength="8" maxlength="25"
                             placeholder="Email" required value="wolf@gmail.com">
                         <img class="contact-input-img" src="./img/mail.png" alt="mail">
                     </div>
                     <div class="contact-input-group">
-                        <input id="edit-contact-phone" class="contact-input" type="number" minlength="5" maxlength="20"
-                            placeholder="Number" value="+49 2222 222 22 2">
+                        <input id="edit-contact-phone" class="contact-input" type="text" minlength="5" maxlength="20"
+                            placeholder="Number" value="+49 2222 222 22 2" onfocus="renderPhoneStart(id)"
+                            onkeydown="verifyKeyType(event, id)">
                         <img class="contact-input-img" src="./img/call.png" alt="call">
                     </div>
                 </fieldset>
