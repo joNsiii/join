@@ -184,7 +184,7 @@ function setContactBgc(contacts) {
     for (let i = 0; i < contacts.length; i++) {
         setContactBgcName(counter, i);
         setContactBgcCode(counter, i);
-        counter = (counter < bgcNames.length) ? ++counter : 0;
+        counter = (counter < bgcNames.length - 1) ? ++counter : 0;
     }
 }
 

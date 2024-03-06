@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="animateBacklogContact"><span class="type-signature"></span>animateBacklogContact<span class="signature">(position, value)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addUser"><span class="type-signature">(async) </span>addUser<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,105 @@
 
 
 <div class="description">
-    Animates the contacts' backlog.
+    adding new user to users-array if name and email not existing
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    alert if name or email already in use
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="formatName"><span class="type-signature"></span>formatName<span class="signature">(fullName)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    format the first letter of the name to uppercase
 </div>
 
 
@@ -148,13 +246,13 @@
 
         <tr>
             
-                <td class="name"><code>position</code></td>
+                <td class="name"><code>fullName</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -164,30 +262,7 @@
 
             
 
-            <td class="description last">The appropriate css property's name.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">value</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The contacts' backlog coming value.</td>
+            <td class="description last">name of the user</td>
         </tr>
 
     
@@ -228,7 +303,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line237">line 237</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -257,7 +332,7 @@
 
         
 <div class="param-desc">
-    The css code for the element 'backlog-contact-animation'.
+    formatted name of the user
 </div>
 
 
@@ -274,7 +349,7 @@
     
 
     
-    <h4 class="name" id="closeAddContact"><span class="type-signature"></span>closeAddContact<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="loadContactsDefault"><span class="type-signature">(async) </span>loadContactsDefault<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -282,7 +357,7 @@
 
 
 <div class="description">
-    Closes the add contact form.
+    Loads the default contact list.
 </div>
 
 
@@ -326,7 +401,105 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line13">line 13</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The default contact list.
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="passwordValidation"><span class="type-signature"></span>passwordValidation<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checking for the same password in both inputfields and returning green color if matching and red color if not
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -362,7 +535,7 @@
     
 
     
-    <h4 class="name" id="createNewContact"><span class="type-signature"></span>createNewContact<span class="signature">(name, mail, phone)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="resetButton"><span class="type-signature"></span>resetButton<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -370,7 +543,95 @@
 
 
 <div class="description">
-    Creates a new contact object.
+    reset button
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveAsObject"><span class="type-signature">(async) </span>saveAsObject<span class="signature">(name, email, password, initials, userId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    creating a new object in users-array // clearing localStorage if rememberme is set // add localStorage to show new signed up user-email after redirected to login.html
 </div>
 
 
@@ -412,7 +673,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -422,20 +683,20 @@
 
             
 
-            <td class="description last">The new contact's name.</td>
+            <td class="description last">userinput</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mail</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -445,20 +706,20 @@
 
             
 
-            <td class="description last">The new contact's mail address.</td>
+            <td class="description last">userinput</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>phone</code></td>
+                <td class="name"><code>password</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -468,7 +729,53 @@
 
             
 
-            <td class="description last">The new contact's phone number.</td>
+            <td class="description last">userinput</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>initials</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will automaticlly created from username</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will automaticlly created from actual date and time</td>
         </tr>
 
     
@@ -509,7 +816,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line142">line 142</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -534,16 +841,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - A new contact object.
-</div>
-
-
-
-    
 
 
 
@@ -555,7 +852,7 @@
     
 
     
-    <h4 class="name" id="formatPhoneNumber"><span class="type-signature"></span>formatPhoneNumber<span class="signature">(id, isBackspace)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="togglePassword"><span class="type-signature"></span>togglePassword<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -563,7 +860,95 @@
 
 
 <div class="description">
-    Formats the phone number.
+    toogle the type of the inputfield
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="togglePasswordIcon"><span class="type-signature"></span>togglePasswordIcon<span class="signature">(passwordField, toggleImg)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    toggle image in password input to hide or show the input
 </div>
 
 
@@ -599,13 +984,13 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>passwordField</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">variable</span>
 
 
             
@@ -615,20 +1000,20 @@
 
             
 
-            <td class="description last">The input element's id.</td>
+            <td class="description last">passwordfield input</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>isBackspace</code></td>
+                <td class="name"><code>toggleImg</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">img</span>
 
 
             
@@ -638,7 +1023,7 @@
 
             
 
-            <td class="description last">True or false.</td>
+            <td class="description last">image in passwordfield</td>
         </tr>
 
     
@@ -679,7 +1064,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line73">line 73</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line163">line 163</a>
     </li></ul></dd>
     
 
@@ -715,7 +1100,7 @@
     
 
     
-    <h4 class="name" id="getContactId"><span class="type-signature"></span>getContactId<span class="signature">(mail)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="wrongPassword"><span class="type-signature"></span>wrongPassword<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -723,154 +1108,7 @@
 
 
 <div class="description">
-    Provides the added contact's rendering index.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The entered mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line181">line 181</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The added contact's rendering index.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getNewContact"><span class="type-signature"></span>getNewContact<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Provides the new contact's data.
+    Showing red border in inputfield if password is wrong
 </div>
 
 
@@ -914,1606 +1152,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line126">line 126</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The new contact object.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="openAddContact"><span class="type-signature"></span>openAddContact<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Opens the add contact form.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line4">line 4</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="pushNewUserContact"><span class="type-signature">(async) </span>pushNewUserContact<span class="signature">(user)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Pushes a new user contact.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The user object which receives the new contact.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line115">line 115</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="renderPhoneStart"><span class="type-signature"></span>renderPhoneStart<span class="signature">(id)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Renders the phone number's start.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The input element's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line39">line 39</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="resetAddContactInput"><span class="type-signature"></span>resetAddContactInput<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Resets the add contact form's input elements.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line25">line 25</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="setBacklogContactMessage"><span class="type-signature"></span>setBacklogContactMessage<span class="signature">(id, message)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Sets the message of contacts' backlog.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The requested element's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The displaying message.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line208">line 208</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="setBacklogContactPosition"><span class="type-signature"></span>setBacklogContactPosition<span class="signature">(position, valueIn, valueOut)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Sets the contacts' backlog position.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>position</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The appropriate css property's name.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>valueIn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">value</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The contacts' backlog coming in value.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>valueOut</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">value</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The contacts' backlog coming out value.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line220">line 220</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showAddedContact"><span class="type-signature"></span>showAddedContact<span class="signature">(mail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the added contact.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The entered mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line169">line 169</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showBacklogContact"><span class="type-signature"></span>showBacklogContact<span class="signature">(message)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the contacts' backlog.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The displaying message.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line191">line 191</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showUpdatedContactList"><span class="type-signature">(async) </span>showUpdatedContactList<span class="signature">(mail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the updated contact list.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The entered mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line155">line 155</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateContactList"><span class="type-signature">(async) </span>updateContactList<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Updates the contact list.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line86">line 86</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="verifyContactInput"><span class="type-signature">(async) </span>verifyContactInput<span class="signature">(mail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Verifies the added contact's input values.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The entered mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line99">line 99</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="verifyKeyType"><span class="type-signature"></span>verifyKeyType<span class="signature">(event, id)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Verifies the key type.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>event</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">event</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The event.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The input element's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add-contact-form.js.html">add-contact-form.js</a>, <a href="add-contact-form.js.html#line52">line 52</a>
+        <a href="register.js.html">register.js</a>, <a href="register.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -2559,13 +1198,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#animateBacklogContact">animateBacklogContact</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#formatPhoneNumber">formatPhoneNumber</a></li><li><a href="global.html#getContactId">getContactId</a></li><li><a href="global.html#getNewContact">getNewContact</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#pushNewUserContact">pushNewUserContact</a></li><li><a href="global.html#renderPhoneStart">renderPhoneStart</a></li><li><a href="global.html#resetAddContactInput">resetAddContactInput</a></li><li><a href="global.html#setBacklogContactMessage">setBacklogContactMessage</a></li><li><a href="global.html#setBacklogContactPosition">setBacklogContactPosition</a></li><li><a href="global.html#showAddedContact">showAddedContact</a></li><li><a href="global.html#showBacklogContact">showBacklogContact</a></li><li><a href="global.html#showUpdatedContactList">showUpdatedContactList</a></li><li><a href="global.html#updateContactList">updateContactList</a></li><li><a href="global.html#verifyContactInput">verifyContactInput</a></li><li><a href="global.html#verifyKeyType">verifyKeyType</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#formatName">formatName</a></li><li><a href="global.html#loadContactsDefault">loadContactsDefault</a></li><li><a href="global.html#passwordValidation">passwordValidation</a></li><li><a href="global.html#resetButton">resetButton</a></li><li><a href="global.html#saveAsObject">saveAsObject</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#togglePasswordIcon">togglePasswordIcon</a></li><li><a href="global.html#wrongPassword">wrongPassword</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 06 2024 16:00:24 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 06 2024 22:43:04 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

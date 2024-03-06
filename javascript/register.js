@@ -2,6 +2,18 @@ let users = [];
 let newArray = []; /* delete our backend-users-array */
 let bgcNames = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red', 'cyan'];
 let bgcCodes = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
+let contactsDefault;
+
+
+/**
+ * Loads the default contact list.
+ * @returns - The default contact list.
+ */
+async function loadContactsDefault() {
+    let response = await fetch('./javascript/contacts-default.json');
+    contactsDefault = await response.json();
+    return contactsDefault;
+}
 
 /**
  * adding new user to users-array if name and email not existing
@@ -27,7 +39,7 @@ async function addUser() {
     } if (users.find(u => email.value === u.email)) {
         return alert('Email already exist!!');
     }
-    saveAsObject(formatName(name.value), email, password, initials, userId);
+    await saveAsObject(formatName(name.value), email, password, initials, userId);
     await setItem('users', JSON.stringify(users));
     resetButton();
     window.location.href = 'login.html?msg=You Signed Up successfully';
@@ -42,12 +54,12 @@ async function addUser() {
  * @param {string} initials - will automaticlly created from username
  * @param {number} userId - will automaticlly created from actual date and time
  */
-function saveAsObject(name, email, password, initials, userId) {
+async function saveAsObject(name, email, password, initials, userId) {
     let newUser = {
         'name': name,
         'email': email.value,
         'password': password.value,
-        'contacts': [],
+        'contacts': await loadContactsDefault(),
         'phone': '',
         'initials': initials,
         'userId': userId,
