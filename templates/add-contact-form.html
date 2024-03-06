@@ -21,8 +21,8 @@
             <form id="add-contact-form" class="contact-form" onsubmit="updateContactList(); return false">
                 <fieldset class="contact-fieldset">
                     <div class="contact-input-group">
-                        <input id="add-contact-name" class="contact-input" type="text" minlength="2" maxlength="30" placeholder="Name"
-                            required>
+                        <input id="add-contact-name" class="contact-input" type="text" minlength="2" maxlength="30"
+                            placeholder="Name" required>
                         <img class="contact-input-img" src="./img/person.png" alt="person">
                     </div>
                     <div class="contact-input-group">
@@ -31,8 +31,8 @@
                         <img class="contact-input-img" src="./img/mail.png" alt="mail">
                     </div>
                     <div class="contact-input-group">
-                        <input id="add-contact-phone" class="contact-input" type="number" minlength="5" maxlength="20"
-                            placeholder="Phone">
+                        <input id="add-contact-phone" class="contact-input" type="text" minlength="5" maxlength="20"
+                            placeholder="Phone" onfocus="renderPhoneStart()" onkeydown="verifyKeyType(event)">
                         <img class="contact-input-img" src="./img/call.png" alt="call">
                     </div>
                 </fieldset>

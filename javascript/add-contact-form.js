@@ -3,7 +3,6 @@
  */
 function openAddContact() {
     openDialog('dialog-add-contact');
-    getElement('add-contact-phone').value = 49;
     setClass('section-add-contact', addClass, 'dialog-contacts-position');
 }
 
@@ -29,6 +28,51 @@ function resetAddContactInput() {
         let id = ids[i];
         let info = getElement(`add-contact-${id}`);
         info.value = '';
+    }
+}
+
+
+/**
+ * Renders the phone number's start.
+ */
+function renderPhoneStart() {
+    let phone = getElement('add-contact-phone');
+    if (phone.value == '') {
+        phone.value = '+49 ';
+    }
+}
+
+
+/**
+ * Verifies the key type.
+ * @param {event} event - The event to verify.
+ */
+function verifyKeyType(event) {
+    let length = getInputValue('add-contact-phone').length;
+    let isNumberKey = /[0-9]/.test(event.key);
+    let isControlKey = event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'Backspace' || event.key == 'Enter';
+    let isBackspace = event.key == 'Backspace';
+    if (isNumberKey || isControlKey && length != 1) {
+        setElementAttribute('add-contact-phone', 'onkeypress', `formatPhoneNumber(${isBackspace})`);
+        setElementAttribute('add-contact-phone', 'onkeyup', `formatPhoneNumber(${isBackspace})`);
+    } else {
+        event.preventDefault();
+        removeElementAttribute('add-contact-phone', 'onkeypress');
+        removeElementAttribute('add-contact-phone', 'onkeyup');
+    }
+}
+
+
+/**
+ * Formats the phone number.
+ * @param {Boolean} isBackspace - True or false.
+ */
+function formatPhoneNumber(isBackspace) {
+    let phone = getElement('add-contact-phone');
+    let length = phone.value.length;
+    let isSpace = length == 3 || length == 8 || length == 12 || length == 15 || length == 17;
+    if (!isBackspace && isSpace) {
+        phone.value += ' ';
     }
 }
 
