@@ -342,12 +342,13 @@ document.addEventListener("DOMContentLoaded", () => {
  * Removes deleted subusers.
  */
 async function removeDeletedSubusers() {
-    for (let i = 0; i < boardTasks.length; i++) {
+    for (let i = boardTasks.length - 1; i > -1; i--) {
         let subusers = boardTasks[i].sub_users;
-        for (let j = 0; j < subusers.length; j++) {
+        for (let j = subusers.length - 1; j > -1; j--) {
             let subuser = subusers[j];
-            let isExisting = assignableContacts.find(u => u.mail === subuser.mail);
-            if (!isExisting) {
+            let isMailExisting = assignableContacts.find(u => u.mail === subuser.mail);
+            let isIdExisting = assignableContacts.find(u => u.userId === subuser.userId);
+            if (!isMailExisting || !isIdExisting) {
                 boardTasks[i]['sub_users'].splice(j, 1);
             }
         }
