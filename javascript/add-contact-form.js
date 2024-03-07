@@ -99,8 +99,9 @@ async function updateContactList() {
 async function verifyContactInput(mail) {
     let user = users.find(u => u.userId == userId);
     let isUserMail = user.email === mail;
+    let isOtherUserMail = users.find(u => u.email === mail);
     let isOthersMail = userContacts.find(c => c.mail === mail);
-    if (isUserMail || isOthersMail) {
+    if (isUserMail || isOtherUserMail || isOthersMail) {
         showBacklogContactForm('add', 'Email already existing');
     } else {
         await pushNewUserContact(user);
