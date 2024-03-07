@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: register.js</title>
+    <title>JSDoc: Source: board_render.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: register.js</h1>
+    <h1 class="page-title">Source: board_render.js</h1>
 
     
 
@@ -26,193 +26,209 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let users = [];
-let newArray = []; /* delete our backend-users-array */
-let bgcNames = ['orange', 'purple', 'blue', 'magenta', 'yellow', 'green', 'dark-blue', 'red', 'cyan'];
-let bgcCodes = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'];
-let contactsDefault;
-
-
-/**
- * Loads the default contact list.
- * @returns - The default contact list.
+            <pre class="prettyprint source linenums"><code>/**
+ * Renders each task in the board.
  */
-async function loadContactsDefault() {
-    let response = await fetch('./javascript/contacts-default.json');
-    contactsDefault = await response.json();
-    return contactsDefault;
+function renderEachTask() {
+    clearHTML();
+    for (let i = 0; i &lt; boardTasks.length; i++) {
+        const task = boardTasks[i];
+        let containerId = "";
+        checkCategory(task, containerId);
+        updateProgressBar(task);
+    }
+    updateAllNoTaskMessages();
 }
 
 /**
- * adding new user to users-array if name and email not existing
- * 
- * @returns alert if name or email already in use
+ * Renders tasks that match the search criteria.
  */
-async function addUser() {
-    registerBtn.disabled = true;
-    let date = new Date();
-    let userId = date.getTime();
-    let name = document.getElementById('username');
-    let email = document.getElementById('useremail');
-    let password = document.getElementById('password-type');
-    let initials = userInitials(name.value);
-    let nameRegex = /^[a-zA-Z\s]+$/;
-    formatName(name.value);
-    if (!name.value.match(nameRegex)) {
-        resetButton();
-        return alert('Please enter a valid name with letters and spaces only.');
+function renderMatchingTask() {
+    clearHTML();
+    for (let i = 0; i &lt; matchingBoardTask.length; i++) {
+        const task = matchingBoardTask[i];
+        let containerId = "";
+        checkCategory(task, containerId);
+        updateProgressBar(task);
     }
-    if (users.find(u => name.value === u.name)) {
-        return alert('Username already exist!!');
-    } if (users.find(u => email.value === u.email)) {
-        return alert('Email already exist!!');
-    }
-    await saveAsObject(formatName(name.value), email, password, initials, userId);
-    await setItem('users', JSON.stringify(users));
-    resetButton();
-    window.location.href = 'login.html?msg=You Signed Up successfully';
+    updateAllNoTaskMessages();
 }
 
 /**
- * creating a new object in users-array // clearing localStorage if rememberme is set // add localStorage to show new signed up user-email after redirected to login.html
- * 
- * @param {string} name - userinput
- * @param {string} email - userinput
- * @param {string} password - userinput
- * @param {string} initials - will automaticlly created from username
- * @param {number} userId - will automaticlly created from actual date and time
+ * Generates HTML content for a task card and appends it to the specified container.
+ * @param {Object} task - The task object to create HTML for.
+ * @param {string} containerId - The container ID to append the task card to.
+ * @param {boolean} returnHtml - If true, returns the generated HTML string instead of appending it.
+ * @returns {string|undefined} The task HTML if returnHtml is true, otherwise undefined.
  */
-async function saveAsObject(name, email, password, initials, userId) {
-    let newUser = {
-        'name': name,
-        'email': email.value,
-        'password': password.value,
-        'contacts': await loadContactsDefault(),
-        'phone': '',
-        'initials': initials,
-        'userId': userId,
-        'bgc-name': 'lightblue',
-        'bgc-code': '#29ABE2'
-    }
-
-    users.push(newUser);
-    localStorage.clear('remember-me-email');
-    localStorage.clear('remember-me-password');
-    localStorage.setItem('email', email.value);
-}
-
-/**
- * format the first letter of the name to uppercase
- * 
- * @param {string} fullName - name of the user
- * @returns formatted name of the user
- */
-function formatName(fullName) {
-    let spaceIndex = fullName.indexOf(' ');
-    if (spaceIndex === -1) {
-        let formattedName = fullName.charAt(0).toUpperCase() + fullName.slice(1).toLowerCase();
-        return formattedName;
+function createHTML(task, containerId, returnHtml = false) {
+    let userInitialsHtml = generateUserInitialsHtml(task.sub_users);
+    let taskHtml = /*html*/ `
+    &lt;div class="board-content" onclick="openDetails(${task.taskId})" ondragstart="startDragging(${task.taskId})" draggable="true"> 
+        &lt;div class="board-body">
+            &lt;div class="board-task-card">
+                &lt;h3 class="btc-type ${setCategoryStyle(task.heading)}">${task.heading}&lt;/h3>
+                &lt;div class="btc-group">
+                    &lt;div class="btc-title">${task.title}&lt;/div>
+                    &lt;div class="btc-description">${task.description}&lt;/div>
+                &lt;/div>
+                &lt;div class="board-task-progress-group">
+                    &lt;div class="board-task-max-bar">
+                        &lt;div id="progress-bar-${task.taskId}" class="board-task-value-bar">&lt;/div>
+                    &lt;/div>
+                    &lt;div id="subtask-progress-text-${task.taskId}" class="board-task-progress-text">&lt;/div>
+                &lt;/div>
+                &lt;div class="user-priority-group">
+                    &lt;div class="board-user-group">
+                        ${userInitialsHtml}
+                    &lt;/div>
+                    ${showPriority(task)}
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>`;
+    if (returnHtml) {
+        return taskHtml;
     } else {
-        let firstName = fullName.slice(0, spaceIndex);
-        let lastName = fullName.slice(spaceIndex + 1);
-        let formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-        let formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-        let formattedFullName = formattedFirstName + ' ' + formattedLastName;
-        return formattedFullName;
-    }
-}
-
-/**
- * reset button 
- */
-function resetButton() {
-    registerBtn.disabled = false;
-}
-
-/**
- * Checking for the same password in both inputfields and returning green color if matching and red color if not
- */
-function passwordValidation() {
-    let passwordOutline1 = document.getElementById('password-parent');
-    let passwordOutline2 = document.getElementById('password-input2');
-    if (document.getElementById('password-type').value ==
-        document.getElementById('password-type2').value) {
-        passwordOutline1.classList.add('good-outline');
-        passwordOutline2.classList.add('good-outline');
-        document.getElementById('message').innerHTML = '';
-    } else {
-        document.getElementById('message').innerHTML = 'Ups! Your password\'s don\'t match';
-        passwordOutline1.classList.add('bad-outline');
-        passwordOutline2.classList.add('bad-outline');
-        passwordOutline1.classList.remove('good-outline');
-        passwordOutline2.classList.remove('good-outline');
-    }
-    if (document.getElementById('password-type').value == '' &amp;&amp;
-        document.getElementById('password-type2').value == '') {
-        passwordOutline1.classList.remove('good-outline');
-        passwordOutline2.classList.remove('good-outline');
-        passwordOutline1.classList.remove('bad-outline');
-        passwordOutline2.classList.remove('bad-outline');
-        document.getElementById('message').innerHTML = '';
-    }
-}
-document.querySelectorAll('input[type="password"]').forEach(passwordField => {
-    passwordField.addEventListener('input', togglePassword);
-});
-document.querySelectorAll('input[type="password"]').forEach(passwordField => {
-    let toggleImg = passwordField.nextElementSibling.querySelector('img');
-    toggleImg.addEventListener('click', function () {
-        togglePasswordIcon(passwordField, toggleImg);
-    });
-});
-
-/**
- * toogle the type of the inputfield
- */
-function togglePassword() {
-    let passwordField = this;
-    let toggleImg = passwordField.nextElementSibling.querySelector('img');
-
-    if (passwordField.value !== "") {
-        toggleImg.src = "./img/visibility_off.png";
-        passwordField.type = "password";
-    } else {
-        toggleImg.src = "./img/lock.png";
-        passwordField.type = "password";
-    }
-};
-
-/**
- * toggle image in password input to hide or show the input
- * 
- * @param {variable} passwordField - passwordfield input
- * @param {img} toggleImg - image in passwordfield
- */
-function togglePasswordIcon(passwordField, toggleImg) {
-    if (passwordField) {
-        let currentType = passwordField.type;
-        if (passwordField.value !== "") {
-            passwordField.type = (currentType === "password") ? "text" : "password";
-            toggleImg.src = (currentType === "password") ? "./img/visibility.png" : "./img/visibility_off.png";
-        } else {
-            toggleImg.src = "./img/lock.png";
-            passwordField.type = "password";
+        if (containerId) {
+            document.getElementById(containerId).innerHTML += taskHtml;
         }
     }
-};
+}
 
 /**
- * Showing red border in inputfield if password is wrong
+ * Clears the HTML content of each category container.
  */
-function wrongPassword() {
-    let warning = document.getElementById('wrong-pw');
-    let input = document.getElementById('password-parent');
+function clearHTML() {
+    document.getElementById("toDo").innerHTML = "";
+    document.getElementById("inProgress").innerHTML = "";
+    document.getElementById("awaitFeedback").innerHTML = "";
+    document.getElementById("done").innerHTML = "";
+}
 
-    if (warning.classList !== "d-none") {
-        warning.classList.remove("d-none");
-        input.classList.add("bad-outline");
+/**
+ * Updates the "no task" message for a specific category if there are no tasks.
+ * @param {string} containerId - The container ID to update the message for.
+ * @param {string} message - The message to display.
+ */
+function updateNoTaskMessage(containerId, message) {
+    const container = document.getElementById(containerId);
+    const hasTasks = container.children.length > 0;
+    const noTaskMessage = container.querySelector(".board-no-task");
+    if (!hasTasks &amp;&amp; !noTaskMessage) {
+        container.innerHTML += /*html*/ `
+            &lt;div class="board-content">
+                &lt;div class="board-no-task">${message}&lt;/div>
+            &lt;/div>
+        `;
+    } else if (hasTasks &amp;&amp; noTaskMessage) {
+        noTaskMessage.parentNode.remove();
     }
-};</code></pre>
+}
+
+/**
+ * Generates HTML content for editing and deleting task options.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML content for the edit and delete section.
+ */
+function renderEditAndDeleteSection(task) {
+    let ContentHTML = "";
+    ContentHTML += /*html*/ `
+        &lt;button class="dbt-button" onclick="deleteTask(${task.taskId})">
+            &lt;div class="delete-contact-img-form">&lt;/div>
+            &lt;div class="dbt-button-text">Delete&lt;/div>
+        &lt;/button>
+        &lt;img class="dbt-button-separator" src="./img/vector-board-form.png" alt="vertical-line-dbt">
+        &lt;button class="dbt-button" onclick="editTask(${task.taskId})">
+            &lt;div class="edit-contact-img-form">&lt;/div>
+            &lt;div class="dbt-button-text">Edit&lt;/div>
+        &lt;/button>
+    `;
+    return ContentHTML;
+}
+
+/**
+ * Renders the subtasks of a task.
+ * @param {Object} task - The task object.
+ * @returns {string} HTML content of subtasks.
+ */
+function subTasksRender(task) {
+    let subtasksHtml = "";
+    for (let i = 0; i &lt; task["subtasks"].length; i++) {
+        const subtask = task["subtasks"][i];
+        let imagePath;
+        if (subtask.isChecked) {
+            imagePath = "./img/checkmark.png";
+        } else {
+            imagePath = "./img/checkmark-unchecked.png";
+        }
+        subtasksHtml += /*html */ `
+            &lt;div onclick="subtaskStatus(${task.taskId}, ${subtask.subtaskId})" class="dbt-subtask-group">
+                &lt;img class="dbt-subtask-img" src="${imagePath}" alt="check-button-complete">
+                &lt;div class="dbt-subtask-text">${subtask.subtasksText}&lt;/div>
+            &lt;/div>
+        `;
+    }
+    return subtasksHtml;
+}
+
+/**
+ * Generates HTML content for displaying user initials.
+ * @param {Array} subUsers - The array of user objects.
+ * @returns {string} HTML content of user initials.
+ */
+function generateSubUsersHtml(subUsers) {
+    let subUserNamesHtml = "";
+
+    if (subUsers &amp;&amp; subUsers.length > 0) {
+        subUsers.forEach((user) => {
+            const initials = getFirstLastInitial(user.name);
+            const fullName = user.name;
+            subUserNamesHtml += /*html*/ `
+                &lt;div class="dbt-contact-group">
+                        &lt;div class="dbt-contact-profile bgc-${user["bgc-name"]}">${initials}&lt;/div>
+                        &lt;div class="dbt-contact-name">${fullName}&lt;/div>
+                &lt;/div>
+            `;
+        });
+    } else {
+        subUserNamesHtml = '&lt;div class="dbt-contact-name">No users assigned&lt;/div>';
+    }
+    return subUserNamesHtml;
+}
+
+/**
+ * Generates HTML for user initials to be displayed on the task card.
+ * @param {Array} subUsers - The array of user objects.
+ * @returns {string} HTML content of user initials for the task card.
+ */
+function generateUserInitialsHtml(subUsers) {
+    if (subUsers === undefined) {
+        return;
+    } else {
+        let userInitialsHtml = "";
+        for (let user of subUsers) {
+            const initials = getFirstLastInitial(user.name);
+            userInitialsHtml += `&lt;div class="board-card-user bgc-${user["bgc-name"]}">${initials}&lt;/div>`;
+        }
+        return userInitialsHtml;
+    }
+}
+
+/**
+ * Shows the priority icon for a task based on its priority level.
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string of the priority icon.
+ */
+function showPriority(task) {
+    if (task.priority === "Urgent") {
+        return '&lt;img src="./img/urgent-board.png">&lt;/img>';
+    } else if (task.priority === "Medium") {
+        return '&lt;img src="./img/medium-board.png">&lt;/img>';
+    } else if (task.priority === "Low") {
+        return '&lt;img src="./img/low-board.png">&lt;/img>';
+    }
+}</code></pre>
         </article>
     </section>
 
