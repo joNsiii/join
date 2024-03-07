@@ -89,7 +89,12 @@ async function verifyEditedContact(j, mail) {
 }
 
 
-// jsdoc
+/**
+ * Shows the edited contact list.
+ * @param {number} j - The editing contact's id.
+ * @param {String} mail - The edited mail address.
+ * @param {Boolean} isUserMail - True or false.
+ */
 async function showEditedContactList(j, mail, isUserMail) {
     await updateUserData(j, isUserMail);
     closeSavedContact('edit');
@@ -98,7 +103,11 @@ async function showEditedContactList(j, mail, isUserMail) {
 }
 
 
-// jsdoc
+/**
+ * Updates a contact's data.
+ * @param {number} j - The updating contact's id.
+ * @param {Boolean} isUserMail - True or false.
+ */
 async function updateUserData(j, isUserMail) {
     await editContactInfo(j, 'name');
     await editContactInfo(j, 'mail');
