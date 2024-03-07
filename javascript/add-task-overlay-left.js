@@ -350,7 +350,7 @@ function renderAssigendSubuser() {
         let subBgc = "bgc-" + sub_users[j]['bgc-name'];
         let contactId = sub_users[j]["userIdIterate"];
         let subProfileName = sub_users[j].name;
-        let letterGroup = userInitials(subProfileName);
+        let letterGroup = getFirstLastInitial(subProfileName);
         subProfile.innerHTML += `
         <div class="sub-profile-img-overlay sub-p-overlay ${subBgc}" id="contact-id-${contactId}"onclick="removeSubPB(${contactId})">${letterGroup}</div>
       `;
