@@ -101,10 +101,7 @@ function renderUserProfile() {
     const subProfileContainer = document.getElementById("sub-profile");
     subProfileContainer.innerHTML = "";
     selectedUsers.forEach((user) => {
-        const initials = user.name
-            .match(/(\b\S)?/g)
-            .join("")
-            .toUpperCase();
+        const initials = getFirstLastInitial(user.name);
         subProfileContainer.innerHTML += `
         <div class="board-card-user-edit bgc-${user["bgc-name"]}">${initials}</div>
         `;
@@ -160,7 +157,7 @@ function updateUIForBlur(subtaskId, taskId, currentSubtaskValue) {
  * @param {string} priority The priority of the task ('Low', 'Medium', 'Urgent').
  */
 function setPrioritySelection(priority) {
-    resetPrioritySelection(); 
+    resetPrioritySelection();
 
     const priorityElement = document.getElementById(priority);
     let lowImg = document.getElementById("low-img");

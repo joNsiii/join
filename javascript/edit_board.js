@@ -278,7 +278,7 @@ function editAssignedToUser(task) {
  * @param {number} i The index of the user in the user interface.
  */
 function selectUser(id, i) {
-    let userObject = users.find((u) => u.userId === id);
+    let userObject = assignableContacts.find((u) => u.userId === id);
     let isUserAlreadySelected = selectedUsers.some((selectedUser) => selectedUser.userId === id);
     if (!isUserAlreadySelected) {
         // if user not selected push in array
@@ -317,11 +317,11 @@ function toggleSelectedUser(id, i) {
 function getSelectedUsers(task, selectField) {
     let selectedUsers = task.sub_users;
 
-    for (let i = 0; i < users.length; i++) {
-        let user = users[i].name;
-        let bgc = users[i]["bgc-name"];
-        let userId = users[i].userId;
-        let initials = users[i].initials
+    for (let i = 0; i < assignableContacts.length; i++) {
+        let user = assignableContacts[i].name;
+        let bgc = assignableContacts[i]["bgc-name"];
+        let userId = assignableContacts[i].userId;
+        let initials = getFirstLastInitial(assignableContacts[i].name);
         selectField.innerHTML += generateHTMLUser(i, userId, bgc, user, selectedUsers, initials);
     }
 }

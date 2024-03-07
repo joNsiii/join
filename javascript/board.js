@@ -19,6 +19,7 @@ async function boardInit() {
     await init();
     await applyGuestSettings();
     await loadTasksInBoard();
+    await loadAssignableContacts();
     renderEachTask();
 }
 /**

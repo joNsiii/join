@@ -35,6 +35,7 @@ async function loadTasks() {
  * Loads the assignable contacts.
  */
 async function loadAssignableContacts() {
+    assignableContacts = [];
     getAssignableUser();
     getAssignableContacts();
 }
@@ -45,6 +46,7 @@ async function loadAssignableContacts() {
  */
 function getAssignableUser() {
     let user = currentUserData;
+    user['userId'] = 0;
     if (user.name.includes(' (You)')) {
         assignableContacts.push(user);
     } else {
@@ -61,6 +63,7 @@ function getAssignableContacts() {
     let contacts = currentUserData.contacts;
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
+        contact['userId'] = i + 1;
         assignableContacts.push(contact);
     }
 }
@@ -177,14 +180,17 @@ function fillSelectAssignedTo(assignElement) {
  */
 function getFirstLastInitial(name) {
     let last;
-    if (!name.includes(' (You)')) {
-        name = name.split(' ');
-        last = name.length - 1;
-    } else {
+    if (name.includes(' ') && name.includes(' (You)')) {
         name = name.split(' ');
         last = name.length - 2;
+        return name[0][0] + name[last][0]
+    } else if (name.includes(' ')) {
+        name = name.split(' ');
+        last = name.length - 1;
+        return name[0][0] + name[last][0]
+    } else {
+        return name[0];
     }
-    return name[0][0] + name[last][0]
 }
 
 

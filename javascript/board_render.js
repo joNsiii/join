@@ -154,7 +154,7 @@ function generateSubUsersHtml(subUsers) {
 
     if (subUsers && subUsers.length > 0) {
         subUsers.forEach((user) => {
-            const initials = user.name.match(/(\b\S)?/g).join("").toUpperCase();
+            const initials = getFirstLastInitial(user.name);
             const fullName = user.name;
             subUserNamesHtml += /*html*/ `
                 <div class="dbt-contact-group">
@@ -180,10 +180,7 @@ function generateUserInitialsHtml(subUsers) {
     } else {
         let userInitialsHtml = "";
         for (let user of subUsers) {
-            const initials = user.name
-                .match(/(\b\S)?/g)
-                .join("")
-                .toUpperCase();
+            const initials = getFirstLastInitial(user.name);
             userInitialsHtml += `<div class="board-card-user bgc-${user["bgc-name"]}">${initials}</div>`;
         }
         return userInitialsHtml;
