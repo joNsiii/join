@@ -76,9 +76,11 @@ async function updateEditedContactList(j) {
  * @param {String} mail The edited mail address.
  */
 async function verifyEditedContact(j, mail) {
-    let thisMail = mail === userContacts[j].mail;
-    let userMail = mail === currentUserData.email;
-    if (!thisMail && userMail) {
+    let user = users.find(u => u.userId == userId);
+    let isUserMail = user.email === mail;
+    let isOthersMail = userContacts.find(c => c.mail === mail);
+    let isThisMail = userContacts[j].mail === mail;
+    if ((isUserMail || isOthersMail) && !isThisMail) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
         showEditedContactList(j, mail);
