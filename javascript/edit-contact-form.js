@@ -83,32 +83,30 @@ async function verifyEditedContact(j, mail) {
     if ((isUserMail || isOthersMail) && !isThisMail) {
         showBacklogContactForm('edit', 'Email already existing');
     } else {
-        showEditedContactList(j, mail);
+        showEditedContactList(j, mail, isUserMail);
     }
 }
 
 
-/**
- * Shows the edited contact list.
- * @param {number} j - The editing contact's id.
- * @param {String} mail - The edited mail address.
- */
-async function showEditedContactList(j, mail) {
-    await updateUserData(j);
+// jsdoc
+async function showEditedContactList(j, mail, isUserMail) {
+    await updateUserData(j, isUserMail);
     closeSavedContact('edit');
     await initContactsUser();
     showEditedContact(mail);
 }
 
 
-/**
- * Updates the edited contact's data.
- * @param {number} j - The editing contact's id.
- */
-async function updateUserData(j) {
-    editContactInfo(j, 'name');
-    editContactInfo(j, 'mail');
-    editContactInfo(j, 'phone');
+// jsdoc
+async function updateUserData(j, isUserMail) {
+    await editContactInfo(j, 'name');
+    await editContactInfo(j, 'mail');
+    await editContactInfo(j, 'phone');
+    if (isUserMail) {
+        let user = users.find(u => u.userId === userId);
+        saveUserInfo(user);
+        await setItem('users', users);
+    }
     await saveUserContacts();
 }
 
@@ -118,7 +116,7 @@ async function updateUserData(j) {
  * @param {number} j - The editing contact's id.
  * @param {String} info - The requested element's id.
  */
-function editContactInfo(j, info) {
+async function editContactInfo(j, info) {
     let value = getInputValue(`edit-contact-${info}`);
     userContacts[j][info] = value;
 }
