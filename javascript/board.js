@@ -20,6 +20,7 @@ async function boardInit() {
     await applyGuestSettings();
     await loadTasksInBoard();
     await loadAssignableContacts();
+    await removeDeletedSubusers();
     renderEachTask();
 }
 /**
@@ -336,3 +337,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+/**
+ * Removes deleted subusers.
+ */
+async function removeDeletedSubusers() {
+    for (let i = 0; i < boardTasks.length; i++) {
+        let subusers = boardTasks[i].sub_users;
+        for (let j = 0; j < subusers.length; j++) {
+            let subuser = subusers[j];
+            let isExisting = assignableContacts.find(u => u.mail === subuser.mail);
+            if (!isExisting) {
+                boardTasks[i]['sub_users'].splice(j, 1);
+            }
+        }
+    }
+    await setItem('boardTasks', boardTasks);
+}

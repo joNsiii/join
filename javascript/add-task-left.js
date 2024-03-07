@@ -289,6 +289,7 @@ function addSubuser(i, checkBox, background, subuserTemp, subUserIdTemp) {
         userIdIterate: i,
         userId: subUserIdTemp,
         name: subuserTemp.name,
+        mail: subuserTemp.mail,
         "bgc-name": subuserTemp["bgc-name"],
     });
 }

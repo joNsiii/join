@@ -305,6 +305,7 @@ function pushAssignedContact(i) {
             userIdIterate: i,
             userId: i,
             name: contact.name,
+            mail: contact.mail,
             "bgc-name": contact["bgc-name"]
         }
     );

@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="animateSavedContact"><span class="type-signature"></span>animateSavedContact<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="allowDrop"><span class="type-signature"></span>allowDrop<span class="signature">(event)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,144 @@
 
 
 <div class="description">
-    Animates the closing of a dialog window.
+    Allows dropping of a task card into a category.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The drag event.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line233">line 233</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="applyGuestSettings"><span class="type-signature">(async) </span>applyGuestSettings<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies settings for guest users such as disabling the task addition button and hiding task management icons.
 </div>
 
 
@@ -156,7 +293,640 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line228">line 228</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="basicTaskDetails"><span class="type-signature"></span>basicTaskDetails<span class="signature">(task, dialog)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Inserts basic task details into the dialog.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dialog</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dialog element.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="boardInit"><span class="type-signature">(async) </span>boardInit<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initializes the board by loading tasks and applying guest settings.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkCategory"><span class="type-signature"></span>checkCategory<span class="signature">(task, containerId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Determines the tasks category and assigns it to the correct container.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>containerId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the container where the task belongs.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteTask"><span class="type-signature">(async) </span>deleteTask<span class="signature">(taskId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Deletes a task from the board.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task to delete.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line119">line 119</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDraggedElementData"><span class="type-signature"></span>getDraggedElementData<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    gets the HTML data of the currently dragged element.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line288">line 288</a>
     </li></ul></dd>
     
 
@@ -185,10 +955,22 @@
 
         
 <div class="param-desc">
-    - The css code for the element 'dialog-contacts-position'.
+    HTML content of the dragged element.
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -202,7 +984,7 @@
     
 
     
-    <h4 class="name" id="closeContactSettings"><span class="type-signature"></span>closeContactSettings<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="highlight"><span class="type-signature"></span>highlight<span class="signature">(event, category)</span><span class="type-signature"></span></h4>
     
 
     
@@ -210,7 +992,487 @@
 
 
 <div class="description">
-    Closes the contact settings' dialog.
+    Highlights a drop area when a task card is dragged over it.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dragover event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The category being dragged over.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line258">line 258</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="insertSubTasks"><span class="type-signature"></span>insertSubTasks<span class="signature">(task, dialog)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Inserts sub-tasks and sub-users names into the dialog.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dialog</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dialog element.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line161">line 161</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="insertTaskDataIntoDialog"><span class="type-signature"></span>insertTaskDataIntoDialog<span class="signature">(task, dialog)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    inserts task data into a dialog for viewing.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object to insert data for.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dialog</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dialog element to insert data into.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line131">line 131</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="loadTasksInBoard"><span class="type-signature">(async) </span>loadTasksInBoard<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Loads tasks into the board from storage.
 </div>
 
 
@@ -254,7 +1516,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line305">line 305</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -290,7 +1552,7 @@
     
 
     
-    <h4 class="name" id="closeEditContact"><span class="type-signature"></span>closeEditContact<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="moveTo"><span class="type-signature"></span>moveTo<span class="signature">(category)</span><span class="type-signature"></span></h4>
     
 
     
@@ -298,7 +1560,281 @@
 
 
 <div class="description">
-    Closes the edit contact form.
+    Moves a dragged task to a specified category.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The category to move the task to.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line240">line 240</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="openDetails"><span class="type-signature">(async) </span>openDetails<span class="signature">(taskId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens the task details dialog for editing or viewing.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task to open details for.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="removeDeletedSubusers"><span class="type-signature">(async) </span>removeDeletedSubusers<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes deleted subusers.
 </div>
 
 
@@ -342,7 +1878,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line52">line 52</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -378,7 +1914,7 @@
     
 
     
-    <h4 class="name" id="closeSavedContact"><span class="type-signature"></span>closeSavedContact<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="removeHighlight"><span class="type-signature"></span>removeHighlight<span class="signature">(event, category)</span><span class="type-signature"></span></h4>
     
 
     
@@ -386,7 +1922,502 @@
 
 
 <div class="description">
-    Closes a dialog after saving an edited contact.
+    removes highlight from a drop area when a task card is dragged away.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dragleave event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The category being dragged away from.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line275">line 275</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="searchForTask"><span class="type-signature"></span>searchForTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    searches for a task based on user input and updates the board with matching tasks.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line302">line 302</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setCategoryStyle"><span class="type-signature"></span>setCategoryStyle<span class="signature">(heading)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the category style class for a task based on its heading.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>heading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task heading.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The class name for the task category.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setupCloseDialogMechanism"><span class="type-signature"></span>setupCloseDialogMechanism<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    sets up mechanisms to close the task details dialog and render all tasks.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line200">line 200</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="startDragging"><span class="type-signature"></span>startDragging<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initiates dragging of a task card.
 </div>
 
 
@@ -428,7 +2459,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">number</span>
 
 
             
@@ -438,7 +2469,7 @@
 
             
 
-            <td class="description last">The closing dialog's id.</td>
+            <td class="description last">The ID of the task being dragged.</td>
         </tr>
 
     
@@ -479,7 +2510,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line211">line 211</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line226">line 226</a>
     </li></ul></dd>
     
 
@@ -515,7 +2546,7 @@
     
 
     
-    <h4 class="name" id="deleteUserContact"><span class="type-signature">(async) </span>deleteUserContact<span class="signature">(j)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="subtaskStatus"><span class="type-signature">(async) </span>subtaskStatus<span class="signature">(taskId, subtaskId)</span><span class="type-signature"></span></h4>
     
 
     
@@ -523,7 +2554,7 @@
 
 
 <div class="description">
-    Deletes a user's contact.
+    Toggles the completion status of a subtask.
 </div>
 
 
@@ -559,7 +2590,7 @@
 
         <tr>
             
-                <td class="name"><code>j</code></td>
+                <td class="name"><code>taskId</code></td>
             
 
             <td class="type">
@@ -575,128 +2606,14 @@
 
             
 
-            <td class="description last">The deleting contact's id.</td>
+            <td class="description last">The parent task ID.</td>
         </tr>
 
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line258">line 258</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="editContactInfo"><span class="type-signature">(async) </span>editContactInfo<span class="signature">(j, info)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Edits the editing contact's information.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>j</code></td>
+                <td class="name"><code>subtaskId</code></td>
             
 
             <td class="type">
@@ -712,30 +2629,7 @@
 
             
 
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>info</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The requested element's id.</td>
+            <td class="description last">The subtask ID to toggle status for.</td>
         </tr>
 
     
@@ -776,7 +2670,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line129">line 129</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line174">line 174</a>
     </li></ul></dd>
     
 
@@ -812,7 +2706,7 @@
     
 
     
-    <h4 class="name" id="getUserContactData"><span class="type-signature"></span>getUserContactData<span class="signature">(userContact)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="updateAllNoTaskMessages"><span class="type-signature"></span>updateAllNoTaskMessages<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -820,7 +2714,95 @@
 
 
 <div class="description">
-    Provides a user contact's saving data.
+    Updates the "no task" messages for all categories.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateProgressBar"><span class="type-signature"></span>updateProgressBar<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the progress bar for a task based on the completion status of its subtasks.
 </div>
 
 
@@ -856,13 +2838,13 @@
 
         <tr>
             
-                <td class="name"><code>userContact</code></td>
+                <td class="name"><code>task</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -872,7 +2854,7 @@
 
             
 
-            <td class="description last">The providing json.</td>
+            <td class="description last">The task to update the progress for.</td>
         </tr>
 
     
@@ -913,2298 +2895,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line167">line 167</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - A user contact's saving data.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getUserName"><span class="type-signature"></span>getUserName<span class="signature">(contact)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Provides the user's name without ' (You)'.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>contact</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">json</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The providing json.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line197">line 197</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The user's name without ' (You)'.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="openContactSettings"><span class="type-signature"></span>openContactSettings<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Opens the contact settings' dialog.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line296">line 296</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="pushUserContacts"><span class="type-signature"></span>pushUserContacts<span class="signature">(user)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Pushes the user's contacts to the global json.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">json</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The receiving json.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line150">line 150</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="removeUserContact"><span class="type-signature">(async) </span>removeUserContact<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Removes a contact from the user's data.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line272">line 272</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="renderEditForm"><span class="type-signature"></span>renderEditForm<span class="signature">(j)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Renders the edit contact form's input values.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="renderEditFormInfo"><span class="type-signature"></span>renderEditFormInfo<span class="signature">(j, info)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Renders an edit contact form's input value.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>info</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The requested element's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="renderEditFormProfile"><span class="type-signature"></span>renderEditFormProfile<span class="signature">(j)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Renders the edit contact form's profile.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="resetDialogs"><span class="type-signature"></span>resetDialogs<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Closes all dialog windows.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line285">line 285</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="saveUserContacts"><span class="type-signature">(async) </span>saveUserContacts<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Saves the user contacts.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line138">line 138</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="saveUserInfo"><span class="type-signature"></span>saveUserInfo<span class="signature">(user)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Saves the user's info.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">json</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The saving json.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line182">line 182</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showBacklogContactForm"><span class="type-signature"></span>showBacklogContactForm<span class="signature">(id, message)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the backlog of the contact forms.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The showing backlog's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The showing backlog's message.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line318">line 318</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showEditContactForm"><span class="type-signature"></span>showEditContactForm<span class="signature">(j)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the edit contact form.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line5">line 5</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showEditedContact"><span class="type-signature"></span>showEditedContact<span class="signature">(mail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the edited contact in the contact viewer.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The showing contact's mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line242">line 242</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showEditedContactList"><span class="type-signature">(async) </span>showEditedContactList<span class="signature">(j, mail, isUserMail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Shows the edited contact list.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The edited mail address.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isUserMail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">True or false.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line98">line 98</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateEditedContactList"><span class="type-signature">(async) </span>updateEditedContactList<span class="signature">(j)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Updates the contact list after editing.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line64">line 64</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateUserData"><span class="type-signature">(async) </span>updateUserData<span class="signature">(j, isUserMail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Updates a contact's data.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The updating contact's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isUserMail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">True or false.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line111">line 111</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="verifyEditedContact"><span class="type-signature">(async) </span>verifyEditedContact<span class="signature">(j, mail)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Verfies the edited contact's input values.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>j</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The editing contact's id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The edited mail address.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edit-contact-form.js.html">edit-contact-form.js</a>, <a href="edit-contact-form.js.html#line78">line 78</a>
+        <a href="board.js.html">board.js</a>, <a href="board.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -3250,13 +2941,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#animateSavedContact">animateSavedContact</a></li><li><a href="global.html#closeContactSettings">closeContactSettings</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeSavedContact">closeSavedContact</a></li><li><a href="global.html#deleteUserContact">deleteUserContact</a></li><li><a href="global.html#editContactInfo">editContactInfo</a></li><li><a href="global.html#getUserContactData">getUserContactData</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#openContactSettings">openContactSettings</a></li><li><a href="global.html#pushUserContacts">pushUserContacts</a></li><li><a href="global.html#removeUserContact">removeUserContact</a></li><li><a href="global.html#renderEditForm">renderEditForm</a></li><li><a href="global.html#renderEditFormInfo">renderEditFormInfo</a></li><li><a href="global.html#renderEditFormProfile">renderEditFormProfile</a></li><li><a href="global.html#resetDialogs">resetDialogs</a></li><li><a href="global.html#saveUserContacts">saveUserContacts</a></li><li><a href="global.html#saveUserInfo">saveUserInfo</a></li><li><a href="global.html#showBacklogContactForm">showBacklogContactForm</a></li><li><a href="global.html#showEditContactForm">showEditContactForm</a></li><li><a href="global.html#showEditedContact">showEditedContact</a></li><li><a href="global.html#showEditedContactList">showEditedContactList</a></li><li><a href="global.html#updateEditedContactList">updateEditedContactList</a></li><li><a href="global.html#updateUserData">updateUserData</a></li><li><a href="global.html#verifyEditedContact">verifyEditedContact</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#applyGuestSettings">applyGuestSettings</a></li><li><a href="global.html#basicTaskDetails">basicTaskDetails</a></li><li><a href="global.html#boardInit">boardInit</a></li><li><a href="global.html#checkCategory">checkCategory</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#getDraggedElementData">getDraggedElementData</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#insertSubTasks">insertSubTasks</a></li><li><a href="global.html#insertTaskDataIntoDialog">insertTaskDataIntoDialog</a></li><li><a href="global.html#loadTasksInBoard">loadTasksInBoard</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openDetails">openDetails</a></li><li><a href="global.html#removeDeletedSubusers">removeDeletedSubusers</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#searchForTask">searchForTask</a></li><li><a href="global.html#setCategoryStyle">setCategoryStyle</a></li><li><a href="global.html#setupCloseDialogMechanism">setupCloseDialogMechanism</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#subtaskStatus">subtaskStatus</a></li><li><a href="global.html#updateAllNoTaskMessages">updateAllNoTaskMessages</a></li><li><a href="global.html#updateProgressBar">updateProgressBar</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 07 2024 15:55:01 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 07 2024 16:39:22 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
