@@ -1,0 +1,49 @@
+<section class="contact-viewer-mobile" onclick="stop(event)">
+    <img class="close-contact-viewer" src="./img/arrow-left-line.png" alt="arrow-left-line"
+        onclick="closeContactViewerMobile()">
+
+    <div class="contact-viewer-header-mobile">
+        <h1 class="contact-viewer-headline-mobile">Contacts</h1>
+        <div class="contact-viewer-subheadline-mobile">Better with a team</div>
+        <img class="contact-viewer-img-mobile" src="./img/underline-dialog.png" alt="underline-dialog">
+    </div>
+
+    <div class="contact-user-mobile">
+        <div class="contact-user-header-mobile">
+            <div id="contact-user-profile-mobile" class="contact-user-profile-mobile bgc-flexible">AM</div>
+            <div id="contact-user-name-mobile" class="contact-user-name-mobile">Anton Mayer</div>
+        </div>
+        <div class="contact-user-info-mobile">
+            Contact Information
+        </div>
+        <div class="contact-user-detail-group">
+            <div class="contact-user-detail">
+                <div class="user-detail-title">Email</div>
+                <a id="contact-user-mail-mobile" class="user-detail-mail">anton@gmail.com</a>
+            </div>
+            <div class="contact-user-detail">
+                <div class="user-detail-title">Phone</div>
+                <a id="contact-user-phone-mobile" class="user-detail-phone">+ 49 1111 111 11 1</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="contact-settings-button-mobile" onclick="openContactSettings()">
+        <img class="contact-settings-img" src="./img/more-vert.png" alt="more-vert">
+    </button>
+
+    <dialog id="dialog-contact-settings" class="dialog-contact-settings" onclick="closeContactSettings()">
+        <section id="section-contact-settings" class="section-contact-settings" onclick="stop(event)">
+            <button id="edit-contact-button-mobile" class="contact-settings-button">
+                <div class="edit-contact-img"></div>
+                <div class="contact-button-text">Edit</div>
+            </button>
+            <button id="delete-contact-button-mobile" class="contact-settings-button">
+                <div class="delete-contact-img"></div>
+                <div class="contact-button-text">Delete</div>
+            </button>
+        </section>
+    </dialog>
+
+    <div id="backlog-contact-mobile" class="backlog-contact backlog-contact-animation">Contact succesfully created</div>
+</section>

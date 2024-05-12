@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: delete-contact-form.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: delete-contact-form.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Opens the delete contact form's dialog.
+ * @param {number} j - The deleting contact's id.
+ */
+function openDialogDeleteContact(j) {
+    openDialog('dialog-delete-contact');
+    renderDeletingConfirmation(j);
+}
+
+
+/**
+ * Renders the deleting confirmation.
+ * @param {number} j - The deleting contact's id.
+ */
+function renderDeletingConfirmation(j) {
+    let name = getJsonObjectDeepValue(userContacts, j, 'name');
+    let isUser = (name.includes(' (You)'));
+    (!isUser) ? renderDeleteContactForm(j) : renderDeleteUserForm(j);
+    setClass('delete-contact-form', addClass, 'd-none');
+}
+
+
+/**
+ * Renders the delete contact form.
+ * @param {number} j - The deleting contact's id.
+ */
+function renderDeleteContactForm(j) {
+    renderDeleteContactMessage(j, true);
+    renderDeleteContactButtonBar(j, true);
+}
+
+
+/**
+ * Renders the deleting confirmation's message.
+ */
+function renderDeleteContactMessage(j, isContact) {
+    let messageBox = getElement('deleting-confirmation-message');
+    messageBox.innerHTML = `
+        ${generateDeletingMessage(j, isContact)}
+    `;
+}
+
+
+/**
+ * Generates the deleting confirmation's message.
+ * @param {number} j - The deleting contact's id.
+ * @param {Boolean} isContact - True or false.
+ * @returns - The appropriate function to generate the deleting confirmation's message.
+ */
+function generateDeletingMessage(j, isContact) {
+    return (isContact) ? generateDeleteContactMessage(j) : generateDeleteUserMessage();
+}
+
+
+/**
+ * Generates the deleting confirmation's message of a contact.
+ * @param {number} j - The deleting contact's id.
+ * @returns - The inner html code for the element 'deleting-confirmation-message'.
+ */
+function generateDeleteContactMessage(j) {
+    let name = getJsonObjectDeepValue(userContacts, j, 'name');
+    return `
+        Are you sure to remove&lt;br>
+        &lt;b id="deleting-contact-name" class="deleting-contact-name">${name}&lt;/b>&lt;br>
+        from your contacts?
+    `;
+}
+
+
+/**
+ * Renders the delete contact form's button bar.
+ * @param {number} j - The deleting contact's id.
+ * @param {Boolean} isContact - True or false.
+ */
+function renderDeleteContactButtonBar(j, isContact) {
+    let onclick = (isContact) ? `deleteUserContact(${j})` : `renderDeleteAccountConfirmation(${j})`;
+    let name = (isContact) ? 'Delete' : 'Confirm';
+    let buttonBar = getElement('contact-form-button-bar');
+    buttonBar.innerHTML = `
+        ${generateContactFormCancelButton(isContact)}
+        ${generateContactFormDeleteButton(onclick, name)}
+    `;
+}
+
+
+/**
+ * Generates the delete contact form's cancel button.
+ * @param {Boolean} isContact - True or false.
+ * @returns The inner html code for the element 'contact-form-button-bar'.
+ */
+function generateContactFormCancelButton(isContact) {
+    let onclick = (isContact) ? `closeDialog('dialog-delete-contact')` : `closeDeleteContact()`;
+    return `
+        &lt;button class="contact-form-button" onclick="${onclick}">
+            &lt;div class="contact-form-button-text">Cancel&lt;/div>
+        &lt;/button>
+    `;
+}
+
+
+/**
+ * Generates the delete contact form's delete button.
+ * @param {String} onclick - The onclick attribute's value.
+ * @param {String} name - The button's name.
+ * @returns - The inner html code for the element 'contact-form-button-bar'.
+ */
+function generateContactFormDeleteButton(onclick, name) {
+    return `
+        &lt;button id="dialog-delete-contact-button" class="contact-form-button-dark" onclick="${onclick}">
+            &lt;div id="delete-contact-button-name" class="contact-form-button-dark-text">${name}&lt;/div>
+        &lt;/button>
+    `;
+}
+
+
+/**
+ * Renders the delete user form.
+ * @param {number} j - The deleting user's id.
+ */
+function renderDeleteUserForm(j) {
+    renderDeleteContactMessage(j, false);
+    renderDeleteContactButtonBar(j, false);
+}
+
+
+/**
+ * Generates the deleting confirmation's message of the user.
+ * @returns - The inner html code for the element 'deleting-confirmation-message'.
+ */
+function generateDeleteUserMessage() {
+    return `
+        Are you sure to delete&lt;br>
+        &lt;b id="deleting-contact-name" class="deleting-contact-name c-lightblue">your account&lt;/b>&lt;br>
+        irreversibly?
+    `;
+}
+
+
+/**
+ * Renders the delete account confirmation.
+ * @param {number} j - The deleting user's id.
+ */
+function renderDeleteAccountConfirmation(j) {
+    renderDeleteAccountMessage();
+    setDeleteAccountForm(j);
+    renderDeleteAccountButtonBar(j);
+}
+
+
+/**
+ * Renders the delete account message.
+ */
+function renderDeleteAccountMessage() {
+    let messageBox = getElement('deleting-confirmation-message');
+    messageBox.innerHTML = `
+        Please enter &lt;b class="c-lightblue">email&lt;/b> and &lt;b class="c-lightblue">password&lt;/b> to resign your join account.
+    `;
+}
+
+
+/**
+ * Sets the delete account form.
+ * @param {number} j - The deleting user's id.
+ */
+function setDeleteAccountForm(j) {
+    setClass('delete-contact-form', removeClass, 'd-none');
+    setElementAttribute('delete-contact-form', 'onsubmit', `verifyDeleteAccountForm(${j}); return false`);
+}
+
+
+/**
+ * Renders the delete user account button bar.
+ * @param {number} j - The deleting user's id.
+ */
+function renderDeleteAccountButtonBar(j) {
+    let buttonBar = getElement('contact-form-button-bar');
+    buttonBar.innerHTML = `
+        ${generateContactFormCancelButton(false)}
+        ${generateContactFormSubmitButton()}
+    `;
+}
+
+
+/**
+ * Generates the delete contact form's submit button.
+ * @returns - The inner html code for the element 'contact-form-button-bar'.
+ */
+function generateContactFormSubmitButton() {
+    return `
+        &lt;button id="dialog-delete-contact-button" class="contact-form-button-dark" type="submit" form="delete-contact-form">
+            &lt;div id="delete-contact-button-name" class="contact-form-button-dark-text">Delete&lt;/div>
+        &lt;/button>
+    `;
+}
+
+
+/**
+ * Verifies the delete contact form's input values.
+ * @param {number} j The deleting user's id.
+ */
+async function verifyDeleteAccountForm(j) {
+    let email = getInputValue('deleting-account-mail');
+    let password = getInputValue('deleting-account-password');
+    if (email == currentUserData.email &amp;&amp; password == currentUserData.password) {
+        showDeleteAccountConfirmation();
+        redirectToLoginPage();
+        deleteUserAccount();
+    } else {
+        showUpWrongUserInput(email, password);
+    }
+}
+
+
+/**
+ * Shows the delete account confirmation.
+ */
+function showDeleteAccountConfirmation() {
+    let dialog = getElement('deleting-confirmation');
+    dialog.innerHTML = `
+        &lt;p class="deleting-confirmation-message">
+            Your user account&lt;br>
+            &lt;b class="c-lightblue">${currentUserData.name}&lt;/b>&lt;br>
+            was successfully deleted.&lt;br>
+            &lt;br>
+            Please await logout.
+        &lt;/p>
+    `;
+}
+
+
+/**
+ * Redirects to the login page.
+ */
+function redirectToLoginPage() {
+    setTimeout(() => {
+        window.location.href = `./login.html`;
+    }, 800);
+}
+
+
+/**
+ * Deletes the user's account.
+ */
+async function deleteUserAccount() {
+    let user = users.find(u => u.userId == userId);
+    let userIndex = users.indexOf(user);
+    users.splice(userIndex, 1);
+    await setItem('users', users);
+}
+
+
+/**
+ * Shows up a wrong input value.
+ * @param {String} email - The entered email address.
+ * @param {String} password - The entered password.
+ */
+function showUpWrongUserInput(email, password) {
+    highlightWrongUserInput('mail', false);
+    highlightWrongUserInput('password', false);
+    if (email != currentUserData.email) {
+        highlightWrongUserInput('mail', true);
+    }
+    if (password != currentUserData.password) {
+        highlightWrongUserInput('password', true);
+    }
+}
+
+
+/**
+ * Highlights a wrong input.
+ * @param {String} info - The input element's id.
+ * @param {String} logical - True or false.
+ */
+function highlightWrongUserInput(info, logical) {
+    if (logical) {
+        setClass(`delete-user-${info}`, addClass, 'delete-contact-input-wrong');
+        setClass(`deleting-hint-${info}`, removeClass, 'd-none');
+    } else {
+        setClass(`delete-user-${info}`, removeClass, 'delete-contact-input-wrong');
+        setClass(`deleting-hint-${info}`, addClass, 'd-none');
+    }
+}
+
+
+/**
+ * Closes the delete contact form.
+ */
+function closeDeleteContact() {
+    closeDialog('dialog-delete-contact');
+    resetDeleteContactForm();
+}
+
+
+/**
+ * Resets the delete contact form.
+ */
+function resetDeleteContactForm() {
+    resetDeleteContactInputClasses();
+    resetDeleteContactInputValues();
+    removeElementAttribute('delete-contact-form', 'onsubmit');
+    setClass('delete-contact-form', addClass, 'd-none');
+}
+
+
+/**
+ * Resets the delete contact form's input classes.
+ */
+function resetDeleteContactInputClasses() {
+    setClass('delete-user-mail', removeClass, 'delete-contact-input-wrong');
+    setClass('deleting-hint-mail', addClass, 'd-none');
+    setClass('delete-user-password', removeClass, 'delete-contact-input-wrong');
+    setClass('deleting-hint-password', addClass, 'd-none');
+}
+
+
+/**
+ * Resets the delete contact form's input values.
+ */
+function resetDeleteContactInputValues() {
+    document.getElementById('deleting-account-mail').value = '';
+    document.getElementById('deleting-account-password').value = '';
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#addNewSubtaskForEditing">addNewSubtaskForEditing</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#addSubuser">addSubuser</a></li><li><a href="global.html#addTaskInit">addTaskInit</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#addedTask">addedTask</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#animateBacklogContact">animateBacklogContact</a></li><li><a href="global.html#animateContactUserIn">animateContactUserIn</a></li><li><a href="global.html#animateContactUserOut">animateContactUserOut</a></li><li><a href="global.html#animateSavedContact">animateSavedContact</a></li><li><a href="global.html#applyGuestSettings">applyGuestSettings</a></li><li><a href="global.html#applyGuestSettingsAddTask">applyGuestSettingsAddTask</a></li><li><a href="global.html#assignedTo">assignedTo</a></li><li><a href="global.html#basicTaskDetails">basicTaskDetails</a></li><li><a href="global.html#boardInit">boardInit</a></li><li><a href="global.html#cancelSubtask">cancelSubtask</a></li><li><a href="global.html#cancelSubtaskEdit">cancelSubtaskEdit</a></li><li><a href="global.html#cancelSubtaskEditSafety">cancelSubtaskEditSafety</a></li><li><a href="global.html#cancelSubtaskSafety">cancelSubtaskSafety</a></li><li><a href="global.html#changeImage">changeImage</a></li><li><a href="global.html#changeImage1">changeImage1</a></li><li><a href="global.html#changeImageBack">changeImageBack</a></li><li><a href="global.html#changeImageBack1">changeImageBack1</a></li><li><a href="global.html#checkCategory">checkCategory</a></li><li><a href="global.html#checkForLogin">checkForLogin</a></li><li><a href="global.html#checkForValidUser">checkForValidUser</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#checkboxDeselect">checkboxDeselect</a></li><li><a href="global.html#clearAddTask">clearAddTask</a></li><li><a href="global.html#clearArrays">clearArrays</a></li><li><a href="global.html#clearDropdown">clearDropdown</a></li><li><a href="global.html#clearHTML">clearHTML</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#closeAddTaskOverlay">closeAddTaskOverlay</a></li><li><a href="global.html#closeContactSettings">closeContactSettings</a></li><li><a href="global.html#closeContactViewerMobile">closeContactViewerMobile</a></li><li><a href="global.html#closeDeleteContact">closeDeleteContact</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#closeDropdown">closeDropdown</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeSavedContact">closeSavedContact</a></li><li><a href="global.html#collectInitials">collectInitials</a></li><li><a href="global.html#compareValues">compareValues</a></li><li><a href="global.html#createHTML">createHTML</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#createNewSubtask">createNewSubtask</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#dayTimeGretting">dayTimeGretting</a></li><li><a href="global.html#deleteCookie">deleteCookie</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteSubtaskFromEditing">deleteSubtaskFromEditing</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#deleteUserAccount">deleteUserAccount</a></li><li><a href="global.html#deleteUserContact">deleteUserContact</a></li><li><a href="global.html#displaySubtasksForEditing">displaySubtasksForEditing</a></li><li><a href="global.html#editAssignedToUser">editAssignedToUser</a></li><li><a href="global.html#editContactInfo">editContactInfo</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#fillContactList">fillContactList</a></li><li><a href="global.html#fillEmailAfterSignup">fillEmailAfterSignup</a></li><li><a href="global.html#fillFormWithTaskDetails">fillFormWithTaskDetails</a></li><li><a href="global.html#fillRegisterSection">fillRegisterSection</a></li><li><a href="global.html#fillSelectAssignedTo">fillSelectAssignedTo</a></li><li><a href="global.html#findSubtask">findSubtask</a></li><li><a href="global.html#findTask">findTask</a></li><li><a href="global.html#findTaskAndUpdate">findTaskAndUpdate</a></li><li><a href="global.html#findTaskById">findTaskById</a></li><li><a href="global.html#flipDropDownMenu">flipDropDownMenu</a></li><li><a href="global.html#flipDropDownMenuCategory">flipDropDownMenuCategory</a></li><li><a href="global.html#formatName">formatName</a></li><li><a href="global.html#formatPhoneNumber">formatPhoneNumber</a></li><li><a href="global.html#generateContactFormCancelButton">generateContactFormCancelButton</a></li><li><a href="global.html#generateContactFormDeleteButton">generateContactFormDeleteButton</a></li><li><a href="global.html#generateContactFormSubmitButton">generateContactFormSubmitButton</a></li><li><a href="global.html#generateDeleteContactMessage">generateDeleteContactMessage</a></li><li><a href="global.html#generateDeleteUserMessage">generateDeleteUserMessage</a></li><li><a href="global.html#generateDeletingMessage">generateDeletingMessage</a></li><li><a href="global.html#generateHTMLUser">generateHTMLUser</a></li><li><a href="global.html#generateSubUsersHtml">generateSubUsersHtml</a></li><li><a href="global.html#generateUserInitialsHtml">generateUserInitialsHtml</a></li><li><a href="global.html#getAssignableContacts">getAssignableContacts</a></li><li><a href="global.html#getAssignableUser">getAssignableUser</a></li><li><a href="global.html#getContactId">getContactId</a></li><li><a href="global.html#getCookie">getCookie</a></li><li><a href="global.html#getDraggedElementData">getDraggedElementData</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getElementAttribute">getElementAttribute</a></li><li><a href="global.html#getFirstLastInitial">getFirstLastInitial</a></li><li><a href="global.html#getIncludingMatch">getIncludingMatch</a></li><li><a href="global.html#getInitialLetter">getInitialLetter</a></li><li><a href="global.html#getInitialLetterGroup">getInitialLetterGroup</a></li><li><a href="global.html#getInitialsMatch">getInitialsMatch</a></li><li><a href="global.html#getInputValue">getInputValue</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getJsonObjectDeepValue">getJsonObjectDeepValue</a></li><li><a href="global.html#getJsonObjectValue">getJsonObjectValue</a></li><li><a href="global.html#getLastInitialLetter">getLastInitialLetter</a></li><li><a href="global.html#getNewContact">getNewContact</a></li><li><a href="global.html#getPriorityName">getPriorityName</a></li><li><a href="global.html#getSelectedUsers">getSelectedUsers</a></li><li><a href="global.html#getSubtask">getSubtask</a></li><li><a href="global.html#getUserContactData">getUserContactData</a></li><li><a href="global.html#getUserContactList">getUserContactList</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#greetUser">greetUser</a></li><li><a href="global.html#guestIsLoggedIn">guestIsLoggedIn</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#highlightCurrentContact">highlightCurrentContact</a></li><li><a href="global.html#highlightWrongUserInput">highlightWrongUserInput</a></li><li><a href="global.html#hightlightCurrentButton">hightlightCurrentButton</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initContactsGuest">initContactsGuest</a></li><li><a href="global.html#initContactsUser">initContactsUser</a></li><li><a href="global.html#initializeSubtaskEditing">initializeSubtaskEditing</a></li><li><a href="global.html#insertSubTasks">insertSubTasks</a></li><li><a href="global.html#insertTaskDataIntoDialog">insertTaskDataIntoDialog</a></li><li><a href="global.html#isKeyInLocalStorage">isKeyInLocalStorage</a></li><li><a href="global.html#linkUserInfo">linkUserInfo</a></li><li><a href="global.html#loadAssignableContacts">loadAssignableContacts</a></li><li><a href="global.html#loadCheckBoxStatus">loadCheckBoxStatus</a></li><li><a href="global.html#loadContactsDefault">loadContactsDefault</a></li><li><a href="global.html#loadLogoAnimation">loadLogoAnimation</a></li><li><a href="global.html#loadRememberMe">loadRememberMe</a></li><li><a href="global.html#loadTaskCounter">loadTaskCounter</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadTasksInBoard">loadTasksInBoard</a></li><li><a href="global.html#loadUserContacts">loadUserContacts</a></li><li><a href="global.html#loadUserData">loadUserData</a></li><li><a href="global.html#loadUserImage">loadUserImage</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mobilLoginScreen">mobilLoginScreen</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openAddTaskOverlay">openAddTaskOverlay</a></li><li><a href="global.html#openContactSettings">openContactSettings</a></li><li><a href="global.html#openDetails">openDetails</a></li><li><a href="global.html#openDialog">openDialog</a></li><li><a href="global.html#openDialogDeleteContact">openDialogDeleteContact</a></li><li><a href="global.html#passwordValidation">passwordValidation</a></li><li><a href="global.html#prioDecision">prioDecision</a></li><li><a href="global.html#prioSelection">prioSelection</a></li><li><a href="global.html#pushAssignedSubuser">pushAssignedSubuser</a></li><li><a href="global.html#pushNewUserContact">pushNewUserContact</a></li><li><a href="global.html#pushTasks">pushTasks</a></li><li><a href="global.html#pushUserContact">pushUserContact</a></li><li><a href="global.html#pushUserContacts">pushUserContacts</a></li><li><a href="global.html#pushUserSubcontacts">pushUserSubcontacts</a></li><li><a href="global.html#redirectToLoginPage">redirectToLoginPage</a></li><li><a href="global.html#redirectToPreviousPage">redirectToPreviousPage</a></li><li><a href="global.html#reloadPage">reloadPage</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#rememberMeStatus">rememberMeStatus</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeDeletedSubusers">removeDeletedSubusers</a></li><li><a href="global.html#removeElementAttribute">removeElementAttribute</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#removeIncludingAttribute">removeIncludingAttribute</a></li><li><a href="global.html#removeSubPB">removeSubPB</a></li><li><a href="global.html#removeUserContact">removeUserContact</a></li><li><a href="global.html#renderAssigendSubuser">renderAssigendSubuser</a></li><li><a href="global.html#renderContact">renderContact</a></li><li><a href="global.html#renderContactProfile">renderContactProfile</a></li><li><a href="global.html#renderContactViewer">renderContactViewer</a></li><li><a href="global.html#renderContactViewerVersion">renderContactViewerVersion</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsGuestHint">renderContactsGuestHint</a></li><li><a href="global.html#renderDeleteAccountButtonBar">renderDeleteAccountButtonBar</a></li><li><a href="global.html#renderDeleteAccountConfirmation">renderDeleteAccountConfirmation</a></li><li><a href="global.html#renderDeleteAccountMessage">renderDeleteAccountMessage</a></li><li><a href="global.html#renderDeleteContactButtonBar">renderDeleteContactButtonBar</a></li><li><a href="global.html#renderDeleteContactForm">renderDeleteContactForm</a></li><li><a href="global.html#renderDeleteContactMessage">renderDeleteContactMessage</a></li><li><a href="global.html#renderDeleteUserForm">renderDeleteUserForm</a></li><li><a href="global.html#renderDeletingConfirmation">renderDeletingConfirmation</a></li><li><a href="global.html#renderEachTask">renderEachTask</a></li><li><a href="global.html#renderEditAndDeleteSection">renderEditAndDeleteSection</a></li><li><a href="global.html#renderEditForm">renderEditForm</a></li><li><a href="global.html#renderEditFormInfo">renderEditFormInfo</a></li><li><a href="global.html#renderEditFormProfile">renderEditFormProfile</a></li><li><a href="global.html#renderEditIcon">renderEditIcon</a></li><li><a href="global.html#renderEditIconTypeA">renderEditIconTypeA</a></li><li><a href="global.html#renderEditIconTypeB">renderEditIconTypeB</a></li><li><a href="global.html#renderFocusOptions">renderFocusOptions</a></li><li><a href="global.html#renderMatchingTask">renderMatchingTask</a></li><li><a href="global.html#renderNameMailGroup">renderNameMailGroup</a></li><li><a href="global.html#renderPhoneStart">renderPhoneStart</a></li><li><a href="global.html#renderRegisterLetter">renderRegisterLetter</a></li><li><a href="global.html#renderSubProfiles">renderSubProfiles</a></li><li><a href="global.html#renderSubtaskSafety">renderSubtaskSafety</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderUserBgc">renderUserBgc</a></li><li><a href="global.html#renderUserInfo">renderUserInfo</a></li><li><a href="global.html#renderUserProfile">renderUserProfile</a></li><li><a href="global.html#resetAddContactInput">resetAddContactInput</a></li><li><a href="global.html#resetAddTaskFormData">resetAddTaskFormData</a></li><li><a href="global.html#resetAddTaskGlobalVariables">resetAddTaskGlobalVariables</a></li><li><a href="global.html#resetButton">resetButton</a></li><li><a href="global.html#resetDeleteContactForm">resetDeleteContactForm</a></li><li><a href="global.html#resetDeleteContactInputClasses">resetDeleteContactInputClasses</a></li><li><a href="global.html#resetDeleteContactInputValues">resetDeleteContactInputValues</a></li><li><a href="global.html#resetDialogs">resetDialogs</a></li><li><a href="global.html#resetElementData">resetElementData</a></li><li><a href="global.html#resetPrioClass">resetPrioClass</a></li><li><a href="global.html#resetPrioImg">resetPrioImg</a></li><li><a href="global.html#resetPrioritySelection">resetPrioritySelection</a></li><li><a href="global.html#resetSubtaskIcons">resetSubtaskIcons</a></li><li><a href="global.html#saveAsObject">saveAsObject</a></li><li><a href="global.html#saveNewPrio">saveNewPrio</a></li><li><a href="global.html#saveUserContacts">saveUserContacts</a></li><li><a href="global.html#saveUserInfo">saveUserInfo</a></li><li><a href="global.html#scopeTasks">scopeTasks</a></li><li><a href="global.html#searchForTask">searchForTask</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectUser">selectUser</a></li><li><a href="global.html#setBacklogContactMessage">setBacklogContactMessage</a></li><li><a href="global.html#setBacklogContactPosition">setBacklogContactPosition</a></li><li><a href="global.html#setCategoryStyle">setCategoryStyle</a></li><li><a href="global.html#setCheckBox">setCheckBox</a></li><li><a href="global.html#setCheckBoxBackground">setCheckBoxBackground</a></li><li><a href="global.html#setCheckBoxImage">setCheckBoxImage</a></li><li><a href="global.html#setClass">setClass</a></li><li><a href="global.html#setContactBgc">setContactBgc</a></li><li><a href="global.html#setContactBgcCode">setContactBgcCode</a></li><li><a href="global.html#setContactBgcName">setContactBgcName</a></li><li><a href="global.html#setContactButtonOnclick">setContactButtonOnclick</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#setDeleteAccountForm">setDeleteAccountForm</a></li><li><a href="global.html#setDropDownClasses">setDropDownClasses</a></li><li><a href="global.html#setDropDownIcon">setDropDownIcon</a></li><li><a href="global.html#setElementAttribute">setElementAttribute</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setPrioButton">setPrioButton</a></li><li><a href="global.html#setPrioritySelection">setPrioritySelection</a></li><li><a href="global.html#setSubtaskFocus">setSubtaskFocus</a></li><li><a href="global.html#setUserContactsObjectValue">setUserContactsObjectValue</a></li><li><a href="global.html#setUserInfoLink">setUserInfoLink</a></li><li><a href="global.html#setUserInfoLinkVersion">setUserInfoLinkVersion</a></li><li><a href="global.html#setupCloseDialogMechanism">setupCloseDialogMechanism</a></li><li><a href="global.html#showAddedContact">showAddedContact</a></li><li><a href="global.html#showBacklogContact">showBacklogContact</a></li><li><a href="global.html#showBacklogContactForm">showBacklogContactForm</a></li><li><a href="global.html#showContact">showContact</a></li><li><a href="global.html#showDeleteAccountConfirmation">showDeleteAccountConfirmation</a></li><li><a href="global.html#showEditContactForm">showEditContactForm</a></li><li><a href="global.html#showEditedContact">showEditedContact</a></li><li><a href="global.html#showEditedContactList">showEditedContactList</a></li><li><a href="global.html#showPriority">showPriority</a></li><li><a href="global.html#showUpWrongUserInput">showUpWrongUserInput</a></li><li><a href="global.html#showUpdatedContactList">showUpdatedContactList</a></li><li><a href="global.html#showUserInfo">showUserInfo</a></li><li><a href="global.html#sortContactsByName">sortContactsByName</a></li><li><a href="global.html#spliceAssignedSubuser">spliceAssignedSubuser</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#subTasksRender">subTasksRender</a></li><li><a href="global.html#subtaskCustomTemplate">subtaskCustomTemplate</a></li><li><a href="global.html#subtaskFocus">subtaskFocus</a></li><li><a href="global.html#subtaskFocusOptions">subtaskFocusOptions</a></li><li><a href="global.html#subtaskOutOfFocus">subtaskOutOfFocus</a></li><li><a href="global.html#subtaskStatus">subtaskStatus</a></li><li><a href="global.html#subtaskTemplate">subtaskTemplate</a></li><li><a href="global.html#taskInAwaitFeedback">taskInAwaitFeedback</a></li><li><a href="global.html#taskInCategory">taskInCategory</a></li><li><a href="global.html#taskInDone">taskInDone</a></li><li><a href="global.html#taskInProgress">taskInProgress</a></li><li><a href="global.html#toDoCounter">toDoCounter</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleCheckboxLogin">toggleCheckboxLogin</a></li><li><a href="global.html#toggleClass">toggleClass</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#togglePasswordIcon">togglePasswordIcon</a></li><li><a href="global.html#togglePasswordLogin">togglePasswordLogin</a></li><li><a href="global.html#toggleSelectedUser">toggleSelectedUser</a></li><li><a href="global.html#toggleSubtaskFocus">toggleSubtaskFocus</a></li><li><a href="global.html#updateAllNoTaskMessages">updateAllNoTaskMessages</a></li><li><a href="global.html#updateBoardTasks">updateBoardTasks</a></li><li><a href="global.html#updateContactList">updateContactList</a></li><li><a href="global.html#updateContactViewer">updateContactViewer</a></li><li><a href="global.html#updateDropDownOnclick">updateDropDownOnclick</a></li><li><a href="global.html#updateEditedContactList">updateEditedContactList</a></li><li><a href="global.html#updateNoTaskMessage">updateNoTaskMessage</a></li><li><a href="global.html#updatePriority">updatePriority</a></li><li><a href="global.html#updateProgressBar">updateProgressBar</a></li><li><a href="global.html#updateSubtaskText">updateSubtaskText</a></li><li><a href="global.html#updateSubtasksAndUsers">updateSubtasksAndUsers</a></li><li><a href="global.html#updateTaskDetails">updateTaskDetails</a></li><li><a href="global.html#updateTaskProperties">updateTaskProperties</a></li><li><a href="global.html#updateUIForBlur">updateUIForBlur</a></li><li><a href="global.html#updateUIForFocus">updateUIForFocus</a></li><li><a href="global.html#updateUserData">updateUserData</a></li><li><a href="global.html#urgentDeadline">urgentDeadline</a></li><li><a href="global.html#urgentTaskCounter">urgentTaskCounter</a></li><li><a href="global.html#urlParams">urlParams</a></li><li><a href="global.html#userInitials">userInitials</a></li><li><a href="global.html#userIsLoggedIn">userIsLoggedIn</a></li><li><a href="global.html#userIsSelected">userIsSelected</a></li><li><a href="global.html#verifyAddTaskInput">verifyAddTaskInput</a></li><li><a href="global.html#verifyContactInput">verifyContactInput</a></li><li><a href="global.html#verifyDeleteAccountForm">verifyDeleteAccountForm</a></li><li><a href="global.html#verifyEditedContact">verifyEditedContact</a></li><li><a href="global.html#verifyKeyType">verifyKeyType</a></li><li><a href="global.html#wrongPassword">wrongPassword</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 07 2024 18:16:35 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

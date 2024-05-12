@@ -1,0 +1,50 @@
+<section id="section-edit-contact" class="dialog-contacts" onclick="stop(event)">
+    <div class="dialog-contacts-left">
+        <img class="close-contact-form-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white"
+            onclick="closeEditContact()">
+        <img class="dialog-contacts-img" src="./img/logo-contact-form.png" alt="logo-contact-form">
+        <div class="dialog-contacts-group">
+            <div class="dialog-contacts-headline">Edit contact</div>
+            <img class="dialog-contacts-underline" src="./img/underline-dialog.png" alt="underline-dialog">
+        </div>
+    </div>
+
+    <div class="dialog-contacts-right">
+        <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog" onclick="closeEditContact()">
+        <div id="edit-contact-profile" class="contact-form-profile bgc-flexible">TW</div>
+        <div class="contact-form-group">
+            <form id="edit-contact-form" class="contact-form" onsubmit="return false">
+                <fieldset class="contact-fieldset">
+                    <div class="contact-input-group">
+                        <input id="edit-contact-name" class="contact-input" type="text" minlength="2" maxlength="30"
+                            placeholder="Name" required value="Tatjana Wolf">
+                        <img class="contact-input-img" src="./img/person.png" alt="person">
+                    </div>
+                    <div class="contact-input-group">
+                        <input id="edit-contact-mail" class="contact-input" type="email" minlength="8" maxlength="30"
+                            placeholder="Email" required value="wolf@gmail.com">
+                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                    </div>
+                    <div class="contact-input-group">
+                        <input id="edit-contact-phone" class="contact-input" type="text" minlength="5" maxlength="20"
+                            placeholder="Number" value="+49 2222 222 22 2" onfocus="renderPhoneStart(id)"
+                            onkeydown="verifyKeyType(event, id)">
+                        <img class="contact-input-img" src="./img/call.png" alt="call">
+                    </div>
+                </fieldset>
+            </form>
+            <div class="contact-form-button-bar">
+                <button id="contact-form-delete-button" class="contact-form-button">
+                    <div class="contact-form-button-text">Delete</div>
+                </button>
+                <button id="save-edited-contact-button" class="contact-form-button-dark" form="edit-contact-form"
+                    type="submit">
+                    <div class="contact-form-button-dark-text">Save</div>
+                    <img class="contact-form-button-img" src="./img/check.png" alt="check">
+                </button>
+            </div>
+        </div>
+
+        <div id="backlog-edit-contact" class="backlog-contact-form">Email already existing</div>
+    </div>
+</section>

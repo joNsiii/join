@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Summary</title>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/register.js"></script>
+    <script src="javascript/summary.js"></script>
+    <script src="./javascript/global.js"></script>
+    <script src="javascript/board.js"></script>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="styles/summary.css">
+    <link rel="stylesheet" href="styles/summary-media.css">
+</head>
+
+<body onload="init(), summaryInit()">
+    <div w3-include-html="templates/templates.html"></div>
+    <div class="summary-content">
+
+        <div class="summary-headline">
+            <div class="summary-headline-left">Join 360</div>
+            <div class="summary-headline-mid"></div>
+            <div class="summary-headline-right">Key Metrics at a Glance</div>
+            <div class="summary-headline-bottom-border-mobile"></div>
+        </div>
+        <div class="flex-column">
+            <div class="summary-main-content">
+                <div class="summary-main-overview">
+                    <a href="board.html" id="edit"  onmouseover="changeImage()" onmouseleave="changeImageBack()"
+                        class="summary-main-overview-container">
+                        <div class="summary-main-img-container">
+                            <img id="edit-img" src="./img/edit-bg-blue.png" alt="edit">
+                        </div>
+                        <div class="summary-main-counter-container">
+                            <span id="todo-counter" class="summary-main-counter">1</span>
+                            <span class="summary-main-text">To-do</span>
+                        </div>
+                    </a>
+                    <a href="board.html" id="success" onmouseover="changeImage1()" onmouseleave="changeImageBack1()"
+                        class="summary-main-overview-container">
+                        <div class="summary-main-img-container">
+                            <img id="success-img" src="./img/success-bg-blue.png" alt="done">
+                        </div>
+                        <div class="summary-main-counter-container">
+                            <span id="done-counter" class="summary-main-counter"></span>
+                            <span class="summary-main-text">Done</span>
+                        </div>
+                    </a>
+                </div>
+                <a href="board.html" class="summary-urgent">
+                    <div class="summary-urgent-sub-container">
+                        <div class="summary-urgent-left">
+                            <div class="summary-main-img-container-urgent">
+                                <img src="./img/urgent-red.png" alt="urgent">
+                            </div>
+                            <div class="summary-main-counter-container">
+                                <span id="urgent-counter" class="summary-main-counter"></span>
+                                <span class="summary-main-text">Urgent</span>
+                            </div>
+                        </div>
+                        <div class="summary-urgent-border"></div>
+                        <div class="summary-urgent-right">
+                            <span id="urgent-date" class="summary-urgent-right-date"></span>
+                            <span class="summary-urgent-right-text">Upcoming Deadline</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="summary-main-tasks">
+                    <a href="board.html" class="summary-main-counter-container-task">
+                        <span id="task-in-boards" class="summary-main-counter"></span>
+                        <span class="summary-main-name">Tasks in Board</span>
+                    </a>
+                    <a href="board.html" class="summary-main-counter-container-task">
+                        <span id="task-in-progress" class="summary-main-counter"></span>
+                        <span class="summary-main-name">Tasks in Progress</span>
+                    </a>
+                    <a href="board.html" class="summary-main-counter-container-task">
+                        <span id="task-in-await-feedback" class="summary-main-counter"></span>
+                        <span class="summary-main-name">Awaiting Feedback</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="summary-greeting-container">
+                <span class="summary-daytime-container" id="daytime-greet"></span>
+                <span class="summary-name-container" id="greeting-name"></span>
+            </div>
+            <div id="greet-popup" class="bg-white d-none">
+                <div class="summary-greeting-container-popup">
+                    <span class="summary-daytime-container" id="daytime-greet-mobile"></span>
+                    <span class="summary-name-container" id="greeting-name-mobile"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

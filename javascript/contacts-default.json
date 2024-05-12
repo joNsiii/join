@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Anton Mayer",
+    "mail": "anton.mayer@gmail.com",
+    "phone": "+49 6762 023 03 1",
+    "bgc-name": "orange",
+    "bgc-code": "#FF7A00"
+  },
+  {
+    "name": "Anja Schulz",
+    "mail": "anja.schulz@gmail.com",
+    "phone": "+49 6762 023 03 2",
+    "bgc-name": "purple",
+    "bgc-code": "#9327FF"
+  },
+  {
+    "name": "Benedikt Ziegler",
+    "mail": "benedikt.ziegler@gmail.com",
+    "phone": "+49 6762 023 03 3",
+    "bgc-name": "blue",
+    "bgc-code": "#6E52FF"
+  },
+  {
+    "name": "David Eisenberg",
+    "mail": "david.eisenberg@gmail.com",
+    "phone": "+49 6762 023 03 4",
+    "bgc-name": "magenta",
+    "bgc-code": "#FC71FF"
+  },
+  {
+    "name": "Eva Fischer",
+    "mail": "eva.fischer@gmail.com",
+    "phone": "+49 6762 023 03 5",
+    "bgc-name": "yellow",
+    "bgc-code": "#FFBB2B"
+  },
+  {
+    "name": "Emmanuel Mauer",
+    "mail": "emmanuel.mauer@gmail.com",
+    "phone": "+49 6762 023 03 6",
+    "bgc-name": "green",
+    "bgc-code": "#1FD7C1"
+  },
+  {
+    "name": "Marcel Bauer",
+    "mail": "marcel.bauer@gmail.com",
+    "phone": "+49 6762 023 03 7",
+    "bgc-name": "dark-blue",
+    "bgc-code": "#462F8A"
+  },
+  {
+    "name": "Sophie Müller",
+    "mail": "sophie.müller@gmail.com",
+    "phone": "+49 6762 023 03 8",
+    "bgc-name": "red",
+    "bgc-code": "#FF4646"
+  },
+  {
+    "name": "Tatjana Wolf",
+    "mail": "tatjana wolf@gmail.com",
+    "phone": "+49 6762 023 03 9",
+    "bgc-name": "cyan",
+    "bgc-code": "#00BEE8"
+  }
+]

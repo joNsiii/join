@@ -1,0 +1,156 @@
+@media (max-width: 1400px) {
+    #dialog-edit-contact[open] {
+        display: flex;
+    }
+
+    .dialog-contacts {
+        width: 100%;
+        max-width: 396px;
+        flex-direction: column;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+        top: 100vh;
+        left: calc(50% - 198px);
+        transition: 125ms top ease-in-out;
+    }
+
+    .dialog-contacts-position {
+        top: calc(50vh - 380px);
+        left: calc(50% - 198px);
+    }
+
+    .dialog-contacts-left {
+        padding: 66px 24px;
+        height: 352px;
+        border-radius: 30px 30px 0 0;
+        justify-content: center;
+        gap: 12px;
+        position: relative;
+    }
+
+    .dialog-contacts-img {
+        display: none;
+    }
+
+    .dialog-contacts-headline {
+        height: 56px;
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .dialog-contacts-right {
+        box-sizing: border-box;
+        padding: 92px 16px 62px 16px;
+        height: 408px;
+        border-radius: 0 0 30px 30px;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+
+    .close-contact-form {
+        display: none;
+    }
+
+    .contact-form {
+        margin-top: 0;
+        width: 100%;
+        gap: 32px;
+    }
+
+    .contact-fieldset {
+        gap: 24px;
+    }
+
+    .contact-input-group {
+        width: 100%;
+        height: 41px;
+    }
+
+    .contact-input {
+        width: 100%;
+    }
+
+    .contact-form-button-bar {
+        width: unset;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .contact-form-button {
+        box-sizing: border-box;
+        padding: 17px 9px;
+        height: 51px;
+        font-size: 20px;
+        line-height: 24px;
+        border-radius: 10px;
+    }
+
+    .contact-form-button-dark {
+        padding: 18px 10px;
+        height: 51px;
+    }
+
+    #dialog-add-contact[open] {
+        display: flex;
+    }
+
+    .dialog-contacts-left-clear {
+        padding: 66px 24px;
+        height: 352px;
+        border-radius: 30px 30px 0 0;
+        justify-content: center;
+        gap: 12px;
+        position: relative;
+    }
+
+    .close-contact-form-mobile {
+        display: unset;
+    }
+
+    .dialog-contacts-subheadline {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .contact-form-profile-clear {
+        margin-top: -152px;
+        background-color: #D1D1D1;
+    }
+
+    .contact-form-profile {
+        margin-top: -152px;
+        background-color: #FFBB2B;
+    }
+
+    .contact-form-button-clear {
+        display: none;
+    }
+}
+
+
+@media (max-width: 396px) {
+    .dialog-contacts-position {
+        left: 0;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .dialog-contacts-headline {
+        height: unset;
+        font-size: 37.5px;
+        line-height: 45px;
+    }
+
+    .dialog-contacts-subheadline {
+        line-height: 19px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .contact-input {
+        height: 19px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+}

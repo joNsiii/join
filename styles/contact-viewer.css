@@ -1,0 +1,261 @@
+.contact-viewer {
+    padding: 110px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.contact-viewer-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.contact-viewer-headline {
+    margin: 0;
+    height: 73px;
+    font-family: 'Inter', sans-serif;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+}
+
+.contact-viewer-img {
+    width: 3px;
+    height: 59px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.contact-viewer-subheadline {
+    height: 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 32.4px;
+    color: #2A3647;
+}
+
+.contact-user {
+    min-width: 603px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    position: absolute;
+    top: 205px;
+    left: 100%;
+}
+
+.contact-user-header {
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 54px;
+}
+
+.contact-user-profile {
+    box-sizing: border-box;
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    font-family: 'Inter', sans-serif;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    text-align: center;
+    color: #FFFFFF;
+    border: 3px solid #FFFFFF;
+    border-radius: 70px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-user-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-user-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+}
+
+.contact-user-button-group {
+    display: flex;
+    gap: 16px;
+}
+
+.contact-user-button {
+    padding: 0;
+    border: unset;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+.edit-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/edit-contacts.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-user-button:hover .edit-contact-img {
+    background-image: url('../img/edit-contacts-blue.png');
+}
+
+.contact-button-text {
+    height: 19px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
+}
+
+.contact-user-button:hover .contact-button-text {
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+.delete-contact-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/delete.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-user-button:hover .delete-contact-img {
+    background-image: url('../img/delete-blue.png');
+}
+
+.contact-user-info {
+    width: fit-content;
+    height: 74px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-user-detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contact-user-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-detail-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+
+.user-detail-mail {
+    width: fit-content;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-decoration: none;
+    color: #007CEE;
+}
+
+.user-detail-mail:hover {
+    text-decoration: underline;
+}
+
+.user-detail-phone {
+    width: fit-content;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.user-detail-phone:hover {
+    color: #29ABE2;
+}
+
+.dialog-delete-contact {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border: unset;
+    background-color: rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 300;
+}
+
+.dialog-delete-contact[open] {
+    display: flex;
+}
+
+.deleting-confirmation {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 48px 16px;
+    width: 100%;
+    max-width: 428px;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.deleting-confirmation-message {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+}
+
+.deleting-contact-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 36px;
+    text-align: center;
+}
+
+.c-lightblue {
+    color: #29ABE2;
+}

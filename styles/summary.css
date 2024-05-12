@@ -1,0 +1,217 @@
+
+.flex-column {
+    display: flex;
+    margin-left: 328px;
+}
+
+.summary-headline {
+    display: flex;
+    align-items: center;
+    margin-top: 206px;
+    margin-left: 328px;
+    min-width: 200px;
+    height: 73px;
+    gap: 30px;
+}
+
+.summary-headline-left {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.summary-headline-mid {
+    border: 1.5px solid #29ABE2;
+    border-radius: 3px;
+    height: 59px;
+    padding: 0;
+}
+
+.summary-headline-bottom-border-mobile {
+    border: 3px solid #29ABE2;
+    width: 90px;
+    border-radius: 10px;
+    display: none;
+}
+
+.summary-headline-right {
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+    height: 32px;
+}
+
+.summary-main-content {
+    display: flex;
+    flex-direction: column;
+    width: 560px;
+    min-width: 200px;
+    margin-top: 48px;
+    height: 562px;
+    justify-content: space-between;
+}
+
+.summary-main-overview {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.summary-main-overview-container {
+    display: flex;
+    box-sizing: border-box;
+    width: 264px;
+    height: 168px;
+    border-radius: 30px;
+    gap: 18px;
+    padding: 38px 19px 38px 19px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.summary-main-overview-container:hover {
+    background-color: #2A3647;
+    color: white;
+    scale: 1.1;
+}
+
+.summary-main-counter-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.summary-main-counter {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.summary-urgent {
+    display: flex;
+    justify-content: space-around;
+    height: 168px;
+    gap: 20px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 28px 48px 28px 48px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.summary-urgent-left {
+    display: flex;
+    box-sizing: border-box;
+    height: 96px;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-urgent-border {
+    height: 102px;
+    border: 2px solid #D1D1D1;
+}
+
+.summary-urgent-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+    padding-left: 10px;
+}
+
+.summary-urgent-right-date {
+    height: 25px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.summary-main-tasks {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.summary-main-counter-container-task {
+    width: 168px;
+    height: 168px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 30px;
+    gap: 13px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.summary-main-counter-container-task:hover {
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.summary-main-name {
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    width: 86px;
+    height: 50px;
+    text-align: center;
+}
+
+.summary-greeting-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    min-width: 200px;
+    margin-top: 268px;
+    margin-left: 80px;
+    height: 136px;
+    gap: 3px;
+}
+
+.summary-daytime-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 56px;
+    font-size: 47px;
+    line-height: 56.4px;
+    font-weight: 500;
+    height: fit-content;
+}
+
+.summary-name-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 77px;
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+.summary-urgent:hover {
+    border-radius: 30px;
+    background-color: #2A3647;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.summary-urgent-sub-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.summary-content a {
+    text-decoration: none;
+    color: black;
+}

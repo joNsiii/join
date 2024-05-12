@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Board</title>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="./styles/templates.css" />
+    <link rel="stylesheet" href="./fonts/fonts.css" />
+    <link rel="stylesheet" href="./styles/board.css" />
+    <link rel="stylesheet" href="./styles/board-overlay.css" />
+    <link rel="stylesheet" href="./media/board-media.css" />
+    <link rel="stylesheet" href="./styles/background-color.css">
+    <link rel="stylesheet" href="styles/add-task-overlay.css">
+    <link rel="stylesheet" href="./media/add-task-overlay-media.css">
+    <script src="./javascript/global.js"></script>
+    <script src="./javascript/common.js"></script>
+    <script src="javascript/register.js"></script>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/board.js"></script>
+    <script src="javascript/board_render.js"></script>
+    <script src="./javascript/edit_board.js"></script>
+    <script src="./javascript/edit_board_render.js"></script>
+    <script src="./javascript/add-task-overlay-left.js"></script>
+    <script src="./javascript/add-task-overlay-right.js"></script>
+</head>
+
+<body id="body" onload="boardInit()">
+    <dialog id="add-task-overlay" class="dialog-add-task" w3-include-html="./templates/add-task-overlay.html"
+        onclick="closeAddTaskOverlay()"></dialog>
+    <dialog id="dialog" class="dialog" w3-include-html="./templates/board-overlay-blue.html"></dialog>
+
+    <div w3-include-html="templates/templates.html"></div>
+
+    <main class="content">
+        <section class="board-top-group">
+            <h1 class="board-headline">Board</h1>
+            <div class="board-top-right">
+
+                <div class="board-search-group p-relative">
+                    <input id="board-search-desktop" class="board-search-2" type="text" onkeyup="searchForTask()"
+                        placeholder="Find Task" />
+                    <div class="subtask-add-icons" id="icon-hold">
+                        <img src="./img/divider-subtask.png" alt="divider" class="board-divider-search">
+                        <img class="board-search-img" src="./img/search-input.png" alt="search-input" />
+                    </div>
+                </div>
+                <button id="board-task-button" class="board-task-button" onclick="openAddTaskOverlay()">
+                    <div class="btb-text">Add task</div>
+                    <img class="btb-img" src="./img/add.png" alt="add-task" />
+                </button>
+            </div>
+        </section>
+        <section class="board-search-mobile">
+            <div class="p-relative">
+                <input id="board-search" class="board-search" type="text" onkeyup="searchForTask()"
+                    placeholder="Find Task" />
+                <img class="board-search-img-mobile" src="./img/search-input.png" alt="search-input" />
+            </div>
+        </section>
+
+        <section class="board-content-group" id="board-container">
+            <!-- To Do -->
+            <div class="board-content">
+                <div class="board-header">
+                    <div class="board-header-title">To do</div>
+                    <img id="board-task-icon-1" class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
+                </div>
+                <div class="board-body horizontal-scroll" id="toDo" ondragover="allowDrop(event)"
+                    ondrop="moveTo('toDo')" ondragenter="highlight(event, 'toDo')"
+                    ondragleave="removeHighlight(event, 'toDo')">
+                </div>
+            </div>
+            <!-- In Progress -->
+            <div class="board-content">
+                <div class="board-header">
+                    <div class="board-header-title">In progress</div>
+                    <img id="board-task-icon-2" class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
+                </div>
+                <div class="board-body horizontal-scroll" id="inProgress" ondragover="allowDrop(event)"
+                    ondrop="moveTo('inProgress')" ondragenter="highlight(event, 'inProgress')"
+                    ondragleave="removeHighlight(event, 'inProgress')"></div>
+            </div>
+            <!-- Await Feedback -->
+            <div class="board-content">
+                <div class="board-header">
+                    <div class="board-header-title">Await feedback</div>
+                    <img id="board-task-icon-3" class="board-header-img" src="./img/plus-button.png" alt="plus-button"
+                        onclick="openAddTaskOverlay()" />
+                </div>
+                <div class="board-body horizontal-scroll" id="awaitFeedback" ondragover="allowDrop(event)"
+                    ondrop="moveTo('awaitFeedback')" ondragenter="highlight(event, 'awaitFeedback')"
+                    ondragleave="removeHighlight(event, 'awaitFeedback')"></div>
+            </div>
+            <!-- Done -->
+            <div class="board-content">
+                <div class="board-header">
+                    <div class="board-header-title">Done</div>
+                </div>
+                <div class="board-body horizontal-scroll" id="done" ondragover="allowDrop(event)"
+                    ondrop="moveTo('done')" ondragenter="highlight(event, 'done')"
+                    ondragleave="removeHighlight(event, 'done')"></div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+@media (max-width: 680px) {
+    .login-main {
+        width: 85%;
+    }
+}
+
+@media (max-width: 600px) {
+    .input-child {
+        width: 100%;
+    }
+
+    .input-container {
+        width: 85%;
+    }
+
+    .sign-up-container {
+        display: none;
+    }
+    
+    .sign-up-mobile {
+        display: flex;
+    }
+
+    .joinLogo {
+        width: 100px !important;
+        height: 122px !important;
+    }
+
+    .startup {
+        background-color: #2A3647;
+    }
+
+    .joinLogoWhite {
+        display: flex;
+        width: 100px !important;
+        height: 122px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .login-text-child p {
+        font-size: 47px;
+    }
+
+    .checkbox-container {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .button-login-container {
+        flex-direction: column;
+        height: auto;
+        width: 180px;
+    }
+
+    .button-login {
+        width: 180px;
+    }
+
+    .login-main {
+        height: 515px;
+    }
+}
+
+@media (max-width: 553px) {
+    .checkbox-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin: 0 0px 0 0px;
+        text-align: center;
+    }
+
+    .checkbox-container {
+        justify-content: center;
+    }
+
+    .checkbox {
+        margin: 0 8px 0 0;
+    }
+}
+
+@media (max-width: 451px) {
+    .checkbox-container p {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (max-height: 1000px) {
+
+    .joinLogo.selected {
+        margin: 32px !important;
+    }
+
+
+    .joinLogoWhite.selected {
+        margin: 32px !important;
+    }
+}
+
+@media (max-height: 935px) {
+
+    .joinLogo.selected {
+        width: auto !important;
+        height: 95px !important;
+        margin: 32px !important;
+    }
+
+
+    .joinLogoWhite.selected {
+        width: auto !important;
+        height: 95px !important;
+        margin: 32px !important;
+    }
+}
+
+@media (max-height: 870px) {
+    .joinLogo.selected {
+        width: auto !important;
+        height: 64px !important;
+        margin: 32px !important;
+    }
+
+    .joinLogo {
+        width: auto !important;
+        height: 64px !important;
+    }
+
+    .joinLogoWhite {
+        width: auto !important;
+        height: 64px !important;
+    }
+
+    .joinLogoWhite.selected {
+        width: auto !important;
+        height: 84px !important;
+        margin: 32px !important;
+    }
+}

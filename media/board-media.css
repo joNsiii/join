@@ -1,0 +1,125 @@
+@media (max-width: 730px) {
+    .content {
+        width: 100%;
+        height: calc(100vh - 172px);
+        left: 0;
+    }
+
+    .board-search-group {
+        display: none;
+    }
+
+    .p-relative {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .board-top-group {
+        padding: 32px 16px 0 16px;
+        max-width: 1208px;
+        gap: 16px;
+    }
+
+    .board-headline {
+        height: 56px;
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .board-task-button {
+        padding: 4px;
+    }
+
+    .btb-text {
+        display: none;
+    }
+
+    .board-search-mobile {
+        display: flex;
+    }
+
+    .board-search {
+        width: 100%;
+    }
+
+    .board-header-title {
+        height: 32px;
+        font-size: 27px;
+        line-height: 32.4px;
+    }
+
+    .board-header-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .board-content-group {
+        padding: 24px 16px;
+        min-height: 513px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .board-content {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .board-body {
+        align-items: flex-start;
+    }
+
+    .board-task-card {
+        max-width: 252px;
+    }
+
+    .btc-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .left-side-inputs {
+        width: auto !important;
+    }
+}
+
+@media (max-width: 600px){
+    .add-task-content {
+        margin: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .dialog-board-task {
+        padding: 24px 16px;
+        margin: 0;
+    }
+    .dbt-title {
+        font-size: 32px;
+    }
+    .dbt-button-bar {
+        justify-content: center;
+    }
+    .dbt-type {
+        font-size: 16px;
+    }
+    .add-task-content {
+        padding: 48px 16px !important;
+    }
+    .prio-selection {
+        width: 100% !important;
+    }
+    .dropdown-menu-sub {
+        width: 90% !important;
+        right: -4px !important;
+    }
+}
+
+
+@media (max-width: 380px) {
+    .dropdown-menu-sub {
+        width: 90% !important;
+        right: -4px !important;
+        top: 110px !important
+    }
+}

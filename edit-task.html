@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="styles/edit-task.css">
+    <link rel="stylesheet" href="./styles/background-color.css">
+    <link rel="stylesheet" href="./media/edit-board.css">
+</head>
+
+<body>
+    <div class="add-task-content dialog-edit-task wrapper-scroll" onclick="flipDropDownMenu(false)">
+        <img src="./img/close.png" alt="close" class="closeOverlayIMG" onclick="closeDialog('dialog')">
+        <form onsubmit="findTaskAndUpdate(document.getElementById('task-id-test').value); return false">
+            <input type="hidden" id="task-id-test" value="">
+            <div class="display-flex" id="taskForm">
+                <div class="left-side-inputs">
+                    <div class="single-input-container">
+                        <label>Title</label>
+                        <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task">
+                    </div>
+                    <div class="desc-input-container">
+                        <label>Description</label>
+                        <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task"
+                            cols="30" rows="3"></textarea>
+                    </div>
+                    <div class="single-input-container no-gap" onclick="stop(event)">
+                        <label>Assigned to</label>
+                        <div onclick="flipDropDownMenu(true)" class="dropdown-parent-container" id="dropdown-parent">
+                            Select
+                            contacts to assign
+                            <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
+                        </div>
+                        <!-- assign-task is old id -->
+                        <div class="dropdown-menu-sub wrapper-scroll" id="myDropdown" onclick="stop(event)">
+                            <div class="subuser-selection-parent">
+
+                            </div>
+                        </div>
+                        <div class="sub-profile-container" id="sub-profile">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="right-side-inputs">
+                    <div class="single-input-container">
+                        <label for="date">Due Date</label>
+                        <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                            onblur="(this.type='text')" name="date" id="date-date-task">
+                        <img class="input-single-img" src="./img/calendar.png" alt="calendar">
+                    </div>
+                    <div class="prio-container">
+                        <label>Prio</label>
+                        <div class="prio-select-con">
+                            <div class="prio-selection" id="Urgent" onclick="prioSelection(this);saveNewPrio(this)">
+                                <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img">
+                            </div>
+                            <div class="prio-selection prioMedium" id="Medium"
+                                onclick="prioSelection(this);saveNewPrio(this)">
+                                <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
+                            </div>
+                            <div class="prio-selection" id="Low" onclick="prioSelection(this);saveNewPrio(this)">
+                                <p>Low</p><img src="./img/low.png" alt="low" id="low-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-input-container">
+                        <label>Category</label>
+                        <select class="select-input" id="category">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
+                        </select>
+                    </div>
+                    <div class="single-input-container">
+                        <label>Subtasks</label>
+                        <div class="input-single-line-subtask" id="subtask-form">
+                            <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"
+                                onclick="initializeSubtaskEditing()">
+                            <div class="subtask-add-icons-edit" id="icon-hold">
+                                <img src="./img/subtask.png" alt="add-icon" class="hover add-hover"
+                                    onclick="addNewSubtaskForEditing()">
+                            </div>
+                        </div>
+                        <div id="subtask-display">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="bottom-container">
+                <div class="bottom-button-container bottom-flex-right">
+                    <button class="createBtn">OK<img src="./img/check.png" alt="check"> </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

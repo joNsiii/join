@@ -1,0 +1,18 @@
+.checkmark {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/checkmark-unchecked.png');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.checkmark:checked + .custom-checkbox {
+    background-image: url('../img/checkmark_2_18x18.png');
+}

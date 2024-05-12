@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Add Task</title>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/register.js"></script>
+    <script src="./javascript/global.js"></script>
+    <script src="javascript/board.js"></script>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="styles/add-task.css">
+    <link rel="stylesheet" href="./media/add-task-media.css">
+    <link rel="stylesheet" href="./styles/background-color.css">
+</head>
+
+<body onload="addTaskInit()">
+    <div onclick="flipDropDownMenu(false); flipDropDownMenuCategory(false)">
+        <div w3-include-html="templates/templates.html"></div>
+        <div class="add-task-content">
+            <div class="add-task-headline">Add Task</div>
+            <form onsubmit="scopeTasks(); return false">
+                <div class="display-flex" id="taskForm">
+                    <div class="left-side-inputs">
+                        <div class="single-input-container">
+                            <label>Title<label class="red-star">*</label></label>
+                            <input class="input-single-line" placeholder="Enter a title" type="text" id="title-task"
+                                required>
+                        </div>
+                        <div class="desc-input-container">
+                            <label>Description</label>
+                            <textarea class="desc-textarea" placeholder="Enter a Description" id="description-task"
+                                cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="single-input-container no-gap" onclick="stop(event)">
+                            <label>Assigned to</label>
+                            <div onclick="flipDropDownMenu(true)" class="dropdown-parent-container"
+                                id="dropdown-parent">
+                                Select contacts to assign
+                                <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon">
+                            </div>
+                            <div class="dropdown-menu-sub category-height" id="myDropdown" onclick="stop(event)">
+                                <div class="subuser-selection-parent">
+                                </div>
+                            </div>
+                            <div class="sub-profile-container" id="sub-profile">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-between"></div>
+                    <div class="right-side-inputs">
+                        <div class="single-input-container date-Zindex">
+                            <label for="date-date-task">Due Date<label class="red-star">*</label></label>
+                            <input class="input-single-line" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                onblur="(this.type='text')" name="date" id="date-date-task" required>
+                            <img class="input-single-img" src="./img/calendar.png" alt="calendar">
+                        </div>
+                        <div class="prio-container">
+                            <label>Prio</label>
+                            <div class="prio-select-con">
+                                <div class="prio-selection" id="Urgent" onclick="prioSelection(this)">
+                                    <p>Urgent</p><img src="./img/urgent-red-arrows.png" alt="urgent-red"
+                                        id="urgent-img">
+                                </div>
+                                <div class="prio-selection prioMedium" id="Medium" onclick="prioSelection(this)">
+                                    <p>Medium</p> <img src="./img/medium.png" alt="medium" id="medium-img">
+                                </div>
+                                <div class="prio-selection" id="Low" onclick="prioSelection(this)">
+                                    <p>Low</p><img src="./img/low.png" alt="low" id="low-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-input-container" onclick="stop(event)">
+                            <label>Category<label class="red-star">*</label></label>
+                            <div onclick="flipDropDownMenuCategory(true)" class="dropdown-parent-container-2"
+                                id="dropdown-parent-category">
+                                <p id="chosen-task">Select task category</p>
+                                <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-2">
+                            </div>
+                            <div class="dropdown-menu-category sleep" id="myDropdown-category">
+                                <div class="category-content">
+                                    <div id="Technical Task" onclick="selectCategory(this)">Technical Task</div>
+                                    <div id="User Story" onclick="selectCategory(this)">User Story</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-input-container date-Zindex">
+                            <label>Subtasks</label>
+                            <div class="input-single-line-subtask" id="subtask-form">
+                                <input class="sub-task-child" placeholder="Add new subtask" type="text" id="subtask"
+                                    onclick="subtaskCustomTemplate()">
+                                <div class="subtask-add-icons" id="icon-hold">
+                                    <img src="./img/subtask.png" alt="add-icon" class="hover add-hover"
+                                        onclick="subtaskTemplate()">
+                                </div>
+                            </div>
+                            <div id="subtask-display">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="bottom-container">
+                    <span class="bottom-flex-left"><label class="red-star">*</label>This field is required</span>
+                    <div class="bottom-button-container bottom-flex-right" id="button-container">
+                        <div class="clearBtn" onclick="clearAddTask()">Clear <img src="./img/cancel.png" alt="clear">
+                        </div>
+                        <button id="create-new-task-button" class="createBtn" onclick="addedTask()" disabled>Create
+                            Task
+                            <img src="./img/check.png" alt="check"></button>
+                    </div>
+                </div>
+                <div class="bottom-push"></div>
+            </form>
+        </div>
+        <div class="added-task d-none" id="task-added-success">Task added to board<img src="./img/Vector-white.png"
+                alt="board.icon"></div>
+
+        <script src="./javascript/add-task-left.js"></script>
+        <script src="./javascript/add-task-right.js"></script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+@media (max-width: 1200px) {
+    .add-task-overlay-out {
+        top: 96px;
+    }
+
+    .add-task-overlay-in {
+        left: calc(50% - 214px);
+    }
+
+    .add-task-overlay {
+        height: calc(100vh - 172px);
+        width: 428px;
+
+        padding: 48px 16px;
+    }
+
+    .close-add-task-overlay {
+        top: 48px;
+        right: 16px;
+    }
+
+    .add-task-headline-overlay {
+        font-size: 47px;
+    }
+
+    .add-task-form-group {
+        height: calc(100% - 161px);
+        overflow-y: auto;
+    }
+
+    .task-form-overlay {
+        flex-direction: column;
+        max-width: unset;
+    }
+
+    .left-side-inputs-overlay {
+        margin-bottom: 16px;
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+        gap: 16px;
+    }
+
+    .input-single-line-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .desc-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+        height: fit-content;
+    }
+
+    .border-between-overlay {
+        display: none;
+    }
+
+    .single-input-container-overlay {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    .right-side-inputs-overlay {
+        width: 100%;
+    }
+
+    .prio-selection-overlay {
+        width: 121px;
+        height: 41px;
+        padding: 18px 10px;
+    }
+
+    .bottom-container-overlay {
+        margin-top: 0;
+        padding-top: 16px;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+    }
+
+    .bottom-container-overlay .clearBtn-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container-overlay {
+        height: 56px;
+    }
+}
+
+@media (max-width: 428px) {
+    .add-task-overlay-in {
+        left: 0;
+        right: 0;
+    }
+
+    .add-task-overlay {
+        width: 100%;
+        max-width: 428px;
+    }
+
+    .left-side-inputs-overlay {
+        min-width: unset;
+    }
+
+    .input-single-line-overlay {
+        height: 49px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .input-single-line-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .desc-textarea-overlay {
+        box-sizing: border-box;
+        height: 110px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .desc-textarea-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .dropdown-parent-container-overlay {
+        font-size: 16px;
+    }
+
+    .subuser-selection-overlay {
+        font-size: 16px;
+    }
+
+    .right-side-inputs-overlay {
+        min-width: unset;
+    }
+
+    .dropdown-parent-container-2-overlay {
+        font-size: 16px;
+    }
+
+    .category-content-overlay {
+        font-size: 16px;
+    }
+
+    .sub-task-child-overlay {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .sub-task-child-overlay::placeholder {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .bottom-container-overlay {
+        justify-content: flex-end;
+    }
+
+    .bottom-flex-left-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .clearBtn-overlay {
+        display: none;
+    }
+
+    .bottom-container-overlay .bottom-button-container-overlay {
+        height: 56px;
+    }
+
+    .createBtn-overlay {
+        min-width: 183px;
+    }
+}

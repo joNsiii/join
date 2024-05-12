@@ -1,0 +1,250 @@
+@media (max-width: 730px) {
+    .content {
+        width: 100%;
+        height: calc(100vh - 172px);
+        left: 0;
+    }
+
+    .board-top-group {
+        padding: 32px 16px 0 16px;
+        max-width: 1208px;
+        gap: 16px;
+    }
+
+    .board-headline {
+        height: 56px;
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .board-task-button {
+        padding: 4px;
+    }
+
+    .btb-text {
+        display: none;
+    }
+
+    .board-search-mobile {
+        box-sizing: border-box;
+        padding: 40px 16px 0 16px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .board-search {
+        width: 396px;
+    }
+
+    /* .board-header-group {
+        padding: 0 64px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 26px;
+    } */
+
+    .board-header-title {
+        height: 32px;
+        font-size: 27px;
+        line-height: 32.4px;
+    }
+
+    .board-header-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .board-content-group {
+        padding: 24px 16px;
+        min-height: 513px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .board-content {
+        width: 100%;
+        max-width: 396px;
+    }
+
+    /* .board-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 16px;
+    } */
+
+    .board-task-card {
+        box-sizing: border-box;
+        padding: 16px;
+        width: 100%;
+        background-color: #FFFFFF;
+        border-radius: 24px;
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .btc-type {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 4px 16px;
+        width: fit-content;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        color: #FFFFFF;
+        border-radius: 8px;
+    }
+
+    .btc-type-blue {
+        background-color: #0038FF;
+    }
+
+    .btc-type-green {
+        background-color: #1FD7C1;
+    }
+
+    .btc-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btc-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19.2px;
+        color: #2A3647;
+    }
+
+    .btc-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        color: #A8A8A8;
+    }
+
+    .board-task-progress-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .board-task-max-bar {
+        width: 128px;
+        background-color: #F4F4F4;
+        border-radius: 8px;
+    }
+
+    .board-task-value-bar {
+        width: 50%;
+        height: 8px;
+        background-color: #4589FF;
+        border-radius: 16px;
+    }
+
+    .board-task-progress-text {
+        height: 14px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14.4px;
+    }
+
+    .user-priority-group {
+        display: flex;
+
+    }
+
+    .board-user-group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 8px;
+    }
+
+    .board-card-user {
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14.4px;
+        color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        border-radius: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -8px;
+    }
+
+    .bcu-orange {
+        background-color: #FF7A00;
+    }
+
+    .bcu-green {
+        margin-left: -8px;
+        background-color: #1FD7C1;
+    }
+
+    .bcu-dark-blue {
+        margin-left: -8px;
+        background-color: #462F8A;
+    }
+
+    .bcu-magenta {
+        background-color: #FC71FF;
+    }
+
+    .bcu-blue {
+        margin-left: -8px;
+        background-color: #6E52FF;
+    }
+
+    .bcu-purple {
+        margin-left: -8px;
+        background-color: #9327FF;
+    }
+
+    .bcu-yellow {
+        background-color: #FFBB2B;
+    }
+
+    .bcu-red {
+        margin-left: -8px;
+        background-color: #FF4646;
+    }
+
+    .board-task-value-bar-complete {
+        width: 100%;
+        height: 8px;
+        background-color: #4589FF;
+        border-radius: 16px;
+    }
+
+    .bcu-blue-green {
+        background-color: #00BEE8;
+    }
+
+    .d-none {
+        display: none;
+    }
+}
+
+
+/* input width anpassen!!! */
+/* evtl. board-img fixen und resp-class pruefen!!! */
+/* max-width: 252px fuer card oder board-body!!! */
+/* board-body notwendidg??? */
+
+/* board-media verschieben!!! */

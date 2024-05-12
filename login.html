@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/login-mobile.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+
+</head>
+
+<body class="login-body" onload="loginInit()">
+    <div class="front-page-container">
+        <img src="./img/Capa 2.png" alt="join-logo" class="joinLogo">
+        <img src="./img/join-logo-white.png" alt="join-logo" class="joinLogoWhite">
+        <div class="startup"></div>
+        <div class="sign-up-container">
+            <p class="no-user">Not a Join user?</p>
+            <a href="signup.html"><button id="sign-up" class="button">Sign up</button></a>
+        </div>
+        <div class="login-main">
+            <div class="login-container">
+                <div class="login-text-child">
+                    <p>Log in</p>
+                    <div class="border"></div>
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="input-child margin-bottom"><input id="email-field" type="email" placeholder="Email">
+                    <img src="./img/mail.png" alt="email-icon">
+                </div>
+                <div class="input-password">
+                    <div class="input-child" id="password-parent"><input type="password" placeholder="Password"
+                            id="password-type" onchange="togglePasswordLogin()">
+                        <div class="password-inp">
+                            <img src="./img/lock.png" alt="password-icon" id="password-lock" onclick="togglePasswordIcon()">
+                        </div>
+                    </div>
+                    <div class="wrong-password d-none" id="wrong-pw">
+                        <p>Wrong password Ups! Try again.</p>
+                    </div>
+                </div>
+                <div class="checkbox-container">
+                    <div class="checkbox-child">
+                        <div class="checkbox"><img src="./img/checkmark-unchecked.png" alt="checkbox"
+                                id="checkbox-remember-me" onclick="toggleCheckboxLogin(); rememberMeStatus()"></div>
+                        <p>Remember me</p>
+                    </div>
+                    <!-- <div class="checkbox-child">
+                        <a href="./forgot-password.html">
+                            <p class="forgot-pw">I forgot my password</p>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="button-login-container">
+                <button class="button button-login" onclick="checkLogin()">Log in</button>
+                <button class="button button-guest" onclick="guestLogin()">Guest Log in</button>
+            </div>
+        </div>
+        <div id="sign-up-mobile" class="sign-up-mobile">
+            <p class="no-user">Not a Join user?</p>
+            <a href="signup.html"><button id="sign-up" class="button">Sign up</button></a>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-parent">
+                <a target="_blank" href="privacy-signup.html">Privacy Policy</a>
+                <a target="_blank" href="legal-notice-signup.html">Legal Notice</a>
+            </div>
+        </div>
+        <div id="msgPopup" class="d-none"></div>
+    </div>
+
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/login.js"></script>
+    <script src="./javascript/global.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+#dialog-add-contact[open] {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.dialog-contacts-left-clear {
+    box-sizing: border-box;
+    padding: 66px 48px;
+    height: 594px;
+    background-color: #2A3647;
+    border-radius: 30px 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.close-contact-form-mobile {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.close-contact-form-mobile:hover {
+    background-color: #29ABE2;
+    border-radius: 16px;
+}
+
+.dialog-contacts-subgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dialog-contacts-subheadline {
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 32.4px;
+    color: #FFFFFF;
+}
+
+.contact-form-profile-clear {
+    box-sizing: border-box;
+    margin-top: 138px;
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    font-family: 'Inter', sans-serif;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #D1D1D1;
+    border: 3px solid #FFFFFF;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-form-button-clear {
+    box-sizing: border-box;
+    padding: 15px;
+    width: 126px;
+    height: 56px;
+    background-color: transparent;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.contact-form-button-clear:hover {
+    border: 2px solid #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.contact-form-button-clear:active {
+    color: #091931;
+    border: 1px solid #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.contact-form-button-clear:hover .contact-form-button-text {
+    color: #29ABE2;
+}
+
+.contact-form-button-clear:active .contact-form-button-text {
+    color: #091931;
+}
+
+.contact-form-cancel-img {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/cancel.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact-form-button-clear:hover .contact-form-cancel-img {
+    background-image: url('../img/cancel-blue.png');
+}
+
+.contact-form-button-clear:active .contact-form-cancel-img {
+    background-image: url('../img/cancel.png');
+}
+
+.backlog-contact {
+    width: 326px;
+    height: 74px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FFFFFF;
+    background-color: #2A3647;
+    border-radius: 20px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 110px;
+    left: 100%;
+    transition: 125ms left ease-in-out;
+}
+
+.backlog-contact-form {
+    width: 326px;
+    height: 74px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FFFFFF;
+    background-color: #2A3647;
+    border-radius: 20px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 33px;
+    left: 100%;
+}
+
+.backlog-contact-form-in {
+    left: calc(50% - 163px);
+    transition: 125ms left ease-in-out;
+}
+
+.backlog-contact-form-out {
+    transition: 125ms left ease-in-out;
+}
+
+.delete-contact-fieldset {
+    margin: 0;
+    border: unset;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.delete-contact-input-box {
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.delete-contact-input-group {
+    box-sizing: border-box;
+    padding: 12px 21px;
+    width: 100%;
+    max-width: 422px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-contact-input-wrong {
+    border: 1px solid #FF001F;
+}
+
+.delete-contact-input-hint {
+    height: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #FF8190;
+}

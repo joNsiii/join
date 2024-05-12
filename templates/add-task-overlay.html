@@ -1,0 +1,114 @@
+<section id="add-task-overlay-position" class="add-task-overlay-out" onclick="stop(event)">
+    <div class="add-task-overlay" onclick="flipDropDownMenu(false, false, true); flipDropDownMenu(false, true, true)">
+        <img class="close-add-task-overlay" src="./img/close-dialog.png" alt="close-dialog"
+            onclick="closeAddTaskOverlay()">
+        <div class="add-task-headline-overlay">Add Task</div>
+        <form id="create-new-task-form" class="add-task-form-group" onsubmit="scopeTasks(); return false">
+            <div class="task-form-overlay" id="taskForm-overlay">
+                <div class="left-side-inputs-overlay">
+                    <div class="single-input-container-overlay">
+                        <label>Title<label class="red-star-overlay">*</label></label>
+                        <input class="input-single-line-overlay" placeholder="Enter a title" type="text"
+                            id="title-task-overlay" required>
+                    </div>
+                    <div class="desc-input-container-overlay">
+                        <label>Description</label>
+                        <textarea class="desc-textarea-overlay" placeholder="Enter a Description"
+                            id="description-task-overlay" cols="30" rows="3"></textarea>
+                    </div>
+                    <div class="single-input-container-overlay no-gap-overlay" onclick="stop(event)">
+                        <label>Assigned to</label>
+                        <div onclick="flipDropDownMenu(true, false, true)" class="dropdown-parent-container-overlay"
+                            id="dropdown-parent-overlay">
+                            Select
+                            contacts to assign
+                            <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon" id="drop-down-icon-overlay">
+                        </div>
+                        <div class="dropdown-menu-sub-overlay category-height-overlay" id="myDropdown-overlay"
+                            onclick="stop(event)">
+                            <div class="subuser-selection-parent-overlay">
+                                <!-- rendering subuser selection -->
+                            </div>
+                        </div>
+                        <div class="sub-profile-container-overlay" id="sub-profile-overlay">
+                            <!-- rendeirng sub profiles -->
+                        </div>
+                    </div>
+                </div>
+                <div class="border-between-overlay"></div>
+                <div class="right-side-inputs-overlay">
+                    <div class="single-input-container-overlay">
+                        <label for="date-date-task-overlay">Due Date<label class="red-star-overlay">*</label></label>
+                        <input class="input-single-line-overlay" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                            onblur="(this.type='text')" name="date" id="date-date-task-overlay" required>
+                        <img class="input-single-img" src="./img/calendar.png" alt="calendar">
+                    </div>
+                    <div class="prio-container-overlay">
+                        <label>Prio</label>
+                        <div class="prio-select-con-overlay">
+                            <div class="prio-selection-overlay" id="urgent-overlay" onclick="prioSelection(this, true)">
+                                <p>Urgent</p>
+                                <img src="./img/urgent-red-arrows.png" alt="urgent-red" id="urgent-img-overlay">
+                            </div>
+                            <div class="prio-selection-overlay prioMedium" id="medium-overlay"
+                                onclick="prioSelection(this, true)">
+                                <p>Medium</p>
+                                <img src="./img/medium.png" alt="medium" id="medium-img-overlay">
+                            </div>
+                            <div class="prio-selection-overlay" id="low-overlay" onclick="prioSelection(this, true)">
+                                <p>Low</p>
+                                <img src="./img/low.png" alt="low" id="low-img-overlay">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-input-container-overlay" onclick="stop(event)">
+                        <label>Category<label class="red-star-overlay">*</label></label>
+                        <div onclick="flipDropDownMenu(true, true, true)" class="dropdown-parent-container-2-overlay"
+                            id="dropdown-parent-category-overlay">
+                            <p id="chosen-task-overlay">Select task category</p>
+                            <img src="./img/arrow_drop_downaa.png" alt="drop-down-icon"
+                                id="drop-down-icon-category-overlay">
+                        </div>
+                        <div class="dropdown-menu-category-overlay sleep-overlay" id="myDropdown-category-overlay">
+                            <div class="category-content-overlay">
+                                <div id="Technical Task" onclick="selectCategory(this)">Technical Task</div>
+                                <div id="User Story" onclick="selectCategory(this)">User Story</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-input-container-overlay">
+                        <label>Subtasks</label>
+                        <div class="input-single-line-subtask-overlay" id="subtask-form-overlay">
+                            <input class="sub-task-child-overlay" placeholder="Add new subtask" type="text"
+                                id="subtask-overlay" onclick="subtaskCustomTemplate()">
+                            <div class="subtask-add-icons-overlay" id="icon-hold-overlay">
+                                <img src="./img/subtask.png" alt="add-icon" class="hover-overlay add-hover-overlay"
+                                    onclick="subtaskTemplate()">
+                            </div>
+                        </div>
+                        <div id="subtask-display-overlay">
+                            <!-- rendering subtasks -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-container-overlay">
+                <span class="bottom-flex-left-overlay">
+                    <label class="red-star-overlay">*</label>This field is required
+                </span>
+                <div class="bottom-button-container-overlay bottom-flex-right-overlay" id="button-container-overlay">
+                    <div class="clearBtn-overlay" onclick="clearAddTask()">
+                        Clear <img src="./img/cancel.png" alt="clear">
+                    </div>
+                    <button class="createBtn-overlay">
+                        Create Task <img src="./img/check.png" alt="check">
+                    </button>
+                </div>
+            </div>
+            <div class="bottom-push-overlay"></div>
+        </form>
+        <div class="added-task-overlay d-none-overlay" id="task-added-success-overlay">
+            Task added to board<img src="./img/Vector-white.png" alt="board.icon">
+        </div>
+    </div>
+</section>

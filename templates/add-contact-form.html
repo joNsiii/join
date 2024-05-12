@@ -1,0 +1,55 @@
+<section id="section-add-contact" class="dialog-contacts" onclick="stop(event)">
+    <div class="dialog-contacts-left-clear">
+        <img class="close-contact-form-mobile" src="./img/close-dialog-white.png" alt="close-dialog-white"
+            onclick="closeAddContact()">
+        <img class="dialog-contacts-img" src="./img/logo-contact-form.png" alt="logo-contact-form">
+        <div class="dialog-contacts-group">
+            <div class="dialog-contacts-subgroup">
+                <div class="dialog-contacts-headline">Add contact</div>
+                <div class="dialog-contacts-subheadline">Tasks are better with a team!</div>
+            </div>
+            <img class="dialog-contacts-underline" src="./img/underline-dialog.png" alt="underline-dialog">
+        </div>
+    </div>
+
+    <div class="dialog-contacts-right">
+        <img class="close-contact-form" src="./img/close-dialog.png" alt="close-dialog" onclick="closeAddContact()">
+        <div class="contact-form-profile-clear">
+            <img src="./img/person-clear.png" alt="person-clear">
+        </div>
+        <div class="contact-form-group">
+            <form id="add-contact-form" class="contact-form" onsubmit="updateContactList(); return false">
+                <fieldset class="contact-fieldset">
+                    <div class="contact-input-group">
+                        <input id="add-contact-name" class="contact-input" type="text" minlength="2" maxlength="30"
+                            placeholder="Name" required>
+                        <img class="contact-input-img" src="./img/person.png" alt="person">
+                    </div>
+                    <div class="contact-input-group">
+                        <input id="add-contact-mail" class="contact-input" type="email" minlength="8" maxlength="30"
+                            placeholder="Email" required>
+                        <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                    </div>
+                    <div class="contact-input-group">
+                        <input id="add-contact-phone" class="contact-input" type="text" minlength="5" maxlength="20"
+                            placeholder="Phone" onfocus="renderPhoneStart(id)" onkeydown="verifyKeyType(event, id)">
+                        <img class="contact-input-img" src="./img/call.png" alt="call">
+                    </div>
+                </fieldset>
+            </form>
+            <div class="contact-form-button-bar">
+                <button class="contact-form-button-clear" onclick="closeAddContact()">
+                    <div class="contact-form-button-text">Cancel</div>
+                    <div class="contact-form-cancel-img"></div>
+                </button>
+                <button id="save-created-contact-button" class="contact-form-button-dark" form="add-contact-form"
+                    type="submit">
+                    <div class="contact-form-button-dark-text">Create contact</div>
+                    <img class="contact-form-button-img" src="./img/check.png" alt="check">
+                </button>
+            </div>
+        </div>
+
+        <div id="backlog-add-contact" class="backlog-contact-form">Email already existing</div>
+    </div>
+</section>

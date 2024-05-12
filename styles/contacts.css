@@ -1,0 +1,238 @@
+.content {
+    width: calc(100% - 232px);
+    height: calc(100vh - 96px);
+    position: absolute;
+    top: 96px;
+    left: 232px;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.content-row {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+}
+
+.contact-list {
+    width: 100%;
+    max-width: 428px;
+    position: relative;
+}
+
+.contacts {
+    box-sizing: border-box;
+    padding-left: 28px;
+    width: 456px;
+    height: calc(100vh - 96px);
+    background-color: #FFFFFF;
+    filter: drop-shadow(4px 0 6px rgba(0, 0, 0, 0.08));
+    overflow-y: auto;
+}
+
+.contacts-header {
+    padding-top: 22.5px;
+    width: 400px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-contact-button {
+    box-sizing: border-box;
+    padding: 12px 0;
+    width: 352px;
+    background-color: #2A3647;
+    border: unset;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.add-contact-button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-contact-button:active {
+    background-color: #091931;
+}
+
+.add-contact-button:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: unset;
+}
+
+.add-contact-button:disabled:hover {
+    background-color: #2A3647;
+    box-shadow: unset;
+}
+
+.add-contact-text {
+    width: 175px;
+    height: 25px;
+    font-family: 'Inter', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #FFFFFF;
+}
+
+.add-contact-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-position: centers;
+}
+
+.contacts-collector {
+    box-sizing: border-box;
+    padding: 8px 24px 32px 24px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts-guest-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+.contacts-letter {
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    padding: 17px 36px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.contacts-contact {
+    box-sizing: border-box;
+    padding: 15px 24px;
+    width: 352px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 35px;
+    cursor: pointer;
+}
+
+.contacts-contact:hover:not(.contacts-contact-active) {
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+}
+
+.contacts-contact-active {
+    color: #FFFFFF;
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.contacts-contact-active:hover {
+    color: #FFFFFF;
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.contact-profile {
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-profile-text {
+    margin-top: 12px;
+    height: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: center;
+    color: white;
+}
+
+.name-email-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.contact-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.contact-email {
+    height: 19px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #007CEE;
+}
+
+.add-contact-button-mobile {
+    padding: 12px;
+    border: unset;
+    border-radius: 46px;
+    background-color: #2A3647;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 16px;
+    bottom: 32px;
+    outline: none;
+}
+
+.add-contact-button-mobile:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-contact-button-mobile:active {
+    background-color: #091931;
+}
+
+.add-contact-button-mobile:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: unset;
+}
+
+.add-contact-button-mobile:disabled:hover {
+    background-color: #2A3647;
+    box-shadow: unset;
+}
+
+.add-contact-img-mobile {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    object-position: center;
+}

@@ -1,0 +1,33 @@
+@media (max-width: 600px) {
+    .signup-main {
+        width: 85%;
+        padding: 15px;
+    }
+
+    .arrow-back-to-login {
+        left: -30px;
+        top: 0;
+    }
+
+    .input-child {
+        width: auto;
+        margin: 0 20px;
+    }
+
+    .joinLogo {
+        width: 50px;
+        height: 64px;
+        top: -50px;
+        left: -50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .arrow-back-to-login {
+        left: 30px;
+    }
+
+    .signup-text-child p {
+        font-size: 47px;
+    }
+}

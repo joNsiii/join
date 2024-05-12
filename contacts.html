@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join - Contacts</title>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/register.js"></script>
+    <script src="./javascript/global.js"></script>
+    <script src="./javascript/common.js"></script>
+    <script src="./javascript/contacts.js"></script>
+    <script src="./javascript/contact-viewer.js"></script>
+    <script src="./javascript/add-contact-form.js"></script>
+    <script src="./javascript/edit-contact-form.js"></script>
+    <script src="./javascript/delete-contact-form.js"></script>
+    <link rel="icon" href="./img/favicon.svg">
+    <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./styles/background-color.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/contact-viewer.css">
+    <link rel="stylesheet" href="./styles/contact-viewer-mobile.css">
+    <link rel="stylesheet" href="./styles/edit-contact-form.css">
+    <link rel="stylesheet" href="./styles/add-contact-form.css">
+    <link rel="stylesheet" href="./media/contacts-media.css">
+    <link rel="stylesheet" href="./media/contact-form-media.css">
+    <style id="save-contact-animation"></style>
+    <style id="backlog-contact-animation"></style>
+    <style id="contact-user-animation"></style>
+    <style id="user-bgc-flexible"></style>
+</head>
+
+<body onload="initContacts()">
+
+    <dialog id="dialog-contact-viewer" class="dialog" w3-include-html="./templates/contact-viewer-mobile.html"
+        onclick="closeContactViewerMobile()"></dialog>
+    <dialog id="dialog-add-contact" class="dialog" w3-include-html="./templates/add-contact-form.html"
+        onclick="closeAddContact()"></dialog>
+    <dialog id="dialog-edit-contact" class="dialog" w3-include-html="./templates/edit-contact-form.html"
+        onclick="closeEditContact()"></dialog>
+
+    <dialog id="dialog-delete-contact" class="dialog-delete-contact" onclick="closeDialog('dialog-delete-contact')">
+        <section id="deleting-confirmation" class="deleting-confirmation" onclick="stop(event)">
+            <p id="deleting-confirmation-message" class="deleting-confirmation-message">
+                <!-- rendering deleting-confirmation-message -->
+            </p>
+            <form id="delete-contact-form" class="d-none">
+                <fieldset class="delete-contact-fieldset">
+                    <div class="delete-contact-input-box">
+                        <div id="delete-user-mail" class="delete-contact-input-group">
+                            <input id="deleting-account-mail" class="contact-input" type="email" placeholder="Email"
+                                required>
+                            <img class="contact-input-img" src="./img/mail.png" alt="mail">
+                        </div>
+                        <div id="deleting-hint-mail" class="delete-contact-input-hint d-none">Please enter your email.
+                        </div>
+                    </div>
+                    <div class="delete-contact-input-box">
+                        <div id="delete-user-password" class="delete-contact-input-group">
+                            <input id="deleting-account-password" class="contact-input" type="password"
+                                placeholder="Password" required>
+                            <img class="contact-input-img" src="./img/lock-contacts.png" alt="mail">
+                        </div>
+                        <div id="deleting-hint-password" class="delete-contact-input-hint d-none">Please enter your
+                            password.</div>
+                    </div>
+                </fieldset>
+            </form>
+            <div id="contact-form-button-bar" class="contact-form-button-bar">
+                <!-- rendering contact-form-button-bar -->
+            </div>
+        </section>
+    </dialog>
+
+    <div w3-include-html="./templates/templates.html"></div>
+
+    <main class="content">
+        <div class="content-row">
+            <section class="contact-list">
+                <div class="contacts">
+                    <div class="contacts-header">
+                        <button id="add-contact-button" class="add-contact-button" onclick="openAddContact()">
+                            <div class="add-contact-text">Add new contact</div>
+                            <img class="add-contact-img" src="./img/add-contact.png" alt="add-contact">
+                        </button>
+                    </div>
+                    <div id="contacts-collector" class="contacts-collector">
+                        <!-- rendering contacts -->
+                    </div>
+                </div>
+
+                <button id="add-contact-button-mobile" class="add-contact-button-mobile" onclick="openAddContact()">
+                    <img class="add-contact-img-mobile" src="./img/add-contact.png" alt="add-contact">
+                </button>
+            </section>
+
+            <section id="contact-viewer" class="contact-viewer">
+                <div class="contact-viewer-header">
+                    <h1 class="contact-viewer-headline">Contacts</h1>
+                    <img class="contact-viewer-img" src="./img/vector-contacts.png" alt="vector-contacts">
+                    <div class="contact-viewer-subheadline">Better with a team</div>
+                </div>
+
+                <div id="contact-user" class="contact-user contact-user-animation">
+                    <div class="contact-user-header">
+                        <div id="contact-user-profile" class="contact-user-profile bgc-flexible">AM</div>
+                        <div class="contact-user-group">
+                            <div id="contact-user-name" class="contact-user-name">Anton Mayer</div>
+                            <div class="contact-user-button-group">
+                                <button id="edit-contact-button" class="contact-user-button">
+                                    <div class="edit-contact-img"></div>
+                                    <div class="contact-button-text">Edit</div>
+                                </button>
+                                <button id="delete-contact-button" class="contact-user-button">
+                                    <div class="delete-contact-img"></div>
+                                    <div class="contact-button-text">Delete</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-user-info">Contact Information</div>
+                    <div class="contact-user-detail-group">
+                        <div class="contact-user-detail">
+                            <div class="user-detail-title">Email</div>
+                            <a id="contact-user-mail" class="user-detail-mail">anton@gmail.com</a>
+                        </div>
+                        <div class="contact-user-detail">
+                            <div class="user-detail-title">Phone</div>
+                            <a id="contact-user-phone" class="user-detail-phone">+ 49 1111 111 11 1</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backlog-contact" class="backlog-contact backlog-contact-animation">Contact succesfully created
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

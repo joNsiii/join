@@ -1,0 +1,213 @@
+@media (max-width: 1070px) {
+    .display-flex {
+        flex-direction: column;
+    }
+
+    .border-between {
+        display: none;
+    }
+
+    .right-side-inputs {
+        margin-left: 0;
+        margin-right: 96px;
+        max-width: 100%;
+    }
+
+    .left-side-inputs {
+        margin-right: 96px;
+        width: auto;
+    }
+
+    .bottom-button-container {
+        max-width: 440px;
+        margin-right: 54px;
+    }
+
+    .bottom-container {
+        margin: 0;
+        margin-bottom: 32px;
+        margin-left: 96px;
+        align-items: normal;
+    }
+
+    .dropdown-menu-sub {
+        top: 67px !important;
+    }
+}
+
+@media (max-width: 730px) {
+    .add-task-content {
+        width: 100%;
+        max-height: calc(100vh - 260px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        bottom: 164px;
+    }
+
+    .add-task-headline {
+        font-size: 47px;
+    }
+
+    .add-task-headline {
+        margin-left: 0;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 112px;
+    }
+
+    .right-side-inputs {
+        margin-right: 16px;
+        margin-left: 16px;
+
+    }
+
+    .left-side-inputs {
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+
+    .display-flex {
+        margin-left: 0;
+        height: calc(100vh - 260px);
+    }
+
+    .dropdown-parent-container {
+        margin-bottom: 32px;
+    }
+
+    .prio-selection {
+        height: 41px;
+        width: 121px;
+    }
+
+    .medium-selection {
+        height: 41px;
+        width: 121px;
+    }
+
+    #subtask-display {
+        margin-bottom: 164px;
+    }
+
+    .bottom-container {
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+        padding-bottom: 0;
+        height: 88px;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+        justify-content: space-between;
+        background-color: #f6f7f8;
+        margin-bottom: 0;
+        bottom: 76px;
+    }
+
+    .bottom-button-container {
+        margin-right: 0;
+    }
+
+    .clearBtn {
+        display: none;
+    }
+
+    .sub-profile-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+    }
+
+    #sub-profile {
+        transform: translateY(132%) !important;
+        height: 56px !important;
+    }
+
+    .sub-profile-img {
+        height: 42px !important;
+        width: 42px !important;
+      }
+}
+
+@media (max-width: 983px) {
+    .bottom-flex-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+    .bottom-flex-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 65%;
+    }
+}
+
+@media (max-width: 1070px) {
+    .sub-profile-container {
+        transform: translateY(145%) !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        height: 48px;
+    }
+    .sub-profile-container::-webkit-scrollbar {
+        height: 5px;
+        background: rgba(128, 128, 128, 0.15);
+        border-radius: 10px;
+      }
+      
+      .sub-profile-container::-webkit-scrollbar-thumb {
+        background: #88888873;
+        border-radius: 20px;
+        height: 10px;
+      }
+      
+      .sub-profile-container::-webkit-scrollbar-track-piece:start {
+        background: transparent;
+        margin-top: 11px;
+      }
+
+      .sub-profile-img {
+        height: 36px;
+        width: 36px;
+      }
+      
+      .subuser-selection {
+        font-size: 18px;
+        word-break: break-all;
+    }
+}
+
+@media (max-width: 1133px) {
+    .sub-profile-container {
+        transform: translateY(175%);
+    }
+}
+
+@media (max-width: 1135px) {
+    .dropdown-menu-sub {
+        top: 100px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .dropdown-menu-category {
+        top: 103px;
+    }
+}
+
+@media (max-width: 950px) {
+    .dropdown-menu-category {
+        top: 79px;
+    }
+}
