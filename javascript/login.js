@@ -19,6 +19,12 @@ function loginInit() {
     loadUsers();
     loadRememberMe();
     fillEmailAfterSignup();
+    testAccount();
+}
+
+function testAccount() {
+    document.getElementById('email-field').value = 'account@test.de';
+    document.getElementById('password-type').value = '123';
 }
 
 /**
